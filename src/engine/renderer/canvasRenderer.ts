@@ -1,4 +1,4 @@
-export class Renderer {
+export class CanvasRenderer {
     private ctx: CanvasRenderingContext2D;
 
     private TEST_NUM = 0;
@@ -15,6 +15,5 @@ export class Renderer {
         this.ctx.font = '48px monospace';
         this.TEST_NUM++;
         this.ctx.fillText(`Hello ProtoGL: ${this.TEST_NUM}`, 10, 300);
-        console.log(this.TEST_NUM);
     }
 }

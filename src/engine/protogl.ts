@@ -1,4 +1,6 @@
-import { Renderer } from './renderer/renderer';
+import { InputManager } from '@input/inputManager';
+import { Keys } from '@input/keys';
+import { CanvasRenderer } from '@protogl/renderer/canvasRenderer';
 
 interface ProtoGLOpts {
     width?: number;
@@ -7,7 +9,8 @@ interface ProtoGLOpts {
 }
 
 export class ProtoGL {
-    private renderer: Renderer;
+    private renderer: CanvasRenderer;
+    private inputManager: InputManager;
 
     public constructor(opts: ProtoGLOpts) {
         let canvas = document.getElementById(opts.canvasId ?? '') as HTMLCanvasElement | null;
@@ -20,11 +23,17 @@ export class ProtoGL {
         canvas.width = opts.width ?? window.innerWidth;
         canvas.height = opts.height ?? window.innerHeight;
 
-        this.renderer = new Renderer(canvas);
+        this.renderer = new CanvasRenderer(canvas);
+        this.inputManager = new InputManager(canvas);
     }
 
-    public start(): void {
+    public start(tick: () => void): void {
+        tick();
         this.renderer.render();
-        requestAnimationFrame(this.start.bind(this));
+        requestAnimationFrame(this.start.bind(this, tick));
+    }
+
+    public keyPressed(which: Keys): boolean {
+        return this.inputManager.isKeyDown(which);
     }
 }

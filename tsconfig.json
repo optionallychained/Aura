@@ -7,6 +7,15 @@
         "strict": true,
         "baseUrl": "./src",
         "paths": {
+            "@input/*": [
+                "engine/util/input/*"
+            ],
+            "@math/*": [
+                "engine/util/math/*"
+            ],
+            "@util/*": [
+                "engine/util/*"
+            ],
             "@protogl/*": [
                 "engine/*"
             ],
