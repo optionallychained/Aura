@@ -1,3 +1,3 @@
-import { ProtoGL } from '../engine/protogl';
+import { ProtoGL } from '@protogl/protogl';
 
 new ProtoGL({ width: 800, height: 600 }).start();

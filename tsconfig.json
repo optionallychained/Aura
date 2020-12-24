@@ -4,6 +4,15 @@
         "module": "es6",
         "outDir": "./dist",
         "sourceMap": true,
-        "strict": true
+        "strict": true,
+        "baseUrl": "./src",
+        "paths": {
+            "@protogl/*": [
+                "engine/*"
+            ],
+            "@demo/*": [
+                "demo/*"
+            ]
+        }
     }
 }
