@@ -1,5 +1,5 @@
-import { Keys } from '@input/keys';
-import { Vec2 } from '@math/vec2';
+import { Keys } from '@protogl/input/keys';
+import { Vec2 } from '@protogl/math/vec2';
 
 export class InputManager {
 

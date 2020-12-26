@@ -1,6 +1,6 @@
-import { MathUtils } from '@math/mathUtils';
-import { Vec2 } from '@math/vec2';
-import { Vec3 } from '@math/vec3';
+import { MathUtils } from '@protogl/math/mathUtils';
+import { Vec2 } from '@protogl/math/vec2';
+import { Vec3 } from '@protogl/math/vec3';
 
 export class CanvasRenderer {
     private ctx: CanvasRenderingContext2D;

@@ -1,6 +1,6 @@
-import { InputManager } from '@input/inputManager';
-import { Keys } from '@input/keys';
-import { Vec3 } from '@math/vec3';
+import { InputManager } from '@protogl/input/inputManager';
+import { Keys } from '@protogl/input/keys';
+import { Vec3 } from '@protogl/math/vec3';
 import { EntityManager } from '@protogl/entity/entityManager';
 import { CanvasRenderer } from '@protogl/screen/canvasRenderer';
 import { GameState } from '@protogl/state/gameState';

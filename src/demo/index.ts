@@ -1,6 +1,6 @@
-import { Keys } from '@input/keys';
-import { Vec2 } from '@math/vec2';
-import { Vec3 } from '@math/vec3';
+import { Keys } from '@protogl/input/keys';
+import { Vec2 } from '@protogl/math/vec2';
+import { Vec3 } from '@protogl/math/vec3';
 import { FlatColor } from '@protogl/entity/component/flatColor';
 import { Transform } from '@protogl/entity/component/transform';
 import { Entity } from '@protogl/entity/entity';

@@ -1,4 +1,4 @@
-import { Vec3 } from '@math/vec3';
+import { Vec3 } from '@protogl/math/vec3';
 import { EntityComponent } from '@protogl/entity/component/entityComponent';
 
 export class FlatColor implements EntityComponent {
