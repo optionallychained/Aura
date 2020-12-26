@@ -1,3 +1,6 @@
+import { MathUtils } from '@math/mathUtils';
+import { Vec3 } from '@math/vec3';
+
 export class CanvasRenderer {
     private ctx: CanvasRenderingContext2D;
 
@@ -7,10 +10,12 @@ export class CanvasRenderer {
         this.ctx = canvas.getContext('2d')!; //dumb assertion for now
     }
 
-    public render(): void {
-        this.ctx.fillStyle = 'black';
+    public clearScreen(colour: Vec3): void {
+        this.ctx.fillStyle = MathUtils.rgbToHex(colour);
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    }
 
+    public render(): void {
         this.ctx.fillStyle = 'white';
         this.ctx.font = '48px monospace';
         this.TEST_NUM++;

@@ -20,7 +20,7 @@ Overall long-term Goals:
 - **Step 1: Rough-and-ready Basic Implementations**
     - [ ] port some utilities from ProtoGL-JS that're directly reusable
         - [x] input
-        - [ ] (some) math
+        - [x] (some) math
     - [ ] Reach implementation of basic render/input demo *(Canvas2D for now)*
         - [ ] states
         - [ ] entities
