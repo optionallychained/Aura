@@ -22,7 +22,7 @@ Overall long-term Goals:
         - [x] input
         - [x] (some) math
     - [ ] Reach implementation of basic render/input demo *(Canvas2D for now)*
-        - [ ] states
+        - [x] states
         - [ ] entities
         - [ ] systems
         - [ ] frame deltas

@@ -2,52 +2,79 @@ import { InputManager } from '@input/inputManager';
 import { Keys } from '@input/keys';
 import { Vec3 } from '@math/vec3';
 import { CanvasRenderer } from '@protogl/screen/canvasRenderer';
+import { GameState } from '@protogl/state/gameState';
 
 interface ProtoGLOpts {
     width?: number;
     height?: number;
     canvasId?: string;
     background?: Vec3;
+    initFunc?: () => void
 }
 
 export class ProtoGL {
     private renderer: CanvasRenderer;
     private inputManager: InputManager;
 
-    private delta = 0;
+    private frameDelta = 0;
     private lastFrameTime = 0;
 
     private background: Vec3;
 
-    constructor(opts: ProtoGLOpts) {
-        let canvas = document.getElementById(opts.canvasId ?? '') as HTMLCanvasElement | null;
+    private states: { [name: string]: GameState } = {};
+    private currentState: GameState | undefined;
+
+    constructor(private config: ProtoGLOpts) {
+        let canvas = document.getElementById(config.canvasId ?? '') as HTMLCanvasElement | null;
 
         if (!canvas) {
             canvas = document.createElement('canvas');
             document.body.append(canvas);
         }
 
-        canvas.width = opts.width ?? window.innerWidth;
-        canvas.height = opts.height ?? window.innerHeight;
+        canvas.width = config.width ?? window.innerWidth;
+        canvas.height = config.height ?? window.innerHeight;
 
-        this.background = opts.background ?? new Vec3();
+        this.background = config.background ?? new Vec3();
 
         this.renderer = new CanvasRenderer(canvas);
         this.inputManager = new InputManager(canvas);
     }
 
-    public run(tick: () => void): void {
-        this.delta = Date.now() - this.lastFrameTime;
-        this.lastFrameTime = Date.now();
+    public start(firstState: string): void {
+        if (this.config.initFunc) {
+            this.config.initFunc();
+        }
 
-        this.renderer.clearScreen(this.background);
+        this.switchToState(firstState);
 
-        tick();
-        this.renderer.render();
-        requestAnimationFrame(this.run.bind(this, tick));
+        this.run();
+    }
+
+    public addState(state: GameState): void {
+        this.states[state.getName()] = state;
+    }
+
+    public switchToState(name: string): void {
+        this.currentState = this.states[name];
+        this.currentState.init();
     }
 
     public keyPressed(which: Keys): boolean {
         return this.inputManager.isKeyDown(which);
+    }
+
+    private run(): void {
+        this.frameDelta = Date.now() - this.lastFrameTime;
+        this.lastFrameTime = Date.now();
+
+        this.renderer.clearScreen(this.background);
+
+        if (this.currentState) {
+            this.currentState.tick(this.frameDelta);
+        }
+
+        this.renderer.render();
+        requestAnimationFrame(this.run.bind(this));
     }
 }

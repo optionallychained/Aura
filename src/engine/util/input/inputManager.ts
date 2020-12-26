@@ -24,22 +24,22 @@ export class InputManager {
 
     public init(): void {
         // TODO: deprecated implementation for now, look at .key, .code, etc
-        window.onkeydown = (event: KeyboardEvent): void => {
+        window.addEventListener('keydown', (event: KeyboardEvent): void => {
             const { which } = event;
 
             if (!this.ignoreKeys.includes(which)) {
                 event.preventDefault();
                 this.keyBuffer.add(which);
             }
-        }
+        });
 
-        window.onkeyup = (event: KeyboardEvent): void => {
+        window.addEventListener('keyup', (event: KeyboardEvent): void => {
             const { which } = event;
 
             if (!this.ignoreKeys.includes(which)) {
                 this.keyBuffer.delete(which);
             }
-        }
+        });
 
         this.canvas.addEventListener('mousedown', () => {
             this.mouseDown = true;
