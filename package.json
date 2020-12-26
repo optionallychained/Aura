@@ -9,6 +9,7 @@
         "lint": "eslint --ext .ts --fix",
         "debug": "webpack --config webpack.config.js serve",
         "dev": "webpack --config webpack.config.js serve --open 'Chrome'",
+        "predist": "npm run lint",
         "dist": "webpack --config webpack.dist.config.js"
     },
     "devDependencies": {

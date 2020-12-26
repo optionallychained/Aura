@@ -1,27 +1,54 @@
 # ProtoGL-TS
 
-ProtoGL-TS is a game engine designed for prototyping browser games in TypeScript, rendering with OpenGL *(and maybe Canvas)* and providing a large base of
-built-in utility to enable the swift creation of game prototypes.
+ProtoGL-TS is a TypeScript game engine designed for the swift implementation of prototype WebGL browser games, providing a large base of built-in utility.
 
-Built on the Entity-Component-System architecture and operating as a state machine, ProtoGL-TS enables a compartmentalised approach to game implementation.
+Built on the Entity-Component-System architecture and operating on the concept of distinct game states, ProtoGL-TS aims to enable a compartmentalised approach
+to prototype creation, supporting developments of varying complexity.
 
-This project is a Work In Progress port/rebuild/redesign of a legacy project implemented in pure ES5-compliant JavaScript.
+This project is a WIP revival of [ProtoGL](https://github.com/jonnopon/ProtoGL) and its concepts.
 
-Overall long-term Goals:
-- Zero (or as close to zero as possible) dependencies
-- Simplistic surface-level API for creating games quickly, with a high level of built-in engine utility (shapes, entities, components, systems, text, UI, shaders, etc)
-- 2D support (OpenGL, Canvas?)
-- 3D support (OpenGL)
+Lofty/long-term Goals:
+- Zero (or close to) dependencies
+- Simplistic and easy-to-approach API and project structure
+- Large base of built-in utility (geometry, components, systems, physics, text, UI, shaders, etc)
+- 2D rendering with OpenGL *(*...and canvas?)*
+- 3D rendering with OpenGL
 - Keyboard/Mouse, Gamepad, Touch support
-- Efficient builds and optimised package sizes
+- Solid documentation
+- Automated testing
+- Efficient and optimised builds
 
-## TODO
 
-- **Step 1: Rough-and-ready Basic Implementations**
-    - [ ] port some utilities from ProtoGL-JS that're directly reusable
+## Setup
+
+- Install [NPM](https://nodejs.org/)
+- Clone
+- Terminal: `npm install`
+
+
+## Develop
+
+- Terminal: `npm run dev`
+    - *Alternatively*: Run Debug configuration in VSCode
+- Work on engine in `src/engine/`
+- Work on demo/game in `src/demo/`
+- View output at `localhost:8080`
+
+
+## Distribute
+
+- Terminal: `npm run dist`
+- Retrieve build from `dist/`
+
+----
+
+# TODO
+
+- **Step 1: Rough-and-ready kickstart (ProtoGL conceptual port)**
+    - [ ] Port some basic utilities from ProtoGL
         - [x] input
         - [x] (some) math
-    - [ ] Reach implementation of basic render/input demo *(Canvas2D for now)*
+    - [ ] Reach implementation of basic/rough render/input demo *(Canvas2D)*
         - [x] states
         - [x] frame deltas
         - [x] entities
@@ -32,19 +59,19 @@ Overall long-term Goals:
         - [ ] research TS library creation
         - [ ] research + experiment with NPM package publication *(private)*
         - [ ] decisions on typedefs vs classes for certain utilities
-        - [ ] think about namespacing + research methods
-        - [ ] try to set things up for this purpose going forward
-    - [ ] consider usage as a Script/JS library?
-        - [ ] decide: do we even want to support this type of usage?
-- **Step 3: ...etc *(misc)***
-    - [ ] reconsider Math implementations; instanced/mutable? types only? statics? etc - consider ideal usage patterns
-        - [ ] choose approach, then port math from ProtoGL-JS *as and when needed*
+        - [ ] think about namespacing
+    - [ ] consider usage as a Script include/JS library?
+    - [ ] Initialise Documentation
+        - [ ] Technical documentation
+        - [ ] User/API documentation
+    - [ ] Initialise Testing
+- **Step 3: ...etc *(misc notes)***
+    - [ ] reconsider Math implementations; instanced/mutable? types only? statics? etc
+        - [ ] port math from ProtoGL-JS *as and when needed*
     - [ ] reconsider Input Management
         - [ ] event/emitter type implementation?
         - [ ] input buffering?
         - [ ] observables?
-    - [ ] strongly consider: Observables as an underlying engine utility? - event-driven intra-state approach?
-        - thinking prompts: input, entity events, state events, etc?
-    - [ ] OpenGL and all the crazy that brings
-    - [ ] cameras
-    - [ ] ...etc
+    - [ ] strongly consider: Observables as an underlying engine utility?
+        - thinking prompts: input, entity events, state events, system interrupts, etc?
+    - [ ] OpenGL
