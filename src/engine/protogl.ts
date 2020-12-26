@@ -1,6 +1,7 @@
 import { InputManager } from '@input/inputManager';
 import { Keys } from '@input/keys';
 import { Vec3 } from '@math/vec3';
+import { EntityManager } from '@protogl/entity/entityManager';
 import { CanvasRenderer } from '@protogl/screen/canvasRenderer';
 import { GameState } from '@protogl/state/gameState';
 
@@ -13,6 +14,8 @@ interface ProtoGLOpts {
 }
 
 export class ProtoGL {
+    public entityManager: EntityManager;
+
     private renderer: CanvasRenderer;
     private inputManager: InputManager;
 
@@ -38,6 +41,7 @@ export class ProtoGL {
         this.background = config.background ?? new Vec3();
 
         this.renderer = new CanvasRenderer(canvas);
+        this.entityManager = new EntityManager(this.renderer);
         this.inputManager = new InputManager(canvas);
     }
 
@@ -74,7 +78,9 @@ export class ProtoGL {
             this.currentState.tick(this.frameDelta);
         }
 
-        this.renderer.render();
+        this.entityManager.update(this.frameDelta);
+        this.entityManager.render();
+
         requestAnimationFrame(this.run.bind(this));
     }
 }

@@ -1,4 +1,5 @@
 import { MathUtils } from '@math/mathUtils';
+import { Vec2 } from '@math/vec2';
 import { Vec3 } from '@math/vec3';
 
 export class CanvasRenderer {
@@ -15,10 +16,8 @@ export class CanvasRenderer {
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     }
 
-    public render(): void {
-        this.ctx.fillStyle = 'white';
-        this.ctx.font = '48px monospace';
-        this.TEST_NUM++;
-        this.ctx.fillText(`Hello ProtoGL: ${this.TEST_NUM}`, 10, 300);
+    public renderRect(position: Vec2, dimensions: Vec2, colour: Vec3): void {
+        this.ctx.fillStyle = MathUtils.rgbToHex(colour);
+        this.ctx.fillRect(position.x, position.y, dimensions.x, dimensions.y);
     }
 }

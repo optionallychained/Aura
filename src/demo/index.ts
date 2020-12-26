@@ -1,5 +1,9 @@
 import { Keys } from '@input/keys';
+import { Vec2 } from '@math/vec2';
 import { Vec3 } from '@math/vec3';
+import { FlatColor } from '@protogl/entity/component/flatColor';
+import { Transform } from '@protogl/entity/component/transform';
+import { Entity } from '@protogl/entity/entity';
 import { ProtoGL } from '@protogl/protogl';
 import { GameState } from '@protogl/state/gameState';
 
@@ -14,6 +18,17 @@ game.addState(new GameState({
     name: 'state-1',
     initFunc: (): void => {
         console.log('state-1 -> init');
+
+        game.entityManager.clearEntities();
+
+        game.entityManager.addEntity(new Entity({
+            tag: 'Player-1',
+            onUpdate: (): void => { console.log('Player-1 update') },
+            components: [
+                new FlatColor(),
+                new Transform(new Vec2(100, 100), new Vec2(50, 50))
+            ]
+        }))
     },
     tickFunc: (): void => {
         if (game.keyPressed(Keys.SPACE)) {
@@ -26,6 +41,17 @@ game.addState(new GameState({
     name: 'state-2',
     initFunc: (): void => {
         console.log('state-2 -> init');
+
+        game.entityManager.clearEntities();
+
+        game.entityManager.addEntity(new Entity({
+            tag: 'Player-2',
+            onUpdate: (): void => { console.log('Player-2 update') },
+            components: [
+                new FlatColor(new Vec3(255, 0, 0)),
+                new Transform(new Vec2(200, 200), new Vec2(100, 100))
+            ]
+        }))
     },
     tickFunc: (): void => {
         if (game.keyPressed(Keys.ENTER)) {

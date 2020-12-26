@@ -23,9 +23,9 @@ Overall long-term Goals:
         - [x] (some) math
     - [ ] Reach implementation of basic render/input demo *(Canvas2D for now)*
         - [x] states
-        - [ ] entities
+        - [x] frame deltas
+        - [x] entities
         - [ ] systems
-        - [ ] frame deltas
         - [ ] player-controlled basic 2D movement
 - **Step 2: Project Considerations**
     - [ ] consider usage as an NPM package/library
