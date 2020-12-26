@@ -25,7 +25,7 @@ export class Vec2 {
         return new Vec2(v.x / factor, v.y / factor);
     }
 
-    public constructor(public x = 0, public y = 0) { }
+    constructor(public x = 0, public y = 0) { }
 
     public set(x = 0, y = 0): void {
         this.x = x;

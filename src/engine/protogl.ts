@@ -12,7 +12,7 @@ export class ProtoGL {
     private renderer: CanvasRenderer;
     private inputManager: InputManager;
 
-    public constructor(opts: ProtoGLOpts) {
+    constructor(opts: ProtoGLOpts) {
         let canvas = document.getElementById(opts.canvasId ?? '') as HTMLCanvasElement | null;
 
         if (!canvas) {

@@ -16,7 +16,12 @@
             "error"
         ],
         "@typescript-eslint/explicit-member-accessibility": [
-            "error"
+            "error",
+            {
+                "overrides": {
+                    "constructors": "off"
+                }
+            }
         ],
         "@typescript-eslint/member-ordering": [
             "error",

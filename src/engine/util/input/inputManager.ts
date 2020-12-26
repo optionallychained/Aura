@@ -18,7 +18,7 @@ export class InputManager {
         Keys.F_12
     ];
 
-    public constructor(private canvas: HTMLCanvasElement) {
+    constructor(private canvas: HTMLCanvasElement) {
         this.init();
     }
 

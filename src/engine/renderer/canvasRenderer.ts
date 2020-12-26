@@ -3,7 +3,7 @@ export class CanvasRenderer {
 
     private TEST_NUM = 0;
 
-    public constructor(private canvas: HTMLCanvasElement) {
+    constructor(private canvas: HTMLCanvasElement) {
         this.ctx = canvas.getContext('2d')!; //dumb assertion for now
     }
 
