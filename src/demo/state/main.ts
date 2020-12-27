@@ -40,6 +40,11 @@ export const mainState = new GameState({
 
         (enemy.getComponentByName('Transform') as Transform).position = randomPosition(game);
     },
+    endFunc: (game: ProtoGL) => {
+        const playerTransform = player.getComponentByName('Transform') as Transform;
+        playerTransform.position.set(100, 100);
+        playerTransform.velocity.set();
+    },
     tickFunc: (game: ProtoGL) => {
         game.renderText(`Points: ${game.getData('points') ?? 0}`);
 

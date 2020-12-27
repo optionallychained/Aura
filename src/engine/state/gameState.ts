@@ -3,6 +3,7 @@ import { ProtoGL } from '@protogl/protogl';
 interface GameStateConfig {
     name: string;
     initFunc: (game: ProtoGL) => void;
+    endFunc?: (game: ProtoGL) => void;
     // TODO param not enforced for implementers, maybe indication this isn't the right approach?
     tickFunc: (game: ProtoGL, frameDelta: number) => void;
 }
@@ -18,6 +19,12 @@ export class GameState {
     // TODO sensible way for both initFunc and tickFunc to refer to 'this' from the outside without esoteric bullshit
     public tick(game: ProtoGL, frameDelta: number): void {
         this.config.tickFunc(game, frameDelta);
+    }
+
+    public end(game: ProtoGL): void {
+        if (this.config.endFunc) {
+            this.config.endFunc(game);
+        }
     }
 
     public getName(): string {

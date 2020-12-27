@@ -70,6 +70,8 @@ export class ProtoGL {
     }
 
     public switchToState(name: string): void {
+        this.currentState?.end(this);
+
         this.currentState = this.states.get(name);
         // TODO error handling for invalid states
         this.currentState?.init(this);
