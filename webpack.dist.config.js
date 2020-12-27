@@ -1,9 +1,11 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-//just builds the engine to ./build sans source maps (future: uglify)
+// builds the demo for distribution
 
 module.exports = {
-    entry: './src/engine/protogl.ts',
+    entry: './src/demo/demo.ts',
+    mode: 'production',
     module: {
         rules: [
             {
@@ -16,8 +18,13 @@ module.exports = {
     resolve: {
         extensions: ['.ts', '.js']
     },
+    plugins: [
+        new HtmlWebpackPlugin({
+            title: 'Demo'
+        })
+    ],
     output: {
-        filename: 'protogl.js',
+        filename: 'demo.js',
         path: path.resolve(__dirname, 'dist'),
     }
 };

@@ -1,21 +1,23 @@
 {
-    "name": "protogl-test-2",
-    "version": "0.0.3",
+    "name": "protogl",
+    "version": "0.0.1",
+    "author": "jonnopon",
     "repository": {
         "type": "git",
         "url": "git://git@github.com/jonnopon/ProtoGL-TS.git"
     },
-    "main": "dist/protogl.js",
-    "types": "dist/protogl.d.ts",
+    "main": "publish/protogl.js",
+    "types": "publish/protogl.d.ts",
     "files": [
-        "dist/"
+        "publish/"
     ],
     "scripts": {
         "lint": "eslint --ext .ts --fix",
         "debug": "webpack --config webpack.config.js serve",
         "dev": "webpack --config webpack.config.js serve --open 'Chrome'",
         "predist": "npm run lint",
-        "dist": "webpack --config webpack.dist.config.js"
+        "dist": "webpack --config webpack.dist.config.js",
+        "prepublishOnly": "npm run lint && tsc --project ./tsconfig.publish.json"
     },
     "devDependencies": {
         "@typescript-eslint/eslint-plugin": "^4.10.0",

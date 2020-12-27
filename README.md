@@ -35,7 +35,7 @@ Lofty/long-term Goals:
 - View output at `localhost:8080`
 
 
-## Distribute
+## Distribute 
 
 - Terminal: `npm run dist`
 - Retrieve build from `dist/`
@@ -57,17 +57,16 @@ Lofty/long-term Goals:
         - [x] collision
         - [x] player-controlled movement
 - [ ] **Step 2: Project Considerations**
-    - [ ] consider usage as an NPM package/library
+    - [x] consider usage as an NPM package/library
         - [x] research TS library creation
         - [x] research + experiment with NPM package publication
-        - [ ] decisions on typedefs vs classes for certain utilities
-        - [ ] think about namespacing
-    - [ ] consider usage as a Script include/JS library?
+    - [x] consider usage as a Script include/JS library?
     - [ ] Initialise Documentation
         - [ ] Technical documentation
         - [ ] User/API documentation
     - [ ] Initialise Testing
     - [ ] Think about: ProtoGL-starter/ProtoGL-template for quickstart gamedev?
+    - [ ] Think about: separate engine and demo into distinct projects? (makes some script stuff simpler?)
 - [ ] **Step 3: ...etc *(misc notes)***
     - [ ] reconsider Math implementations; instanced/mutable? types only? statics? etc
         - [ ] port math from ProtoGL-JS *as and when needed*
@@ -83,3 +82,4 @@ Lofty/long-term Goals:
         - [ ] misc: AABBCollisionBox onCollision
     - [ ] Consider decorators (Angular-style) for things like Components, Systems? - rather than interface or class implementation/extension
     - [ ] OpenGL
+    - [ ] keyboard input not working for dist?

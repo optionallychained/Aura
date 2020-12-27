@@ -1,12 +1,12 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-// builds the demo (which will by extension include all necessary engine parts) to ./dev w/ devServer
+// builds the demo for development with webpack-dev-server
 
 module.exports = {
     entry: './src/demo/demo.ts',
     devtool: 'inline-source-map',
-    mode: "development",
+    mode: 'development',
     devServer: {
         contentBase: './dev'
     },
