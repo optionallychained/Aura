@@ -11,7 +11,7 @@ Lofty/long-term Goals:
 - Zero (or close to) dependencies
 - Simplistic and easy-to-approach API and project structure
 - Large base of built-in utility (geometry, components, systems, physics, text, UI, shaders, etc)
-- 2D rendering with OpenGL *(*...and canvas?)*
+- 2D rendering with OpenGL *(...and canvas?)*
 - 3D rendering with OpenGL
 - Keyboard/Mouse, Gamepad, Touch support
 - Solid documentation
@@ -67,6 +67,7 @@ Lofty/long-term Goals:
         - [ ] Technical documentation
         - [ ] User/API documentation
     - [ ] Initialise Testing
+    - [ ] Think about: ProtoGL-starter/ProtoGL-template for quickstart gamedev?
 - [ ] **Step 3: ...etc *(misc notes)***
     - [ ] reconsider Math implementations; instanced/mutable? types only? statics? etc
         - [ ] port math from ProtoGL-JS *as and when needed*
@@ -80,4 +81,5 @@ Lofty/long-term Goals:
         - [ ] state tick
         - [ ] entity update
         - [ ] misc: AABBCollisionBox onCollision
+    - [ ] Consider decorators (Angular-style) for things like Components, Systems? - rather than interface or class implementation/extension
     - [ ] OpenGL

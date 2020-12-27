@@ -1,32 +1,11 @@
 {
+    "extends": "./tsconfig.json",
     "compilerOptions": {
-        "target": "es5",
-        "module": "es6",
-        "outDir": "./dist",
-        "sourceMap": true,
-        "strict": true,
-        "baseUrl": "./src",
-        "declaration": true,
-        "paths": {
-            "@input/*": [
-                "engine/util/input/*"
-            ],
-            "@math/*": [
-                "engine/util/math/*"
-            ],
-            "@util/*": [
-                "engine/util/*"
-            ],
-            "@protogl/*": [
-                "engine/*"
-            ],
-            "@demo/*": [
-                "demo/*"
-            ]
-        }
+        "sourceMap": false,
+        "declaration": true
     },
     "exclude": [
         "node_modules",
-        "dist"
+        "src/demo"
     ]
 }

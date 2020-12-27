@@ -1,4 +1,4 @@
-import { EntityComponent } from '@protogl/entity/component/entityComponent';
+import { EntityComponent } from './component/entityComponent';
 
 interface EntityConfig {
     tag: string;

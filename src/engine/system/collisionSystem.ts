@@ -1,7 +1,7 @@
-import { AABBCollisionBox } from '@protogl/entity/component/AABBCollisionBox';
-import { Transform } from '@protogl/entity/component/transform';
-import { Entity } from '@protogl/entity/entity';
-import { System } from '@protogl/system/system';
+import { AABBCollisionBox } from '../entity/component/AABBCollisionBox';
+import { Transform } from '../entity/component/transform';
+import { Entity } from '../entity/entity';
+import { System } from './system';
 
 export class CollisionSystem extends System {
 

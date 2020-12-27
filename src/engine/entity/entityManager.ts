@@ -1,8 +1,8 @@
-import { EntityComponent } from '@protogl/entity/component/entityComponent';
-import { FlatColor } from '@protogl/entity/component/flatColor';
-import { Transform } from '@protogl/entity/component/transform';
-import { Entity } from '@protogl/entity/entity';
-import { CanvasRenderer } from '@protogl/screen/canvasRenderer';
+import { CanvasRenderer } from '../screen/canvasRenderer';
+import { EntityComponent } from './component/entityComponent';
+import { FlatColor } from './component/flatColor';
+import { Transform } from './component/transform';
+import { Entity } from './entity';
 
 export class EntityManager {
 

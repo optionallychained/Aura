@@ -20,14 +20,7 @@ module.exports = {
         ],
     },
     resolve: {
-        alias: {
-            '@input': path.resolve(__dirname, 'src/engine/util/input'),
-            '@math': path.resolve(__dirname, 'src/engine/util/math'),
-            '@util': path.resolve(__dirname, 'src/engine/util'),
-            '@protogl': path.resolve(__dirname, 'src/engine'),
-            '@demo': path.resolve(__dirname, 'src/demo')
-        },
-        extensions: ['.ts', '.js'],
+        extensions: ['.ts', '.js']
     },
     plugins: [
         new HtmlWebpackPlugin({

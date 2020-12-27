@@ -1,8 +1,8 @@
-import { mainState } from '@demo/state/main';
-import { winState } from '@demo/state/win';
-import { ProtoGL } from '@protogl/protogl';
+import { Game } from '../engine/protogl';
+import { mainState } from './state/main';
+import { winState } from './state/win';
 
-const game = new ProtoGL({
+const game = new Game({
     width: 800,
     height: 600,
     initFunc: () => { console.log('GAME -> init') }

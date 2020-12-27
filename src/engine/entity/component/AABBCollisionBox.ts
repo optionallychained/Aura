@@ -1,6 +1,6 @@
-import { EntityComponent } from '@protogl/entity/component/entityComponent';
-import { Entity } from '@protogl/entity/entity';
-import { Vec2 } from '@protogl/math/vec2';
+import { Vec2 } from '../../math/vec2';
+import { Entity } from '../entity';
+import { EntityComponent } from './entityComponent';
 
 export class AABBCollisionBox implements EntityComponent {
 

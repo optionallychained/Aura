@@ -1,22 +1,14 @@
-import { player } from '@demo/entity/player';
-import { enemy } from '@demo/entity/enemy';
-import { AABBCollisionBox } from '@protogl/entity/component/AABBCollisionBox';
-import { Transform } from '@protogl/entity/component/transform';
-import { Keys } from '@protogl/input/keys';
-import { MathUtils } from '@protogl/math/mathUtils';
-import { Vec2 } from '@protogl/math/vec2';
-import { ProtoGL } from '@protogl/protogl';
-import { GameState } from '@protogl/state/gameState';
-import { CollisionSystem } from '@protogl/system/collisionSystem';
-import { PhysicsSystem } from '@protogl/system/physicsSystem';
+import { AABBCollisionBox, CollisionSystem, Game, GameState, Keys, MathUtils, PhysicsSystem, Transform, Vec2 } from '../../engine/protogl';
+import { enemy } from '../entity/enemy';
+import { player } from '../entity/player';
 
-const randomPosition = (game: ProtoGL): Vec2 => {
+const randomPosition = (game: Game): Vec2 => {
     return new Vec2(MathUtils.randomBetween(50, game.getWidth() - 50), MathUtils.randomBetween(50, game.getHeight() - 50))
 }
 
 export const mainState = new GameState({
     name: 'main',
-    initFunc: (game: ProtoGL) => {
+    initFunc: (game: Game) => {
         game.setData('points', 0);
 
         game.addSystem(new PhysicsSystem(game));
@@ -40,12 +32,12 @@ export const mainState = new GameState({
 
         (enemy.getComponentByName('Transform') as Transform).position = randomPosition(game);
     },
-    endFunc: (game: ProtoGL) => {
+    endFunc: (game: Game) => {
         const playerTransform = player.getComponentByName('Transform') as Transform;
         playerTransform.position.set(100, 100);
         playerTransform.velocity.set();
     },
-    tickFunc: (game: ProtoGL) => {
+    tickFunc: (game: Game) => {
         game.renderText(`Points: ${game.getData('points') ?? 0}`);
 
         // super dutty

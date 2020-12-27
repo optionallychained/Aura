@@ -1,6 +1,6 @@
-import { Transform } from '@protogl/entity/component/transform';
-import { Vec2 } from '@protogl/math/vec2';
-import { System } from '@protogl/system/system';
+import { Transform } from '../entity/component/transform';
+import { Vec2 } from '../math/vec2';
+import { System } from './system';
 
 export class PhysicsSystem extends System {
 

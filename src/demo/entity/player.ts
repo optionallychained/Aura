@@ -1,7 +1,4 @@
-import { FlatColor } from '@protogl/entity/component/flatColor';
-import { Transform } from '@protogl/entity/component/transform';
-import { Entity } from '@protogl/entity/entity';
-import { Vec2 } from '@protogl/math/vec2';
+import { Entity, FlatColor, Transform, Vec2 } from '../../engine/protogl';
 
 export const player = new Entity({
     tag: 'player',

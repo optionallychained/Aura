@@ -1,5 +1,5 @@
-import { Vec2 } from '@protogl/math/vec2';
-import { EntityComponent } from '@protogl/entity/component/entityComponent';
+import { Vec2 } from '../../math/vec2';
+import { EntityComponent } from './entityComponent';
 
 export class Transform implements EntityComponent {
 

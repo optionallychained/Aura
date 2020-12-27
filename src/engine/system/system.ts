@@ -1,10 +1,10 @@
-import { ProtoGL } from '@protogl/protogl';
+import { Game } from '../core/game';
 
 export abstract class System {
 
     public abstract name: string;
 
-    constructor(protected game: ProtoGL) { }
+    constructor(protected game: Game) { }
 
     public abstract tick(frameDelta: number): void;
 }

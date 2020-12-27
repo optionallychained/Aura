@@ -1,13 +1,14 @@
 {
-    "name": "protogl-test",
-    "version": "0.0.1",
+    "name": "protogl-test-2",
+    "version": "0.0.3",
     "repository": {
         "type": "git",
         "url": "git://git@github.com/jonnopon/ProtoGL-TS.git"
     },
-    "types": "dist/**/**.d.ts",
+    "main": "dist/protogl.js",
+    "types": "dist/protogl.d.ts",
     "files": [
-        "dist/**/*"
+        "dist/"
     ],
     "scripts": {
         "lint": "eslint --ext .ts --fix",
