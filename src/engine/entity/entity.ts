@@ -11,8 +11,7 @@ interface EntityConfig {
 export class Entity {
 
     private id = (+new Date()).toString(16) + (Math.random() * 10000000 | 0).toString(16);
-    // TODO memoization of component names supported via add() and remove()
-    private components: { [name: string]: EntityComponent } = {};
+    private components = new Map<string, EntityComponent>();
 
     constructor(private config: EntityConfig) {
         if (config.components) {
@@ -24,12 +23,13 @@ export class Entity {
         this.config.onUpdate(frameDelta);
     }
 
-    public getComponentByName(name: string): EntityComponent {
-        return this.components[name];
+    public getComponentByName(name: string): EntityComponent | undefined {
+        // TODO error handling instead of undefined return type
+        return this.components.get(name);
     }
 
     public addComponent(component: EntityComponent): void {
-        this.components[component.name] = component;
+        this.components.set(component.name, component);
     }
 
     public addComponents(components: EntityComponent[]): void {
@@ -40,10 +40,10 @@ export class Entity {
 
     public removeComponent(component: string | EntityComponent): void {
         if (this.isComponent(component)) {
-            delete this.components[component.name];
+            this.components.delete(component.name);
         }
         else {
-            delete this.components[component];
+            this.components.delete(component);
         }
     }
 
@@ -63,8 +63,7 @@ export class Entity {
             name = component;
         }
 
-        // TODO memoization of names
-        return Object.keys(this.components).includes(name);
+        return this.components.has(name);
     }
 
     public hasComponents(components: Array<string | EntityComponent>): boolean {

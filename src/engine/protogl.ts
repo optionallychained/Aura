@@ -24,7 +24,7 @@ export class ProtoGL {
 
     private background: Vec3;
 
-    private states: { [name: string]: GameState } = {};
+    private states = new Map<string, GameState>();
     private currentState: GameState | undefined;
 
     constructor(private config: ProtoGLOpts) {
@@ -56,12 +56,13 @@ export class ProtoGL {
     }
 
     public addState(state: GameState): void {
-        this.states[state.getName()] = state;
+        this.states.set(state.getName(), state);
     }
 
     public switchToState(name: string): void {
-        this.currentState = this.states[name];
-        this.currentState.init();
+        this.currentState = this.states.get(name);
+        // TODO error handling for invalid states
+        this.currentState?.init();
     }
 
     public keyPressed(which: Keys): boolean {
