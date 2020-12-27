@@ -1,41 +1,22 @@
+import { player } from '@demo/entity/player';
+import { enemy } from '@demo/entity/enemy';
 import { AABBCollisionBox } from '@protogl/entity/component/AABBCollisionBox';
-import { FlatColor } from '@protogl/entity/component/flatColor';
 import { Transform } from '@protogl/entity/component/transform';
-import { Entity } from '@protogl/entity/entity';
 import { Keys } from '@protogl/input/keys';
 import { MathUtils } from '@protogl/math/mathUtils';
 import { Vec2 } from '@protogl/math/vec2';
-import { Vec3 } from '@protogl/math/vec3';
 import { ProtoGL } from '@protogl/protogl';
 import { GameState } from '@protogl/state/gameState';
 import { CollisionSystem } from '@protogl/system/collisionSystem';
 import { PhysicsSystem } from '@protogl/system/physicsSystem';
 
-// TODO super dumb (see AABBCollisionBox below)
-let globalGame: ProtoGL;
-
-const randomPosition = (): Vec2 => {
-    return new Vec2(MathUtils.randomBetween(50, globalGame.getWidth() - 50), MathUtils.randomBetween(50, globalGame.getHeight() - 50))
+const randomPosition = (game: ProtoGL): Vec2 => {
+    return new Vec2(MathUtils.randomBetween(50, game.getWidth() - 50), MathUtils.randomBetween(50, game.getHeight() - 50))
 }
-
-const enemy = new Entity({
-    tag: 'enemy',
-    onUpdate: () => { },
-    components: [
-        new FlatColor(new Vec3(255, 0, 0)),
-        new Transform(new Vec2(), new Vec2(25, 25)),
-        new AABBCollisionBox(new Vec2(50, 50), (e: Entity) => {
-            // TODO: real solution to enabling this type of thing
-            globalGame.entityManager.removeEntity(enemy);
-        })
-    ]
-});
 
 export const mainState = new GameState({
     name: 'main',
     initFunc: (game: ProtoGL) => {
-        globalGame = game;
-
         game.setData('points', 0);
 
         game.addSystem(new PhysicsSystem(game));
@@ -43,21 +24,21 @@ export const mainState = new GameState({
 
         game.entityManager.clearEntities();
 
-        game.entityManager.addEntity(new Entity({
-            tag: 'player',
-            onUpdate: () => { },
-            components: [
-                new FlatColor(),
-                new Transform(new Vec2(100, 100), new Vec2(50, 50)),
-                new AABBCollisionBox(new Vec2(50, 50), (e: Entity) => {
-                    game.setData('points', game.getData('points') as number + 1);
-                })
-            ]
+        // done here just for game access in collision callback
+        // TODO better way of achieving
+        player.addComponent(new AABBCollisionBox(new Vec2(50, 50), () => {
+            game.setData('points', game.getData('points') as number + 1);
         }));
 
+        enemy.addComponent(new AABBCollisionBox(new Vec2(50, 50), () => {
+            // TODO: real solution to enabling this type of thing
+            game.entityManager.removeEntity(enemy);
+        }))
+
+        game.entityManager.addEntity(player);
         game.entityManager.addEntity(enemy);
 
-        (enemy.getComponentByName('Transform') as Transform).position = randomPosition();
+        (enemy.getComponentByName('Transform') as Transform).position = randomPosition(game);
     },
     tickFunc: (game: ProtoGL) => {
         game.renderText(`Points: ${game.getData('points') ?? 0}`);
@@ -104,7 +85,7 @@ export const mainState = new GameState({
 
         // enemy respawing
         if (game.entityManager.countEntities() === 1) {
-            (enemy.getComponentByName('Transform') as Transform).position = randomPosition();
+            (enemy.getComponentByName('Transform') as Transform).position = randomPosition(game);
             game.entityManager.addEntity(enemy);
         }
 
