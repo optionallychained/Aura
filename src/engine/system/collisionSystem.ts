@@ -5,6 +5,8 @@ import { System } from '@protogl/system/system';
 
 export class CollisionSystem extends System {
 
+    public name = 'collision';
+
     public tick(): void {
         const collidables = this.game.entityManager.filterEntitiesByComponents([Transform, AABBCollisionBox]);
 

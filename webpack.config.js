@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 // builds the demo (which will by extension include all necessary engine parts) to ./dev w/ devServer
 
 module.exports = {
-    entry: './src/demo/index.ts',
+    entry: './src/demo/demo.ts',
     devtool: 'inline-source-map',
     mode: "development",
     devServer: {
@@ -35,7 +35,7 @@ module.exports = {
         })
     ],
     output: {
-        filename: 'index.js',
+        filename: 'demo.js',
         path: path.resolve(__dirname, 'dev'),
     }
 };

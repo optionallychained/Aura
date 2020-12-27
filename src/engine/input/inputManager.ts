@@ -24,7 +24,7 @@ export class InputManager {
 
     public init(): void {
         // TODO: deprecated implementation for now, look at .key, .code, etc
-        window.addEventListener('keydown', (event: KeyboardEvent): void => {
+        window.addEventListener('keydown', (event: KeyboardEvent) => {
             const { which } = event;
 
             if (!this.ignoreKeys.includes(which)) {
@@ -33,7 +33,7 @@ export class InputManager {
             }
         });
 
-        window.addEventListener('keyup', (event: KeyboardEvent): void => {
+        window.addEventListener('keyup', (event: KeyboardEvent) => {
             const { which } = event;
 
             if (!this.ignoreKeys.includes(which)) {

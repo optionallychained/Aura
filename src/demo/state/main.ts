@@ -1,43 +1,42 @@
-import { Keys } from '@protogl/input/keys';
-import { Vec2 } from '@protogl/math/vec2';
-import { Vec3 } from '@protogl/math/vec3';
+import { AABBCollisionBox } from '@protogl/entity/component/AABBCollisionBox';
 import { FlatColor } from '@protogl/entity/component/flatColor';
 import { Transform } from '@protogl/entity/component/transform';
 import { Entity } from '@protogl/entity/entity';
+import { Keys } from '@protogl/input/keys';
+import { MathUtils } from '@protogl/math/mathUtils';
+import { Vec2 } from '@protogl/math/vec2';
+import { Vec3 } from '@protogl/math/vec3';
 import { ProtoGL } from '@protogl/protogl';
 import { GameState } from '@protogl/state/gameState';
-import { PhysicsSystem } from '@protogl/system/physicsSystem';
-import { AABBCollisionBox } from '@protogl/entity/component/AABBCollisionBox';
 import { CollisionSystem } from '@protogl/system/collisionSystem';
-import { MathUtils } from '@protogl/math/mathUtils';
+import { PhysicsSystem } from '@protogl/system/physicsSystem';
 
-const game = new ProtoGL({
-    width: 800,
-    height: 600,
-    background: new Vec3(),
-    initFunc: (): void => { console.log('GAME -> init') }
-});
+// TODO super dumb (see AABBCollisionBox below)
+let globalGame: ProtoGL;
 
-// reusable enemy Entity
+const randomPosition = (): Vec2 => {
+    return new Vec2(MathUtils.randomBetween(50, globalGame.getWidth() - 50), MathUtils.randomBetween(50, globalGame.getHeight() - 50))
+}
+
 const enemy = new Entity({
-    tag: 'enemy-1',
-    onUpdate: (): void => { },
+    tag: 'enemy',
+    onUpdate: () => { },
     components: [
         new FlatColor(new Vec3(255, 0, 0)),
-        new Transform(new Vec2(500, 500), new Vec2(25, 25)),
-        new AABBCollisionBox(new Vec2(50, 50), (e: Entity): void => {
-            game.entityManager.removeEntity(enemy);
+        new Transform(new Vec2(), new Vec2(25, 25)),
+        new AABBCollisionBox(new Vec2(50, 50), (e: Entity) => {
+            // TODO: real solution to enabling this type of thing
+            globalGame.entityManager.removeEntity(enemy);
         })
     ]
 });
 
-// stupid global :)
-let points = 0;
+export const mainState = new GameState({
+    name: 'main',
+    initFunc: (game: ProtoGL) => {
+        globalGame = game;
 
-game.addState(new GameState({
-    name: 'state-1',
-    initFunc: (): void => {
-        console.log('state-1 -> init');
+        game.setData('points', 0);
 
         game.addSystem(new PhysicsSystem(game));
         game.addSystem(new CollisionSystem(game));
@@ -45,24 +44,26 @@ game.addState(new GameState({
         game.entityManager.clearEntities();
 
         game.entityManager.addEntity(new Entity({
-            tag: 'Player-1',
-            onUpdate: (): void => { },
+            tag: 'player',
+            onUpdate: () => { },
             components: [
                 new FlatColor(),
                 new Transform(new Vec2(100, 100), new Vec2(50, 50)),
-                new AABBCollisionBox(new Vec2(50, 50), (e: Entity): void => {
-                    points++;
+                new AABBCollisionBox(new Vec2(50, 50), (e: Entity) => {
+                    game.setData('points', game.getData('points') as number + 1);
                 })
             ]
         }));
 
         game.entityManager.addEntity(enemy);
+
+        (enemy.getComponentByName('Transform') as Transform).position = randomPosition();
     },
-    tickFunc: (): void => {
-        game.renderText(`Points: ${points}`);
+    tickFunc: (game: ProtoGL) => {
+        game.renderText(`Points: ${game.getData('points') ?? 0}`);
 
         // super dutty
-        const player = game.entityManager.filterEntitiesByTag('Player-1')[0];
+        const player = game.entityManager.filterEntitiesByTag('player')[0];
         if (!player) {
             return;
         }
@@ -103,10 +104,12 @@ game.addState(new GameState({
 
         // enemy respawing
         if (game.entityManager.countEntities() === 1) {
-            (enemy.getComponentByName('Transform') as Transform).position.set(MathUtils.randomBetween(50, game.getWidth() - 50), MathUtils.randomBetween(50, game.getHeight() - 50));
+            (enemy.getComponentByName('Transform') as Transform).position = randomPosition();
             game.entityManager.addEntity(enemy);
         }
-    }
-}));
 
-game.start('state-1');
+        if (game.getData('points') as number === 10) {
+            game.switchToState('win');
+        }
+    }
+});

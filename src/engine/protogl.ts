@@ -31,7 +31,9 @@ export class ProtoGL {
     private states = new Map<string, GameState>();
     private currentState: GameState | undefined;
 
-    private systems: System[] = [];
+    private systems = new Map<string, System>();
+
+    private data = new Map<string, any>();
 
     constructor(public config: ProtoGLOpts) {
         let canvas = document.getElementById(config.canvasId ?? '') as HTMLCanvasElement | null;
@@ -70,15 +72,16 @@ export class ProtoGL {
     public switchToState(name: string): void {
         this.currentState = this.states.get(name);
         // TODO error handling for invalid states
-        this.currentState?.init();
+        this.currentState?.init(this);
     }
 
     public addSystem(system: System): void {
-        this.systems.push(system);
+        this.systems.set(system.name, system);
     }
 
-    public removeSystem(system: System): void {
-        this.systems.splice(this.systems.indexOf(system), 1);
+    // TODO better way
+    public removeSystem(name: string): void {
+        this.systems.delete(name);
     }
 
     public keyPressed(which: Keys): boolean {
@@ -108,18 +111,26 @@ export class ProtoGL {
         this.renderer.renderText(text, position, color);
     }
 
+    public setData(key: string, value: any): void {
+        this.data.set(key, value);
+    }
+
+    public getData(key: string): any {
+        return this.data.get(key);
+    }
+
     private run(): void {
         this.frameDelta = Date.now() - this.lastFrameTime;
         this.lastFrameTime = Date.now();
 
         this.renderer.clearScreen(this.background);
 
-        for (const system of this.systems) {
-            system.tick(this.frameDelta);
-        }
+        this.systems.forEach((s) => {
+            s.tick(this.frameDelta);
+        });
 
         if (this.currentState) {
-            this.currentState.tick(this.frameDelta);
+            this.currentState.tick(this, this.frameDelta);
         }
 
         this.entityManager.update(this.frameDelta);

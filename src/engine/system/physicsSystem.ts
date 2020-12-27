@@ -4,6 +4,8 @@ import { System } from '@protogl/system/system';
 
 export class PhysicsSystem extends System {
 
+    public name = 'physics';
+
     public tick(frameDelta: number): void {
         const movers = this.game.entityManager.filterEntitiesByComponent(Transform);
 
