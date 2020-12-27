@@ -4,6 +4,8 @@ import { Vec3 } from '@protogl/math/vec3';
 import { EntityManager } from '@protogl/entity/entityManager';
 import { CanvasRenderer } from '@protogl/screen/canvasRenderer';
 import { GameState } from '@protogl/state/gameState';
+import { System } from '@protogl/system/system';
+import { Vec2 } from '@protogl/math/vec2';
 
 interface ProtoGLOpts {
     width?: number;
@@ -16,6 +18,8 @@ interface ProtoGLOpts {
 export class ProtoGL {
     public entityManager: EntityManager;
 
+    private canvas: HTMLCanvasElement;
+
     private renderer: CanvasRenderer;
     private inputManager: InputManager;
 
@@ -27,7 +31,9 @@ export class ProtoGL {
     private states = new Map<string, GameState>();
     private currentState: GameState | undefined;
 
-    constructor(private config: ProtoGLOpts) {
+    private systems: System[] = [];
+
+    constructor(public config: ProtoGLOpts) {
         let canvas = document.getElementById(config.canvasId ?? '') as HTMLCanvasElement | null;
 
         if (!canvas) {
@@ -37,6 +43,8 @@ export class ProtoGL {
 
         canvas.width = config.width ?? window.innerWidth;
         canvas.height = config.height ?? window.innerHeight;
+
+        this.canvas = canvas;
 
         this.background = config.background ?? new Vec3();
 
@@ -65,8 +73,39 @@ export class ProtoGL {
         this.currentState?.init();
     }
 
+    public addSystem(system: System): void {
+        this.systems.push(system);
+    }
+
+    public removeSystem(system: System): void {
+        this.systems.splice(this.systems.indexOf(system), 1);
+    }
+
     public keyPressed(which: Keys): boolean {
         return this.inputManager.isKeyDown(which);
+    }
+
+    public keysPressed(which: Keys[]): boolean {
+        for (const key of which) {
+            if (!this.inputManager.isKeyDown(key)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public getWidth(): number {
+        return this.config.width ?? this.canvas.width;
+    }
+
+    public getHeight(): number {
+        return this.config.height ?? this.canvas.height;
+    }
+
+    // temporary
+    public renderText(text: string, position?: Vec2, color?: Vec3): void {
+        this.renderer.renderText(text, position, color);
     }
 
     private run(): void {
@@ -74,6 +113,10 @@ export class ProtoGL {
         this.lastFrameTime = Date.now();
 
         this.renderer.clearScreen(this.background);
+
+        for (const system of this.systems) {
+            system.tick(this.frameDelta);
+        }
 
         if (this.currentState) {
             this.currentState.tick(this.frameDelta);

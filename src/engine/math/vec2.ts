@@ -32,6 +32,14 @@ export class Vec2 {
         this.y = y;
     }
 
+    public setX(x = 0): void {
+        this.x = x;
+    }
+
+    public setY(y = 0): void {
+        this.y = y;
+    }
+
     public clone(): Vec2 {
         return new Vec2(this.x, this.y);
     }

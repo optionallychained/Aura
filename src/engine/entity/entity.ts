@@ -23,6 +23,10 @@ export class Entity {
         this.config.onUpdate(frameDelta);
     }
 
+    public getTag(): string {
+        return this.config.tag;
+    }
+
     public getComponentByName(name: string): EntityComponent | undefined {
         // TODO error handling instead of undefined return type
         return this.components.get(name);

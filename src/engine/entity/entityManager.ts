@@ -58,6 +58,23 @@ export class EntityManager {
         }
     }
 
+    // TODO memoization of commonly-used lists
+    public filterEntitiesByComponent(component: string | EntityComponent): Entity[] {
+        return this.entities.filter((e) => e.hasComponent(component));
+    }
+
+    public filterEntitiesByComponents(components: Array<string | EntityComponent>): Entity[] {
+        return this.entities.filter((e) => e.hasComponents(components));
+    }
+
+    public filterEntitiesByTag(tag: string): Entity[] {
+        return this.entities.filter((e) => e.getTag() === tag);
+    }
+
+    public countEntities(): number {
+        return this.entities.length;
+    }
+
     private loadEntities(): void {
         this.entities = this.entities.concat(this.addList);
         this.addList = [];
@@ -68,14 +85,5 @@ export class EntityManager {
             this.entities.splice(this.entities.indexOf(remove), 1);
         }
         this.removeList = [];
-    }
-
-    // TODO memoization of commonly-used lists
-    private filterEntitiesByComponent(component: string | EntityComponent): Entity[] {
-        return this.entities.filter((e) => e.hasComponent(component));
-    }
-
-    private filterEntitiesByComponents(components: Array<string | EntityComponent>): Entity[] {
-        return this.entities.filter((e) => e.hasComponents(components));
     }
 }

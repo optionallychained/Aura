@@ -44,20 +44,22 @@ Lofty/long-term Goals:
 
 # TODO
 
-- **Step 1: Rough-and-ready kickstart (ProtoGL conceptual port)**
-    - [ ] Port some basic utilities from ProtoGL
+- [x] **Step 1: Rough-and-ready kickstart (ProtoGL conceptual port)**
+    - [x] Port some basic utilities from ProtoGL
         - [x] input
         - [x] (some) math
-    - [ ] Reach implementation of basic/rough render/input demo *(Canvas2D)*
+    - [x] Reach implementation of basic/rough render/input/game demo *(Canvas2D)*
         - [x] states
         - [x] frame deltas
         - [x] entities
-        - [ ] systems
-        - [ ] player-controlled basic 2D movement
-- **Step 2: Project Considerations**
+        - [x] systems
+        - [x] physics (movement)
+        - [x] collision
+        - [x] player-controlled movement
+- [ ] **Step 2: Project Considerations**
     - [ ] consider usage as an NPM package/library
-        - [ ] research TS library creation
-        - [ ] research + experiment with NPM package publication
+        - [x] research TS library creation
+        - [x] research + experiment with NPM package publication
         - [ ] decisions on typedefs vs classes for certain utilities
         - [ ] think about namespacing
     - [ ] consider usage as a Script include/JS library?
@@ -65,7 +67,7 @@ Lofty/long-term Goals:
         - [ ] Technical documentation
         - [ ] User/API documentation
     - [ ] Initialise Testing
-- **Step 3: ...etc *(misc notes)***
+- [ ] **Step 3: ...etc *(misc notes)***
     - [ ] reconsider Math implementations; instanced/mutable? types only? statics? etc
         - [ ] port math from ProtoGL-JS *as and when needed*
     - [ ] reconsider Input Management
@@ -74,4 +76,8 @@ Lofty/long-term Goals:
         - [ ] observables?
     - [ ] strongly consider: Observables as an underlying engine utility?
         - thinking prompts: input, entity events, state events, system interrupts, etc?
+    - [ ] `this` scoping or other creative solutions for:
+        - [ ] state tick
+        - [ ] entity update
+        - [ ] misc: AABBCollisionBox onCollision
     - [ ] OpenGL
