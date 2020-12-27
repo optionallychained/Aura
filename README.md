@@ -57,7 +57,7 @@ Lofty/long-term Goals:
 - **Step 2: Project Considerations**
     - [ ] consider usage as an NPM package/library
         - [ ] research TS library creation
-        - [ ] research + experiment with NPM package publication *(private)*
+        - [ ] research + experiment with NPM package publication
         - [ ] decisions on typedefs vs classes for certain utilities
         - [ ] think about namespacing
     - [ ] consider usage as a Script include/JS library?

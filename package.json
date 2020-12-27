@@ -1,10 +1,14 @@
 {
-    "name": "protogl-ts",
+    "name": "protogl-test",
     "version": "0.0.1",
     "repository": {
         "type": "git",
-        "url": "git+ssh://git@github.com/jonnopon/ProtoGL-TS.git"
+        "url": "git://git@github.com/jonnopon/ProtoGL-TS.git"
     },
+    "types": "dist/**/**.d.ts",
+    "files": [
+        "dist/**/*"
+    ],
     "scripts": {
         "lint": "eslint --ext .ts --fix",
         "debug": "webpack --config webpack.config.js serve",
