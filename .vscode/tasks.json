@@ -4,7 +4,7 @@
         {
             "label": "Start Game",
             "type": "npm",
-            "script": "debug",
+            "script": "demo:debug",
             "isBackground": true,
             "problemMatcher": {
                 "owner": "typescript",

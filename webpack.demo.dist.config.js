@@ -1,11 +1,10 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-// builds the demo for distribution
+// builds the demo for distribution as browser-friendly JS (with HTML file)
 
 module.exports = {
     entry: './src/demo/demo.ts',
-    mode: 'production',
     module: {
         rules: [
             {
@@ -20,7 +19,7 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            title: 'Demo'
+            title: 'ProtoGL-TS Demo'
         })
     ],
     output: {

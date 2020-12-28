@@ -5,6 +5,8 @@ ProtoGL-TS is a TypeScript game engine designed for the swift implementation of 
 Built on the Entity-Component-System architecture and operating on the concept of distinct game states, ProtoGL-TS aims to enable a compartmentalised approach
 to prototype creation, supporting developments of varying complexity.
 
+See [ProtoGL-TS-Starter](https://github.com/jonnopon/ProtoGL-TS-Starter) for getting up and running with ProtoGL-TS fast.
+
 This project is a WIP revival of [ProtoGL](https://github.com/jonnopon/ProtoGL) and its concepts.
 
 Lofty/long-term Goals:
@@ -17,28 +19,6 @@ Lofty/long-term Goals:
 - Solid documentation
 - Automated testing
 - Efficient and optimised builds
-
-
-## Setup
-
-- Install [NPM](https://nodejs.org/)
-- Clone
-- Terminal: `npm install`
-
-
-## Develop
-
-- Terminal: `npm run dev`
-    - *Alternatively*: Run Debug configuration in VSCode
-- Work on engine in `src/engine/`
-- Work on demo/game in `src/demo/`
-- View output at `localhost:8080`
-
-
-## Distribute 
-
-- Terminal: `npm run dist`
-- Retrieve build from `dist/`
 
 ----
 
@@ -60,13 +40,17 @@ Lofty/long-term Goals:
     - [x] consider usage as an NPM package/library
         - [x] research TS library creation
         - [x] research + experiment with NPM package publication
-    - [x] consider usage as a Script include/JS library?
+    - [ ] re-approach bunding/distribution/typedef stuff
+        - [ ] export collections, per-folder? - support patterns like "protogl/input" / "protogl/math"?
+        - [x] NPM package - consider ideal build targets/resultant code level/structure (*commonJS?* / *ESM*)
+        - [x] demo dist - consider ideal build targets/resultant code level/structure
+    - [x] really think about usage as an NPM package by experimenting in a test project
+        - [x] how to build game using engine as such?
+        - [x] template/starter project to facilitate? Angular style?
     - [ ] Initialise Documentation
         - [ ] Technical documentation
         - [ ] User/API documentation
     - [ ] Initialise Testing
-    - [ ] Think about: ProtoGL-starter/ProtoGL-template for quickstart gamedev?
-    - [ ] Think about: separate engine and demo into distinct projects? (makes some script stuff simpler?)
 - [ ] **Step 3: ...etc *(misc notes)***
     - [ ] reconsider Math implementations; instanced/mutable? types only? statics? etc
         - [ ] port math from ProtoGL-JS *as and when needed*

@@ -1,14 +1,14 @@
 {
-    "extends": "./tsconfig.json",
     "compilerOptions": {
         "outDir": "./publish",
-        "sourceMap": false,
-        "declaration": true
+        "lib": [
+            "es2016",
+            "dom"
+        ],
+        "declaration": true,
+        "strict": true
     },
-    "exclude": [
-        "dist",
-        "publish",
-        "node_modules",
-        "src/demo"
+    "include": [
+        "src/engine/**/*.ts"
     ]
 }
