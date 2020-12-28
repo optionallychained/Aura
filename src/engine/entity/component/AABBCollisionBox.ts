@@ -1,10 +1,10 @@
 import { Vec2 } from '../../math/vec2';
 import { Entity } from '../entity';
-import { EntityComponent } from './entityComponent';
+import { Component } from './component';
 
-export class AABBCollisionBox implements EntityComponent {
+export class AABBCollisionBox extends Component {
 
-    public name = 'AABBCollisionBox';
-
-    constructor(public dimensions = new Vec2(), public onCollision: (other: Entity) => void) { }
+    constructor(public dimensions = new Vec2(), public onCollision: (other: Entity) => void) {
+        super('AABBCollisionBox');
+    }
 }

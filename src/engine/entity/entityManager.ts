@@ -1,5 +1,4 @@
 import { CanvasRenderer } from '../screen/canvasRenderer';
-import { EntityComponent } from './component/entityComponent';
 import { FlatColor } from './component/flatColor';
 import { Transform } from './component/transform';
 import { Entity } from './entity';
@@ -59,11 +58,11 @@ export class EntityManager {
     }
 
     // TODO memoization of commonly-used lists
-    public filterEntitiesByComponent(component: string | EntityComponent): Entity[] {
+    public filterEntitiesByComponent(component: string): Entity[] {
         return this.entities.filter((e) => e.hasComponent(component));
     }
 
-    public filterEntitiesByComponents(components: Array<string | EntityComponent>): Entity[] {
+    public filterEntitiesByComponents(components: string[]): Entity[] {
         return this.entities.filter((e) => e.hasComponents(components));
     }
 

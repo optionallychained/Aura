@@ -11,8 +11,8 @@ export const mainState = new GameState({
     initFunc: (game: Game) => {
         game.setData('points', 0);
 
-        game.addSystem(new PhysicsSystem(game));
-        game.addSystem(new CollisionSystem(game));
+        game.addSystem(new PhysicsSystem());
+        game.addSystem(new CollisionSystem());
 
         game.entityManager.clearEntities();
 

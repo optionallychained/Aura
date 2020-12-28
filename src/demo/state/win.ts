@@ -5,8 +5,8 @@ export const winState = new GameState({
     initFunc: (game: Game) => {
         game.entityManager.clearEntities();
 
-        game.removeSystem('physics');
-        game.removeSystem('collision');
+        game.removeSystem('Physics');
+        game.removeSystem('Collision');
     },
     tickFunc: (game: Game, frameDelta: number) => {
         game.renderText('WIN! ENTER to play again', new Vec2(game.getWidth() / 4, game.getHeight() / 2));

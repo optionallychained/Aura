@@ -1,3 +1,4 @@
+import { Game } from '../core/game';
 import { AABBCollisionBox } from '../entity/component/AABBCollisionBox';
 import { Transform } from '../entity/component/transform';
 import { Entity } from '../entity/entity';
@@ -5,10 +6,12 @@ import { System } from './system';
 
 export class CollisionSystem extends System {
 
-    public name = 'collision';
+    constructor() {
+        super('Collision');
+    }
 
-    public tick(): void {
-        const collidables = this.game.entityManager.filterEntitiesByComponents([Transform, AABBCollisionBox]);
+    public tick(game: Game): void {
+        const collidables = game.entityManager.filterEntitiesByComponents(['Transform', 'AABBCollisionBox']);
 
         for (let i = 0; i < collidables.length; i++) {
             for (let j = i + 1; j < collidables.length; j++) {

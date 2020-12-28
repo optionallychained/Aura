@@ -1,9 +1,9 @@
 import { Vec2 } from '../../math/vec2';
-import { EntityComponent } from './entityComponent';
+import { Component } from './component';
 
-export class Transform implements EntityComponent {
+export class Transform extends Component {
 
-    public name = 'Transform';
-
-    constructor(public position = new Vec2(), public dimensions = new Vec2(), public velocity = new Vec2()) { }
+    constructor(public position = new Vec2(), public dimensions = new Vec2(), public velocity = new Vec2()) {
+        super('Transform');
+    }
 }

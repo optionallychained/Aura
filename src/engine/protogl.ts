@@ -2,7 +2,7 @@ export * from './core/game';
 
 export * from './entity/entity';
 export * from './entity/entityManager';
-export * from './entity/component/entityComponent';
+export * from './entity/component/component';
 export * from './entity/component/AABBCollisionBox';
 export * from './entity/component/flatColor';
 export * from './entity/component/transform';

@@ -1,13 +1,16 @@
+import { Game } from '../core/game';
 import { Transform } from '../entity/component/transform';
 import { Vec2 } from '../math/vec2';
 import { System } from './system';
 
 export class PhysicsSystem extends System {
 
-    public name = 'physics';
+    constructor() {
+        super('Physics');
+    }
 
-    public tick(frameDelta: number): void {
-        const movers = this.game.entityManager.filterEntitiesByComponent(Transform);
+    public tick(game: Game, frameDelta: number): void {
+        const movers = game.entityManager.filterEntitiesByComponent('Transform');
 
         for (const e of movers) {
             const transform = e.getComponentByName('Transform') as Transform;

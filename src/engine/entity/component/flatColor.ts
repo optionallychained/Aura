@@ -1,8 +1,9 @@
 import { Vec3 } from '../../math/vec3';
-import { EntityComponent } from './entityComponent';
+import { Component } from './component';
 
-export class FlatColor implements EntityComponent {
-    public name = 'FlatColor';
+export class FlatColor extends Component {
 
-    constructor(public color = new Vec3(255, 255, 255)) { }
+    constructor(public color = new Vec3(255, 255, 255)) {
+        super('FlatColor');
+    }
 }

@@ -78,7 +78,7 @@ export class Game {
     }
 
     public addSystem(system: System): void {
-        this.systems.set(system.name, system);
+        this.systems.set(system.getName(), system);
     }
 
     // TODO better way
@@ -128,7 +128,7 @@ export class Game {
         this.renderer.clearScreen(this.background);
 
         this.systems.forEach((s) => {
-            s.tick(this.frameDelta);
+            s.tick(this, this.frameDelta);
         });
 
         if (this.currentState) {
