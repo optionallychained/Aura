@@ -1,5 +1,7 @@
 # ProtoGL-TS
 
+[![NPM](https://badge.fury.io/js/protogl.svg)](https://badge.fury.io/js/protogl)
+
 ProtoGL-TS is a TypeScript game engine designed for the swift implementation of prototype WebGL browser games, providing a large base of built-in utility.
 
 Built on the Entity-Component-System architecture and operating on the concept of distinct game states, ProtoGL-TS aims to enable a compartmentalised approach
@@ -35,5 +37,5 @@ Fork or clone [ProtoGL-TS-Starter](https://github.com/jonnopon/ProtoGL-TS-Starte
 ### CDN
 
 ```html
-<script src="TODO-unpkg"></script>
+<script src="https://unpkg.com/protogl/publish/_min/protogl.min.js"></script>
 ```
