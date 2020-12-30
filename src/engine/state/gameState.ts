@@ -2,10 +2,10 @@ import { Game } from '../core/game';
 
 interface GameStateConfig {
     name: string;
-    initFunc: (game: Game) => void;
-    endFunc?: (game: Game) => void;
+    init: (game: Game) => void;
+    end?: (game: Game) => void;
     // TODO param not enforced for implementers, maybe indication this isn't the right approach?
-    tickFunc: (game: Game, frameDelta: number) => void;
+    tick: (game: Game, frameDelta: number) => void;
 }
 
 export class GameState {
@@ -13,18 +13,16 @@ export class GameState {
     constructor(private config: GameStateConfig) { }
 
     public init(game: Game): void {
-        this.config.initFunc(game);
+        this.config.init(game);
     }
 
     // TODO sensible way for both initFunc and tickFunc to refer to 'this' from the outside without esoteric bullshit
     public tick(game: Game, frameDelta: number): void {
-        this.config.tickFunc(game, frameDelta);
+        this.config.tick(game, frameDelta);
     }
 
     public end(game: Game): void {
-        if (this.config.endFunc) {
-            this.config.endFunc(game);
-        }
+        this.config.end?.(game);
     }
 
     public getName(): string {

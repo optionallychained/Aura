@@ -2,7 +2,7 @@ import { Component } from './component/component';
 
 interface EntityConfig {
     tag: string;
-    onUpdate: (frameDelta: number) => void;
+    tick?: (frameDelta: number) => void;
     components?: Component[];
 }
 
@@ -19,8 +19,8 @@ export class Entity {
         }
     }
 
-    public update(frameDelta: number): void {
-        this.config.onUpdate(frameDelta);
+    public tick(frameDelta: number): void {
+        this.config.tick?.(frameDelta);
     }
 
     public getTag(): string {

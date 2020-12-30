@@ -12,21 +12,18 @@
         - [x] physics (movement)
         - [x] collision
         - [x] player-controlled movement
+
 - [ ] **Step 2: Project Considerations**
     - [x] consider usage as an NPM package/library
         - [x] research TS library creation
         - [x] research + experiment with NPM package publication
-    - [ ] re-approach bunding/distribution/typedef stuff
-        - [ ] export collections, per-folder? - support patterns like "protogl/input" / "protogl/math"?
-        - [x] NPM package - consider ideal build targets/resultant code level/structure (*commonJS?* / *ESM*)
-        - [x] demo dist - consider ideal build targets/resultant code level/structure
-    - [x] really think about usage as an NPM package by experimenting in a test project
-        - [x] how to build game using engine as such?
-        - [x] template/starter project to facilitate? Angular style?
+        - [x] set up a protogl-starter type project for getting up and running fast
+    - [x] consider usage as a bundled `<script>`
     - [ ] Initialise Documentation
         - [ ] Technical documentation
         - [ ] User/API documentation
     - [ ] Initialise Testing
+
 - [ ] **Step 3: ...etc *(misc notes)***
     - [ ] reconsider Math implementations; instanced/mutable? types only? statics? etc
         - [ ] port math from ProtoGL-JS *as and when needed*
@@ -40,8 +37,17 @@
         - [ ] state tick
         - [ ] entity update
         - [ ] misc: AABBCollisionBox onCollision
-    - [ ] Consider decorators (Angular-style) for things like Components, Systems? - rather than interface or class implementation/extension
     - [ ] OpenGL
-    - [ ] Enums for built-in Component and System names
+    - [ ] Enums for built-in Component and System names?
     - [ ] type-safety for entity.getComponent()
     - [ ] keyboard input not working for dist?
+        - seems to be an issue with (entity).hasComponent()
+
+- [ ] **Step 4: Project considerations II**
+    - [ ] re-re-reconsider structuring and publishing (after a cooldown period, head hurts)
+        - [ ] barrels? - Yes/no? Single/multi?
+        - [ ] TS Target - ESM? CommonJS?
+        - [ ] bundling - Yes/no?
+        - [ ] relative imports/absolute?
+            - [ ] paths/aliases?
+        - [ ] ensure tree shaking support for demo + consumers?

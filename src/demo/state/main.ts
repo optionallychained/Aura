@@ -8,7 +8,7 @@ const randomPosition = (game: Game): Vec2 => {
 
 export const mainState = new GameState({
     name: 'main',
-    initFunc: (game: Game) => {
+    init: (game: Game) => {
         game.setData('points', 0);
 
         game.addSystem(new PhysicsSystem());
@@ -32,12 +32,12 @@ export const mainState = new GameState({
 
         (enemy.getComponentByName('Transform') as Transform).position = randomPosition(game);
     },
-    endFunc: (game: Game) => {
+    end: (game: Game) => {
         const playerTransform = player.getComponentByName('Transform') as Transform;
         playerTransform.position.set(100, 100);
         playerTransform.velocity.set();
     },
-    tickFunc: (game: Game) => {
+    tick: (game: Game) => {
         game.renderText(`Points: ${game.getData('points') ?? 0}`);
 
         // super dutty

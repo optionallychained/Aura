@@ -5,7 +5,7 @@ import { winState } from './state/win';
 const game = new Game({
     width: 800,
     height: 600,
-    initFunc: () => { console.log('GAME -> init') }
+    init: () => { console.log('GAME -> init') }
 });
 
 game.addState(mainState);

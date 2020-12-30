@@ -33,7 +33,7 @@ export class EntityManager {
         this.removeEntities(this.entities);
     }
 
-    public update(frameDelta: number): void {
+    public tick(frameDelta: number): void {
         if (this.addList.length) {
             this.loadEntities();
         }
@@ -42,7 +42,7 @@ export class EntityManager {
         }
 
         for (const e of this.entities) {
-            e.update(frameDelta);
+            e.tick(frameDelta);
         }
     }
 

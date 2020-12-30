@@ -12,7 +12,7 @@ interface GameOpts {
     height?: number;
     canvasId?: string;
     background?: Vec3;
-    initFunc?: () => void
+    init?: () => void
 }
 
 export class Game {
@@ -56,9 +56,7 @@ export class Game {
     }
 
     public start(firstState: string): void {
-        if (this.config.initFunc) {
-            this.config.initFunc();
-        }
+        this.config.init?.();
 
         this.switchToState(firstState);
 
@@ -135,7 +133,7 @@ export class Game {
             this.currentState.tick(this, this.frameDelta);
         }
 
-        this.entityManager.update(this.frameDelta);
+        this.entityManager.tick(this.frameDelta);
         this.entityManager.render();
 
         requestAnimationFrame(this.run.bind(this));
