@@ -1,0 +1,11 @@
+{
+    "entryPoints": [
+        "./src/engine/protogl.ts"
+    ],
+    "out": "./docs",
+    "theme": "minimal",
+    "excludePrivate": true,
+    "name": "ProtoGL",
+    "includeVersion": true,
+    "hideGenerator": true
+}
