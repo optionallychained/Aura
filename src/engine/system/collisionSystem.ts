@@ -16,19 +16,19 @@ export class CollisionSystem extends System {
         for (let i = 0; i < collidables.length; i++) {
             for (let j = i + 1; j < collidables.length; j++) {
                 if (this.collides(collidables[i], collidables[j])) {
-                    (collidables[i].getComponentByName('AABBCollisionBox') as AABBCollisionBox).onCollision(collidables[j]);
-                    (collidables[j].getComponentByName('AABBCollisionBox') as AABBCollisionBox).onCollision(collidables[i]);
+                    (collidables[i].getComponent<AABBCollisionBox>('AABBCollisionBox')).onCollision(collidables[j]);
+                    (collidables[j].getComponent<AABBCollisionBox>('AABBCollisionBox')).onCollision(collidables[i]);
                 }
             }
         }
     }
 
     private collides(e1: Entity, e2: Entity): boolean {
-        const e1Transform = e1.getComponentByName('Transform') as Transform;
-        const e1Box = e1.getComponentByName('AABBCollisionBox') as AABBCollisionBox;
+        const e1Transform = e1.getComponent<Transform>('Transform');
+        const e1Box = e1.getComponent<AABBCollisionBox>('AABBCollisionBox');
 
-        const e2Transform = e2.getComponentByName('Transform') as Transform;
-        const e2Box = e2.getComponentByName('AABBCollisionBox') as AABBCollisionBox;
+        const e2Transform = e2.getComponent<Transform>('Transform');
+        const e2Box = e2.getComponent<AABBCollisionBox>('AABBCollisionBox');
 
         const e1Pos = e1Transform.position;
         const e1Dim = e1Box.dimensions;

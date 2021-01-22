@@ -20,11 +20,6 @@ export class Vec2 {
         return new Vec2(v.x * factor, v.y * factor);
     }
 
-    // TODO better name lol
-    public static divScale(v: Vec2, factor: number): Vec2 {
-        return new Vec2(v.x / factor, v.y / factor);
-    }
-
     constructor(public x = 0, public y = 0) { }
 
     public set(x = 0, y = 0): void {

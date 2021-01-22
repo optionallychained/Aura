@@ -50,8 +50,8 @@ export class EntityManager {
         const renderables = this.filterEntitiesByComponents(['FlatColor', 'Transform']);
 
         for (const e of renderables) {
-            const transform = e.getComponentByName('Transform') as Transform; // TODO entity component type checking
-            const flatColor = e.getComponentByName('FlatColor') as FlatColor;
+            const transform = e.getComponent<Transform>('Transform');
+            const flatColor = e.getComponent<FlatColor>('FlatColor');
 
             this.renderer.renderRect(transform.position, transform.dimensions, flatColor.color);
         }

@@ -13,7 +13,7 @@ export class PhysicsSystem extends System {
         const movers = game.entityManager.filterEntitiesByComponent('Transform');
 
         for (const e of movers) {
-            const transform = e.getComponentByName('Transform') as Transform;
+            const transform = e.getComponent<Transform>('Transform');
 
             const movement = Vec2.scale(transform.velocity, frameDelta / 100);
 

@@ -30,10 +30,10 @@ export const mainState = new GameState({
         game.entityManager.addEntity(player);
         game.entityManager.addEntity(enemy);
 
-        (enemy.getComponentByName('Transform') as Transform).position = randomPosition(game);
+        (enemy.getComponent<Transform>('Transform')).position = randomPosition(game);
     },
     end: (game: Game) => {
-        const playerTransform = player.getComponentByName('Transform') as Transform;
+        const playerTransform = player.getComponent<Transform>('Transform');
         playerTransform.position.set(100, 100);
         playerTransform.velocity.set();
     },
@@ -46,7 +46,7 @@ export const mainState = new GameState({
             return;
         }
 
-        const transform = player.getComponentByName('Transform') as Transform;
+        const transform = player.getComponent<Transform>('Transform');
 
         // movement
         if (game.keyPressed(Keys.A)) {
@@ -82,7 +82,7 @@ export const mainState = new GameState({
 
         // enemy respawing
         if (game.entityManager.countEntities() === 1) {
-            (enemy.getComponentByName('Transform') as Transform).position = randomPosition(game);
+            enemy.getComponent<Transform>('Transform').position = randomPosition(game);
             game.entityManager.addEntity(enemy);
         }
 

@@ -6,8 +6,6 @@ interface EntityConfig {
     components?: Component[];
 }
 
-// TODO type-checking on accessing entity component data is gonna be...fun
-
 export class Entity {
 
     private id = (+new Date()).toString(16) + (Math.random() * 10000000 | 0).toString(16);
@@ -27,9 +25,12 @@ export class Entity {
         return this.config.tag;
     }
 
-    public getComponentByName(name: string): Component | undefined {
-        // TODO error handling instead of undefined return type
-        return this.components.get(name);
+    // TODO either want error handling for component not found (.get() => undefined), or assurance by way of param type/map type crossover
+    // alternatively just accept the | undefined specifier from .get() and force handling on consumers
+    // TODO maybe use type mapping to ensure that name is a valid component name
+    // how would this be extended by game implementations? - interface merging?
+    public getComponent<T extends Component>(name: string): T {
+        return this.components.get(name) as T;
     }
 
     public addComponent(component: Component): void {

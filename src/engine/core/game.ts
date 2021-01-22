@@ -79,7 +79,8 @@ export class Game {
         this.systems.set(system.getName(), system);
     }
 
-    // TODO better way
+    // TODO maybe use type mapping to ensure that name is a valid system name
+    // how would this be extended by game implementations? - interface merging?
     public removeSystem(name: string): void {
         this.systems.delete(name);
     }

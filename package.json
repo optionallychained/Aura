@@ -19,7 +19,8 @@
         "predemo:dist": "npm run lint",
         "demo:dist": "webpack --config webpack.demo.dist.config.js",
         "engine:dist": "webpack --config webpack.engine.dist.config.js",
-        "prepublishOnly": "npm run lint && npm run engine:dist && tsc --project ./tsconfig.publish.json"
+        "engine:publish": "tsc --project ./tsconfig.publish.json",
+        "prepublishOnly": "npm run lint && npm run engine:dist && npm run engine:publish"
     },
     "devDependencies": {
         "@typescript-eslint/eslint-plugin": "^4.11.1",
