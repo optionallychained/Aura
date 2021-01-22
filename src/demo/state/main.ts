@@ -1,4 +1,4 @@
-import { AABBCollisionBox, CollisionSystem, Game, GameState, Keys, MathUtils, PhysicsSystem, Transform, Vec2 } from '../../engine/protogl';
+import { AABBCollisionBox, CollisionSystem, Game, State, Keys, MathUtils, PhysicsSystem, Transform, Vec2 } from '../../engine/protogl';
 import { enemy } from '../entity/enemy';
 import { player } from '../entity/player';
 
@@ -6,7 +6,7 @@ const randomPosition = (game: Game): Vec2 => {
     return new Vec2(MathUtils.randomBetween(50, game.getWidth() - 50), MathUtils.randomBetween(50, game.getHeight() - 50))
 }
 
-export const mainState = new GameState({
+export const mainState = new State({
     name: 'main',
     init: (game: Game) => {
         game.setData('points', 0);

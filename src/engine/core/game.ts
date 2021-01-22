@@ -3,17 +3,10 @@ import { InputManager } from '../input/inputManager';
 import { Keys } from '../input/keys';
 import { Vec2 } from '../math/vec2';
 import { Vec3 } from '../math/vec3';
-import { CanvasRenderer } from '../screen/canvasRenderer';
-import { GameState } from '../state/gameState';
+import { CanvasRenderer } from '../screen/canvas.renderer';
+import { State } from '../state/state';
 import { System } from '../system/system';
-
-interface GameOpts {
-    width?: number;
-    height?: number;
-    canvasId?: string;
-    background?: Vec3;
-    init?: () => void
-}
+import { GameConfig } from './game.config';
 
 export class Game {
     public entityManager: EntityManager;
@@ -28,14 +21,14 @@ export class Game {
 
     private background: Vec3;
 
-    private states = new Map<string, GameState>();
-    private currentState: GameState | undefined;
+    private states = new Map<string, State>();
+    private currentState: State | undefined;
 
     private systems = new Map<string, System>();
 
     private data = new Map<string, any>();
 
-    constructor(public config: GameOpts) {
+    constructor(public config: GameConfig) {
         let canvas = document.getElementById(config.canvasId ?? '') as HTMLCanvasElement | null;
 
         if (!canvas) {
@@ -63,7 +56,7 @@ export class Game {
         this.run();
     }
 
-    public addState(state: GameState): void {
+    public addState(state: State): void {
         this.states.set(state.getName(), state);
     }
 

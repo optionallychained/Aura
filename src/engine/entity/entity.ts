@@ -1,10 +1,5 @@
 import { Component } from './component/component';
-
-interface EntityConfig {
-    tag: string;
-    tick?: (frameDelta: number) => void;
-    components?: Component[];
-}
+import { EntityConfig } from './entity.config';
 
 export class Entity {
 

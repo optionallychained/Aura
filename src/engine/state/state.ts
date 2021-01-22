@@ -1,15 +1,9 @@
 import { Game } from '../core/game';
+import { StateConfig } from './state.config';
 
-interface GameStateConfig {
-    name: string;
-    init: (game: Game) => void;
-    end?: (game: Game) => void;
-    tick: (game: Game, frameDelta: number) => void;
-}
+export class State {
 
-export class GameState {
-
-    constructor(private config: GameStateConfig) { }
+    constructor(private config: StateConfig) { }
 
     public init(game: Game): void {
         this.config.init(game);

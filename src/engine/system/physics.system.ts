@@ -1,5 +1,5 @@
 import { Game } from '../core/game';
-import { Transform } from '../entity/component/transform';
+import { Transform } from '../entity/component/transform.component';
 import { Vec2 } from '../math/vec2';
 import { System } from './system';
 

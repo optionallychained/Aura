@@ -1,6 +1,6 @@
 import { Game } from '../core/game';
-import { AABBCollisionBox } from '../entity/component/AABBCollisionBox';
-import { Transform } from '../entity/component/transform';
+import { AABBCollisionBox } from '../entity/component/AABBCollisionBox.component';
+import { Transform } from '../entity/component/transform.component';
 import { Entity } from '../entity/entity';
 import { System } from './system';
 

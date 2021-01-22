@@ -1,6 +1,6 @@
-import { Game, GameState, Keys, Vec2 } from '../../engine/protogl';
+import { Game, State, Keys, Vec2 } from '../../engine/protogl';
 
-export const winState = new GameState({
+export const winState = new State({
     name: 'win',
     init: (game: Game) => {
         game.entityManager.clearEntities();

@@ -1,6 +1,6 @@
-import { CanvasRenderer } from '../screen/canvasRenderer';
-import { FlatColor } from './component/flatColor';
-import { Transform } from './component/transform';
+import { CanvasRenderer } from '../screen/canvas.renderer';
+import { FlatColor } from './component/flatColor.component';
+import { Transform } from './component/transform.component';
 import { Entity } from './entity';
 
 export class EntityManager {
