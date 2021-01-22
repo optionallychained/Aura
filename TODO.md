@@ -21,7 +21,7 @@
     - [x] consider usage as a bundled `<script>`
     - [ ] Initialise Documentation
         - [ ] Technical documentation
-        - [ ] User/API documentation
+        - [ ] User/API documentation *("getting started", "concepts", etc)*
     - [ ] Initialise Testing
 
 - [ ] **Step 3: ...etc *(misc notes)***
@@ -34,12 +34,13 @@
     - [ ] strongly consider: Observables as an underlying engine utility?
         - thinking prompts: input, entity events, state events, system interrupts, etc?
     - [ ] `this` scoping or other creative solutions for:
-        - [ ] state tick
+        - [x] state tick
         - [ ] entity update
         - [ ] misc: AABBCollisionBox onCollision
     - [ ] OpenGL
-    - [ ] Enums for built-in Component and System names?
-    - [ ] type-safety for entity.getComponent()
+    - [ ] Enums/interfaces/type maps for built-in Component and System names?
+    - [x] type-safety for entity.getComponent()
+    - [ ] improvements for type-safety across entity.getComponent(), game.getData(), state + system management
     - [ ] keyboard input not working for dist?
         - seems to be an issue with (entity).hasComponent()
 

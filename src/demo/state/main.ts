@@ -19,7 +19,7 @@ export const mainState = new State({
         // done here just for game access in collision callback
         // TODO better way of achieving
         player.addComponent(new AABBCollisionBox(new Vec2(50, 50), () => {
-            game.setData('points', game.getData('points') as number + 1);
+            game.setData('points', game.getData<number>('points') + 1);
         }));
 
         enemy.addComponent(new AABBCollisionBox(new Vec2(50, 50), () => {
@@ -38,7 +38,7 @@ export const mainState = new State({
         playerTransform.velocity.set();
     },
     tick: (game: Game) => {
-        game.renderText(`Points: ${game.getData('points') ?? 0}`);
+        game.renderText(`Points: ${game.getData<number>('points') ?? 0}`);
 
         // super dutty
         const player = game.entityManager.filterEntitiesByTag('player')[0];
@@ -86,7 +86,7 @@ export const mainState = new State({
             game.entityManager.addEntity(enemy);
         }
 
-        if (game.getData('points') as number === 10) {
+        if (game.getData<number>('points') === 10) {
             game.switchToState('win');
         }
     }
