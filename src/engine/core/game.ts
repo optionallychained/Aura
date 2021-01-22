@@ -137,23 +137,23 @@ export class Game {
     /**
      * Utility for checking if a given key is currently pressed
      *
-     * @param which the Key to check
+     * @param code the Key to check
      *
      * @returns a boolean indicating whether or not the key is pressed
      */
-    public keyPressed(which: Keys): boolean {
-        return this.inputManager.isKeyDown(which);
+    public keyPressed(code: Keys): boolean {
+        return this.inputManager.isKeyDown(code);
     }
 
     /**
      * Utility for checking if a given *set* of keys are all currently pressed
      *
-     * @param which the Keys to check
+     * @param code the Keys to check
      *
      * @returns a boolean indicating whether or not all given keys are pressed
      */
-    public keysPressed(which: Keys[]): boolean {
-        for (const key of which) {
+    public keysPressed(code: Keys[]): boolean {
+        for (const key of code) {
             if (!this.inputManager.isKeyDown(key)) {
                 return false;
             }

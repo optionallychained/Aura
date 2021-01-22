@@ -3,7 +3,7 @@ import { Keys } from './keys';
 
 export class InputManager {
 
-    private keyBuffer = new Set<Keys>();
+    private keyBuffer = new Set<string>();
 
     private mouseDown = false;
 
@@ -13,7 +13,7 @@ export class InputManager {
     private dblClickPos = new Vec2();
     private contextClickPos = new Vec2();
 
-    private ignoreKeys = [
+    private ignoreKeys: string[] = [
         Keys.F_5,
         Keys.F_12
     ];
@@ -23,21 +23,23 @@ export class InputManager {
     }
 
     public init(): void {
-        // TODO: deprecated implementation for now, look at .key, .code, etc
         window.addEventListener('keydown', (event: KeyboardEvent) => {
-            const { which } = event;
+            const { code } = event;
 
-            if (!this.ignoreKeys.includes(which)) {
-                event.preventDefault();
-                this.keyBuffer.add(which);
+            event.preventDefault();
+
+            if (!this.ignoreKeys.includes(code)) {
+                this.keyBuffer.add(code);
             }
         });
 
         window.addEventListener('keyup', (event: KeyboardEvent) => {
-            const { which } = event;
+            const { code } = event;
 
-            if (!this.ignoreKeys.includes(which)) {
-                this.keyBuffer.delete(which);
+            event.preventDefault();
+
+            if (!this.ignoreKeys.includes(code)) {
+                this.keyBuffer.delete(code);
             }
         });
 
@@ -66,7 +68,7 @@ export class InputManager {
         });
     }
 
-    public isKeyDown(which: Keys): boolean {
-        return this.keyBuffer.has(which);
+    public isKeyDown(code: Keys): boolean {
+        return this.keyBuffer.has(code);
     }
 }
