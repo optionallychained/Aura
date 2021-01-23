@@ -15,6 +15,10 @@ const staticDest = path.join(dest, 'static');
 
 (async () => {
     try {
+        if (!fs.existsSync(dest)) {
+            fs.mkdirSync(dest);
+        }
+
         // for every page, render a pug template extending the main layout file and including the compiled markdown for its 'content' block
         for (const file of await fs.promises.readdir(pageSource)) {
             const srcPath = path.join(pageSource, file);

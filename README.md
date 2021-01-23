@@ -21,18 +21,20 @@ Lofty/long-term Goals:
 - Efficient and optimised builds
 
 
-## Usage
+## Documentation
 
+[ProtoGL Documentation (GitHub Pages)](https://jonnopon.github.io/ProtoGL-TS/)
+
+
+## Usage
 
 ### Quickstart
 
 Fork or clone [ProtoGL-TS-Starter](https://github.com/jonnopon/ProtoGL-TS-Starter) to get up and running fast
 
-
 ### NPM
 
 `npm install protogl`
-
 
 ### CDN
 

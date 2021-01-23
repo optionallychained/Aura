@@ -1,6 +1,6 @@
 # ProtoGL
 
-## Documentation Test
+## Documentation
 
 [API Documentation](./api/index.html)
 
