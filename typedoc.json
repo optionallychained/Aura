@@ -2,7 +2,7 @@
     "entryPoints": [
         "./src/engine/protogl.ts"
     ],
-    "out": "./docs",
+    "out": "./docs/api",
     "theme": "minimal",
     "excludePrivate": true,
     "name": "ProtoGL",
