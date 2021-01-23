@@ -4,53 +4,42 @@ const fs = require('fs-extra');
 const path = require('path');
 const { exec } = require('child_process');
 
+// source paths
 const source = './src/docs';
-const mdSource = path.join(source, 'pages');
+const pageSource = path.join(source, 'pages');
 const staticSource = path.join(source, 'static');
-const dest = './docs';
 
-if (fs.existsSync(dest)) {
-    fs.rmSync(dest, { recursive: true, force: true });
-}
-fs.mkdirSync(dest);
+// destination paths
+const dest = './docs';
+const staticDest = path.join(dest, 'static');
 
 (async () => {
     try {
-        const files = await fs.promises.readdir(mdSource);
+        // for every page, render a pug template extending the main layout file and including the compiled markdown for its 'content' block
+        for (const file of await fs.promises.readdir(pageSource)) {
+            const srcPath = path.join(pageSource, file);
+            const destName = file.replace('.md', '.html');
+            const destPath = path.join(dest, destName);
 
-        // process all markdown documentation
-        for (const file of files) {
-            const sourcePath = path.join(mdSource, file);
-            const destPath = path.join(dest, file.replace('.md', '.html'));
-
-            const markdown = marked((await fs.promises.readFile(sourcePath)).toString()).replace(/(?:\r\n|\r|\n)/g, '');
-
-            await fs.promises.writeFile(destPath, pug.render(
+            const markdown = marked((await fs.promises.readFile(srcPath)).toString()).replace(/(?:\r\n|\r|\n)/g, '');
+            const page = pug.render(
                 `extends layout\nblock content
                 ${markdown}`,
                 {
-                    filename: path.join(source, file.replace('.md', '.html'))
+                    filename: path.join(source, destName)
                 }
-            ));
+            )
+
+            await fs.promises.writeFile(destPath, page);
         }
 
-        // copy all static files across
-        fs.copySync(staticSource, path.join(dest, 'static'));
+        // copy all static resources into the destination folder
+        await fs.copy(staticSource, staticDest);
 
-        // generate API documentation with typedoc
+        // execute TypeDoc to generate API documentation
         exec('typedoc');
     }
     catch (e) {
         console.error('Something went wrong!', e);
     }
 })();
-
-
-
-// fs.mkdirSync('./test/css');
-
-// for (const file of fs.readdirSync('./src/docs/css')) {
-//     fs.copyFileSync(path.join('./src/docs/css', file), path.join('./test/css', file));
-// }
-
-// console.log(compiledFunction({ title: 'ProtoGL', pagetitle: 'Index' }));

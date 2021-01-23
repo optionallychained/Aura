@@ -19,9 +19,12 @@
         - [x] research + experiment with NPM package publication
         - [x] set up a protogl-starter type project for getting up and running fast
     - [x] consider usage as a bundled `<script>`
-    - [ ] Initialise Documentation
-        - [ ] Technical documentation
-        - [ ] User/API documentation *("getting started", "concepts", etc)*
+    - [x] Initialise Documentation
+        - [x] Technical documentation
+        - [x] User/API documentation *("getting started", "concepts", etc)*
+    - [ ] complete first-stage documentation (API + User)
+        - [ ] text
+        - [ ] layout + style
     - [ ] Initialise Testing
 
 - [ ] **Step 3: ...etc *(misc notes)***
