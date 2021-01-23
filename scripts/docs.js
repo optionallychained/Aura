@@ -9,11 +9,11 @@ const { exec } = require('child_process');
 // source paths
 const source = './src/docs';
 const pageSource = path.join(source, 'pages');
-const staticSource = path.join(source, 'static');
+const assetSource = path.join(source, 'assets');
 
 // destination paths
 const dest = './docs';
-const staticDest = path.join(dest, 'static');
+const assetDest = path.join(dest, 'assets');
 
 // pretty filename => pagetitle mappings
 const pageNameMappings = {
@@ -62,8 +62,8 @@ marked.setOptions({
             await fs.promises.writeFile(destPath, page);
         }
 
-        // copy all static resources into the destination folder
-        await fs.copy(staticSource, staticDest);
+        // copy all asset resources into the destination folder
+        await fs.copy(assetSource, assetDest);
 
         // execute TypeDoc to generate API documentation
         exec('typedoc');
