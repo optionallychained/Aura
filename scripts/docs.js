@@ -13,6 +13,12 @@ const staticSource = path.join(source, 'static');
 const dest = './docs';
 const staticDest = path.join(dest, 'static');
 
+const pageNameMappings = {
+    'index': 'Home'
+}
+
+const titleCase = (str) => str.replace('-', ' ').replace(/\w\S*/g, (s) => s.charAt(0).toUpperCase() + s.substr(1));
+
 (async () => {
     try {
         if (!fs.existsSync(dest)) {
@@ -22,6 +28,8 @@ const staticDest = path.join(dest, 'static');
         // for every page, render a pug template extending the main layout file and including the compiled markdown for its 'content' block
         for (const file of await fs.promises.readdir(pageSource)) {
             const srcPath = path.join(pageSource, file);
+            const pageName = file.replace('.md', '');
+            const pageNamePretty = titleCase(pageNameMappings[pageName] ?? pageName);
             const destName = file.replace('.md', '.html');
             const destPath = path.join(dest, destName);
 
@@ -31,7 +39,8 @@ const staticDest = path.join(dest, 'static');
                 ${markdown}`,
                 {
                     filename: path.join(source, destName),
-                    bodyClass: file.replace('.md', '')
+                    bodyClass: pageName,
+                    pageTitle: pageNamePretty
                 }
             )
 
