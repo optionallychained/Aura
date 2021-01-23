@@ -10,9 +10,12 @@ html
 
         title Documentation | ProtoGL
 
-    body
-        include includes/nav
+    body(class=bodyClass)
+        nav
+            include includes/nav
 
-        block content
+        main
+            block content
 
-        include includes/footer
+        footer
+            include includes/footer

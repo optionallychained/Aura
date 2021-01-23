@@ -30,7 +30,8 @@ const staticDest = path.join(dest, 'static');
                 `extends layout\nblock content
                 ${markdown}`,
                 {
-                    filename: path.join(source, destName)
+                    filename: path.join(source, destName),
+                    bodyClass: file.replace('.md', '')
                 }
             )
 
