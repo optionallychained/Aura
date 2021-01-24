@@ -31,7 +31,7 @@
 
 - [ ] **Step 3: ...etc *(misc notes)***
     - [ ] reconsider Math implementations; instanced/mutable? types only? statics? etc
-        - [ ] port math from ProtoGL-JS *as and when needed*
+    - [ ] port math from ProtoGL-JS *as and when needed*
     - [ ] reconsider Input Management
         - [x] move away from deprecated `which`
         - [ ] event/emitter type implementation?

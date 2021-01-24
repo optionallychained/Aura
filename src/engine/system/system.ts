@@ -7,6 +7,10 @@ import { Game } from '../core/game';
  *
  * Example Systems include Physics and Collision
  *
+ * // TODO move away from class extension for Systems in place of a SystemConfig type approach?
+ * //   - implementation of Systems becomes a little less naturally-readable, but it fits the approach of the rest of the engine...
+ * //   - also consider this for Components
+ *
  * @see Game
  * @see PhysicsSystem
  * @see CollisionSystem

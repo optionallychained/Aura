@@ -5,6 +5,10 @@
  *
  * Example Components include physics-related Transforms, rendering-related Colors and Geometry, and Collision Boxes.
  *
+ * // TODO move away from class extension for COmponents in place of a ComponentConfig type approach?
+ * //   - implementation of Components becomes a little less naturally-readable, but it fits the approach of the rest of the engine...
+ * //   - also consider this for Systems
+ *
  * @see Entity
  */
 export abstract class Component {
