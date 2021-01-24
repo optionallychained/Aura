@@ -3,36 +3,83 @@ import { FlatColor } from './component/flatColor.component';
 import { Transform } from './component/transform.component';
 import { Entity } from './entity';
 
+/**
+ * Core EntityManager; utilised by the Game to defer the management, updating and rendering of all game Entities
+ *
+ * Includes Entity filtering methods for retrieval of Entities by various search metrics
+ *
+ * The EntityManager is available on the Game instance at `game.entityManager`
+ *
+ * @see Game
+ */
 export class EntityManager {
 
-    // TODO memoization of filtered commonly-used lists (renderable, for example)
-    // TODO grouping of entities by component on add/remove
+    /** List of Entities currently in play */
     private entities: Entity[] = [];
+
+    /** List of Entities to be removed on the next frame */
     private removeList: Entity[] = [];
+
+    /** List of Entities to be added on the next frame */
     private addList: Entity[] = [];
 
+    /**
+     * Constructor. Take and store the Game's Renderer instance
+     *
+     * @param renderer the renderer
+     */
     constructor(private renderer: CanvasRenderer) { }
 
+    /**
+     * Add an Entity to the addList
+     *
+     * @param e the Entity to add
+     */
     public addEntity(e: Entity): void {
         this.addList.push(e);
     }
 
+    /**
+     * Add a list of Entities to the addList
+     *
+     * // TODO grouping of entities by component on add/remove for faster filtering?
+     *
+     * @param list the Entities to add
+     */
     public addEntities(list: Entity[]): void {
         this.addList = this.addList.concat(list);
     }
 
+    /**
+     * Add an Entity to the removeList
+     *
+     * @param e the Entity to remove
+     */
     public removeEntity(e: Entity): void {
         this.removeList.push(e);
     }
 
+    /**
+     * Add a list of Entities to the removeList
+     *
+     * @param list the Entities to remove
+     */
     public removeEntities(list: Entity[]): void {
         this.removeList = this.removeList.concat(list);
     }
 
+    /**
+     * Purge all active Entities by adding them to the removeList
+     */
     public clearEntities(): void {
         this.removeEntities(this.entities);
     }
 
+    /**
+     * Frame update method. Augment the Entity list by processing the addList and removeList, then update all active Entities
+     *
+     * @param frameDelta the time between the last frame and the current, for normalizing time-dependent operations
+     */
     public tick(frameDelta: number): void {
         if (this.addList.length) {
             this.loadEntities();
@@ -46,7 +93,13 @@ export class EntityManager {
         }
     }
 
+    /**
+     * Frame render method, called after tick so as to render all renderable active Entities
+     *
+     * // TODO smart momoization of renderables so as to reduce filtering operations when no changes occur frame-to-frame
+     */
     public render(): void {
+        // to render, an Entity must have a Transform (position and dimensions within the world) and (for now) a FlatColor
         const renderables = this.filterEntitiesByComponents(['FlatColor', 'Transform']);
 
         for (const e of renderables) {
@@ -57,28 +110,73 @@ export class EntityManager {
         }
     }
 
-    // TODO memoization of commonly-used lists
+    /**
+     * Filter the active Entities by a given Component name
+     *
+     * // TODO by Component class?
+     *
+     * // TODO smart momization of previous searches so as to reduce filtering operations for common frame-by-frame filters?
+     *
+     * @param component the (name of the) Component to filter by
+     *
+     * @returns the list of Entities with the Component
+     */
     public filterEntitiesByComponent(component: string): Entity[] {
         return this.entities.filter((e) => e.hasComponent(component));
     }
 
+    /**
+     * Filter the active Entities by a given list of Component names
+     *
+     * // TODO by Component class?
+     *
+     * // TODO smart momization of previous searches so as to reduce filtering operations for common frame-by-frame filters?
+     *
+     * @param components the (names of the) Components to filter by
+     *
+     * @returns the list of Entities with the Components
+     */
     public filterEntitiesByComponents(components: string[]): Entity[] {
         return this.entities.filter((e) => e.hasComponents(components));
     }
 
+    /**
+     * Filter the active Entities by a given tag
+     *
+     * // TODO smart momization of previous searches so as to reduce filtering operations for common frame-by-frame filters?
+     *
+     * @param tag the tag to filter by
+     *
+     * @returns the list of Entities with the tag
+     */
     public filterEntitiesByTag(tag: string): Entity[] {
         return this.entities.filter((e) => e.getTag() === tag);
     }
 
+    /**
+     * Retrieve the number of active Entities
+     *
+     * @returns the number of active Entities
+     */
     public countEntities(): number {
         return this.entities.length;
     }
 
+    /**
+     * Populate the addList into the list of active Entities
+     *
+     * // TODO grouping of entities by component on add/remove for faster filtering?
+     */
     private loadEntities(): void {
         this.entities = this.entities.concat(this.addList);
         this.addList = [];
     }
 
+    /**
+     * Clean the list of active Entities by removing all those in the removeList
+     *
+     * // TODO grouping of entities by component on add/remove for faster filtering?
+     */
     private cleanEntities(): void {
         for (const remove of this.removeList) {
             this.entities.splice(this.entities.indexOf(remove), 1);

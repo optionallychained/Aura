@@ -41,7 +41,7 @@ export class Entity {
     }
 
     /**
-     * Tick function called by the EntityManager during frame execution. Runs the Entity's tick, if provided in its config
+     * Update function called by the EntityManager during frame execution. Runs the Entity's tick, if provided in its config
      *
      * @see EntityManager
      *

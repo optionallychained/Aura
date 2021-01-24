@@ -11,7 +11,9 @@ import { GameConfig } from './game.config';
 /**
  * Core Game object; instantiated with or without a configuration object as a first step in creating a game
  *
- * Serves as the operational hub for the execution of the game; handles the Canvas, Entities, Text, Systems and States
+ * Serves as the operational hub for the execution of the game; handles the Canvas, Input, Entities, Text, Systems and States
+ *
+ * Note: Games are controlled by the Keyboard only by default. See GameConfig#controlScheme for details
  *
  * Game execution begins when *start* is called on a configured Game instance
  */
@@ -69,7 +71,7 @@ export class Game {
 
         this.renderer = new CanvasRenderer(canvas);
         this.entityManager = new EntityManager(this.renderer);
-        this.inputManager = new InputManager(canvas);
+        this.inputManager = new InputManager(canvas, config?.controlScheme ?? 'keyboard');
     }
 
     /**
@@ -135,7 +137,9 @@ export class Game {
     }
 
     /**
-     * Utility for checking if a given key is currently pressed
+     * Utility for checking if a given key is currently pressed. Just passes through to the InputManager
+     *
+     * @see InputManager
      *
      * @param code the Key to check
      *
@@ -146,7 +150,9 @@ export class Game {
     }
 
     /**
-     * Utility for checking if a given *set* of keys are all currently pressed
+     * Utility for checking if a given set of keys are all currently pressed. Just passes through to the InputManager
+     *
+     * @see InputManager
      *
      * @param code the Keys to check
      *
@@ -180,11 +186,6 @@ export class Game {
         return this.canvas.height;
     }
 
-    // temporary
-    public renderText(text: string, position?: Vec2, color?: Vec3): void {
-        this.renderer.renderText(text, position, color);
-    }
-
     /**
      * Setter for generic Game data, useful for storing values which should be accessible to Entities, Systems or States
      *
@@ -210,10 +211,15 @@ export class Game {
         return this.data.get(key) as T;
     }
 
+    /** TODO temporary - to be supplanted by TextManager */
+    public renderText(text: string, position?: Vec2, color?: Vec3): void {
+        this.renderer.renderText(text, position, color);
+    }
+
     /**
      * Main Game execution method, representing a single frame.
      *
-     * Calculates the frame delta, then executes all Systems, ticks the current State, updates all Entities, and renders
+     * Calculates the frame delta, then executes all Systems, updates the current State, updates all Entities, and renders
      */
     private run(): void {
         this.frameDelta = Date.now() - this.lastFrameTime;

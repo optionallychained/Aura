@@ -2,6 +2,8 @@ import { Vec3 } from '../math/vec3';
 
 /**
  * Interface desciribing the main Game Configuration object
+ *
+ * // TODO potentially take controlScheme out of here and into its own structure (see InputManager)
  */
 export interface GameConfig {
     /** Game window width; default value is window.innerWidth */
@@ -12,6 +14,8 @@ export interface GameConfig {
     canvasId?: string;
     /** Game background color; default value is black */
     backgroundColor?: Vec3;
+    /** Game control scheme, used to optimise InputManager event registrations; default value is 'keyboard' */
+    controlScheme?: 'keyboard' | 'mouse' | 'both'
     /** Game init function; none is provided by default */
     init?: () => void
 }
