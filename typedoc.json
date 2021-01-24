@@ -3,7 +3,7 @@
         "./src/engine/protogl.ts"
     ],
     "out": "./docs/api",
-    "theme": "minimal",
+    "theme": "default",
     "excludePrivate": true,
     "name": "API | ProtoGL Documentation",
     "includeVersion": true,

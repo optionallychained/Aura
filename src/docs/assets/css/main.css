@@ -67,10 +67,23 @@ li {
     width: 100%;
     border-bottom: 1px solid black;
 }
-li.selected a,
-li:hover a,
+/** nested ul */
+ul li ul {
+    padding-left: 35px;
+}
+ul li ul li:last-child {
+    border-bottom: 0;
+}
+
+/* hamfisted link highlighting */
+li.selected > a,
+li:hover > a,
 body.index li.index a,
 body.getting-started li.getting-started a,
+body.concepts li.concepts > a,
+body.game li.game a,
+body.states li.states a,
+body.entities-and-components li.entities-and-components a,
 body.api li.api a {
     color: blue;
 }

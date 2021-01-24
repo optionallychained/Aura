@@ -31,36 +31,58 @@ marked.setOptions({
     highlight: (code) => hljs.highlightAuto(code).value.replace(/(?:\r\n|\r|\n)/g, '<br/>')
 });
 
-(async () => {
-    try {
-        if (!fs.existsSync(dest)) {
-            fs.mkdirSync(dest);
-        }
+// convenient shorthand for making a directory only if it doesn't already exist
+const mkDirOptional = (dir) => {
+    if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir);
+    }
+}
 
-        // for every page, render a pug template extending the main layout file and including the compiled markdown for its 'content' block
-        for (const file of await fs.promises.readdir(pageSource, 'utf8')) {
-            const srcPath = path.join(pageSource, file);
-            const pageName = file.replace('.md', '');
-            const pageNamePretty = titleCase(pageNameMappings[pageName] ?? pageName);
-            const destName = file.replace('.md', '.html');
-            const destPath = path.join(dest, destName);
+// process a given directory of files or folders recursively, rendering one HTML file per MD file through into the 'content' block of 'layout.pug' and retaining
+//   the directory structure found in ./src/docs/pages
+const processDir = async (src, depth = 1) => {
+    for (const file of await fs.promises.readdir(src, 'utf8')) {
+        const srcPath = path.join(src, file);
+        const pageName = file.replace('.md', '');
+        const pageNamePretty = titleCase(pageNameMappings[pageName] ?? pageName);
+        const destName = file.replace('.md', '.html');
+        const destPath = path.join(src.replace('src', '').replace('pages', '').substr(1), destName);
 
+        const stat = await fs.promises.stat(srcPath);
+
+        // render files
+        if (stat.isFile()) {
             // remove any return characters because Pug is finnicky
             const markdown = marked((await fs.promises.readFile(srcPath)).toString()).replace(/(?:\r\n|\r|\n)/g, '');
 
             // nb: the strange layout of the template string is the only way I've found to avoid Pug complaining about extension/blocks due to indent problems
             const page = pug.render(
-                `extends layout\nblock content
+                `extends /layout\nblock content
                 ${markdown}`,
                 {
-                    filename: path.join(source, destName),
+                    basedir: './src/docs/',
                     bodyClass: pageName,
-                    pageTitle: pageNamePretty
+                    pageTitle: pageNamePretty,
+                    relativePath: '.'.repeat(depth)
                 }
             )
 
             await fs.promises.writeFile(destPath, page);
         }
+        // and create directories and recurse for folders
+        else if (stat.isDirectory()) {
+            mkDirOptional(destPath);
+            await processDir(srcPath, depth + 1);
+        }
+    }
+}
+
+// main execution routine; create the root output directory and then kick off the recursive generation process in processDir()
+(async () => {
+    try {
+        mkDirOptional(dest);
+
+        await processDir(pageSource);
 
         // copy all asset resources into the destination folder
         await fs.copy(assetSource, assetDest);
