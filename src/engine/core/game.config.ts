@@ -16,6 +16,8 @@ export interface GameConfig {
     backgroundColor?: Vec3;
     /** Game control scheme, used to optimise InputManager event registrations; default value is 'keyboard' */
     controlScheme?: 'keyboard' | 'mouse' | 'both'
+    /** Debug mode, enabling the display of frame data and potentially other useful stuff in the future; default value is false */
+    debugMode?: boolean;
     /** Game init function; none is provided by default */
     init?: () => void
 }

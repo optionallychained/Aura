@@ -49,6 +49,12 @@ export class Game {
     /** Generic game data, stored as a Map for relative type-safety */
     private data = new Map<string, unknown>();
 
+    /** Debug data, used if the game is configured with debugMode on */
+    private debugData = {
+        frameCount: 0,
+        fps: ''
+    };
+
     /**
      * Constructor. Initialise the Canvas, as well as the Renderer, EntityManager and InputManager
      *
@@ -224,6 +230,19 @@ export class Game {
 
         this.entityManager.tick(this.frameDelta);
         this.entityManager.render();
+
+        // handle updating and displaying debug data when in debug mode
+        if (this.config?.debugMode) {
+            // a little hacky, we only wanna update the fps on every 10th frame to avoid annoying flickering
+            this.debugData.frameCount++;
+            if (this.debugData.frameCount % 10 === 0) {
+                this.debugData.frameCount = 0;
+                this.debugData.fps = (1000 / this.frameDelta).toFixed(1);
+            }
+
+            // render the frames
+            this.renderer.renderText(`fps: ${this.debugData.fps}`, new Vec2(this.getWidth() - 125, 25));
+        }
 
         requestAnimationFrame(this.run.bind(this));
     }
