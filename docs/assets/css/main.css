@@ -5,7 +5,7 @@
     box-sizing: border-box;
     font-family: "Open Sans", sans-serif;
     outline-style: none;
-    transition: all 0.25s ease-in-out;
+    transition: all 0.35s ease-in-out;
 }
 
 html,
@@ -63,9 +63,14 @@ ul {
     width: 100%;
 }
 li {
-    padding: 15px 0;
+    padding: 0;
     width: 100%;
     border-bottom: 1px solid black;
+}
+ul li a {
+    display: block;
+    width: 100%;
+    padding: 15px 5px;
 }
 /** nested ul */
 ul li ul {
@@ -80,12 +85,41 @@ li.selected > a,
 li:hover > a,
 body.index li.index a,
 body.getting-started li.getting-started a,
-body.concepts li.concepts > a,
+body.installation li.installation a,
 body.game li.game a,
 body.states li.states a,
 body.entities-and-components li.entities-and-components a,
-body.api li.api a {
-    color: blue;
+body.api li.api a,
+li.dropdown.open > a {
+    background: rgb(71, 73, 73);
+    color: white;
+}
+
+/* dropdown styles */
+li.dropdown {
+    cursor: pointer;
+    position: relative;
+}
+li.dropdown ul {
+    max-height: 0;
+    opacity: 0;
+}
+li.dropdown:hover ul,
+li.dropdown.open ul {
+    max-height: 1000px;
+    opacity: 1;
+}
+li.dropdown > a::after {
+    content: ">";
+    font-weight: bold;
+    font-size: 18px;
+    display: inline;
+    position: absolute;
+    right: 10px;
+}
+li.dropdown:hover > a::after,
+li.dropdown.open > a::after {
+    transform: rotate(90deg);
 }
 
 /**********************************************************************************************

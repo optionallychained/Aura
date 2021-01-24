@@ -25,7 +25,7 @@
     - [ ] complete first-stage documentation (API + User)
         - [ ] text
         - [ ] layout + style
-        - [ ] incorporate API Docs into main structure...somehow
+        - ~~[x] incorporate API Docs into main structure...somehow~~
         - [x] ~~auto-generate nav in `docs.js`? - easy enough?~~
     - [ ] Initialise Testing
 
