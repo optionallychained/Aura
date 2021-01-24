@@ -4,7 +4,7 @@
  * For use in asking the game if a key is down:
  *
  *     ```
- *     if (game.keyPressed(Keys.ARROW_LEFT)) { ... }
+ *     if (game.inputManager.keyPressed(Keys.ARROW_LEFT)) { ... }
  *     ```
  *
  * // TODO technically supports alternative keyboard layouts by way of (KeyboardEvent).code but it might be nice to provide alt key names for those layouts?

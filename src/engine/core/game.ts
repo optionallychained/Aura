@@ -21,14 +21,14 @@ export class Game {
     /** the EntityManager to be used in handling and processing the game's Entities */
     public entityManager: EntityManager;
 
+    /** InputManager for handling all user input */
+    public inputManager: InputManager;
+
     /** the Canvas to render the game on */
     private canvas: HTMLCanvasElement;
 
     /** Renderer */
     private renderer: CanvasRenderer;
-
-    /** InputManager for handling all user input */
-    private inputManager: InputManager;
 
     /** Frame time calculation utilities */
     private frameDelta = 0;
@@ -134,19 +134,6 @@ export class Game {
      */
     public removeSystem(name: string): void {
         this.systems.delete(name);
-    }
-
-    /**
-     * Utility for checking if a given key is currently pressed. Just passes through to the InputManager
-     *
-     * @see InputManager
-     *
-     * @param code the Key to check
-     *
-     * @returns a boolean indicating whether or not the key is pressed
-     */
-    public keyPressed(code: Keys): boolean {
-        return this.inputManager.isKeyDown(code);
     }
 
     /**

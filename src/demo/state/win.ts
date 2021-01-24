@@ -11,7 +11,7 @@ export const winState = new State({
     tick: (game: Game) => {
         game.renderText('WIN! ENTER to play again', new Vec2(game.getWidth() / 4, game.getHeight() / 2));
 
-        if (game.keyPressed(Keys.ENTER)) {
+        if (game.inputManager.isKeyDown(Keys.ENTER)) {
             game.switchToState('main');
         }
     }
