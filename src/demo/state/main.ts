@@ -2,6 +2,7 @@ import { CollisionSystem, Game, State, Keys, MathUtils, PhysicsSystem, Transform
 import { enemy } from '../entity/enemy';
 import { player } from '../entity/player';
 
+/** internal module utility for producing a new random position for the Enemy when required */
 const randomPosition = (game: Game): Vec2 => {
     return new Vec2(MathUtils.randomBetween(50, game.getWidth() - 50), MathUtils.randomBetween(50, game.getHeight() - 50))
 }
@@ -41,7 +42,7 @@ export const mainState = new State({
         game.entityManager.clearEntities();
     },
     // tick; execute per-frame State behaviour
-    tick: (game: Game) => {
+    tick: (game) => {
         const { entityManager, inputManager } = game;
 
         // render the player's points to the screen
