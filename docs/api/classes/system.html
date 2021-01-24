@@ -2754,6 +2754,29 @@ img {
 </nav>
 <div class="container container-main">
 	<div class="content-wrap">
+		<section class="tsd-panel tsd-comment">
+			<div class="tsd-comment tsd-typography">
+				<div class="lead">
+					<p>Abstract class representing a System; a distinct purposeful processing method that runs on a per-frame basis, operating on Entities to produce game behavior.</p>
+				</div>
+				<p>All States should extend from this class and provide an easy-to-guess and sensible name (eg. PhysicsSystem =&gt; &#39;Physics&#39;)</p>
+				<p>Example Systems include Physics and Collision</p>
+				<p>// TODO move away from class extension for Systems in place of a SystemConfig type approach?
+					//   - implementation of Systems becomes a little less naturally-readable, but it fits the approach of the rest of the engine...
+				//   - also consider this for Components</p>
+				<dl class="tsd-comment-tags">
+					<dt>see</dt>
+					<dd><p>Game</p>
+					</dd>
+					<dt>see</dt>
+					<dd><p>PhysicsSystem</p>
+					</dd>
+					<dt>see</dt>
+					<dd><p>CollisionSystem</p>
+					</dd>
+				</dl>
+			</div>
+		</section>
 		<section class="tsd-panel tsd-hierarchy">
 			<h3>Hierarchy</h3>
 			<ul class="tsd-hierarchy">
@@ -2808,13 +2831,21 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/3564e9c/src/engine/system/system.ts#L3">system/system.ts:3</a></li>
+								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/f7f98e7/src/engine/system/system.ts#L18">system/system.ts:18</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Constructor. Take and store the System&#39;s name</p>
+							</div>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
 								<h5>name: <span class="tsd-signature-type">string</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>the System&#39;s name</p>
+								</div>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <a href="system.html" class="tsd-signature-type" data-tsd-kind="Class">System</a></h4>
@@ -2844,10 +2875,16 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/3564e9c/src/engine/system/system.ts#L9">system/system.ts:9</a></li>
+								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/f7f98e7/src/engine/system/system.ts#L40">system/system.ts:40</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Getter for the System&#39;s name</p>
+							</div>
+						</div>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						<p>the System&#39;s name</p>
 					</li>
 				</ul>
 			</section>
@@ -2861,16 +2898,27 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/3564e9c/src/engine/system/system.ts#L7">system/system.ts:7</a></li>
+								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/f7f98e7/src/engine/system/system.ts#L33">system/system.ts:33</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Abstract update function called by the Game on a per-frame basis when the System is active. The functional body of the System itself</p>
+							</div>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
 								<h5>game: <a href="game.html" class="tsd-signature-type" data-tsd-kind="Class">Game</a></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>the Game the System is running within</p>
+								</div>
 							</li>
 							<li>
 								<h5>frameDelta: <span class="tsd-signature-type">number</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>the time between the last frame and the current, for normalizing time-dependent operations</p>
+								</div>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>

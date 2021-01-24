@@ -2754,6 +2754,23 @@ img {
 </nav>
 <div class="container container-main">
 	<div class="content-wrap">
+		<section class="tsd-panel tsd-comment">
+			<div class="tsd-comment tsd-typography">
+				<div class="lead">
+					<p>Built-in Collision System, handling the basic AABB Collision testing of all Entities which are capable of colliding with one another.</p>
+				</div>
+				<p>To be eligible for collision, an Entity must have a Transform (position and dimensions in the world), and an AABBCollisionBox.</p>
+				<p>// TODO optimisation of collision detection methods; memoization (defer to EntityManager?) of &#39;collidables&#39; filter?</p>
+				<dl class="tsd-comment-tags">
+					<dt>see</dt>
+					<dd><p>AABBCollisionBox</p>
+					</dd>
+					<dt>see</dt>
+					<dd><p>Transform</p>
+					</dd>
+				</dl>
+			</div>
+		</section>
 		<section class="tsd-panel tsd-hierarchy">
 			<h3>Hierarchy</h3>
 			<ul class="tsd-hierarchy">
@@ -2806,9 +2823,14 @@ img {
 						<aside class="tsd-sources">
 							<p>Inherited from <a href="system.html">System</a>.<a href="system.html#constructor">constructor</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/3564e9c/src/engine/system/collision.system.ts#L7">system/collision.system.ts:7</a></li>
+								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/f7f98e7/src/engine/system/collision.system.ts#L17">system/collision.system.ts:17</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Constructor. Provide the name &#39;Collision&#39; to the parent class</p>
+							</div>
+						</div>
 						<h4 class="tsd-returns-title">Returns <a href="collisionsystem.html" class="tsd-signature-type" data-tsd-kind="Class">CollisionSystem</a></h4>
 					</li>
 				</ul>
@@ -2838,10 +2860,16 @@ img {
 						<aside class="tsd-sources">
 							<p>Inherited from <a href="system.html">System</a>.<a href="system.html#getname">getName</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/3564e9c/src/engine/system/system.ts#L9">system/system.ts:9</a></li>
+								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/f7f98e7/src/engine/system/system.ts#L40">system/system.ts:40</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Getter for the System&#39;s name</p>
+							</div>
+						</div>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						<p>the System&#39;s name</p>
 					</li>
 				</ul>
 			</section>
@@ -2856,13 +2884,22 @@ img {
 						<aside class="tsd-sources">
 							<p>Overrides <a href="system.html">System</a>.<a href="system.html#tick">tick</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/3564e9c/src/engine/system/collision.system.ts#L13">system/collision.system.ts:13</a></li>
+								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/f7f98e7/src/engine/system/collision.system.ts#L34">system/collision.system.ts:34</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Concrete update function implementing the Collision System&#39;s per-frame functionality.</p>
+							</div>
+							<p>Check for collision between all eligible Entities and call their collision handling methods if appropriate</p>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
 								<h5>game: <a href="game.html" class="tsd-signature-type" data-tsd-kind="Class">Game</a></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>the Game the System is running within</p>
+								</div>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>

@@ -2754,6 +2754,19 @@ img {
 </nav>
 <div class="container container-main">
 	<div class="content-wrap">
+		<section class="tsd-panel tsd-comment">
+			<div class="tsd-comment tsd-typography">
+				<div class="lead">
+					<p>Core CanvasRenderer; utilised by the Game to defer the rendering of Entities and Text to the Canvas</p>
+				</div>
+				<p>A temporary implementation for simplicity in getting off the ground, to be supplanted by a rendering abstraction layer, WebGLRenderer, and conforming CanvasRenderer</p>
+				<dl class="tsd-comment-tags">
+					<dt>see</dt>
+					<dd><p>Game</p>
+					</dd>
+				</dl>
+			</div>
+		</section>
 		<section class="tsd-panel tsd-hierarchy">
 			<h3>Hierarchy</h3>
 			<ul class="tsd-hierarchy">
@@ -2795,13 +2808,21 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/3564e9c/src/engine/screen/canvas.renderer.ts#L6">screen/canvas.renderer.ts:6</a></li>
+								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/f7f98e7/src/engine/screen/canvas.renderer.ts#L15">screen/canvas.renderer.ts:15</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Constructor. Take and store the game&#39;s Canvas and retrieve its 2D rendering context</p>
+							</div>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
 								<h5>canvas: <span class="tsd-signature-type">HTMLCanvasElement</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>the Canvas</p>
+								</div>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <a href="canvasrenderer.html" class="tsd-signature-type" data-tsd-kind="Class">CanvasRenderer</a></h4>
@@ -2821,13 +2842,21 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/3564e9c/src/engine/screen/canvas.renderer.ts#L14">screen/canvas.renderer.ts:14</a></li>
+								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/f7f98e7/src/engine/screen/canvas.renderer.ts#L33">screen/canvas.renderer.ts:33</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Clear the screen to the given color</p>
+							</div>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
 								<h5>color: <a href="vec3.html" class="tsd-signature-type" data-tsd-kind="Class">Vec3</a></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>the color to clear to, expressed as a Vec3</p>
+								</div>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -2844,19 +2873,33 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/3564e9c/src/engine/screen/canvas.renderer.ts#L19">screen/canvas.renderer.ts:19</a></li>
+								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/f7f98e7/src/engine/screen/canvas.renderer.ts#L45">screen/canvas.renderer.ts:45</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Render a rectangle with the given position, dimensions and color</p>
+							</div>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
 								<h5>position: <a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>the position of the rect</p>
+								</div>
 							</li>
 							<li>
 								<h5>dimensions: <a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>the dimensions of the rect</p>
+								</div>
 							</li>
 							<li>
 								<h5>color: <a href="vec3.html" class="tsd-signature-type" data-tsd-kind="Class">Vec3</a></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>the color of the rect</p>
+								</div>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -2873,19 +2916,33 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/3564e9c/src/engine/screen/canvas.renderer.ts#L24">screen/canvas.renderer.ts:24</a></li>
+								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/f7f98e7/src/engine/screen/canvas.renderer.ts#L57">screen/canvas.renderer.ts:57</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Render the given text at the given position in the given color</p>
+							</div>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
 								<h5>text: <span class="tsd-signature-type">string</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>the text to render</p>
+								</div>
 							</li>
 							<li>
 								<h5>position: <a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a><span class="tsd-signature-symbol"> = ...</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>the position of the text (temporary default value)</p>
+								</div>
 							</li>
 							<li>
 								<h5>color: <a href="vec3.html" class="tsd-signature-type" data-tsd-kind="Class">Vec3</a><span class="tsd-signature-symbol"> = ...</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>the color of the text; default value is white</p>
+								</div>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>

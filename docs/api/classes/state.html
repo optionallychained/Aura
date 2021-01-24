@@ -2757,6 +2757,20 @@ img {
 </nav>
 <div class="container container-main">
 	<div class="content-wrap">
+		<section class="tsd-panel tsd-comment">
+			<div class="tsd-comment tsd-typography">
+				<div class="lead">
+					<p>Class representing a State.</p>
+				</div>
+				<p>A State is roughly equivalent to a Scene; a literal distinct <em>state</em> that the game can be in.</p>
+				<p>Example States may include Menu, Game, Pause, Dead, etc</p>
+				<dl class="tsd-comment-tags">
+					<dt>see</dt>
+					<dd><p>Game</p>
+					</dd>
+				</dl>
+			</div>
+		</section>
 		<section class="tsd-panel tsd-hierarchy">
 			<h3>Hierarchy</h3>
 			<ul class="tsd-hierarchy">
@@ -2799,13 +2813,21 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/3564e9c/src/engine/state/state.ts#L4">state/state.ts:4</a></li>
+								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/f7f98e7/src/engine/state/state.ts#L13">state/state.ts:13</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Constructor. Take and store the State&#39;s config</p>
+							</div>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
 								<h5>config: <a href="../interfaces/stateconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">StateConfig</a></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>the State&#39;s configuration</p>
+								</div>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <a href="state.html" class="tsd-signature-type" data-tsd-kind="Class">State</a></h4>
@@ -2825,13 +2847,22 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/3564e9c/src/engine/state/state.ts#L16">state/state.ts:16</a></li>
+								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/f7f98e7/src/engine/state/state.ts#L52">state/state.ts:52</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>State shutdown method, called when the State is &#39;switched away from&#39; by the Game.</p>
+							</div>
+							<p>Useful for cleaning up Systems and Entities before State closure</p>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
 								<h5>game: <a href="game.html" class="tsd-signature-type" data-tsd-kind="Class">Game</a></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>the Game the State is running within</p>
+								</div>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -2848,10 +2879,16 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/3564e9c/src/engine/state/state.ts#L20">state/state.ts:20</a></li>
+								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/f7f98e7/src/engine/state/state.ts#L61">state/state.ts:61</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Getter for the State&#39;s name, as provided in its Config</p>
+							</div>
+						</div>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						<p>the State&#39;s name</p>
 					</li>
 				</ul>
 			</section>
@@ -2865,13 +2902,22 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/3564e9c/src/engine/state/state.ts#L8">state/state.ts:8</a></li>
+								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/f7f98e7/src/engine/state/state.ts#L29">state/state.ts:29</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>State initialisation method, called when the State is &#39;switched to&#39; by the Game.</p>
+							</div>
+							<p>Useful for configuring the game with Systems and Entities before State kickoff</p>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
 								<h5>game: <a href="game.html" class="tsd-signature-type" data-tsd-kind="Class">Game</a></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>the Game the State is running within</p>
+								</div>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -2888,16 +2934,28 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/3564e9c/src/engine/state/state.ts#L12">state/state.ts:12</a></li>
+								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/f7f98e7/src/engine/state/state.ts#L41">state/state.ts:41</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>State frame update method, called for every frame the State is active.</p>
+							</div>
+							<p>Useful for handling per-frame logic necessary to progress the State</p>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
 								<h5>game: <a href="game.html" class="tsd-signature-type" data-tsd-kind="Class">Game</a></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>the Game the State is running within</p>
+								</div>
 							</li>
 							<li>
 								<h5>frameDelta: <span class="tsd-signature-type">number</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>the time between the last frame and the current, for normalizing time-dependent operations</p>
+								</div>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>

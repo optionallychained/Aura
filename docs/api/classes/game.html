@@ -2789,7 +2789,8 @@ img {
 				<div class="lead">
 					<p>Core Game object; instantiated with or without a configuration object as a first step in creating a game</p>
 				</div>
-				<p>Serves as the operational hub for the execution of the game; handles the Canvas, Entities, Text, Systems and States</p>
+				<p>Serves as the operational hub for the execution of the game; handles the Canvas, Input, Entities, Text, Systems and States</p>
+				<p>Note: Games are controlled by the Keyboard only by default. See GameConfig#controlScheme for details</p>
 				<p>Game execution begins when <em>start</em> is called on a configured Game instance</p>
 			</div>
 		</section>
@@ -2849,7 +2850,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/3564e9c/src/engine/core/game.ts#L48">core/game.ts:48</a></li>
+								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/f7f98e7/src/engine/core/game.ts#L50">core/game.ts:50</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2879,7 +2880,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">entity<wbr>Manager<span class="tsd-signature-symbol">:</span> <a href="entitymanager.html" class="tsd-signature-type" data-tsd-kind="Class">EntityManager</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/3564e9c/src/engine/core/game.ts#L20">core/game.ts:20</a></li>
+						<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/f7f98e7/src/engine/core/game.ts#L22">core/game.ts:22</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2901,7 +2902,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/3564e9c/src/engine/core/game.ts#L95">core/game.ts:95</a></li>
+								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/f7f98e7/src/engine/core/game.ts#L97">core/game.ts:97</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2932,7 +2933,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/3564e9c/src/engine/core/game.ts#L122">core/game.ts:122</a></li>
+								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/f7f98e7/src/engine/core/game.ts#L124">core/game.ts:124</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2963,7 +2964,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/3564e9c/src/engine/core/game.ts#L209">core/game.ts:209</a></li>
+								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/f7f98e7/src/engine/core/game.ts#L210">core/game.ts:210</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3004,7 +3005,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/3564e9c/src/engine/core/game.ts#L179">core/game.ts:179</a></li>
+								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/f7f98e7/src/engine/core/game.ts#L185">core/game.ts:185</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3027,7 +3028,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/3564e9c/src/engine/core/game.ts#L170">core/game.ts:170</a></li>
+								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/f7f98e7/src/engine/core/game.ts#L176">core/game.ts:176</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3050,13 +3051,18 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/3564e9c/src/engine/core/game.ts#L144">core/game.ts:144</a></li>
+								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/f7f98e7/src/engine/core/game.ts#L148">core/game.ts:148</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Utility for checking if a given key is currently pressed</p>
+								<p>Utility for checking if a given key is currently pressed. Just passes through to the InputManager</p>
 							</div>
+							<dl class="tsd-comment-tags">
+								<dt>see</dt>
+								<dd><p>InputManager</p>
+								</dd>
+							</dl>
 						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
@@ -3082,13 +3088,18 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/3564e9c/src/engine/core/game.ts#L155">core/game.ts:155</a></li>
+								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/f7f98e7/src/engine/core/game.ts#L161">core/game.ts:161</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Utility for checking if a given <em>set</em> of keys are all currently pressed</p>
+								<p>Utility for checking if a given set of keys are all currently pressed. Just passes through to the InputManager</p>
 							</div>
+							<dl class="tsd-comment-tags">
+								<dt>see</dt>
+								<dd><p>InputManager</p>
+								</dd>
+							</dl>
 						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
@@ -3114,7 +3125,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/3564e9c/src/engine/core/game.ts#L133">core/game.ts:133</a></li>
+								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/f7f98e7/src/engine/core/game.ts#L135">core/game.ts:135</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3146,9 +3157,14 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/3564e9c/src/engine/core/game.ts#L184">core/game.ts:184</a></li>
+								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/f7f98e7/src/engine/core/game.ts#L215">core/game.ts:215</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>TODO temporary - to be supplanted by TextManager</p>
+							</div>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
@@ -3175,7 +3191,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/3564e9c/src/engine/core/game.ts#L196">core/game.ts:196</a></li>
+								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/f7f98e7/src/engine/core/game.ts#L197">core/game.ts:197</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3221,7 +3237,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/3564e9c/src/engine/core/game.ts#L82">core/game.ts:82</a></li>
+								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/f7f98e7/src/engine/core/game.ts#L84">core/game.ts:84</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3253,7 +3269,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/3564e9c/src/engine/core/game.ts#L109">core/game.ts:109</a></li>
+								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/f7f98e7/src/engine/core/game.ts#L111">core/game.ts:111</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">

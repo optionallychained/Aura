@@ -2756,7 +2756,11 @@ img {
 				<div class="lead">
 					<p>Abstract class defining a Component; an object stored on an Entity providing data and behaviour enabling the operation of Systems on the Entity.</p>
 				</div>
-				<p>All Components should extend from this class and provide an easy-to-guess and sensible name (eg. Transform =&gt; &#39;Transform&#39;)</p>
+				<p>All Components should extend from this class and provide an easy-to-guess and sensible name (eg. Transform =&gt; &#39;Transform&#39;).</p>
+				<p>Example Components include physics-related Transforms, rendering-related Colors and Geometry, and Collision Boxes.</p>
+				<p>// TODO move away from class extension for COmponents in place of a ComponentConfig type approach?
+					//   - implementation of Components becomes a little less naturally-readable, but it fits the approach of the rest of the engine...
+				//   - also consider this for Systems</p>
 				<dl class="tsd-comment-tags">
 					<dt>see</dt>
 					<dd><p>Entity</p>
@@ -2820,7 +2824,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/3564e9c/src/engine/entity/component/component.ts#L8">entity/component/component.ts:8</a></li>
+								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/f7f98e7/src/engine/entity/component/component.ts#L14">entity/component/component.ts:14</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2864,7 +2868,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/3564e9c/src/engine/entity/component/component.ts#L22">entity/component/component.ts:22</a></li>
+								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/f7f98e7/src/engine/entity/component/component.ts#L28">entity/component/component.ts:28</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">

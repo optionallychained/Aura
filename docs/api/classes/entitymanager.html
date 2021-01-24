@@ -2778,6 +2778,20 @@ img {
 </nav>
 <div class="container container-main">
 	<div class="content-wrap">
+		<section class="tsd-panel tsd-comment">
+			<div class="tsd-comment tsd-typography">
+				<div class="lead">
+					<p>Core EntityManager; utilised by the Game to defer the management, updating and rendering of all game Entities</p>
+				</div>
+				<p>Includes Entity filtering methods for retrieval of Entities by various search metrics</p>
+				<p>The EntityManager is available on the Game instance at <code>game.entityManager</code></p>
+				<dl class="tsd-comment-tags">
+					<dt>see</dt>
+					<dd><p>Game</p>
+					</dd>
+				</dl>
+			</div>
+		</section>
 		<section class="tsd-panel tsd-hierarchy">
 			<h3>Hierarchy</h3>
 			<ul class="tsd-hierarchy">
@@ -2827,13 +2841,21 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/3564e9c/src/engine/entity/entity.manager.ts#L12">entity/entity.manager.ts:12</a></li>
+								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/f7f98e7/src/engine/entity/entity.manager.ts#L24">entity/entity.manager.ts:24</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Constructor. Take and store the Game&#39;s Renderer instance</p>
+							</div>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
 								<h5>renderer: <a href="canvasrenderer.html" class="tsd-signature-type" data-tsd-kind="Class">CanvasRenderer</a></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>the renderer</p>
+								</div>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <a href="entitymanager.html" class="tsd-signature-type" data-tsd-kind="Class">EntityManager</a></h4>
@@ -2853,13 +2875,22 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/3564e9c/src/engine/entity/entity.manager.ts#L20">entity/entity.manager.ts:20</a></li>
+								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/f7f98e7/src/engine/entity/entity.manager.ts#L49">entity/entity.manager.ts:49</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Add a list of Entities to the addList</p>
+							</div>
+							<p>// TODO grouping of entities by component on add/remove for faster filtering?</p>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
 								<h5>list: <a href="entity.html" class="tsd-signature-type" data-tsd-kind="Class">Entity</a><span class="tsd-signature-symbol">[]</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>the Entities to add</p>
+								</div>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -2876,13 +2907,21 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/3564e9c/src/engine/entity/entity.manager.ts#L16">entity/entity.manager.ts:16</a></li>
+								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/f7f98e7/src/engine/entity/entity.manager.ts#L38">entity/entity.manager.ts:38</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Add an Entity to the addList</p>
+							</div>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
 								<h5>e: <a href="entity.html" class="tsd-signature-type" data-tsd-kind="Class">Entity</a></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>the Entity to add</p>
+								</div>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -2899,9 +2938,14 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/3564e9c/src/engine/entity/entity.manager.ts#L32">entity/entity.manager.ts:32</a></li>
+								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/f7f98e7/src/engine/entity/entity.manager.ts#L74">entity/entity.manager.ts:74</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Purge all active Entities by adding them to the removeList</p>
+							</div>
+						</div>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 					</li>
 				</ul>
@@ -2916,10 +2960,16 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/3564e9c/src/engine/entity/entity.manager.ts#L73">entity/entity.manager.ts:73</a></li>
+								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/f7f98e7/src/engine/entity/entity.manager.ts#L161">entity/entity.manager.ts:161</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Retrieve the number of active Entities</p>
+							</div>
+						</div>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						<p>the number of active Entities</p>
 					</li>
 				</ul>
 			</section>
@@ -2933,16 +2983,27 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/3564e9c/src/engine/entity/entity.manager.ts#L61">entity/entity.manager.ts:61</a></li>
+								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/f7f98e7/src/engine/entity/entity.manager.ts#L124">entity/entity.manager.ts:124</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Filter the active Entities by a given Component name</p>
+							</div>
+							<p>// TODO by Component class?</p>
+							<p>// TODO smart momization of previous searches so as to reduce filtering operations for common frame-by-frame filters?</p>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
 								<h5>component: <span class="tsd-signature-type">string</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>the (name of the) Component to filter by</p>
+								</div>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <a href="entity.html" class="tsd-signature-type" data-tsd-kind="Class">Entity</a><span class="tsd-signature-symbol">[]</span></h4>
+						<p>the list of Entities with the Component</p>
 					</li>
 				</ul>
 			</section>
@@ -2956,16 +3017,27 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/3564e9c/src/engine/entity/entity.manager.ts#L65">entity/entity.manager.ts:65</a></li>
+								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/f7f98e7/src/engine/entity/entity.manager.ts#L139">entity/entity.manager.ts:139</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Filter the active Entities by a given list of Component names</p>
+							</div>
+							<p>// TODO by Component class?</p>
+							<p>// TODO smart momization of previous searches so as to reduce filtering operations for common frame-by-frame filters?</p>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
 								<h5>components: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>the (names of the) Components to filter by</p>
+								</div>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <a href="entity.html" class="tsd-signature-type" data-tsd-kind="Class">Entity</a><span class="tsd-signature-symbol">[]</span></h4>
+						<p>the list of Entities with the Components</p>
 					</li>
 				</ul>
 			</section>
@@ -2979,16 +3051,26 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/3564e9c/src/engine/entity/entity.manager.ts#L69">entity/entity.manager.ts:69</a></li>
+								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/f7f98e7/src/engine/entity/entity.manager.ts#L152">entity/entity.manager.ts:152</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Filter the active Entities by a given tag</p>
+							</div>
+							<p>// TODO smart momization of previous searches so as to reduce filtering operations for common frame-by-frame filters?</p>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
 								<h5>tag: <span class="tsd-signature-type">string</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>the tag to filter by</p>
+								</div>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <a href="entity.html" class="tsd-signature-type" data-tsd-kind="Class">Entity</a><span class="tsd-signature-symbol">[]</span></h4>
+						<p>the list of Entities with the tag</p>
 					</li>
 				</ul>
 			</section>
@@ -3002,13 +3084,21 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/3564e9c/src/engine/entity/entity.manager.ts#L28">entity/entity.manager.ts:28</a></li>
+								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/f7f98e7/src/engine/entity/entity.manager.ts#L67">entity/entity.manager.ts:67</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Add a list of Entities to the removeList</p>
+							</div>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
 								<h5>list: <a href="entity.html" class="tsd-signature-type" data-tsd-kind="Class">Entity</a><span class="tsd-signature-symbol">[]</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>the Entities to remove</p>
+								</div>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -3025,13 +3115,21 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/3564e9c/src/engine/entity/entity.manager.ts#L24">entity/entity.manager.ts:24</a></li>
+								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/f7f98e7/src/engine/entity/entity.manager.ts#L58">entity/entity.manager.ts:58</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Add an Entity to the removeList</p>
+							</div>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
 								<h5>e: <a href="entity.html" class="tsd-signature-type" data-tsd-kind="Class">Entity</a></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>the Entity to remove</p>
+								</div>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -3048,9 +3146,15 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/3564e9c/src/engine/entity/entity.manager.ts#L49">entity/entity.manager.ts:49</a></li>
+								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/f7f98e7/src/engine/entity/entity.manager.ts#L101">entity/entity.manager.ts:101</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Frame render method, called after tick so as to render all renderable active Entities</p>
+							</div>
+							<p>// TODO smart momoization of renderables so as to reduce filtering operations when no changes occur frame-to-frame</p>
+						</div>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 					</li>
 				</ul>
@@ -3065,13 +3169,21 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/3564e9c/src/engine/entity/entity.manager.ts#L36">entity/entity.manager.ts:36</a></li>
+								<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/f7f98e7/src/engine/entity/entity.manager.ts#L83">entity/entity.manager.ts:83</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Frame update method. Augment the Entity list by processing the addList and removeList, then update all active Entities</p>
+							</div>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
 								<h5>frameDelta: <span class="tsd-signature-type">number</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>the time between the last frame and the current, for normalizing time-dependent operations</p>
+								</div>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
