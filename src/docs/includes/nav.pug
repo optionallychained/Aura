@@ -1,22 +1,25 @@
 ul#nav
     li.index
-        a(href=relativePath + '/index.html') Home
+        a(href=relativePrefix + 'index.html') Home
 
     li.getting-started
-        a(href=relativePath + '/getting-started.html') Getting Started
+        a(href=relativePrefix + 'getting-started.html') Getting Started
+
+    li.installation
+        a(href=relativePrefix + 'installation.html') Installation
 
     li.concepts
-        a(href=relativePath + '/concepts.html') Concepts
+        a(href=relativePrefix + 'concepts.html') Concepts
 
         ul#concepts
             li.game
-                a(href=relativePath + '/concepts/game.html') Game
+                a(href=relativePrefix + 'concepts/game.html') Game
 
             li.states
-                a(href=relativePath + '/concepts/states.html') States
+                a(href=relativePrefix + 'concepts/states.html') States
 
             li.entities-and-components
-                a(href=relativePath + '/concepts/entities-and-components.html') Entities and Components
+                a(href=relativePrefix + 'concepts/entities-and-components.html') Entities and Components
 
     li.api
-        a(href=relativePath + '/api/index.html') API Documentation
+        a(href=relativePrefix + 'api/index.html') API Documentation

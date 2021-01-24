@@ -63,7 +63,7 @@ const processDir = async (src, depth = 1) => {
                     basedir: './src/docs/',
                     bodyClass: pageName,
                     pageTitle: pageNamePretty,
-                    relativePath: '.'.repeat(depth)
+                    relativePrefix: `${'.'.repeat(depth)}/`
                 }
             )
 
