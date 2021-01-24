@@ -37,8 +37,8 @@ export class CollisionSystem extends System {
         for (let i = 0; i < collidables.length; i++) {
             for (let j = i + 1; j < collidables.length; j++) {
                 if (this.collides(collidables[i], collidables[j])) {
-                    (collidables[i].getComponent<AABBCollisionBox>('AABBCollisionBox')).onCollision(collidables[j]);
-                    (collidables[j].getComponent<AABBCollisionBox>('AABBCollisionBox')).onCollision(collidables[i]);
+                    (collidables[i].getComponent<AABBCollisionBox>('AABBCollisionBox')).onCollision(game, collidables[j]);
+                    (collidables[j].getComponent<AABBCollisionBox>('AABBCollisionBox')).onCollision(game, collidables[i]);
                 }
             }
         }
