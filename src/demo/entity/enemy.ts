@@ -5,6 +5,5 @@ export const enemy = new Entity({
     components: [
         new FlatColor(new Vec3(255, 0, 0)),
         new Transform(new Vec2(), new Vec2(25, 25)),
-
     ]
 });

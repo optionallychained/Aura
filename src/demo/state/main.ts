@@ -32,7 +32,7 @@ export const mainState = new State({
 
         (enemy.getComponent<Transform>('Transform')).position = randomPosition(game);
     },
-    end: (game: Game) => {
+    end: () => {
         const playerTransform = player.getComponent<Transform>('Transform');
         playerTransform.position.set(100, 100);
         playerTransform.velocity.set();

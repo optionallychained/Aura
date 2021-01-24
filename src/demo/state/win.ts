@@ -8,7 +8,7 @@ export const winState = new State({
         game.removeSystem('Physics');
         game.removeSystem('Collision');
     },
-    tick: (game: Game, frameDelta: number) => {
+    tick: (game: Game) => {
         game.renderText('WIN! ENTER to play again', new Vec2(game.getWidth() / 4, game.getHeight() / 2));
 
         if (game.keyPressed(Keys.ENTER)) {
