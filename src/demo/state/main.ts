@@ -1,4 +1,4 @@
-import { AABBCollisionBox, CollisionSystem, Game, State, Keys, MathUtils, PhysicsSystem, Transform, Vec2 } from '../../engine/protogl';
+import { CollisionSystem, Game, State, Keys, MathUtils, PhysicsSystem, Transform, Vec2 } from '../../engine/protogl';
 import { enemy } from '../entity/enemy';
 import { player } from '../entity/player';
 
@@ -6,53 +6,57 @@ const randomPosition = (game: Game): Vec2 => {
     return new Vec2(MathUtils.randomBetween(50, game.getWidth() - 50), MathUtils.randomBetween(50, game.getHeight() - 50))
 }
 
+/**
+ * 'main' State for the Game, implementing the Game's playable state
+ */
 export const mainState = new State({
     name: 'main',
-    init: (game: Game) => {
+    // init; set up the State when transitioned to
+    init: (game) => {
         const { entityManager } = game;
 
+        // add some data to the Game to track the player's points
         game.setData('points', 0);
 
-        game.addSystem(new PhysicsSystem());
-        game.addSystem(new CollisionSystem());
+        // add the Physics and Collision Systems to the Game to enable behaviours
+        game.addSystems(new PhysicsSystem(), new CollisionSystem());
 
-        entityManager.clearEntities();
+        // randomly set the enemy's position
+        enemy.getComponent<Transform>('Transform').position = randomPosition(game);
 
-        // done here just for game access in collision callback
-        // TODO better way of achieving
-        player.addComponent(new AABBCollisionBox(new Vec2(50, 50), () => {
-            game.setData('points', game.getData<number>('points') + 1);
-        }));
-
-        enemy.addComponent(new AABBCollisionBox(new Vec2(50, 50), () => {
-            // TODO: real solution to enabling this type of thing
-            entityManager.removeEntity(enemy);
-        }))
-
-        entityManager.addEntity(player);
-        entityManager.addEntity(enemy);
-
-        (enemy.getComponent<Transform>('Transform')).position = randomPosition(game);
+        // add the player and enemy to the Game
+        entityManager.addEntities(player, enemy);
     },
-    end: () => {
+    // end; clean up the State and the Game before transitioning to a new State
+    end: (game) => {
+        // reset the player's position and velocity
         const playerTransform = player.getComponent<Transform>('Transform');
         playerTransform.position.set(100, 100);
         playerTransform.velocity.set();
+
+        // remove the Physics and Collision systems from the game
+        game.removeSystems('Physics', 'Collision')
+
+        // remove all Entities from the Game
+        game.entityManager.clearEntities();
     },
+    // tick; execute per-frame State behaviour
     tick: (game: Game) => {
         const { entityManager, inputManager } = game;
 
+        // render the player's points to the screen
         game.renderText(`Points: ${game.getData<number>('points') ?? 0}`);
 
-        // super dutty
+        // kind of dirty method of retrieving and operating on the player; to be improved
         const player = entityManager.filterEntitiesByTag('player')[0];
         if (!player) {
             return;
         }
 
+        // retrieve the player's Transform Component
         const transform = player.getComponent<Transform>('Transform');
 
-        // movement
+        // implement player movement based on user input
         if (inputManager.isKeyDown(Keys.A)) {
             transform.velocity.set(-50, 0);
         }
@@ -69,7 +73,7 @@ export const mainState = new State({
             transform.velocity.set();
         }
 
-        // position wrapping
+        // wrap the player's position at screen edges
         if (transform.position.x > game.getWidth()) {
             transform.position.setX(0);
         }
@@ -84,12 +88,13 @@ export const mainState = new State({
             transform.position.setY(game.getHeight());
         }
 
-        // enemy respawing
+        // handle enemy respawns
         if (entityManager.countEntities() === 1) {
             enemy.getComponent<Transform>('Transform').position = randomPosition(game);
             entityManager.addEntity(enemy);
         }
 
+        // handle transitioning to the 'win' State when the player gets 10 points
         if (game.getData<number>('points') === 10) {
             game.switchToState('win');
         }
