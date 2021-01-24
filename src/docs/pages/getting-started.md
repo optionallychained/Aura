@@ -9,4 +9,3 @@ const game = new Game({
     }
 });
 ```
-
