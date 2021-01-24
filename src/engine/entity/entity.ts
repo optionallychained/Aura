@@ -6,9 +6,7 @@ import { EntityConfig } from './entity.config';
  *
  * An Entity is any object existing within the game; be it a player, enemy, pickup, level object, etc.
  *
- * Entities maintain a list of Components, which give them their properties and behaviour, and allow Systems to operate on them as necessary.
- *
- * Example Components include physics-related Transforms, rendering-related Colors and Geometry, and Collision Boxes.
+ * Entities maintain a list of Components, which give them their properties and behaviour and allow Systems to operate on them as necessary.
  *
  * @see Component
  */
