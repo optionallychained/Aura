@@ -27,7 +27,7 @@ export class State {
      * @param game the Game the State is running within
      */
     public init(game: Game): void {
-        this.config.init(game);
+        this.config.init?.(game);
     }
 
     /**

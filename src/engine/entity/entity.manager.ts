@@ -33,10 +33,10 @@ export class EntityManager {
     /**
      * Add an Entity to the addList
      *
-     * @param e the Entity to add
+     * @param entity the Entity to add
      */
-    public addEntity(e: Entity): void {
-        this.addList.push(e);
+    public addEntity(entity: Entity): void {
+        this.addList.push(entity);
     }
 
     /**
@@ -44,35 +44,35 @@ export class EntityManager {
      *
      * // TODO grouping of entities by component on add/remove for faster filtering?
      *
-     * @param list the Entities to add
+     * @param entities the Entities to add
      */
-    public addEntities(list: Entity[]): void {
-        this.addList = this.addList.concat(list);
+    public addEntities(...entities: Entity[]): void {
+        this.addList = this.addList.concat(entities);
     }
 
     /**
      * Add an Entity to the removeList
      *
-     * @param e the Entity to remove
+     * @param entity the Entity to remove
      */
-    public removeEntity(e: Entity): void {
-        this.removeList.push(e);
+    public removeEntity(entity: Entity): void {
+        this.removeList.push(entity);
     }
 
     /**
      * Add a list of Entities to the removeList
      *
-     * @param list the Entities to remove
+     * @param entities the Entities to remove
      */
-    public removeEntities(list: Entity[]): void {
-        this.removeList = this.removeList.concat(list);
+    public removeEntities(...entities: Entity[]): void {
+        this.removeList = this.removeList.concat(entities);
     }
 
     /**
      * Purge all active Entities by adding them to the removeList
      */
     public clearEntities(): void {
-        this.removeEntities(this.entities);
+        this.removeEntities(...this.entities);
     }
 
     /**

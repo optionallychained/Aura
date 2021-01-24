@@ -105,6 +105,17 @@ export class Game {
     }
 
     /**
+     * Add a set of States to the Game
+     *
+     * @param state the States to add
+     */
+    public addStates(...states: State[]): void {
+        for (const state of states) {
+            this.addState(state);
+        }
+    }
+
+    /**
      * Switch to the State given by name.
      *
      * Calls .end() on the outgoing State, and .init() on the incoming
@@ -132,6 +143,17 @@ export class Game {
     }
 
     /**
+     * Add a set of Systems to the Game
+     *
+     * @param systems the Systems to add
+     */
+    public addSystems(...systems: System[]): void {
+        for (const system of systems) {
+            this.addSystem(system);
+        }
+    }
+
+    /**
      * Remove a System from the Game
      *
      * // TODO type-safety for the system name somehow?
@@ -143,22 +165,16 @@ export class Game {
     }
 
     /**
-     * Utility for checking if a given set of keys are all currently pressed. Just passes through to the InputManager
+     * Remove a set of Systems from the Game
      *
-     * @see InputManager
+     * // TODO type-safety for the system names somehow?
      *
-     * @param code the Keys to check
-     *
-     * @returns a boolean indicating whether or not all given keys are pressed
+     * @param name the names of the Systems to remove
      */
-    public keysPressed(code: Keys[]): boolean {
-        for (const key of code) {
-            if (!this.inputManager.isKeyDown(key)) {
-                return false;
-            }
+    public removeSystems(...names: string[]): void {
+        for (const name of names) {
+            this.removeSystem(name);
         }
-
-        return true;
     }
 
     /**
