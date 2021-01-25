@@ -1,6 +1,7 @@
 const pug = require('pug');
 const marked = require('marked');
 const hljs = require('highlight.js');
+const minify = require('minify');
 
 const fs = require('fs-extra');
 const path = require('path');
@@ -48,10 +49,10 @@ const log = (...args) => {
     }
 }
 
-// process a given directory of files or folders recursively, rendering one HTML file per MD file into the 'content' block of 'layout.pug' and retaining
+// process a given directory of pages, rendering one HTML file per MD file into the 'content' block of 'layout.pug' and retaining
 //   the directory structure found in ./src/docs/pages
-const processDir = async (src, depth = 1) => {
-    log('Processing Directory:', src, '\n');
+const processPages = async (src, depth = 1) => {
+    log('Processing Pages:', src, '\n');
 
     for (const file of await fs.promises.readdir(src, 'utf8')) {
         const srcPath = path.join(src, file);
@@ -86,7 +87,31 @@ const processDir = async (src, depth = 1) => {
         // and create directories and recurse for folders
         else if (stat.isDirectory()) {
             mkDirOptional(destPath);
-            await processDir(srcPath, depth + 1);
+            await processPages(srcPath, depth + 1);
+            log('\n');
+        }
+    }
+}
+
+// process a given directory of assets, minifying CSS and JS and maintaining the directory structure found in ./src/assets
+const processAssets = async (src) => {
+    log('Processing Assets:', src, '\n');
+
+    for (const file of await fs.promises.readdir(src)) {
+        const srcPath = path.join(src, file);
+        const destPath = path.join(src.replace('src', '').substr(1), file.replace('.', '.min.'));
+
+        const stat = await fs.promises.stat(srcPath);
+
+        if (stat.isFile()) {
+            log('Minifying File:', destPath);
+            const minified = await minify(srcPath);
+
+            await fs.promises.writeFile(destPath, minified);
+        }
+        else if (stat.isDirectory()) {
+            mkDirOptional(destPath)
+            await processAssets(srcPath);
             log('\n');
         }
     }
@@ -96,13 +121,15 @@ const processDir = async (src, depth = 1) => {
 (async () => {
     try {
         log('DocGen Starting...\n');
+
+        // process pages
         mkDirOptional(dest);
+        await processPages(pageSource);
 
-        await processDir(pageSource);
-
-        // copy all asset resources into the destination folder
-        log('\nCopying:', assetSource, '\n');
-        await fs.copy(assetSource, assetDest);
+        // process assets
+        log('\n');
+        mkDirOptional(assetDest);
+        await processAssets(assetSource);
 
         // execute TypeDoc to generate API documentation
         log('Running TypeDoc...\n');
