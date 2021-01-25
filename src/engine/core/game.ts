@@ -1,6 +1,5 @@
 import { EntityManager } from '../entity/entity.manager';
 import { InputManager } from '../input/input.manager';
-import { Keys } from '../input/keys';
 import { Vec2 } from '../math/vec2';
 import { Vec3 } from '../math/vec3';
 import { CanvasRenderer } from '../screen/canvas.renderer';

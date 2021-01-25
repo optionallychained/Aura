@@ -59,16 +59,16 @@ export const mainState = new State({
 
         // implement player movement based on user input
         if (inputManager.isKeyDown(Keys.A)) {
-            transform.velocity.set(-50, 0);
+            transform.velocity.set(-500, 0);
         }
         else if (inputManager.isKeyDown(Keys.D)) {
-            transform.velocity.set(50, 0);
+            transform.velocity.set(500, 0);
         }
         else if (inputManager.isKeyDown(Keys.W)) {
-            transform.velocity.set(0, -50);
+            transform.velocity.set(0, -500);
         }
         else if (inputManager.isKeyDown(Keys.S)) {
-            transform.velocity.set(0, 50);
+            transform.velocity.set(0, 500);
         }
         else if (inputManager.isKeyDown(Keys.SPACE)) {
             transform.velocity.set();
