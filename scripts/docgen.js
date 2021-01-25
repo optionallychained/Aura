@@ -15,6 +15,9 @@ const assetSource = path.join(source, 'assets');
 const dest = './docs';
 const assetDest = path.join(dest, 'assets');
 
+// whether or not we're running in quiet mode
+const quiet = process.argv.includes('--quiet') || process.argv.includes('quiet');
+
 // pretty filename => pagetitle mappings
 const pageNameMappings = {
     'index': 'Home'
@@ -38,9 +41,18 @@ const mkDirOptional = (dir) => {
     }
 }
 
-// process a given directory of files or folders recursively, rendering one HTML file per MD file through into the 'content' block of 'layout.pug' and retaining
+/** simple logging function, only logging if we're not 'quiet' */
+const log = (...args) => {
+    if (!quiet) {
+        console.log(...args);
+    }
+}
+
+// process a given directory of files or folders recursively, rendering one HTML file per MD file into the 'content' block of 'layout.pug' and retaining
 //   the directory structure found in ./src/docs/pages
 const processDir = async (src, depth = 1) => {
+    log('Processing Directory:', src, '\n');
+
     for (const file of await fs.promises.readdir(src, 'utf8')) {
         const srcPath = path.join(src, file);
         const pageName = file.replace('.md', '');
@@ -52,6 +64,8 @@ const processDir = async (src, depth = 1) => {
 
         // render files
         if (stat.isFile()) {
+            log('Rendering File:', destPath);
+
             // remove any return characters because Pug is finnicky
             const markdown = marked((await fs.promises.readFile(srcPath)).toString()).replace(/(?:\r\n|\r|\n)/g, '');
 
@@ -73,6 +87,7 @@ const processDir = async (src, depth = 1) => {
         else if (stat.isDirectory()) {
             mkDirOptional(destPath);
             await processDir(srcPath, depth + 1);
+            log('\n');
         }
     }
 }
@@ -80,15 +95,25 @@ const processDir = async (src, depth = 1) => {
 // main execution routine; create the root output directory and then kick off the recursive generation process in processDir()
 (async () => {
     try {
+        log('DocGen Starting...\n');
         mkDirOptional(dest);
 
         await processDir(pageSource);
 
         // copy all asset resources into the destination folder
+        log('\nCopying:', assetSource, '\n');
         await fs.copy(assetSource, assetDest);
 
         // execute TypeDoc to generate API documentation
-        exec('typedoc');
+        log('Running TypeDoc...\n');
+        const cmd = `typedoc${quiet ? '' : ' --logLevel Verbose'}`;
+        const td = exec(cmd);
+        td.stdout.pipe(process.stdout);
+        td.stderr.pipe(process.stderr);
+
+        td.on('exit', () => {
+            log('\n\nDone! Docs generated at', dest);
+        });
     }
     catch (e) {
         console.error('Something went wrong!', e);
