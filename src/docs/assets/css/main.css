@@ -89,6 +89,7 @@ body.installation li.installation a,
 body.game li.game a,
 body.states li.states a,
 body.entities-and-components li.entities-and-components a,
+body.systems li.systems a,
 body.api li.api a,
 li.dropdown.open > a {
     background: rgb(71, 73, 73);
@@ -100,14 +101,27 @@ li.dropdown {
     cursor: pointer;
     position: relative;
 }
-li.dropdown ul {
+li.dropdown ul,
+li.dropdown ul li,
+li.dropdown ul li a {
     max-height: 0;
     opacity: 0;
 }
+li.dropdown ul li a {
+    padding: 0;
+}
 li.dropdown:hover ul,
-li.dropdown.open ul {
+li.dropdown.open ul,
+li.dropdown:hover ul li,
+li.dropdown.open ul li,
+li.dropdown:hover ul li a,
+li.dropdown.open ul li a {
     max-height: 1000px;
     opacity: 1;
+}
+li.dropdown:hover ul li a,
+li.dropdown.open ul li a {
+    padding: 15px 5px;
 }
 li.dropdown > a::after {
     content: ">";
