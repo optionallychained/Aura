@@ -19,11 +19,12 @@ Lofty/long-term Goals:
 - Solid documentation
 - Automated testing
 - Efficient and optimised builds
+- *Maybe* Desktop + Mobile builds via Electron and/or Cordova
 
 
 ## Documentation
 
-[ProtoGL Documentation (GitHub Pages)](https://jonnopon.github.io/ProtoGL-TS/)
+[ProtoGL Documentation](https://jonnopon.github.io/ProtoGL-TS/)
 
 
 ## Usage

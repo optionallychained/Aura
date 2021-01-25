@@ -1,7 +1,5 @@
 /**
  * Class representing a three-dimensional Vector with properties x, y and z and providing static utilities for mathematical operations
- *
- * // TODO move to an entirely-static approach involving an {x,y,z} interface for core representation? Functional vs OO approach...
  */
 export class Vec3 {
 

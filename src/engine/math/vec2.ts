@@ -1,7 +1,5 @@
 /**
  * Class representing a two-dimensional Vector with properties x and y and providing static utilities for mathematical operations
- *
- * // TODO move to an entirely-static approach involving an {x,y} interface for core representation? Functional vs OO approach...
  */
 export class Vec2 {
 
