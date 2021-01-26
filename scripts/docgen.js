@@ -2,6 +2,7 @@ const pug = require('pug');
 const marked = require('marked');
 const hljs = require('highlight.js');
 const minify = require('minify');
+const sass = require('sass');
 
 const fs = require('fs-extra');
 const path = require('path');
@@ -11,10 +12,13 @@ const { exec } = require('child_process');
 const source = './src/docs';
 const pageSource = path.join(source, 'pages');
 const assetSource = path.join(source, 'assets');
+const sassSource = path.join(assetSource, 'scss');
 
 // destination paths
 const dest = './docs';
 const assetDest = path.join(dest, 'assets');
+const sassDest = path.join(assetDest, 'css');
+const cssDest = path.join(sassDest, 'main.min.css');
 
 // whether or not we're running in quiet mode
 const quiet = process.argv.includes('--quiet') || process.argv.includes('quiet');
@@ -93,6 +97,17 @@ const processPages = async (src, depth = 1) => {
     }
 }
 
+// compile SASS and write to file ready for minifying as part of processAssets()
+const compileSass = async (cssDest) => {
+    await fs.writeFile(cssDest, sass.renderSync({
+        file: `${sassSource}/main.scss`,
+        outFile: cssDest,
+        includePaths: [
+            "node_modules"
+        ]
+    }).css);
+}
+
 // process a given directory of assets, minifying CSS and JS and maintaining the directory structure found in ./src/assets
 const processAssets = async (src) => {
     log('Processing Assets:', src, '\n');
@@ -104,15 +119,23 @@ const processAssets = async (src) => {
         const stat = await fs.promises.stat(srcPath);
 
         if (stat.isFile()) {
-            log('Minifying File:', destPath);
-            const minified = await minify(srcPath);
-
-            await fs.promises.writeFile(destPath, minified);
+            log('Minifying File:', srcPath);
+            await fs.promises.writeFile(destPath, await minify(srcPath));
         }
         else if (stat.isDirectory()) {
-            mkDirOptional(destPath)
-            await processAssets(srcPath);
-            log('\n');
+            // override for sass
+            if (srcPath === sassSource) {
+                log('Processing Assets:', srcPath, '\n');
+                log('Rendering SASS to:', cssDest, '\n');
+                mkDirOptional(sassDest);
+                await compileSass(cssDest);
+                await fs.writeFile(cssDest, await minify(cssDest));
+            }
+            else {
+                mkDirOptional(destPath)
+                await processAssets(srcPath);
+                log('\n');
+            }
         }
     }
 }

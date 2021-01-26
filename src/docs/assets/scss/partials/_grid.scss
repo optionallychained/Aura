@@ -1,0 +1,28 @@
+body {
+    display: grid;
+    grid-template:
+        "left right" 9fr
+        "left footer" 1fr /
+        1fr 4fr;
+    grid-gap: 15px;
+}
+
+nav,
+main,
+footer {
+    padding: 15px;
+}
+
+nav,
+main {
+    overflow-y: auto;
+}
+
+main {
+    grid-area: right;
+}
+
+footer {
+    grid-area: footer;
+    border-top: 1px solid black;
+}
