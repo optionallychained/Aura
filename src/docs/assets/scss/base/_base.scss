@@ -27,3 +27,18 @@ a {
     color: black;
     text-decoration: none;
 }
+
+nav,
+main,
+footer {
+    padding: 15px;
+}
+
+nav,
+main {
+    overflow-y: auto;
+}
+
+footer {
+    border-top: 1px solid black;
+}

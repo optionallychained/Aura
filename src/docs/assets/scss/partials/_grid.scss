@@ -7,15 +7,8 @@ body {
     grid-gap: 15px;
 }
 
-nav,
-main,
-footer {
-    padding: 15px;
-}
-
-nav,
-main {
-    overflow-y: auto;
+nav {
+    grid-area: left;
 }
 
 main {
@@ -24,5 +17,4 @@ main {
 
 footer {
     grid-area: footer;
-    border-top: 1px solid black;
 }

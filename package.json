@@ -14,7 +14,7 @@
     "scripts": {
         "lint": "eslint --ext .ts --fix",
         "docs:serve": "browser-sync start --port 9090 --server './docs' --files './docs/**/*'",
-        "docs:watch": "nodemon -w ./src/docs --ext pug,js,css,md ./scripts/docgen.js --args dev",
+        "docs:watch": "nodemon -w ./src/docs --ext pug,js,scss,md ./scripts/docgen.js --args dev",
         "docs:dev": "concurrently \"npm run docs:serve\" \"npm run docs:watch\"",
         "docs:dist": "node ./scripts/docgen.js",
         "demo:debug": "webpack serve --config webpack.demo.config.js",
