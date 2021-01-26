@@ -3,6 +3,8 @@ const marked = require('marked');
 const hljs = require('highlight.js');
 const minify = require('minify');
 const sass = require('sass');
+const autoprefixer = require('autoprefixer');
+const postcss = require('postcss');
 
 const fs = require('fs-extra');
 const path = require('path');
@@ -12,16 +14,16 @@ const { exec } = require('child_process');
 const source = './src/docs';
 const pageSource = path.join(source, 'pages');
 const assetSource = path.join(source, 'assets');
-const sassSource = path.join(assetSource, 'scss');
+const scssSource = path.join(assetSource, 'scss');
 
 // destination paths
 const dest = './docs';
 const assetDest = path.join(dest, 'assets');
-const sassDest = path.join(assetDest, 'css');
-const cssDest = path.join(sassDest, 'main.min.css');
+const scssDest = path.join(assetDest, 'css');
+const cssDest = path.join(scssDest, 'main.min.css');
 
-// whether or not we're running in quiet mode
-const quiet = process.argv.includes('--quiet') || process.argv.includes('quiet');
+// whether or not we're running in dev mode
+const dev = process.argv.includes('--dev') || process.argv.includes('dev');
 
 // pretty filename => pagetitle mappings
 const pageNameMappings = {
@@ -46,9 +48,9 @@ const mkDirOptional = (dir) => {
     }
 }
 
-/** simple logging function, only logging if we're not 'quiet' */
+/** simple logging function, only logging if we're not in dev mode */
 const log = (...args) => {
-    if (!quiet) {
+    if (!dev) {
         console.log(...args);
     }
 }
@@ -97,15 +99,28 @@ const processPages = async (src, depth = 1) => {
     }
 }
 
-// compile SASS and write to file ready for minifying as part of processAssets()
-const compileSass = async (cssDest) => {
-    await fs.writeFile(cssDest, sass.renderSync({
-        file: `${sassSource}/main.scss`,
-        outFile: cssDest,
+// compile the docs' scss, autoprefix and minify the result
+const compileScss = async () => {
+    log('Rendering SCSS to:', cssDest, '\n');
+    mkDirOptional(scssDest);
+
+    // compile the SCSS
+    const compiled = sass.renderSync({
+        file: `${scssSource}/main.scss`,
+        outFIle: cssDest,
         includePaths: [
-            "node_modules"
+            'node_modules'
         ]
-    }).css);
+    });
+
+    // postprocess with autoprefixer
+    const prefixed = await postcss([autoprefixer]).process(compiled.css, { from: undefined });
+
+    // write to file to be read by minify()
+    await fs.writeFile(cssDest, prefixed.css);
+
+    // minify the compiled
+    await fs.writeFile(cssDest, await minify(cssDest));
 }
 
 // process a given directory of assets, minifying CSS and JS and maintaining the directory structure found in ./src/assets
@@ -123,13 +138,9 @@ const processAssets = async (src) => {
             await fs.promises.writeFile(destPath, await minify(srcPath));
         }
         else if (stat.isDirectory()) {
-            // override for sass
-            if (srcPath === sassSource) {
-                log('Processing Assets:', srcPath, '\n');
-                log('Rendering SASS to:', cssDest, '\n');
-                mkDirOptional(sassDest);
-                await compileSass(cssDest);
-                await fs.writeFile(cssDest, await minify(cssDest));
+            // override for scss
+            if (srcPath === scssSource) {
+                await compileScss();
             }
             else {
                 mkDirOptional(destPath)
@@ -156,7 +167,7 @@ const processAssets = async (src) => {
 
         // execute TypeDoc to generate API documentation
         log('Running TypeDoc...\n');
-        const cmd = `typedoc${quiet ? '' : ' --logLevel Verbose'}`;
+        const cmd = `typedoc${dev ? '' : ' --logLevel Verbose'}`;
         const td = exec(cmd);
         td.stdout.pipe(process.stdout);
         td.stderr.pipe(process.stderr);
