@@ -1,6 +1,6 @@
 # Project TODOs
 
-- [ ] Initialise testing
+- [x] Initialise testing
 - [ ] Structuring for publish
     - [ ] consider: barrels?
     - [ ] consider: compilation target? - ESM/Common/maybe even just publish-as-TS?
