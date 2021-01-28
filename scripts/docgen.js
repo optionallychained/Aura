@@ -1,26 +1,23 @@
 const pug = require('pug');
 const marked = require('marked');
 const hljs = require('highlight.js');
-const minify = require('minify');
-const sass = require('sass');
-const autoprefixer = require('autoprefixer');
-const postcss = require('postcss');
 
 const fs = require('fs-extra');
 const path = require('path');
-const { exec } = require('child_process');
+const { execSync } = require('child_process');
 
 // source paths
 const source = './src/docs';
 const pageSource = path.join(source, 'pages');
 const assetSource = path.join(source, 'assets');
-const scssSource = path.join(assetSource, 'scss');
+const imgSource = path.join(assetSource, 'img');
 
 // destination paths
 const dest = './docs';
 const assetDest = path.join(dest, 'assets');
-const scssDest = path.join(assetDest, 'css');
-const cssDest = path.join(scssDest, 'main.min.css');
+const jsDest = path.join(assetDest, 'js');
+const cssDest = path.join(assetDest, 'css');
+const imgDest = path.join(assetDest, 'img');
 
 // whether or not we're running in dev mode
 const dev = process.argv.includes('--dev') || process.argv.includes('dev');
@@ -48,15 +45,14 @@ const mkDirOptional = (dir) => {
     }
 }
 
-/** simple logging function, only logging if we're not in dev mode */
+// simple logging function, only logging if we're not in dev mode
 const log = (...args) => {
     if (!dev) {
         console.log(...args);
     }
 }
 
-// process a given directory of pages, rendering one HTML file per MD file into the 'content' block of 'layout.pug' and retaining
-//   the directory structure found in ./src/docs/pages
+// process a given directory of pages, rendering one HTML file per MD file into the 'content' block of 'layout.pug' and retaining the correct directory structure
 const processPages = async (src, depth = 1) => {
     log('Processing Pages:', src, '\n');
 
@@ -65,12 +61,12 @@ const processPages = async (src, depth = 1) => {
         const pageName = file.replace('.md', '');
         const pageNamePretty = titleCase(pageNameMappings[pageName] ?? pageName);
         const destName = file.replace('.md', '.html');
-        const destPath = path.join(src.replace('src', '').replace('pages', '').substr(1), destName);
+        const destPath = path.join(src.replace(/src|pages/g, '').substr(1), destName);
 
         const stat = await fs.promises.stat(srcPath);
 
-        // render files
         if (stat.isFile()) {
+            // file encountered: render it
             log('Rendering File:', destPath);
 
             // remove any return characters because Pug is finnicky
@@ -82,16 +78,20 @@ const processPages = async (src, depth = 1) => {
                 ${markdown}`,
                 {
                     basedir: './src/docs/',
+                    // body class for nav link highlighting
                     bodyClass: pageName,
+                    // page title for the <title>
                     pageTitle: pageNamePretty,
+                    // relative prefix for links and asset inclusions
                     relativePrefix: `${'.'.repeat(depth)}/`
                 }
             )
 
+            // write the file
             await fs.promises.writeFile(destPath, page);
         }
-        // and create directories and recurse for folders
         else if (stat.isDirectory()) {
+            // directory encountered: mirror into dest, then recurse
             mkDirOptional(destPath);
             await processPages(srcPath, depth + 1);
             log('\n');
@@ -99,82 +99,85 @@ const processPages = async (src, depth = 1) => {
     }
 }
 
-// compile the docs' scss, autoprefix and minify the result
-const compileScss = async () => {
-    log('Rendering SCSS to:', cssDest, '\n');
-    mkDirOptional(scssDest);
-
-    // compile the SCSS
-    const compiled = sass.renderSync({
-        file: `${scssSource}/main.scss`,
-        outFIle: cssDest,
-        includePaths: [
-            'node_modules'
-        ]
-    });
-
-    // postprocess with autoprefixer
-    const prefixed = await postcss([autoprefixer]).process(compiled.css, { from: undefined });
-
-    // write to file to be read by minify()
-    await fs.writeFile(cssDest, prefixed.css);
-
-    // minify the compiled
-    await fs.writeFile(cssDest, await minify(cssDest));
-}
-
-// process a given directory of assets, minifying CSS and JS and maintaining the directory structure found in ./src/assets
-const processAssets = async (src) => {
-    log('Processing Assets:', src, '\n');
+// copy a given directory of images, retaining the correct directory structure
+const copyImages = async (src) => {
+    log('Copying Images:', src, '\n');
 
     for (const file of await fs.promises.readdir(src)) {
         const srcPath = path.join(src, file);
-        const destPath = path.join(src.replace('src', '').substr(1), file.replace('.', '.min.'));
+        const destPath = path.join(src.replace(/src/g, '').substr(1), file);
 
         const stat = await fs.promises.stat(srcPath);
 
         if (stat.isFile()) {
-            log('Minifying File:', srcPath);
-            await fs.promises.writeFile(destPath, await minify(srcPath));
+            // file encountered: copy it
+            log('Copying File:', destPath);
+
+            await fs.promises.copyFile(srcPath, destPath);
         }
         else if (stat.isDirectory()) {
-            // override for scss
-            if (srcPath === scssSource) {
-                await compileScss();
-            }
-            else {
-                mkDirOptional(destPath)
-                await processAssets(srcPath);
-                log('\n');
-            }
+            // directory encountered: mirror into dest, then recurse
+            mkDirOptional(destPath);
+            await processImages(srcPath);
+            log('\n');
         }
     }
+
+    log('\n');
+};
+
+// process the documentation's assets by compiling TS + SCSS with Webpack, shuffling the output a bit and then copying the images directory
+const processAssets = async () => {
+    log('Processing Assets:', assetSource, '\n');
+    mkDirOptional(assetSource);
+
+    // run webpack in the proper mode
+    const cmd = `webpack --config webpack.docs.config.js --mode ${dev ? 'development' : 'production'}`;
+    execSync(cmd, { stdio: 'inherit' });
+
+    // move webpack JS output to the right dest
+    mkDirOptional(jsDest);
+    await fs.promises.rename(path.join(assetDest, 'css.css'), path.join(cssDest, 'main.css'));
+
+    // move webpack CSS output to the right dest
+    mkDirOptional(cssDest);
+    await fs.promises.rename(path.join(assetDest, 'js.js'), path.join(jsDest, 'main.js'));
+
+    // clean up the Webpack CSS JS output (not applicable for our use-case)
+    await fs.promises.rm(path.join(assetDest, 'css.js'));
+
+    // handle images
+    mkDirOptional(imgDest);
+    log('\n');
+    await copyImages(imgSource);
 }
 
-// main execution routine; create the root output directory and then kick off the recursive generation process in processDir()
+// generate the API documentation by running typedoc
+const generateAPI = () => {
+    log('\n', 'Generating API Documentation...', '\n');
+
+    const cmd = `typedoc${dev ? '' : ' --logLevel Verbose'}`;
+    execSync(cmd, { stdio: 'inherit' });
+}
+
+// main execution routine; create the root output directory, then process assets, pages and API documentation in order
 (async () => {
     try {
-        log('DocGen Starting...\n');
-
-        // process pages
+        log('DocGen Starting...', '\n');
         mkDirOptional(dest);
-        await processPages(pageSource);
 
         // process assets
-        log('\n');
-        mkDirOptional(assetDest);
-        await processAssets(assetSource);
+        await processAssets();
 
-        // execute TypeDoc to generate API documentation
-        log('Running TypeDoc...\n');
-        const cmd = `typedoc${dev ? '' : ' --logLevel Verbose'}`;
-        const td = exec(cmd);
-        td.stdout.pipe(process.stdout);
-        td.stderr.pipe(process.stderr);
+        // process pages
+        await processPages(pageSource);
 
-        td.on('exit', () => {
-            log('\n\nDone! Docs generated at', dest);
-        });
+        // generate API documentation only if we're building for prod
+        if (!dev) {
+            generateAPI();
+        }
+
+        log('\n\n', 'Done! Docs generated at', dest);
     }
     catch (e) {
         console.error('Something went wrong!', e);

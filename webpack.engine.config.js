@@ -3,6 +3,7 @@ const path = require('path');
 // builds the engine for distribution as browser-friendly JS (places into publish/_min for npm distribution via unpkg)
 
 module.exports = {
+    mode: 'production',
     entry: './src/engine/protogl.ts',
     module: {
         rules: [
