@@ -12,6 +12,13 @@
         "plugin:@typescript-eslint/recommended-requiring-type-checking"
     ],
     "rules": {
+        "quotes": [
+            "error",
+            "single",
+            {
+                "avoidEscape": true
+            }
+        ],
         "@typescript-eslint/explicit-function-return-type": [
             "error",
             {
@@ -46,13 +53,6 @@
                     "protected-instance-method",
                     "private-instance-method"
                 ]
-            }
-        ],
-        "quotes": [
-            "error",
-            "single",
-            {
-                "avoidEscape": true
             }
         ],
         "@typescript-eslint/restrict-template-expressions": [
