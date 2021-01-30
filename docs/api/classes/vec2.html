@@ -98,6 +98,16 @@
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
+							<h3>Accessors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="vec2.html#array" class="tsd-kind-icon">array</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="vec2.html#float32array" class="tsd-kind-icon">float32<wbr>Array</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="vec2.html#magnitude" class="tsd-kind-icon">magnitude</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="vec2.html#mutable" class="tsd-kind-icon">mutable</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="vec2.html#string" class="tsd-kind-icon">string</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="vec2.html#clone" class="tsd-kind-icon">clone</a></li>
@@ -105,8 +115,16 @@
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="vec2.html#setx" class="tsd-kind-icon">setX</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="vec2.html#sety" class="tsd-kind-icon">setY</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="vec2.html#add" class="tsd-kind-icon">add</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="vec2.html#anglebetween" class="tsd-kind-icon">angle<wbr>Between</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="vec2.html#cross" class="tsd-kind-icon">cross</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="vec2.html#distancebetween" class="tsd-kind-icon">distance<wbr>Between</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="vec2.html#div" class="tsd-kind-icon">div</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="vec2.html#dot" class="tsd-kind-icon">dot</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="vec2.html#invert" class="tsd-kind-icon">invert</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="vec2.html#mult" class="tsd-kind-icon">mult</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="vec2.html#negate" class="tsd-kind-icon">negate</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="vec2.html#normalize" class="tsd-kind-icon">normalize</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="vec2.html#rotate" class="tsd-kind-icon">rotate</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="vec2.html#scale" class="tsd-kind-icon">scale</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="vec2.html#sub" class="tsd-kind-icon">sub</a></li>
 							</ul>
@@ -126,7 +144,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/4baf244/src/engine/math/vec2.ts#L64">math/vec2.ts:64</a></li>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/e8ccf7b/src/engine/math/vec2.ts#L179">math/vec2.ts:179</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -158,17 +176,131 @@
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="x" class="tsd-anchor"></a>
-					<h3>x</h3>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> x</h3>
 					<div class="tsd-signature tsd-kind-icon">x<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 0</span></div>
 					<aside class="tsd-sources">
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="y" class="tsd-anchor"></a>
-					<h3>y</h3>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> y</h3>
 					<div class="tsd-signature tsd-kind-icon">y<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 0</span></div>
 					<aside class="tsd-sources">
 					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Accessors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="array" class="tsd-anchor"></a>
+					<h3>array</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> array<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/e8ccf7b/src/engine/math/vec2.ts#L199">math/vec2.ts:199</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Getter for the Array form of the Vec2</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="float32array" class="tsd-anchor"></a>
+					<h3>float32<wbr>Array</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> float32Array<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Float32Array</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/e8ccf7b/src/engine/math/vec2.ts#L206">math/vec2.ts:206</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Getter for the Float32Array form of the Vec2</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Float32Array</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="magnitude" class="tsd-anchor"></a>
+					<h3>magnitude</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> magnitude<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/e8ccf7b/src/engine/math/vec2.ts#L192">math/vec2.ts:192</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Getter for the Vec2&#39;s magnitude</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="mutable" class="tsd-anchor"></a>
+					<h3>mutable</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> mutable<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Mutable</span><span class="tsd-signature-symbol">&lt;</span><a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/e8ccf7b/src/engine/math/vec2.ts#L260">math/vec2.ts:260</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Getter for a Mutable cast of the Vec2 instance; used for enabling internal-only mutation in the set*() methods</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Mutable</span><span class="tsd-signature-symbol">&lt;</span><a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>the typecasted Mutable Vec2 instance</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="string" class="tsd-anchor"></a>
+					<h3>string</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> string<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/e8ccf7b/src/engine/math/vec2.ts#L213">math/vec2.ts:213</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Getter for the readable string form of the Vec2</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -183,7 +315,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/4baf244/src/engine/math/vec2.ts#L108">math/vec2.ts:108</a></li>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/e8ccf7b/src/engine/math/vec2.ts#L251">math/vec2.ts:251</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -206,7 +338,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/4baf244/src/engine/math/vec2.ts#L80">math/vec2.ts:80</a></li>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/e8ccf7b/src/engine/math/vec2.ts#L223">math/vec2.ts:223</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -243,7 +375,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/4baf244/src/engine/math/vec2.ts#L90">math/vec2.ts:90</a></li>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/e8ccf7b/src/engine/math/vec2.ts#L233">math/vec2.ts:233</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -274,7 +406,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/4baf244/src/engine/math/vec2.ts#L99">math/vec2.ts:99</a></li>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/e8ccf7b/src/engine/math/vec2.ts#L242">math/vec2.ts:242</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -305,12 +437,12 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/4baf244/src/engine/math/vec2.ts#L14">math/vec2.ts:14</a></li>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/e8ccf7b/src/engine/math/vec2.ts#L16">math/vec2.ts:16</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Static adder; produce a new Vec2 adding the right to the left</p>
+									<p>Add two Vec2s</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -318,18 +450,132 @@
 								<li>
 									<h5>left: <a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>the Vector to add to</p>
+										<p>the first Vec2</p>
 									</div>
 								</li>
 								<li>
 									<h5>right: <a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>the Vector to add</p>
+										<p>the second Vec2</p>
 									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a></h4>
-							<p>a new Vec2 containing the result of the addition</p>
+							<p>the result of the addition</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="anglebetween" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> angle<wbr>Between</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">angle<wbr>Between<span class="tsd-signature-symbol">(</span>left<span class="tsd-signature-symbol">: </span><a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a>, right<span class="tsd-signature-symbol">: </span><a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/e8ccf7b/src/engine/math/vec2.ts#L166">math/vec2.ts:166</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Calculate the angle between two Vec2s</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>left: <a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the first Vec2</p>
+									</div>
+								</li>
+								<li>
+									<h5>right: <a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the second Vec2</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+							<p>the angle between the two Vec2s (radians)</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="cross" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> cross</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">cross<span class="tsd-signature-symbol">(</span>left<span class="tsd-signature-symbol">: </span><a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a>, right<span class="tsd-signature-symbol">: </span><a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="vec3.html" class="tsd-signature-type" data-tsd-kind="Class">Vec3</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/e8ccf7b/src/engine/math/vec2.ts#L142">math/vec2.ts:142</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Calculate the cross product of two Vec2s</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>left: <a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the first Vec2</p>
+									</div>
+								</li>
+								<li>
+									<h5>right: <a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the second Vec2</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="vec3.html" class="tsd-signature-type" data-tsd-kind="Class">Vec3</a></h4>
+							<p>the cross product of the two Vec2s (a Vec3)</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="distancebetween" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> distance<wbr>Between</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">distance<wbr>Between<span class="tsd-signature-symbol">(</span>left<span class="tsd-signature-symbol">: </span><a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a>, right<span class="tsd-signature-symbol">: </span><a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/e8ccf7b/src/engine/math/vec2.ts#L154">math/vec2.ts:154</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Calculate the distance between two Vec2s</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>left: <a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the first Vec2</p>
+									</div>
+								</li>
+								<li>
+									<h5>right: <a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the second Vec2</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+							<p>the distance between the two Vec2s</p>
 						</li>
 					</ul>
 				</section>
@@ -343,12 +589,12 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/4baf244/src/engine/math/vec2.ts#L50">math/vec2.ts:50</a></li>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/e8ccf7b/src/engine/math/vec2.ts#L52">math/vec2.ts:52</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Static divider; produce a new Vec2 dividing the left by the right</p>
+									<p>Divide the left Vec2 by the right</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -356,18 +602,88 @@
 								<li>
 									<h5>left: <a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>the Vector to divide</p>
+										<p>the Vec2 to divide</p>
 									</div>
 								</li>
 								<li>
 									<h5>right: <a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>the Vector to divide by</p>
+										<p>the Vec2 to divide by</p>
 									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a></h4>
-							<p>a new Vec2 containing the result of the division</p>
+							<p>the result of the division</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="dot" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> dot</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">dot<span class="tsd-signature-symbol">(</span>left<span class="tsd-signature-symbol">: </span><a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a>, right<span class="tsd-signature-symbol">: </span><a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/e8ccf7b/src/engine/math/vec2.ts#L130">math/vec2.ts:130</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Calculate the dot product of two Vec2s</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>left: <a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the first Vec2</p>
+									</div>
+								</li>
+								<li>
+									<h5>right: <a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the second Vec2</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+							<p>the dot product of the two Vec2s</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="invert" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> invert</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">invert<span class="tsd-signature-symbol">(</span>v<span class="tsd-signature-symbol">: </span><a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/e8ccf7b/src/engine/math/vec2.ts#L101">math/vec2.ts:101</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Invert a Vec2</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>v: <a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the Vec2 to invert</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a></h4>
+							<p>the inverse of the Vec2</p>
 						</li>
 					</ul>
 				</section>
@@ -381,12 +697,12 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/4baf244/src/engine/math/vec2.ts#L38">math/vec2.ts:38</a></li>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/e8ccf7b/src/engine/math/vec2.ts#L40">math/vec2.ts:40</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Static multiplier; produce a new Vec2 multiplying the left by the right</p>
+									<p>Multiply two Vec2s</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -394,18 +710,120 @@
 								<li>
 									<h5>left: <a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>the Vector to multiply</p>
+										<p>the first Vec2</p>
 									</div>
 								</li>
 								<li>
 									<h5>right: <a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>the Vector to multiply by</p>
+										<p>the second Vec2</p>
 									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a></h4>
-							<p>a new Vec2 containing the result of the multiplication</p>
+							<p>the result of the multiplication</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="negate" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> negate</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">negate<span class="tsd-signature-symbol">(</span>v<span class="tsd-signature-symbol">: </span><a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/e8ccf7b/src/engine/math/vec2.ts#L90">math/vec2.ts:90</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Negate a Vec2</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>v: <a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the Vec2 to negate</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a></h4>
+							<p>the negated Vec2</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="normalize" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> normalize</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">normalize<span class="tsd-signature-symbol">(</span>v<span class="tsd-signature-symbol">: </span><a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/e8ccf7b/src/engine/math/vec2.ts#L112">math/vec2.ts:112</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Normalize a Vec2</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>v: <a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the Vec2 to normalize</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a></h4>
+							<p>the normalized Vec2</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="rotate" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> rotate</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">rotate<span class="tsd-signature-symbol">(</span>v<span class="tsd-signature-symbol">: </span><a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a>, angle<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/e8ccf7b/src/engine/math/vec2.ts#L76">math/vec2.ts:76</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Rotate a Vec2 by a given angle (radians)</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>v: <a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the Vec2 to rotate</p>
+									</div>
+								</li>
+								<li>
+									<h5>angle: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the angle to rotate by</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a></h4>
+							<p>the rotated Vec2</p>
 						</li>
 					</ul>
 				</section>
@@ -419,12 +837,12 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/4baf244/src/engine/math/vec2.ts#L62">math/vec2.ts:62</a></li>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/e8ccf7b/src/engine/math/vec2.ts#L64">math/vec2.ts:64</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Static scalar multiplication; produce a new Vec2 scaling the Vector by the factor</p>
+									<p>Scale a Vec2 by a given factor</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -432,7 +850,7 @@
 								<li>
 									<h5>v: <a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>the Vector to scale</p>
+										<p>the Vec2 to scale</p>
 									</div>
 								</li>
 								<li>
@@ -443,7 +861,7 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a></h4>
-							<p>a new Vec2 containing the result of the scalar multiplication</p>
+							<p>the scaled Vec2</p>
 						</li>
 					</ul>
 				</section>
@@ -457,12 +875,12 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL-TS/blob/4baf244/src/engine/math/vec2.ts#L26">math/vec2.ts:26</a></li>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/e8ccf7b/src/engine/math/vec2.ts#L28">math/vec2.ts:28</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Static subtractor; produce a new Vec2 subtracting the right from the left</p>
+									<p>Subtract the right Vec2 from the left</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -470,18 +888,18 @@
 								<li>
 									<h5>left: <a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>the Vector to subtract from</p>
+										<p>the Vec2 to subtract from</p>
 									</div>
 								</li>
 								<li>
 									<h5>right: <a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>the Vector to subtract</p>
+										<p>the Vec2 to subtract</p>
 									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a></h4>
-							<p>a new Vec2 containing the result of the subtraction</p>
+							<p>the result of the subtraction</p>
 						</li>
 					</ul>
 				</section>
@@ -556,6 +974,21 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="vec2.html#y" class="tsd-kind-icon">y</a>
 							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="vec2.html#array" class="tsd-kind-icon">array</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="vec2.html#float32array" class="tsd-kind-icon">float32<wbr>Array</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="vec2.html#magnitude" class="tsd-kind-icon">magnitude</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="vec2.html#mutable" class="tsd-kind-icon">mutable</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="vec2.html#string" class="tsd-kind-icon">string</a>
+							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="vec2.html#clone" class="tsd-kind-icon">clone</a>
 							</li>
@@ -572,10 +1005,34 @@
 								<a href="vec2.html#add" class="tsd-kind-icon">add</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="vec2.html#anglebetween" class="tsd-kind-icon">angle<wbr>Between</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="vec2.html#cross" class="tsd-kind-icon">cross</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="vec2.html#distancebetween" class="tsd-kind-icon">distance<wbr>Between</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
 								<a href="vec2.html#div" class="tsd-kind-icon">div</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="vec2.html#dot" class="tsd-kind-icon">dot</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="vec2.html#invert" class="tsd-kind-icon">invert</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
 								<a href="vec2.html#mult" class="tsd-kind-icon">mult</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="vec2.html#negate" class="tsd-kind-icon">negate</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="vec2.html#normalize" class="tsd-kind-icon">normalize</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="vec2.html#rotate" class="tsd-kind-icon">rotate</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
 								<a href="vec2.html#scale" class="tsd-kind-icon">scale</a>

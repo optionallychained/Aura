@@ -18,7 +18,7 @@ module.exports = (env, options) => {
         },
         plugins: [
             new HtmlWebpackPlugin({
-                title: 'ProtoGL-TS'
+                title: 'ProtoGL Demo'
             })
         ],
         resolve: {

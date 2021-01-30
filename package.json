@@ -4,7 +4,7 @@
     "author": "jonnopon",
     "repository": {
         "type": "git",
-        "url": "git://git@github.com/jonnopon/ProtoGL-TS.git"
+        "url": "git://git@github.com/jonnopon/ProtoGL.git"
     },
     "main": "publish/protogl.js",
     "types": "publish/protogl.d.ts",
