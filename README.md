@@ -1,4 +1,4 @@
-[![logo](https://github.com/jonnopon/ProtoGL/blob/master/assets/logo.png)](#)
+[![logo](https://github.com/jonnopon/ProtoGL/blob/master/assets/logo.png?raw=true)](#)
 
 [![NPM](https://badge.fury.io/js/protogl.svg)](https://badge.fury.io/js/protogl)
 
