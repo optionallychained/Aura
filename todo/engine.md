@@ -3,7 +3,7 @@
 ## Math
 - [x] consider: statics/interface vs instances
 - [x] Vec2 - remaining operations
-- [ ] Vec3
+- [x] Vec3
 - [ ] Vec4
 - [ ] Mat3
 - [ ] Mat4

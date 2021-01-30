@@ -8,10 +8,10 @@ export class Vec2 {
     /**
      * Add two Vec2s
      *
-     * @param left first Vec2
+     * @param left the first Vec2
      * @param right the second Vec2
      *
-     * @returns a new Vec2 adding the left and right
+     * @returns the result of the addition
      */
     public static add(left: Vec2, right: Vec2): Vec2 {
         return new Vec2(left.x + right.x, left.y + right.y);
@@ -23,7 +23,7 @@ export class Vec2 {
      * @param left the Vec2 to subtract from
      * @param right the Vec2 to subtract
      *
-     * @returns a new Vec2 subtracing the right from the left
+     * @returns the result of the subtraction
      */
     public static sub(left: Vec2, right: Vec2): Vec2 {
         return new Vec2(left.x - right.x, left.y - right.y);
@@ -35,7 +35,7 @@ export class Vec2 {
      * @param left the first Vec2
      * @param right the second Vec2
      *
-     * @returns a new Vec2 multiplying the left and right
+     * @returns the result of the multiplication
      */
     public static mult(left: Vec2, right: Vec2): Vec2 {
         return new Vec2(left.x * right.x, left.y * right.y);
@@ -47,7 +47,7 @@ export class Vec2 {
      * @param left the Vec2 to divide
      * @param right the Vec2 to divide by
      *
-     * @returns a new Vec2 dividing the left by the right
+     * @returns the result of the division
      */
     public static div(left: Vec2, right: Vec2): Vec2 {
         return new Vec2(left.x / right.x, left.y / right.y);
@@ -59,7 +59,7 @@ export class Vec2 {
      * @param v the Vec2 to scale
      * @param factor the factor to scale by
      *
-     * @returns a new Vec2 scaling the Vec2 by the factor
+     * @returns the scaled Vec2
      */
     public static scale(v: Vec2, factor: number): Vec2 {
         return new Vec2(v.x * factor, v.y * factor);
@@ -71,7 +71,7 @@ export class Vec2 {
      * @param v the Vec2 to rotate
      * @param angle the angle to rotate by
      *
-     * @returns a new Vec2 rotating the Vec2 by the angle
+     * @returns the rotated Vec2
      */
     public static rotate(v: Vec2, angle: number): Vec2 {
         const ca = Math.cos(angle);
@@ -85,7 +85,7 @@ export class Vec2 {
      *
      * @param v the Vec2 to negate
      *
-     * @returns a new Vec2 negating the Vec2
+     * @returns the negated Vec2
      */
     public static negate(v: Vec2): Vec2 {
         return new Vec2(-v.x, -v.y);
@@ -96,7 +96,7 @@ export class Vec2 {
      *
      * @param v the Vec2 to invert
      *
-     * @returns a new inverted Vec2
+     * @returns the inverse of the Vec2
      */
     public static invert(v: Vec2): Vec2 {
         return new Vec2(1 / v.x, 1 / v.y);
@@ -107,7 +107,7 @@ export class Vec2 {
      *
      * @param v the Vec2 to normalize
      *
-     * @returns a new normalized Vec2
+     * @returns the normalized Vec2
      */
     public static normalize(v: Vec2): Vec2 {
         const mag = v.magnitude;
@@ -137,7 +137,7 @@ export class Vec2 {
      * @param left the first Vec2
      * @param right the second Vec2
      *
-     * @returns a Vec3 representing the cross of the two Vec2s
+     * @returns the cross product of the two Vec2s (a Vec3)
      */
     public static cross(left: Vec2, right: Vec2): Vec3 {
         return new Vec3(0, 0, left.x * right.y - left.y * right.x);
@@ -149,7 +149,7 @@ export class Vec2 {
      * @param left the first Vec2
      * @param right the second Vec2
      *
-     * @returns the distance between the Vec2s
+     * @returns the distance between the two Vec2s
      */
     public static distanceBetween(left: Vec2, right: Vec2): number {
         return Math.hypot(right.x - left.x, right.y - left.y);
@@ -166,10 +166,16 @@ export class Vec2 {
     public static angleBetween(left: Vec2, right: Vec2): number {
         const leftMag = left.magnitude;
         const rightMag = right.magnitude;
+        const product = leftMag * rightMag;
 
         const dot = Vec2.dot(left, right);
 
-        return Math.acos(dot / (leftMag * rightMag));
+        if (product > 0) {
+            return Math.acos(dot / (product));
+        }
+
+        // TODO is this correct?
+        return 0;
     }
 
     /**
@@ -182,15 +188,13 @@ export class Vec2 {
 
     /**
      * Getter for the Vec2's magnitude
-     *
-     * @returns the Vec2's magnitude
      */
     public get magnitude(): number {
         return Math.hypot(this.x, this.y);
     }
 
     /**
-     * Getter for the array form of the Vec2
+     * Getter for the Array form of the Vec2
      */
     public get array(): Array<number> {
         return [this.x, this.y];
@@ -201,6 +205,13 @@ export class Vec2 {
      */
     public get float32Array(): Float32Array {
         return Float32Array.from(this.array);
+    }
+
+    /**
+     * Getter for the readable string form of the Vec2
+     */
+    public get string(): string {
+        return `Vec2(${this.x},${this.y})`;
     }
 
     /**
@@ -239,15 +250,6 @@ export class Vec2 {
      */
     public clone(): Vec2 {
         return new Vec2(this.x, this.y);
-    }
-
-    /**
-     * toString for Vec2; return a readable representation of the Vec2
-     *
-     * @returns the readable Vec2 representation
-     */
-    public toString(): string {
-        return `Vec2(${this.x},${this.y})`;
     }
 
     /**
