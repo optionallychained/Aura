@@ -1,6 +1,6 @@
 # Docs TODOs
 
-## Pages
+## Page Content
 - [ ] Home (README?)
 - [ ] Getting Started
 - [ ] Installation

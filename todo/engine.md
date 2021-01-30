@@ -4,7 +4,7 @@
 - [x] consider: statics/interface vs instances
 - [x] Vec2 - remaining operations
 - [x] Vec3
-- [ ] Vec4
+- [x] Vec4
 - [ ] Mat3
 - [ ] Mat4
 - [ ] HexToRGB
