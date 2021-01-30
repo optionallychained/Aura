@@ -35,9 +35,10 @@ export class PhysicsSystem extends System {
         for (const e of movers) {
             const transform = e.getComponent<Transform>('Transform');
 
-            const movement = Vec2.scale(transform.velocity, frameDelta / 1000);
-
-            transform.position = Vec2.add(transform.position, movement);
+            transform.position = Vec2.add(
+                transform.position,
+                Vec2.scale(transform.velocity, frameDelta / 1000)
+            );
         }
     }
 }

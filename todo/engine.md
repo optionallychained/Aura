@@ -1,8 +1,8 @@
 # Engine TODOs
 
 ## Math
-- [ ] consider: statics/interface vs instances
-- [ ] Vec2 - remaining operations
+- [x] consider: statics/interface vs instances
+- [x] Vec2 - remaining operations
 - [ ] Vec3
 - [ ] Vec4
 - [ ] Mat3

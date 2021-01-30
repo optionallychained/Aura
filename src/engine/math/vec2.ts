@@ -1,66 +1,175 @@
+import { Vec3 } from './vec3';
+
 /**
  * Class representing a two-dimensional Vector with properties x and y and providing static utilities for mathematical operations
  */
 export class Vec2 {
 
     /**
-     * Static adder; produce a new Vec2 adding the right to the left
+     * Add two Vec2s
      *
-     * @param left the Vector to add to
-     * @param right the Vector to add
+     * @param left first Vec2
+     * @param right the second Vec2
      *
-     * @returns a new Vec2 containing the result of the addition
+     * @returns a new Vec2 adding the left and right
      */
     public static add(left: Vec2, right: Vec2): Vec2 {
         return new Vec2(left.x + right.x, left.y + right.y);
     }
 
     /**
-     * Static subtractor; produce a new Vec2 subtracting the right from the left
+     * Subtract the right Vec2 from the left
      *
-     * @param left the Vector to subtract from
-     * @param right the Vector to subtract
+     * @param left the Vec2 to subtract from
+     * @param right the Vec2 to subtract
      *
-     * @returns a new Vec2 containing the result of the subtraction
+     * @returns a new Vec2 subtracing the right from the left
      */
     public static sub(left: Vec2, right: Vec2): Vec2 {
         return new Vec2(left.x - right.x, left.y - right.y);
     }
 
     /**
-     * Static multiplier; produce a new Vec2 multiplying the left by the right
+     * Multiply two Vec2s
      *
-     * @param left the Vector to multiply
-     * @param right the Vector to multiply by
+     * @param left the first Vec2
+     * @param right the second Vec2
      *
-     * @returns a new Vec2 containing the result of the multiplication
+     * @returns a new Vec2 multiplying the left and right
      */
     public static mult(left: Vec2, right: Vec2): Vec2 {
         return new Vec2(left.x * right.x, left.y * right.y);
     }
 
     /**
-     * Static divider; produce a new Vec2 dividing the left by the right
+     * Divide the left Vec2 by the right
      *
-     * @param left the Vector to divide
-     * @param right the Vector to divide by
+     * @param left the Vec2 to divide
+     * @param right the Vec2 to divide by
      *
-     * @returns a new Vec2 containing the result of the division
+     * @returns a new Vec2 dividing the left by the right
      */
     public static div(left: Vec2, right: Vec2): Vec2 {
         return new Vec2(left.x / right.x, left.y / right.y);
     }
 
     /**
-     * Static scalar multiplication; produce a new Vec2 scaling the Vector by the factor
+     * Scale a Vec2 by a given factor
      *
-     * @param v the Vector to scale
+     * @param v the Vec2 to scale
      * @param factor the factor to scale by
      *
-     * @returns a new Vec2 containing the result of the scalar multiplication
+     * @returns a new Vec2 scaling the Vec2 by the factor
      */
     public static scale(v: Vec2, factor: number): Vec2 {
         return new Vec2(v.x * factor, v.y * factor);
+    }
+
+    /**
+     * Rotate a Vec2 by a given angle (radians)
+     *
+     * @param v the Vec2 to rotate
+     * @param angle the angle to rotate by
+     *
+     * @returns a new Vec2 rotating the Vec2 by the angle
+     */
+    public static rotate(v: Vec2, angle: number): Vec2 {
+        const ca = Math.cos(angle);
+        const sa = Math.sin(angle);
+
+        return new Vec2(ca * v.x - sa * v.y, sa * v.x + ca * v.y);
+    }
+
+    /**
+     * Negate a Vec2
+     *
+     * @param v the Vec2 to negate
+     *
+     * @returns a new Vec2 negating the Vec2
+     */
+    public static negate(v: Vec2): Vec2 {
+        return new Vec2(-v.x, -v.y);
+    }
+
+    /**
+     * Invert a Vec2
+     *
+     * @param v the Vec2 to invert
+     *
+     * @returns a new inverted Vec2
+     */
+    public static invert(v: Vec2): Vec2 {
+        return new Vec2(1 / v.x, 1 / v.y);
+    }
+
+    /**
+     * Normalize a Vec2
+     *
+     * @param v the Vec2 to normalize
+     *
+     * @returns a new normalized Vec2
+     */
+    public static normalize(v: Vec2): Vec2 {
+        const mag = v.magnitude;
+
+        if (mag > 0) {
+            return new Vec2(v.x / mag, v.y / mag);
+        }
+
+        return new Vec2();
+    }
+
+    /**
+     * Calculate the dot product of two Vec2s
+     *
+     * @param left the first Vec2
+     * @param right the second Vec2
+     *
+     * @returns the dot product of the two Vec2s
+     */
+    public static dot(left: Vec2, right: Vec2): number {
+        return left.x * right.x + left.y * right.y;
+    }
+
+    /**
+     * Calculate the cross product of two Vec2s
+     *
+     * @param left the first Vec2
+     * @param right the second Vec2
+     *
+     * @returns a Vec3 representing the cross of the two Vec2s
+     */
+    public static cross(left: Vec2, right: Vec2): Vec3 {
+        return new Vec3(0, 0, left.x * right.y - left.y * right.x);
+    }
+
+    /**
+     * Calculate the distance between two Vec2s
+     *
+     * @param left the first Vec2
+     * @param right the second Vec2
+     *
+     * @returns the distance between the Vec2s
+     */
+    public static distanceBetween(left: Vec2, right: Vec2): number {
+        return Math.hypot(right.x - left.x, right.y - left.y);
+    }
+
+    /**
+     * Calculate the angle between two Vec2s
+     *
+     * @param left the first Vec2
+     * @param right the second Vec2
+     *
+     * @returns the angle between the two Vec2s (radians)
+     */
+    public static angleBetween(left: Vec2, right: Vec2): number {
+        const leftMag = left.magnitude;
+        const rightMag = right.magnitude;
+
+        const dot = Vec2.dot(left, right);
+
+        return Math.acos(dot / (leftMag * rightMag));
     }
 
     /**
@@ -69,7 +178,30 @@ export class Vec2 {
      * @param x the Vec2's x; defaults to 0
      * @param y the Vec2's y; defaults to 0
      */
-    constructor(public x = 0, public y = 0) { }
+    constructor(public readonly x = 0, public readonly y = 0) { }
+
+    /**
+     * Getter for the Vec2's magnitude
+     *
+     * @returns the Vec2's magnitude
+     */
+    public get magnitude(): number {
+        return Math.hypot(this.x, this.y);
+    }
+
+    /**
+     * Getter for the array form of the Vec2
+     */
+    public get array(): Array<number> {
+        return [this.x, this.y];
+    }
+
+    /**
+     * Getter for the Float32Array form of the Vec2
+     */
+    public get float32Array(): Float32Array {
+        return Float32Array.from(this.array);
+    }
 
     /**
      * Set the Vec2's x and y to the given values
@@ -78,8 +210,8 @@ export class Vec2 {
      * @param y the new y; defaults to 0
      */
     public set(x = 0, y = 0): void {
-        this.x = x;
-        this.y = y;
+        this.mutable.x = x;
+        this.mutable.y = y;
     }
 
     /**
@@ -88,7 +220,7 @@ export class Vec2 {
      * @param x the new x; defaults to 0
      */
     public setX(x = 0): void {
-        this.x = x;
+        this.mutable.x = x;
     }
 
     /**
@@ -97,7 +229,7 @@ export class Vec2 {
      * @param y the new y; defaults to 0
      */
     public setY(y = 0): void {
-        this.y = y;
+        this.mutable.y = y;
     }
 
     /**
@@ -107,5 +239,23 @@ export class Vec2 {
      */
     public clone(): Vec2 {
         return new Vec2(this.x, this.y);
+    }
+
+    /**
+     * toString for Vec2; return a readable representation of the Vec2
+     *
+     * @returns the readable Vec2 representation
+     */
+    public toString(): string {
+        return `Vec2(${this.x},${this.y})`;
+    }
+
+    /**
+     * Getter for a Mutable cast of the Vec2 instance; used for enabling internal-only mutation in the set*() methods
+     *
+     * @returns the typecasted Mutable Vec2 instance
+     */
+    private get mutable(): Mutable<Vec2> {
+        return this as Mutable<Vec2>;
     }
 }
