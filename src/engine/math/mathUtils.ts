@@ -30,8 +30,8 @@ export class MathUtils {
     /**
      * Produce a random integer between two given values
      *
-     * @param min the minimum number
-     * @param max the maximum number
+     * @param min the minimum number (inclusive)
+     * @param max the maximum number (exclusive)
      *
      * @returns the generated random number
      */
