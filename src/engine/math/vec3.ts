@@ -158,7 +158,7 @@ export class Vec3 {
         const dot = Vec3.dot(left, right);
 
         if (product > 0) {
-            return Math.acos(dot / (product));
+            return Math.acos(dot / product);
         }
 
         // TODO is this correct?
@@ -183,7 +183,7 @@ export class Vec3 {
 
         const rotate = [
             translate[0],
-            translate[1] * Math.cos(angle) + translate[2] * Math.sin(angle),
+            translate[1] * Math.cos(angle) - translate[2] * Math.sin(angle),
             translate[1] * Math.sin(angle) + translate[2] * Math.cos(angle)
         ];
 
@@ -213,7 +213,7 @@ export class Vec3 {
         const rotate = [
             translate[2] * Math.sin(angle) + translate[0] * Math.cos(angle),
             translate[1],
-            translate[2] * Math.cos(angle) + translate[0] * Math.sin(angle)
+            translate[2] * Math.cos(angle) - translate[0] * Math.sin(angle)
         ];
 
         return new Vec3(

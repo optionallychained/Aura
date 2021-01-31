@@ -204,14 +204,14 @@ describe('Vec2', () => {
          */
         describe('rotate', () => {
             it('should rotate a vector correctly', () => {
-                const x = 100, y = 100, angle = 90 * (Math.PI / 180);
+                const x = 100, y = 200, angle = 60 * (Math.PI / 180);
                 const sin = Math.sin(angle);
                 const cos = Math.cos(angle);
 
                 const rotate = Vec2.rotate(new Vec2(x, y), angle);
 
-                expect(rotate).toHaveProperty('x', cos * x - sin * y);
-                expect(rotate).toHaveProperty('y', sin * x + cos * y);
+                expect(rotate).toHaveProperty('x', x * cos - y * sin);
+                expect(rotate).toHaveProperty('y', x * sin + y * cos);
             })
         });
     });
@@ -240,7 +240,7 @@ describe('Vec2', () => {
                 const vector = new Vec2(x, y);
 
                 expect(vector).toHaveProperty('x', x);
-                expect(vector).toHaveProperty('y', y)
+                expect(vector).toHaveProperty('y', y);
             });
 
         });

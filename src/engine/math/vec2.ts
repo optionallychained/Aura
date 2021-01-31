@@ -175,7 +175,10 @@ export class Vec2 {
         const ca = Math.cos(angle);
         const sa = Math.sin(angle);
 
-        return new Vec2(ca * v.x - sa * v.y, sa * v.x + ca * v.y);
+        return new Vec2(
+            v.x * ca - v.y * sa,
+            v.x * sa + v.y * ca
+        );
     }
 
     /**
