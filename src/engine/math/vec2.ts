@@ -214,7 +214,7 @@ export class Vec2 {
      * Getter for the readable string form of the Vec2
      */
     public get string(): string {
-        return `Vec2(${this.x},${this.y})`;
+        return `Vec2( ${this.x} , ${this.y} )`;
     }
 
     /**

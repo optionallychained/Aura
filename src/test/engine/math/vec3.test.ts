@@ -213,7 +213,7 @@ describe('Vec3', () => {
          */
         describe('rotateX', () => {
             // TODO test with differing origin ?
-            // TODO simple numbers test on a 100,100,100 => 90deg rotation
+            // TODO simple formula-less numbers dumb test on a 100,100,100 => 90deg rotation
             it('should rotate a vector around the X axis correctly', () => {
                 const x = 100, y = 200, z = 300, angle = 60 * (Math.PI / 180);
                 const sin = Math.sin(angle);
@@ -232,7 +232,7 @@ describe('Vec3', () => {
          */
         describe('rotateY', () => {
             // TODO test with differing origin ?
-            // TODO simple numbers test on a 100,100,100 => 90deg rotation
+            // TODO simple formula-less numbers dumb test on a 100,100,100 => 90deg rotation
             it('should rotate a vector around the Y axis correctly', () => {
                 const x = 50, y = 100, z = 150, angle = 30 * (Math.PI / 180);
                 const sin = Math.sin(angle);
@@ -251,7 +251,7 @@ describe('Vec3', () => {
          */
         describe('rotateZ', () => {
             // TODO test with differing origin ?
-            // TODO simple numbers test on a 100,100,100 => 90deg rotation
+            // TODO simple formula-less numbers dumb test on a 100,100,100 => 90deg rotation
             it('should rotate a vector around the Z axis correctly', () => {
                 const x = 150, y = 250, z = 350, angle = 45 * (Math.PI / 180);
                 const sin = Math.sin(angle);
@@ -292,7 +292,7 @@ describe('Vec3', () => {
 
                 expect(vector).toHaveProperty('x', x);
                 expect(vector).toHaveProperty('y', y);
-                expect(vector).toHaveProperty('z', z)
+                expect(vector).toHaveProperty('z', z);
             });
 
         });
@@ -353,7 +353,7 @@ describe('Vec3', () => {
 
                 const { string } = new Vec3(x, y, z);
 
-                expect(string).toBe(`Vec3(${x},${y},${z})`);
+                expect(string).toBe(`Vec3( ${x} , ${y} , ${z} )`);
             });
         });
 
@@ -402,7 +402,7 @@ describe('Vec3', () => {
 
             // given value
             it('should set given X value', () => {
-                const x1 = 50, y = 100, z = 150, x2 = 100;
+                const x1 = 50, x2 = 100, y = 100, z = 150;
 
                 const vector = new Vec3(x1, y, z);
                 vector.setX(x2);
@@ -445,7 +445,7 @@ describe('Vec3', () => {
         /**
          * Tests for (Vec3).setZ()
          */
-        describe('setY', () => {
+        describe('setZ', () => {
             // default value
             it('should set default Z value', () => {
                 const x = 50, y = 100, z = 150;

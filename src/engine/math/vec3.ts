@@ -286,7 +286,7 @@ export class Vec3 {
      * Getter for the readable string form of the Vec3
      */
     public get string(): string {
-        return `Vec3(${this.x},${this.y},${this.z})`;
+        return `Vec3( ${this.x} , ${this.y} , ${this.z} )`;
     }
 
     /**

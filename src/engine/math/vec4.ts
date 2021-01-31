@@ -111,7 +111,7 @@ export class Vec4 {
      * @returns the dot product of the two Vec4s
      */
     public static dot(left: Vec4, right: Vec4): number {
-        return left.x * right.x + left.y + right.y + left.z + right.z + left.w + right.w;
+        return left.x * right.x + left.y * right.y + left.z * right.z + left.w * right.w;
     }
 
     /**
@@ -161,7 +161,7 @@ export class Vec4 {
      * Getter for the readable string form of the Vec4
      */
     public get string(): string {
-        return `Vec4(${this.x},${this.y},${this.z},${this.w})`;
+        return `Vec4( ${this.x} , ${this.y} , ${this.z} , ${this.w} )`;
     }
 
     /**

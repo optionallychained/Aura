@@ -299,7 +299,7 @@ describe('Vec2', () => {
 
                 const { string } = new Vec2(x, y);
 
-                expect(string).toBe(`Vec2(${x},${y})`);
+                expect(string).toBe(`Vec2( ${x} , ${y} )`);
             });
         });
 
