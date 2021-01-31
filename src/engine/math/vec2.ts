@@ -66,21 +66,6 @@ export class Vec2 {
     }
 
     /**
-     * Rotate a Vec2 by a given angle (radians)
-     *
-     * @param v the Vec2 to rotate
-     * @param angle the angle to rotate by
-     *
-     * @returns the rotated Vec2
-     */
-    public static rotate(v: Vec2, angle: number): Vec2 {
-        const ca = Math.cos(angle);
-        const sa = Math.sin(angle);
-
-        return new Vec2(ca * v.x - sa * v.y, sa * v.x + ca * v.y);
-    }
-
-    /**
      * Negate a Vec2
      *
      * @param v the Vec2 to negate
@@ -176,6 +161,21 @@ export class Vec2 {
 
         // TODO is this correct?
         return 0;
+    }
+
+    /**
+     * Rotate a Vec2 by a given angle (radians)
+     *
+     * @param v the Vec2 to rotate
+     * @param angle the angle to rotate by
+     *
+     * @returns the rotated Vec2
+     */
+    public static rotate(v: Vec2, angle: number): Vec2 {
+        const ca = Math.cos(angle);
+        const sa = Math.sin(angle);
+
+        return new Vec2(ca * v.x - sa * v.y, sa * v.x + ca * v.y);
     }
 
     /**

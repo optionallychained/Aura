@@ -64,93 +64,6 @@ export class Vec3 {
     }
 
     /**
-     * Rotate a Vec3 by a given angle (radians) about a given orgin around the X axis
-     *
-     * @param v the Vec3 to rotate
-     * @param origin the origin of the rotation
-     * @param angle the angle to rotate by
-     *
-     * @returns the rotated Vec3
-     */
-    public static rotateX(v: Vec3, origin: Vec3, angle: number): Vec3 {
-        const translate = [
-            v.x - origin.x,
-            v.y - origin.y,
-            v.z - origin.z
-        ];
-
-        const rotate = [
-            translate[0],
-            translate[1] * Math.cos(angle) + translate[2] * Math.sin(angle),
-            translate[1] * Math.sin(angle) + translate[2] * Math.cos(angle)
-        ];
-
-        return new Vec3(
-            rotate[0] + origin.x,
-            rotate[1] + origin.y,
-            rotate[2] + origin.z
-        );
-    }
-
-    /**
-     * Rotate a Vec3 by a given angle (radians) about a given orgin around the Y axis
-     *
-     * @param v the Vec3 to rotate
-     * @param origin the origin of the rotation
-     * @param angle the angle to rotate by
-     *
-     * @returns the rotated Vec3
-     */
-    public static rotateY(v: Vec3, origin: Vec3, angle: number): Vec3 {
-        const translate = [
-            v.x - origin.x,
-            v.y - origin.y,
-            v.z - origin.z
-        ];
-
-        const rotate = [
-            translate[2] * Math.sin(angle) + translate[0] * Math.cos(angle),
-            translate[1],
-            translate[2] * Math.cos(angle) + translate[0] * Math.sin(angle)
-        ];
-
-        return new Vec3(
-            rotate[0] + origin.x,
-            rotate[1] + origin.y,
-            rotate[2] + origin.z
-        );
-    }
-
-    /**
-     * Rotate a Vec3 by a given angle (radians) about a given orgin around the Z axis
-     *
-     * @param v the Vec3 to rotate
-     * @param origin the origin of the rotation
-     * @param angle the angle to rotate by
-     *
-     * @returns the rotated Vec3
-     */
-    public static rotateZ(v: Vec3, origin: Vec3, angle: number): Vec3 {
-        const translate = [
-            v.x - origin.x,
-            v.y - origin.y,
-            v.z - origin.z
-        ];
-
-        const rotate = [
-            translate[0] * Math.cos(angle) - translate[1] * Math.sin(angle),
-            translate[0] * Math.sin(angle) + translate[1] * Math.cos(angle),
-            translate[2]
-        ];
-
-        return new Vec3(
-            rotate[0] + origin.x,
-            rotate[1] + origin.y,
-            rotate[2] + origin.z
-        );
-    }
-
-    /**
      * Negate a Vec3
      *
      * @param v the Vec3 to negate
@@ -250,6 +163,93 @@ export class Vec3 {
 
         // TODO is this correct?
         return 0;
+    }
+
+    /**
+     * Rotate a Vec3 by a given angle (radians) about a given orgin around the X axis
+     *
+     * @param v the Vec3 to rotate
+     * @param origin the origin of the rotation
+     * @param angle the angle to rotate by
+     *
+     * @returns the rotated Vec3
+     */
+    public static rotateX(v: Vec3, origin: Vec3, angle: number): Vec3 {
+        const translate = [
+            v.x - origin.x,
+            v.y - origin.y,
+            v.z - origin.z
+        ];
+
+        const rotate = [
+            translate[0],
+            translate[1] * Math.cos(angle) + translate[2] * Math.sin(angle),
+            translate[1] * Math.sin(angle) + translate[2] * Math.cos(angle)
+        ];
+
+        return new Vec3(
+            rotate[0] + origin.x,
+            rotate[1] + origin.y,
+            rotate[2] + origin.z
+        );
+    }
+
+    /**
+     * Rotate a Vec3 by a given angle (radians) about a given orgin around the Y axis
+     *
+     * @param v the Vec3 to rotate
+     * @param origin the origin of the rotation
+     * @param angle the angle to rotate by
+     *
+     * @returns the rotated Vec3
+     */
+    public static rotateY(v: Vec3, origin: Vec3, angle: number): Vec3 {
+        const translate = [
+            v.x - origin.x,
+            v.y - origin.y,
+            v.z - origin.z
+        ];
+
+        const rotate = [
+            translate[2] * Math.sin(angle) + translate[0] * Math.cos(angle),
+            translate[1],
+            translate[2] * Math.cos(angle) + translate[0] * Math.sin(angle)
+        ];
+
+        return new Vec3(
+            rotate[0] + origin.x,
+            rotate[1] + origin.y,
+            rotate[2] + origin.z
+        );
+    }
+
+    /**
+     * Rotate a Vec3 by a given angle (radians) about a given orgin around the Z axis
+     *
+     * @param v the Vec3 to rotate
+     * @param origin the origin of the rotation
+     * @param angle the angle to rotate by
+     *
+     * @returns the rotated Vec3
+     */
+    public static rotateZ(v: Vec3, origin: Vec3, angle: number): Vec3 {
+        const translate = [
+            v.x - origin.x,
+            v.y - origin.y,
+            v.z - origin.z
+        ];
+
+        const rotate = [
+            translate[0] * Math.cos(angle) - translate[1] * Math.sin(angle),
+            translate[0] * Math.sin(angle) + translate[1] * Math.cos(angle),
+            translate[2]
+        ];
+
+        return new Vec3(
+            rotate[0] + origin.x,
+            rotate[1] + origin.y,
+            rotate[2] + origin.z
+        );
     }
 
     /**
