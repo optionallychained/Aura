@@ -156,7 +156,7 @@ export class Vec2 {
         const dot = Vec2.dot(left, right);
 
         if (product > 0) {
-            return Math.acos(dot / (product));
+            return Math.acos(dot / product);
         }
 
         // TODO is this correct?
