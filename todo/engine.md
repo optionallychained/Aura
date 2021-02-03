@@ -5,11 +5,12 @@
 - [x] Vec2 - remaining operations
 - [x] Vec3
 - [x] Vec4
-- [ ] Mat3
+- [x] Mat3
 - [ ] Mat4
-- [ ] HexToRGB
-    - [ ] Support Hex colour definitions as well as Vec3/RGB
-        - prompt: Color wrapping class supporting color-related operations?
+- [x] Colors
+- [x] Randoms
+- [x] Angles
+- [ ] Quaternions
 
 
 ## Input
