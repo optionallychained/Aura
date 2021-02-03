@@ -33,7 +33,7 @@ export class Vec3 {
      * @param left the first Vec3
      * @param right the second Vec3
      *
-     * @returns the rsult of the multiplication
+     * @returns the result of the multiplication
      */
     public static mult(left: Vec3, right: Vec3): Vec3 {
         return new Vec3(left.x * right.x, left.y * right.y, left.z * right.z);
