@@ -212,8 +212,6 @@ describe('Vec3', () => {
          * Tests for Vec3.rotateX()
          */
         describe('rotateX', () => {
-            // TODO test with differing origin ?
-            // TODO simple formula-less numbers dumb test on a 100,100,100 => 90deg rotation
             it('should rotate a vector around the X axis correctly', () => {
                 const x = 100, y = 200, z = 300, angle = 60 * (Math.PI / 180);
                 const sin = Math.sin(angle);
@@ -231,8 +229,6 @@ describe('Vec3', () => {
          * Tests for Vec3.rotateY()
          */
         describe('rotateY', () => {
-            // TODO test with differing origin ?
-            // TODO simple formula-less numbers dumb test on a 100,100,100 => 90deg rotation
             it('should rotate a vector around the Y axis correctly', () => {
                 const x = 50, y = 100, z = 150, angle = 30 * (Math.PI / 180);
                 const sin = Math.sin(angle);
@@ -250,8 +246,6 @@ describe('Vec3', () => {
          * Tests for Vec3.rotateZ()
          */
         describe('rotateZ', () => {
-            // TODO test with differing origin ?
-            // TODO simple formula-less numbers dumb test on a 100,100,100 => 90deg rotation
             it('should rotate a vector around the Z axis correctly', () => {
                 const x = 150, y = 250, z = 350, angle = 45 * (Math.PI / 180);
                 const sin = Math.sin(angle);

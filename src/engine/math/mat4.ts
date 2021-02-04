@@ -385,9 +385,7 @@ export class Mat4 {
      *
      * @param values the Mat4's values; defaults to Mat4.IDENTITY
      */
-    constructor(public readonly array = Mat4.IDENTITY.slice(0)) {
-        // TODO ensure values is a 4x4 matrix
-    }
+    constructor(public readonly array = Mat4.IDENTITY.slice(0)) { }
 
     /**
      * Getter for the Mat4's determinant
@@ -461,8 +459,7 @@ export class Mat4 {
      * @returns a new Mat4 with the same values as this one
      */
     public clone(): Mat4 {
-        // TODO test whether or not the slice is necessary here
-        return new Mat4(this.array.slice(0));
+        return new Mat4(this.array);
     }
 
     /**

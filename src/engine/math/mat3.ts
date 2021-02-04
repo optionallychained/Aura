@@ -268,9 +268,7 @@ export class Mat3 {
      *
      * @param values the Mat3's values; defaults to Mat3.IDENTITY
      */
-    constructor(public readonly array = Mat3.IDENTITY.slice(0)) {
-        // TODO ensure values is a 3x3 matrix
-    }
+    constructor(public readonly array = Mat3.IDENTITY.slice(0)) { }
 
     /**
      * Getter for the Mat3's determinant
@@ -329,8 +327,7 @@ export class Mat3 {
      * @returns a new Mat3 with the same values as this one
      */
     public clone(): Mat3 {
-        // TODO test whether or not the slice is necessary here
-        return new Mat3(this.array.slice(0));
+        return new Mat3(this.array);
     }
 
     /**
