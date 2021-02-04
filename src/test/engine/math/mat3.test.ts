@@ -1,4 +1,4 @@
-import { Mat3 } from '../../../engine/protogl';
+import { Mat3, Vec2 } from '../../../engine/protogl';
 
 /**
  * Tests for class Mat3
@@ -17,6 +17,13 @@ fdescribe('Mat3', () => {
         1, 2, 3,
         3, 2, 1,
         1, 2, 3
+    ];
+
+    // invertible matrix for various tests
+    const INVERTIBLE = [
+        3, 0, 2,
+        2, 0, -2,
+        0, 1, 1
     ];
 
     /**
@@ -119,8 +126,33 @@ fdescribe('Mat3', () => {
          * Tests for Mat3.invert()
          */
         describe('invert', () => {
+            // invertible mat3
             it('should invert a matrix correctly', () => {
-                expect(true).toBe(true);
+                // result obtained from online calculator at https://www.symbolab.com/solver/matrix-inverse-calculator
+                const m = new Mat3(INVERTIBLE.slice(0));
+
+                const result = [
+                    0.2, 0.2, 0,
+                    -0.2, 0.3, 1,
+                    0.2, -0.3, 0
+                ];
+
+                const inverse = Mat3.invert(m);
+
+                expect(inverse).toBeTruthy();
+
+                for (let i = 0; i < result.length; i++) {
+                    expect(inverse!.array[i]).toBeCloseTo(result[i]);
+                }
+            });
+
+            // non-invertible mat3
+            it('should return null for a mat3 without an inverse', () => {
+                const m = new Mat3(RHS.slice(0));
+
+                const inverse = Mat3.invert(m);
+
+                expect(inverse).toBeFalsy();
             });
         });
 
@@ -148,7 +180,20 @@ fdescribe('Mat3', () => {
          */
         describe('adjoint', () => {
             it('should calculate the adjugate of a matrix correctly', () => {
-                expect(true).toBe(true);
+                // result obtained from online calculator at https://www.symbolab.com/solver/matrix-adjoint-calculator
+                const m = new Mat3(RHS.slice(0));
+
+                // -0s because Jest doesn't like comparing 0 to -0
+                // safe to ignore 0-sign for general use because (-0 === 0) => true
+                const result = [
+                    4, -0, -4,
+                    -8, 0, 8,
+                    4, -0, -4
+                ];
+
+                const adjugate = Mat3.adjoint(m);
+
+                expect(adjugate.array).toEqual(result)
             });
         });
 
@@ -157,7 +202,20 @@ fdescribe('Mat3', () => {
          */
         describe('translate', () => {
             it('should translate a matrix correctly', () => {
-                expect(true).toBe(true);
+                const m = new Mat3(RHS.slice(0));
+                const x = 78, y = -68;
+
+                const result = [
+                    RHS[0], RHS[1], RHS[2],
+                    RHS[3], RHS[4], RHS[5],
+                    x * RHS[0] + y * RHS[3] + RHS[6],
+                    x * RHS[1] + y * RHS[4] + RHS[7],
+                    x * RHS[2] + y * RHS[5] + RHS[8]
+                ];
+
+                const translate = Mat3.translate(m, new Vec2(x, y));
+
+                expect(translate.array).toEqual(result);
             });
         });
 
@@ -166,7 +224,24 @@ fdescribe('Mat3', () => {
          */
         describe('rotate', () => {
             it('should rotate a matrix correctly', () => {
-                expect(true).toBe(true);
+                const m = new Mat3(RHS.slice(0));
+                const angle = 2.4, cos = Math.cos(angle), sin = Math.sin(angle);
+
+                const result = [
+                    cos * RHS[0] + sin * RHS[3],
+                    cos * RHS[1] + sin * RHS[4],
+                    cos * RHS[2] + sin * RHS[5],
+
+                    cos * RHS[3] - sin * RHS[0],
+                    cos * RHS[4] - sin * RHS[1],
+                    cos * RHS[5] - sin * RHS[2],
+
+                    RHS[6], RHS[7], RHS[8]
+                ];
+
+                const rotate = Mat3.rotate(m, angle);
+
+                expect(rotate.array).toEqual(result);
             });
         });
 
@@ -175,7 +250,19 @@ fdescribe('Mat3', () => {
          */
         describe('scale', () => {
             it('should scale a matrix correctly', () => {
-                expect(true).toBe(true);
+                const m = new Mat3(RHS.slice(0));
+                const x = 78, y = -68;
+
+                const result = [
+                    x * RHS[0], x * RHS[1], x * RHS[2],
+                    y * RHS[3], y * RHS[4], y * RHS[5],
+
+                    RHS[6], RHS[7], RHS[8]
+                ];
+
+                const scale = Mat3.scale(m, new Vec2(x, y));
+
+                expect(scale.array).toEqual(result);
             });
         });
     });
@@ -209,7 +296,16 @@ fdescribe('Mat3', () => {
          */
         describe('determinant', () => {
             it('should calculate the determinant correctly', () => {
-                expect(true).toBe(true);
+                // result obtained from online calculator at https://www.symbolab.com/solver/matrix-determinant-calculator
+                const { determinant } = new Mat3(INVERTIBLE.slice(0));
+
+                expect(determinant).toBe(10);
+            });
+
+            it('should return 0 for a non-invertible matrix', () => {
+                const { determinant } = new Mat3(RHS.slice(0));
+
+                expect(determinant).toBe(0);
             });
         });
 
