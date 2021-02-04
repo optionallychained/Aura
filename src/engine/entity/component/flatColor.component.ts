@@ -1,3 +1,4 @@
+import { Color } from '../../math/color';
 import { Vec3 } from '../../math/vec3';
 import { Component } from './component';
 
@@ -9,11 +10,11 @@ import { Component } from './component';
 export class FlatColor extends Component {
 
     /**
-     * Constructor. Take and store the color, and provide the name 'FlatColor' to the parent class
+     * Constructor. Take and store the Color, and provide the name 'FlatColor' to the parent class
      *
-     * @param color the color, expressed as a Vec3. Defaults to white
+     * @param color the Color. Defaults to white
      */
-    constructor(public color = new Vec3(255, 255, 255)) {
+    constructor(public color = new Color(255, 255, 255)) {
         super('FlatColor');
     }
 }

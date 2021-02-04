@@ -1,7 +1,7 @@
 import { EntityManager } from '../entity/entity.manager';
 import { InputManager } from '../input/input.manager';
+import { Color } from '../math/color';
 import { Vec2 } from '../math/vec2';
-import { Vec3 } from '../math/vec3';
 import { CanvasRenderer } from '../screen/canvas.renderer';
 import { State } from '../state/state';
 import { System } from '../system/system';
@@ -34,7 +34,7 @@ export class Game {
     private lastFrameTime = 0;
 
     /** Background colour for the Canvas */
-    private background: Vec3;
+    private background: Color;
 
     /** Game States, mapped by their name for simple management */
     private states = new Map<string, State>();
@@ -72,7 +72,7 @@ export class Game {
 
         this.canvas = canvas;
 
-        this.background = config?.backgroundColor ?? new Vec3();
+        this.background = config?.backgroundColor ?? new Color();
 
         this.renderer = new CanvasRenderer(canvas);
         this.entityManager = new EntityManager(this.renderer);
@@ -220,7 +220,7 @@ export class Game {
     }
 
     /** TODO temporary - to be supplanted by TextManager */
-    public renderText(text: string, position?: Vec2, color?: Vec3): void {
+    public renderText(text: string, position?: Vec2, color?: Color): void {
         this.renderer.renderText(text, position, color);
     }
 

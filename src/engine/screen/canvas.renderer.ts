@@ -1,6 +1,5 @@
-import { MathUtils } from '../math/mathUtils';
+import { Color } from '../math/color';
 import { Vec2 } from '../math/vec2';
-import { Vec3 } from '../math/vec3';
 
 /**
  * Core CanvasRenderer; utilised by the Game to defer the rendering of Entities and Text to the Canvas
@@ -30,8 +29,8 @@ export class CanvasRenderer {
      *
      * @param color the color to clear to, expressed as a Vec3
      */
-    public clearScreen(color: Vec3): void {
-        this.ctx.fillStyle = MathUtils.rgbToHex(color);
+    public clearScreen(color: Color): void {
+        this.ctx.fillStyle = color.hex;
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     }
 
@@ -42,8 +41,8 @@ export class CanvasRenderer {
      * @param dimensions the dimensions of the rect
      * @param color the color of the rect
      */
-    public renderRect(position: Vec2, dimensions: Vec2, color: Vec3): void {
-        this.ctx.fillStyle = MathUtils.rgbToHex(color);
+    public renderRect(position: Vec2, dimensions: Vec2, color: Color): void {
+        this.ctx.fillStyle = color.hex;
         this.ctx.fillRect(position.x, position.y, dimensions.x, dimensions.y);
     }
 
@@ -54,8 +53,8 @@ export class CanvasRenderer {
      * @param position the position of the text (temporary default value)
      * @param color the color of the text; default value is white
      */
-    public renderText(text: string, position = new Vec2(10, 24), color = new Vec3(255, 255, 255)): void {
-        this.ctx.fillStyle = MathUtils.rgbToHex(color);
+    public renderText(text: string, position = new Vec2(10, 24), color = new Color(255, 255, 255)): void {
+        this.ctx.fillStyle = color.hex;
         this.ctx.fillText(text, position.x, position.y);
     }
 }

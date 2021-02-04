@@ -1,10 +1,10 @@
-import { CollisionSystem, Game, State, Keys, MathUtils, PhysicsSystem, Transform, Vec2 } from '../../engine/protogl';
+import { CollisionSystem, Game, State, Keys, PhysicsSystem, Transform, Vec2, Random } from '../../engine/protogl';
 import { enemy } from '../entity/enemy';
 import { player } from '../entity/player';
 
 /** internal module utility for producing a new random position for the Enemy when required */
 const randomPosition = (game: Game): Vec2 => {
-    return new Vec2(MathUtils.randomBetween(50, game.getWidth() - 50), MathUtils.randomBetween(50, game.getHeight() - 50))
+    return new Vec2(Random.between(50, game.getWidth() - 50), Random.between(50, game.getHeight() - 50))
 }
 
 /**

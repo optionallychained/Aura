@@ -1,4 +1,4 @@
-import { Vec3 } from '../math/vec3';
+import { Color } from '../math/color';
 
 /**
  * Interface desciribing the main Game Configuration object
@@ -13,7 +13,7 @@ export interface GameConfig {
     /** Game Canvas ID. If not provided, a Canvas will be created */
     canvasId?: string;
     /** Game background color; default value is black */
-    backgroundColor?: Vec3;
+    backgroundColor?: Color;
     /** Game control scheme, used to optimise InputManager event registrations; default value is 'keyboard' */
     controlScheme?: 'keyboard' | 'mouse' | 'both'
     /** Debug mode, enabling the display of frame data and potentially other useful stuff in the future; default value is false */
