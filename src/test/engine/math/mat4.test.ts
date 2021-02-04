@@ -1,4 +1,4 @@
-import { Mat4 } from '../../../engine/protogl';
+import { Mat4, Vec3 } from '../../../engine/protogl';
 
 /**
  * Tests for class Mat4
@@ -232,7 +232,26 @@ describe('Mat4', () => {
          */
         describe('translate', () => {
             it('should translate a matrix correctly', () => {
-                expect(true).toBe(true);
+                const m = new Mat4(RHS.slice(0));
+                const x = 78, y = -68, z = 13;
+
+                const result = [
+                    RHS[0], RHS[1], RHS[2], RHS[3],
+                    RHS[4], RHS[5], RHS[6], RHS[7],
+                    RHS[8], RHS[9], RHS[10], RHS[11],
+
+                    x * RHS[0] + y * RHS[4] + z * RHS[8] + RHS[12],
+
+                    x * RHS[1] + y * RHS[5] + z * RHS[9] + RHS[13],
+
+                    x * RHS[2] + y * RHS[6] + z * RHS[10] + RHS[14],
+
+                    x * RHS[3] + y * RHS[7] + z * RHS[11] + RHS[15]
+                ];
+
+                const translate = Mat4.translate(m, new Vec3(x, y, z));
+
+                expect(translate.array).toEqual(result);
             });
         });
 
@@ -241,6 +260,7 @@ describe('Mat4', () => {
          */
         describe('rotate', () => {
             it('should rotate a matrix correctly', () => {
+                // TODO
                 expect(true).toBe(true);
             });
         });
@@ -250,7 +270,20 @@ describe('Mat4', () => {
          */
         describe('scale', () => {
             it('should scale a matrix correctly', () => {
-                expect(true).toBe(true);
+                const m = new Mat4(RHS.slice(0));
+                const x = 78, y = -68, z = 13;
+
+                const result = [
+                    x * RHS[0], x * RHS[1], x * RHS[2], x * RHS[3],
+                    y * RHS[4], y * RHS[5], y * RHS[6], y * RHS[7],
+                    z * RHS[8], z * RHS[9], z * RHS[10], z * RHS[11],
+
+                    RHS[12], RHS[13], RHS[14], RHS[15]
+                ];
+
+                const scale = Mat4.scale(m, new Vec3(x, y, z));
+
+                expect(scale.array).toEqual(result);
             });
         });
     });

@@ -208,8 +208,11 @@ describe('Mat3', () => {
                 const result = [
                     RHS[0], RHS[1], RHS[2],
                     RHS[3], RHS[4], RHS[5],
+
                     x * RHS[0] + y * RHS[3] + RHS[6],
+
                     x * RHS[1] + y * RHS[4] + RHS[7],
+
                     x * RHS[2] + y * RHS[5] + RHS[8]
                 ];
 
