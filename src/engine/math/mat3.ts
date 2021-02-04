@@ -46,7 +46,7 @@ export class Mat3 {
         return new Mat3([
             lv[0] - rv[0], lv[1] - rv[1], lv[2] - rv[2],
             lv[3] - rv[3], lv[4] - rv[4], lv[5] - rv[5],
-            lv[6] - rv[6], lv[7] - rv[7], lv[8] - rv[8],
+            lv[6] - rv[6], lv[7] - rv[7], lv[8] - rv[8]
         ]);
     }
 
@@ -105,7 +105,7 @@ export class Mat3 {
         return new Mat3([
             v[0] * factor, v[1] * factor, v[2] * factor,
             v[3] * factor, v[4] * factor, v[5] * factor,
-            v[6] * factor, v[7] * factor, v[8] * factor,
+            v[6] * factor, v[7] * factor, v[8] * factor
         ]);
     }
 
@@ -268,7 +268,7 @@ export class Mat3 {
      *
      * @param values the Mat3's values; defaults to Mat3.IDENTITY
      */
-    constructor(public readonly array: Array<number> = Mat3.IDENTITY.slice(0)) {
+    constructor(public readonly array = Mat3.IDENTITY.slice(0)) {
         // TODO ensure values is a 3x3 matrix
     }
 

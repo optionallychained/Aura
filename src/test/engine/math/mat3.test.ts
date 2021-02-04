@@ -3,7 +3,7 @@ import { Mat3, Vec2 } from '../../../engine/protogl';
 /**
  * Tests for class Mat3
  */
-fdescribe('Mat3', () => {
+describe('Mat3', () => {
 
     // identity matrix
     const IDENTITY = [
@@ -333,11 +333,10 @@ fdescribe('Mat3', () => {
         });
 
         /**
-         * Tests for (Mat3).set()
+         * Tests for (Mat3).reset()
          */
         describe('reset', () => {
-            // default values
-            it('should reset the mat3 properly', () => {
+            it('should reset a matrix properly', () => {
                 const m = new Mat3(RHS.slice(0));
 
                 m.reset();

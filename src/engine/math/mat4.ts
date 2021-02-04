@@ -30,7 +30,7 @@ export class Mat4 {
             lv[0] + rv[0], lv[1] + rv[1], lv[2] + rv[2], lv[3] + rv[3],
             lv[4] + rv[4], lv[5] + rv[5], lv[6] + rv[6], lv[7] + rv[7],
             lv[8] + rv[8], lv[9] + rv[9], lv[10] + rv[10], lv[11] + rv[11],
-            lv[12] + rv[12], lv[13] + rv[13], lv[14] + rv[14], lv[15] + rv[15],
+            lv[12] + rv[12], lv[13] + rv[13], lv[14] + rv[14], lv[15] + rv[15]
         ]);
     }
 
@@ -49,7 +49,7 @@ export class Mat4 {
             lv[0] - rv[0], lv[1] - rv[1], lv[2] - rv[2], lv[3] - rv[3],
             lv[4] - rv[4], lv[5] - rv[5], lv[6] - rv[6], lv[7] - rv[7],
             lv[8] - rv[8], lv[9] - rv[9], lv[10] - rv[10], lv[11] - rv[11],
-            lv[12] - rv[12], lv[13] - rv[13], lv[14] - rv[14], lv[15] - rv[15],
+            lv[12] - rv[12], lv[13] - rv[13], lv[14] - rv[14], lv[15] - rv[15]
         ]);
     }
 
@@ -319,31 +319,22 @@ export class Mat4 {
      * Getter for the Mat4's determinant
      */
     public get determinant(): number {
-        // using shortcut method for 4x4 determinants
-        // unused values left for visual clarity
-        /* eslint-disable @typescript-eslint/no-unused-vars */
-
         const v = this.array,
 
-            // copy columns 0..2=>4..6
-            v00 = v[0], v01 = v[1], v02 = v[2], v03 = v[3], v04 = v[0], v05 = v[1], v06 = v[2],
-            v10 = v[4], v11 = v[5], v12 = v[6], v13 = v[7], v14 = v[4], v15 = v[5], v16 = v[6],
-            v20 = v[8], v21 = v[9], v22 = v[10], v23 = v[11], v24 = v[8], v25 = v[9], v26 = v[10],
-            v30 = v[12], v31 = v[13], v32 = v[14], v33 = v[15], v34 = v[12], v35 = v[13], v36 = v[14],
+            v00 = v[0], v01 = v[1], v02 = v[2], v03 = v[3],
+            v10 = v[4], v11 = v[5], v12 = v[6], v13 = v[7],
+            v20 = v[8], v21 = v[9], v22 = v[10], v23 = v[11],
+            v30 = v[12], v31 = v[13], v32 = v[14], v33 = v[15],
 
-            // products of left -> right diagonals
-            d1 = v00 * v11 * v22 * v33,
-            d2 = v01 * v12 * v23 * v34,
-            d3 = v02 * v13 * v24 * v35,
-            d4 = v03 * v14 * v25 * v36,
+            // determinants of submatrices for v00, v01, v02, v03
+            // using standard method for 3x3 determinants
+            sub00 = v11 * ((v22 * v33) - (v23 * v32)) - v12 * ((v21 * v33) - (v23 * v31)) + v13 * ((v21 * v32) - (v22 * v31)),
+            sub01 = v10 * ((v22 * v33) - (v23 * v32)) - v12 * ((v20 * v33) - (v23 * v30)) + v13 * ((v20 * v32) - (v22 * v30)),
+            sub02 = v10 * ((v21 * v33) - (v23 * v31)) - v11 * ((v20 * v33) - (v23 * v30)) + v13 * ((v20 * v31) - (v21 * v30)),
+            sub03 = v10 * ((v21 * v32) - (v22 * v31)) - v11 * ((v20 * v32) - (v22 * v30)) + v12 * ((v20 * v31) - (v21 * v30));
 
-            // products of right -> left diagonals
-            nd1 = v06 * v15 * v24 * v33,
-            nd2 = v05 * v14 * v23 * v32,
-            nd3 = v04 * v13 * v22 * v31,
-            nd4 = v03 * v12 * v21 * v30;
-
-        return d1 + d2 + d3 + d4 - nd1 - nd2 - nd3 - nd4;
+        // det(4x4) => 00 . det(sub00)  -  01 . det(sub01)  +  02 . det(sub02)  -  03 . det(sub03)
+        return v00 * sub00 - v01 * sub01 + v02 * sub02 - v03 * sub03;
     }
 
     /**
