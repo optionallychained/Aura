@@ -6,7 +6,7 @@
 - [x] Vec3
 - [x] Vec4
 - [x] Mat3
-- [ ] Mat4
+- [x] Mat4
 - [x] Colors
 - [x] Randoms
 - [x] Angles

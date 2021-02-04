@@ -250,34 +250,109 @@ export class Mat4 {
         ]);
     }
 
-    // TODO find good learning resource
-    // /**
-    //  * Rotate a Mat4 by a given angle (radians) around the axis, given as a Vec3
-    //  *
-    //  * @param m the Mat4 to rotate
-    //  * @param angle the angle to rotate by
-    //  * @param axisVector the axis to rotate around
-    //  *
-    //  * @returns the rotated Mat4
-    //  */
-    // public static rotate(m: Mat4, angle: number, axisVector: Vec3): Mat4 {
-    //     const v = m.array,
+    /**
+     * Rotate a Mat4 by a given angle (radians) around the X axis
+     *
+     * @param m the Mat4 to rotate
+     * @param angle the angle to rotate by
+     *
+     * @returns the rotated Mat4
+     */
+    public static rotateX(m: Mat4, angle: number): Mat4 {
+        const v = m.array,
 
-    //         { x, y, z } = axisVector,
+            sin = Math.sin(angle), cos = Math.cos(angle),
 
-    //         v00 = v[0], v01 = v[1], v02 = v[2], v03 = v[3],
-    //         v10 = v[4], v11 = v[5], v12 = v[6], v13 = v[7],
-    //         v20 = v[8], v21 = v[9], v22 = v[10], v23 = v[11],
-    //         v30 = v[12], v31 = v[13], v32 = v[14], v33 = v[15];
+            v00 = v[0], v01 = v[1], v02 = v[2], v03 = v[3],
+            v10 = v[4], v11 = v[5], v12 = v[6], v13 = v[7],
+            v20 = v[8], v21 = v[9], v22 = v[10], v23 = v[11],
+            v30 = v[12], v31 = v[13], v32 = v[14], v33 = v[15];
 
+        return new Mat4([
+            v00, v01, v02, v03,
 
-    //     return new Mat4([
-    //         1, 0, 0, 0,
-    //         0, 1, 0, 0,
-    //         0, 0, 1, 0,
-    //         0, 0, 0, 1
-    //     ]);
-    // }
+            cos * v10 + sin * v20,
+            cos * v11 + sin * v21,
+            cos * v12 + sin * v22,
+            cos * v13 + sin * v23,
+
+            cos * v20 - sin * v10,
+            cos * v21 - sin * v11,
+            cos * v22 - sin * v12,
+            cos * v23 - sin * v13,
+
+            v30, v31, v32, v33
+        ]);
+    }
+
+    /**
+     * Rotate a Mat4 by a given angle (radians) around the Y axis
+     *
+     * @param m the Mat4 to rotate
+     * @param angle the angle to rotate by
+     *
+     * @returns the rotated Mat4
+     */
+    public static rotateY(m: Mat4, angle: number): Mat4 {
+        const v = m.array,
+
+            sin = Math.sin(angle), cos = Math.cos(angle),
+
+            v00 = v[0], v01 = v[1], v02 = v[2], v03 = v[3],
+            v10 = v[4], v11 = v[5], v12 = v[6], v13 = v[7],
+            v20 = v[8], v21 = v[9], v22 = v[10], v23 = v[11],
+            v30 = v[12], v31 = v[13], v32 = v[14], v33 = v[15];
+
+        return new Mat4([
+            cos * v00 - sin * v20,
+            cos * v01 - sin * v21,
+            cos * v02 - sin * v22,
+            cos * v03 - sin * v23,
+
+            v10, v11, v12, v13,
+
+            cos * v20 + sin * v00,
+            cos * v21 + sin * v01,
+            cos * v22 + sin * v02,
+            cos * v23 + sin * v03,
+
+            v30, v31, v32, v33
+        ]);
+    }
+
+    /**
+     * Rotate a Mat4 by a given angle (radians) around the Z axis
+     *
+     * @param m the Mat4 to rotate
+     * @param angle the angle to rotate by
+     *
+     * @returns the rotated Mat4
+     */
+    public static rotateZ(m: Mat4, angle: number): Mat4 {
+        const v = m.array,
+
+            sin = Math.sin(angle), cos = Math.cos(angle),
+
+            v00 = v[0], v01 = v[1], v02 = v[2], v03 = v[3],
+            v10 = v[4], v11 = v[5], v12 = v[6], v13 = v[7],
+            v20 = v[8], v21 = v[9], v22 = v[10], v23 = v[11],
+            v30 = v[12], v31 = v[13], v32 = v[14], v33 = v[15];
+
+        return new Mat4([
+            cos * v00 + sin * v10,
+            cos * v01 + sin * v11,
+            cos * v02 + sin * v12,
+            cos * v03 + sin * v13,
+
+            cos * v10 - sin * v00,
+            cos * v11 - sin * v01,
+            cos * v12 - sin * v02,
+            cos * v13 - sin * v03,
+
+            v20, v21, v22, v23,
+            v30, v31, v32, v33
+        ]);
+    }
 
     /**
      * Scale a Mat4 by factors on the x, y and z axes, given as a Vec3

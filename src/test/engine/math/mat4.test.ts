@@ -256,12 +256,91 @@ describe('Mat4', () => {
         });
 
         /**
-         * Tests for Mat4.rotate()
+         * Tests for Mat4.rotateX()
          */
-        describe('rotate', () => {
-            it('should rotate a matrix correctly', () => {
-                // TODO
-                expect(true).toBe(true);
+        describe('rotateX', () => {
+            it('should rotate a matrix around the X axis correctly', () => {
+                const m = new Mat4(RHS.slice(0));
+                const angle = 2.4, cos = Math.cos(angle), sin = Math.sin(angle);
+
+                const result = [
+                    RHS[0], RHS[1], RHS[2], RHS[3],
+
+                    cos * RHS[4] + sin * RHS[8],
+                    cos * RHS[5] + sin * RHS[9],
+                    cos * RHS[6] + sin * RHS[10],
+                    cos * RHS[7] + sin * RHS[11],
+
+                    cos * RHS[8] - sin * RHS[4],
+                    cos * RHS[9] - sin * RHS[5],
+                    cos * RHS[10] - sin * RHS[6],
+                    cos * RHS[11] - sin * RHS[7],
+
+                    RHS[12], RHS[13], RHS[14], RHS[15]
+                ];
+
+                const rotate = Mat4.rotateX(m, angle);
+
+                expect(rotate.array).toEqual(result);
+            });
+        });
+
+        /**
+         * Tests for Mat4.rotateY()
+         */
+        describe('rotateY', () => {
+            it('should rotate a matrix around the Y axis correctly', () => {
+                const m = new Mat4(RHS.slice(0));
+                const angle = 2.4, cos = Math.cos(angle), sin = Math.sin(angle);
+
+                const result = [
+                    cos * RHS[0] - sin * RHS[8],
+                    cos * RHS[1] - sin * RHS[9],
+                    cos * RHS[2] - sin * RHS[10],
+                    cos * RHS[3] - sin * RHS[11],
+
+                    RHS[4], RHS[5], RHS[6], RHS[7],
+
+                    cos * RHS[8] + sin * RHS[0],
+                    cos * RHS[9] + sin * RHS[1],
+                    cos * RHS[10] + sin * RHS[2],
+                    cos * RHS[11] + sin * RHS[3],
+
+                    RHS[12], RHS[13], RHS[14], RHS[15]
+                ];
+
+                const rotate = Mat4.rotateY(m, angle);
+
+                expect(rotate.array).toEqual(result);
+            });
+        });
+
+        /**
+         * Tests for Mat4.rotateZ()
+         */
+        describe('rotateZ', () => {
+            it('should rotate a matrix around the Z axis correctly', () => {
+                const m = new Mat4(RHS.slice(0));
+                const angle = 2.4, cos = Math.cos(angle), sin = Math.sin(angle);
+
+                const result = [
+                    cos * RHS[0] + sin * RHS[4],
+                    cos * RHS[1] + sin * RHS[5],
+                    cos * RHS[2] + sin * RHS[6],
+                    cos * RHS[3] + sin * RHS[7],
+
+                    cos * RHS[4] - sin * RHS[0],
+                    cos * RHS[5] - sin * RHS[1],
+                    cos * RHS[6] - sin * RHS[2],
+                    cos * RHS[7] - sin * RHS[3],
+
+                    RHS[8], RHS[9], RHS[10], RHS[11],
+                    RHS[12], RHS[13], RHS[14], RHS[15]
+                ];
+
+                const rotate = Mat4.rotateZ(m, angle);
+
+                expect(rotate.array).toEqual(result);
             });
         });
 
