@@ -74,12 +74,22 @@ export class Color {
     /**
      * Constructor. Take and store the Color's r, g, b and optionally a properties
      *
-     * @param r the Color's red value
-     * @param g the Color's green value
-     * @param b the Color's blue value
-     * @param a the Color's alpha value (optional)
+     * r, g and b are clamped to 255, and a is clamped to 1. Negative values will be set to 0
+     *
+     * @param r the Color's red value; 0-255; defaults to 0
+     * @param g the Color's green value; 0-255; defaults to 0
+     * @param b the Color's blue value; 0-255; defaults to 0
+     * @param a the Color's alpha value (optional); 0-1
      */
-    constructor(public readonly r = 0, public readonly g = 0, public readonly b = 0, public readonly a?: number) { }
+    constructor(public readonly r = 0, public readonly g = 0, public readonly b = 0, public readonly a?: number) {
+        this.r = Math.max(Math.min(r, 255), 0);
+        this.g = Math.max(Math.min(g, 255), 0);
+        this.b = Math.max(Math.min(b, 255), 0);
+
+        if (a) {
+            this.a = Math.max(Math.min(a, 1), 0);
+        }
+    }
 
     /**
      * Getter for the hex form of the Color
