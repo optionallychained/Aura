@@ -24,7 +24,7 @@ export class Mat4 {
      * @returns the result of the addition
      */
     public static add(left: Mat4, right: Mat4): Mat4 {
-        const lv = left.values, rv = right.values;
+        const lv = left.array, rv = right.array;
 
         return new Mat4([
             lv[0] + rv[0], lv[1] + rv[1], lv[2] + rv[2], lv[3] + rv[3],
@@ -43,7 +43,7 @@ export class Mat4 {
      * @returns the result of the subtraction
      */
     public static sub(left: Mat4, right: Mat4): Mat4 {
-        const lv = left.values, rv = right.values;
+        const lv = left.array, rv = right.array;
 
         return new Mat4([
             lv[0] - rv[0], lv[1] - rv[1], lv[2] - rv[2], lv[3] - rv[3],
@@ -62,7 +62,7 @@ export class Mat4 {
      * @returns the result of the multiplication
      */
     public static mult(left: Mat4, right: Mat4): Mat4 {
-        const lv = left.values, rv = right.values,
+        const lv = left.array, rv = right.array,
 
             // left
             l00 = lv[0], l01 = lv[1], l02 = lv[2], l03 = lv[3],
@@ -114,7 +114,7 @@ export class Mat4 {
      * @returns the multiplied Mat4
      */
     public static multScalar(m: Mat4, factor: number): Mat4 {
-        const v = m.values;
+        const v = m.array;
 
         return new Mat4([
             v[0] * factor, v[1] * factor, v[2] * factor, v[3] * factor,
@@ -150,7 +150,7 @@ export class Mat4 {
      * @return the transposed Mat4
      */
     public static transpose(m: Mat4): Mat4 {
-        const v = m.values,
+        const v = m.array,
 
             v00 = v[0], v01 = v[1], v02 = v[2], v03 = v[3],
             v10 = v[4], v11 = v[5], v12 = v[6], v13 = v[7],
@@ -173,7 +173,7 @@ export class Mat4 {
      * @returns the adjugate of the Mat4
      */
     public static adjoint(m: Mat4): Mat4 {
-        const v = m.values,
+        const v = m.array,
 
             v00 = v[0], v01 = v[1], v02 = v[2], v03 = v[3],
             v10 = v[4], v11 = v[5], v12 = v[6], v13 = v[7],
@@ -227,7 +227,7 @@ export class Mat4 {
      * @returns the translated Mat4
      */
     public static translate(m: Mat4, translate: Vec3): Mat4 {
-        const v = m.values,
+        const v = m.array,
 
             { x, y, z } = translate,
 
@@ -262,7 +262,7 @@ export class Mat4 {
     //  * @returns the rotated Mat4
     //  */
     // public static rotate(m: Mat4, angle: number, axisVector: Vec3): Mat4 {
-    //     const v = m.values,
+    //     const v = m.array,
 
     //         { x, y, z } = axisVector,
 
@@ -289,7 +289,7 @@ export class Mat4 {
      * @returns the scaled Mat4
      */
     public static scale(m: Mat4, factor: Vec3): Mat4 {
-        const v = m.values,
+        const v = m.array,
 
             { x, y, z } = factor,
 
@@ -311,7 +311,7 @@ export class Mat4 {
      *
      * @param values the Mat4's values; defaults to Mat4.IDENTITY
      */
-    constructor(private readonly values: Array<number> = Mat4.IDENTITY.slice(0)) {
+    constructor(public readonly array = Mat4.IDENTITY.slice(0)) {
         // TODO ensure values is a 4x4 matrix
     }
 
@@ -323,7 +323,7 @@ export class Mat4 {
         // unused values left for visual clarity
         /* eslint-disable @typescript-eslint/no-unused-vars */
 
-        const v = this.values,
+        const v = this.array,
 
             // copy columns 0..2=>4..6
             v00 = v[0], v01 = v[1], v02 = v[2], v03 = v[3], v04 = v[0], v05 = v[1], v06 = v[2],
@@ -350,28 +350,21 @@ export class Mat4 {
      * Getter for the Mat4's forward vector
      */
     public get forwardVector(): Vec3 {
-        return new Vec3(this.values[8], this.values[9], this.values[10]);
+        return new Vec3(this.array[8], this.array[9], this.array[10]);
     }
 
     /**
      * Getter for the Mat4's forward vector
      */
     public get rightVector(): Vec3 {
-        return new Vec3(this.values[0], this.values[1], this.values[2]);
+        return new Vec3(this.array[0], this.array[1], this.array[2]);
     }
 
     /**
      * Getter for the Mat4's up vector
      */
     public get upVector(): Vec3 {
-        return new Vec3(this.values[4], this.values[5], this.values[6]);
-    }
-
-    /**
-     * Getter for the Array form of the Mat4
-     */
-    public get array(): Array<number> {
-        return this.values;
+        return new Vec3(this.array[4], this.array[5], this.array[6]);
     }
 
     /**
@@ -385,7 +378,7 @@ export class Mat4 {
      * Getter for the readable string form of the Mat4
      */
     public get string(): string {
-        const v = this.values;
+        const v = this.array;
 
         return `Mat4\n${v[0]} ${v[1]} ${v[2]} ${v[3]}\n${v[4]} ${v[5]} ${v[6]} ${v[7]}\n${v[8]} ${v[9]} ${v[10]} ${v[11]}\n${v[12]} ${v[13]} ${v[14]} ${v[15]}`;
     }
@@ -394,7 +387,6 @@ export class Mat4 {
      * Reset the Mat4's values to match the identity matrix
      */
     public reset(): void {
-        // TODO hmmmm
         this.mutable.array = Mat4.IDENTITY.slice(0);
     }
 
@@ -405,7 +397,7 @@ export class Mat4 {
      */
     public clone(): Mat4 {
         // TODO test whether or not the slice is necessary here
-        return new Mat4(this.values.slice(0));
+        return new Mat4(this.array.slice(0));
     }
 
     /**
