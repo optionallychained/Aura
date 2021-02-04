@@ -3,7 +3,7 @@ import { Color } from '../../../engine/protogl';
 /**
  * Tests for class Color
  */
-fdescribe('Color', () => {
+describe('Color', () => {
 
     /**
      * Tests for Color static methods
@@ -183,9 +183,18 @@ fdescribe('Color', () => {
          * Tests for (Color).hex
          */
         describe('hex', () => {
+            // nominal test
             it('should give the correct hex form', () => {
                 const color = new Color(150, 250, 75);
                 const knownHex = '#96fa4b';
+
+                expect(color.hex).toBe(knownHex);
+            });
+
+            // cover low RGB value '0' prepends
+            it('should prepend hex components properly', () => {
+                const color = new Color(1, 2, 3);
+                const knownHex = '#010203';
 
                 expect(color.hex).toBe(knownHex);
             });
