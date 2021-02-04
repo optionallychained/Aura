@@ -1,9 +1,9 @@
-import { Mat3, Mat4 } from '../../../engine/protogl';
+import { Mat4 } from '../../../engine/protogl';
 
 /**
  * Tests for class Mat4
  */
-fdescribe('Mat4', () => {
+describe('Mat4', () => {
 
     // identity matrix
     const IDENTITY = [
@@ -82,7 +82,7 @@ fdescribe('Mat4', () => {
         describe('mult', () => {
             it('should multiply two matrices correctly', () => {
                 const m1 = new Mat4(IDENTITY.slice(0));
-                const m2 = new Mat4(IDENTITY.slice(0));
+                const m2 = new Mat4(RHS.slice(0));
 
                 const i = IDENTITY;
                 const r = RHS;
@@ -142,14 +142,45 @@ fdescribe('Mat4', () => {
         describe('invert', () => {
             // invertible mat4
             it('should invert a matrix correctly', () => {
-                expect(true).toBe(true);
+                // result obtained from online calculator at https://www.symbolab.com/solver/matrix-inverse-calculator
+                const m = new Mat4(INVERTIBLE.slice(0));
+
+                const result = [
+                    -13 / 47,
+                    2 / 47,
+                    7 / 47,
+                    6 / 47,
+
+                    -5 / 8,
+                    7 / 8,
+                    1 / 4,
+                    - 1 / 4,
+
+                    39 / 376,
+                    -53 / 376,
+                    13 / 188,
+                    -9 / 188,
+
+                    55 / 188,
+                    -41 / 188,
+                    -13 / 94,
+                    9 / 94
+                ];
+
+                const inverse = Mat4.invert(m);
+
+                expect(inverse).toBeTruthy();
+
+                for (let i = 0; i < result.length; i++) {
+                    expect(inverse!.array[i]).toBeCloseTo(result[i]);
+                }
             });
 
             // non-invertible mat4
             it('should return null for a mat4 without an inverse', () => {
-                const m = new Mat3(RHS.slice(0));
+                const m = new Mat4(RHS.slice(0));
 
-                const inverse = Mat3.invert(m);
+                const inverse = Mat4.invert(m);
 
                 expect(inverse).toBeFalsy();
             });
@@ -175,26 +206,26 @@ fdescribe('Mat4', () => {
             });
         });
 
-        // /**
-        //  * Tests for Mat4.adjoint()
-        //  */
-        // describe('adjoint', () => {
-        //     it('should calculate the adjugate of a matrix correctly', () => {
-        //         // result obtained from online calculator at https://www.symbolab.com/solver/matrix-adjoint-calculator
-        //         const m = new Mat4(INVERTIBLE.slice(0));
+        /**
+         * Tests for Mat4.adjoint()
+         */
+        describe('adjoint', () => {
+            it('should calculate the adjugate of a matrix correctly', () => {
+                // result obtained from online calculator at https://www.symbolab.com/solver/matrix-adjoint-calculator
+                const m = new Mat4(INVERTIBLE.slice(0));
 
-        //         const result = [
-        //             27, -12, 6, -30,
-        //             0, -18, 9, 36,
-        //             0, 18, -9, 45,
-        //             -18, 47, -10, 50
-        //         ];
+                const result = [
+                    104, -16, -56, -48,
+                    235, -329, -94, 94,
+                    -39, 53, -26, 18,
+                    -110, 82, 52, -36
+                ];
 
-        //         const adjugate = Mat4.adjoint(m);
+                const adjugate = Mat4.adjoint(m);
 
-        //         expect(adjugate.array).toEqual(result);
-        //     });
-        // });
+                expect(adjugate.array).toEqual(result);
+            });
+        });
 
         /**
          * Tests for Mat4.translate()
@@ -227,7 +258,7 @@ fdescribe('Mat4', () => {
     /**
      * Tests for Mat4 instances and methods
      */
-    fdescribe('Instance', () => {
+    describe('Instance', () => {
 
         /**
          * Tests for Mat4 constructor
@@ -251,7 +282,7 @@ fdescribe('Mat4', () => {
         /**
          * Tests for (Mat4).determinant
          */
-        fdescribe('determinant', () => {
+        describe('determinant', () => {
             it('should calculate the determinant correctly', () => {
                 // result obtained from online calculator at https://www.symbolab.com/solver/matrix-determinant-calculator
                 const { determinant } = new Mat4(INVERTIBLE.slice(0));
