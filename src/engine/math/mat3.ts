@@ -162,7 +162,6 @@ export class Mat3 {
             v10 = v[3], v11 = v[4], v12 = v[5],
             v20 = v[6], v21 = v[7], v22 = v[8],
 
-
             // matrix of minors (determinants of submatrices)
             m00 = (v11 * v22) - (v12 * v21), m01 = (v10 * v22) - (v12 * v20), m02 = (v10 * v21) - (v11 * v20),
             m10 = (v01 * v22) - (v02 * v21), m11 = (v00 * v22) - (v02 * v20), m12 = (v00 * v21) - (v01 * v20),
@@ -172,7 +171,6 @@ export class Mat3 {
             c00 = m00, c01 = -m01, c02 = m02,
             c10 = -m10, c11 = m11, c12 = -m12,
             c20 = m20, c21 = -m21, c22 = m22;
-
 
         // transposed cofactor
         return new Mat3([
@@ -193,7 +191,7 @@ export class Mat3 {
     public static translate(m: Mat3, translate: Vec2): Mat3 {
         const v = m.values,
 
-            x = translate.x, y = translate.y,
+            { x, y } = translate,
 
             v00 = v[0], v01 = v[1], v02 = v[2],
             v10 = v[3], v11 = v[4], v12 = v[5],
@@ -202,12 +200,17 @@ export class Mat3 {
         return new Mat3([
             v00, v01, v02,
             v10, v11, v12,
-            x * v00 + y * v10 + v20, x * v01 + y * v11 + v21, x * v02 + y * v12 + v22
+            // r20
+            x * v00 + y * v10 + v20,
+            // r21
+            x * v01 + y * v11 + v21,
+            // r22
+            x * v02 + y * v12 + v22
         ]);
     }
 
     /**
-     * Rotate a Mat3 by angles (radians) by a given angle (radians)
+     * Rotate a Mat3 by a given angle angle (radians)
      *
      * @param m the Mat3 to rotate
      * @param angle the angle to rotate by
@@ -241,15 +244,15 @@ export class Mat3 {
     public static scale(m: Mat3, factor: Vec2): Mat3 {
         const v = m.values,
 
-            x = factor.x, y = factor.y,
+            { x, y } = factor,
 
             v00 = v[0], v01 = v[1], v02 = v[2],
             v10 = v[3], v11 = v[4], v12 = v[5],
             v20 = v[6], v21 = v[7], v22 = v[8];
 
         return new Mat3([
-            v00 * x, v01 * x, v02 * x,
-            v10 * y, v11 * y, v12 * y,
+            x * v00, x * v01, x * v02,
+            y * v10, y * v11, y * v12,
             v20, v21, v22
         ]);
     }
@@ -265,6 +268,10 @@ export class Mat3 {
      * Getter for the Mat3's determinant
      */
     public get determinant(): number {
+        // using shortcut method for 3x3 determinants
+        // unused values left for visual clarity
+        /* eslint-disable @typescript-eslint/no-unused-vars */
+
         const v = this.values,
 
             // copy columns 0,1 => 3,4
