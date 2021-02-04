@@ -124,8 +124,6 @@ export class Mat4 {
         ]);
     }
 
-
-
     /**
      * Invert a Mat4
      *
@@ -313,7 +311,9 @@ export class Mat4 {
      *
      * @param values the Mat4's values; defaults to Mat4.IDENTITY
      */
-    constructor(private readonly values: Array<number> = Mat4.IDENTITY.slice(0)) { }
+    constructor(private readonly values: Array<number> = Mat4.IDENTITY.slice(0)) {
+        // TODO ensure values is a 4x4 matrix
+    }
 
     /**
      * Getter for the Mat4's determinant
@@ -337,7 +337,7 @@ export class Mat4 {
             d3 = v02 * v13 * v24 * v35,
             d4 = v03 * v14 * v25 * v36,
 
-            // products of right->left diagonals
+            // products of right -> left diagonals
             nd1 = v06 * v15 * v24 * v33,
             nd2 = v05 * v14 * v23 * v32,
             nd3 = v04 * v13 * v22 * v31,
@@ -387,10 +387,7 @@ export class Mat4 {
     public get string(): string {
         const v = this.values;
 
-        return `Mat4( ${v[0]} , ${v[1]} , ${v[2]} , ${v[3]} ,
-                      ${v[4]} , ${v[5]} , ${v[6]} , ${v[7]} ,
-                      ${v[8]} , ${v[9]} , ${v[10]} , ${v[11]}
-                )`;
+        return `Mat4\n${v[0]} ${v[1]} ${v[2]} ${v[3]}\n${v[4]} ${v[5]} ${v[6]} ${v[7]}\n${v[8]} ${v[9]} ${v[10]} ${v[11]}\n${v[12]} ${v[13]} ${v[14]} ${v[15]}`;
     }
 
     /**

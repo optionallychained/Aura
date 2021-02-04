@@ -328,7 +328,7 @@ fdescribe('Mat3', () => {
             it('should give the correct string form', () => {
                 const { string } = new Mat3(RHS.slice(0));
 
-                expect(string).toBe(`Mat3(\n${RHS[0]} , ${RHS[1]} , ${RHS[2]} ,\n${RHS[3]} , ${RHS[4]} , ${RHS[5]} ,\n${RHS[6]} , ${RHS[7]} , ${RHS[8]}\n)`);
+                expect(string).toBe(`Mat3\n${RHS[0]} ${RHS[1]} ${RHS[2]}\n${RHS[3]} ${RHS[4]} ${RHS[5]}\n${RHS[6]} ${RHS[7]} ${RHS[8]}\n`);
             });
         });
 

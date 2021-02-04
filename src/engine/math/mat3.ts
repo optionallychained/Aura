@@ -313,7 +313,7 @@ export class Mat3 {
     public get string(): string {
         const v = this.array;
 
-        return `Mat3(\n${v[0]} , ${v[1]} , ${v[2]} ,\n${v[3]} , ${v[4]} , ${v[5]} ,\n${v[6]} , ${v[7]} , ${v[8]}\n)`;
+        return `Mat3\n${v[0]} ${v[1]} ${v[2]}\n${v[3]} ${v[4]} ${v[5]}\n${v[6]} ${v[7]} ${v[8]}\n`;
     }
 
     /**

@@ -88,7 +88,6 @@ describe('Color', () => {
              * Tests for NaN hex components
              */
             describe('NaN hex components', () => {
-                // NaN component
                 it('should set default values for NaN hex components', () => {
                     const color = Color.fromHex('ZFF');
 
