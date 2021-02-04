@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>InputManager | API | ProtoGL Documentation - v0.2.0</title>
+	<title>Random | API | ProtoGL Documentation - v0.2.0</title>
 	<meta name="description" content="Documentation for API | ProtoGL Documentation - v0.2.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,10 +55,10 @@
 					<a href="../modules.html">API | ProtoGL Documentation - v0.2.0</a>
 				</li>
 				<li>
-					<a href="inputmanager.html">InputManager</a>
+					<a href="random.html">Random</a>
 				</li>
 			</ul>
-			<h1>Class InputManager</h1>
+			<h1>Class Random</h1>
 		</div>
 	</div>
 </header>
@@ -68,21 +68,15 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Core InputManager; utilised by the Game to defer the detection and management of user input</p>
+						<p>Utility class for generating random numbers</p>
 					</div>
-					<p>// TODO improve/play with input buffering, mouse support, mouse capturing, controller support?, touch support?</p>
-					<dl class="tsd-comment-tags">
-						<dt>see</dt>
-						<dd><p>Game</p>
-						</dd>
-					</dl>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">InputManager</span>
+						<span class="target">Random</span>
 					</li>
 				</ul>
 			</section>
@@ -93,14 +87,13 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="inputmanager.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="random.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="inputmanager.html#iskeydown" class="tsd-kind-icon">is<wbr>Key<wbr>Down</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="inputmanager.html#ismousedown" class="tsd-kind-icon">is<wbr>Mouse<wbr>Down</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="random.html#between" class="tsd-kind-icon">between</a></li>
 							</ul>
 						</section>
 					</div>
@@ -112,94 +105,54 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Input<wbr>Manager<span class="tsd-signature-symbol">(</span>canvas<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">HTMLCanvasElement</span>, controlScheme<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;keyboard&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;mouse&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;both&quot;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="inputmanager.html" class="tsd-signature-type" data-tsd-kind="Class">InputManager</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Random<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="random.html" class="tsd-signature-type" data-tsd-kind="Class">Random</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/ba421da/src/engine/input/input.manager.ts#L36">input/input.manager.ts:36</a></li>
-								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Constructor. Take and store the game&#39;s Canvas for registering input events upon</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>canvas: <span class="tsd-signature-type">HTMLCanvasElement</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>the Canvas</p>
-									</div>
-								</li>
-								<li>
-									<h5>controlScheme: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;keyboard&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;mouse&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;both&quot;</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>the ControlScheme given to the Game&#39;s Config, used for optimising event registration and handling</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="inputmanager.html" class="tsd-signature-type" data-tsd-kind="Class">InputManager</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="random.html" class="tsd-signature-type" data-tsd-kind="Class">Random</a></h4>
 						</li>
 					</ul>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="iskeydown" class="tsd-anchor"></a>
-					<h3>is<wbr>Key<wbr>Down</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">is<wbr>Key<wbr>Down<span class="tsd-signature-symbol">(</span>code<span class="tsd-signature-symbol">: </span><a href="../enums/keys.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Keys</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="between" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> between</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">between<span class="tsd-signature-symbol">(</span>min<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, max<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/ba421da/src/engine/input/input.manager.ts#L55">input/input.manager.ts:55</a></li>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/ba421da/src/engine/math/random.ts#L14">math/random.ts:14</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Check if a given Key code is currently pressed by checking its presence within the keyBuffer</p>
+									<p>Generate a random float between two given values</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>code: <a href="../enums/keys.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Keys</a></h5>
+									<h5>min: <span class="tsd-signature-type">number</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>the Key code to check</p>
+										<p>the minimum number (inclusive)</p>
+									</div>
+								</li>
+								<li>
+									<h5>max: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the maximum number (exclusive)</p>
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-							<p>a boolean indicating whether or not the key is pressed</p>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="ismousedown" class="tsd-anchor"></a>
-					<h3>is<wbr>Mouse<wbr>Down</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">is<wbr>Mouse<wbr>Down<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/ba421da/src/engine/input/input.manager.ts#L64">input/input.manager.ts:64</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Check if the mouse is down</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-							<p>a boolean indicating whether or not the mouse is pressed</p>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+							<p>the random float</p>
 						</li>
 					</ul>
 				</section>
@@ -248,24 +201,9 @@
 					<li class=" tsd-kind-class">
 						<a href="game.html" class="tsd-kind-icon">Game</a>
 					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-class">
+					<li class=" tsd-kind-class">
 						<a href="inputmanager.html" class="tsd-kind-icon">Input<wbr>Manager</a>
-						<ul>
-							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="inputmanager.html#constructor" class="tsd-kind-icon">constructor</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="inputmanager.html#iskeydown" class="tsd-kind-icon">is<wbr>Key<wbr>Down</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="inputmanager.html#ismousedown" class="tsd-kind-icon">is<wbr>Mouse<wbr>Down</a>
-							</li>
-						</ul>
 					</li>
-				</ul>
-				<ul class="after-current">
 					<li class=" tsd-kind-class">
 						<a href="mat3.html" class="tsd-kind-icon">Mat3</a>
 					</li>
@@ -275,9 +213,21 @@
 					<li class=" tsd-kind-class">
 						<a href="physicssystem.html" class="tsd-kind-icon">Physics<wbr>System</a>
 					</li>
-					<li class=" tsd-kind-class">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class">
 						<a href="random.html" class="tsd-kind-icon">Random</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="random.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="random.html#between" class="tsd-kind-icon">between</a>
+							</li>
+						</ul>
 					</li>
+				</ul>
+				<ul class="after-current">
 					<li class=" tsd-kind-class">
 						<a href="state.html" class="tsd-kind-icon">State</a>
 					</li>

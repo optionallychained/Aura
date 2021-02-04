@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>MathUtils | API | ProtoGL Documentation - v0.1.0</title>
-	<meta name="description" content="Documentation for API | ProtoGL Documentation - v0.1.0">
+	<title>Angle | API | ProtoGL Documentation - v0.2.0</title>
+	<meta name="description" content="Documentation for API | ProtoGL Documentation - v0.2.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
 	<script async src="../assets/js/search.js" id="search-script"></script>
@@ -23,7 +23,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">API | ProtoGL Documentation - v0.1.0</a>
+					<a href="../index.html" class="title">API | ProtoGL Documentation - v0.2.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -52,13 +52,13 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="../modules.html">API | ProtoGL Documentation - v0.1.0</a>
+					<a href="../modules.html">API | ProtoGL Documentation - v0.2.0</a>
 				</li>
 				<li>
-					<a href="mathutils.html">MathUtils</a>
+					<a href="angle.html">Angle</a>
 				</li>
 			</ul>
-			<h1>Class MathUtils</h1>
+			<h1>Class Angle</h1>
 		</div>
 	</div>
 </header>
@@ -68,7 +68,7 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>A class of static utility math methods</p>
+						<p>Utility class for converting angles</p>
 					</div>
 				</div>
 			</section>
@@ -76,7 +76,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">MathUtils</span>
+						<span class="target">Angle</span>
 					</li>
 				</ul>
 			</section>
@@ -87,16 +87,14 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="mathutils.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="angle.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="mathutils.html#degtorad" class="tsd-kind-icon">deg<wbr>ToRad</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="mathutils.html#radtodeg" class="tsd-kind-icon">rad<wbr>ToDeg</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="mathutils.html#randombetween" class="tsd-kind-icon">random<wbr>Between</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="mathutils.html#rgbtohex" class="tsd-kind-icon">rgb<wbr>ToHex</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="angle.html#todegrees" class="tsd-kind-icon">to<wbr>Degrees</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="angle.html#toradians" class="tsd-kind-icon">to<wbr>Radians</a></li>
 							</ul>
 						</section>
 					</div>
@@ -108,13 +106,13 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Math<wbr>Utils<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="mathutils.html" class="tsd-signature-type" data-tsd-kind="Class">MathUtils</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Angle<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="angle.html" class="tsd-signature-type" data-tsd-kind="Class">Angle</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 							</aside>
-							<h4 class="tsd-returns-title">Returns <a href="mathutils.html" class="tsd-signature-type" data-tsd-kind="Class">MathUtils</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="angle.html" class="tsd-signature-type" data-tsd-kind="Class">Angle</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -122,48 +120,16 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
-					<a name="degtorad" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> deg<wbr>ToRad</h3>
+					<a name="todegrees" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> to<wbr>Degrees</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">deg<wbr>ToRad<span class="tsd-signature-symbol">(</span>deg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+						<li class="tsd-signature tsd-kind-icon">to<wbr>Degrees<span class="tsd-signature-symbol">(</span>radians<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/bf434c2/src/engine/math/mathUtils.ts#L15">math/mathUtils.ts:15</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Convert an angle given in degrees to radians</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>deg: <span class="tsd-signature-type">number</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>the angle in degrees to convert</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
-							<p>the converted angle in radians</p>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
-					<a name="radtodeg" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> rad<wbr>ToDeg</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">rad<wbr>ToDeg<span class="tsd-signature-symbol">(</span>rad<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/bf434c2/src/engine/math/mathUtils.ts#L26">math/mathUtils.ts:26</a></li>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/ba421da/src/engine/math/angle.ts#L24">math/angle.ts:24</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -174,84 +140,43 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>rad: <span class="tsd-signature-type">number</span></h5>
+									<h5>radians: <span class="tsd-signature-type">number</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>the angle in radians to convert</p>
+										<p>the angle to convert</p>
 									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
-							<p>the converted angle in degrees</p>
+							<p>the angle in degrees</p>
 						</li>
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
-					<a name="randombetween" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> random<wbr>Between</h3>
+					<a name="toradians" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> to<wbr>Radians</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">random<wbr>Between<span class="tsd-signature-symbol">(</span>min<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, max<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+						<li class="tsd-signature tsd-kind-icon">to<wbr>Radians<span class="tsd-signature-symbol">(</span>degrees<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/bf434c2/src/engine/math/mathUtils.ts#L38">math/mathUtils.ts:38</a></li>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/ba421da/src/engine/math/angle.ts#L13">math/angle.ts:13</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Produce a random integer between two given values</p>
+									<p>Convert an angle given in degrees to radians</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>min: <span class="tsd-signature-type">number</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>the minimum number</p>
-									</div>
-								</li>
-								<li>
-									<h5>max: <span class="tsd-signature-type">number</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>the maximum number</p>
-									</div>
+									<h5>degrees: <span class="tsd-signature-type">number</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
-							<p>the generated random number</p>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
-					<a name="rgbtohex" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> rgb<wbr>ToHex</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">rgb<wbr>ToHex<span class="tsd-signature-symbol">(</span>rgb<span class="tsd-signature-symbol">: </span><a href="vec3.html" class="tsd-signature-type" data-tsd-kind="Class">Vec3</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/bf434c2/src/engine/math/mathUtils.ts#L49">math/mathUtils.ts:49</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Convert an RGB color to a Hex string</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>rgb: <a href="vec3.html" class="tsd-signature-type" data-tsd-kind="Class">Vec3</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>the RGB color, expressed as a Vec3</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
-							<p>the converted Hex string</p>
+							<p>the angle in radians</p>
 						</li>
 					</ul>
 				</section>
@@ -273,11 +198,32 @@
 					<li class=" tsd-kind-class">
 						<a href="aabbcollisionbox.html" class="tsd-kind-icon">AABBCollision<wbr>Box</a>
 					</li>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class">
+						<a href="angle.html" class="tsd-kind-icon">Angle</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="angle.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="angle.html#todegrees" class="tsd-kind-icon">to<wbr>Degrees</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="angle.html#toradians" class="tsd-kind-icon">to<wbr>Radians</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
 					<li class=" tsd-kind-class">
 						<a href="canvasrenderer.html" class="tsd-kind-icon">Canvas<wbr>Renderer</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="collisionsystem.html" class="tsd-kind-icon">Collision<wbr>System</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="color.html" class="tsd-kind-icon">Color</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="component.html" class="tsd-kind-icon">Component</a>
@@ -297,32 +243,17 @@
 					<li class=" tsd-kind-class">
 						<a href="inputmanager.html" class="tsd-kind-icon">Input<wbr>Manager</a>
 					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-class">
-						<a href="mathutils.html" class="tsd-kind-icon">Math<wbr>Utils</a>
-						<ul>
-							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="mathutils.html#constructor" class="tsd-kind-icon">constructor</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
-								<a href="mathutils.html#degtorad" class="tsd-kind-icon">deg<wbr>ToRad</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
-								<a href="mathutils.html#radtodeg" class="tsd-kind-icon">rad<wbr>ToDeg</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
-								<a href="mathutils.html#randombetween" class="tsd-kind-icon">random<wbr>Between</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
-								<a href="mathutils.html#rgbtohex" class="tsd-kind-icon">rgb<wbr>ToHex</a>
-							</li>
-						</ul>
+					<li class=" tsd-kind-class">
+						<a href="mat3.html" class="tsd-kind-icon">Mat3</a>
 					</li>
-				</ul>
-				<ul class="after-current">
+					<li class=" tsd-kind-class">
+						<a href="mat4.html" class="tsd-kind-icon">Mat4</a>
+					</li>
 					<li class=" tsd-kind-class">
 						<a href="physicssystem.html" class="tsd-kind-icon">Physics<wbr>System</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="random.html" class="tsd-kind-icon">Random</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="state.html" class="tsd-kind-icon">State</a>
@@ -338,6 +269,9 @@
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="vec3.html" class="tsd-kind-icon">Vec3</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="vec4.html" class="tsd-kind-icon">Vec4</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="../interfaces/entityconfig.html" class="tsd-kind-icon">Entity<wbr>Config</a>
