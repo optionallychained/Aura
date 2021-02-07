@@ -18,14 +18,5 @@ export abstract class Component {
      *
      * @param name the name of the Component
      */
-    constructor(protected name: string) { }
-
-    /**
-     * Getter for the Component name
-     *
-     * @returns the Component's name
-     */
-    public getName(): string {
-        return this.name;
-    }
+    constructor(public readonly name: string) { }
 }

@@ -18,7 +18,7 @@ export class CanvasRenderer {
      *
      * @param canvas the Canvas
      */
-    constructor(private canvas: HTMLCanvasElement) {
+    constructor(private readonly canvas: HTMLCanvasElement) {
         this.ctx = canvas.getContext('2d')!; //dumb assertion for now
 
         this.ctx.font = '24px monospace';

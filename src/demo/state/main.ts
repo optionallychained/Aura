@@ -4,7 +4,7 @@ import { player } from '../entity/player';
 
 /** internal module utility for producing a new random position for the Enemy when required */
 const randomPosition = (game: Game): Vec2 => {
-    return new Vec2(Random.between(50, game.getWidth() - 50), Random.between(50, game.getHeight() - 50))
+    return new Vec2(Random.between(50, game.width - 50), Random.between(50, game.height - 50))
 }
 
 /**
@@ -75,18 +75,18 @@ export const mainState = new State({
         }
 
         // wrap the player's position at screen edges
-        if (transform.position.x > game.getWidth()) {
+        if (transform.position.x > game.width) {
             transform.position.setX(0);
         }
         else if ((transform.position.x + transform.dimensions.x) < 0) {
-            transform.position.setX(game.getWidth());
+            transform.position.setX(game.width);
         }
 
-        if (transform.position.y > game.getHeight()) {
+        if (transform.position.y > game.height) {
             transform.position.setY(0);
         }
         else if ((transform.position.y + transform.dimensions.y) < 0) {
-            transform.position.setY(game.getHeight());
+            transform.position.setY(game.height);
         }
 
         // handle enemy respawns

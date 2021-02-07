@@ -150,7 +150,7 @@ export class EntityManager {
      * @returns the list of Entities with the tag
      */
     public filterEntitiesByTag(tag: string): Entity[] {
-        return this.entities.filter((e) => e.getTag() === tag);
+        return this.entities.filter((e) => e.tag === tag);
     }
 
     /**

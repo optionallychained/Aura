@@ -59,7 +59,7 @@ export class Game {
      *
      * @param config optional configuration
      */
-    constructor(private config?: GameConfig) {
+    constructor(private readonly config?: GameConfig) {
         let canvas = document.getElementById(config?.canvasId ?? '') as HTMLCanvasElement | null;
 
         if (!canvas) {
@@ -77,6 +77,24 @@ export class Game {
         this.renderer = new CanvasRenderer(canvas);
         this.entityManager = new EntityManager(this.renderer);
         this.inputManager = new InputManager(canvas, config?.controlScheme ?? 'keyboard');
+    }
+
+    /**
+     * Getter for the Canvas' width
+     *
+     * @returns the width of the Canvas
+     */
+    public get width(): number {
+        return this.canvas.width;
+    }
+
+    /**
+     * Getter for the Canvas' height
+     *
+     * @returns the height of the Canvas
+     */
+    public get height(): number {
+        return this.canvas.height;
     }
 
     /**
@@ -100,7 +118,7 @@ export class Game {
      * @param state the State to add
      */
     public addState(state: State): void {
-        this.states.set(state.getName(), state);
+        this.states.set(state.name, state);
     }
 
     /**
@@ -138,7 +156,7 @@ export class Game {
      * @param system the System to add
      */
     public addSystem(system: System): void {
-        this.systems.set(system.getName(), system);
+        this.systems.set(system.name, system);
     }
 
     /**
@@ -174,24 +192,6 @@ export class Game {
         for (const name of names) {
             this.removeSystem(name);
         }
-    }
-
-    /**
-     * Getter for the Canvas' width
-     *
-     * @returns the width of the Canvas
-     */
-    public getWidth(): number {
-        return this.canvas.width;
-    }
-
-    /**
-     * Getter for the Canvas' height
-     *
-     * @returns the height of the Canvas
-     */
-    public getHeight(): number {
-        return this.canvas.height;
     }
 
     /**
@@ -256,7 +256,7 @@ export class Game {
             }
 
             // render the frames
-            this.renderer.renderText(`fps: ${this.debugData.fps}`, new Vec2(this.getWidth() - 125, 25));
+            this.renderer.renderText(`fps: ${this.debugData.fps}`, new Vec2(this.width - 125, 25));
         }
 
         requestAnimationFrame(this.run.bind(this));

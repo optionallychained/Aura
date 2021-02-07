@@ -13,7 +13,7 @@ import { EntityConfig } from './entity.config';
 export class Entity {
 
     /** Unique id for the Entity */
-    private id = (+new Date()).toString(16) + (Math.random() * 10000000 | 0).toString(16);
+    public id = (+new Date()).toString(16) + (Math.random() * 10000000 | 0).toString(16);
 
     /** Entity Components, mapped by their name for simple management */
     private components = new Map<string, Component>();
@@ -23,7 +23,7 @@ export class Entity {
      *
      * @param config entity configuration
      */
-    constructor(private config: EntityConfig) {
+    constructor(private readonly config: EntityConfig) {
         if (config.components) {
             this.addComponents(config.components);
         }
@@ -34,7 +34,7 @@ export class Entity {
      *
      * @returns the Entity's tag
      */
-    public getTag(): string {
+    public get tag(): string {
         return this.config.tag;
     }
 
@@ -71,7 +71,7 @@ export class Entity {
      * @param component the Component to add
      */
     public addComponent(component: Component): void {
-        this.components.set(component.getName(), component);
+        this.components.set(component.name, component);
     }
 
     /**

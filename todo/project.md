@@ -1,8 +1,8 @@
 # Project TODOs
 
 - [x] Initialise testing
-- [ ] Structuring for publish
-    - [ ] consider: barrels?
-    - [ ] consider: compilation target? - ESM/Common/maybe even just publish-as-TS?
-    - [ ] consider: relative vs absolute imports for engine/demo (paths/aliases)
-    - [ ] want: tree shaking for demo/consumer build
+- [x] ~~Structuring for publish~~
+    - [x] ~~consider: barrels?~~
+    - [x] ~~consider: compilation target? - ESM/Common/maybe even just publish-as-TS?~~
+    - [x] ~~consider: relative vs absolute imports for engine/demo (paths/aliases)~~
+    - [x] ~~want: tree shaking for demo/consumer build~~

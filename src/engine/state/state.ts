@@ -17,7 +17,16 @@ export class State {
      *
      * @param config the State's configuration
      */
-    constructor(private config: StateConfig) { }
+    constructor(private readonly config: StateConfig) { }
+
+    /**
+     * Getter for the State's name, as provided in its Config
+     *
+     * @returns the State's name
+     */
+    public get name(): string {
+        return this.config.name;
+    }
 
     /**
      * State initialisation method, called when the State is 'switched to' by the Game.
@@ -51,14 +60,5 @@ export class State {
      */
     public end(game: Game): void {
         this.config.end?.(game);
-    }
-
-    /**
-     * Getter for the State's name, as provided in its Config
-     *
-     * @returns the State's name
-     */
-    public getName(): string {
-        return this.config.name;
     }
 }

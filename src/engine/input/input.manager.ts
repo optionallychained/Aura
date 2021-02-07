@@ -41,7 +41,7 @@ export class InputManager {
      * @param canvas the Canvas
      * @param controlScheme the ControlScheme given to the Game's Config, used for optimising event registration and handling
      */
-    constructor(private canvas: HTMLCanvasElement, controlScheme: GameConfig['controlScheme']) {
+    constructor(private readonly canvas: HTMLCanvasElement, private readonly controlScheme: GameConfig['controlScheme']) {
         this.init(controlScheme);
     }
 

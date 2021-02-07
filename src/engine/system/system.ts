@@ -22,7 +22,7 @@ export abstract class System {
      *
      * @param name the System's name
      */
-    constructor(protected name: string) { }
+    constructor(public readonly name: string) { }
 
     /**
      * Abstract update function called by the Game on a per-frame basis when the System is active. The functional body of the System itself
@@ -31,13 +31,4 @@ export abstract class System {
      * @param frameDelta the time between the last frame and the current, for normalizing time-dependent operations
      */
     public abstract tick(game: Game, frameDelta: number): void;
-
-    /**
-     * Getter for the System's name
-     *
-     * @returns the System's name
-     */
-    public getName(): string {
-        return this.name;
-    }
 }
