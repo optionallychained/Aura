@@ -1,4 +1,4 @@
-import { CanvasRenderer } from '../screen/canvas.renderer';
+import { WebGLRenderer } from '../screen/webgl.renderer';
 import { FlatColor } from './component/flatColor.component';
 import { Transform } from './component/transform.component';
 import { Entity } from './entity';
@@ -28,7 +28,7 @@ export class EntityManager {
      *
      * @param renderer the renderer
      */
-    constructor(private renderer: CanvasRenderer) { }
+    constructor(private renderer: WebGLRenderer) { }
 
     /**
      * Add an Entity to the addList
@@ -106,7 +106,8 @@ export class EntityManager {
             const transform = e.getComponent<Transform>('Transform');
             const flatColor = e.getComponent<FlatColor>('FlatColor');
 
-            this.renderer.renderRect(transform.position, transform.dimensions, flatColor.color);
+            // TODO
+            // this.renderer.renderRect(transform.position, transform.dimensions, flatColor.color);
         }
     }
 

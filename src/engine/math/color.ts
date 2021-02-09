@@ -97,4 +97,25 @@ export class Color {
     public get hex(): string {
         return `#${Color.toHex(this.r)}${Color.toHex(this.g)}${Color.toHex(this.b)}`;
     }
+
+    /**
+     * Getter for the gl-compatible clamped form of the Color's r number (0 -> 1)
+     */
+    public get rf(): number {
+        return this.r / 255;
+    }
+
+    /**
+     * Getter for the gl-compatible clamped form of the Color's g number (0 -> 1)
+     */
+    public get gf(): number {
+        return this.g / 255;
+    }
+
+    /**
+     * Getter for the gl-compatible clamped form of the Color's b number (0 -> 1)
+     */
+    public get bf(): number {
+        return this.b / 255;
+    }
 }

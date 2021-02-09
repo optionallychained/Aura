@@ -1,8 +1,7 @@
 import { EntityManager } from '../entity/entity.manager';
 import { InputManager } from '../input/input.manager';
 import { Color } from '../math/color';
-import { Vec2 } from '../math/vec2';
-import { CanvasRenderer } from '../screen/canvas.renderer';
+import { WebGLRenderer } from '../screen/webgl.renderer';
 import { State } from '../state/state';
 import { System } from '../system/system';
 import { GameConfig } from './game.config';
@@ -27,7 +26,7 @@ export class Game {
     private canvas: HTMLCanvasElement;
 
     /** Renderer */
-    private renderer: CanvasRenderer;
+    private renderer: WebGLRenderer;
 
     /** Frame time calculation utilities */
     private frameDelta = 0;
@@ -74,7 +73,7 @@ export class Game {
 
         this.background = config?.backgroundColor ?? new Color();
 
-        this.renderer = new CanvasRenderer(canvas);
+        this.renderer = new WebGLRenderer(canvas);
         this.entityManager = new EntityManager(this.renderer);
         this.inputManager = new InputManager(canvas, config?.controlScheme ?? 'keyboard');
     }
@@ -219,10 +218,10 @@ export class Game {
         return this.data.get(key) as T;
     }
 
-    /** TODO temporary - to be supplanted by TextManager */
-    public renderText(text: string, position?: Vec2, color?: Color): void {
-        this.renderer.renderText(text, position, color);
-    }
+    // /** TODO temporary - to be supplanted by TextManager */
+    // public renderText(text: string, position?: Vec2, color?: Color): void {
+    //     this.renderer.renderText(text, position, color);
+    // }
 
     /**
      * Main Game execution method, representing a single frame.
@@ -256,7 +255,8 @@ export class Game {
             }
 
             // render the frames
-            this.renderer.renderText(`fps: ${this.debugData.fps}`, new Vec2(this.width - 125, 25));
+            // TODO
+            // this.renderer.renderText(`fps: ${this.debugData.fps}`, new Vec2(this.width - 125, 25));
         }
 
         requestAnimationFrame(this.run.bind(this));

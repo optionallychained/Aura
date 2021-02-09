@@ -46,7 +46,7 @@ export const mainState = new State({
         const { entityManager, inputManager } = game;
 
         // render the player's points to the screen
-        game.renderText(`Points: ${game.getData<number>('points') ?? 0}`);
+        // game.renderText(`Points: ${game.getData<number>('points') ?? 0}`);
 
         // kind of dirty method of retrieving and operating on the player; to be improved
         const player = entityManager.filterEntitiesByTag('player')[0];

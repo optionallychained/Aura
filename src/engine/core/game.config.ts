@@ -16,6 +16,9 @@ export interface GameConfig {
     backgroundColor?: Color;
     /** Game control scheme, used to optimise InputManager event registrations; default value is 'keyboard' */
     controlScheme?: 'keyboard' | 'mouse' | 'both'
+    /** Game render target, selecting either webgl or canvas; default value is 'webgl' */
+    // TODO for the future
+    //renderTarget: 'webgl' | 'canvas';
     /** Debug mode, enabling the display of frame data and potentially other useful stuff in the future; default value is false */
     debugMode?: boolean;
     /** Game init function; none is provided by default */
