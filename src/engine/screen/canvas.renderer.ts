@@ -19,9 +19,15 @@ export class CanvasRenderer {
      * @param canvas the Canvas
      */
     constructor(private readonly canvas: HTMLCanvasElement) {
-        this.ctx = canvas.getContext('2d')!; //dumb assertion for now
+        const ctx = canvas.getContext('2d');
 
-        this.ctx.font = '24px monospace';
+        if (!ctx) {
+            throw Error('No Canvas2D Context support');
+        }
+
+        ctx.font = '24px monospace';
+
+        this.ctx = ctx;
     }
 
     /**
