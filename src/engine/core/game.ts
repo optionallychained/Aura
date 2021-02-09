@@ -1,6 +1,7 @@
 import { EntityManager } from '../entity/entity.manager';
 import { InputManager } from '../input/input.manager';
 import { Color } from '../math/color';
+import { ShaderProgram } from '../screen/shaders/shaderProgram';
 import { WebGLRenderer } from '../screen/webgl.renderer';
 import { State } from '../state/state';
 import { System } from '../system/system';
@@ -216,6 +217,10 @@ export class Game {
      */
     public getData<T>(key: string): T {
         return this.data.get(key) as T;
+    }
+
+    public addShader(shader: ShaderProgram): void {
+        this.renderer.createShaderProgram(shader);
     }
 
     // /** TODO temporary - to be supplanted by TextManager */

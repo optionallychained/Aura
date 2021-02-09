@@ -1,5 +1,7 @@
 import { WebGLRenderer } from '../screen/webgl.renderer';
 import { FlatColor } from './component/flatColor.component';
+import { Model } from './component/model.component';
+import { Shader } from './component/shader.component';
 import { Transform } from './component/transform.component';
 import { Entity } from './entity';
 
@@ -23,12 +25,16 @@ export class EntityManager {
     /** List of Entities to be added on the next frame */
     private addList: Entity[] = [];
 
+    private VBOName = 'EntityVBO';
+
     /**
      * Constructor. Take and store the Game's Renderer instance
      *
      * @param renderer the renderer
      */
-    constructor(private renderer: WebGLRenderer) { }
+    constructor(private renderer: WebGLRenderer) {
+        renderer.createVBO(this.VBOName);
+    }
 
     /**
      * Add an Entity to the addList
@@ -100,14 +106,31 @@ export class EntityManager {
      */
     public render(): void {
         // to render, an Entity must have a Transform (position and dimensions within the world) and (for now) a FlatColor
-        const renderables = this.filterEntitiesByComponents(['FlatColor', 'Transform']);
+        const renderables = this.filterEntitiesByComponents(['Transform', 'Model', 'Shader']);
 
         for (const e of renderables) {
             const transform = e.getComponent<Transform>('Transform');
-            const flatColor = e.getComponent<FlatColor>('FlatColor');
+            const model = e.getComponent<Model>('Model');
+            const shader = e.getComponent<Shader>('Shader');
 
-            // TODO
-            // this.renderer.renderRect(transform.position, transform.dimensions, flatColor.color);
+            let vertices: number[] = [];
+
+            for (const v of model.vertices) {
+                vertices = vertices.concat(v.array);
+            }
+
+            this.renderer.render({
+                VBOName: this.VBOName,
+                shaderProgramName: shader.programName,
+                vertices: Float32Array.from(vertices),
+                glShape: model.glShape,
+                // TODO temporary
+                attributes: {
+                    a_Position: 2
+                },
+                vertSize: 2,
+                vertCount: 3
+            });
         }
     }
 
