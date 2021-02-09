@@ -1,4 +1,6 @@
-import { Color, Game } from '../engine/protogl';
+import { Game } from '../engine/protogl';
+import { FRAGMENT_BASIC } from '../engine/screen/shaders/frag/fragment.basic';
+import { VERTEX_BASIC } from '../engine/screen/shaders/vert/vertex.basic';
 import { mainState } from './state/main';
 import { winState } from './state/win';
 
@@ -7,8 +9,13 @@ const game = new Game({
     width: 800,
     height: 600,
     debugMode: true,
-    init: () => { console.log('GAME -> init') },
-    backgroundColor: new Color(150, 150, 150)
+    init: () => { console.log('GAME -> init') }
+});
+
+game.addShader({
+    name: 'basic',
+    vertexSource: VERTEX_BASIC,
+    fragmentSource: FRAGMENT_BASIC
 });
 
 // add our States to the Game
