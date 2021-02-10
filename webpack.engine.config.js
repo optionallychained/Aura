@@ -4,7 +4,7 @@ const path = require('path');
 
 module.exports = {
     mode: 'production',
-    entry: './src/engine/protogl.ts',
+    entry: './src/engine/index.ts',
     module: {
         rules: [
             {

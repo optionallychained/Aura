@@ -1,6 +1,6 @@
 {
     "entryPoints": [
-        "./src/engine/protogl.ts"
+        "./src/engine/index.ts"
     ],
     "out": "./docs/api",
     "theme": "default",
