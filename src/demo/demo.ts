@@ -1,4 +1,4 @@
-import { FragmentShaders, Game, VertexShaders } from '../engine/protogl';
+import { Game, ShaderPrograms } from '../engine/protogl';
 import { mainState } from './state/main';
 import { winState } from './state/win';
 
@@ -10,11 +10,7 @@ const game = new Game({
     init: () => { console.log('GAME -> init') }
 });
 
-game.addShader({
-    name: 'basic',
-    vertexSource: VertexShaders.VERTEX_BASIC,
-    fragmentSource: FragmentShaders.FRAGMENT_BASIC
-});
+game.addShader(ShaderPrograms.PROGRAM_BASIC);
 
 // add our States to the Game
 game.addStates(mainState, winState);

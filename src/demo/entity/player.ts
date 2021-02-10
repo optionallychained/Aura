@@ -1,4 +1,4 @@
-import { AABBCollisionBox, Entity, FlatColor, Geometry, Model, Shader, Transform, Vec2 } from '../../engine/protogl';
+import { AABBCollisionBox, Entity, FlatColor, Geometry, Model, Shader, ShaderPrograms, Transform, Vec2 } from '../../engine/protogl';
 
 /**
  * Player Entity for the Game, composed of FlatColor, Transform and AABBCollisionBox Components
@@ -10,7 +10,7 @@ export const player = new Entity({
         new Transform(new Vec2(100, 100), new Vec2(50, 50)),
 
         new Model(new Geometry.Triangle()),
-        new Shader('basic'),
+        new Shader(ShaderPrograms.PROGRAM_BASIC.name),
 
         new AABBCollisionBox(new Vec2(50, 50), (game) => {
             // when we collide, it'll be with an enemy; update the Game's points data

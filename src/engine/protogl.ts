@@ -38,7 +38,7 @@ export * from './screen/webgl.renderer';
 // group fragment shaders under a name to act like a package
 // TODO check efficiency/actual utility of this pattern
 // TODO check whether or not we actually wanna export internals (ShaderProgram)
-import { FRAGMENT_BASIC } from './screen/shaders/fragment/fragment.basic';
+import { FRAGMENT_BASIC } from './screen/shaders/fragment/basic.fragment';
 export const FragmentShaders = {
     FRAGMENT_BASIC
 };
@@ -46,9 +46,16 @@ export const FragmentShaders = {
 // group Vertex shaders under a name to act like a package
 // TODO check efficiency/actual utility of this pattern
 // TODO check whether or not we actually wanna export internals (ShaderProgram)
-import { VERTEX_BASIC } from './screen/shaders/vertex/vertex.basic';
+import { VERTEX_BASIC } from './screen/shaders/vertex/basic.vertex';
 export const VertexShaders = {
     VERTEX_BASIC
+};
+
+// group prebuilt shader programs under a name to act like a package
+// TODO check efficiency/actual utility of this pattern
+import { PROGRAM_BASIC } from './screen/shaders/programs/basic.program';
+export const ShaderPrograms = {
+    PROGRAM_BASIC
 };
 
 export * from './state/state.config';
