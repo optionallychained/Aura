@@ -1,4 +1,4 @@
-import { AABBCollisionBox, Color, Entity, FlatColor, Model, Shader, Transform, Triangle, Vec2 } from '../../engine/protogl';
+import { AABBCollisionBox, Color, Entity, FlatColor, Geometry, Model, Shader, Transform, Vec2 } from '../../engine/protogl';
 
 /**
  * Enemy Entity for the Game, composed of FlatColor, Transform and AABBCollisionBox Components
@@ -9,7 +9,7 @@ export const enemy = new Entity({
         new FlatColor(new Color(255, 0, 0)),
         new Transform(new Vec2(), new Vec2(25, 25)),
 
-        new Model(new Triangle()),
+        new Model(new Geometry.Triangle()),
         new Shader('basic'),
 
         new AABBCollisionBox(new Vec2(25, 25), (game) => {

@@ -11,9 +11,14 @@ export * from './entity/component/model.component';
 export * from './entity/component/shader.component';
 export * from './entity/component/transform.component';
 
-export * from './geometry/geometry';
-export * from './geometry/glShape';
-export * from './geometry/triangle.geometry';
+// group geometry under a name to act like a package
+// do not export internals Geometry and GLShape?
+// TODO check efficiency/actual utility of this pattern
+// TODO check whether or not we actually wanna export internals
+import { Triangle } from './geometry/triangle.geometry';
+export const Geometry = {
+    Triangle
+};
 
 export * from './input/input.manager';
 export * from './input/keys';
@@ -29,9 +34,22 @@ export * from './math/vec4';
 
 export * from './screen/webgl.renderer.config';
 export * from './screen/webgl.renderer';
-export * from './screen/shaders/shaderProgram';
-export * from './screen/shaders/fragment/fragment.basic';
-export * from './screen/shaders/vertex/vertex.basic';
+
+// group fragment shaders under a name to act like a package
+// TODO check efficiency/actual utility of this pattern
+// TODO check whether or not we actually wanna export internals (ShaderProgram)
+import { FRAGMENT_BASIC } from './screen/shaders/fragment/fragment.basic';
+export const FragmentShaders = {
+    FRAGMENT_BASIC
+};
+
+// group Vertex shaders under a name to act like a package
+// TODO check efficiency/actual utility of this pattern
+// TODO check whether or not we actually wanna export internals (ShaderProgram)
+import { VERTEX_BASIC } from './screen/shaders/vertex/vertex.basic';
+export const VertexShaders = {
+    VERTEX_BASIC
+};
 
 export * from './state/state.config';
 export * from './state/state';
