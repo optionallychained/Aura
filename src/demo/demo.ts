@@ -1,16 +1,16 @@
-import { Game, ShaderPrograms } from '../engine/protogl';
+import { Core, Screen } from '../engine';
 import { mainState } from './state/main';
 import { winState } from './state/win';
 
 // instantiate a Game (canvas is automatically created)
-const game = new Game({
+const game = new Core.Game({
     width: 800,
     height: 600,
     debugMode: true,
     init: () => { console.log('GAME -> init') }
 });
 
-game.addShader(ShaderPrograms.PROGRAM_BASIC);
+game.addShader(Screen.Shader.ShaderPrograms.PROGRAM_BASIC);
 
 // add our States to the Game
 game.addStates(mainState, winState);

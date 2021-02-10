@@ -1,7 +1,7 @@
 import { EntityManager } from '../entity/entity.manager';
 import { InputManager } from '../input/input.manager';
 import { Color } from '../math/color';
-import { ShaderProgram } from '../screen/shaders/shaderProgram';
+import { ShaderProgram } from '../screen/shader';
 import { WebGLRenderer } from '../screen/webgl.renderer';
 import { State } from '../state/state';
 import { System } from '../system/system';

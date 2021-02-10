@@ -6,8 +6,8 @@
         "type": "git",
         "url": "git://git@github.com/jonnopon/ProtoGL.git"
     },
-    "main": "publish/protogl.js",
-    "types": "publish/protogl.d.ts",
+    "main": "publish/index.js",
+    "types": "publish/index.d.ts",
     "files": [
         "publish/"
     ],

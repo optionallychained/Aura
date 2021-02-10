@@ -1,16 +1,16 @@
-import { CollisionSystem, Game, State, Keys, PhysicsSystem, Transform, Vec2, Random } from '../../engine/protogl';
+import { Core, Entity, Input, Math, State, System } from '../../engine';
 import { enemy } from '../entity/enemy';
 import { player } from '../entity/player';
 
 /** internal module utility for producing a new random position for the Enemy when required */
-const randomPosition = (game: Game): Vec2 => {
-    return new Vec2(Random.between(50, game.width - 50), Random.between(50, game.height - 50))
+const randomPosition = (game: Core.Game): Math.Vec2 => {
+    return new Math.Vec2(Math.Random.between(50, game.width - 50), Math.Random.between(50, game.height - 50))
 }
 
 /**
  * 'main' State for the Game, implementing the Game's playable state
  */
-export const mainState = new State({
+export const mainState = new State.State({
     name: 'main',
     // init; set up the State when transitioned to
     init: (game) => {
@@ -20,10 +20,10 @@ export const mainState = new State({
         game.setData('points', 0);
 
         // add the Physics and Collision Systems to the Game to enable behaviours
-        game.addSystems(new PhysicsSystem(), new CollisionSystem());
+        game.addSystems(new System.Physics(), new System.Collision());
 
         // randomly set the enemy's position
-        enemy.getComponent<Transform>('Transform').position = randomPosition(game);
+        enemy.getComponent<Entity.Component.Transform>('Transform').position = randomPosition(game);
 
         // add the player and enemy to the Game
         entityManager.addEntities(player, enemy);
@@ -31,7 +31,7 @@ export const mainState = new State({
     // end; clean up the State and the Game before transitioning to a new State
     end: (game) => {
         // reset the player's position and velocity
-        const playerTransform = player.getComponent<Transform>('Transform');
+        const playerTransform = player.getComponent<Entity.Component.Transform>('Transform');
         playerTransform.position.set(100, 100);
         playerTransform.velocity.set();
 
@@ -55,22 +55,22 @@ export const mainState = new State({
         }
 
         // retrieve the player's Transform Component
-        const transform = player.getComponent<Transform>('Transform');
+        const transform = player.getComponent<Entity.Component.Transform>('Transform');
 
         // implement player movement based on user input
-        if (inputManager.isKeyDown(Keys.A)) {
+        if (inputManager.isKeyDown(Input.Keys.A)) {
             transform.velocity.set(-500, 0);
         }
-        else if (inputManager.isKeyDown(Keys.D)) {
+        else if (inputManager.isKeyDown(Input.Keys.D)) {
             transform.velocity.set(500, 0);
         }
-        else if (inputManager.isKeyDown(Keys.W)) {
+        else if (inputManager.isKeyDown(Input.Keys.W)) {
             transform.velocity.set(0, -500);
         }
-        else if (inputManager.isKeyDown(Keys.S)) {
+        else if (inputManager.isKeyDown(Input.Keys.S)) {
             transform.velocity.set(0, 500);
         }
-        else if (inputManager.isKeyDown(Keys.SPACE)) {
+        else if (inputManager.isKeyDown(Input.Keys.SPACE)) {
             transform.velocity.set();
         }
 
@@ -91,7 +91,7 @@ export const mainState = new State({
 
         // handle enemy respawns
         if (entityManager.countEntities() === 1) {
-            enemy.getComponent<Transform>('Transform').position = randomPosition(game);
+            enemy.getComponent<Entity.Component.Transform>('Transform').position = randomPosition(game);
             entityManager.addEntity(enemy);
         }
 
