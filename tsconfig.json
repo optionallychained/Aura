@@ -8,5 +8,9 @@
         ],
         "sourceMap": true,
         "strict": true
-    }
+    },
+    "include": [
+        "src/demo/**/*.ts",
+        "src/engine/**/*.ts"
+    ]
 }

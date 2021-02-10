@@ -1,4 +1,4 @@
-import { State, Keys, Vec2 } from '../../engine/protogl';
+import { State, Keys } from '../../engine/protogl';
 
 /**
  * 'win' State for the Game, transitioned to on Game win and enabling transition back to 'main'

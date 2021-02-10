@@ -1,8 +1,6 @@
 import { WebGLRenderer } from '../screen/webgl.renderer';
-import { FlatColor } from './component/flatColor.component';
 import { Model } from './component/model.component';
 import { Shader } from './component/shader.component';
-import { Transform } from './component/transform.component';
 import { Entity } from './entity';
 
 /**
@@ -109,7 +107,6 @@ export class EntityManager {
         const renderables = this.filterEntitiesByComponents(['Transform', 'Model', 'Shader']);
 
         for (const e of renderables) {
-            const transform = e.getComponent<Transform>('Transform');
             const model = e.getComponent<Model>('Model');
             const shader = e.getComponent<Shader>('Shader');
 

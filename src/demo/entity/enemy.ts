@@ -1,7 +1,4 @@
-import { Model } from '../../engine/entity/component/model.component';
-import { Shader } from '../../engine/entity/component/shader.component';
-import { Triangle } from '../../engine/geometry/triangle.geometry';
-import { AABBCollisionBox, Color, Entity, FlatColor, Transform, Vec2 } from '../../engine/protogl';
+import { AABBCollisionBox, Color, Entity, FlatColor, Model, Shader, Transform, Triangle, Vec2 } from '../../engine/protogl';
 
 /**
  * Enemy Entity for the Game, composed of FlatColor, Transform and AABBCollisionBox Components

@@ -1,5 +1,4 @@
 import { Color } from '../../math/color';
-import { Vec3 } from '../../math/vec3';
 import { Component } from './component';
 
 /**

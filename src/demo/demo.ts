@@ -1,6 +1,4 @@
-import { Game } from '../engine/protogl';
-import { FRAGMENT_BASIC } from '../engine/screen/shaders/frag/fragment.basic';
-import { VERTEX_BASIC } from '../engine/screen/shaders/vert/vertex.basic';
+import { FRAGMENT_BASIC, Game, VERTEX_BASIC } from '../engine/protogl';
 import { mainState } from './state/main';
 import { winState } from './state/win';
 
