@@ -1,4 +1,4 @@
-import { Game } from '../core/game';
+import { Game } from '../core';
 
 /**
  * Abstract class representing a System; a distinct purposeful processing method that runs on a per-frame basis, operating on Entities to produce game behavior.

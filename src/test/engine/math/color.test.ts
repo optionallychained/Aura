@@ -1,4 +1,4 @@
-import { Color } from '../../../engine/protogl';
+import { Color } from '../../../engine';
 
 /**
  * Tests for class Color

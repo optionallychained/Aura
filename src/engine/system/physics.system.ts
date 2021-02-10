@@ -1,6 +1,6 @@
-import { Game } from '../core/game';
-import { Transform } from '../entity/component/transform.component';
-import { Vec2 } from '../math/vec2';
+import { Transform } from '../component';
+import { Game } from '../core';
+import { Vec2 } from '../math';
 import { System } from './system';
 
 /**

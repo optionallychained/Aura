@@ -1,7 +1,2 @@
-import { GameConfig } from './game.config';
-import { Game } from './game';
-
-export {
-    GameConfig,
-    Game
-};
+export * from './game.config';
+export * from './game';

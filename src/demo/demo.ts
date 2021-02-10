@@ -1,4 +1,4 @@
-import { Core, Screen } from '../engine';
+import { Core, Shader } from '../engine';
 import { mainState } from './state/main';
 import { winState } from './state/win';
 
@@ -10,7 +10,7 @@ const game = new Core.Game({
     init: () => { console.log('GAME -> init') }
 });
 
-game.addShader(Screen.Shader.ShaderPrograms.PROGRAM_BASIC);
+game.addShader(Shader.Program.PROGRAM_BASIC);
 
 // add our States to the Game
 game.addStates(mainState, winState);

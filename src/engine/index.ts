@@ -1,3 +1,5 @@
+export * as Component from './component';
+
 export * as Core from './core';
 
 export * as Entity from './entity';
@@ -6,18 +8,12 @@ export * as Geometry from './geometry';
 
 export * as Input from './input';
 
-// TODO maybe we wanna just expose these without packaging?
-export * as Math from './math';
-// export * from './math/angle';
-// export * from './math/color';
-// export * from './math/mat3';
-// export * from './math/mat4';
-// export * from './math/random';
-// export * from './math/vec2';
-// export * from './math/vec3';
-// export * from './math/vec4';
+// no name for math as we wanna be able to use them without namespacing
+export * from './math';
 
 export * as Screen from './screen';
+
+export * as Shader from './shader';
 
 export * as State from './state';
 

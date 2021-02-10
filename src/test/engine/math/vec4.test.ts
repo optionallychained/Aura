@@ -1,4 +1,4 @@
-import { Vec4 } from '../../../engine/protogl';
+import { Vec4 } from '../../../engine';
 
 /**
  * Tests for class Vec4

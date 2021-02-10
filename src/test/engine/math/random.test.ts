@@ -1,4 +1,4 @@
-import { Random } from '../../../engine/protogl';
+import { Random } from '../../../engine';
 
 /**
  * Tests for class Random

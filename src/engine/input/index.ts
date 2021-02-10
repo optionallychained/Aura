@@ -1,7 +1,2 @@
-import { InputManager } from './input.manager';
-import { Keys } from './keys';
-
-export {
-    InputManager,
-    Keys
-};
+export * from './input.manager';
+export * from './keys';

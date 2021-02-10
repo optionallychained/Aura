@@ -1,5 +1,5 @@
-import { Color } from '../math/color';
-import { ShaderProgram } from './shader';
+import { Color } from '../math';
+import { ShaderProgram } from '../shader';
 import { WebGLRendererConfig } from './webgl.renderer.config';
 
 /**

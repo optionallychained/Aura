@@ -1,6 +1,5 @@
-import { Geometry } from '../../geometry/geometry';
-import { GLShape } from '../../geometry/glShape';
-import { Vec2 } from '../../math/vec2';
+import { Geometry, GLShape } from '../geometry';
+import { Vec2 } from '../math';
 import { Component } from './component';
 
 export class Model extends Component implements Geometry {

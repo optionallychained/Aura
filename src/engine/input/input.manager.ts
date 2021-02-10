@@ -1,5 +1,5 @@
-import { GameConfig } from '../core/game.config';
-import { Vec2 } from '../math/vec2';
+import { GameConfig } from '../core';
+import { Vec2 } from '../math';
 import { Keys } from './keys';
 
 /**

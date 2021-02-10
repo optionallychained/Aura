@@ -1,4 +1,4 @@
-import { Game } from '../core/game';
+import { Game } from '../core';
 
 /**
  * Interface describing a State Configuration object

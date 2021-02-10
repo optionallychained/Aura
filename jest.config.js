@@ -1,5 +1,19 @@
 module.exports = {
     preset: 'ts-jest',
     collectCoverage: true,
-    coverageReporters: ['html', 'text-summary']
+    coverageReporters: ['html', 'text-summary'],
+    extraGlobals: [
+        "Math"
+    ],
+    globals: {
+        WebGLRenderingContext: {
+            POINTS: 0,
+            LINES: 1,
+            LINE_LOOP: 2,
+            LINE_STRIP: 3,
+            TRIANGLES: 4,
+            TRIANGLE_STRIP: 5,
+            TRIANGLE_FAN: 6
+        }
+    }
 };

@@ -1,9 +1,3 @@
-import { Geometry } from './geometry';
-import { GLShape } from './glShape';
-import { Triangle } from './triangle.geometry';
-
-export {
-    Geometry,
-    GLShape,
-    Triangle
-};
+export * from './geometry';
+export * from './glShape';
+export * from './triangle.geometry';

@@ -1,9 +1,4 @@
-import { CollisionSystem as Collision } from './collision.system';
-import { PhysicsSystem as Physics } from './physics.system';
-import { System } from './system';
+export * from './system';
 
-export {
-    Collision,
-    Physics,
-    System
-};
+export { CollisionSystem as Collision } from './collision.system';
+export { PhysicsSystem as Physics } from './physics.system';

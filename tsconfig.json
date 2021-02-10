@@ -11,6 +11,7 @@
     },
     "include": [
         "src/demo/**/*.ts",
-        "src/engine/**/*.ts"
+        "src/engine/**/*.ts",
+        "src/test/**/*.ts"
     ]
 }

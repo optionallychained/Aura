@@ -1,7 +1,2 @@
-import { StateConfig } from './state.config';
-import { State } from './state';
-
-export {
-    StateConfig,
-    State
-};
+export * from './state.config';
+export * from './state';

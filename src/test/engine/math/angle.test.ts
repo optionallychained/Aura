@@ -1,4 +1,4 @@
-import { Angle } from '../../../engine/protogl';
+import { Angle } from '../../../engine';
 
 /**
  * Tests for class Angle

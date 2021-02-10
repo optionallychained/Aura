@@ -1,6 +1,5 @@
-import { WebGLRenderer } from '../screen/webgl.renderer';
-import { Model } from './component/model.component';
-import { Shader } from './component/shader.component';
+import { Model, Shader } from '../component';
+import { WebGLRenderer } from '../screen';
 import { Entity } from './entity';
 
 /**

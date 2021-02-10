@@ -1,4 +1,4 @@
-import { Mat3, Vec2 } from '../../../engine/protogl';
+import { Mat3, Vec2 } from '../../../engine';
 
 /**
  * Tests for class Mat3

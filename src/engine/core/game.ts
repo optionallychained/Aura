@@ -1,10 +1,10 @@
-import { EntityManager } from '../entity/entity.manager';
-import { InputManager } from '../input/input.manager';
-import { Color } from '../math/color';
-import { ShaderProgram } from '../screen/shader';
-import { WebGLRenderer } from '../screen/webgl.renderer';
-import { State } from '../state/state';
-import { System } from '../system/system';
+import { EntityManager } from '../entity';
+import { InputManager } from '../input';
+import { Color } from '../math';
+import { WebGLRenderer } from '../screen';
+import { ShaderProgram } from '../shader';
+import { State } from '../state';
+import { System } from '../system';
 import { GameConfig } from './game.config';
 
 /**

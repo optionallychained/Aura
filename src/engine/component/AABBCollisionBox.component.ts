@@ -1,6 +1,6 @@
-import { Game } from '../../core/game';
-import { Vec2 } from '../../math/vec2';
+import { Game } from '../core';
 import { Entity } from '../entity';
+import { Vec2 } from '../math';
 import { Component } from './component';
 
 /**

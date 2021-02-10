@@ -1,4 +1,4 @@
-import { GLShape } from '../geometry/glShape';
+import { GLShape } from '../geometry';
 
 export interface WebGLRendererConfig {
     VBOName: string;

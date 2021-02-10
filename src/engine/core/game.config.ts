@@ -1,4 +1,4 @@
-import { Color } from '../math/color';
+import { Color } from '../math';
 
 /**
  * Interface desciribing the main Game Configuration object
