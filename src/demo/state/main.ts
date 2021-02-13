@@ -1,4 +1,4 @@
-import { Component, Core, Input, Random, State, System, Vec2 } from '../../engine';
+import { Angle, Component, Core, Input, Mat3, Random, State, System, Vec2 } from '../../engine';
 import { enemy } from '../entity/enemy';
 import { player } from '../entity/player';
 
@@ -88,6 +88,14 @@ export const mainState = new State.State({
         else if ((transform.position.y + transform.dimensions.y) < 0) {
             transform.position.setY(game.height);
         }
+
+        transform.transform = Mat3.rotate(transform.transform, Angle.toRadians(1));
+        transform.transform = Mat3.scale(transform.transform, new Vec2(1.002, 1.002));
+        // transform.transform = Mat3.translate(transform.transform, new Vec2(-0.01, -0.01))
+
+        const eTransform = enemy.getComponent<Component.Transform>('Transform');
+        eTransform.transform = Mat3.rotate(eTransform.transform, Angle.toRadians(-1));
+        eTransform.transform = Mat3.scale(eTransform.transform, new Vec2(1.001, 1.001));
 
         // handle enemy respawns
         if (entityManager.countEntities() === 1) {
