@@ -1,4 +1,4 @@
-import { Vec2 } from '../math';
+import { Mat3, Vec2 } from '../math';
 import { Component } from './component';
 
 /**
@@ -9,6 +9,9 @@ import { Component } from './component';
  * @see PhysicsSystem
  */
 export class Transform extends Component {
+
+    /** Transform Matrix for representing Entity transformations */
+    public transform = new Mat3();
 
     /**
      * Constructor. Take and store the position, dimensions and velocity, and provide the name 'Transform' to the parent class

@@ -10,6 +10,13 @@ export interface WebGLRendererConfig {
 
     attributes: { [key: string]: number };
 
+    uniforms: {
+        [key: string]: {
+            type: 'mat3' | 'vec4', // TODO
+            value: Float32Array
+        }
+    };
+
     vertSize: number;
     vertCount: number;
 }

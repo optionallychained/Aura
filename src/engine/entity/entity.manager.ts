@@ -1,4 +1,4 @@
-import { Model, Shader } from '../component';
+import { FlatColor, Model, Shader, Transform } from '../component';
 import { WebGLRenderer } from '../screen';
 import { Entity } from './entity';
 
@@ -103,11 +103,13 @@ export class EntityManager {
      */
     public render(): void {
         // to render, an Entity must have a Transform (position and dimensions within the world) and (for now) a FlatColor
-        const renderables = this.filterEntitiesByComponents(['Transform', 'Model', 'Shader']);
+        const renderables = this.filterEntitiesByComponents(['Transform', 'Model', 'Shader', 'FlatColor']);
 
         for (const e of renderables) {
+            const transform = e.getComponent<Transform>('Transform');
             const model = e.getComponent<Model>('Model');
             const shader = e.getComponent<Shader>('Shader');
+            const flatColor = e.getComponent<FlatColor>('FlatColor');
 
             let vertices: number[] = [];
 
@@ -124,8 +126,18 @@ export class EntityManager {
                 attributes: {
                     a_Position: 2
                 },
-                vertSize: 2,
-                vertCount: 3
+                uniforms: {
+                    u_Transform: {
+                        type: 'mat3',
+                        value: transform.transform.float32Array
+                    },
+                    u_Color: {
+                        type: 'vec4',
+                        value: flatColor.color.float32Array
+                    }
+                },
+                vertSize: model.vertSize,
+                vertCount: model.vertCount
             });
         }
     }
