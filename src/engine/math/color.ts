@@ -99,6 +99,13 @@ export class Color {
     }
 
     /**
+     * Getter for the GL-friendly Float32Array form of the Color
+     */
+    public get float32Array(): Float32Array {
+        return Float32Array.from([this.rf, this.gf, this.bf, this.a ?? 1]);
+    }
+
+    /**
      * Getter for the gl-compatible clamped form of the Color's r number (0 -> 1)
      */
     public get rf(): number {

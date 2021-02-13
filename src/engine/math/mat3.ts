@@ -227,13 +227,13 @@ export class Mat3 {
             v20 = v[6], v21 = v[7], v22 = v[8];
 
         return new Mat3([
-            cos * v00 + sin * v10,
-            cos * v01 + sin * v11,
-            cos * v02 + sin * v12,
+            cos * v00 - sin * v10,
+            cos * v01 - sin * v11,
+            cos * v02 - sin * v12,
 
-            cos * v10 - sin * v00,
-            cos * v11 - sin * v01,
-            cos * v12 - sin * v02,
+            cos * v10 + sin * v00,
+            cos * v11 + sin * v01,
+            cos * v12 + sin * v02,
 
             v20, v21, v22
         ]);
