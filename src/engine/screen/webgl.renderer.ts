@@ -33,11 +33,12 @@ export class WebGLRenderer {
     private activeVBO: WebGLBuffer = 0;
 
     /**
-     * Constructor. Retrieve and store the WebGLRenderingContext from the given Canvas
+     * Constructor. Retrieve and store the WebGLRenderingContext from the given Canvas, then perform one-time setup of the context
      *
      * @param canvas the Canvas we're drawing to
+     * @param clearColor the Game's background color, to be set as the gl clearColor once on init
      */
-    constructor(private readonly canvas: HTMLCanvasElement) {
+    constructor(private readonly canvas: HTMLCanvasElement, private readonly clearColor: Color) {
         const gl = canvas.getContext('webgl');
 
         if (!gl) {
@@ -45,15 +46,14 @@ export class WebGLRenderer {
         }
 
         this.gl = gl;
+
+        this.init();
     }
 
     /**
-     * Clear the screen to the given background Color
-     *
-     * @param color the background Color to clear to
+     * Clear the screen to the previously-configured clearColor
      */
-    public clearScreen(color: Color): void {
-        this.gl.clearColor(color.rf, color.gf, color.bf, 1.0);
+    public clearScreen(): void {
         this.gl.clear(this.gl.COLOR_BUFFER_BIT);
     }
 
@@ -130,6 +130,7 @@ export class WebGLRenderer {
         for (const attr of Object.keys(config.attributes)) {
             const size = config.attributes[attr];
 
+            // per-shader-program, the location of attributes never changes; this can be done once, maybe as part of building a shader
             const attributeLocation = gl.getAttribLocation(this.activeShaderProgram, attr);
             gl.enableVertexAttribArray(attributeLocation);
             gl.vertexAttribPointer(attributeLocation, size, gl.FLOAT, false, config.vertSize * 4, offset);
@@ -140,6 +141,7 @@ export class WebGLRenderer {
         for (const uniform of Object.keys(config.uniforms)) {
             const val = config.uniforms[uniform];
 
+            // per-shader-program, the location of attributes never changes; this can be done once, maybe as part of building a shader
             const uniformLocation = gl.getUniformLocation(this.activeShaderProgram, uniform);
             switch (val.type) {
                 case 'mat3':
@@ -158,7 +160,21 @@ export class WebGLRenderer {
     }
 
     /**
-     * Internal use single-shader compilation routine for registering and compiling the individual Vertex and Fragment aspects of a ShaderProgram
+     * Internal-use GL configuration routine; set flags and enable features once at application initialisation
+     */
+    private init(): void {
+        const { gl } = this;
+
+        // set clear color
+        this.gl.clearColor(this.clearColor.rf, this.clearColor.gf, this.clearColor.bf, this.clearColor.a);
+
+        // enable transparency
+        gl.enable(gl.BLEND);
+        gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+    }
+
+    /**
+     * Internal-use single-shader compilation routine for registering and compiling the individual Vertex and Fragment aspects of a ShaderProgram
      *
      * @param type the gl numerical type of the shader to create; either gl.VERTEX_SHADER or gl.FRAGMENT_SHADER
      * @param src the source of the shader to compile

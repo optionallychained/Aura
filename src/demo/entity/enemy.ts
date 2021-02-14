@@ -6,7 +6,7 @@ import { Color, Component, Entity, Geometry, Shader, Vec2 } from '../../engine';
 export const enemy = new Entity.Entity({
     tag: 'enemy',
     components: [
-        new Component.FlatColor(new Color(255, 0, 0)),
+        new Component.FlatColor(new Color(255, 0, 0, 0.5)),
         new Component.Transform(new Vec2(), new Vec2(25, 25)),
 
         new Component.Model(new Geometry.Triangle()),

@@ -33,9 +33,6 @@ export class Game {
     private frameDelta = 0;
     private lastFrameTime = 0;
 
-    /** Background colour for the Canvas */
-    private background: Color;
-
     /** Game States, mapped by their name for simple management */
     private states = new Map<string, State>();
 
@@ -72,9 +69,7 @@ export class Game {
 
         this.canvas = canvas;
 
-        this.background = config?.backgroundColor ?? new Color();
-
-        this.renderer = new WebGLRenderer(canvas);
+        this.renderer = new WebGLRenderer(canvas, config?.backgroundColor ?? new Color());
         this.entityManager = new EntityManager(this.renderer);
         this.inputManager = new InputManager(canvas, config?.controlScheme ?? 'keyboard');
     }
@@ -237,7 +232,7 @@ export class Game {
         this.frameDelta = Date.now() - this.lastFrameTime;
         this.lastFrameTime = Date.now();
 
-        this.renderer.clearScreen(this.background);
+        this.renderer.clearScreen();
 
         this.systems.forEach((s) => {
             s.tick(this, this.frameDelta);
