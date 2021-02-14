@@ -9,7 +9,7 @@ export const enemy = new Entity.Entity({
         new Component.FlatColor(new Color(255, 0, 0, 0.5)),
         new Component.Transform(new Vec2(), new Vec2(25, 25)),
 
-        new Component.Model(new Geometry.Triangle()),
+        new Component.Model(new Geometry.TwoD.Triangle()),
         new Component.Shader(Shader.Program.PROGRAM_BASIC.name),
 
         new Component.AABBCollisionBox(new Vec2(25, 25), (game) => {

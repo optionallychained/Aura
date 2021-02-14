@@ -1,6 +1,6 @@
-import { Vec2 } from '../math';
-import { Geometry } from './geometry';
-import { GLShape } from './glShape';
+import { Vec2 } from '../../math';
+import { Geometry } from '../geometry';
+import { GLShape } from '../glShape';
 
 export class Triangle implements Geometry {
     public vertices = [
@@ -12,5 +12,5 @@ export class Triangle implements Geometry {
     public glShape = GLShape.TRIANGLES;
 
     public vertSize = 2;
-    public vertCount = 3;
+    public vertCount = this.vertices.length;
 }

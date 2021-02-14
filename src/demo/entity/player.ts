@@ -9,7 +9,7 @@ export const player = new Entity.Entity({
         new Component.FlatColor(new Color(255, 255, 0, 1)),
         new Component.Transform(new Vec2(100, 100), new Vec2(50, 50)),
 
-        new Component.Model(new Geometry.Rect()),
+        new Component.Model(new Geometry.TwoD.Wireframe.Rect()),
         new Component.Shader(Shader.Program.PROGRAM_BASIC.name),
 
         new Component.AABBCollisionBox(new Vec2(50, 50), (game) => {
