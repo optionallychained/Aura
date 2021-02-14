@@ -20,10 +20,10 @@ export const mainState = new State.State({
         game.setData('points', 0);
 
         // add the Physics and Collision Systems to the Game to enable behaviours
-        game.addSystems(new System.Physics(), new System.Collision());
+        // game.addSystems(new System.Physics(), new System.Collision());
 
         // randomly set the enemy's position
-        enemy.getComponent<Component.Transform>('Transform').position = randomPosition(game);
+        // enemy.getComponent<Component.Transform>('Transform').position = randomPosition(game);
 
         // add the player and enemy to the Game
         entityManager.addEntities(player, enemy);
@@ -32,7 +32,7 @@ export const mainState = new State.State({
     end: (game) => {
         // reset the player's position and velocity
         const playerTransform = player.getComponent<Component.Transform>('Transform');
-        playerTransform.position.set(100, 100);
+        // playerTransform.position.set(100, 100);
         playerTransform.velocity.set();
 
         // remove the Physics and Collision systems from the game
@@ -91,16 +91,15 @@ export const mainState = new State.State({
 
         transform.transform = Mat3.rotate(transform.transform, Angle.toRadians(1));
         transform.transform = Mat3.scale(transform.transform, new Vec2(1.002, 1.002));
-        // transform.transform = Mat3.translate(transform.transform, new Vec2(-0.01, -0.01))
 
         const eTransform = enemy.getComponent<Component.Transform>('Transform');
-        eTransform.transform = Mat3.rotate(eTransform.transform, Angle.toRadians(-1));
-        eTransform.transform = Mat3.scale(eTransform.transform, new Vec2(1.001, 1.001));
+        eTransform.transform = Mat3.rotate(eTransform.transform, Angle.toRadians(1));
+        eTransform.transform = Mat3.scale(eTransform.transform, new Vec2(1.002, 1.002));
 
         // handle enemy respawns
         if (entityManager.countEntities() === 1) {
-            enemy.getComponent<Component.Transform>('Transform').position = randomPosition(game);
-            entityManager.addEntity(enemy);
+            // enemy.getComponent<Component.Transform>('Transform').position = randomPosition(game);
+            // entityManager.addEntity(enemy);
         }
 
         // handle transitioning to the 'win' State when the player gets 10 points

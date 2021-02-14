@@ -1,11 +1,11 @@
-import { Core, Shader } from '../engine';
+import { Core, Shader, Vec2 } from '../engine';
 import { mainState } from './state/main';
 import { winState } from './state/win';
 
 // instantiate a Game (canvas is automatically created)
 const game = new Core.Game({
-    width: 800,
-    height: 600,
+    canvasDimensions: new Vec2(800, 600),
+
     debugMode: true,
     init: () => { console.log('GAME -> init') }
 });

@@ -64,8 +64,8 @@ export class Game {
             document.body.append(canvas);
         }
 
-        canvas.width = config?.width ?? window.innerWidth;
-        canvas.height = config?.height ?? window.innerHeight;
+        canvas.width = config?.canvasDimensions?.x ?? window.innerWidth;
+        canvas.height = config?.canvasDimensions?.y ?? window.innerHeight;
 
         this.canvas = canvas;
 

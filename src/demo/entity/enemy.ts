@@ -7,7 +7,7 @@ export const enemy = new Entity.Entity({
     tag: 'enemy',
     components: [
         new Component.FlatColor(new Color(255, 0, 0, 0.5)),
-        new Component.Transform(new Vec2(), new Vec2(25, 25)),
+        new Component.Transform(new Vec2(0.25, 0.25), new Vec2(25, 25)),
 
         new Component.Model(new Geometry.TwoD.Triangle()),
         new Component.Shader(Shader.Program.PROGRAM_BASIC.name),

@@ -22,6 +22,7 @@ export class EntityManager {
     /** List of Entities to be added on the next frame */
     private addList: Entity[] = [];
 
+    /** Name of the VBO the EntityManager will use for GPU bound data */
     private VBOName = 'EntityVBO';
 
     /**

@@ -1,4 +1,4 @@
-import { Color } from '../math';
+import { Color, Vec2 } from '../math';
 
 /**
  * Interface desciribing the main Game Configuration object
@@ -6,10 +6,8 @@ import { Color } from '../math';
  * // TODO potentially take controlScheme out of here and into its own structure (see InputManager)
  */
 export interface GameConfig {
-    /** Game window width; default value is window.innerWidth */
-    width?: number;
-    /** Game window height; default value is window.innerHeight */
-    height?: number;
+    /** Game Canvas dimensions; default value is (window.innerWidth, window.innerHeight) */
+    canvasDimensions?: Vec2;
     /** Game Canvas ID. If not provided, a Canvas will be created */
     canvasId?: string;
     /** Game background color; default value is black */
