@@ -72,23 +72,20 @@ export class Color {
     }
 
     /**
-     * Constructor. Take and store the Color's r, g, b and optionally a properties
+     * Constructor. Take and store the Color's r, g, b and a properties
      *
      * r, g and b are clamped to 255, and a is clamped to 1. Negative values will be set to 0
      *
      * @param r the Color's red value; 0-255; defaults to 0
      * @param g the Color's green value; 0-255; defaults to 0
      * @param b the Color's blue value; 0-255; defaults to 0
-     * @param a the Color's alpha value (optional); 0-1
+     * @param a the Color's alpha value; 0-1; defaults to 1
      */
-    constructor(public readonly r = 0, public readonly g = 0, public readonly b = 0, public readonly a?: number) {
+    constructor(public readonly r = 0, public readonly g = 0, public readonly b = 0, public readonly a = 1) {
         this.r = Math.max(Math.min(r, 255), 0);
         this.g = Math.max(Math.min(g, 255), 0);
         this.b = Math.max(Math.min(b, 255), 0);
-
-        if (a) {
-            this.a = Math.max(Math.min(a, 1), 0);
-        }
+        this.a = Math.max(Math.min(a, 1), 0);
     }
 
     /**
@@ -102,7 +99,7 @@ export class Color {
      * Getter for the GL-friendly Float32Array form of the Color
      */
     public get float32Array(): Float32Array {
-        return Float32Array.from([this.rf, this.gf, this.bf, this.a ?? 1]);
+        return Float32Array.from([this.rf, this.gf, this.bf, this.a]);
     }
 
     /**
