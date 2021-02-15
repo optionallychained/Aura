@@ -167,14 +167,7 @@ export class EntityManager {
      * @returns the list of Entities with the Component
      */
     public filterEntitiesByComponent(component: string): Array<Entity> {
-        let list = this.componentFilters.get(component);
-
-        if (this.listChanged || !list) {
-            list = this.entities.filter((e) => e.hasComponent(component));
-            this.componentFilters.set(component, list);
-        }
-
-        return list;
+        return this.memoizeFilter(this.componentFilters, component, (e) => e.hasComponent(component))
     }
 
     /**
@@ -187,14 +180,7 @@ export class EntityManager {
      * @returns the list of Entities with the Components
      */
     public filterEntitiesByComponents(components: Array<string>): Array<Entity> {
-        let list = this.componentFilters.get(components.toString());
-
-        if (this.listChanged || !list) {
-            list = this.entities.filter((e) => e.hasComponents(components));
-            this.componentFilters.set(components.toString(), list);
-        }
-
-        return list;
+        return this.memoizeFilter(this.componentFilters, components.toString(), (e) => e.hasComponents(components));
     }
 
     /**
@@ -205,14 +191,7 @@ export class EntityManager {
      * @returns the list of Entities with the tag
      */
     public filterEntitiesByTag(tag: string): Array<Entity> {
-        let list = this.tagFilters.get(tag);
-
-        if (this.listChanged || !list) {
-            list = this.entities.filter((e) => e.tag === tag);
-            this.tagFilters.set(tag, list);
-        }
-
-        return list;
+        return this.memoizeFilter(this.tagFilters, tag, (e) => e.tag === tag);
     }
 
     /**
@@ -223,14 +202,7 @@ export class EntityManager {
      * @returns the list of Entities with the tags
      */
     public filterEntitiesByTags(tags: Array<string>): Array<Entity> {
-        let list = this.tagFilters.get(tags.toString());
-
-        if (this.listChanged || !list) {
-            list = this.entities.filter((e) => tags.includes(e.tag));
-            this.tagFilters.set(tags.toString(), list);
-        }
-
-        return list;
+        return this.memoizeFilter(this.tagFilters, tags.toString(), (e) => tags.includes(e.tag));
     }
 
     /**
@@ -262,5 +234,27 @@ export class EntityManager {
             this.entities.splice(this.entities.indexOf(remove), 1);
         }
         this.removeList = [];
+    }
+
+    /**
+     * Retrieve a set of Entities by filtering active Entities by the given predicate, caching the result
+     *
+     * Skip filtering if a cache exists for the given filter and no changes have been made to the active Entity list
+     *
+     * @param cache the cache (a map of filter => Entity[]) to utilise
+     * @param filter a string representation of the Entity filter
+     * @param predicate the filter predicate for matching Entities
+     *
+     * @returns the array of Entities matching the filter
+     */
+    private memoizeFilter(cache: Map<string, Array<Entity>>, filter: string, predicate: (e: Entity) => boolean): Array<Entity> {
+        let list = cache.get(filter);
+
+        if (this.listChanged || !list) {
+            list = this.entities.filter(predicate)
+            cache.set(filter, list);
+        }
+
+        return list;
     }
 }
