@@ -150,6 +150,8 @@ export class EntityManager {
                             shaderProgramName: shaderName,
                             vbo
                         });
+
+                        vbo.changed = false;
                     }
                 }
             }
@@ -213,9 +215,68 @@ export class EntityManager {
         return this.entities.length;
     }
 
-    private compileVertices(): void {
-        for (const [shaderName, forModel] of this.groupedEntities.entries()) {
-            for (const [modelName, entities] of forModel.entries()) {
+    /**
+     * Populate the addList into the list of active Entities
+     *
+     * // TODO grouping of entities by component on add/remove for faster filtering?
+     */
+    private loadEntities(): void {
+        if (this.addList.length) {
+            const changes: Array<{ shaderName: string, modelName: string }> = [];
+
+            for (const e of this.addList) {
+                const shader = e.getComponent<Shader>('Shader');
+                const model = e.getComponent<Model>('Model');
+
+                let shaderName = 'none';
+                let modelName = 'none';
+
+                if (shader) {
+                    shaderName = shader.program.name;
+                }
+                if (model) {
+                    modelName = model.modelName;
+                }
+
+                // mark the changes for recompiling the vertices for this shader+model combo
+                changes.push({ shaderName, modelName });
+
+                let forShader = this.groupedEntities.get(shaderName);
+
+                if (forShader) {
+                    let forModel = forShader.get(modelName);
+
+                    if (forModel) {
+                        forModel.push(e);
+                    }
+                    else {
+                        forModel = [e];
+                    }
+
+                    forShader.set(modelName, forModel);
+                }
+                else {
+                    forShader = new Map<string, Array<Entity>>();
+                    forShader.set(modelName, [e]);
+                }
+
+                this.groupedEntities.set(shaderName, forShader);
+            }
+
+            this.compileVertices(changes);
+
+            this.entities = this.entities.concat(this.addList);
+
+            this.addList = [];
+            this.listChanged = true;
+        }
+    }
+
+    private compileVertices(changes: Array<{ shaderName: string, modelName: string }>): void {
+        for (const { shaderName, modelName } of changes) {
+            const entities = this.groupedEntities.get(shaderName)?.get(modelName);
+
+            if (entities) {
                 const vboIdentifier = `${shaderName}_${modelName}`;
                 const vboName = `${this.config.vboPrefix}_${vboIdentifier}_vbo`;
 
@@ -224,7 +285,6 @@ export class EntityManager {
                 if (!existingVBO) {
                     this.config.renderer.createVBO(vboName);
                 }
-
 
                 let vertices: Array<number> = [];
                 let vertexCount = 0;
@@ -253,65 +313,9 @@ export class EntityManager {
                     vertexCount,
                     vertexSize,
                     glShape,
-                    // TODO actual changed
                     changed: true
                 });
             }
-        }
-    }
-
-    /**
-     * Populate the addList into the list of active Entities
-     *
-     * // TODO grouping of entities by component on add/remove for faster filtering?
-     */
-    private loadEntities(): void {
-        if (this.addList.length) {
-            for (const e of this.addList) {
-                const shader = e.getComponent<Shader>('Shader');
-                const model = e.getComponent<Model>('Model');
-
-                let shaderName = 'none';
-                let modelName = 'none';
-
-                if (shader) {
-                    shaderName = shader.program.name;
-                }
-
-                if (model) {
-                    modelName = model.modelName;
-                }
-
-                let forShader = this.groupedEntities.get(shaderName);
-
-                if (forShader) {
-                    let forModel = forShader.get(modelName);
-
-                    if (forModel) {
-                        forModel = forModel.concat([e]);
-                    }
-                    else {
-                        forModel = [e];
-                    }
-
-                    forShader.set(modelName, forModel);
-                }
-                else {
-                    forShader = new Map<string, Array<Entity>>();
-                    forShader.set(modelName, [e]);
-                }
-
-                this.groupedEntities.set(shaderName, forShader);
-            }
-
-            this.compileVertices();
-
-            this.entities = this.entities.concat(this.addList);
-            console.log('GROUPED ENTITIES: ', this.groupedEntities);
-            console.log('VBOs: ', this.vbos);
-
-            this.addList = [];
-            this.listChanged = true;
         }
     }
 

@@ -9,16 +9,16 @@ const rotations: Array<number> = [];
 const populate = (game: Core.Game): void => {
     const entities: Array<Entity.Entity> = [];
 
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 1000; i++) {
         const r = Math.round(Random.between(1, 5));
         const color = Color.random();
 
         switch (r) {
             case 1:
-                entities.push(_createRect(color));
+                entities.push(_createRectWire(color));
                 break;
             case 2:
-                entities.push(_createRectWire(color));
+                entities.push(_createRect(color));
                 break;
             case 3:
                 entities.push(_createTriangle(color));
@@ -27,7 +27,7 @@ const populate = (game: Core.Game): void => {
                 entities.push(_createTriangleWire(color));
                 break;
             default:
-                entities.push(_createRect(color));
+                entities.push(_createTriangleWire(color));
                 break;
         }
 

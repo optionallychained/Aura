@@ -152,35 +152,39 @@ export class WebGLRenderer {
     public render(config: WebGLRendererConfig): void {
         const { gl } = this;
 
-        if (config.vbo.name !== this.activeVBOName) {
-            this.useVBO(config.vbo);
+        if (config.shaderProgramName !== this.activeShaderProgramName) {
+            this.useShaderProgram(config.shaderProgramName);
         }
 
-        if (config.shaderProgramName !== this.activeShaderProgramName) {
-            this.useShaderProgram(config.shaderProgramName, config.vbo.vertexSize);
+        if (config.vbo.name !== this.activeVBOName) {
+            this.useVBO(config.vbo);
+
+            this.layoutAttributes(config.vbo.vertexSize);
         }
 
         let offset = 0;
         for (const uniformSet of config.uniforms) {
-            for (const [name, uConfig] of Object.entries(uniformSet)) {
-                const location = this.activeShaderProgram?.uniformLocations[name];
+            for (const uniformName of Object.keys(uniformSet)) {
+                const uConfig = uniformSet[uniformName];
 
-                if (location) {
+                const loc = this.activeShaderProgram?.uniformLocations[uniformName];
+
+                if (loc) {
                     switch (uConfig.type) {
                         case UniformType.VEC2:
-                            gl.uniform2fv(location, uConfig.value);
+                            gl.uniform2fv(loc, uConfig.value);
                             break;
                         case UniformType.VEC3:
-                            gl.uniform3fv(location, uConfig.value);
+                            gl.uniform3fv(loc, uConfig.value);
                             break;
                         case UniformType.VEC4:
-                            gl.uniform4fv(location, uConfig.value);
+                            gl.uniform4fv(loc, uConfig.value);
                             break;
                         case UniformType.MAT3:
-                            gl.uniformMatrix3fv(location, false, uConfig.value);
+                            gl.uniformMatrix3fv(loc, false, uConfig.value);
                             break;
                         case UniformType.MAT4:
-                            gl.uniformMatrix4fv(location, false, uConfig.value);
+                            gl.uniformMatrix4fv(loc, false, uConfig.value);
                             break;
                     }
                 }
@@ -243,7 +247,7 @@ export class WebGLRenderer {
      *
      * @param name the name of the shader program to make active
      */
-    private useShaderProgram(name: string, vertSize: number): void {
+    private useShaderProgram(name: string): void {
         const { gl } = this;
 
         const program = this.shaderPrograms.get(name);
@@ -255,15 +259,6 @@ export class WebGLRenderer {
         gl.useProgram(program.program);
         this.activeShaderProgramName = name;
         this.activeShaderProgram = program;
-
-        // set up attribute pointers
-        let offset = 0;
-        for (const attr of program.attributes) {
-            gl.enableVertexAttribArray(attr.location);
-            gl.vertexAttribPointer(attr.location, attr.size, gl.FLOAT, false, vertSize * 4, offset);
-
-            offset += attr.size * 4;
-        }
     }
 
     /**
@@ -288,5 +283,17 @@ export class WebGLRenderer {
 
         this.activeVBOName = vbo.name;
         this.activeVBO = buffer;
+    }
+
+    private layoutAttributes(vertexSize: number): void {
+        const { gl } = this;
+
+        let offset = 0;
+        for (const attr of this.activeShaderProgram?.attributes ?? []) {
+            gl.enableVertexAttribArray(attr.location);
+            gl.vertexAttribPointer(attr.location, attr.size, gl.FLOAT, false, vertexSize * 4, offset);
+
+            offset += attr.size * 4;
+        }
     }
 }

@@ -259,6 +259,7 @@ export class Game {
 
             // render the frames
             // TODO
+            // console.log('FRAMES: ', this.debugData.fps);
             // this.renderer.renderText(`fps: ${this.debugData.fps}`, new Vec2(this.width - 125, 25));
         }
 
