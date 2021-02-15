@@ -8,7 +8,7 @@ export class Mat4 {
     /**
      * Internally-referenced static identity matrix
      */
-    private static readonly IDENTITY = [
+    private static readonly IDENTITY: ReadonlyArray<number> = [
         1, 0, 0, 0,
         0, 1, 0, 0,
         0, 0, 1, 0,
@@ -385,7 +385,7 @@ export class Mat4 {
      *
      * @param values the Mat4's values; defaults to Mat4.IDENTITY
      */
-    constructor(public readonly array = Mat4.IDENTITY.slice(0)) { }
+    constructor(public readonly array: ReadonlyArray<number> = Mat4.IDENTITY.slice(0)) { }
 
     /**
      * Getter for the Mat4's determinant

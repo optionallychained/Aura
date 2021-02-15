@@ -8,7 +8,7 @@ export class Mat3 {
     /**
      * Internally-referenced static identity matrix
      */
-    private static readonly IDENTITY = [
+    private static readonly IDENTITY: ReadonlyArray<number> = [
         1, 0, 0,
         0, 1, 0,
         0, 0, 1
@@ -274,7 +274,7 @@ export class Mat3 {
      *
      * @param values the Mat3's values; defaults to Mat3.IDENTITY
      */
-    constructor(public readonly array = Mat3.IDENTITY.slice(0)) { }
+    constructor(public readonly array: ReadonlyArray<number> = Mat3.IDENTITY.slice(0)) { }
 
     /**
      * Getter for the Mat3's determinant
