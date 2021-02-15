@@ -25,6 +25,15 @@ export class EntityManager {
     /** Name of the VBO the EntityManager will use for GPU bound data */
     private VBOName = 'EntityVBO';
 
+    /** Flag for determining whether or not the Entity list has changed; for optimising filters */
+    private listChanged = false;
+
+    /** Memoized Entity-by-Component filters; for optimising filters */
+    private componentFilters = new Map<string, Array<Entity>>();
+
+    /** Memoized Entity-by-Tag filters; for optimising filters */
+    private tagFilters = new Map<string, Array<Entity>>();
+
     /**
      * Constructor. Take and store the Game's Renderer instance
      *
@@ -85,11 +94,19 @@ export class EntityManager {
      * @param frameDelta the time between the last frame and the current, for normalizing time-dependent operations
      */
     public tick(frameDelta: number): void {
-        if (this.addList.length) {
-            this.loadEntities();
+        if (!this.addList.length && !this.removeList.length) {
+            this.listChanged = false;
         }
-        if (this.removeList.length) {
-            this.cleanEntities();
+        else {
+            if (this.addList.length) {
+                this.loadEntities();
+                this.listChanged = true;
+            }
+
+            if (this.removeList.length) {
+                this.cleanEntities();
+                this.listChanged = true;
+            }
         }
 
         for (const e of this.entities) {
@@ -99,11 +116,8 @@ export class EntityManager {
 
     /**
      * Frame render method, called after tick so as to render all renderable active Entities
-     *
-     * // TODO smart momoization of renderables so as to reduce filtering operations when no changes occur frame-to-frame
      */
     public render(): void {
-        // to render, an Entity must have a Transform (position and dimensions within the world) and (for now) a FlatColor
         const renderables = this.filterEntitiesByComponents(['Transform', 'Model', 'Shader', 'FlatColor']);
 
         for (const e of renderables) {
@@ -148,14 +162,19 @@ export class EntityManager {
      *
      * // TODO by Component class?
      *
-     * // TODO smart momization of previous searches so as to reduce filtering operations for common frame-by-frame filters?
-     *
      * @param component the (name of the) Component to filter by
      *
      * @returns the list of Entities with the Component
      */
     public filterEntitiesByComponent(component: string): Entity[] {
-        return this.entities.filter((e) => e.hasComponent(component));
+        let list = this.componentFilters.get(component);
+
+        if (this.listChanged || !list) {
+            list = this.entities.filter((e) => e.hasComponent(component));
+            this.componentFilters.set(component, list);
+        }
+
+        return list;
     }
 
     /**
@@ -163,27 +182,55 @@ export class EntityManager {
      *
      * // TODO by Component class?
      *
-     * // TODO smart momization of previous searches so as to reduce filtering operations for common frame-by-frame filters?
-     *
      * @param components the (names of the) Components to filter by
      *
      * @returns the list of Entities with the Components
      */
     public filterEntitiesByComponents(components: string[]): Entity[] {
-        return this.entities.filter((e) => e.hasComponents(components));
+        let list = this.componentFilters.get(components.toString());
+
+        if (this.listChanged || !list) {
+            list = this.entities.filter((e) => e.hasComponents(components));
+            this.componentFilters.set(components.toString(), list);
+        }
+
+        return list;
     }
 
     /**
      * Filter the active Entities by a given tag
-     *
-     * // TODO smart momization of previous searches so as to reduce filtering operations for common frame-by-frame filters?
      *
      * @param tag the tag to filter by
      *
      * @returns the list of Entities with the tag
      */
     public filterEntitiesByTag(tag: string): Entity[] {
-        return this.entities.filter((e) => e.tag === tag);
+        let list = this.tagFilters.get(tag);
+
+        if (this.listChanged || !list) {
+            list = this.entities.filter((e) => e.tag === tag);
+            this.tagFilters.set(tag, list);
+        }
+
+        return list;
+    }
+
+    /**
+     * Filter the active Entities by a given list of tags
+     *
+     * @param tags the tags to filter by
+     *
+     * @returns the list of Entities with the tags
+     */
+    public filterEntitiesByTags(tags: string[]): Entity[] {
+        let list = this.tagFilters.get(tags.toString());
+
+        if (this.listChanged || !list) {
+            list = this.entities.filter((e) => tags.includes(e.tag));
+            this.tagFilters.set(tags.toString(), list);
+        }
+
+        return list;
     }
 
     /**
