@@ -1,7 +1,17 @@
+import { Random } from './random';
+
 /**
  * Class representing a Color with properties r, g, b and optionally a
  */
 export class Color {
+
+    public static random(): Color {
+        return new Color(
+            Random.between(0, 255),
+            Random.between(0, 255),
+            Random.between(0, 255)
+        );
+    }
 
     /**
      * Convert a hex string to an RGB Color.
