@@ -262,7 +262,7 @@ export class EntityManager {
                 }
 
                 // get the shader and model name for provisioning vertices and VBOs
-                const shaderName = shader.program.name;
+                const shaderName = shader.programName;
                 const modelName = model.modelName;
 
                 // mark that the vertices for this shader+model combo should be recompiled
@@ -335,7 +335,7 @@ export class EntityManager {
                 }
 
                 // get the shader and model name for provisioning vertices and VBOs
-                const shaderName = shader.program.name;
+                const shaderName = shader.programName;
                 const modelName = model.modelName;
 
                 // retrieve the Entities associated with this Shader
@@ -429,7 +429,7 @@ export class EntityManager {
 
                     // TODO this is guaranteed to be the same for each Entity; make that clearer somehow and/or do this once?
                     glShape = model.glShape;
-                    vertexSize = Object.values(shader.program.vertex.attributes).reduce((prev, current) => prev + current);
+                    vertexSize = Object.values(shader.vertex.attributes).reduce((prev, current) => prev + current);
                     vertexCount = model.vertCount;
                 }
 
