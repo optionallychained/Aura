@@ -31,7 +31,7 @@ export class CollisionSystem extends System {
      * @param frameDelta the time between the last frame and the current, for normalizing time-dependent operations
      */
     public tick(game: Game): void {
-        const collidables = game.entityManager.filterEntitiesByComponents(['Transform', 'AABBCollisionBox']);
+        const collidables = game.entityManager.filterEntitiesByComponents('Transform', 'AABBCollisionBox');
 
         for (let i = 0; i < collidables.length; i++) {
             for (let j = i + 1; j < collidables.length; j++) {

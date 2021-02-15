@@ -39,7 +39,7 @@ const populate = (game: Core.Game): void => {
 
 const rotate = (game: Core.Game): void => {
     let i = 0;
-    for (const e of game.entityManager.filterEntitiesByTags(['rect', 'triangle', 'triangleWire', 'rectWire'])) {
+    for (const e of game.entityManager.filterEntitiesByTags('rect', 'triangle', 'triangleWire', 'rectWire')) {
         const transform = e.getComponent<Component.Transform>('Transform');
 
         transform.transform = Mat3.rotate(transform.transform, rotations[i]);
@@ -47,12 +47,44 @@ const rotate = (game: Core.Game): void => {
     }
 }
 
+const rect = _createRect(new Color(0, 255, 0));
+const rect2 = _createRect(new Color(0, 0, 255, 0.5));
+const triangle = _createTriangle(new Color(255, 0, 0));
+let timeout1: number;
+let timeout2: number;
+let timeout3: number;
+
 export const mainState = new State.State({
     name: 'main',
     init: (game) => {
-        populate(game);
+        // populate(game);
+        // game.entityManager.addEntities(rect, triangle, rect2);
     },
     tick: (game) => {
-        rotate(game);
+        // rotate(game);
+
+        if (!timeout1) {
+            timeout1 = window.setTimeout(() => {
+                game.entityManager.addEntity(rect);
+
+                clearTimeout(timeout1);
+            }, 5000);
+        }
+
+        if (!timeout2) {
+            timeout2 = window.setTimeout(() => {
+                game.entityManager.addEntity(triangle);
+
+                clearTimeout(timeout2);
+            }, 10000);
+        }
+
+        if (!timeout3) {
+            timeout3 = window.setTimeout(() => {
+                game.entityManager.addEntity(rect2);
+
+                clearTimeout(timeout3);
+            }, 15000);
+        }
     }
 });
