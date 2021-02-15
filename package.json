@@ -12,7 +12,7 @@
         "publish/"
     ],
     "scripts": {
-        "lint": "eslint --ext .ts --fix",
+        "lint": "eslint --ext .ts --fix src",
         "test": "jest",
         "docs:serve": "browser-sync start --port 9090 --server './docs' --files './docs/**/*'",
         "docs:watch": "nodemon -w ./src/docs --ext pug,ts,scss,md,png,jpg,svg ./scripts/docgen.js --args dev",

@@ -14,13 +14,13 @@ import { Entity } from './entity';
 export class EntityManager {
 
     /** List of Entities currently in play */
-    private entities: Entity[] = [];
+    private entities: Array<Entity> = [];
 
     /** List of Entities to be removed on the next frame */
-    private removeList: Entity[] = [];
+    private removeList: Array<Entity> = [];
 
     /** List of Entities to be added on the next frame */
-    private addList: Entity[] = [];
+    private addList: Array<Entity> = [];
 
     /** Name of the VBO the EntityManager will use for GPU bound data */
     private VBOName = 'EntityVBO';
@@ -59,7 +59,7 @@ export class EntityManager {
      *
      * @param entities the Entities to add
      */
-    public addEntities(...entities: Entity[]): void {
+    public addEntities(...entities: Array<Entity>): void {
         this.addList = this.addList.concat(entities);
     }
 
@@ -77,7 +77,7 @@ export class EntityManager {
      *
      * @param entities the Entities to remove
      */
-    public removeEntities(...entities: Entity[]): void {
+    public removeEntities(...entities: Array<Entity>): void {
         this.removeList = this.removeList.concat(entities);
     }
 
@@ -126,7 +126,7 @@ export class EntityManager {
             const shader = e.getComponent<Shader>('Shader');
             const flatColor = e.getComponent<FlatColor>('FlatColor');
 
-            let vertices: number[] = [];
+            let vertices: Array<number> = [];
 
             for (const v of model.vertices) {
                 vertices = vertices.concat(v.array);
@@ -166,7 +166,7 @@ export class EntityManager {
      *
      * @returns the list of Entities with the Component
      */
-    public filterEntitiesByComponent(component: string): Entity[] {
+    public filterEntitiesByComponent(component: string): Array<Entity> {
         let list = this.componentFilters.get(component);
 
         if (this.listChanged || !list) {
@@ -186,7 +186,7 @@ export class EntityManager {
      *
      * @returns the list of Entities with the Components
      */
-    public filterEntitiesByComponents(components: string[]): Entity[] {
+    public filterEntitiesByComponents(components: Array<string>): Array<Entity> {
         let list = this.componentFilters.get(components.toString());
 
         if (this.listChanged || !list) {
@@ -204,7 +204,7 @@ export class EntityManager {
      *
      * @returns the list of Entities with the tag
      */
-    public filterEntitiesByTag(tag: string): Entity[] {
+    public filterEntitiesByTag(tag: string): Array<Entity> {
         let list = this.tagFilters.get(tag);
 
         if (this.listChanged || !list) {
@@ -222,7 +222,7 @@ export class EntityManager {
      *
      * @returns the list of Entities with the tags
      */
-    public filterEntitiesByTags(tags: string[]): Entity[] {
+    public filterEntitiesByTags(tags: Array<string>): Array<Entity> {
         let list = this.tagFilters.get(tags.toString());
 
         if (this.listChanged || !list) {

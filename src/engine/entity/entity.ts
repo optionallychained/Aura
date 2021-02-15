@@ -79,7 +79,7 @@ export class Entity {
      *
      * @param components the Components to add
      */
-    public addComponents(components: Component[]): void {
+    public addComponents(components: Array<Component>): void {
         for (const c of components) {
             this.addComponent(c);
         }
@@ -99,7 +99,7 @@ export class Entity {
      *
      * @param names the names of the Components to remove
      */
-    public removeComponents(names: string[]): void {
+    public removeComponents(names: Array<string>): void {
         for (const c of names) {
             this.removeComponent(c);
         }
@@ -123,7 +123,7 @@ export class Entity {
      *
      * @returns a boolean indicating whether or not the Entity has all of the named Components
      */
-    public hasComponents(names: string[]): boolean {
+    public hasComponents(names: Array<string>): boolean {
         for (const c of names) {
             if (!this.hasComponent(c)) {
                 return false;

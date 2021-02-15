@@ -121,7 +121,7 @@ export class Game {
      *
      * @param state the States to add
      */
-    public addStates(...states: State[]): void {
+    public addStates(...states: Array<State>): void {
         for (const state of states) {
             this.addState(state);
         }
@@ -159,7 +159,7 @@ export class Game {
      *
      * @param systems the Systems to add
      */
-    public addSystems(...systems: System[]): void {
+    public addSystems(...systems: Array<System>): void {
         for (const system of systems) {
             this.addSystem(system);
         }
@@ -183,7 +183,7 @@ export class Game {
      *
      * @param name the names of the Systems to remove
      */
-    public removeSystems(...names: string[]): void {
+    public removeSystems(...names: Array<string>): void {
         for (const name of names) {
             this.removeSystem(name);
         }

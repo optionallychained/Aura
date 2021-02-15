@@ -19,6 +19,15 @@
                 "avoidEscape": true
             }
         ],
+        "@typescript-eslint/restrict-template-expressions": [
+            "error"
+        ],
+        "@typescript-eslint/array-type": [
+            "error",
+            {
+                "default": "generic"
+            }
+        ],
         "@typescript-eslint/explicit-function-return-type": [
             "error",
             {
@@ -53,12 +62,6 @@
                     "protected-instance-method",
                     "private-instance-method"
                 ]
-            }
-        ],
-        "@typescript-eslint/restrict-template-expressions": [
-            "error",
-            {
-                "allowAny": true
             }
         ]
     }

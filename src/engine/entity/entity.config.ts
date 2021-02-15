@@ -9,5 +9,5 @@ export interface EntityConfig {
     /** Entity frame tick function; none is provided by default */
     tick?: (frameDelta: number) => void;
     /** Components to initialise the Entity with, for convenient setup */
-    components?: Component[];
+    components?: Array<Component>;
 }

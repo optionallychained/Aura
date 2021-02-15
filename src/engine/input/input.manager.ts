@@ -30,7 +30,7 @@ export class InputManager {
     private contextClickPos = new Vec2();
 
     /** Keys to ignore in the handling of keyboard input */
-    private ignoreKeys: string[] = [
+    private ignoreKeys: Array<string> = [
         Keys.F_5,
         Keys.F_12
     ];

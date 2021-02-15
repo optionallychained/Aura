@@ -10,8 +10,6 @@
         "strict": true
     },
     "include": [
-        "src/demo/**/*.ts",
-        "src/engine/**/*.ts",
-        "src/test/**/*.ts"
+        "./src/**/*.ts"
     ]
 }
