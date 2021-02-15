@@ -1,6 +1,9 @@
 import { FlatColor, Model, Shader, Transform } from '../component';
-import { WebGLRenderer } from '../screen';
+import { GLShape } from '../geometry';
+import { WebGLRendererConfig } from '../screen';
+import { UniformType } from '../shader/uniformType';
 import { Entity } from './entity';
+import { EntityManagerConfig } from './entity.manager.config';
 
 /**
  * Core EntityManager; utilised by the Game to defer the management, updating and rendering of all game Entities
@@ -16,6 +19,9 @@ export class EntityManager {
     /** List of Entities currently in play */
     private entities: Array<Entity> = [];
 
+    // entities grouped by shader name and then by model name
+    private groupedEntities = new Map<string, Map<string, Array<Entity>>>();
+
     /** List of Entities to be removed on the next frame */
     private removeList: Array<Entity> = [];
 
@@ -24,6 +30,10 @@ export class EntityManager {
 
     /** Name of the VBO the EntityManager will use for GPU bound data */
     private VBOName = 'EntityVBO';
+
+    private VBONames = new Map<string, string>();
+
+    private vbos = new Map<string, WebGLRendererConfig['vbo']>();
 
     /** Flag for determining whether or not the Entity list has changed; for optimising filters */
     private listChanged = false;
@@ -39,9 +49,7 @@ export class EntityManager {
      *
      * @param renderer the renderer
      */
-    constructor(private renderer: WebGLRenderer) {
-        renderer.createVBO(this.VBOName);
-    }
+    constructor(private readonly config: EntityManagerConfig) { }
 
     /**
      * Add an Entity to the addList
@@ -94,20 +102,9 @@ export class EntityManager {
      * @param frameDelta the time between the last frame and the current, for normalizing time-dependent operations
      */
     public tick(frameDelta: number): void {
-        if (!this.addList.length && !this.removeList.length) {
-            this.listChanged = false;
-        }
-        else {
-            if (this.addList.length) {
-                this.loadEntities();
-                this.listChanged = true;
-            }
-
-            if (this.removeList.length) {
-                this.cleanEntities();
-                this.listChanged = true;
-            }
-        }
+        this.listChanged = false;
+        this.loadEntities();
+        this.cleanEntities();
 
         for (const e of this.entities) {
             e.tick(frameDelta);
@@ -118,42 +115,44 @@ export class EntityManager {
      * Frame render method, called after tick so as to render all renderable active Entities
      */
     public render(): void {
-        const renderables = this.filterEntitiesByComponents(['Transform', 'Model', 'Shader', 'FlatColor']);
+        for (const [shaderName, forModel] of this.groupedEntities.entries()) {
 
-        for (const e of renderables) {
-            const transform = e.getComponent<Transform>('Transform');
-            const model = e.getComponent<Model>('Model');
-            const shader = e.getComponent<Shader>('Shader');
-            const flatColor = e.getComponent<FlatColor>('FlatColor');
+            for (const [modelName, entities] of forModel) {
+                // TODO reimplement filtering
+                const renderables = entities.filter((e) => e.hasComponents(['Transform', 'Model', 'FlatColor', 'Shader']));
 
-            let vertices: Array<number> = [];
+                if (renderables.length) {
 
-            for (const v of model.vertices) {
-                vertices = vertices.concat(v.array);
-            }
+                    const vbo = this.vbos.get(`${shaderName}_${modelName}`);
 
-            this.renderer.render({
-                VBOName: this.VBOName,
-                shaderProgramName: shader.programName,
-                vertices: Float32Array.from(vertices),
-                glShape: model.glShape,
-                // TODO temporary
-                attributes: {
-                    a_Position: 2
-                },
-                uniforms: {
-                    u_Transform: {
-                        type: 'mat3',
-                        value: transform.transform.float32Array
-                    },
-                    u_Color: {
-                        type: 'vec4',
-                        value: flatColor.color.float32Array
+                    if (vbo) {
+                        const uniforms: WebGLRendererConfig['uniforms'] = [];
+
+                        for (const e of renderables) {
+                            const transform = e.getComponent<Transform>('Transform');
+                            const flatColor = e.getComponent<FlatColor>('FlatColor');
+
+                            // TODO uniform compilation by shaderProgram->uniforms
+                            uniforms.push({
+                                u_Transform: {
+                                    type: UniformType.MAT3,
+                                    value: transform.transform.float32Array
+                                },
+                                u_Color: {
+                                    type: UniformType.VEC4,
+                                    value: flatColor.color.float32Array
+                                }
+                            })
+                        }
+
+                        this.config.renderer.render({
+                            uniforms,
+                            shaderProgramName: shaderName,
+                            vbo
+                        });
                     }
-                },
-                vertSize: model.vertSize,
-                vertCount: model.vertCount
-            });
+                }
+            }
         }
     }
 
@@ -214,14 +213,106 @@ export class EntityManager {
         return this.entities.length;
     }
 
+    private compileVertices(): void {
+        for (const [shaderName, forModel] of this.groupedEntities.entries()) {
+            for (const [modelName, entities] of forModel.entries()) {
+                const vboIdentifier = `${shaderName}_${modelName}`;
+                const vboName = `${this.config.vboPrefix}_${vboIdentifier}_vbo`;
+
+                const existingVBO = this.vbos.get(vboIdentifier);
+
+                if (!existingVBO) {
+                    this.config.renderer.createVBO(vboName);
+                }
+
+
+                let vertices: Array<number> = [];
+                let vertexCount = 0;
+                let vertexSize = 0;
+                let glShape: GLShape = 0;
+
+                for (const e of entities) {
+                    const model = e.getComponent<Model>('Model');
+                    const shader = e.getComponent<Shader>('Shader');
+
+                    for (const vertex of model.vertices) {
+                        vertices = vertices.concat(vertex.array);
+                    }
+
+                    // TODO this is guaranteed to be the same for each model; make that clearer somehow?
+                    glShape = model.glShape;
+                    vertexSize = Object.values(shader.program.vertex.attributes).reduce((prev, current) => prev + current);
+                    vertexCount = model.vertCount;
+
+                    // TODO vertex compilation by attributes (eg attr color)
+                }
+
+                this.vbos.set(vboIdentifier, {
+                    name: vboName,
+                    vertices: Float32Array.from(vertices),
+                    vertexCount,
+                    vertexSize,
+                    glShape,
+                    // TODO actual changed
+                    changed: true
+                });
+            }
+        }
+    }
+
     /**
      * Populate the addList into the list of active Entities
      *
      * // TODO grouping of entities by component on add/remove for faster filtering?
      */
     private loadEntities(): void {
-        this.entities = this.entities.concat(this.addList);
-        this.addList = [];
+        if (this.addList.length) {
+            for (const e of this.addList) {
+                const shader = e.getComponent<Shader>('Shader');
+                const model = e.getComponent<Model>('Model');
+
+                let shaderName = 'none';
+                let modelName = 'none';
+
+                if (shader) {
+                    shaderName = shader.program.name;
+                }
+
+                if (model) {
+                    modelName = model.modelName;
+                }
+
+                let forShader = this.groupedEntities.get(shaderName);
+
+                if (forShader) {
+                    let forModel = forShader.get(modelName);
+
+                    if (forModel) {
+                        forModel = forModel.concat([e]);
+                    }
+                    else {
+                        forModel = [e];
+                    }
+
+                    forShader.set(modelName, forModel);
+                }
+                else {
+                    forShader = new Map<string, Array<Entity>>();
+                    forShader.set(modelName, [e]);
+                }
+
+                this.groupedEntities.set(shaderName, forShader);
+            }
+
+            this.compileVertices();
+
+            this.entities = this.entities.concat(this.addList);
+            console.log('GROUPED ENTITIES: ', this.groupedEntities);
+            console.log('VBOs: ', this.vbos);
+
+            this.addList = [];
+            this.listChanged = true;
+        }
     }
 
     /**
@@ -230,10 +321,35 @@ export class EntityManager {
      * // TODO grouping of entities by component on add/remove for faster filtering?
      */
     private cleanEntities(): void {
-        for (const remove of this.removeList) {
-            this.entities.splice(this.entities.indexOf(remove), 1);
+        if (this.removeList.length) {
+            for (const e of this.removeList) {
+                // const shader = e.getComponent<Shader>('Shader');
+                // let name;
+
+                // if (shader) {
+                //     name = shader.programName;
+                // }
+                // else {
+                //     name = 'none';
+                // }
+
+                // let list = this.groupedEntities.get(name);
+
+                // if (list) {
+                //     list = list.splice(list.indexOf(e), 1);
+
+                //     this.groupedEntities.set(name, list);
+                // }
+                // else {
+                //     // this shouldn't happen?
+                // }
+
+                // this.entities.splice(this.entities.indexOf(remove), 1);
+            }
+
+            this.removeList = [];
+            this.listChanged = true;
         }
-        this.removeList = [];
     }
 
     /**

@@ -70,8 +70,11 @@ export class Game {
         this.canvas = canvas;
 
         this.renderer = new WebGLRenderer(canvas, config?.backgroundColor ?? new Color());
-        this.entityManager = new EntityManager(this.renderer);
         this.inputManager = new InputManager(canvas, config?.controlScheme ?? 'keyboard');
+        this.entityManager = new EntityManager({
+            vboPrefix: 'main',
+            renderer: this.renderer
+        });
     }
 
     /**
@@ -214,7 +217,7 @@ export class Game {
         return this.data.get(key) as T;
     }
 
-    public addShader(shader: ShaderProgram): void {
+    public registerShader(shader: ShaderProgram): void {
         this.renderer.createShaderProgram(shader);
     }
 

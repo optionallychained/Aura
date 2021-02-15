@@ -1,5 +1,6 @@
 import { Color } from '../math';
 import { ShaderProgram } from '../shader';
+import { UniformType } from '../shader/uniformType';
 import { WebGLRendererConfig } from './webgl.renderer.config';
 
 /**
@@ -15,13 +16,22 @@ export class WebGLRenderer {
     private gl: WebGLRenderingContext;
 
     /** Shader Programs; mapped by their name for simple management and usage */
-    private shaderPrograms = new Map<string, WebGLProgram>();
+    // TODO type for this
+    private shaderPrograms = new Map<string, {
+        program: WebGLProgram,
+        attributes: Array<{ location: number, size: number }>,
+        uniformLocations: { [name: string]: WebGLUniformLocation | null }
+    }>();
 
     /** Active Shader Program name; used for frame-to-frame optimisation of gl API calls */
     private activeShaderProgramName = '';
 
     /** Active Shader Program numerical value; used for frame-to-frame optimisation of gl API calls */
-    private activeShaderProgram: WebGLProgram = 0;
+    private activeShaderProgram: {
+        program: WebGLProgram,
+        attributes: Array<{ location: number, size: number }>,
+        uniformLocations: { [name: string]: WebGLUniformLocation | null }
+    } | null = null;
 
     /** VBOs; mapped by their name for simple managment and usage */
     private vbos = new Map<string, WebGLBuffer>();
@@ -81,10 +91,10 @@ export class WebGLRenderer {
      */
     public createShaderProgram(shader: ShaderProgram): void {
         const { gl } = this;
-        const { vertexSource, fragmentSource } = shader;
+        const { vertex, fragment } = shader;
 
-        const vertex = this.compileShader(gl.VERTEX_SHADER, vertexSource);
-        const fragment = this.compileShader(gl.FRAGMENT_SHADER, fragmentSource);
+        const vertexCompiled = this.compileShader(gl.VERTEX_SHADER, vertex.source);
+        const fragmentCompiled = this.compileShader(gl.FRAGMENT_SHADER, fragment.source);
 
         const program = gl.createProgram();
         if (!program) {
@@ -92,8 +102,8 @@ export class WebGLRenderer {
             throw Error('Failed to create Shader Program');
         }
 
-        gl.attachShader(program, vertex);
-        gl.attachShader(program, fragment);
+        gl.attachShader(program, vertexCompiled);
+        gl.attachShader(program, fragmentCompiled);
         gl.linkProgram(program);
 
         const linked = gl.getProgramParameter(program, gl.LINK_STATUS); //eslint-disable-line @typescript-eslint/no-unsafe-assignment
@@ -102,12 +112,36 @@ export class WebGLRenderer {
             // TODO
             console.log('PROGRAM LINK ERROR', error);
             gl.deleteProgram(program);
-            gl.deleteShader(fragment);
-            gl.deleteShader(vertex);
+            gl.deleteShader(fragmentCompiled);
+            gl.deleteShader(vertexCompiled);
             throw Error(`Failed to link shader program [${error ?? ''}]`);
         }
 
-        this.shaderPrograms.set(shader.name, program);
+        // switch to the newly-created program so as to get its attribute and uniform locations
+        gl.useProgram(program);
+
+        const attributes: Array<{ location: number, size: number }> = [];
+        const uniformLocations: { [name: string]: WebGLUniformLocation | null } = {};
+
+        for (const attr of Object.keys(vertex.attributes)) {
+            attributes.push({
+                location: gl.getAttribLocation(program, attr),
+                size: vertex.attributes[attr]
+            });
+        }
+
+        for (const uniform of (Object.keys(vertex.uniforms) ?? []).concat(Object.keys(fragment.uniforms))) {
+            uniformLocations[uniform] = gl.getUniformLocation(program, uniform);
+        }
+
+        this.shaderPrograms.set(shader.name, {
+            program,
+            attributes,
+            uniformLocations
+        });
+
+        // switch away from the program to clean up the GL State
+        gl.useProgram(null);
     }
 
     /**
@@ -118,45 +152,44 @@ export class WebGLRenderer {
     public render(config: WebGLRendererConfig): void {
         const { gl } = this;
 
-        if (config.VBOName !== this.activeVBOName) {
-            this.bindVBO(config.VBOName);
+        if (config.vbo.name !== this.activeVBOName) {
+            this.useVBO(config.vbo);
         }
 
         if (config.shaderProgramName !== this.activeShaderProgramName) {
-            this.useShaderProgram(config.shaderProgramName);
+            this.useShaderProgram(config.shaderProgramName, config.vbo.vertexSize);
         }
 
         let offset = 0;
-        for (const attr of Object.keys(config.attributes)) {
-            const size = config.attributes[attr];
+        for (const uniformSet of config.uniforms) {
+            for (const [name, uConfig] of Object.entries(uniformSet)) {
+                const location = this.activeShaderProgram?.uniformLocations[name];
 
-            // per-shader-program, the location of attributes never changes; this can be done once, maybe as part of building a shader
-            const attributeLocation = gl.getAttribLocation(this.activeShaderProgram, attr);
-            gl.enableVertexAttribArray(attributeLocation);
-            gl.vertexAttribPointer(attributeLocation, size, gl.FLOAT, false, config.vertSize * 4, offset);
-
-            offset += size * 4;
-        }
-
-        for (const uniform of Object.keys(config.uniforms)) {
-            const val = config.uniforms[uniform];
-
-            // per-shader-program, the location of attributes never changes; this can be done once, maybe as part of building a shader
-            const uniformLocation = gl.getUniformLocation(this.activeShaderProgram, uniform);
-            switch (val.type) {
-                case 'mat3':
-                    gl.uniformMatrix3fv(uniformLocation, false, val.value);
-                    break;
-
-                case 'vec4':
-                    gl.uniform4fv(uniformLocation, val.value);
-                    break;
+                if (location) {
+                    switch (uConfig.type) {
+                        case UniformType.VEC2:
+                            gl.uniform2fv(location, uConfig.value);
+                            break;
+                        case UniformType.VEC3:
+                            gl.uniform3fv(location, uConfig.value);
+                            break;
+                        case UniformType.VEC4:
+                            gl.uniform4fv(location, uConfig.value);
+                            break;
+                        case UniformType.MAT3:
+                            gl.uniformMatrix3fv(location, false, uConfig.value);
+                            break;
+                        case UniformType.MAT4:
+                            gl.uniformMatrix4fv(location, false, uConfig.value);
+                            break;
+                    }
+                }
             }
+
+            gl.drawArrays(config.vbo.glShape, offset, config.vbo.vertexCount);
+
+            offset += config.vbo.vertexCount;
         }
-
-        this.bufferVertices(config.vertices);
-
-        gl.drawArrays(config.glShape, 0, config.vertCount);
     }
 
     /**
@@ -210,7 +243,7 @@ export class WebGLRenderer {
      *
      * @param name the name of the shader program to make active
      */
-    private useShaderProgram(name: string): void {
+    private useShaderProgram(name: string, vertSize: number): void {
         const { gl } = this;
 
         const program = this.shaderPrograms.get(name);
@@ -219,9 +252,18 @@ export class WebGLRenderer {
             throw Error('Could not use program');
         }
 
-        gl.useProgram(program);
+        gl.useProgram(program.program);
         this.activeShaderProgramName = name;
         this.activeShaderProgram = program;
+
+        // set up attribute pointers
+        let offset = 0;
+        for (const attr of program.attributes) {
+            gl.enableVertexAttribArray(attr.location);
+            gl.vertexAttribPointer(attr.location, attr.size, gl.FLOAT, false, vertSize * 4, offset);
+
+            offset += attr.size * 4;
+        }
     }
 
     /**
@@ -229,9 +271,9 @@ export class WebGLRenderer {
      *
      * @param name the name of the VBO to make active
      */
-    private bindVBO(name: string): void {
+    private useVBO(vbo: WebGLRendererConfig['vbo']): void {
         const { gl } = this;
-        const buffer = this.vbos.get(name);
+        const buffer = this.vbos.get(vbo.name);
 
         if (!buffer) {
             // TODO
@@ -239,18 +281,12 @@ export class WebGLRenderer {
         }
 
         gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-        this.activeVBOName = name;
+
+        if (vbo.changed) {
+            gl.bufferData(gl.ARRAY_BUFFER, vbo.vertices, gl.DYNAMIC_DRAW);
+        }
+
+        this.activeVBOName = vbo.name;
         this.activeVBO = buffer;
-    }
-
-    /**
-     * Internal-use VBO buffering routine; buffer the given vertex data to the active VBO
-     *
-     * @param vertices the vertices to buffer
-     */
-    private bufferVertices(vertices: ArrayBuffer): void {
-        const { gl } = this;
-
-        gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
     }
 }

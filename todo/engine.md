@@ -23,8 +23,8 @@
 ## Entity
 - [ ] consider: type or class based getComponent()/hasComponent()?
 - [ ] Optimisations for EntityManager
-    - [ ] memoization of filters
-    - [ ] group-by-component for faster filtering
+    - [x] memoization of filters
+    - [x] group-by-component for faster filtering
     - [ ] update-as-necessary
     - [ ] render-as-necessary
 

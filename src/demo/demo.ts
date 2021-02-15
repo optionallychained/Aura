@@ -8,7 +8,7 @@ const game = new Core.Game({
     init: () => { console.log('GAME -> init') }
 });
 
-game.addShader(Shader.Program.PROGRAM_BASIC);
+game.registerShader(Shader.Program.PROGRAM_BASIC);
 
 // add our States to the Game
 game.addState(mainState);

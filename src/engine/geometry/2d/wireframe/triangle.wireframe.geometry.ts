@@ -13,4 +13,6 @@ export class Triangle implements Geometry {
 
     public vertSize = 2;
     public vertCount = this.vertices.length;
+
+    public name = 'triangle_wireframe';
 }

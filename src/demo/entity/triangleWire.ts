@@ -7,6 +7,6 @@ export const triangleWire = new Entity.Entity({
         new Component.Transform(new Vec2(), new Vec2()),
 
         new Component.Model(new Geometry.TwoD.Wireframe.Triangle()),
-        new Component.Shader(Shader.Program.PROGRAM_BASIC.name)
+        new Component.Shader(Shader.Program.PROGRAM_BASIC)
     ]
 });

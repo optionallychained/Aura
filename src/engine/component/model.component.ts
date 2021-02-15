@@ -4,6 +4,7 @@ import { Component } from './component';
 
 export class Model extends Component implements Geometry {
 
+    public modelName: string;
     public vertices: Array<Vec2>;
     public glShape: GLShape;
     public vertSize: number;
@@ -16,5 +17,6 @@ export class Model extends Component implements Geometry {
         this.glShape = geometry.glShape;
         this.vertSize = geometry.vertSize;
         this.vertCount = geometry.vertCount;
+        this.modelName = geometry.name;
     }
 }
