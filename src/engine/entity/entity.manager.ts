@@ -1,7 +1,5 @@
 import { Model, Shader } from '../component';
-import { GLShape } from '../geometry';
-import { UniformList, VBOConfig } from '../screen';
-import { UniformType } from '../shader/uniformType';
+import { UniformList, UniformSet, VBOConfig } from '../screen';
 import { Entity } from './entity';
 import { EntityManagerConfig } from './entity.manager.config';
 import { EntityShaderMap } from './entityShaderMap';
@@ -145,44 +143,49 @@ export class EntityManager {
                 // TODO EITHER will become unnecessary when automatic attr/uniform inference is in, OR will redefine the meaning of "renderable"
                 const renderables = this.filterEntitiesByComponentsFromSource(entities, `${shaderName}_${modelName}`, 'Transform', 'Model', 'FlatColor', 'Shader');
 
-                if (renderables.length) {
-                    // retrieve the VBO to use in rendering this Entity set
-                    const vbo = this.vbos.get(`${shaderName}_${modelName}`);
+                // retrieve the VBO to use in rendering this Entity set
+                const vbo = this.vbos.get(`${shaderName}_${modelName}`);
 
-                    // TODO if there's no VBO under this combination, something has gone wrong? handle the issue?
-                    if (vbo) {
-                        const uniforms: UniformList = [];
+                if (renderables.length && vbo) {
+                    // pull out the shader info once from the first Entity, as the shader is guaranteed to be the same for all these renderables
+                    const shaderInfo = entities[0].getComponent<Shader>('Shader');
 
-                        // construct the list of Shader Uniforms for the Entity set
-                        // TODO automatic (but customisable?) retrieval of uniforms from Entities on a per-uniform-name basis
-                        // TODO hardcoded for now
+                    // retrieve all the uniform keys from the shader info
+                    const allUniforms = (shaderInfo.vertex.uniforms ?? []).concat(shaderInfo.fragment.uniforms);
+
+                    // initialise the UniformSet for the render call as undefined
+                    let uniformList: UniformSet | undefined;
+
+                    if (allUniforms.length) {
+                        // if there are uniforms to pipe, we need to build a UniformList so that the renderer can split draw calls accordingly
+                        uniformList = [];
+
                         for (const e of renderables) {
-                            // need knowledge of shader uniforms
-                            const shader = e.getComponent<Shader>('Shader');
-
-                            const allUniforms = (Object.keys(shader.vertex.uniforms) ?? []).concat(Object.keys(shader.fragment.uniforms));
-
-                            const eUniforms: Array<{ [key: string]: { type: UniformType, value: Float32Array | number } }> = [];
+                            const eUniforms: UniformList = [];
 
                             for (const uniform of allUniforms) {
+                                // resolve the value of the uniform for this Entity and add it to the list
                                 eUniforms.push({
-                                    [`${uniform}`]: EntityShaderMap.getShaderValueForEntity(uniform, e)
-                                })
+                                    name: uniform.name,
+                                    type: uniform.type,
+                                    value: EntityShaderMap.getShaderValueForEntity(uniform.name, e)
+                                });
                             }
 
-                            uniforms.push(eUniforms);
+                            // add the uniform list to the set
+                            uniformList.push(eUniforms);
                         }
-
-                        // render the Entity set by configuring a render call
-                        this.config.renderer.render({
-                            uniforms: uniforms.length ? uniforms : undefined,
-                            shaderProgramName: shaderName,
-                            vbo
-                        });
-
-                        // reset the VBO's 'changed' configuration; in combo with (this).compileVertices(), works to limit the number of GL buffer calls
-                        vbo.changed = false;
                     }
+
+                    // render the set of renderable Entities
+                    this.config.renderer.render({
+                        uniforms: uniformList,
+                        shaderProgramName: shaderName,
+                        vbo
+                    });
+
+                    // reset the VBO's 'changed' configuration; in combo with (this).compileVertices(), works to limit the number of GL buffer calls
+                    vbo.changed = false;
                 }
             }
         }
@@ -402,42 +405,57 @@ export class EntityManager {
             // identify a VBO by the shader+model combo it represents
             const vboIdentifier = `${shaderName}_${modelName}`;
 
-            if (entities) {
-                // name the VBO with this EntityManager instance's vboPrefix, facilitating multiple EntityManagers per Game instance
-                const vboName = `${this.config.vboPrefix}_${vboIdentifier}`;
+            // name the VBO with this EntityManager instance's vboPrefix, facilitating multiple EntityManagers per Game instance
+            const vboName = `${this.config.vboPrefix}_${vboIdentifier}`;
 
+            if (entities && entities.length) {
                 // retrieve the existing VBO for this combo; if none exists, create one
                 const existingVBO = this.vbos.get(vboIdentifier);
+
                 if (!existingVBO) {
                     this.config.renderer.createVBO(vboName);
                 }
 
-                // initilize the VBO information we'll want to store
-                let vertices: Array<number> = [];
-                let vertexCount = 0;
-                let vertexSize = 0;
-                let glShape: GLShape = 0;
+                // pull out the shader and model info once from the first Entity, as they're guaranteed to be the same for all these Entities
+                const shaderInfo = entities[0].getComponent<Shader>('Shader');
+                const modelInfo = entities[0].getComponent<Model>('Model');
 
+                // retrieve nominal information relating to all the Entities
+                const { glShape, vertexCount } = modelInfo;
+
+                // the vertex size is the size of all attributes required by the shader added together
+                // TODO this reduce call is a little clumsy but it works for now
+                const vertexSize = Object.values(shaderInfo.vertex.attributes).reduce((prev, current) => {
+                    return {
+                        name: current.name,
+                        size: prev.size + current.size
+                    };
+                }).size;
+
+                // initialise the Float32Array; its size is the number of entities multiplied by the size and count of their vertices
+                const stride = vertexSize * vertexCount;
+                const vertices = new Float32Array(entities.length * stride);
+
+                let offset = 0;
                 for (const e of entities) {
-                    const shader = e.getComponent<Shader>('Shader');
-                    const model = e.getComponent<Model>('Model');
+                    for (const attr of shaderInfo.vertex.attributes) {
+                        // TODO recompilation of dynamic values as part of Entity change detection/sub-buffering/etc optimisations
+                        let value = EntityShaderMap.getShaderValueForEntity(attr.name, e);
 
-                    for (const attributeName of Object.keys(shader.vertex.attributes)) {
-                        // TODO dumb quick solution
-                        const array = EntityShaderMap.getAttributeValueForEntity(attributeName, e);
-                        vertices = vertices.concat(array);
+                        if (typeof value === 'number') {
+                            value = Float32Array.from([value]);
+                        }
+
+                        vertices.set(value, offset);
+
+                        offset += stride;
                     }
-
-                    // TODO this is guaranteed to be the same for each Entity; make that clearer somehow and/or do this once?
-                    glShape = model.glShape;
-                    vertexSize = Object.values(shader.vertex.attributes).reduce((prev, current) => prev + current);
-                    vertexCount = model.vertCount;
                 }
 
                 // create or update the VBO for later use in rendering these Entities
                 this.vbos.set(vboIdentifier, {
                     name: vboName,
-                    vertices: Float32Array.from(vertices),
+                    vertices,
                     vertexCount,
                     vertexSize,
                     glShape,
@@ -447,6 +465,7 @@ export class EntityManager {
             }
             else {
                 // if there are no Entities for a given shader+model combo, delete the associated VBO
+                this.config.renderer.deleteVBO(vboName);
                 this.vbos.delete(vboIdentifier);
             }
         }

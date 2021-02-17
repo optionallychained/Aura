@@ -92,6 +92,25 @@ export class WebGLRenderer {
     }
 
     /**
+     * Delete a VBO with a given name to release memory no longer required by the application
+     *
+     * @param name the name of the VBO
+     */
+    public deleteVBO(name: string): void {
+        const { gl } = this;
+
+        const buffer = this.vbos.get(name);
+
+        if (!buffer) {
+            throw Error('Could not delete buffer');
+        }
+
+        gl.deleteBuffer(buffer);
+
+        this.vbos.delete(name);
+    }
+
+    /**
      * Initialise and store a shader program with the given sources and name specified in the ShaderProgram
      *
      * @param shader the ShaderProgram specification
@@ -148,18 +167,15 @@ export class WebGLRenderer {
         if (config.uniforms) {
             // if the config contains uniforms, we need to do one draw call per uniform set variation
             let offset = 0;
-            for (const uniformSet of config.uniforms) {
-                for (const uniform of uniformSet) {
 
-                    // TODO this could be much nicer; look at the UniformList type to resolve
-                    const uniformName = Object.keys(uniform)[0];
-                    const uniformConfig = Object.values(uniform)[0];
-
+            for (const uniformList of config.uniforms) {
+                for (const uniform of uniformList) {
                     // TODO it'd be nice if we didn't have to ? the activeShaderProgram
-                    const uniformLocation = this.activeShaderProgram?.uniformLocations[uniformName];
+                    // TODO error handling for location not found
+                    const uniformLocation = this.activeShaderProgram?.uniformLocations[uniform.name];
 
                     if (uniformLocation) {
-                        this.loadUniform(uniformLocation, uniformConfig.type, uniformConfig.value);
+                        this.loadUniform(uniformLocation, uniform.type, uniform.value);
                     }
                 }
 
@@ -234,15 +250,16 @@ export class WebGLRenderer {
         const attributes: Array<AttributeSpec> = [];
         const uniformLocations: UniformSpec = {};
 
-        for (const attr of Object.keys(spec.vertex.attributes)) {
+        for (const attr of spec.vertex.attributes) {
             attributes.push({
-                location: gl.getAttribLocation(program, attr),
-                size: spec.vertex.attributes[attr]
+                location: gl.getAttribLocation(program, attr.name),
+                size: attr.size
             });
         }
 
-        for (const uniform of (Object.keys(spec.vertex.uniforms) ?? []).concat(Object.keys(spec.fragment.uniforms))) {
-            uniformLocations[uniform] = gl.getUniformLocation(program, uniform);
+        const allUniforms = (spec.vertex.uniforms ?? []).concat(spec.fragment.uniforms);
+        for (const uniform of allUniforms) {
+            uniformLocations[uniform.name] = gl.getUniformLocation(program, uniform.name);
         }
 
         this.shaderPrograms.set(spec.name, {

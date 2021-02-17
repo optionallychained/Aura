@@ -12,7 +12,10 @@ export const FRAGMENT_BASIC: FragmentShader = {
             gl_FragColor = u_Color;
         }
     `,
-    uniforms: {
-        u_Color: UniformType.VEC4
-    }
+    uniforms: [
+        {
+            name: 'u_Color',
+            type: UniformType.VEC4
+        }
+    ]
 };

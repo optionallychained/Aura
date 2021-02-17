@@ -13,8 +13,8 @@ export class Rect implements Geometry {
 
     public glShape = GLShape.LINE_LOOP;
 
-    public vertSize = 2;
-    public vertCount = this.vertices.length;
+    public vertexSize = 2;
+    public vertexCount = this.vertices.length;
 
     public name = 'rect_wireframe';
 }

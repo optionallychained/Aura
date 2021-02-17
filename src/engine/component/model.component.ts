@@ -7,16 +7,16 @@ export class Model extends Component implements Geometry {
     public modelName: string;
     public vertices: Array<Vec2>;
     public glShape: GLShape;
-    public vertSize: number;
-    public vertCount: number;
+    public vertexSize: number;
+    public vertexCount: number;
 
     constructor(geometry: Geometry) {
         super('Model');
 
         this.vertices = geometry.vertices;
         this.glShape = geometry.glShape;
-        this.vertSize = geometry.vertSize;
-        this.vertCount = geometry.vertCount;
+        this.vertexSize = geometry.vertexSize;
+        this.vertexCount = geometry.vertexCount;
         this.modelName = geometry.name;
     }
 }

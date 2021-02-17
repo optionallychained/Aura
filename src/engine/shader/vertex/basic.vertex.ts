@@ -12,10 +12,16 @@ export const VERTEX_BASIC: VertexShader = {
             gl_Position = vec4(u_Transform * vec3(a_Position, 1.0), 1.0);
         }
     `,
-    attributes: {
-        a_Position: 2
-    },
-    uniforms: {
-        u_Transform: UniformType.MAT3
-    }
+    attributes: [
+        {
+            name: 'a_Position',
+            size: 2
+        }
+    ],
+    uniforms: [
+        {
+            name: 'u_Transform',
+            type: UniformType.MAT3
+        }
+    ]
 };
