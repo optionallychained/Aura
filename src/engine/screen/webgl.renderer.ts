@@ -149,8 +149,11 @@ export class WebGLRenderer {
             // if the config contains uniforms, we need to do one draw call per uniform set variation
             let offset = 0;
             for (const uniformSet of config.uniforms) {
-                for (const uniformName of Object.keys(uniformSet)) {
-                    const uniformConfig = uniformSet[uniformName];
+                for (const uniform of uniformSet) {
+
+                    // TODO this could be much nicer; look at the UniformList type to resolve
+                    const uniformName = Object.keys(uniform)[0];
+                    const uniformConfig = Object.values(uniform)[0];
 
                     // TODO it'd be nice if we didn't have to ? the activeShaderProgram
                     const uniformLocation = this.activeShaderProgram?.uniformLocations[uniformName];

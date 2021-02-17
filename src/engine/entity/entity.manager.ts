@@ -1,9 +1,10 @@
-import { FlatColor, Model, Shader, Transform } from '../component';
+import { Model, Shader } from '../component';
 import { GLShape } from '../geometry';
 import { UniformList, VBOConfig } from '../screen';
 import { UniformType } from '../shader/uniformType';
 import { Entity } from './entity';
 import { EntityManagerConfig } from './entity.manager.config';
+import { EntityShaderMap } from './entityShaderMap';
 
 /**
  * Internal-use utility type for representing Entity list change hints to the vertex compilation routine
@@ -156,24 +157,25 @@ export class EntityManager {
                         // TODO automatic (but customisable?) retrieval of uniforms from Entities on a per-uniform-name basis
                         // TODO hardcoded for now
                         for (const e of renderables) {
-                            const transform = e.getComponent<Transform>('Transform');
-                            const flatColor = e.getComponent<FlatColor>('FlatColor');
+                            // need knowledge of shader uniforms
+                            const shader = e.getComponent<Shader>('Shader');
 
-                            uniforms.push({
-                                u_Transform: {
-                                    type: UniformType.MAT3,
-                                    value: transform.transform.float32Array
-                                },
-                                u_Color: {
-                                    type: UniformType.VEC4,
-                                    value: flatColor.color.float32Array
-                                }
-                            });
+                            const allUniforms = (Object.keys(shader.vertex.uniforms) ?? []).concat(Object.keys(shader.fragment.uniforms));
+
+                            const eUniforms: Array<{ [key: string]: { type: UniformType, value: Float32Array | number } }> = [];
+
+                            for (const uniform of allUniforms) {
+                                eUniforms.push({
+                                    [`${uniform}`]: EntityShaderMap.getShaderValueForEntity(uniform, e)
+                                })
+                            }
+
+                            uniforms.push(eUniforms);
                         }
 
                         // render the Entity set by configuring a render call
                         this.config.renderer.render({
-                            uniforms,
+                            uniforms: uniforms.length ? uniforms : undefined,
                             shaderProgramName: shaderName,
                             vbo
                         });
@@ -417,14 +419,13 @@ export class EntityManager {
                 let glShape: GLShape = 0;
 
                 for (const e of entities) {
-                    const model = e.getComponent<Model>('Model');
                     const shader = e.getComponent<Shader>('Shader');
+                    const model = e.getComponent<Model>('Model');
 
-                    // add this Entity's attribute data to the vertex list
-                    // TODO automatic (but customisable?) retrieval of attributes from Entities on a per-attribute-name basis (shader.vertex.attributes)
-                    // TODO for now, just compiles the model geometry
-                    for (const vertex of model.vertices) {
-                        vertices = vertices.concat(vertex.array);
+                    for (const attributeName of Object.keys(shader.vertex.attributes)) {
+                        // TODO dumb quick solution
+                        const array = EntityShaderMap.getAttributeValueForEntity(attributeName, e);
+                        vertices = vertices.concat(array);
                     }
 
                     // TODO this is guaranteed to be the same for each Entity; make that clearer somehow and/or do this once?
