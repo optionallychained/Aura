@@ -141,7 +141,7 @@ export class EntityManager {
             for (const [modelName, entities] of forModel) {
                 // pluck out the renderables from the shader+model source
                 // TODO EITHER will become unnecessary when automatic attr/uniform inference is in, OR will redefine the meaning of "renderable"
-                const renderables = this.filterEntitiesByComponentsFromSource(entities, `${shaderName}_${modelName}`, 'Transform', 'Model', 'FlatColor', 'Shader');
+                const renderables = this.filterEntitiesByComponentsFromSource(entities, `${shaderName}_${modelName}`, 'Model', 'Shader');
 
                 // retrieve the VBO to use in rendering this Entity set
                 const vbo = this.vbos.get(`${shaderName}_${modelName}`);
@@ -440,17 +440,28 @@ export class EntityManager {
 
                 let offset = 0;
                 for (const e of entities) {
-                    for (const attr of shaderInfo.vertex.attributes) {
-                        // TODO recompilation of dynamic values as part of Entity change detection/sub-buffering/etc optimisations
-                        let value = EntityShaderMap.getShaderValueForEntity(attr.name, e);
+                    // TODO temporary hack for quick path to demonstration for interleaving positional data with other attrs
+                    let count = 0;
 
-                        if (typeof value === 'number') {
-                            value = Float32Array.from([value]);
+                    for (let i = 0; i < vertexCount; i++) {
+                        for (const attr of shaderInfo.vertex.attributes) {
+                            // TODO recompilation of dynamic values as part of Entity change detection/sub-buffering/etc optimisations
+                            let value = EntityShaderMap.getShaderValueForEntity(attr.name, e);
+
+                            if (typeof value === 'number') {
+                                value = Float32Array.from([value]);
+                            }
+                            else if (attr.name.includes('Position')) {
+                                // TODO temporary hack for quick path to demonstration for interleaving positional data with other attrs
+                                // position needs to get the actual entity position, NOT the model vertices
+                                value = value.slice(count, count + 2);
+                                count += 2;
+                            }
+
+                            vertices.set(value, offset);
+
+                            offset += attr.size;
                         }
-
-                        vertices.set(value, offset);
-
-                        offset += stride;
                     }
                 }
 

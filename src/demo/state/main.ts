@@ -10,7 +10,7 @@ let frame = 0;
 const populate = (game: Core.Game): void => {
     const entities: Array<Entity.Entity> = [];
 
-    for (let i = 0; i < 1000; i++) {
+    for (let i = 0; i < 10; i++) {
         const r = Math.round(Random.between(1, 5));
         const color = Color.random();
 
