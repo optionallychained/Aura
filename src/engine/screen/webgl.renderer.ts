@@ -3,6 +3,21 @@ import { ShaderProgram } from '../shader';
 import { UniformType } from '../shader/uniformType';
 import { WebGLRendererConfig } from './webgl.renderer.config';
 
+interface AttributeSpec {
+    location: number;
+    size: number
+}
+
+interface UniformSpec {
+    [name: string]: WebGLUniformLocation | null;
+}
+
+interface ShaderProgramSpec {
+    program: WebGLProgram;
+    attributes: Array<AttributeSpec>;
+    uniformLocations: UniformSpec;
+}
+
 /**
  * Core WebGLRenderer; utilised by the Game to defer the rendering of Entities to the Canvas
  *
@@ -17,21 +32,13 @@ export class WebGLRenderer {
 
     /** Shader Programs; mapped by their name for simple management and usage */
     // TODO type for this
-    private shaderPrograms = new Map<string, {
-        program: WebGLProgram,
-        attributes: Array<{ location: number, size: number }>,
-        uniformLocations: { [name: string]: WebGLUniformLocation | null }
-    }>();
+    private shaderPrograms = new Map<string, ShaderProgramSpec>();
 
     /** Active Shader Program name; used for frame-to-frame optimisation of gl API calls */
     private activeShaderProgramName = '';
 
     /** Active Shader Program numerical value; used for frame-to-frame optimisation of gl API calls */
-    private activeShaderProgram: {
-        program: WebGLProgram,
-        attributes: Array<{ location: number, size: number }>,
-        uniformLocations: { [name: string]: WebGLUniformLocation | null }
-    } | null = null;
+    private activeShaderProgram: ShaderProgramSpec | null = null;
 
     /** VBOs; mapped by their name for simple managment and usage */
     private vbos = new Map<string, WebGLBuffer>();
@@ -117,31 +124,7 @@ export class WebGLRenderer {
             throw Error(`Failed to link shader program [${error ?? ''}]`);
         }
 
-        // switch to the newly-created program so as to get its attribute and uniform locations
-        gl.useProgram(program);
-
-        const attributes: Array<{ location: number, size: number }> = [];
-        const uniformLocations: { [name: string]: WebGLUniformLocation | null } = {};
-
-        for (const attr of Object.keys(vertex.attributes)) {
-            attributes.push({
-                location: gl.getAttribLocation(program, attr),
-                size: vertex.attributes[attr]
-            });
-        }
-
-        for (const uniform of (Object.keys(vertex.uniforms) ?? []).concat(Object.keys(fragment.uniforms))) {
-            uniformLocations[uniform] = gl.getUniformLocation(program, uniform);
-        }
-
-        this.shaderPrograms.set(shader.name, {
-            program,
-            attributes,
-            uniformLocations
-        });
-
-        // switch away from the program to clean up the GL State
-        gl.useProgram(null);
+        this.initializeShaderProgram(program, shader);
     }
 
     /**
@@ -162,37 +145,29 @@ export class WebGLRenderer {
             this.layoutAttributes(config.vbo.vertexSize);
         }
 
-        let offset = 0;
-        for (const uniformSet of config.uniforms) {
-            for (const uniformName of Object.keys(uniformSet)) {
-                const uConfig = uniformSet[uniformName];
+        if (config.uniforms) {
+            // if the config contains uniforms, we need to do one draw call per uniform set variation
+            let offset = 0;
+            for (const uniformSet of config.uniforms) {
+                for (const uniformName of Object.keys(uniformSet)) {
+                    const uniformConfig = uniformSet[uniformName];
 
-                const loc = this.activeShaderProgram?.uniformLocations[uniformName];
+                    // TODO it'd be nice if we didn't have to ? the activeShaderProgram
+                    const uniformLocation = this.activeShaderProgram?.uniformLocations[uniformName];
 
-                if (loc) {
-                    switch (uConfig.type) {
-                        case UniformType.VEC2:
-                            gl.uniform2fv(loc, uConfig.value);
-                            break;
-                        case UniformType.VEC3:
-                            gl.uniform3fv(loc, uConfig.value);
-                            break;
-                        case UniformType.VEC4:
-                            gl.uniform4fv(loc, uConfig.value);
-                            break;
-                        case UniformType.MAT3:
-                            gl.uniformMatrix3fv(loc, false, uConfig.value);
-                            break;
-                        case UniformType.MAT4:
-                            gl.uniformMatrix4fv(loc, false, uConfig.value);
-                            break;
+                    if (uniformLocation) {
+                        this.loadUniform(uniformLocation, uniformConfig.type, uniformConfig.value);
                     }
                 }
+
+                gl.drawArrays(config.vbo.glShape, offset, config.vbo.vertexCount);
+
+                offset += config.vbo.vertexCount;
             }
-
-            gl.drawArrays(config.vbo.glShape, offset, config.vbo.vertexCount);
-
-            offset += config.vbo.vertexCount;
+        }
+        else {
+            // if there is no uniform variation, we can draw once
+            gl.drawArrays(config.vbo.glShape, 0, config.vbo.vertexCount);
         }
     }
 
@@ -243,6 +218,40 @@ export class WebGLRenderer {
     }
 
     /**
+     * // TODO
+     *
+     * @param program
+     * @param spec
+     */
+    private initializeShaderProgram(program: WebGLProgram, spec: ShaderProgram): void {
+        const { gl } = this;
+
+        gl.useProgram(program);
+
+        const attributes: Array<AttributeSpec> = [];
+        const uniformLocations: UniformSpec = {};
+
+        for (const attr of Object.keys(spec.vertex.attributes)) {
+            attributes.push({
+                location: gl.getAttribLocation(program, attr),
+                size: spec.vertex.attributes[attr]
+            });
+        }
+
+        for (const uniform of (Object.keys(spec.vertex.uniforms) ?? []).concat(Object.keys(spec.fragment.uniforms))) {
+            uniformLocations[uniform] = gl.getUniformLocation(program, uniform);
+        }
+
+        this.shaderPrograms.set(spec.name, {
+            program,
+            attributes,
+            uniformLocations
+        });
+
+        gl.useProgram(null);
+    }
+
+    /**
      * Internal-use shader switching routine; make the shader program, specified by name, active for draw calls
      *
      * @param name the name of the shader program to make active
@@ -285,6 +294,11 @@ export class WebGLRenderer {
         this.activeVBO = buffer;
     }
 
+    /**
+     * // TODO
+     *
+     * @param vertexSize
+     */
     private layoutAttributes(vertexSize: number): void {
         const { gl } = this;
 
@@ -294,6 +308,46 @@ export class WebGLRenderer {
             gl.vertexAttribPointer(attr.location, attr.size, gl.FLOAT, false, vertexSize * 4, offset);
 
             offset += attr.size * 4;
+        }
+    }
+
+    /**
+     * // TODO
+     *
+     * @param location
+     * @param type
+     * @param value
+     */
+    private loadUniform(location: WebGLUniformLocation, type: UniformType, value: Float32Array | number): void {
+        const { gl } = this;
+
+        switch (type) {
+            case UniformType.VEC2:
+                gl.uniform2fv(location, value as Float32Array);
+                break;
+
+            case UniformType.VEC3:
+                gl.uniform3fv(location, value as Float32Array);
+                break;
+
+            case UniformType.VEC4:
+                gl.uniform4fv(location, value as Float32Array);
+                break;
+
+            case UniformType.MAT3:
+                gl.uniformMatrix3fv(location, false, value as Float32Array);
+                break;
+
+            case UniformType.MAT4:
+                gl.uniformMatrix4fv(location, false, value as Float32Array);
+                break;
+
+            case UniformType.NUMBER:
+                gl.uniform1f(location, value as number);
+                break;
+
+            default:
+                throw Error(`Could not load uniform with value ${value.toString()}`);
         }
     }
 }

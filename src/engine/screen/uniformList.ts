@@ -6,6 +6,6 @@ import { UniformType } from '../shader/uniformType';
 export type UniformList = Array<{
     [key: string]: {
         type: UniformType;
-        value: Float32Array;
+        value: Float32Array | number;
     };
 }>;
