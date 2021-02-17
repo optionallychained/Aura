@@ -1,10 +1,11 @@
-import { Angle, Color, Component, Core, Entity, Mat3, Random, State } from '../../engine';
+import { Angle, Color, Component, Core, Entity, Mat3, Random, State, Vec2 } from '../../engine';
 import { _createRect } from '../entity/rect';
 import { _createRectWire } from '../entity/rectWire';
 import { _createTriangle } from '../entity/triangle';
 import { _createTriangleWire } from '../entity/triangleWire';
 
 const rotations: Array<number> = [];
+let frame = 0;
 
 const populate = (game: Core.Game): void => {
     const entities: Array<Entity.Entity> = [];
@@ -31,60 +32,35 @@ const populate = (game: Core.Game): void => {
                 break;
         }
 
-        rotations.push(Angle.toRadians(Random.between(0.25, 2.5)));
+        rotations.push(Angle.toRadians(Random.between(0.5, 3)));
     }
 
     game.entityManager.addEntities(...entities);
 };
 
-const rotate = (game: Core.Game): void => {
+const rotateAndScale = (game: Core.Game): void => {
     let i = 0;
+
+    const scaleFactor = 1 + (Math.sin(frame * 0.025) * 0.8);
+    const scale = new Vec2(scaleFactor, scaleFactor);
+
     for (const e of game.entityManager.filterEntitiesByTags('rect', 'triangle', 'triangleWire', 'rectWire')) {
         const transform = e.getComponent<Component.Transform>('Transform');
 
-        transform.transform = Mat3.rotate(transform.transform, rotations[i]);
+        transform.transform = Mat3.scale(new Mat3(), scale);
+        transform.transform = Mat3.rotate(transform.transform, rotations[i] * frame);
         i++;
     }
-}
 
-const rect = _createRect(new Color(0, 255, 0));
-const rect2 = _createRect(new Color(0, 0, 255, 0.5));
-const triangle = _createTriangle(new Color(255, 0, 0));
-let timeout1: number;
-let timeout2: number;
-let timeout3: number;
+    frame++;
+}
 
 export const mainState = new State.State({
     name: 'main',
     init: (game) => {
-        // populate(game);
-        // game.entityManager.addEntities(rect, triangle, rect2);
+        populate(game);
     },
     tick: (game) => {
-        // rotate(game);
-
-        if (!timeout1) {
-            timeout1 = window.setTimeout(() => {
-                game.entityManager.addEntity(rect);
-
-                clearTimeout(timeout1);
-            }, 5000);
-        }
-
-        if (!timeout2) {
-            timeout2 = window.setTimeout(() => {
-                game.entityManager.addEntity(triangle);
-
-                clearTimeout(timeout2);
-            }, 10000);
-        }
-
-        if (!timeout3) {
-            timeout3 = window.setTimeout(() => {
-                game.entityManager.addEntity(rect2);
-
-                clearTimeout(timeout3);
-            }, 15000);
-        }
+        rotateAndScale(game);
     }
 });

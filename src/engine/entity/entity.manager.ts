@@ -160,6 +160,8 @@ export class EntityManager {
                         // if there are uniforms to pipe, we need to build a UniformList so that the renderer can split draw calls accordingly
                         uniformList = [];
 
+                        // TODO we may not want to do this here; technically we're looping through all renderables twice since renderer loops through the UniformList
+                        // TODO this is effectively done just to make for a single render call here with multiple drawArrays in renderer, but it's probably not worth the clean look
                         for (const e of renderables) {
                             const eUniforms: UniformList = [];
 

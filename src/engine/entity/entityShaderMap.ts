@@ -1,6 +1,8 @@
 import { FlatColor, Model, Transform } from '../component';
 import { Entity } from './entity'
 
+export type EntityShaderResolver = (e: Entity) => Float32Array | number;
+
 /**
  * Utility class for automatically retrieving attribute and uniform shader values from Entities and their Components
  *
@@ -13,14 +15,7 @@ import { Entity } from './entity'
 export class EntityShaderMap {
 
     // TODO readonly?
-    private static VARIABLE_NAMES = [
-        'Position',
-        'Transform',
-        'Color'
-    ];
-
-    // TODO readonly?
-    private static MAP = new Map<string, (e: Entity) => Float32Array | number>([
+    private static MAP = new Map<string, EntityShaderResolver>([
         [
             'Position',
             // TODO dumb and for now not considering actual Transform.position
@@ -49,9 +44,22 @@ export class EntityShaderMap {
         return value;
     }
 
-    // TODO
-    public static registerEntityShaderMapping(name: string, resolve: (e: Entity) => Float32Array | number): void {
-        EntityShaderMap.MAP.set(name, resolve);
-        EntityShaderMap.VARIABLE_NAMES.push(name);
+    // register a NEW shader mapping. Separated from overriding existing ones for clear user API and error handling avoiding accidental alteration of built-in functionality
+    // in effect, force the user to be explicit when wanting to override internal functionality
+    public static registerEntityShaderMapping(variableName: string, resolve: EntityShaderResolver): void {
+        if (EntityShaderMap.MAP.get(variableName)) {
+            throw Error(`Entity Shader Mapping for ${variableName} already exists; this may be an accidental override; if not, please use 'overrideEntityShaderMapping()'`);
+        }
+
+        EntityShaderMap.MAP.set(variableName, resolve);
+    }
+
+    public static overrideEntityShaderMapping(variableName: string, resolve: EntityShaderResolver): void {
+        if (!EntityShaderMap.MAP.get(variableName)) {
+            // TODO do we want to error in this case? Could safely pass through to registration silently...better to ensure the user knows the use-case maybe?
+            throw Error(`Entity Shader Mapping for ${variableName} does not exist; use 'registerEntityShaderMapping()' instead`);
+        }
+
+        EntityShaderMap.MAP.set(variableName, resolve);
     }
 }

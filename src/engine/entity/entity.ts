@@ -24,6 +24,9 @@ export class Entity {
      * @param config entity configuration
      */
     constructor(private readonly config: EntityConfig) {
+        // TODO initialization-time verification by way of EntityShaderMap and shader registrations that:
+        //   - an Entity can be rendered with its shader based on its components
+        //   - its Model is compatible with its Shader
         if (config.components) {
             this.addComponents(config.components);
         }

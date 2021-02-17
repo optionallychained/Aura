@@ -1,4 +1,5 @@
 import { EntityManager } from '../entity';
+import { EntityShaderMap, EntityShaderResolver } from '../entity/entityShaderMap';
 import { InputManager } from '../input';
 import { Color } from '../math';
 import { WebGLRenderer } from '../screen';
@@ -219,6 +220,14 @@ export class Game {
 
     public registerShader(shader: ShaderProgram): void {
         this.renderer.createShaderProgram(shader);
+    }
+
+    public registerEntityShaderMapping(variableName: string, resolve: EntityShaderResolver): void {
+        EntityShaderMap.registerEntityShaderMapping(variableName, resolve);
+    }
+
+    public overrideEntityShaderMapping(variableName: string, resolve: EntityShaderResolver): void {
+        EntityShaderMap.overrideEntityShaderMapping(variableName, resolve);
     }
 
     // /** TODO temporary - to be supplanted by TextManager */
