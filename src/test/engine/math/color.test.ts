@@ -11,6 +11,54 @@ describe('Color', () => {
     describe('Static', () => {
 
         /**
+         * Tests for Color.random()
+         */
+        describe('random', () => {
+            it('should generate random colors with fixed alphas', () => {
+                const color = Color.random();
+
+                expect(color).toHaveProperty('r');
+                expect(color.r).toBeGreaterThanOrEqual(0);
+                expect(color.r).toBeLessThan(255);
+
+                expect(color).toHaveProperty('g');
+                expect(color.g).toBeGreaterThanOrEqual(0);
+                expect(color.g).toBeLessThan(255);
+
+                expect(color).toHaveProperty('b');
+                expect(color.b).toBeGreaterThanOrEqual(0);
+                expect(color.b).toBeLessThan(255);
+
+                expect(color).toHaveProperty('a', 1);
+            });
+        });
+
+        /**
+         * Tests for Color.randomWithAlpha()
+         */
+        describe('randomWithAlpha', () => {
+            it('should generate random colors with random alphas', () => {
+                const color = Color.randomWithAlpha();
+
+                expect(color).toHaveProperty('r');
+                expect(color.r).toBeGreaterThanOrEqual(0);
+                expect(color.r).toBeLessThan(255);
+
+                expect(color).toHaveProperty('g');
+                expect(color.g).toBeGreaterThanOrEqual(0);
+                expect(color.g).toBeLessThan(255);
+
+                expect(color).toHaveProperty('b');
+                expect(color.b).toBeGreaterThanOrEqual(0);
+                expect(color.b).toBeLessThan(255);
+
+                expect(color).toHaveProperty('a');
+                expect(color.a).toBeGreaterThanOrEqual(0);
+                expect(color.a).toBeLessThan(1);
+            });
+        });
+
+        /**
          * Tests for Color.fromHex()
          */
         describe('fromHex', () => {
@@ -120,26 +168,12 @@ describe('Color', () => {
                     expect(color).toHaveProperty('r', 0);
                     expect(color).toHaveProperty('g', 0);
                     expect(color).toHaveProperty('b', 0);
-
-                    expect(color).toHaveProperty('a', undefined);
+                    expect(color).toHaveProperty('a', 1);
                 });
 
                 // given values
                 it('should set given values', () => {
-                    const r = 50, g = 100, b = 255;
-
-                    const color = new Color(r, g, b);
-
-                    expect(color).toHaveProperty('r', r);
-                    expect(color).toHaveProperty('g', g);
-                    expect(color).toHaveProperty('b', b);
-
-                    expect(color).toHaveProperty('a', undefined);
-                });
-
-                // alpha
-                it('should set alpha value', () => {
-                    const r = 0, g = 0, b = 0, a = 1;
+                    const r = 50, g = 100, b = 255, a = 0.5;
 
                     const color = new Color(r, g, b, a);
 
@@ -196,6 +230,24 @@ describe('Color', () => {
                 const knownHex = '#010203';
 
                 expect(color.hex).toBe(knownHex);
+            });
+        });
+
+        /**
+         * Tests for (Color).float32Array
+         */
+        describe('float32Array', () => {
+            it('should give the correct Float32Array form', () => {
+                const r = 150, g = 250, b = 75, a = 0.25;
+
+                const { float32Array } = new Color(r, g, b, a);
+
+                expect(float32Array).toBeInstanceOf(Float32Array);
+                expect(float32Array.length).toBe(4);
+                expect(float32Array[0]).toBeCloseTo(r / 255);
+                expect(float32Array[1]).toBeCloseTo(g / 255);
+                expect(float32Array[2]).toBeCloseTo(b / 255);
+                expect(float32Array[3]).toBeCloseTo(a);
             });
         });
     });

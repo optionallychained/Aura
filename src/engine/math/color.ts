@@ -5,11 +5,30 @@ import { Random } from './random';
  */
 export class Color {
 
+    /**
+     * Generate a random Color with r, g and b values
+     *
+     * @returns a random Color
+     */
     public static random(): Color {
         return new Color(
             Random.between(0, 255),
             Random.between(0, 255),
             Random.between(0, 255)
+        );
+    }
+
+    /**
+     * Generate a random Color with r, g, b and a values, supporting transparency
+     *
+     * @returns a random Color with transparency
+     */
+    public static randomWithAlpha(): Color {
+        return new Color(
+            Random.between(0, 255),
+            Random.between(0, 255),
+            Random.between(0, 255),
+            Random.between(0, 1)
         );
     }
 
@@ -113,23 +132,23 @@ export class Color {
     }
 
     /**
-     * Getter for the gl-compatible clamped form of the Color's r number (0 -> 1)
+     * Internal-use getter for the gl-compatible clamped form of the Color's r number (0 -> 1)
      */
-    public get rf(): number {
+    private get rf(): number {
         return this.r / 255;
     }
 
     /**
-     * Getter for the gl-compatible clamped form of the Color's g number (0 -> 1)
+     * Internal-use getter for the gl-compatible clamped form of the Color's g number (0 -> 1)
      */
-    public get gf(): number {
+    private get gf(): number {
         return this.g / 255;
     }
 
     /**
-     * Getter for the gl-compatible clamped form of the Color's b number (0 -> 1)
+     * Internal-use getter for the gl-compatible clamped form of the Color's b number (0 -> 1)
      */
-    public get bf(): number {
+    private get bf(): number {
         return this.b / 255;
     }
 }

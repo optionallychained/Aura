@@ -231,13 +231,13 @@ describe('Mat3', () => {
                 const angle = 2.4, cos = Math.cos(angle), sin = Math.sin(angle);
 
                 const result = [
-                    cos * RHS[0] + sin * RHS[3],
-                    cos * RHS[1] + sin * RHS[4],
-                    cos * RHS[2] + sin * RHS[5],
+                    cos * RHS[0] - sin * RHS[3],
+                    cos * RHS[1] - sin * RHS[4],
+                    cos * RHS[2] - sin * RHS[5],
 
-                    cos * RHS[3] - sin * RHS[0],
-                    cos * RHS[4] - sin * RHS[1],
-                    cos * RHS[5] - sin * RHS[2],
+                    cos * RHS[3] + sin * RHS[0],
+                    cos * RHS[4] + sin * RHS[1],
+                    cos * RHS[5] + sin * RHS[2],
 
                     RHS[6], RHS[7], RHS[8]
                 ];
