@@ -24,15 +24,15 @@ export class EntityShaderMap {
             'Position',
             // TODO dumb and for now not considering actual Transform.position
             //   improve alongside work to map Entity positions from world->screenspace
-            (e) => Float32Array.from(e.getComponent<Model>('Model')!.vertices.map((v) => v.array).reduce((prev, current) => prev.concat(current)))
+            (e) => Float32Array.from(e.getComponent<Model>('Model').vertices.map((v) => v.array).reduce((prev, current) => prev.concat(current)))
         ],
         [
             'Transform',
-            (e) => e.getComponent<Transform>('Transform')!.transform.float32Array
+            (e) => e.getComponent<Transform>('Transform').transform.float32Array
         ],
         [
             'Color',
-            (e) => e.getComponent<FlatColor>('FlatColor')!.color.float32Array
+            (e) => e.getComponent<FlatColor>('FlatColor').color.float32Array
         ]
     ]);
 
@@ -47,12 +47,16 @@ export class EntityShaderMap {
      * @returns the value of the attribute or uniform to build into vertex lists or pipe to the GPU for draw calls
      */
     public static getShaderValueForEntity(name: string, entity: Entity): Float32Array | number {
-        const variableName = name.replace(/(a|u)_/, '');
+        const resolve = EntityShaderMap.MAP.get(name.replace(/(a|u)_/, ''));
 
-        const value = EntityShaderMap.MAP.get(variableName)?.(entity);
+        if (!resolve) {
+            throw Error(`No shader value resolver for variable name ${name}`);
+        }
+
+        const value = resolve(entity);
 
         if (!value) {
-            throw Error('Could not resolve Shader value for Entity');
+            throw Error(`Could not get shader value for variable ${name} for Entity with tag ${entity.tag} and id ${entity.id}`);
         }
 
         return value;
@@ -71,7 +75,10 @@ export class EntityShaderMap {
      */
     public static registerEntityShaderMapping(variableName: string, resolve: EntityShaderResolver): void {
         if (EntityShaderMap.MAP.get(variableName)) {
-            throw Error(`Entity Shader Mapping for ${variableName} already exists; this may be an accidental override; if not, please use 'overrideEntityShaderMapping()'`);
+            throw Error(
+                `Entity Shader Mapping for variable name ${variableName} already exists.
+                If this is an intentional override, use 'overrideEntityShaderMapping()'`
+            );
         }
 
         EntityShaderMap.MAP.set(variableName, resolve);
@@ -92,7 +99,10 @@ export class EntityShaderMap {
         if (!EntityShaderMap.MAP.get(variableName)) {
             // TODO we could just fall silently through to registration in this case; decide on this as well as the overall philosophy of
             //   separating overrides + additions
-            throw Error(`Entity Shader Mapping for ${variableName} does not exist; use 'registerEntityShaderMapping()' instead`);
+            throw Error(
+                `Entity Shader Mapping for variable name ${variableName} does not exist.
+                Register a new mapping with 'registerEntityShaderMapping()'`
+            );
         }
 
         EntityShaderMap.MAP.set(variableName, resolve);
