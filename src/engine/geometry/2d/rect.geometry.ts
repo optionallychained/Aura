@@ -15,11 +15,11 @@ export class Rect extends Geometry {
             name: 'rect',
             vertices: [
                 new Vec2(0.5, 0.5),
-                new Vec2(0, 0.5),
-                new Vec2(0, 0),
+                new Vec2(-0.5, 0.5),
+                new Vec2(-0.5, -0.5),
 
-                new Vec2(0, 0),
-                new Vec2(0.5, 0),
+                new Vec2(-0.5, -0.5),
+                new Vec2(0.5, -0.5),
                 new Vec2(0.5, 0.5)
             ],
             vertexSize: 2,

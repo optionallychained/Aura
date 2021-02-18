@@ -56,19 +56,22 @@ export class CollisionSystem extends System {
         const e2Transform = e2.getComponent<Transform>('Transform');
         const e2Box = e2.getComponent<AABBCollisionBox>('AABBCollisionBox');
 
-        const e1Pos = e1Transform.position;
-        const e1Dim = e1Box.dimensions;
-        const e2Pos = e2Transform.position;
-        const e2Dim = e2Box.dimensions;
+        // TODO collision after world coords involving transforms
+        return false;
 
-        return (
-            e1Pos.x < (e2Pos.x + e2Dim.x)
-            &&
-            (e1Pos.x + e1Dim.x) > e2Pos.x
-            &&
-            e1Pos.y < (e2Pos.y + e2Dim.y)
-            &&
-            (e1Pos.y + e1Dim.y) > e2Pos.y
-        )
+        // const e1Pos = e1Transform.position;
+        // const e1Dim = e1Box.dimensions;
+        // const e2Pos = e2Transform.position;
+        // const e2Dim = e2Box.dimensions;
+
+        // return (
+        //     e1Pos.x < (e2Pos.x + e2Dim.x)
+        //     &&
+        //     (e1Pos.x + e1Dim.x) > e2Pos.x
+        //     &&
+        //     e1Pos.y < (e2Pos.y + e2Dim.y)
+        //     &&
+        //     (e1Pos.y + e1Dim.y) > e2Pos.y
+        // )
     }
 }

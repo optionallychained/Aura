@@ -8,11 +8,17 @@ import { Component } from './component';
  */
 export class Transform extends Component {
 
-    /** Transform Matrix for representing Entity transformations */
-    public readonly transform = new Mat3();
+    /** Maintained scale vector */
+    private scaleVector: Vec2;
+
+    /** maintained translation vector */
+    private translationVector: Vec2;
+
+    /** maintained rotation angle in radians */
+    private rotation = 0;
 
     /** Vec2 representing the center of the Entity, calculated by its position and dimensions */
-    public readonly center: Vec2;
+    // public readonly center: Vec2;
 
     /**
      * Constructor. Take and store the position, dimensions and velocity, and provide the name 'Transform' to the parent class
@@ -21,10 +27,18 @@ export class Transform extends Component {
      * @param dimensions the dimensions of the Entity, expressed as a Vec2. Defaults to 0,0
      * @param velocity the velocity of the Entity, expressed as a Vec2. Defaults to 0,0
      */
-    constructor(public readonly position = new Vec2(), public readonly dimensions = new Vec2(), public readonly velocity = new Vec2()) {
+    constructor(
+        public readonly initialPosition = new Vec2(),
+        public readonly initialScale = new Vec2(),
+        public readonly initialAngle = 0,
+        public readonly velocity = new Vec2()
+    ) {
+
         super('Transform');
 
-        this.center = new Vec2(position.x + (dimensions.x / 2), position.y + (dimensions.y / 2));
+        this.translationVector = initialPosition;
+        this.scaleVector = initialScale;
+        this.rotation = initialAngle;
     }
 
     /**
@@ -33,7 +47,7 @@ export class Transform extends Component {
      * @param translate the Vec2 to translate by
      */
     public translate(translate: Vec2): void {
-        this.mutable.transform = Mat3.translate(this.transform, translate);
+        this.translationVector = Vec2.add(this.translationVector, translate);
     }
 
     /**
@@ -42,7 +56,7 @@ export class Transform extends Component {
      * @param angle the angle to rotate by
      */
     public rotate(angle: number): void {
-        this.mutable.transform = Mat3.rotate(this.transform, angle);
+        this.rotation += angle;
     }
 
     /**
@@ -51,15 +65,24 @@ export class Transform extends Component {
      * @param factor the factor to scale by
      */
     public scale(factor: Vec2): void {
-        this.mutable.transform = Mat3.scale(this.transform, factor);
+        // maintain the initial scale by making all subsequent scales a factor of the initial
+        this.scaleVector = Vec2.mult(this.initialScale, factor);
     }
 
     /**
-     * Getter for a Mutable cast of the Transform instance; used for enabling internal-only mutation in the transform abstractions
+     * Compute the composite Transform Matrix for the maintained translation, scaling and rotation
      *
-     * @returns the typecasted Mutable Transform instance
+     * @returns the Transform matrix
      */
-    private get mutable(): Mutable<Transform> {
-        return this as Mutable<Transform>;
+    public compute(): Mat3 {
+        const trans = Mat3.translate(new Mat3(), this.translationVector);
+        const rot = Mat3.rotate(new Mat3(), this.rotation);
+        const scale = Mat3.scale(new Mat3(), this.scaleVector);
+
+        let compute = Mat3.mult(new Mat3(), scale);
+        compute = Mat3.mult(compute, rot);
+        compute = Mat3.mult(compute, trans);
+
+        return compute;
     }
 }

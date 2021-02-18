@@ -28,7 +28,7 @@ export class EntityShaderMap {
         ],
         [
             'Transform',
-            (e) => e.getComponent<Transform>('Transform').transform.float32Array
+            (e) => e.getComponent<Transform>('Transform').compute().float32Array
         ],
         [
             'Color',
