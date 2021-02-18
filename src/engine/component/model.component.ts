@@ -7,7 +7,7 @@ import { Component } from './component';
  *
  * @see Geometry
  */
-export class Model extends Component implements Geometry {
+export class Model extends Component {
 
     /** The name of the Model */
     public modelName: string;
@@ -15,14 +15,14 @@ export class Model extends Component implements Geometry {
     /** The vertices that make up the Model */
     public vertices: Array<Vec2>;
 
-    /** The GLShape of the Model */
-    public glShape: GLShape;
-
     /** The size of each of the Model's vertices */
     public vertexSize: number;
 
     /** The number of vertices the Model is made up of */
     public vertexCount: number;
+
+    /** The GLShape of the Model */
+    public glShape: GLShape;
 
     /**
      * Constructor. Take the Geometry to use, and extract its details into the Component
@@ -34,8 +34,8 @@ export class Model extends Component implements Geometry {
 
         this.modelName = geometry.name;
         this.vertices = geometry.vertices;
-        this.glShape = geometry.glShape;
         this.vertexSize = geometry.vertexSize;
         this.vertexCount = geometry.vertexCount;
+        this.glShape = geometry.glShape;
     }
 }

@@ -2,22 +2,29 @@ import { Vec2 } from '../../math';
 import { Geometry } from '../geometry';
 import { GLShape } from '../glShape.enum';
 
-export class Rect implements Geometry {
-    public vertices = [
+/**
+ * Built-in 2D Rect Geometry, setting out the information required to render quads
+ */
+export class Rect extends Geometry {
 
-        new Vec2(0.5, 0.5),
-        new Vec2(0, 0.5),
-        new Vec2(0, 0),
+    /**
+     * Constructor. Provide a GeometryConfig representing a quad to the parent class
+     */
+    constructor() {
+        super({
+            name: 'rect',
+            vertices: [
+                new Vec2(0.5, 0.5),
+                new Vec2(0, 0.5),
+                new Vec2(0, 0),
 
-        new Vec2(0, 0),
-        new Vec2(0.5, 0),
-        new Vec2(0.5, 0.5)
-    ];
-
-    public glShape = GLShape.TRIANGLES;
-
-    public vertexSize = 2;
-    public vertexCount = this.vertices.length;
-
-    public name = 'rect';
+                new Vec2(0, 0),
+                new Vec2(0.5, 0),
+                new Vec2(0.5, 0.5)
+            ],
+            vertexSize: 2,
+            vertexCount: 6,
+            glShape: GLShape.TRIANGLES
+        });
+    }
 }

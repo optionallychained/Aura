@@ -2,17 +2,25 @@ import { Vec2 } from '../../math';
 import { Geometry } from '../geometry';
 import { GLShape } from '../glShape.enum';
 
-export class Triangle implements Geometry {
-    public vertices = [
-        new Vec2(0, 0),
-        new Vec2(0.5, 0),
-        new Vec2(0.5, 0.5)
-    ];
+/**
+ * Built-in 2D Triangle Geometry, setting out the information required to render triangles
+ */
+export class Triangle extends Geometry {
 
-    public glShape = GLShape.TRIANGLES;
-
-    public vertexSize = 2;
-    public vertexCount = this.vertices.length;
-
-    public name = 'triangle';
+    /**
+     * Constructor. Provide a GeometryConfig representing a triangle to the parent class
+     */
+    constructor() {
+        super({
+            name: 'triangle',
+            vertices: [
+                new Vec2(0, 0),
+                new Vec2(0.5, 0),
+                new Vec2(0.5, 0.5)
+            ],
+            vertexSize: 2,
+            vertexCount: 3,
+            glShape: GLShape.TRIANGLES
+        });
+    }
 }

@@ -2,17 +2,25 @@ import { Vec2 } from '../../../math';
 import { Geometry } from '../../geometry';
 import { GLShape } from '../../glShape.enum';
 
-export class Triangle implements Geometry {
-    public vertices = [
-        new Vec2(0, 0),
-        new Vec2(0.5, 0),
-        new Vec2(0.5, 0.5)
-    ];
+/**
+ * Built-in 2D Wireframe Triangle Geometry, setting out the information required to render wireframe triangles
+ */
+export class Triangle extends Geometry {
 
-    public glShape = GLShape.LINE_LOOP;
-
-    public vertexSize = 2;
-    public vertexCount = this.vertices.length;
-
-    public name = 'triangle_wireframe';
+    /**
+     * Constructor. Provide a GeometryConfig representing a wireframe triangle to the parent class
+     */
+    constructor() {
+        super({
+            name: 'triangle_wireframe',
+            vertices: [
+                new Vec2(0, 0),
+                new Vec2(0.5, 0),
+                new Vec2(0.5, 0.5)
+            ],
+            vertexSize: 2,
+            vertexCount: 3,
+            glShape: GLShape.LINE_LOOP
+        });
+    }
 }
