@@ -8,8 +8,6 @@ import { System } from './system';
  *
  * To be eligible for movement, an Entity must have a Transform (position and dimension within the world).
  *
- * // TODO memoization (defer to EntityManager?) of 'movers' filter?
- *
  * @see Transform
  */
 export class PhysicsSystem extends System {

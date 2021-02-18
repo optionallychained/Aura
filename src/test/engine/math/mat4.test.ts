@@ -467,6 +467,7 @@ describe('Mat4', () => {
             it('should give the correct string form', () => {
                 const { string } = new Mat4(RHS.slice(0));
 
+                /* eslint-disable max-len */
                 expect(string).toBe(`Mat4\n${RHS[0]} ${RHS[1]} ${RHS[2]} ${RHS[3]}\n${RHS[4]} ${RHS[5]} ${RHS[6]} ${RHS[7]}\n${RHS[8]} ${RHS[9]} ${RHS[10]} ${RHS[11]}\n${RHS[12]} ${RHS[13]} ${RHS[14]} ${RHS[15]}`)
             });
         });

@@ -3,19 +3,16 @@ import { ShaderProgram } from '../shader/program';
 import { UniformType } from '../shader/uniformType';
 import { WebGLRendererConfig } from './webgl.renderer.config';
 
-interface AttributeSpec {
-    location: number;
-    size: number
-}
+type AttributeLocationArray = Array<{ location: number; size: number; }>;
 
-interface UniformSpec {
+type UniformLocationSet = {
     [name: string]: WebGLUniformLocation | null;
-}
+};
 
 interface ShaderProgramSpec {
     program: WebGLProgram;
-    attributes: Array<AttributeSpec>;
-    uniformLocations: UniformSpec;
+    attributeLocations: AttributeLocationArray;
+    uniformLocations: UniformLocationSet;
 }
 
 /**
@@ -252,11 +249,11 @@ export class WebGLRenderer {
 
         gl.useProgram(program);
 
-        const attributes: Array<AttributeSpec> = [];
-        const uniformLocations: UniformSpec = {};
+        const attributeLocations: AttributeLocationArray = [];
+        const uniformLocations: UniformLocationSet = {};
 
         for (const attr of spec.vertex.attributes) {
-            attributes.push({
+            attributeLocations.push({
                 location: gl.getAttribLocation(program, attr.name),
                 size: attr.size
             });
@@ -269,7 +266,7 @@ export class WebGLRenderer {
 
         this.shaderPrograms.set(spec.name, {
             program,
-            attributes,
+            attributeLocations,
             uniformLocations
         });
 
@@ -328,7 +325,7 @@ export class WebGLRenderer {
         const { gl } = this;
 
         let offset = 0;
-        for (const attr of this.activeShaderProgram?.attributes ?? []) {
+        for (const attr of this.activeShaderProgram?.attributeLocations ?? []) {
             gl.enableVertexAttribArray(attr.location);
             gl.vertexAttribPointer(attr.location, attr.size, gl.FLOAT, false, vertexSize * 4, offset);
 

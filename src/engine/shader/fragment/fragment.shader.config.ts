@@ -1,4 +1,4 @@
-import { UniformArray } from '../uniformType';
+import { UniformArray } from '../uniformArray.type';
 
 export interface FragmentShaderConfig {
     readonly name: string;

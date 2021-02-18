@@ -1,5 +1,6 @@
 import { Model, Shader } from '../component';
-import { UniformList, UniformSet, VBOConfig } from '../screen';
+import { UniformList, VBOConfig } from '../screen';
+import { UniformSet } from '../screen/uniformSet.type';
 import { Entity } from './entity';
 import { EntityManagerConfig } from './entity.manager.config';
 import { EntityShaderMap } from './entityShaderMap';
@@ -7,7 +8,7 @@ import { EntityShaderMap } from './entityShaderMap';
 /**
  * Internal-use utility type for representing Entity list change hints to the vertex compilation routine
  */
-type EntityChanges = Array<{ shaderName: string, modelName: string }>;
+type EntityChanges = Array<{ shaderName: string; modelName: string; }>;
 
 /**
  * Core EntityManager; utilised by the Game to defer the management, updating and rendering of game Entities

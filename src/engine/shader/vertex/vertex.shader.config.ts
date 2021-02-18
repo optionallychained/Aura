@@ -1,4 +1,5 @@
-import { AttributeArray, UniformArray } from '../uniformType';
+import { AttributeArray } from '../attributeArray.type';
+import { UniformArray } from '../uniformArray.type';
 
 export interface VertexShaderConfig {
     readonly name: string,

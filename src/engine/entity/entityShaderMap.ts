@@ -1,7 +1,6 @@
 import { FlatColor, Model, Transform } from '../component';
 import { Entity } from './entity'
-
-export type EntityShaderResolver = (e: Entity) => Float32Array | number;
+import { EntityShaderResolver } from './entityShaderResolver.type';
 
 /**
  * Utility class for automatically retrieving attribute and uniform shader values from Entities and their Components

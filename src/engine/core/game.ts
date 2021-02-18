@@ -1,5 +1,6 @@
 import { EntityManager } from '../entity';
-import { EntityShaderMap, EntityShaderResolver } from '../entity/entityShaderMap';
+import { EntityShaderMap } from '../entity/entityShaderMap';
+import { EntityShaderResolver } from '../entity/entityShaderResolver.type';
 import { InputManager } from '../input';
 import { Color } from '../math';
 import { WebGLRenderer } from '../screen';
