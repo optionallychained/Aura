@@ -38,17 +38,19 @@ const populate = (game: Core.Game): void => {
     game.entityManager.addEntities(...entities);
 };
 
+let lastScaleFactor = 0;
 const rotateAndScale = (game: Core.Game): void => {
     let i = 0;
 
     const scaleFactor = 1 + (Math.sin(frame * 0.025) * 0.8);
-    const scale = new Vec2(scaleFactor, scaleFactor);
+    const scale = new Vec2(scaleFactor - lastScaleFactor + 1, scaleFactor - lastScaleFactor + 1);
+    lastScaleFactor = scaleFactor;
 
     for (const e of game.entityManager.filterEntitiesByTags('rect', 'triangle', 'triangleWire', 'rectWire')) {
         const transform = e.getComponent<Component.Transform>('Transform');
 
-        transform.transform = Mat3.scale(new Mat3(), scale);
-        transform.transform = Mat3.rotate(transform.transform, rotations[i] * frame);
+        transform.scale(scale);
+        transform.rotate(rotations[i]);
         i++;
     }
 

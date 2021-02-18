@@ -227,7 +227,8 @@ export class WebGLRenderer {
         const { gl } = this;
 
         // set clear color
-        this.gl.clearColor(this.clearColor.rf, this.clearColor.gf, this.clearColor.bf, this.clearColor.a);
+        const color = this.clearColor.float32Array;
+        this.gl.clearColor(color[0], color[1], color[2], color[3]);
 
         // enable transparency
         gl.enable(gl.BLEND);
