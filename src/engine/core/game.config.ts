@@ -3,7 +3,7 @@ import { Color, Vec2 } from '../math';
 /**
  * Interface desciribing the main Game Configuration object
  *
- * // TODO potentially take controlScheme out of here and into its own structure (see InputManager)
+ * @see Game
  */
 export interface GameConfig {
     /** Game Canvas dimensions; default value is (window.innerWidth, window.innerHeight) */

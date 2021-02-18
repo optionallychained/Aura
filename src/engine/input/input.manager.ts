@@ -1,11 +1,9 @@
 import { GameConfig } from '../core';
 import { Vec2 } from '../math';
-import { Keys } from './keys';
+import { Keys } from './keys.enum';
 
 /**
  * Core InputManager; utilised by the Game to defer the detection and management of user input
- *
- * // TODO improve/play with input buffering, mouse support, mouse capturing, controller support?, touch support?
  *
  * @see Game
  */

@@ -13,7 +13,7 @@ type EntityChanges = Array<{ shaderName: string; modelName: string; }>;
 /**
  * Core EntityManager; utilised by the Game to defer the management, updating and rendering of game Entities
  *
- * Works to optimise Entity management and rendering by grouping Entities, precompiling vertex lists, handling VBOs and memoizing Entity
+ * Works to optimise Entity management and rendering by grouping Entities, precompiling vertex lists, handling VBOs and caching Entity
  *   filter/search results
  *
  * VBOs are provisioned on a per-shader+model combination basis. This is because Entities that share both a Shader and a Model can be
@@ -28,14 +28,14 @@ export class EntityManager {
     /** Flat list of all Entities currently in play, used for efficiently executing frame ticks and in filtering */
     private entities: Array<Entity> = [];
 
-    /** Entities with Shaders and Models, grouped by the same, used for optimising vertex and gl API call handling */
+    /** Entities with Shaders and Models, grouped by the same, used for optimising vertex compilation and gl API call handling */
     private renderableEntities = new Map<string, Map<string, Array<Entity>>>();
-
-    /** Flat list of Entities to be removed on the next frame */
-    private removeList: Array<Entity> = [];
 
     /** Flat list of Entities to be added on the next frame */
     private addList: Array<Entity> = [];
+
+    /** Flat list of Entities to be removed on the next frame */
+    private removeList: Array<Entity> = [];
 
     /** Map of VBOs constructed and used in rendering, used to reduce the number of vertex compilations for Entities and gl buffer calls */
     private vbos = new Map<string, VBOConfig>();
@@ -51,7 +51,7 @@ export class EntityManager {
     private sourcedEntityFilterCache = new Map<string, Array<Entity>>();
 
     /**
-     * Constructor. Take and store the Game's Renderer instance
+     * Constructor. Take and store the EntityManager's config
      *
      * @param renderer the renderer
      */
@@ -67,7 +67,7 @@ export class EntityManager {
     }
 
     /**
-     * Add an Entity to the addList
+     * Add an Entity to the addList, to be added to the game on the next frame
      *
      * @param entity the Entity to add
      */
@@ -76,9 +76,7 @@ export class EntityManager {
     }
 
     /**
-     * Add a list of Entities to the addList
-     *
-     * // TODO grouping of entities by component on add/remove for faster filtering?
+     * Add a list of Entities to the addList, to be added to the game on the next frame
      *
      * @param entities the Entities to add
      */
@@ -87,7 +85,7 @@ export class EntityManager {
     }
 
     /**
-     * Add an Entity to the removeList
+     * Add an Entity to the removeList, to be removed from the game on the next frame
      *
      * @param entity the Entity to remove
      */
@@ -96,7 +94,7 @@ export class EntityManager {
     }
 
     /**
-     * Add a list of Entities to the removeList
+     * Add a list of Entities to the removeList, to be removed from the game on the next frame
      *
      * @param entities the Entities to remove
      */
@@ -105,7 +103,7 @@ export class EntityManager {
     }
 
     /**
-     * Purge all active Entities by adding them to the removeList
+     * Purge all active Entities
      */
     public clearEntities(): void {
         this.removeEntities(...this.entities);
@@ -121,6 +119,8 @@ export class EntityManager {
         const removed = this.cleanEntities();
 
         if (added || removed) {
+            // TODO would be nice if we could detect and invalidate only those filter caches which will change based on the add/remove
+            //   work relevant alongside Entity change detection optimisation for vertex compilation and buffering
             this.invalidateFilterCaches();
         }
 
@@ -135,8 +135,9 @@ export class EntityManager {
      * Processes Entities grouped by given shader+model combinations so as to reduce the amount of GL buffering required and render all
      *   technically-similar Entities from a single vertex source
      *
-     * // TODO there will be an issue with draw order since same-shader+model additions are potentially added to a vbo rendered first
-     * //   hmmmm
+     * // TODO draw order problem: since Entities are grouped, batches of same-shader+model Entities are rendered in the order new
+     * //   new combinations were added to the game, instead of the order the Entities were added to the game. Tricky problem; want for a
+     * //   way of defining a draw order from the outside maybe, but without undoing the optimation that shader+model grouping represents...
      */
     public render(): void {
         for (const [shaderName, forModel] of this.renderableEntities.entries()) {
@@ -161,10 +162,10 @@ export class EntityManager {
                         // if there are uniforms to pipe, we need to build a UniformList so that the renderer can split draw calls
                         uniformList = [];
 
-                        // TODO we may not want to do this here; technically we're looping through all renderables twice since renderer
-                        //   loops through the UniformList
-                        // TODO this is effectively done just to make for a single render call here with multiple drawArrays in renderer,
-                        //   but it's probably not worth the clean look
+                        // TODO the only reason this is done here is to make for a single render() call on the renderer
+                        //   BUT, this creates a sort of double-looping where the renderer then has to loop again to drawArrays() once per
+                        //   UniformList
+                        //   Probably just wanna suck it up and do the multi-render call here to reduce back to one processing loop
                         for (const e of renderables) {
                             const eUniforms: UniformList = [];
 
@@ -280,8 +281,8 @@ export class EntityManager {
                 const modelName = model.modelName;
 
                 // mark that the vertices for this shader+model combo should be recompiled
-                // TODO (later) - more intelligent change decection + vertex compilation; potentially on a per-Entity basis rather than
-                //   per-combo; alongside GL sub-buffering?
+                // TODO entity change detection: further optimise vertex compilation and buffering by recompiling and buffering on a per
+                //   Entity basis
                 changes.push({ shaderName, modelName });
 
                 // retrieve the existing Entities associated with this Shader
@@ -365,8 +366,8 @@ export class EntityManager {
                         forModel.splice(forModel.indexOf(e), 1);
 
                         // mark that the vertices for this shader+model combo should be recompiled
-                        // TODO (later) - more intelligent change decection + vertex compilation; potentially on a per-Entity basis rather
-                        //   than per-combo; alongside GL sub-buffering?
+                        // TODO entity change detection: further optimise vertex compilation and buffering by recompiling and buffering on
+                        //   a per Entity basis
                         changes.push({ shaderName, modelName });
 
                         // delete the shader+model combo outright if it's now empty
@@ -402,8 +403,8 @@ export class EntityManager {
     /**
      * Compile any vertex lists and update relevant VBOs for a given set of shader+model combinations altered in Entity list changes
      *
-     * // TODO (later) - more intelligent change decection + vertex compilation; potentially on a per-Entity basis rather than per-combo;
-     * //   alongside GL sub-buffering?
+     * // TODO entity change detection: further optimise vertex compilation and buffering by recompiling and buffering on a per
+     * //   Entity basis
      *
      * @param changes the list of Shader+Model combinations that were altered and require compiling
      */
@@ -449,11 +450,12 @@ export class EntityManager {
                 let offset = 0;
                 for (const e of entities) {
                     // TODO temporary hack for quick path to demonstration for interleaving positional data with other attrs
+                    //   will be solved by implementing Entity world->screenspace transform
                     let count = 0;
 
                     for (let i = 0; i < vertexCount; i++) {
                         for (const attr of shaderInfo.vertex.attributes) {
-                            // TODO recompilation of dynamic values as part of Entity change detection/sub-buffering/etc optimisations
+                            // TODO entity change detection: recompile dynamic values only as necessary
                             let value = EntityShaderMap.getShaderValueForEntity(attr.name, e);
 
                             if (typeof value === 'number') {
@@ -461,7 +463,7 @@ export class EntityManager {
                             }
                             else if (attr.name.includes('Position')) {
                                 // TODO temporary hack for quick path to demonstration for interleaving positional data with other attrs
-                                // position needs to get the actual entity position, NOT the model vertices
+                                //   will be solved by implementing Entity world->screenspace transform
                                 value = value.slice(count, count + 2);
                                 count += 2;
                             }
@@ -480,7 +482,7 @@ export class EntityManager {
                     vertexCount,
                     vertexSize,
                     glShape,
-                    // set the VBO's changed flag to ensure data is rebuffered to the GPU later on
+                    // set the VBO's changed flag to ensure data is (re)buffered to the GPU later on
                     changed: true
                 });
             }
@@ -503,7 +505,8 @@ export class EntityManager {
      * Further separate sourced filters from each other with a filterId so as to avoid conflicts between similar filters from disparate
      *   sources
      *
-     * // TODO filters may become out of date due to the single listChanged flag; maybe best to have an 'invalidate' flag on caches
+     * // TODO would be nice if we could detect and invalidate only those filter caches which will change based on add/remove
+     * //   work relevant alongside Entity change detection optimisation for vertex compilation and buffering
      *
      * @param filter a string representation of the Entity filter
      * @param predicate the filter predicate for matching Entities
@@ -535,7 +538,8 @@ export class EntityManager {
      * Clear all filter caches in the event of an Entity list change by way of loadEntities or cleanEntities, ensuring that filters do not
      *   become out of date
      *
-     * // TODO test the efficiency of this in practice; consider specific invalidation if possible/necessary
+     * // TODO would be nice if we could detect and invalidate only those filter caches which will change based on add/remove
+     * //   work relevant alongside Entity change detection optimisation for vertex compilation and buffering
      */
     private invalidateFilterCaches(): void {
         this.entityFilterCache.clear();

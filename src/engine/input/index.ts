@@ -1,2 +1,2 @@
 export * from './input.manager';
-export * from './keys';
+export * from './keys.enum';

@@ -2,9 +2,7 @@ import { Color } from '../math';
 import { Component } from './component';
 
 /**
- * Built-in FlatColor Component, defining a basic color for the Entity.
- *
- * Utilised in rendering the Entity
+ * Built-in FlatColor Component, defining a basic singular color for the Entity
  */
 export class FlatColor extends Component {
 

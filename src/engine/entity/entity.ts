@@ -4,7 +4,7 @@ import { EntityConfig } from './entity.config';
 /**
  * Class representing an Entity.
  *
- * An Entity is any object existing within the game; be it a player, enemy, pickup, level object, etc.
+ * An Entity is any object existing within the game; be it a player, enemy, pickup, level object, camera, UI element, etc.
  *
  * Entities maintain a list of Components, which give them their properties and behaviour and allow Systems to operate on them as necessary.
  *
@@ -19,14 +19,15 @@ export class Entity {
     private components = new Map<string, Component>();
 
     /**
-     * Constructor. Initialise the Entity with Components if provided in the config
+     * Constructor. Take and store the Entity's config and initialise the Entity with Components if provided in the config
      *
      * @param config entity configuration
      */
     constructor(private readonly config: EntityConfig) {
         // TODO initialization-time verification by way of EntityShaderMap and shader registrations that:
         //   - an Entity can be rendered with its shader based on its components
-        //   - its Model is compatible with its Shader
+        //     - ...working off the knowledge of which Components are required to source which shader attributes+uniforms
+        //   - its Model is compatible with its Shader (?)
         if (config.components) {
             this.addComponents(config.components);
         }
@@ -55,8 +56,7 @@ export class Entity {
     /**
      * Getter for the named Component
      *
-     * // TODO either want error handling for component not found (.get() => undefined), or assurance by way of param typing
-     * //     alternatively: just accept the | undefined specifier from .get() and force handling on consumers
+     * // TODO error handling for Components
      *
      * @param name the name of the Component to retrieve
      *
@@ -91,6 +91,8 @@ export class Entity {
     /**
      * Remove the named Component from the Entity
      *
+     * // TODO error handling for Components
+     *
      * @param name the name of the Component to remove
      */
     public removeComponent(name: string): void {
@@ -99,6 +101,8 @@ export class Entity {
 
     /**
      * Remove the named Components from the Entity
+     *
+     * // TODO error handling for Components
      *
      * @param names the names of the Components to remove
      */
@@ -110,6 +114,8 @@ export class Entity {
 
     /**
      * Check if the Entity has the named Component
+     *
+     * // TODO this doesn't appear to work in the distribution version of the demo. Why?
      *
      * @param name the name of the Component to check
      *

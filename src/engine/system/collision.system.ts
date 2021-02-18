@@ -8,8 +8,6 @@ import { System } from './system';
  *
  * To be eligible for collision, an Entity must have a Transform (position and dimensions in the world), and an AABBCollisionBox.
  *
- * // TODO optimisation of collision detection methods; memoization (defer to EntityManager?) of 'collidables' filter?
- *
  * @see AABBCollisionBox
  * @see Transform
  */

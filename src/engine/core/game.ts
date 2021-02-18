@@ -17,8 +17,11 @@ import { GameConfig } from './game.config';
  * Note: Games are controlled by the Keyboard only by default. See GameConfig#controlScheme for details
  *
  * Game execution begins when *start* is called on a configured Game instance
+ *
+ * @see GameConfig
  */
 export class Game {
+
     /** the EntityManager to be used in handling and processing the game's Entities */
     public entityManager: EntityManager;
 
@@ -98,21 +101,6 @@ export class Game {
     }
 
     /**
-     * Begin game execution by first calling init() (if provided in the GameConfig) and then switching to the given state
-     *
-     * // TODO type-safety for state name somehow?
-     *
-     * @param state the name of the first State to run
-     */
-    public start(state: string): void {
-        this.config?.init?.();
-
-        this.switchToState(state);
-
-        this.run();
-    }
-
-    /**
      * Add a new State to the Game
      *
      * @param state the State to add
@@ -137,8 +125,7 @@ export class Game {
      *
      * Calls .end() on the outgoing State, and .init() on the incoming
      *
-     * // TODO type-safety for state name somehow?
-     * // TODO error handling or other useful behavior for invalid state?
+     * // TODO error handling for States
      *
      * @param name the name of the State to switch to
      */
@@ -173,7 +160,7 @@ export class Game {
     /**
      * Remove a System from the Game
      *
-     * // TODO type-safety for the system name somehow?
+     * // TODO error handling for Systems
      *
      * @param name the name of the System to remove
      */
@@ -184,7 +171,7 @@ export class Game {
     /**
      * Remove a set of Systems from the Game
      *
-     * // TODO type-safety for the system names somehow?
+     * // TODO error handling for Systems
      *
      * @param name the names of the Systems to remove
      */
@@ -209,7 +196,7 @@ export class Game {
     /**
      * Getter for generic Game data
      *
-     * // TODO error handling or other useful behavior for .get() => undefined?
+     * // TODO error handling for Data
      *
      * @param key the name of the data to retrieve
      *
@@ -219,22 +206,57 @@ export class Game {
         return this.data.get(key) as T;
     }
 
+    /**
+     * Register and create a given ShaderProgram so as to make it available for use in Entity Shader Components
+     *
+     * @param shader the ShaderProgram to register
+     */
     public registerShader(shader: ShaderProgram): void {
         this.renderer.createShaderProgram(shader);
     }
 
+    /**
+     * Register a new Entity Shader value resolution mapping for a given Shader attribute/uniform variable name
+     *
+     * Facilitates extension of the system's Shader and Component libraries by extending the automatic retrieval of Entity data for piping
+     *   to the GPU
+     *
+     * Separated from overrideEntityShaderMapping() so as to avoid accidental consumer mistakes in changing built-in mappings
+     *
+     * @param variableName the name of the shader variable to register
+     * @param resolve the EntityShaderResolver which will retrieve the relevant value from the Entity
+     */
     public registerEntityShaderMapping(variableName: string, resolve: EntityShaderResolver): void {
         EntityShaderMap.registerEntityShaderMapping(variableName, resolve);
     }
 
+    /**
+     * Override an existing Entity Shader value resolution mapping for a given Shader attribute/uniform variable name
+     *
+     * Facilitates extension of the system's Shader and Component libraries by extending the automatic retrieval of Entity data for piping
+     *   to the GPU
+     *
+     * Separated from registerEntityShaderMapping() so as to avoid accidental consumer mistakes in changing built-in mappings
+     *
+     * @param variableName the name of the shader variable to override
+     * @param resolve the EntityShaderResolver which will retrieve the relevant value from the Entity
+     */
     public overrideEntityShaderMapping(variableName: string, resolve: EntityShaderResolver): void {
         EntityShaderMap.overrideEntityShaderMapping(variableName, resolve);
     }
 
-    // /** TODO temporary - to be supplanted by TextManager */
-    // public renderText(text: string, position?: Vec2, color?: Color): void {
-    //     this.renderer.renderText(text, position, color);
-    // }
+    /**
+     * Begin game execution by first calling init() (if provided in the GameConfig) and then switching to the given state
+     *
+     * @param state the name of the first State to run
+     */
+    public start(state: string): void {
+        this.config?.init?.();
+
+        this.switchToState(state);
+
+        this.run();
+    }
 
     /**
      * Main Game execution method, representing a single frame.
@@ -268,9 +290,7 @@ export class Game {
             }
 
             // render the frames
-            // TODO
             // console.log('FRAMES: ', this.debugData.fps);
-            // this.renderer.renderText(`fps: ${this.debugData.fps}`, new Vec2(this.width - 125, 25));
         }
 
         requestAnimationFrame(this.run.bind(this));
