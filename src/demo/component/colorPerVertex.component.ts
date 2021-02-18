@@ -1,4 +1,4 @@
-import { Color, Component, } from '../../engine';
+import { Color, Component } from '../../engine';
 
 /**
  * Custom Component, holding multiple Colors for an Entity and

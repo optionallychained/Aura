@@ -1,5 +1,5 @@
 import { Vec2 } from '../math';
-import { GLShape } from './glShape';
+import { GLShape } from './glShape.enum';
 
 export interface Geometry {
     name: string;

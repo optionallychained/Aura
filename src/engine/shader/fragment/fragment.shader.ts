@@ -1,5 +1,5 @@
 import { FragmentShaderConfig } from './fragment.shader.config';
-import { UniformType } from '../uniformType';
+import { UniformType } from '../uniformType.enum';
 
 export class FragmentShader {
 

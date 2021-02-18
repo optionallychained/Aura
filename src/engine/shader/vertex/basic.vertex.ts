@@ -1,4 +1,4 @@
-import { UniformType } from '../uniformType';
+import { UniformType } from '../uniformType.enum';
 import { VertexShader } from './vertex.shader';
 
 export const VERTEX_BASIC = new VertexShader({

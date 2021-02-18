@@ -1,6 +1,6 @@
 import { Color } from '../math';
 import { ShaderProgram } from '../shader/program';
-import { UniformType } from '../shader/uniformType';
+import { UniformType } from '../shader/uniformType.enum';
 import { WebGLRendererConfig } from './webgl.renderer.config';
 
 type AttributeLocationArray = Array<{ location: number; size: number; }>;

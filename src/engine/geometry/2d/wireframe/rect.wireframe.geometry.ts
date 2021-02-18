@@ -1,6 +1,6 @@
 import { Vec2 } from '../../../math';
 import { Geometry } from '../../geometry';
-import { GLShape } from '../../glShape';
+import { GLShape } from '../../glShape.enum';
 
 
 export class Rect implements Geometry {

@@ -1,4 +1,6 @@
-export * from './uniformType';
+export * from './attributeArray.type';
+export * from './uniformArray.type';
+export * from './uniformType.enum';
 
 export * as Fragment from './fragment';
 export * as Program from './program';

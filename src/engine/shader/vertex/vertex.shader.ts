@@ -1,4 +1,4 @@
-import { UniformType } from '../uniformType';
+import { UniformType } from '../uniformType.enum';
 import { VertexShaderConfig } from './vertex.shader.config';
 
 export class VertexShader {

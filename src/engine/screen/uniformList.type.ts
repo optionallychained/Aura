@@ -1,4 +1,4 @@
-import { UniformType } from '../shader/uniformType';
+import { UniformType } from '../shader';
 
 export type UniformList = Array<{
     name: string;

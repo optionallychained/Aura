@@ -1,5 +1,5 @@
 import { FragmentShader } from './fragment.shader';
-import { UniformType } from '../uniformType';
+import { UniformType } from '../uniformType.enum';
 
 export const FRAGMENT_BASIC = new FragmentShader({
     name: 'fragment_basic',
