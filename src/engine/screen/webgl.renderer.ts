@@ -1,5 +1,5 @@
 import { Color } from '../math';
-import { ShaderProgram } from '../shader';
+import { ShaderProgram } from '../shader/program';
 import { UniformType } from '../shader/uniformType';
 import { WebGLRendererConfig } from './webgl.renderer.config';
 
@@ -205,14 +205,19 @@ export class WebGLRenderer {
     }
 
     /**
-     * Internal-use single-shader compilation routine for registering and compiling the individual Vertex and Fragment aspects of a ShaderProgram
+     * Internal-use single-shader compilation routine for registering and compiling the individual Vertex and Fragment aspects of a
+     *   ShaderProgram
      *
      * @param type the gl numerical type of the shader to create; either gl.VERTEX_SHADER or gl.FRAGMENT_SHADER
      * @param src the source of the shader to compile
      *
      * @returns the compiled GL Shader
      */
-    private compileShader(type: WebGLRenderingContext['VERTEX_SHADER'] | WebGLRenderingContext['FRAGMENT_SHADER'], src: string): WebGLShader {
+    private compileShader(
+        type: WebGLRenderingContext['VERTEX_SHADER'] | WebGLRenderingContext['FRAGMENT_SHADER'],
+        src: string
+    ): WebGLShader {
+
         const { gl } = this;
 
         const shader = gl.createShader(type);

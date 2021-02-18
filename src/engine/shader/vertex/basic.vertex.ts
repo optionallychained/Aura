@@ -1,7 +1,7 @@
 import { UniformType } from '../uniformType';
-import { VertexShader } from '../vertex.shader';
+import { VertexShader } from './vertex.shader';
 
-export const VERTEX_BASIC: VertexShader = {
+export const VERTEX_BASIC = new VertexShader({
     name: 'vertex_basic',
     source: `
         uniform mat3 u_Transform;
@@ -24,4 +24,4 @@ export const VERTEX_BASIC: VertexShader = {
             type: UniformType.MAT3
         }
     ]
-};
+});

@@ -1,9 +1,10 @@
-import { ShaderProgram } from '../shader';
-import { FragmentShader } from '../shader/fragment.shader';
-import { VertexShader } from '../shader/vertex.shader';
+
+import { FragmentShader } from '../shader/fragment/fragment.shader';
+import { ShaderProgram } from '../shader/program';
+import { VertexShader } from '../shader/vertex/vertex.shader';
 import { Component } from './component';
 
-export class Shader extends Component implements ShaderProgram {
+export class Shader extends Component {
 
     public programName: string;
     public vertex: VertexShader;

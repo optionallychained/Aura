@@ -19,6 +19,12 @@
                 "avoidEscape": true
             }
         ],
+        "max-len": [
+            "error",
+            {
+                "code": 140
+            }
+        ],
         "@typescript-eslint/restrict-template-expressions": [
             "error"
         ],

@@ -7,7 +7,8 @@
  *     if (game.inputManager.keyPressed(Keys.ARROW_LEFT)) { ... }
  *     ```
  *
- * // TODO technically supports alternative keyboard layouts by way of (KeyboardEvent).code but it might be nice to provide alt key names for those layouts?
+ * // TODO technically supports alternative keyboard layouts by way of (KeyboardEvent).code but it might be nice to provide alt key names
+ *   for those layouts?
  */
 export enum Keys {
     // letters

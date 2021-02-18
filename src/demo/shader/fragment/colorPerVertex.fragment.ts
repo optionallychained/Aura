@@ -1,6 +1,6 @@
-import { FragmentShader } from '../../../engine/shader/fragment.shader';
+import { Shader } from '../../../engine';
 
-export const FRAGMENT_COLOR_PER_VERTEX: FragmentShader = {
+export const FRAGMENT_COLOR_PER_VERTEX = new Shader.Fragment.FragmentShader({
     name: 'fragment_color_per_vertex',
     source: `
         precision mediump float;
@@ -12,4 +12,4 @@ export const FRAGMENT_COLOR_PER_VERTEX: FragmentShader = {
         }
     `,
     uniforms: []
-};
+});

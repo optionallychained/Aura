@@ -3,7 +3,7 @@ import { EntityShaderMap, EntityShaderResolver } from '../entity/entityShaderMap
 import { InputManager } from '../input';
 import { Color } from '../math';
 import { WebGLRenderer } from '../screen';
-import { ShaderProgram } from '../shader';
+import { ShaderProgram } from '../shader/program';
 import { State } from '../state';
 import { System } from '../system';
 import { GameConfig } from './game.config';

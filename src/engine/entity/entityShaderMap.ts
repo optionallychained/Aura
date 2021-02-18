@@ -14,6 +14,9 @@ export type EntityShaderResolver = (e: Entity) => Float32Array | number;
  */
 export class EntityShaderMap {
 
+    // TODO temporary
+    /* eslint-disable max-len */
+
     // TODO readonly?
     private static MAP = new Map<string, EntityShaderResolver>([
         [

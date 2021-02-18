@@ -1,4 +1,4 @@
-import { Color, Component, Entity, Geometry, Shader, Vec2 } from '../../engine';
+import { Color, Component, Entity, Geometry, Vec2 } from '../../engine';
 import { ColorPerVertex } from '../component/colorPerVertex.component';
 import { PROGRAM_COLOR_PER_VERTEX } from '../shader/program/colorPerVertex.program';
 

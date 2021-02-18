@@ -443,6 +443,7 @@ export class Mat4 {
     public get string(): string {
         const v = this.array;
 
+        /* eslint-disable max-len */
         return `Mat4\n${v[0]} ${v[1]} ${v[2]} ${v[3]}\n${v[4]} ${v[5]} ${v[6]} ${v[7]}\n${v[8]} ${v[9]} ${v[10]} ${v[11]}\n${v[12]} ${v[13]} ${v[14]} ${v[15]}`;
     }
 

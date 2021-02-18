@@ -6,3 +6,7 @@ export enum UniformType {
     MAT4 = 'mat4',
     NUMBER = 'number'
 }
+
+export type UniformArray = Array<{ name: string; type: UniformType; }>;
+
+export type AttributeArray = Array<{ name: string; size: number; }>;

@@ -1,7 +1,7 @@
-import { FragmentShader } from '../fragment.shader';
+import { FragmentShader } from './fragment.shader';
 import { UniformType } from '../uniformType';
 
-export const FRAGMENT_BASIC: FragmentShader = {
+export const FRAGMENT_BASIC = new FragmentShader({
     name: 'fragment_basic',
     source: `
         precision mediump float;
@@ -18,4 +18,4 @@ export const FRAGMENT_BASIC: FragmentShader = {
             type: UniformType.VEC4
         }
     ]
-};
+});

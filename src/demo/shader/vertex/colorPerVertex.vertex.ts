@@ -1,7 +1,6 @@
-import { UniformType } from '../../../engine/shader/uniformType';
-import { VertexShader } from '../../../engine/shader/vertex.shader';
+import { Shader } from '../../../engine';
 
-export const VERTEX_COLOR_PER_VERTEX: VertexShader = {
+export const VERTEX_COLOR_PER_VERTEX = new Shader.Vertex.VertexShader({
     name: 'vertex_color_per_vertex',
     source: `
         precision mediump float;
@@ -32,7 +31,7 @@ export const VERTEX_COLOR_PER_VERTEX: VertexShader = {
     uniforms: [
         {
             name: 'u_Transform',
-            type: UniformType.MAT3
+            type: Shader.UniformType.MAT3
         }
     ]
-};
+});

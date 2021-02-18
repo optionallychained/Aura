@@ -1,21 +1,22 @@
 import { Color, Component, } from '../../engine';
 
+/**
+ * Custom Component, holding multiple Colors for an Entity and
+ *   providing Color cycling functionality for per-vertex variation
+ */
 export class ColorPerVertex extends Component.Component {
 
-    public currentColor = 0;
+    private currentColor = 0;
 
     constructor(public colors: Array<Color>) {
         super('ColorPerVertex');
     }
 
+    /**
+     * Retrieve the next Color in the list, clamping the counter if necessary
+     */
     public nextColor(): Color {
-        const color = this.colors[this.currentColor];
-
-        if (!color) {
-            console.log('NO COLOR');
-        }
-
-        this.currentColor++;
+        const color = this.colors[this.currentColor++];
 
         if (this.currentColor === this.colors.length) {
             this.currentColor = 0;

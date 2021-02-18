@@ -1,4 +1,4 @@
-export * from './shaderProgram';
+export * from './uniformType';
 
 export * as Fragment from './fragment';
 export * as Program from './program';
