@@ -1,4 +1,4 @@
-import { FlatColor, Model, Transform } from '../component';
+import { FlatColor, Model, MultiColor, Transform } from '../component';
 import { Entity } from './entity'
 import { EntityShaderResolver } from './entityShaderResolver.type';
 
@@ -31,13 +31,15 @@ export class EntityShaderMap {
         [
             'Color',
             (e) => e.getComponent<FlatColor>('FlatColor').color.float32Array
+        ],
+        [
+            'VertexColor',
+            (e) => e.getComponent<MultiColor>('MultiColor').nextColor().float32Array
         ]
     ]);
 
     /**
      * Retrieve an attribute or uniform value given by its name from the given Entity by executing the associated EntityShaderResolver
-     *
-     * // TODO error handling
      *
      * @param name the name of the attribute or uniform to retrieve a value for
      * @param entity the Entity to retrieve the value from
