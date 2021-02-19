@@ -61,7 +61,7 @@ export class Game {
      *
      * @param config optional configuration
      */
-    constructor(private readonly config?: GameConfig) {
+    constructor(private readonly config: GameConfig) {
         let canvas = document.getElementById(config?.canvasId ?? '') as HTMLCanvasElement | null;
 
         if (!canvas) {
@@ -69,13 +69,13 @@ export class Game {
             document.body.append(canvas);
         }
 
-        canvas.width = config?.canvasDimensions?.x ?? window.innerWidth;
-        canvas.height = config?.canvasDimensions?.y ?? window.innerHeight;
+        canvas.width = config.canvasDimensions?.x ?? window.innerWidth;
+        canvas.height = config.canvasDimensions?.y ?? window.innerHeight;
 
         this.canvas = canvas;
 
-        this.renderer = new WebGLRenderer(canvas, config?.type ?? '2D', config?.backgroundColor ?? new Color());
-        this.inputManager = new InputManager(canvas, config?.controlScheme ?? 'keyboard');
+        this.renderer = new WebGLRenderer(canvas, config.type, config.backgroundColor ?? new Color());
+        this.inputManager = new InputManager(canvas, config.controlScheme ?? 'keyboard');
         this.entityManager = new EntityManager({
             vboPrefix: 'main',
             renderer: this.renderer
@@ -251,7 +251,7 @@ export class Game {
      * @param state the name of the first State to run
      */
     public start(state: string): void {
-        this.config?.init?.();
+        this.config.init?.();
 
         this.switchToState(state);
 
@@ -281,7 +281,7 @@ export class Game {
         this.entityManager.render();
 
         // handle updating and displaying debug data when in debug mode
-        if (this.config?.debugMode) {
+        if (this.config.debugMode) {
             // a little hacky, we only wanna update the fps on every 10th frame to avoid annoying flickering
             this.debugData.frameCount++;
             if (this.debugData.frameCount % 10 === 0) {
