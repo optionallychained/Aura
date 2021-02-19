@@ -22,9 +22,7 @@ export class EntityShaderMap {
     private static MAP = new Map<string, EntityShaderResolver>([
         [
             'Position',
-            // TODO dumb and for now not considering actual Transform.position
-            //   improve alongside work to map Entity positions from world->screenspace
-            (e) => Float32Array.from(e.getComponent<Model>('Model').vertices.map((v) => v.array).reduce((prev, current) => prev.concat(current)))
+            (e) => e.getComponent<Model>('Model').vertices
         ],
         [
             'Transform',

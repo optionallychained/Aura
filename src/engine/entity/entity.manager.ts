@@ -447,25 +447,25 @@ export class EntityManager {
                 const stride = vertexSize * vertexCount;
                 const vertices = new Float32Array(entities.length * stride);
 
+                // track the offset for setting values into vertices
                 let offset = 0;
                 for (const e of entities) {
-                    // TODO temporary hack for quick path to demonstration for interleaving positional data with other attrs
-                    //   will be solved by implementing Entity world->screenspace transform
-                    let count = 0;
-
+                    // track the offset for pulling positional data out of an Entity's Model's vertices
+                    let v = 0;
                     for (let i = 0; i < vertexCount; i++) {
+                        // process every attribute for every vertex of the Entity
                         for (const attr of shaderInfo.vertex.attributes) {
                             // TODO entity change detection: recompile dynamic values only as necessary
                             let value = EntityShaderMap.getShaderValueForEntity(attr.name, e);
 
                             if (typeof value === 'number') {
+                                // handle numerical values by wrapping them in an array for setting into vertices
                                 value = Float32Array.from([value]);
                             }
                             else if (attr.name.includes('Position')) {
-                                // TODO temporary hack for quick path to demonstration for interleaving positional data with other attrs
-                                //   will be solved by implementing Entity world->screenspace transform
-                                value = value.slice(count, count + 2);
-                                count += 2;
+                                // handle positions by pulling out only *this* vertex's position from the Model's array
+                                value = value.slice(v, v + attr.size);
+                                v += attr.size;
                             }
 
                             vertices.set(value, offset);

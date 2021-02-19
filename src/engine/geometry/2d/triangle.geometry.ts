@@ -1,4 +1,3 @@
-import { Vec2 } from '../../math';
 import { Geometry } from '../geometry';
 import { GLShape } from '../glShape.enum';
 
@@ -13,11 +12,11 @@ export class Triangle extends Geometry {
     constructor() {
         super({
             name: 'triangle',
-            vertices: [
-                new Vec2(0, 0.5),
-                new Vec2(-0.5, 0),
-                new Vec2(0.5, 0)
-            ],
+            vertices: Float32Array.from([
+                0, 0.5,
+                -0.5, 0,
+                0.5, 0
+            ]),
             vertexSize: 2,
             vertexCount: 3,
             glShape: GLShape.TRIANGLES

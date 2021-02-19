@@ -30,7 +30,7 @@ export abstract class Geometry {
     /**
      * Getter for the Geometry's vertices, as provided in its config
      */
-    public get vertices(): Array<Vec2> {
+    public get vertices(): Float32Array {
         return this.config.vertices;
     }
 

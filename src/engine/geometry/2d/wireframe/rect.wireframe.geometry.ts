@@ -1,4 +1,3 @@
-import { Vec2 } from '../../../math';
 import { Geometry } from '../../geometry';
 import { GLShape } from '../../glShape.enum';
 
@@ -13,12 +12,12 @@ export class Rect extends Geometry {
     constructor() {
         super({
             name: 'rect_wireframe',
-            vertices: [
-                new Vec2(0.5, 0.5),
-                new Vec2(-0.5, 0.5),
-                new Vec2(-0.5, -0.5),
-                new Vec2(0.5, -0.5)
-            ],
+            vertices: Float32Array.from([
+                0.5, 0.5,
+                -0.5, 0.5,
+                -0.5, -0.5,
+                0.5, -0.5
+            ]),
             vertexSize: 2,
             vertexCount: 4,
             glShape: GLShape.LINE_LOOP

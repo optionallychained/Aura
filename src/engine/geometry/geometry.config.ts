@@ -8,7 +8,7 @@ export interface GeometryConfig {
     /** A name for the Geometry */
     readonly name: string;
     /** The vertices that make up the Geometry */
-    readonly vertices: Array<Vec2>;
+    readonly vertices: Float32Array;
     /** The size of each of the Geometry's vertices */
     readonly vertexSize: number;
     /** The number of Vertices making up the Geometry */

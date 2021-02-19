@@ -13,7 +13,7 @@ export class Model extends Component {
     public modelName: string;
 
     /** The vertices that make up the Model */
-    public vertices: Array<Vec2>;
+    public vertices: Float32Array;
 
     /** The size of each of the Model's vertices */
     public vertexSize: number;
