@@ -1,1 +1,1 @@
-export * from './transform3D.component';
+export * from './transform.component.3d';

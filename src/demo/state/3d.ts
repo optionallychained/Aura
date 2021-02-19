@@ -1,5 +1,5 @@
-import { Angle, Component, Core, Entity, Random, State, Vec3 } from '../../../engine';
-import { _createCube } from '../../entity/3d/cube';
+import { Angle, Component, Core, Entity, Random, State, Vec3 } from '../../engine';
+import { _createCube } from '../entity/3d/cube';
 
 const rotations: Array<Vec3> = [];
 let frame = 0;

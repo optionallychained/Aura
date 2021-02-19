@@ -15,7 +15,7 @@ export const _createTriangle = (): Entity.Entity => {
             ),
 
             new Component.Model(new Geometry.TwoD.Triangle()),
-            new Component.Shader(Shader.TwoD.Program.PROGRAM_COLOR_PER_VERTEX)
+            new Component.Shader(Shader.Program.TwoD.PROGRAM_COLOR_PER_VERTEX)
         ]
     });
 };

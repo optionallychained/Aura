@@ -1,8 +1,8 @@
-import { Angle, Component, Core, Entity, Random, State, Vec2 } from '../../../engine';
-import { _createRect } from '../../entity/2d/rect';
-import { _createRectWire } from '../../entity/2d/rectWire';
-import { _createTriangle } from '../../entity/2d/triangle';
-import { _createTriangleWire } from '../../entity/2d/triangleWire';
+import { Angle, Component, Core, Entity, Random, State, Vec2 } from '../../engine';
+import { _createRect } from '../entity/2d/rect';
+import { _createRectWire } from '../entity/2d/rectWire';
+import { _createTriangle } from '../entity/2d/triangle';
+import { _createTriangleWire } from '../entity/2d/triangleWire';
 
 const rotations: Array<number> = [];
 let frame = 0;

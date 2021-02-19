@@ -1,6 +1,6 @@
 import { Core, Shader, Vec2 } from '../engine';
-import { State2D } from './state/2d/2d';
-import { state3D } from './state/3d/3d';
+import { State2D } from './state/2d';
+import { state3D } from './state/3d';
 
 // instantiate a Game (canvas is automatically created)
 const game = new Core.Game({
@@ -11,10 +11,10 @@ const game = new Core.Game({
 });
 
 // register the built in color-per-vertex 2D shader program
-// game.registerShader(Shader.TwoD.Program.PROGRAM_COLOR_PER_VERTEX);
+// game.registerShader(Shader.Program.TwoD.PROGRAM_COLOR_PER_VERTEX);
 
 // register the built in basic 3D shader program
-game.registerShader(Shader.ThreeD.Program.PROGRAM_COLOR_PER_VERTEX);
+game.registerShader(Shader.Program.ThreeD.PROGRAM_COLOR_PER_VERTEX);
 
 // add the 2D State to the Game
 // game.addState(State2D);

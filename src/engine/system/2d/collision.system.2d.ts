@@ -1,18 +1,17 @@
-import { AABBCollisionBox } from '../component';
-import { Transform2D } from '../component/2d';
-import { Game } from '../core';
-import { Entity } from '../entity';
-import { System } from './system';
+import { AABBCollisionBox2D, Transform2D } from '../../component/2d';
+import { Game } from '../../core';
+import { Entity } from '../../entity';
+import { System } from '../system';
 
 /**
  * Built-in Collision System, handling the basic AABB Collision testing of all Entities which are capable of colliding with one another.
  *
  * To be eligible for collision, an Entity must have a Transform (position and dimensions in the world), and an AABBCollisionBox.
  *
- * @see AABBCollisionBox
+ * @see AABBCollisionBox2D
  * @see Transform2D
  */
-export class CollisionSystem extends System {
+export class Collision extends System {
 
     /**
      * Constructor. Provide the name 'Collision' to the parent class
@@ -35,8 +34,8 @@ export class CollisionSystem extends System {
         for (let i = 0; i < collidables.length; i++) {
             for (let j = i + 1; j < collidables.length; j++) {
                 if (this.collides(collidables[i], collidables[j])) {
-                    (collidables[i].getComponent<AABBCollisionBox>('AABBCollisionBox')).onCollision(game, collidables[j]);
-                    (collidables[j].getComponent<AABBCollisionBox>('AABBCollisionBox')).onCollision(game, collidables[i]);
+                    (collidables[i].getComponent<AABBCollisionBox2D>('AABBCollisionBox2D')).onCollision(game, collidables[j]);
+                    (collidables[j].getComponent<AABBCollisionBox2D>('AABBCollisionBox2D')).onCollision(game, collidables[i]);
                 }
             }
         }
@@ -52,10 +51,10 @@ export class CollisionSystem extends System {
      */
     private collides(e1: Entity, e2: Entity): boolean {
         const e1Transform = e1.getComponent<Transform2D>('Transform2D');
-        const e1Box = e1.getComponent<AABBCollisionBox>('AABBCollisionBox');
+        const e1Box = e1.getComponent<AABBCollisionBox2D>('AABBCollisionBox');
 
         const e2Transform = e2.getComponent<Transform2D>('Transform2D');
-        const e2Box = e2.getComponent<AABBCollisionBox>('AABBCollisionBox');
+        const e2Box = e2.getComponent<AABBCollisionBox2D>('AABBCollisionBox');
 
         // TODO collision after world coords involving transforms
         return false;

@@ -1,7 +1,7 @@
-import { Transform2D } from '../component/2d';
-import { Game } from '../core';
-import { Vec2 } from '../math';
-import { System } from './system';
+import { Transform2D } from '../../component/2d';
+import { Game } from '../../core';
+import { Vec2 } from '../../math';
+import { System } from '../system';
 
 /**
  * Built-in Physics System, handling the movement of Entities which are capable of moving.
@@ -10,7 +10,7 @@ import { System } from './system';
  *
  * @see Transform2D
  */
-export class PhysicsSystem extends System {
+export class Physics extends System {
 
     /**
      * Constructor. Provide the name 'Physics' to the parent class
