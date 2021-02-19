@@ -1,5 +1,4 @@
 import { Geometry, GLShape } from '../geometry';
-import { Vec2 } from '../math';
 import { Component } from './component';
 
 /**

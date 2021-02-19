@@ -1,8 +1,8 @@
-import { Angle, Component, Core, Entity, Random, State, Vec2 } from '../../engine';
-import { _createRect } from '../entity/rect';
-import { _createRectWire } from '../entity/rectWire';
-import { _createTriangle } from '../entity/triangle';
-import { _createTriangleWire } from '../entity/triangleWire';
+import { Angle, Component, Core, Entity, Random, State, Vec2 } from '../../../engine';
+import { _createRect } from '../../entity/2d/rect';
+import { _createRectWire } from '../../entity/2d/rectWire';
+import { _createTriangle } from '../../entity/2d/triangle';
+import { _createTriangleWire } from '../../entity/2d/triangleWire';
 
 const rotations: Array<number> = [];
 let frame = 0;
@@ -44,7 +44,7 @@ const rotateAndScale = (game: Core.Game): void => {
     const scale = new Vec2(scaleFactor, scaleFactor);
 
     for (const e of game.entityManager.filterEntitiesByTags('rect', 'triangle', 'triangleWire', 'rectWire')) {
-        const transform = e.getComponent<Component.Transform>('Transform');
+        const transform = e.getComponent<Component.TwoD.Transform2D>('Transform2D');
 
         transform.scale(scale);
         transform.rotate(rotations[i]);
@@ -54,8 +54,8 @@ const rotateAndScale = (game: Core.Game): void => {
     frame++;
 }
 
-export const mainState = new State.State({
-    name: 'main',
+export const State2D = new State.State({
+    name: '2D',
     init: (game) => {
         populate(game);
     },

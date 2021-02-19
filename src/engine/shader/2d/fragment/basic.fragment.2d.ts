@@ -1,5 +1,5 @@
-import { FragmentShader } from './fragment.shader';
-import { UniformType } from '../uniformType.enum';
+import { FragmentShader } from '../../fragment';
+import { UniformType } from '../../uniformType.enum';
 
 /**
  * Built-in basic Fragment Shader, shading fragments with a uniform color

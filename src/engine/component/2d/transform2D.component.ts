@@ -1,12 +1,12 @@
-import { Mat3, Vec2 } from '../math';
-import { Component } from './component';
+import { Mat3, Vec2 } from '../../math';
+import { Component } from '../component';
 
 /**
- * Built-in Transform Component, defining the position, dimensions and velocity of an Entity
+ * Built-in Transform2D Component, defining the position, dimensions and velocity of an Entity
  *
- * Maintains and provides abstractions for a Mat3 transform
+ * Maintains and provides abstractions for a Mat3 Transform2D
  */
-export class Transform extends Component {
+export class Transform2D extends Component {
 
     /** Maintained scale vector */
     private scaleVector: Vec2;
@@ -21,7 +21,7 @@ export class Transform extends Component {
     // public readonly center: Vec2;
 
     /**
-     * Constructor. Take and store the position, dimensions and velocity, and provide the name 'Transform' to the parent class
+     * Constructor. Take and store the position, dimensions and velocity, and provide the name 'Transform2D' to the parent class
      *
      * @param position the position of the Entity, expressed as a Vec2. Defaults to 0,0
      * @param dimensions the dimensions of the Entity, expressed as a Vec2. Defaults to 0,0
@@ -29,12 +29,12 @@ export class Transform extends Component {
      */
     constructor(
         public readonly initialPosition = new Vec2(),
-        public readonly initialScale = new Vec2(),
+        public readonly initialScale = new Vec2(1, 1),
         public readonly initialAngle = 0,
         public readonly velocity = new Vec2()
     ) {
 
-        super('Transform');
+        super('Transform2D');
 
         this.translationVector = initialPosition;
         this.scaleVector = initialScale;

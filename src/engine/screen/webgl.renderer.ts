@@ -72,7 +72,7 @@ export class WebGLRenderer {
      * @param canvas the Canvas we're drawing to
      * @param clearColor the Game's background color, to be set as the gl clearColor once on init
      */
-    constructor(private readonly canvas: HTMLCanvasElement, private readonly clearColor: Color) {
+    constructor(private readonly canvas: HTMLCanvasElement, private readonly type: '2D' | '3D', private readonly clearColor: Color) {
         const gl = canvas.getContext('webgl');
 
         if (!gl) {
@@ -90,7 +90,8 @@ export class WebGLRenderer {
      * // TODO alongside making WebGL config configurable in init(), here's where we'll wanna do stuff like clear the depth buffer for 3D
      */
     public clearScreen(): void {
-        this.gl.clear(this.gl.COLOR_BUFFER_BIT);
+        const clearBit = this.type === '3D' ? this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT : this.gl.COLOR_BUFFER_BIT;
+        this.gl.clear(clearBit);
     }
 
     /**
@@ -233,6 +234,12 @@ export class WebGLRenderer {
         // enable transparency
         gl.enable(gl.BLEND);
         gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+
+        // enable depth test if we're rendering in 3D
+        if (this.type === '3D') {
+            gl.enable(gl.DEPTH_TEST);
+            gl.depthFunc(gl.LESS);
+        }
     }
 
     /**

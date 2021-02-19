@@ -1,4 +1,6 @@
-import { FlatColor, Model, MultiColor, Transform } from '../component';
+import { FlatColor, Model, MultiColor } from '../component';
+import { Transform2D } from '../component/2d';
+import { Transform3D } from '../component/3d';
 import { Entity } from './entity'
 import { EntityShaderResolver } from './entityShaderResolver.type';
 
@@ -13,9 +15,6 @@ import { EntityShaderResolver } from './entityShaderResolver.type';
  */
 export class EntityShaderMap {
 
-    // TODO temporary ?
-    /* eslint-disable max-len */
-
     /**
      * The internal map of Shader Variable Name => Resolution function
      */
@@ -25,8 +24,12 @@ export class EntityShaderMap {
             (e) => e.getComponent<Model>('Model').vertices
         ],
         [
-            'Transform',
-            (e) => e.getComponent<Transform>('Transform').compute().float32Array
+            'Transform2D',
+            (e) => e.getComponent<Transform2D>('Transform2D').compute().float32Array
+        ],
+        [
+            'Transform3D',
+            (e) => e.getComponent<Transform3D>('Transform3D').compute().float32Array
         ],
         [
             'Color',

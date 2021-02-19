@@ -1,4 +1,4 @@
-import { Transform } from '../component';
+import { Transform2D } from '../component/2d';
 import { Game } from '../core';
 import { Vec2 } from '../math';
 import { System } from './system';
@@ -8,7 +8,7 @@ import { System } from './system';
  *
  * To be eligible for movement, an Entity must have a Transform (position and dimension within the world).
  *
- * @see Transform
+ * @see Transform2D
  */
 export class PhysicsSystem extends System {
 
@@ -28,10 +28,10 @@ export class PhysicsSystem extends System {
      * @param frameDelta the time between the last frame and the current, for normalizing time-dependent operations
      */
     public tick(game: Game, frameDelta: number): void {
-        const movers = game.entityManager.filterEntitiesByComponent('Transform');
+        const movers = game.entityManager.filterEntitiesByComponent('Transform2D');
 
         for (const e of movers) {
-            const transform = e.getComponent<Transform>('Transform');
+            const transform = e.getComponent<Transform2D>('Transform2D');
             transform.translate(Vec2.scale(transform.velocity, frameDelta / 1000));
         }
     }

@@ -1,4 +1,5 @@
-import { AABBCollisionBox, Transform } from '../component';
+import { AABBCollisionBox } from '../component';
+import { Transform2D } from '../component/2d';
 import { Game } from '../core';
 import { Entity } from '../entity';
 import { System } from './system';
@@ -9,7 +10,7 @@ import { System } from './system';
  * To be eligible for collision, an Entity must have a Transform (position and dimensions in the world), and an AABBCollisionBox.
  *
  * @see AABBCollisionBox
- * @see Transform
+ * @see Transform2D
  */
 export class CollisionSystem extends System {
 
@@ -29,7 +30,7 @@ export class CollisionSystem extends System {
      * @param frameDelta the time between the last frame and the current, for normalizing time-dependent operations
      */
     public tick(game: Game): void {
-        const collidables = game.entityManager.filterEntitiesByComponents('Transform', 'AABBCollisionBox');
+        const collidables = game.entityManager.filterEntitiesByComponents('Transform2D', 'AABBCollisionBox');
 
         for (let i = 0; i < collidables.length; i++) {
             for (let j = i + 1; j < collidables.length; j++) {
@@ -50,10 +51,10 @@ export class CollisionSystem extends System {
      * @returns a boolean indicating whether or not the two Entities collide
      */
     private collides(e1: Entity, e2: Entity): boolean {
-        const e1Transform = e1.getComponent<Transform>('Transform');
+        const e1Transform = e1.getComponent<Transform2D>('Transform2D');
         const e1Box = e1.getComponent<AABBCollisionBox>('AABBCollisionBox');
 
-        const e2Transform = e2.getComponent<Transform>('Transform');
+        const e2Transform = e2.getComponent<Transform2D>('Transform2D');
         const e2Box = e2.getComponent<AABBCollisionBox>('AABBCollisionBox');
 
         // TODO collision after world coords involving transforms

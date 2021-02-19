@@ -74,7 +74,7 @@ export class Game {
 
         this.canvas = canvas;
 
-        this.renderer = new WebGLRenderer(canvas, config?.backgroundColor ?? new Color());
+        this.renderer = new WebGLRenderer(canvas, config?.type ?? '2D', config?.backgroundColor ?? new Color());
         this.inputManager = new InputManager(canvas, config?.controlScheme ?? 'keyboard');
         this.entityManager = new EntityManager({
             vboPrefix: 'main',

@@ -1,4 +1,4 @@
-import { FragmentShader } from './fragment.shader';
+import { FragmentShader } from '../../fragment';
 
 /**
  * Built-in basic Fragment Shader, shading fragments with a varying Color

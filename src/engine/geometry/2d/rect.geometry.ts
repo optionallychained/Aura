@@ -3,6 +3,9 @@ import { GLShape } from '../glShape.enum';
 
 /**
  * Built-in 2D Rect Geometry, setting out the information required to render quads
+ *
+ * // TODO now that Geometry is definitely a fixed thing and not dependent on Entity Position or Scale,
+ * //   can be made to be singleton instances of Geometry instead, not requiring construction for games
  */
 export class Rect extends Geometry {
 
