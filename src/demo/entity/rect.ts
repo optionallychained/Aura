@@ -2,19 +2,19 @@ import { Color, Component, Entity, Geometry, Random, Vec2 } from '../../engine';
 import { ColorPerVertex } from '../component/colorPerVertex.component';
 import { PROGRAM_COLOR_PER_VERTEX } from '../shader/program/colorPerVertex.program';
 
-export const _createRect = (color: Color): Entity.Entity => {
+export const _createRect = (): Entity.Entity => {
     return new Entity.Entity({
         tag: 'rect',
         components: [
             // custom ColorPerVertex Component with 6 colors
             // 1 per vertex of a rectangle
             new ColorPerVertex([
-                new Color(255, 0, 0),
-                new Color(0, 255, 0),
-                new Color(0, 0, 255),
-                new Color(255, 255, 0),
-                new Color(0, 255, 255),
-                new Color(255, 0, 255)
+                Color.random(),
+                Color.random(),
+                Color.random(),
+                Color.random(),
+                Color.random(),
+                Color.random()
             ]),
 
             // built-in Transform, providing a position in the world

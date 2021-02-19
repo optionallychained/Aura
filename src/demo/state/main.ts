@@ -1,4 +1,4 @@
-import { Angle, Color, Component, Core, Entity, Random, State, Vec2 } from '../../engine';
+import { Angle, Component, Core, Entity, Random, State, Vec2 } from '../../engine';
 import { _createRect } from '../entity/rect';
 import { _createRectWire } from '../entity/rectWire';
 import { _createTriangle } from '../entity/triangle';
@@ -10,25 +10,24 @@ let frame = 0;
 const populate = (game: Core.Game): void => {
     const entities: Array<Entity.Entity> = [];
 
-    for (let i = 0; i < 500; i++) {
+    for (let i = 0; i < 100; i++) {
         const r = Math.round(Random.between(1, 4));
-        const color = Color.random();
 
         switch (r) {
             case 1:
-                entities.push(_createRectWire(color));
+                entities.push(_createRectWire());
                 break;
             case 2:
-                entities.push(_createRect(color));
+                entities.push(_createRect());
                 break;
             case 3:
-                entities.push(_createTriangle(color));
+                entities.push(_createTriangle());
                 break;
             case 4:
-                entities.push(_createTriangleWire(color));
+                entities.push(_createTriangleWire());
                 break;
             default:
-                entities.push(_createRect(color));
+                entities.push(_createRect());
                 break;
         }
 
