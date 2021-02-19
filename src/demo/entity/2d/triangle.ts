@@ -14,7 +14,7 @@ export const _createTriangle = (): Entity.Entity => {
                 new Vec2(Random.between(0.5, 1.5), Random.between(0.5, 1.5))
             ),
 
-            new Component.Model(new Geometry.TwoD.Triangle()),
+            new Component.Model(Geometry.TwoD.TRIANGLE),
             new Component.Shader(Shader.Program.TwoD.PROGRAM_COLOR_PER_VERTEX)
         ]
     });

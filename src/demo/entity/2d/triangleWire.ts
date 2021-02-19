@@ -13,7 +13,7 @@ export const _createTriangleWire = (): Entity.Entity => {
                 new Vec2(Random.between(-1, 1), Random.between(-1, 1)),
                 new Vec2(Random.between(0.5, 1.5), Random.between(0.5, 1.5))
             ),
-            new Component.Model(new Geometry.TwoD.Wireframe.Triangle()),
+            new Component.Model(Geometry.TwoD.Wireframe.TRIANGLE),
             new Component.Shader(Shader.Program.TwoD.PROGRAM_COLOR_PER_VERTEX)
         ]
     });

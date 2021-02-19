@@ -1,9 +1,8 @@
-import { Vec2 } from '../math';
 import { GeometryConfig } from './geometry.config';
 import { GLShape } from './glShape.enum';
 
 /**
- * Abstract class representing geometry, generically defining a shape to be renderered
+ * Class representing geometry, generically defining a shape to be renderered
  *
  * Stores and provides access to all the information the system needs to render an Entity with a given shape
  *
@@ -11,7 +10,7 @@ import { GLShape } from './glShape.enum';
  *
  * @see Model
  */
-export abstract class Geometry {
+export class Geometry {
 
     /**
      * Constructor. Take and store the Geometry's configuration object
