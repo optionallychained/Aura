@@ -304,17 +304,17 @@ export class Mat4 {
             v30 = v[12], v31 = v[13], v32 = v[14], v33 = v[15];
 
         return new Mat4([
-            cos * v00 - sin * v20,
-            cos * v01 - sin * v21,
-            cos * v02 - sin * v22,
-            cos * v03 - sin * v23,
+            cos * v00 + sin * v20,
+            cos * v01 + sin * v21,
+            cos * v02 + sin * v22,
+            cos * v03 + sin * v23,
 
             v10, v11, v12, v13,
 
-            cos * v20 + sin * v00,
-            cos * v21 + sin * v01,
-            cos * v22 + sin * v02,
-            cos * v23 + sin * v03,
+            cos * v20 - sin * v00,
+            cos * v21 - sin * v01,
+            cos * v22 - sin * v02,
+            cos * v23 - sin * v03,
 
             v30, v31, v32, v33
         ]);
@@ -339,15 +339,15 @@ export class Mat4 {
             v30 = v[12], v31 = v[13], v32 = v[14], v33 = v[15];
 
         return new Mat4([
-            cos * v00 + sin * v10,
-            cos * v01 + sin * v11,
-            cos * v02 + sin * v12,
-            cos * v03 + sin * v13,
+            cos * v00 - sin * v10,
+            cos * v01 - sin * v11,
+            cos * v02 - sin * v12,
+            cos * v03 - sin * v13,
 
-            cos * v10 - sin * v00,
-            cos * v11 - sin * v01,
-            cos * v12 - sin * v02,
-            cos * v13 - sin * v03,
+            cos * v10 + sin * v00,
+            cos * v11 + sin * v01,
+            cos * v12 + sin * v02,
+            cos * v13 + sin * v03,
 
             v20, v21, v22, v23,
             v30, v31, v32, v33

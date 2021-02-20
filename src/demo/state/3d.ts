@@ -23,9 +23,9 @@ const populate = (game: Core.Game): void => {
                 break;
         }
 
-        const angleX = Angle.toRadians(Random.between(0.5, 3));
-        const angleY = Angle.toRadians(Random.between(0.5, 3));
-        const angleZ = Angle.toRadians(Random.between(0.5, 3));
+        const angleX = Angle.toRadians(Random.between(-3, 3));
+        const angleY = Angle.toRadians(Random.between(-3, 3));
+        const angleZ = Angle.toRadians(Random.between(-3, 3));
 
         rotations.push(new Vec3(angleX, angleY, angleZ));
     }

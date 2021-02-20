@@ -31,7 +31,7 @@ const populate = (game: Core.Game): void => {
                 break;
         }
 
-        rotations.push(Angle.toRadians(Random.between(0.5, 3)));
+        rotations.push(Angle.toRadians(Random.between(-3, 3)));
     }
 
     game.entityManager.addEntities(...entities);
