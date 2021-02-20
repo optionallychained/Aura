@@ -1,6 +1,5 @@
 import { Model, Shader } from '../component';
-import { UniformList, VBOConfig } from '../screen';
-import { UniformSet } from '../screen/uniformSet.type';
+import { VBOConfig } from '../screen';
 import { Entity } from './entity';
 import { EntityManagerConfig } from './entity.manager.config';
 import { EntityShaderMap } from './entityShaderMap';
@@ -142,52 +141,17 @@ export class EntityManager {
     public render(): void {
         for (const [shaderName, forModel] of this.renderableEntities.entries()) {
             for (const [modelName, entities] of forModel) {
-                // pluck out the renderables from the shader+model source
-                const renderables = this.filterEntitiesByComponentsFromSource(entities, `${shaderName}_${modelName}`, 'Model', 'Shader');
-
                 // retrieve the VBO to use in rendering this Entity set
                 const vbo = this.vbos.get(`${shaderName}_${modelName}`);
 
-                if (renderables.length && vbo) {
+                if (entities.length && vbo) {
                     // pull out the shader info once from the first Entity, as the shader is guaranteed to be the same for all
-                    const shaderInfo = entities[0].getComponent<Shader>('Shader');
+                    const { programName } = entities[0].getComponent<Shader>('Shader');
 
-                    // retrieve all the uniform keys from the shader info
-                    const allUniforms = (shaderInfo.vertex.uniforms ?? []).concat(shaderInfo.fragment.uniforms);
-
-                    // initialise the UniformSet for the render call as undefined
-                    let uniformList: UniformSet | undefined;
-
-                    if (allUniforms.length) {
-                        // if there are uniforms to pipe, we need to build a UniformList so that the renderer can split draw calls
-                        uniformList = [];
-
-                        // TODO the only reason this is done here is to make for a single render() call on the renderer
-                        //   BUT, this creates a sort of double-looping where the renderer then has to loop again to drawArrays() once per
-                        //   UniformList
-                        //   Probably just wanna suck it up and do the multi-render call here to reduce back to one processing loop
-                        for (const e of renderables) {
-                            const eUniforms: UniformList = [];
-
-                            for (const uniform of allUniforms) {
-                                // resolve the value of the uniform for this Entity and add it to the list
-                                eUniforms.push({
-                                    name: uniform.name,
-                                    type: uniform.type,
-                                    value: EntityShaderMap.getShaderValueForEntity(uniform.name, e)
-                                });
-                            }
-
-                            // add the uniform list to the set
-                            uniformList.push(eUniforms);
-                        }
-                    }
-
-                    // render the set of renderable Entities
                     this.config.renderer.render({
-                        uniforms: uniformList,
-                        shaderProgramName: shaderName,
-                        vbo
+                        vbo,
+                        shaderProgramName: programName,
+                        entities
                     });
 
                     // reset the VBO's 'changed' configuration; in combo with (this).compileVertices(), works to limit the number of GL

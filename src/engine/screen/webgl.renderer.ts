@@ -1,3 +1,4 @@
+import { EntityShaderMap } from '../entity';
 import { Color } from '../math';
 import { ShaderProgram } from '../shader/program';
 import { UniformType } from '../shader/uniformType.enum';
@@ -9,16 +10,21 @@ import { WebGLRendererConfig } from './webgl.renderer.config';
  *
  * Created on shader program initialisation and used in generically handling vertexAttribPointer() calls
  */
-type AttributeLocationArray = Array<{ location: number; size: number; }>;
+type AttributeLocationArray = Array<{
+    location: number;
+    size: number;
+}>;
 
 /**
  * Internal-use utility type for representing uniform location and type information required only by the renderer
  *
  * Created on shader program initialisation and used in generically handling glUniform*() calls
  */
-type UniformLocationSet = {
-    [name: string]: WebGLUniformLocation | null;
-};
+type UniformLocationArray = Array<{
+    name: string;
+    location: WebGLUniformLocation | null;
+    type: UniformType;
+}>;
 
 /**
  * Internal-use utility interface describing a shader program's specification with information required only by the renderer
@@ -34,7 +40,7 @@ interface ShaderProgramSpec {
     /** The attribute information associated with the shader program */
     attributeLocations: AttributeLocationArray;
     /** the uniform information associated with the shader program */
-    uniformLocations: UniformLocationSet;
+    uniformLocations: UniformLocationArray;
 }
 
 /**
@@ -188,32 +194,34 @@ export class WebGLRenderer {
 
         if (config.vbo.name !== this.activeVBOName) {
             this.useVBO(config.vbo);
-
-            this.layoutAttributes(config.vbo.vertexSize);
         }
 
-        if (config.uniforms) {
-            // if the config contains uniforms, we need to do one draw call per uniform set variation
+        // TODO it'd be nice if we didn't have to ? the activeShaderProgram
+        const uniforms = this.activeShaderProgram?.uniformLocations;
+
+        if (uniforms && uniforms.length) {
+            // if the shader program contains uniforms, we need to do one draw call per Entity (per uniform set variation)
             let offset = 0;
 
-            for (const uniformList of config.uniforms) {
-                for (const uniform of uniformList) {
-                    // TODO it'd be nice if we didn't have to ? the activeShaderProgram
+            for (const e of config.entities) {
+                // upload the Entity's uniform values
+                for (const uniform of uniforms) {
                     // TODO error handling for location not found
-                    const uniformLocation = this.activeShaderProgram?.uniformLocations[uniform.name];
+                    const location = uniform.location;
 
-                    if (uniformLocation) {
-                        this.loadUniform(uniformLocation, uniform.type, uniform.value);
+                    if (location) {
+                        this.loadUniform(location, uniform.type, EntityShaderMap.getShaderValueForEntity(uniform.name, e));
                     }
                 }
 
+                // draw the a set of vertices from the VBO and update the offset for the next go round
                 gl.drawArrays(config.vbo.glShape, offset, config.vbo.vertexCount);
 
                 offset += config.vbo.vertexCount;
             }
         }
         else {
-            // if there is no uniform variation, we can draw once
+            // if the shader program contains no uniforms, we can draw all the entities in one batch
             gl.drawArrays(config.vbo.glShape, 0, config.vbo.vertexCount);
         }
     }
@@ -305,11 +313,15 @@ export class WebGLRenderer {
         }
 
         // retrieve all uniform locations
-        const uniformLocations: UniformLocationSet = {};
+        const uniformLocations: UniformLocationArray = [];
         const allUniforms = (spec.vertex.uniforms ?? []).concat(spec.fragment.uniforms);
 
         for (const uniform of allUniforms) {
-            uniformLocations[uniform.name] = gl.getUniformLocation(program, uniform.name);
+            uniformLocations.push({
+                name: uniform.name,
+                location: gl.getUniformLocation(program, uniform.name),
+                type: uniform.type
+            });
         }
 
         // store the resulting information in the ShaderProgramSpec map
@@ -365,25 +377,16 @@ export class WebGLRenderer {
             gl.bufferData(gl.ARRAY_BUFFER, vbo.vertices, gl.DYNAMIC_DRAW);
         }
 
-        this.activeVBOName = vbo.name;
-    }
-
-    /**
-     * Internal-use attribute layout routine; after switching to a new VBO, set up the vertex attribute pointers by calling down to
-     *   vertexAttribPointer()
-     *
-     * @param vertexSize the size of the vertices contained in the active VBO, used in the attribPointer calls
-     */
-    private layoutAttributes(vertexSize: number): void {
-        const { gl } = this;
-
+        // layout attributes with vertexAttribPointer
         let offset = 0;
         for (const attr of this.activeShaderProgram?.attributeLocations ?? []) {
             gl.enableVertexAttribArray(attr.location);
-            gl.vertexAttribPointer(attr.location, attr.size, gl.FLOAT, false, vertexSize * 4, offset);
+            gl.vertexAttribPointer(attr.location, attr.size, gl.FLOAT, false, vbo.vertexSize * 4, offset);
 
             offset += attr.size * 4;
         }
+
+        this.activeVBOName = vbo.name;
     }
 
     /**

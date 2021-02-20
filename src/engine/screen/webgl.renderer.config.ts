@@ -1,4 +1,4 @@
-import { UniformSet } from './uniformSet.type';
+import { Entity } from '../entity';
 import { VBOConfig } from './vbo.config';
 
 /**
@@ -15,6 +15,6 @@ export interface WebGLRendererConfig {
     shaderProgramName: string;
     /** The VBOConfig describing the VBO to use in this render call */
     vbo: VBOConfig;
-    /** An optional UniformSet for when shader uniforms are present, used by the Renderer to decide how many times to call drawArrays() */
-    uniforms?: UniformSet;
+    /** The list of Entities this draw call is rendering; used in uploading uniform values, if applicable */
+    entities: Array<Entity>;
 }
