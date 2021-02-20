@@ -10,7 +10,7 @@ import { System } from '../system';
  *
  * @see Transform2D
  */
-export class Physics extends System {
+export class Physics2D extends System {
 
     /**
      * Constructor. Provide the name 'Physics' to the parent class

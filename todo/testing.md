@@ -35,7 +35,7 @@
 
 
 ## Component
-- [ ] AABBCollisionBox
+- [ ] BoxCollider
 - [ ] Component
 - [ ] FlatColor
 - [ ] Model

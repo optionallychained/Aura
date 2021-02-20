@@ -1,17 +1,17 @@
-import { AABBCollisionBox2D, Transform2D } from '../../component/2d';
+import { BoxCollider2D, Transform2D } from '../../component/2d';
 import { Game } from '../../core';
 import { Entity } from '../../entity';
 import { System } from '../system';
 
 /**
- * Built-in Collision System, handling the basic AABB Collision testing of all Entities which are capable of colliding with one another.
+ * Built-in 2D Collision System, handling the basic AABB Collision testing of all Entities which are capable of colliding with one another
  *
- * To be eligible for collision, an Entity must have a Transform (position and dimensions in the world), and an AABBCollisionBox.
+ * To be eligible for collision, an Entity must have a Transform2D and a BoxCollider2D.
  *
- * @see AABBCollisionBox2D
+ * @see BoxCollider
  * @see Transform2D
  */
-export class Collision extends System {
+export class Collision2D extends System {
 
     /**
      * Constructor. Provide the name 'Collision' to the parent class
@@ -29,20 +29,20 @@ export class Collision extends System {
      * @param frameDelta the time between the last frame and the current, for normalizing time-dependent operations
      */
     public tick(game: Game): void {
-        const collidables = game.entityManager.filterEntitiesByComponents('Transform2D', 'AABBCollisionBox');
+        const collidables = game.entityManager.filterEntitiesByComponents('Transform2D', 'BoxCollider2D');
 
         for (let i = 0; i < collidables.length; i++) {
             for (let j = i + 1; j < collidables.length; j++) {
                 if (this.collides(collidables[i], collidables[j])) {
-                    (collidables[i].getComponent<AABBCollisionBox2D>('AABBCollisionBox2D')).onCollision(game, collidables[j]);
-                    (collidables[j].getComponent<AABBCollisionBox2D>('AABBCollisionBox2D')).onCollision(game, collidables[i]);
+                    (collidables[i].getComponent<BoxCollider2D>('BoxCollider2D')).onCollision(game, collidables[j]);
+                    (collidables[j].getComponent<BoxCollider2D>('BoxCollider2D')).onCollision(game, collidables[i]);
                 }
             }
         }
     }
 
     /**
-     * Actual collision detection method. Just checks whether the AABBCollisionBoxes of the two entities, positioned correctly, overlap
+     * Actual collision detection method. Just checks whether the BoxColliders of the two entities, positioned correctly, overlap
      *
      * @param e1 the first Entity
      * @param e2 the second Entity
@@ -51,10 +51,10 @@ export class Collision extends System {
      */
     private collides(e1: Entity, e2: Entity): boolean {
         const e1Transform = e1.getComponent<Transform2D>('Transform2D');
-        const e1Box = e1.getComponent<AABBCollisionBox2D>('AABBCollisionBox');
+        const e1Box = e1.getComponent<BoxCollider2D>('BoxCollider2D');
 
         const e2Transform = e2.getComponent<Transform2D>('Transform2D');
-        const e2Box = e2.getComponent<AABBCollisionBox2D>('AABBCollisionBox');
+        const e2Box = e2.getComponent<BoxCollider2D>('BoxCollider2D');
 
         // TODO collision after world coords involving transforms
         return false;

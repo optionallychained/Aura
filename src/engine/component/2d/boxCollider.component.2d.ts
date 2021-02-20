@@ -4,22 +4,22 @@ import { Vec2 } from '../../math';
 import { Component } from '../component';
 
 /**
- * Built-in Collision Box Component, defining a bounding box of a given size and with a given collision handling function.
+ * Built-in 2D Collision Box Component, defining a bounding box of a given size and with a given collision handling function.
  *
- * Utilised by the built-in CollisionSystem
+ * Utilised by the built-in Collision2D system
  *
  * @see CollisionSystem
  */
-export class AABBCollisionBox2D extends Component {
+export class BoxCollider2D extends Component {
 
     /**
-     * Constructor. Take and store the box's dimensions and collision handling function, and provide the name 'AABBCollisionBox' to the
+     * Constructor. Take and store the box's dimensions and collision handling function, and provide the name 'BoxCollider2D' to the
      *   parent class
      *
      * @param dimensions the dimensions of this collision box, expressed as a Vec2
      * @param onCollision the collision handling method, receiving the Game instance and the other Entity
      */
     constructor(public dimensions = new Vec2(), public onCollision: (game: Game, other: Entity) => void) {
-        super('AABBCollisionBox2D');
+        super('BoxCollider2D');
     }
 }
