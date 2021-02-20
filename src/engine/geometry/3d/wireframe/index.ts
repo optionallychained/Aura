@@ -1,1 +1,1 @@
-export * from './cube.wireframe.geometry';
+export * from './box.wireframe.geometry';

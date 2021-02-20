@@ -1,8 +1,8 @@
 import { Geometry } from '../geometry';
 import { GLShape } from '../glShape.enum';
 
-export const CUBE = new Geometry({
-    name: 'cube',
+export const BOX = new Geometry({
+    name: 'box',
     vertices: Float32Array.from([
         // TODO fix
         -0.5, -0.5, -0.5,

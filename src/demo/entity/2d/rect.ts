@@ -16,7 +16,7 @@ export const _createRect = (): Entity.Entity => {
                 new Vec2(Random.between(-1, 1), Random.between(-1, 1)),
                 new Vec2(Random.between(0.5, 1.5), Random.between(0.5, 1.5))
             ),
-            new Component.Model(Geometry.TwoD.RECT),
+            new Component.Model(Geometry.TwoD.BOX),
             new Component.Shader(Shader.Program.TwoD.PROGRAM_COLOR_PER_VERTEX)
         ]
     });

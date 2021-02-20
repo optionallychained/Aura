@@ -8,8 +8,8 @@ let frame = 0;
 const populate = (game: Core.Game): void => {
     const entities: Array<Entity.Entity> = [];
 
-    for (let i = 0; i < 5; i++) {
-        const r = Math.round(Random.between(1, 2));
+    for (let i = 0; i < 1; i++) {
+        const r = Math.round(Random.between(2, 2));
 
         switch (r) {
             case 1:
@@ -42,7 +42,7 @@ const rotateAndScale = (game: Core.Game): void => {
     for (const e of game.entityManager.filterEntitiesByTags('cube', 'cubeWire')) {
         const transform = e.getComponent<Component.ThreeD.Transform3D>('Transform3D');
 
-        transform.scale(scale);
+        // transform.scale(scale);
         transform.rotate(rotations[i]);
 
         i++;
