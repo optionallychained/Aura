@@ -3,7 +3,7 @@ import { ShaderProgram } from '../../program';
 import { VERTEX_COLOR_PER_VERTEX } from '../../vertex/3d';
 
 export const PROGRAM_COLOR_PER_VERTEX = new ShaderProgram({
-    name: 'color_per_vertex',
+    name: 'program_color_per_vertex_3d',
     vertex: VERTEX_COLOR_PER_VERTEX,
     fragment: FRAGMENT_COLOR_PER_VERTEX
 });

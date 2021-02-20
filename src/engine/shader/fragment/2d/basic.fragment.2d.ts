@@ -5,7 +5,7 @@ import { UniformType } from '../../uniformType.enum';
  * Built-in basic Fragment Shader, shading fragments with a uniform color
  */
 export const FRAGMENT_BASIC = new FragmentShader({
-    name: 'fragment_basic',
+    name: 'fragment_basic_2d',
     source: `
         precision mediump float;
 

@@ -2,7 +2,7 @@ import { UniformType } from '../../uniformType.enum';
 import { VertexShader } from '../../vertex';
 
 export const VERTEX_COLOR_PER_VERTEX = new VertexShader({
-    name: 'vertex_color_per_vertex',
+    name: 'vertex_color_per_vertex_3d',
     source: `
         precision mediump float;
 

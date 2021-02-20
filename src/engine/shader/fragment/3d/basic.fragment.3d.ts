@@ -2,7 +2,7 @@ import { FragmentShader } from '../../fragment';
 import { UniformType } from '../../uniformType.enum';
 
 export const FRAGMENT_BASIC = new FragmentShader({
-    name: 'fragment_basic',
+    name: 'fragment_basic_3d',
     source: `
         precision mediump float;
 

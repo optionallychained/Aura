@@ -3,7 +3,7 @@ import { ShaderProgram } from '../../program';
 import { VERTEX_BASIC } from '../../vertex/3d';
 
 export const PROGRAM_BASIC = new ShaderProgram({
-    name: 'program_basic',
+    name: 'program_basic_3d',
     vertex: VERTEX_BASIC,
     fragment: FRAGMENT_BASIC
 });

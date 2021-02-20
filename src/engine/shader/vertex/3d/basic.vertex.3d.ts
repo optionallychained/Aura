@@ -2,7 +2,7 @@ import { UniformType } from '../../uniformType.enum';
 import { VertexShader } from '../../vertex';
 
 export const VERTEX_BASIC = new VertexShader({
-    name: 'vertex_basic',
+    name: 'vertex_basic_3d',
     source: `
         precision mediump float;
 
