@@ -1,4 +1,4 @@
-import { Angle, Component, Core, Entity, Random, State, Vec2 } from '../../engine';
+import { Angle, Component, Core, Entity, Input, Random, State, Vec2 } from '../../engine';
 import { _createRect } from '../entity/2d/rect';
 import { _createRectWire } from '../entity/2d/rectWire';
 import { _createTriangle } from '../entity/2d/triangle';
@@ -56,10 +56,15 @@ const rotateAndScale = (game: Core.Game): void => {
 
 export const State2D = new State.State({
     name: '2D',
+    renderMode: '2D',
     init: (game) => {
         populate(game);
     },
     tick: (game) => {
+        if (game.inputManager.isKeyDown(Input.Keys.ENTER)) {
+            game.switchToState('3D');
+        }
+
         rotateAndScale(game);
     }
 });

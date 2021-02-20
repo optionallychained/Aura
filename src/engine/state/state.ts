@@ -29,6 +29,15 @@ export class State {
     }
 
     /**
+     * Getter for the State's rendering mode, as provided in its Config
+     *
+     * @returns the State's rendering mode
+     */
+    public get renderMode(): '2D' | '3D' {
+        return this.config.renderMode;
+    }
+
+    /**
      * State initialisation method, called when the State is 'switched to' by the Game.
      *
      * Useful for configuring the game with Systems and Entities before State kickoff

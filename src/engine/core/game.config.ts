@@ -6,8 +6,6 @@ import { Color, Vec2 } from '../math';
  * @see Game
  */
 export interface GameConfig {
-    /** High level game 'Type'; either '2D' or '3D'; default value is '2D' */
-    type: '2D' | '3D',
     /** Game Canvas dimensions; default value is (window.innerWidth, window.innerHeight) */
     canvasDimensions?: Vec2;
     /** Game Canvas ID. If not provided, a Canvas will be created */

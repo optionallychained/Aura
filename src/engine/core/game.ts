@@ -74,7 +74,7 @@ export class Game {
 
         this.canvas = canvas;
 
-        this.renderer = new WebGLRenderer(canvas, config.type, config.backgroundColor ?? new Color());
+        this.renderer = new WebGLRenderer(canvas, config.backgroundColor ?? new Color());
         this.inputManager = new InputManager(canvas, config.controlScheme ?? 'keyboard');
         this.entityManager = new EntityManager({
             vboPrefix: 'main',
@@ -125,7 +125,7 @@ export class Game {
      *
      * Calls .end() on the outgoing State, and .init() on the incoming
      *
-     * // TODO error handling for States
+     * Signals the renderer that the rendering mode may have changed
      *
      * @param name the name of the State to switch to
      */
@@ -134,7 +134,13 @@ export class Game {
 
         this.currentState = this.states.get(name);
 
-        this.currentState?.init(this);
+        if (this.currentState) {
+            this.currentState.init(this);
+            this.renderer.setRenderingMode(this.currentState.renderMode);
+        }
+        else {
+            throw Error(`Could not switch to State ${name}`);
+        }
     }
 
     /**

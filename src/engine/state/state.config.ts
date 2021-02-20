@@ -6,7 +6,9 @@ import { Game } from '../core';
 export interface StateConfig {
     /** A name for the State; none is provided by default */
     name: string;
-    /** State initialisation function; none is provided by default */
+    /** The rendering mode of the State; 2D or 3D; none is provided by default */
+    renderMode: '2D' | '3D';
+    /** State initialisation function; optional */
     init?: (game: Game) => void;
     /** State end/shutdown function; optional */
     end?: (game: Game) => void;

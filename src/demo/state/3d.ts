@@ -1,4 +1,4 @@
-import { Angle, Component, Core, Entity, Random, State, Vec3 } from '../../engine';
+import { Angle, Component, Core, Entity, Input, Random, State, Vec3 } from '../../engine';
 import { _createCube } from '../entity/3d/cube';
 import { _createCubeWire } from '../entity/3d/cubeWire';
 
@@ -8,8 +8,8 @@ let frame = 0;
 const populate = (game: Core.Game): void => {
     const entities: Array<Entity.Entity> = [];
 
-    for (let i = 0; i < 1; i++) {
-        const r = Math.round(Random.between(2, 2));
+    for (let i = 0; i < 25; i++) {
+        const r = Math.round(Random.between(1, 2));
 
         switch (r) {
             case 1:
@@ -42,7 +42,7 @@ const rotateAndScale = (game: Core.Game): void => {
     for (const e of game.entityManager.filterEntitiesByTags('cube', 'cubeWire')) {
         const transform = e.getComponent<Component.ThreeD.Transform3D>('Transform3D');
 
-        // transform.scale(scale);
+        transform.scale(scale);
         transform.rotate(rotations[i]);
 
         i++;
@@ -53,10 +53,18 @@ const rotateAndScale = (game: Core.Game): void => {
 
 export const state3D = new State.State({
     name: '3D',
+    renderMode: '3D',
     init: (game) => {
         populate(game);
     },
+    end: (game) => {
+        game.entityManager.clearEntities();
+    },
     tick: (game) => {
+        if (game.inputManager.isKeyDown(Input.Keys.SPACE)) {
+            game.switchToState('2D');
+        }
+
         rotateAndScale(game);
     }
 });

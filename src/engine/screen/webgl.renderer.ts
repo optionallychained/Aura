@@ -72,13 +72,19 @@ export class WebGLRenderer {
     /** Active VBO name; used for frame-to-frame optimisation of VBO switching and vertexAttribPointer() calls */
     private activeVBOName: string | null = null;
 
+    /** Current rendering mode; used for differentiating some rendering functionality between 2D and 3D States */
+    private mode: '2D' | '3D' = '2D';
+
+    /** Last rendering mode; used for optimising GL reconfigurations in setRenderingMode() */
+    private lastMode: '2D' | '3D' = '2D';
+
     /**
      * Constructor. Retrieve and store the WebGLRenderingContext from the given Canvas, then perform one-time setup of the context
      *
      * @param canvas the Canvas we're drawing to
      * @param clearColor the Game's background color, to be set as the gl clearColor once on init
      */
-    constructor(private readonly canvas: HTMLCanvasElement, private readonly type: '2D' | '3D', private readonly clearColor: Color) {
+    constructor(private readonly canvas: HTMLCanvasElement, private readonly clearColor: Color) {
         const gl = canvas.getContext('webgl');
 
         if (!gl) {
@@ -96,7 +102,7 @@ export class WebGLRenderer {
      * // TODO alongside making WebGL config configurable in init(), here's where we'll wanna do stuff like clear the depth buffer for 3D
      */
     public clearScreen(): void {
-        const clearBit = this.type === '3D' ? this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT : this.gl.COLOR_BUFFER_BIT;
+        const clearBit = this.mode === '3D' ? this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT : this.gl.COLOR_BUFFER_BIT;
         this.gl.clear(clearBit);
     }
 
@@ -127,13 +133,10 @@ export class WebGLRenderer {
 
         const buffer = this.vbos.get(name);
 
-        if (!buffer) {
-            throw Error('Could not delete buffer');
+        if (buffer) {
+            gl.deleteBuffer(buffer);
+            this.vbos.delete(name);
         }
-
-        gl.deleteBuffer(buffer);
-
-        this.vbos.delete(name);
     }
 
     /**
@@ -227,6 +230,32 @@ export class WebGLRenderer {
     }
 
     /**
+     * Rendering mode switching routine; receives a State's rendering mode, indicating a transition towards either 2D or 3D rendering, and
+     *   configures WebGL to render in the mode if it's different than the last one
+     *
+     * Effectively allows a Game to comprise States rendering in a mix of 2D and 3D
+     *
+     * @param type the mode to switch to
+     */
+    public setRenderingMode(type: '2D' | '3D'): void {
+        const { gl } = this;
+
+        if (type !== this.lastMode) {
+            if (type === '2D') {
+                // disable the depth test for 2D rendering
+                gl.disable(gl.DEPTH_TEST);
+            }
+            else {
+                // enable and configure the depth test for 3D rendering
+                gl.enable(gl.DEPTH_TEST);
+                gl.depthFunc(gl.LESS);
+            }
+
+            this.lastMode = type;
+        }
+    }
+
+    /**
      * Internal-use one-time WebGL configuration routine; set flags and enable features once at application initialisation
      *
      * // TODO make this configurable and expand its utility to generically support stuff like 2D and 3D rendering, custom blendFuncs,
@@ -242,12 +271,6 @@ export class WebGLRenderer {
         // enable transparency
         gl.enable(gl.BLEND);
         gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-
-        // enable depth test if we're rendering in 3D
-        if (this.type === '3D') {
-            gl.enable(gl.DEPTH_TEST);
-            gl.depthFunc(gl.LESS);
-        }
     }
 
     /**
