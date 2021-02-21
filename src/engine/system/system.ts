@@ -4,7 +4,7 @@ import { Game } from '../core';
  * Abstract class representing a System; a distinct purposeful processing method that runs on a per-frame basis, operating on Entities to
  *   produce game behavior
  *
- * All States should extend from this class and provide an easy-to-guess and sensible name (eg. PhysicsSystem => 'Physics')
+ * All Systems should extend from this class and provide an easy-to-guess and sensible name (eg. Physics2D => 'Physics2D')
  *
  * Example Systems include Physics and Collision
  *

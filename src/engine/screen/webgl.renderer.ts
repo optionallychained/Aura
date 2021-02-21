@@ -2,6 +2,7 @@ import { EntityShaderMap } from '../entity';
 import { Color } from '../math';
 import { ShaderProgram } from '../shader/program';
 import { UniformType } from '../shader/uniformType.enum';
+import { RenderingMode } from './renderingMode.type';
 import { VBOConfig } from './vbo.config';
 import { WebGLRendererConfig } from './webgl.renderer.config';
 
@@ -29,8 +30,8 @@ type UniformLocationArray = Array<{
 /**
  * Internal-use utility interface describing a shader program's specification with information required only by the renderer
  *
- * Comprising a shader program's WebGL handle, and information about its attribute and uniform locations, constructed on shader program
- *   initialisation and used in generically handling shader program registration and switching
+ * Comprising a shader program's name, WebGL handle, and information about its attribute and uniform locations, constructed on shader
+ *   program initialisation and used in generically handling shader program registration and switching
  */
 interface ShaderProgramSpec {
     /** The name of the shader program */
@@ -60,6 +61,9 @@ export class WebGLRenderer {
     /** The WebGLRenderingContext retrieved from the Canvas */
     private gl: WebGLRenderingContext;
 
+    /** Game background Color, in its GL-friendly Float32Array form */
+    private backgroundColor: Float32Array;
+
     /** A maintained list of shader program specifications; mapped by their name for simple management and usage */
     private shaderPrograms = new Map<string, ShaderProgramSpec>();
 
@@ -73,10 +77,10 @@ export class WebGLRenderer {
     private activeVBOName: string | null = null;
 
     /** Current rendering mode; used for differentiating some rendering functionality between 2D and 3D States */
-    private mode: '2D' | '3D' = '2D';
+    private mode: RenderingMode = '2D';
 
     /** Last rendering mode; used for optimising GL reconfigurations in setRenderingMode() */
-    private lastMode: '2D' | '3D' = '2D';
+    private lastMode: RenderingMode = '2D';
 
     /**
      * Constructor. Retrieve and store the WebGLRenderingContext from the given Canvas, then perform one-time setup of the context
@@ -84,7 +88,7 @@ export class WebGLRenderer {
      * @param canvas the Canvas we're drawing to
      * @param clearColor the Game's background color, to be set as the gl clearColor once on init
      */
-    constructor(private readonly canvas: HTMLCanvasElement, private readonly clearColor: Color) {
+    constructor(private readonly canvas: HTMLCanvasElement, clearColor: Color) {
         const gl = canvas.getContext('webgl');
 
         if (!gl) {
@@ -93,16 +97,21 @@ export class WebGLRenderer {
 
         this.gl = gl;
 
+        this.backgroundColor = clearColor.float32Array;
+
         this.init();
     }
 
     /**
-     * Clear the screen to the previously-configured clearColor
-     *
-     * // TODO alongside making WebGL config configurable in init(), here's where we'll wanna do stuff like clear the depth buffer for 3D
+     * Clear the drawing buffer with the appropriate bitmask, account for depth buffer if we're rendering in 3D
      */
     public clearScreen(): void {
-        const clearBit = this.mode === '3D' ? this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT : this.gl.COLOR_BUFFER_BIT;
+        let clearBit = this.gl.COLOR_BUFFER_BIT;
+
+        if (this.mode === '3D') {
+            clearBit = clearBit | this.gl.DEPTH_BUFFER_BIT;
+        }
+
         this.gl.clear(clearBit);
     }
 
@@ -182,19 +191,19 @@ export class WebGLRenderer {
     }
 
     /**
-     * // TODO
-     *
-     * Generic rendering method; using the information in a given WebGLRendererConfig, render some vertices
+     * Generic rendering method; using the information in a given WebGLRendererConfig, render some Entities
      *
      * @param config the WebGLRenderingConfig specifying what and how to render
      */
     public render(config: WebGLRendererConfig): void {
         const { gl } = this;
 
+        // switch shader programs if necessary
         if (config.shaderProgramName !== this.activeShaderProgram?.name) {
             this.useShaderProgram(config.shaderProgramName);
         }
 
+        // switch VBOs if necessary
         if (config.vbo.name !== this.activeVBOName) {
             this.useVBO(config.vbo);
         }
@@ -225,7 +234,7 @@ export class WebGLRenderer {
         }
         else {
             // if the shader program contains no uniforms, we can draw all the entities in one batch
-            gl.drawArrays(config.vbo.glShape, 0, config.vbo.vertexCount);
+            gl.drawArrays(config.vbo.glShape, 0, config.vbo.vertexCount * config.entities.length);
         }
     }
 
@@ -233,15 +242,15 @@ export class WebGLRenderer {
      * Rendering mode switching routine; receives a State's rendering mode, indicating a transition towards either 2D or 3D rendering, and
      *   configures WebGL to render in the mode if it's different than the last one
      *
-     * Effectively allows a Game to comprise States rendering in a mix of 2D and 3D
+     * Effectively allows a Game to comprise both 2D and 3D States
      *
-     * @param type the mode to switch to
+     * @param mode the mode to switch to
      */
-    public setRenderingMode(type: '2D' | '3D'): void {
+    public setRenderingMode(mode: RenderingMode): void {
         const { gl } = this;
 
-        if (type !== this.lastMode) {
-            if (type === '2D') {
+        if (mode !== this.lastMode) {
+            if (mode === '2D') {
                 // disable the depth test for 2D rendering
                 gl.disable(gl.DEPTH_TEST);
             }
@@ -251,22 +260,22 @@ export class WebGLRenderer {
                 gl.depthFunc(gl.LESS);
             }
 
-            this.lastMode = type;
+            this.lastMode = this.mode;
+            this.mode = mode;
         }
     }
 
     /**
      * Internal-use one-time WebGL configuration routine; set flags and enable features once at application initialisation
      *
-     * // TODO make this configurable and expand its utility to generically support stuff like 2D and 3D rendering, custom blendFuncs,
-     * //   texture configurations, etc
+     * // TODO make this configurable and expand its utility
      */
     private init(): void {
         const { gl } = this;
 
         // set clear color
-        const color = this.clearColor.float32Array;
-        this.gl.clearColor(color[0], color[1], color[2], color[3]);
+        const [r, g, b, a] = this.backgroundColor;
+        this.gl.clearColor(r, g, b, a);
 
         // enable transparency
         gl.enable(gl.BLEND);

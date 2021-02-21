@@ -1,8 +1,11 @@
 import { Geometry } from '../geometry';
 import { GLShape } from '../glShape.enum';
 
+/**
+ * Built-in 3D box Geometry, setting out the information required to render 3D rects
+ */
 export const BOX = new Geometry({
-    name: 'box',
+    name: 'box_3d',
     vertices: Float32Array.from([
         // TODO fix
         -0.5, -0.5, -0.5,

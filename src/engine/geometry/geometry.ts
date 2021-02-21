@@ -6,7 +6,7 @@ import { GLShape } from './glShape.enum';
  *
  * Stores and provides access to all the information the system needs to render an Entity with a given shape
  *
- * Used to associate Entities with vertex sets to facilitate rendering in Model Components
+ * Used to associate Entities with vertex sets and GL drawing modes to facilitate rendering in Model Components
  *
  * @see Model
  */

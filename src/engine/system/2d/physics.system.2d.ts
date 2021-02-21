@@ -4,19 +4,19 @@ import { Vec2 } from '../../math';
 import { System } from '../system';
 
 /**
- * Built-in Physics System, handling the movement of Entities which are capable of moving.
+ * Built-in 2D Physics System, handling the movement of two dimensional Entities which are capable of moving
  *
- * To be eligible for movement, an Entity must have a Transform (position and dimension within the world).
+ * To be eligible for movement, an Entity must have a Transform2D
  *
  * @see Transform2D
  */
 export class Physics2D extends System {
 
     /**
-     * Constructor. Provide the name 'Physics' to the parent class
+     * Constructor. Provide the name 'Physics2D' to the parent class
      */
     constructor() {
-        super('Physics');
+        super('Physics2D');
     }
 
     /**

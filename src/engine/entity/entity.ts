@@ -2,11 +2,11 @@ import { Component } from '../component';
 import { EntityConfig } from './entity.config';
 
 /**
- * Class representing an Entity.
+ * Class representing an Entity
  *
- * An Entity is any object existing within the game; be it a player, enemy, pickup, level object, camera, UI element, etc.
+ * An Entity is any object existing within the game; be it a player, enemy, pickup, level object, camera, UI element, etc
  *
- * Entities maintain a list of Components, which give them their properties and behaviour and allow Systems to operate on them as necessary.
+ * Entities maintain a list of Components, which give them their properties and behaviour and allow Systems to operate on them as necessary
  *
  * @see Component
  */

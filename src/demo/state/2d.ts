@@ -56,7 +56,7 @@ const rotateAndScale = (game: Core.Game): void => {
 
 export const State2D = new State.State({
     name: '2D',
-    renderMode: '2D',
+    renderingMode: '2D',
     init: (game) => {
         populate(game);
     },

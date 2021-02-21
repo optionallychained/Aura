@@ -4,20 +4,22 @@ import { Entity } from '../../entity';
 import { System } from '../system';
 
 /**
- * Built-in 2D Collision System, handling the basic AABB Collision testing of all Entities which are capable of colliding with one another
+ * Built-in 2D Collision System, handling the collision testing of two dimensional Entities which are capable of colliding with one another
  *
- * To be eligible for collision, an Entity must have a Transform2D and a BoxCollider2D.
+ * To be eligible for collision, an Entity must have a Transform2D and a BoxCollider2D
  *
- * @see BoxCollider
+ * // TODO reimplement
+ *
+ * @see BoxCollider2D
  * @see Transform2D
  */
 export class Collision2D extends System {
 
     /**
-     * Constructor. Provide the name 'Collision' to the parent class
+     * Constructor. Provide the name 'Collision2D' to the parent class
      */
     constructor() {
-        super('Collision');
+        super('Collision2D');
     }
 
     /**

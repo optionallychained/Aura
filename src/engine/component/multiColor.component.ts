@@ -13,6 +13,11 @@ export class MultiColor extends Component {
      */
     private currentColor = 0;
 
+    /**
+     * Constructor. Take and store the colors to use
+     *
+     * @param colors the colors to use
+     */
     constructor(public colors: Array<Color>) {
         super('MultiColor');
     }

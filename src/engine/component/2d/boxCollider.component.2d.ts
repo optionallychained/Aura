@@ -4,11 +4,7 @@ import { Vec2 } from '../../math';
 import { Component } from '../component';
 
 /**
- * Built-in 2D Collision Box Component, defining a bounding box of a given size and with a given collision handling function.
- *
- * Utilised by the built-in Collision2D system
- *
- * @see CollisionSystem
+ * Built-in 2D Collision Box Component, defining an AABB of a given size and with a given collision handling method
  */
 export class BoxCollider2D extends Component {
 

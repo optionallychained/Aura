@@ -4,7 +4,7 @@
  *
  * All Components should extend from this class and provide an easy-to-guess and sensible name (eg. Transform2D => 'Transform2D')
  *
- * Example Components include physics-related Transforms, rendering-related Colors and Geometry, and Collision Boxes
+ * Example Components include physics-related Transforms, rendering-related Shaders and Models, Colliders and more
  *
  * @see Entity
  */

@@ -2,7 +2,7 @@ import { UniformType } from '../../uniformType.enum';
 import { VertexShader } from '../../vertex';
 
 /**
- * Built-in basic Vertex Shader, transforming vertices by a uniform Mat3
+ * Built-in basic 2D Vertex Shader, transforming vertices by a uniform Mat3
  */
 export const VERTEX_BASIC = new VertexShader({
     name: 'vertex_basic_2d',

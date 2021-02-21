@@ -53,7 +53,7 @@ const rotateAndScale = (game: Core.Game): void => {
 
 export const state3D = new State.State({
     name: '3D',
-    renderMode: '3D',
+    renderingMode: '3D',
     init: (game) => {
         populate(game);
     },

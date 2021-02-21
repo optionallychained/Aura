@@ -1,7 +1,10 @@
 import { FragmentShader } from '../../fragment';
 
 /**
- * Built-in basic Fragment Shader, shading fragments with a varying Color
+ * Built-in basic 3D Fragment Shader, shading fragments with a varying Color
+ *
+ * // TODO fragment shaders at this level of complexity vary less between 2D and 3D than vertex shaders
+ * //   is it worth having the split at all?
  */
 export const FRAGMENT_COLOR_PER_VERTEX = new FragmentShader({
     name: 'fragment_color_per_vertex_2d',

@@ -136,7 +136,7 @@ export class EntityManager {
      *
      * // TODO draw order problem: since Entities are grouped, batches of same-shader+model Entities are rendered in the order new
      * //   new combinations were added to the game, instead of the order the Entities were added to the game. Tricky problem; want for a
-     * //   way of defining a draw order from the outside maybe, but without undoing the optimation that shader+model grouping represents...
+     * //   way of defining a draw order from the outside maybe, but without undoing the optimisation that shader+model grouping represents
      */
     public render(): void {
         for (const [shaderName, forModel] of this.renderableEntities.entries()) {
@@ -472,9 +472,9 @@ export class EntityManager {
      * // TODO would be nice if we could detect and invalidate only those filter caches which will change based on add/remove
      * //   work relevant alongside Entity change detection optimisation for vertex compilation and buffering
      *
-     * @param filter a string representation of the Entity filter
+     * @param filter a string representation of the Entity filter, to be used as a cache key
      * @param predicate the filter predicate for matching Entities
-     * @param filterId an optional filter ID for separating similar filters from disparate sources. Must be provided for sourced filters
+     * @param filterId (optional) a filter ID for sourced filters, to be used as a cache key extension. Must be provided for sourced filters
      * @param source the source to filter from; defaulting to the flat list of all Entities
      *
      * @returns the array of Entities matching the filter

@@ -1,4 +1,3 @@
-import { Vec2 } from '../math';
 import { GLShape } from './glShape.enum';
 
 /**

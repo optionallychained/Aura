@@ -2,29 +2,27 @@ import { Mat3, Vec2 } from '../../math';
 import { Component } from '../component';
 
 /**
- * Built-in Transform2D Component, defining the position, dimensions and velocity of an Entity
+ * Built-in Transform2D Component, defining the position, scale, rotation and velocity of a two dimensional Entity
  *
- * Maintains and provides abstractions for a Mat3 Transform2D
+ * Maintains and provides abstractions for a Mat3 transformations matrix
  */
 export class Transform2D extends Component {
 
     /** Maintained scale vector */
     private scaleVector: Vec2;
 
-    /** maintained translation vector */
+    /** Maintained translation vector */
     private translationVector: Vec2;
 
-    /** maintained rotation angle in radians */
+    /** Maintained rotation angle in radians */
     private rotation = 0;
 
-    /** Vec2 representing the center of the Entity, calculated by its position and dimensions */
-    // public readonly center: Vec2;
-
     /**
-     * Constructor. Take and store the position, dimensions and velocity, and provide the name 'Transform2D' to the parent class
+     * Constructor. Take and store the initial position, scale, angle and velocity
      *
-     * @param position the position of the Entity, expressed as a Vec2. Defaults to 0,0
-     * @param dimensions the dimensions of the Entity, expressed as a Vec2. Defaults to 0,0
+     * @param initialPosition the position of the Entity, expressed as a Vec2. Defaults to 0,0
+     * @param initialScale the starting scale of the Entity, expressed as a Vec2. Defaults to 1,1
+     * @param initialAngle the starting rotation of the Entity. Defaults to 0
      * @param velocity the velocity of the Entity, expressed as a Vec2. Defaults to 0,0
      */
     constructor(
@@ -42,7 +40,7 @@ export class Transform2D extends Component {
     }
 
     /**
-     * Abstraction for Mat3.translate, translating the transform matrix by the given vector
+     * Abstraction for Mat3.translate, adding a given translation onto the existing translationVector
      *
      * @param translate the Vec2 to translate by
      */
@@ -51,21 +49,22 @@ export class Transform2D extends Component {
     }
 
     /**
-     * Abstraction for Mat3.rotate, rotating the transform matrix by the given angle (radians)
+     * Abstraction for Mat3.rotate, adding a given angle (in radians) to the current rotation angle
      *
-     * @param angle the angle to rotate by
+     * @param angle the angle (radians) to rotate by
      */
     public rotate(angle: number): void {
         this.rotation += angle;
     }
 
     /**
-     * Abstraction for Mat3.scale, scaling the transform matrix by the given Vec2 factor
+     * Abstraction for Mat3.scale, updating the existing scale factor with the given
+     *
+     * Multiplies the two Vec2s so as to ensure an Entity's initialScale is preserved as the baseline
      *
      * @param factor the factor to scale by
      */
     public scale(factor: Vec2): void {
-        // maintain the initial scale by making all subsequent scales a factor of the initial
         this.scaleVector = Vec2.mult(this.initialScale, factor);
     }
 

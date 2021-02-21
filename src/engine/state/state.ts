@@ -1,10 +1,11 @@
 import { Game } from '../core';
+import { RenderingMode } from '../screen/renderingMode.type';
 import { StateConfig } from './state.config';
 
 /**
- * Class representing a State.
+ * Class representing a State
  *
- * A State is roughly equivalent to a Scene; a literal distinct *state* that the game can be in.
+ * A State is roughly equivalent to a Scene; a literal distinct *state* that the game can be in
  *
  * Example States may include Menu, Game, Pause, Dead, etc
  *
@@ -33,8 +34,8 @@ export class State {
      *
      * @returns the State's rendering mode
      */
-    public get renderMode(): '2D' | '3D' {
-        return this.config.renderMode;
+    public get renderingMode(): RenderingMode {
+        return this.config.renderingMode;
     }
 
     /**
