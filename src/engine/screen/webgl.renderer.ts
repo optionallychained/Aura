@@ -79,9 +79,6 @@ export class WebGLRenderer {
     /** Current rendering mode; used for differentiating some rendering functionality between 2D and 3D States */
     private mode: RenderingMode = '2D';
 
-    /** Last rendering mode; used for optimising GL reconfigurations in setRenderingMode() */
-    private lastMode: RenderingMode = '2D';
-
     /**
      * Constructor. Retrieve and store the WebGLRenderingContext from the given Canvas, then perform one-time setup of the context
      *
@@ -249,7 +246,7 @@ export class WebGLRenderer {
     public setRenderingMode(mode: RenderingMode): void {
         const { gl } = this;
 
-        if (mode !== this.lastMode) {
+        if (mode !== this.mode) {
             if (mode === '2D') {
                 // disable the depth test for 2D rendering
                 gl.disable(gl.DEPTH_TEST);
@@ -260,7 +257,6 @@ export class WebGLRenderer {
                 gl.depthFunc(gl.LESS);
             }
 
-            this.lastMode = this.mode;
             this.mode = mode;
         }
     }
