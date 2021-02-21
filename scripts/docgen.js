@@ -136,11 +136,11 @@ const processAssets = async () => {
     execSync(cmd, { stdio: 'inherit' });
 
     // move webpack JS output to the right dest
-    mkDirOptional(jsDest);
+    mkDirOptional(cssDest);
     await fs.promises.rename(path.join(assetDest, 'css.css'), path.join(cssDest, 'main.css'));
 
     // move webpack CSS output to the right dest
-    mkDirOptional(cssDest);
+    mkDirOptional(jsDest);
     await fs.promises.rename(path.join(assetDest, 'js.js'), path.join(jsDest, 'main.js'));
 
     // clean up the Webpack CSS JS output (not applicable for our use-case)

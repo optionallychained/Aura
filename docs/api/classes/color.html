@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Color | API | ProtoGL Documentation - v0.2.0</title>
-	<meta name="description" content="Documentation for API | ProtoGL Documentation - v0.2.0">
+	<title>Color | API | ProtoGL Documentation - v0.3.0</title>
+	<meta name="description" content="Documentation for API | ProtoGL Documentation - v0.3.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
 	<script async src="../assets/js/search.js" id="search-script"></script>
@@ -23,7 +23,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">API | ProtoGL Documentation - v0.2.0</a>
+					<a href="../index.html" class="title">API | ProtoGL Documentation - v0.3.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -52,7 +52,7 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="../modules.html">API | ProtoGL Documentation - v0.2.0</a>
+					<a href="../modules.html">API | ProtoGL Documentation - v0.3.0</a>
 				</li>
 				<li>
 					<a href="color.html">Color</a>
@@ -102,13 +102,19 @@
 						<section class="tsd-index-section ">
 							<h3>Accessors</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="color.html#bf" class="tsd-kind-icon">bf</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="color.html#float32array" class="tsd-kind-icon">float32<wbr>Array</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="color.html#gf" class="tsd-kind-icon">gf</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="color.html#hex" class="tsd-kind-icon">hex</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="color.html#rf" class="tsd-kind-icon">rf</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="color.html#fromhex" class="tsd-kind-icon">from<wbr>Hex</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="color.html#random" class="tsd-kind-icon">random</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="color.html#randomwithalpha" class="tsd-kind-icon">random<wbr>With<wbr>Alpha</a></li>
 							</ul>
 						</section>
 					</div>
@@ -126,12 +132,12 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/ba421da/src/engine/math/color.ts#L72">math/color.ts:72</a></li>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/dd159fa/src/engine/math/color.ts#L101">math/color.ts:101</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Constructor. Take and store the Color&#39;s r, g, b and optionally a properties</p>
+									<p>Constructor. Take and store the Color&#39;s r, g, b and a properties</p>
 								</div>
 								<p>r, g and b are clamped to 255, and a is clamped to 1. Negative values will be set to 0</p>
 							</div>
@@ -156,9 +162,9 @@
 									</div>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> a: <span class="tsd-signature-type">number</span></h5>
+									<h5>a: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 1</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>the Color&#39;s alpha value (optional); 0-1</p>
+										<p>the Color&#39;s alpha value; 0-1; defaults to 1</p>
 									</div>
 								</li>
 							</ul>
@@ -171,8 +177,8 @@
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="a" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> a</h3>
-					<div class="tsd-signature tsd-kind-icon">a<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> a</h3>
+					<div class="tsd-signature tsd-kind-icon">a<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 1</span></div>
 					<aside class="tsd-sources">
 					</aside>
 				</section>
@@ -201,6 +207,72 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Accessors</h2>
 				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="bf" class="tsd-anchor"></a>
+					<h3>bf</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> bf<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/dd159fa/src/engine/math/color.ts#L151">math/color.ts:151</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Internal-use getter for the gl-compatible clamped form of the Color&#39;s b number (0 -&gt; 1)</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="float32array" class="tsd-anchor"></a>
+					<h3>float32<wbr>Array</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> float32Array<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Float32Array</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/dd159fa/src/engine/math/color.ts#L130">math/color.ts:130</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Getter for the GL-friendly Float32Array form of the Color</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Float32Array</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="gf" class="tsd-anchor"></a>
+					<h3>gf</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> gf<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/dd159fa/src/engine/math/color.ts#L144">math/color.ts:144</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Internal-use getter for the gl-compatible clamped form of the Color&#39;s g number (0 -&gt; 1)</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
 					<a name="hex" class="tsd-anchor"></a>
 					<h3>hex</h3>
 					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
@@ -210,7 +282,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/ba421da/src/engine/math/color.ts#L97">math/color.ts:97</a></li>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/dd159fa/src/engine/math/color.ts#L123">math/color.ts:123</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -219,6 +291,28 @@
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="rf" class="tsd-anchor"></a>
+					<h3>rf</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> rf<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/dd159fa/src/engine/math/color.ts#L137">math/color.ts:137</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Internal-use getter for the gl-compatible clamped form of the Color&#39;s r number (0 -&gt; 1)</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -235,7 +329,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/ba421da/src/engine/math/color.ts#L17">math/color.ts:17</a></li>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/dd159fa/src/engine/math/color.ts#L46">math/color.ts:46</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -259,6 +353,52 @@
 						</li>
 					</ul>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="random" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> random</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">random<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="color.html" class="tsd-signature-type" data-tsd-kind="Class">Color</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/dd159fa/src/engine/math/color.ts#L13">math/color.ts:13</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Generate a random Color with r, g and b values</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="color.html" class="tsd-signature-type" data-tsd-kind="Class">Color</a></h4>
+							<p>a random Color</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="randomwithalpha" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> random<wbr>With<wbr>Alpha</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">random<wbr>With<wbr>Alpha<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="color.html" class="tsd-signature-type" data-tsd-kind="Class">Color</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/dd159fa/src/engine/math/color.ts#L26">math/color.ts:26</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Generate a random Color with r, g, b and a values, supporting transparency</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="color.html" class="tsd-signature-type" data-tsd-kind="Class">Color</a></h4>
+							<p>a random Color with transparency</p>
+						</li>
+					</ul>
+				</section>
 			</section>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -271,20 +411,8 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-enum">
-						<a href="../enums/keys.html" class="tsd-kind-icon">Keys</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="aabbcollisionbox.html" class="tsd-kind-icon">AABBCollision<wbr>Box</a>
-					</li>
 					<li class=" tsd-kind-class">
 						<a href="angle.html" class="tsd-kind-icon">Angle</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="canvasrenderer.html" class="tsd-kind-icon">Canvas<wbr>Renderer</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="collisionsystem.html" class="tsd-kind-icon">Collision<wbr>System</a>
 					</li>
 				</ul>
 				<ul class="current">
@@ -307,33 +435,33 @@
 								<a href="color.html#r" class="tsd-kind-icon">r</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="color.html#bf" class="tsd-kind-icon">bf</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="color.html#float32array" class="tsd-kind-icon">float32<wbr>Array</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="color.html#gf" class="tsd-kind-icon">gf</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
 								<a href="color.html#hex" class="tsd-kind-icon">hex</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="color.html#rf" class="tsd-kind-icon">rf</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
 								<a href="color.html#fromhex" class="tsd-kind-icon">from<wbr>Hex</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="color.html#random" class="tsd-kind-icon">random</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="color.html#randomwithalpha" class="tsd-kind-icon">random<wbr>With<wbr>Alpha</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-class">
-						<a href="component.html" class="tsd-kind-icon">Component</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="entity.html" class="tsd-kind-icon">Entity</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="entitymanager.html" class="tsd-kind-icon">Entity<wbr>Manager</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="flatcolor.html" class="tsd-kind-icon">Flat<wbr>Color</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="game.html" class="tsd-kind-icon">Game</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="inputmanager.html" class="tsd-kind-icon">Input<wbr>Manager</a>
-					</li>
 					<li class=" tsd-kind-class">
 						<a href="mat3.html" class="tsd-kind-icon">Mat3</a>
 					</li>
@@ -341,19 +469,7 @@
 						<a href="mat4.html" class="tsd-kind-icon">Mat4</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="physicssystem.html" class="tsd-kind-icon">Physics<wbr>System</a>
-					</li>
-					<li class=" tsd-kind-class">
 						<a href="random.html" class="tsd-kind-icon">Random</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="state.html" class="tsd-kind-icon">State</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="system.html" class="tsd-kind-icon">System</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="transform.html" class="tsd-kind-icon">Transform</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="vec2.html" class="tsd-kind-icon">Vec2</a>
@@ -363,15 +479,6 @@
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="vec4.html" class="tsd-kind-icon">Vec4</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/entityconfig.html" class="tsd-kind-icon">Entity<wbr>Config</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/gameconfig.html" class="tsd-kind-icon">Game<wbr>Config</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/stateconfig.html" class="tsd-kind-icon">State<wbr>Config</a>
 					</li>
 				</ul>
 			</nav>
@@ -386,16 +493,6 @@
 				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
 				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
