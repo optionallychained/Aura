@@ -9,6 +9,7 @@ import { ShaderProgram } from '../shader/program';
 import { State } from '../state';
 import { System } from '../system';
 import { GameConfig } from './game.config';
+import { ProtoGLError } from './protogl.error';
 
 /**
  * Core Game object; instantiated with or without a configuration object as a first step in creating a game
@@ -155,7 +156,11 @@ export class Game {
             this.renderer.setRenderingMode(this.currentState.renderingMode);
         }
         else {
-            throw Error(`Could not switch to State ${name}`);
+            throw new ProtoGLError({
+                class: 'Game',
+                method: 'switchToState',
+                message: `Could not switch to State '${name}'`
+            });
         }
     }
 
