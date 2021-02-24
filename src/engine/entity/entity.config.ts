@@ -5,9 +5,9 @@ import { Component } from '../component';
  */
 export interface EntityConfig {
     /** A human-readable tag for identifying the Entity */
-    tag: string;
-    /** Entity frame tick function; none is provided by default */
-    tick?: (frameDelta: number) => void;
+    readonly tag: string;
     /** Components to initialise the Entity with, for convenient setup */
-    components?: Array<Component>;
+    readonly components?: ReadonlyArray<Component>;
+    /** Entity frame tick function; none is provided by default */
+    readonly tick?: (frameDelta: number) => void;
 }

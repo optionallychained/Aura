@@ -1,3 +1,4 @@
+import { ControlScheme } from '../input/controlScheme.type';
 import { Color, Vec2 } from '../math';
 
 /**
@@ -7,15 +8,15 @@ import { Color, Vec2 } from '../math';
  */
 export interface GameConfig {
     /** Game Canvas dimensions; default value is (window.innerWidth, window.innerHeight) */
-    canvasDimensions?: Vec2;
+    readonly canvasDimensions?: Vec2;
     /** Game Canvas ID. If not provided, a Canvas will be created */
-    canvasId?: string;
+    readonly canvasId?: string;
     /** Game background color; default value is black */
-    backgroundColor?: Color;
+    readonly backgroundColor?: Color;
     /** Game control scheme, used to optimise InputManager event registrations; default value is 'keyboard' */
-    controlScheme?: 'keyboard' | 'mouse' | 'both'
+    readonly controlScheme?: ControlScheme;
     /** Debug mode, enabling the display of frame data and potentially other useful stuff in the future; default value is false */
-    debugMode?: boolean;
+    readonly debugMode?: boolean;
     /** Game init function; none is provided by default */
-    init?: () => void
+    readonly init?: () => void
 }

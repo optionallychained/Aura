@@ -5,7 +5,7 @@ import { WebGLRenderer } from '../screen';
  */
 export interface EntityManagerConfig {
     /** Prefix for all VBOs created by this EntityManager; facilitating use of multiple EntityManagers per Game */
-    vboPrefix: string;
+    readonly vboPrefix: string;
     /** The WebGLRenderer the EntityManager will use */
-    renderer: WebGLRenderer;
+    readonly renderer: WebGLRenderer;
 }

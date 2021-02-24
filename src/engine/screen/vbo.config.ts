@@ -9,15 +9,15 @@ import { GLShape } from '../geometry';
  */
 export interface VBOConfig {
     /** The name of the VBO */
-    name: string;
+    readonly name: string;
     /** The vertices comprising the VBO */
-    vertices: Float32Array;
+    readonly vertices: Float32Array;
     /** The size of the vertices comprising the VBO */
-    vertexSize: number;
+    readonly vertexSize: number;
     /** The number of vertices contained within the vertex list */
-    vertexCount: number;
+    readonly vertexCount: number;
     /** The GLShape (drawing mode) to render the vertices in */
-    glShape: GLShape;
+    readonly glShape: GLShape;
     /** A flag indicating whether or not the VBO has been modified on a frame-to-frame basis, thereby requiring (re)buffering to the GPU */
     changed: boolean;
 }

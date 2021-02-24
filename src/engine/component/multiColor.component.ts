@@ -18,7 +18,7 @@ export class MultiColor extends Component {
      *
      * @param colors the colors to use
      */
-    constructor(public colors: Array<Color>) {
+    constructor(public readonly colors: ReadonlyArray<Color>) {
         super('MultiColor');
     }
 

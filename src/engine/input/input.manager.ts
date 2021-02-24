@@ -1,5 +1,5 @@
-import { GameConfig } from '../core';
 import { Vec2 } from '../math';
+import { ControlScheme } from './controlScheme.type';
 import { Keys } from './keys.enum';
 
 /**
@@ -10,7 +10,7 @@ import { Keys } from './keys.enum';
 export class InputManager {
 
     /** Buffer for user keypresses */
-    private keyBuffer = new Set<string>();
+    private readonly keyBuffer = new Set<string>();
 
     /** Boolean indicating whether or not the left mouse button is currently down */
     private mousePressed = false;
@@ -28,7 +28,7 @@ export class InputManager {
     private contextClickPos = new Vec2();
 
     /** Keys to ignore in the handling of keyboard input */
-    private ignoreKeys: Array<string> = [
+    private readonly ignoreKeys: ReadonlyArray<string> = [
         Keys.F_5,
         Keys.F_12
     ];
@@ -39,8 +39,20 @@ export class InputManager {
      * @param canvas the Canvas
      * @param controlScheme the ControlScheme given to the Game's Config, used for optimising event registration and handling
      */
-    constructor(private readonly canvas: HTMLCanvasElement, private readonly controlScheme: GameConfig['controlScheme']) {
-        this.init(controlScheme);
+    constructor(canvas: HTMLCanvasElement, controlScheme: ControlScheme) {
+        switch (controlScheme) {
+            case 'keyboard':
+                this.initializeKeyboard();
+                break;
+
+            case 'mouse':
+                this.initializeMouse(canvas);
+                break;
+
+            default:
+                this.initializeKeyboard();
+                this.initializeMouse(canvas);
+        }
     }
 
     /**
@@ -144,37 +156,40 @@ export class InputManager {
     }
 
     /**
-     * Initialise the game's input handling by registering all keyboard and mouse events required by the given controlScheme
+     * Initialize keyboard event handling
      *
-     * @param controlScheme
+     * // TODO register on Canvas directly?
      */
-    private init(controlScheme: GameConfig['controlScheme']): void {
-        if (controlScheme === 'keyboard' || controlScheme === 'both') {
-            // register keydown on the window
-            window.addEventListener('keydown', this.onKeyDown.bind(this));
+    private initializeKeyboard(): void {
+        // register keydown on the window
+        window.addEventListener('keydown', this.onKeyDown.bind(this));
 
-            // register keyup on the window
-            window.addEventListener('keyup', this.onKeyUp.bind(this));
-        }
+        // register keyup on the window
+        window.addEventListener('keyup', this.onKeyUp.bind(this));
+    }
 
-        if (controlScheme === 'mouse' || controlScheme === 'both') {
-            // register mousedown on the canvas
-            this.canvas.addEventListener('mousedown', this.onMouseDown.bind(this));
+    /**
+     * Initialize mouse event handling on the Canvas
+     *
+     * @param canvas the Canvas to register events upon
+     */
+    private initializeMouse(canvas: HTMLCanvasElement): void {
+        // register mousedown on the canvas
+        canvas.addEventListener('mousedown', this.onMouseDown.bind(this));
 
-            // register mouseup on the canvas
-            this.canvas.addEventListener('mouseup', this.onMouseUp.bind(this));
+        // register mouseup on the canvas
+        canvas.addEventListener('mouseup', this.onMouseUp.bind(this));
 
-            // register click on the canvas
-            this.canvas.addEventListener('click', this.onClick.bind(this));
+        // register click on the canvas
+        canvas.addEventListener('click', this.onClick.bind(this));
 
-            // register contextmenu on the canvas
-            this.canvas.addEventListener('contextmenu', this.onContextMenu.bind(this));
+        // register contextmenu on the canvas
+        canvas.addEventListener('contextmenu', this.onContextMenu.bind(this));
 
-            // register dblclick on the canvas
-            this.canvas.addEventListener('dblclick', this.onDoubleClick.bind(this));
+        // register dblclick on the canvas
+        canvas.addEventListener('dblclick', this.onDoubleClick.bind(this));
 
-            // register mousemove on the canvas
-            this.canvas.addEventListener('mousemove', this.onMouseMove.bind(this));
-        }
+        // register mousemove on the canvas
+        canvas.addEventListener('mousemove', this.onMouseMove.bind(this));
     }
 }

@@ -13,10 +13,10 @@ import { EntityConfig } from './entity.config';
 export class Entity {
 
     /** Unique id for the Entity */
-    public id = (+new Date()).toString(16) + (Math.random() * 10000000 | 0).toString(16);
+    public readonly id = (+new Date()).toString(16) + (Math.random() * 10000000 | 0).toString(16);
 
     /** Entity Components, mapped by their name for simple management */
-    private components = new Map<string, Component>();
+    private readonly components = new Map<string, Component>();
 
     /**
      * Constructor. Take and store the Entity's config and initialise the Entity with Components if provided in the config
@@ -29,7 +29,7 @@ export class Entity {
         //     - ...working off the knowledge of which Components are required to source which shader attributes+uniforms
         //   - its Model is compatible with its Shader (?)
         if (config.components) {
-            this.addComponents(config.components);
+            this.addComponents(...config.components);
         }
     }
 
@@ -82,7 +82,7 @@ export class Entity {
      *
      * @param components the Components to add
      */
-    public addComponents(components: Array<Component>): void {
+    public addComponents(...components: Array<Component>): void {
         for (const c of components) {
             this.addComponent(c);
         }
@@ -106,7 +106,7 @@ export class Entity {
      *
      * @param names the names of the Components to remove
      */
-    public removeComponents(names: Array<string>): void {
+    public removeComponents(...names: Array<string>): void {
         for (const c of names) {
             this.removeComponent(c);
         }
@@ -132,7 +132,7 @@ export class Entity {
      *
      * @returns a boolean indicating whether or not the Entity has all of the named Components
      */
-    public hasComponents(names: Array<string>): boolean {
+    public hasComponents(...names: Array<string>): boolean {
         for (const c of names) {
             if (!this.hasComponent(c)) {
                 return false;

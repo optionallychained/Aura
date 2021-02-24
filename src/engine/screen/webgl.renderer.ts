@@ -12,8 +12,8 @@ import { WebGLRendererConfig } from './webgl.renderer.config';
  * Created on shader program initialisation and used in generically handling vertexAttribPointer() calls
  */
 type AttributeLocationArray = Array<{
-    location: number;
-    size: number;
+    readonly location: number;
+    readonly size: number;
 }>;
 
 /**
@@ -22,9 +22,9 @@ type AttributeLocationArray = Array<{
  * Created on shader program initialisation and used in generically handling glUniform*() calls
  */
 type UniformLocationArray = Array<{
-    name: string;
-    location: WebGLUniformLocation | null;
-    type: UniformType;
+    readonly name: string;
+    readonly location: WebGLUniformLocation | null;
+    readonly type: UniformType;
 }>;
 
 /**
@@ -35,13 +35,13 @@ type UniformLocationArray = Array<{
  */
 interface ShaderProgramSpec {
     /** The name of the shader program */
-    name: string;
+    readonly name: string;
     /** The WebGL handle for the shader program */
-    program: WebGLProgram;
+    readonly program: WebGLProgram;
     /** The attribute information associated with the shader program */
-    attributeLocations: AttributeLocationArray;
+    readonly attributeLocations: AttributeLocationArray;
     /** the uniform information associated with the shader program */
-    uniformLocations: UniformLocationArray;
+    readonly uniformLocations: UniformLocationArray;
 }
 
 /**
@@ -59,19 +59,19 @@ interface ShaderProgramSpec {
 export class WebGLRenderer {
 
     /** The WebGLRenderingContext retrieved from the Canvas */
-    private gl: WebGLRenderingContext;
+    private readonly gl: WebGLRenderingContext;
 
     /** Game background Color, in its GL-friendly Float32Array form */
-    private backgroundColor: Float32Array;
+    private readonly backgroundColor: Float32Array;
 
     /** A maintained list of shader program specifications; mapped by their name for simple management and usage */
-    private shaderPrograms = new Map<string, ShaderProgramSpec>();
+    private readonly shaderPrograms = new Map<string, ShaderProgramSpec>();
 
     /** Active shader program specification; used for frame-to-frame optimisation of shader switching */
     private activeShaderProgram: ShaderProgramSpec | null = null;
 
     /** A maintained list of VBO handles; mapped by their name for simple managment and usage */
-    private vbos = new Map<string, WebGLBuffer>();
+    private readonly vbos = new Map<string, WebGLBuffer>();
 
     /** Active VBO name; used for frame-to-frame optimisation of VBO switching and vertexAttribPointer() calls */
     private activeVBOName: string | null = null;
@@ -85,7 +85,7 @@ export class WebGLRenderer {
      * @param canvas the Canvas we're drawing to
      * @param clearColor the Game's background color, to be set as the gl clearColor once on init
      */
-    constructor(private readonly canvas: HTMLCanvasElement, clearColor: Color) {
+    constructor(canvas: HTMLCanvasElement, clearColor: Color) {
         const gl = canvas.getContext('webgl');
 
         if (!gl) {

@@ -10,25 +10,33 @@ import { Component } from './component';
  */
 export class Shader extends Component {
 
-    /** The name of the Shader Program */
-    public programName: string;
-
-    /** The VertexShader */
-    public vertex: VertexShader;
-
-    /** The FragmentShader */
-    public fragment: FragmentShader;
-
     /**
      * Constructor. Take the ShaderProgram to use, and extract its details into the Component
      *
      * @param program the ShaderProgram to use
      */
-    constructor(program: ShaderProgram) {
+    constructor(private readonly program: ShaderProgram) {
         super('Shader');
+    }
 
-        this.programName = program.name;
-        this.vertex = program.vertex;
-        this.fragment = program.fragment;
+    /**
+     * Getter for the Shader's name, as provided in its ShaderProgram config
+     */
+    public get programName(): string {
+        return this.program.name;
+    }
+
+    /**
+     * Getter for the Shader's VertexShader, as provided in its ShaderProgram config
+     */
+    public get vertex(): VertexShader {
+        return this.program.vertex;
+    }
+
+    /**
+     * Getter for the Shader's FragmentShader, as provided in its ShaderProgram config
+     */
+    public get fragment(): FragmentShader {
+        return this.program.fragment;
     }
 }

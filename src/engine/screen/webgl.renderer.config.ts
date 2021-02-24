@@ -12,9 +12,9 @@ import { VBOConfig } from './vbo.config';
  */
 export interface WebGLRendererConfig {
     /** The name of the shader program to use for this render call */
-    shaderProgramName: string;
+    readonly shaderProgramName: string;
     /** The VBOConfig describing the VBO to use in this render call */
-    vbo: VBOConfig;
+    readonly vbo: VBOConfig;
     /** The list of Entities this draw call is rendering; used in uploading uniform values, if applicable */
-    entities: Array<Entity>;
+    readonly entities: ReadonlyArray<Entity>;
 }

@@ -28,7 +28,7 @@ export class EntityManager {
     private entities: Array<Entity> = [];
 
     /** Entities with Shaders and Models, grouped by the same, used for optimising vertex compilation and gl API call handling */
-    private renderableEntities = new Map<string, Map<string, Array<Entity>>>();
+    private readonly renderableEntities = new Map<string, Map<string, Array<Entity>>>();
 
     /** Flat list of Entities to be added on the next frame */
     private addList: Array<Entity> = [];
@@ -37,17 +37,17 @@ export class EntityManager {
     private removeList: Array<Entity> = [];
 
     /** Map of VBOs constructed and used in rendering, used to reduce the number of vertex compilations for Entities and gl buffer calls */
-    private vbos = new Map<string, VBOConfig>();
+    private readonly vbos = new Map<string, VBOConfig>();
 
     /** Cached Entity filters, used in optimising filters */
-    private entityFilterCache = new Map<string, Array<Entity>>();
+    private readonly entityFilterCache = new Map<string, Array<Entity>>();
 
     /**
      * Cached specific-source Entity filters, used in optimising filters from specific sources
      *
      * Separated from regular filters so as not to produce conflicts between similar filters of all Entities and subsets
      */
-    private sourcedEntityFilterCache = new Map<string, Array<Entity>>();
+    private readonly sourcedEntityFilterCache = new Map<string, Array<Entity>>();
 
     /**
      * Constructor. Take and store the EntityManager's config
@@ -181,7 +181,7 @@ export class EntityManager {
      * @returns the list of Entities with the Components
      */
     public filterEntitiesByComponents(...components: Array<string>): Array<Entity> {
-        return this.memoizeFilter(components.toString(), (e) => e.hasComponents(components));
+        return this.memoizeFilter(components.toString(), (e) => e.hasComponents(...components));
     }
 
     /**
@@ -195,7 +195,7 @@ export class EntityManager {
      * @returns the list of Entities from the source with the Components
      */
     public filterEntitiesByComponentsFromSource(source: Array<Entity>, filterId: string, ...components: Array<string>): Array<Entity> {
-        return this.memoizeFilter(components.toString(), (e) => e.hasComponents(components), filterId, source);
+        return this.memoizeFilter(components.toString(), (e) => e.hasComponents(...components), filterId, source);
     }
 
     /**

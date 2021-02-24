@@ -2,7 +2,8 @@ import { EntityManager } from '../entity';
 import { EntityShaderMap } from '../entity/entityShaderMap';
 import { EntityShaderResolver } from '../entity/entityShaderResolver.type';
 import { InputManager } from '../input';
-import { Color } from '../math';
+import { ControlScheme } from '../input/controlScheme.type';
+import { Color, Vec2 } from '../math';
 import { WebGLRenderer } from '../screen';
 import { ShaderProgram } from '../shader/program';
 import { State } from '../state';
@@ -23,38 +24,47 @@ import { GameConfig } from './game.config';
 export class Game {
 
     /** the EntityManager to be used in handling and processing the game's Entities */
-    public entityManager: EntityManager;
+    public readonly entityManager: EntityManager;
 
     /** InputManager for handling all user input */
-    public inputManager: InputManager;
+    public readonly inputManager: InputManager;
 
     /** the Canvas to render the game on */
-    private canvas: HTMLCanvasElement;
+    private readonly canvas: HTMLCanvasElement;
 
     /** Renderer */
-    private renderer: WebGLRenderer;
+    private readonly renderer: WebGLRenderer;
 
     /** Frame time calculation utilities */
     private frameDelta = 0;
     private lastFrameTime = 0;
 
     /** Game States, mapped by their name for simple management */
-    private states = new Map<string, State>();
+    private readonly states = new Map<string, State>();
 
     /** Reference to the current game State for frametime execution */
     private currentState: State | undefined;
 
     /** Game Systems, mapped by their name for simple management */
-    private systems = new Map<string, System>();
+    private readonly systems = new Map<string, System>();
 
     /** Generic game data, stored as a Map for relative type-safety */
-    private data = new Map<string, unknown>();
+    private readonly data = new Map<string, unknown>();
 
     /** Debug data, used if the game is configured with debugMode on */
-    private debugData = {
+    private readonly debugData = {
         frameCount: 0,
         fps: ''
     };
+
+    /** Default Canvas dimensions for use in initialization */
+    private readonly defaultCanvasDimensions = new Vec2(window.innerWidth, window.innerHeight);
+
+    /** Default ControlScheme */
+    private readonly defaultControlScheme: ControlScheme = 'keyboard';
+
+    /** Default background color */
+    private readonly defaultBackgroundColor = new Color();
 
     /**
      * Constructor. Initialise the Canvas, as well as the Renderer, EntityManager and InputManager
@@ -62,20 +72,19 @@ export class Game {
      * @param config optional configuration
      */
     constructor(private readonly config?: GameConfig) {
-        let canvas = document.getElementById(config?.canvasId ?? '') as HTMLCanvasElement | null;
-
-        if (!canvas) {
-            canvas = document.createElement('canvas');
-            document.body.append(canvas);
+        if (config?.canvasId) {
+            this.canvas = document.getElementById(config.canvasId) as HTMLCanvasElement;
+        }
+        else {
+            this.canvas = document.createElement('canvas');
+            document.body.append(this.canvas);
         }
 
-        canvas.width = config?.canvasDimensions?.x ?? window.innerWidth;
-        canvas.height = config?.canvasDimensions?.y ?? window.innerHeight;
+        this.canvas.width = config?.canvasDimensions?.x ?? this.defaultCanvasDimensions.x;
+        this.canvas.height = config?.canvasDimensions?.y ?? this.defaultCanvasDimensions.y;
 
-        this.canvas = canvas;
-
-        this.renderer = new WebGLRenderer(canvas, config?.backgroundColor ?? new Color());
-        this.inputManager = new InputManager(canvas, config?.controlScheme ?? 'keyboard');
+        this.renderer = new WebGLRenderer(this.canvas, config?.backgroundColor ?? this.defaultBackgroundColor);
+        this.inputManager = new InputManager(this.canvas, config?.controlScheme ?? this.defaultControlScheme);
         this.entityManager = new EntityManager({
             vboPrefix: 'main',
             renderer: this.renderer
@@ -98,6 +107,13 @@ export class Game {
      */
     public get height(): number {
         return this.canvas.height;
+    }
+
+    /**
+     * Getter for the Game's ControlScheme
+     */
+    public get controlScheme(): ControlScheme {
+        return this.config?.controlScheme ?? this.defaultControlScheme;
     }
 
     /**

@@ -1,8 +1,8 @@
 # Project
 
-- [ ] **Consistency:** readonly + ReadonlyArray usage
-    - [ ] constructors
-    - [ ] interfaces
+- [x] **Consistency:** readonly + ReadonlyArray usage
+    - [x] constructors
+    - [x] interfaces
 
 - [ ] **Consistency:** instance+.config.ts usage or class extension as appropriate; review/justify
     - [ ] Systems
@@ -12,11 +12,15 @@
     - [ ] Shader
     - [ ] Geometry
     - [ ] Component
+    - [ ] **Consider:** config store + pass-through-get pattern...do we even like this?
+        - ...vs config retrieve + extract
 
 - [ ] Review barelling approach
     - [ ] selectively export only the relevant public API for consumers
     - ...are resultant consumer imports good?
     - ...does it cause issues with build optimisation?
+
+- [ ] Review potentially-excessive readonly + ReadonlyArray usage
 
 - [ ] DebugMode
     - [ ] frame-by-frame execution

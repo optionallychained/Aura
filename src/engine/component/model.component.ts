@@ -8,33 +8,47 @@ import { Component } from './component';
  */
 export class Model extends Component {
 
-    /** The name of the Model */
-    public modelName: string;
-
-    /** The vertices that make up the Model */
-    public vertices: Float32Array;
-
-    /** The size of each of the Model's vertices */
-    public vertexSize: number;
-
-    /** The number of vertices the Model is made up of */
-    public vertexCount: number;
-
-    /** The GLShape of the Model */
-    public glShape: GLShape;
-
     /**
-     * Constructor. Take the Geometry to use, and extract its details into the Component
+     * Constructor. Take and store the Geometry to use
      *
      * @param geometry the Geometry to use
      */
-    constructor(geometry: Geometry) {
+    constructor(private readonly geometry: Geometry) {
         super('Model');
+    }
 
-        this.modelName = geometry.name;
-        this.vertices = geometry.vertices;
-        this.vertexSize = geometry.vertexSize;
-        this.vertexCount = geometry.vertexCount;
-        this.glShape = geometry.glShape;
+    /**
+     * Getter for the Model's name, as provided in its Geometry config
+     */
+    public get modelName(): string {
+        return this.geometry.name;
+    }
+
+    /**
+     * Getter for the Model's vertices, as provided in its Geometry config
+     */
+    public get vertices(): Float32Array {
+        return this.geometry.vertices;
+    }
+
+    /**
+     * Getter for the Model's vertexSize, as provided in its Geometry config
+     */
+    public get vertexSize(): number {
+        return this.geometry.vertexSize;
+    }
+
+    /**
+     * Getter for the Model's vertexCount, as provided in its Geometry config
+     */
+    public get vertexCount(): number {
+        return this.geometry.vertexCount;
+    }
+
+    /**
+     * Getter for the Model's GLShape, as provided in its Geometry config
+     */
+    public get glShape(): GLShape {
+        return this.geometry.glShape;
     }
 }

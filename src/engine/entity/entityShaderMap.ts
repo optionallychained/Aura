@@ -18,7 +18,7 @@ export class EntityShaderMap {
     /**
      * The internal map of Shader Variable Name => Resolution function
      */
-    private static MAP = new Map<string, EntityShaderResolver>([
+    private static readonly MAP = new Map<string, EntityShaderResolver>([
         [
             'Position',
             (e) => e.getComponent<Model>('Model').vertices

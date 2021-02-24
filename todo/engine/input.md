@@ -1,5 +1,8 @@
 # Input
 
+- [ ] **Consider:** register keyboard events on the Canvas directly?
+    - ...this doesn't immediately work in testing. Why?
+
 - [ ] Customisable 'ignoreKeys' behaviour
 
 - [ ] Mouse capture
