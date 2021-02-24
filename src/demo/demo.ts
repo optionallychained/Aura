@@ -21,8 +21,5 @@ game.addState(State2D);
 // // add the 3D State to the Game
 game.addState(state3D);
 
-// kick off the game's execution with the 2D state
-// game.start('2D');
-
 // kick off the game's execution with the 3D state
 game.start('3D');
