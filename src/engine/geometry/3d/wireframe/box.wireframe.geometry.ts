@@ -2,7 +2,7 @@ import { Geometry } from '../../geometry';
 import { GLShape } from '../../glShape.enum';
 
 /**
- * Built-in 3D Wireframe box Geometry, setting out the information required to render 3D wireframe rects
+ * Built-in 3D Wireframe box Geometry, setting out the information required to render wireframe cubes
  */
 export const BOX = new Geometry({
     name: 'box_3d_wireframe',

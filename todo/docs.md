@@ -1,5 +1,10 @@
 # Docs TODOs
 
+## General
+- [ ] Site design
+- [ ] **Consider:** API documentation integration / standard linking approach
+
+
 ## Page Content
 - [ ] Home (README?)
 - [ ] Getting Started
@@ -9,10 +14,5 @@
     - [ ] States
     - [ ] Entities and Components
     - [ ] Systems
-
-
-## General
-- [ ] Better integrate API Documentation into main site
-    - [ ] OR: standard method of linking between
-- [ ] Improve style + layout
-- [ ] Responsive styles
+    - [ ] Shaders
+    - [ ] Geometry and Models

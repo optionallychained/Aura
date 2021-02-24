@@ -1,11 +1,36 @@
-# Project TODOs
+# Project
 
-- [x] Initialise testing
-- [x] ~~Structuring for publish~~
-    - [x] ~~consider: barrels?~~
-    - [x] ~~consider: compilation target? - ESM/Common/maybe even just publish-as-TS?~~
-    - [x] ~~consider: relative vs absolute imports for engine/demo (paths/aliases)~~
-    - [x] ~~want: tree shaking for demo/consumer build~~
-- [ ] review barrelling approach
-    - [ ] is it worth it for consumer imports?
-    - [ ] does it cause issues with build optimisation? (ie do parts a game doesn't explicitly use end up in the package)
+- [ ] **Consistency:** readonly + ReadonlyArray usage
+    - [ ] constructors
+    - [ ] interfaces
+
+- [ ] **Consistency:** instance+.config.ts usage or class extension as appropriate; review/justify
+    - [ ] Systems
+    - [ ] States
+    - [ ] Game
+    - [ ] Renderer
+    - [ ] Shader
+    - [ ] Geometry
+    - [ ] Component
+
+- [ ] Review barelling approach
+    - [ ] selectively export only the relevant public API for consumers
+    - ...are resultant consumer imports good?
+    - ...does it cause issues with build optimisation?
+
+- [ ] DebugMode
+    - [ ] frame-by-frame execution
+    - [ ] granular frame data output
+    - [ ] **Consider:** on-screen controls?
+
+- [ ] **Consider/Experiment:** Save serialization system?
+
+- **Consider:** "zero config" setup:
+    - [ ] Default Systems?
+    - [ ] Default Shader registration?
+    - [ ] Default Geometry?
+
+- [ ] Mobile support
+    - [ ] device detection
+    - [ ] viewport sizing/fullscreen-by-default
+    - [ ] touch input (see Input)

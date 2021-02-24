@@ -1,5 +1,11 @@
 # Testing TODOs
 
+## General
+
+- [ ] Tests run *slow*
+- [ ] Mocking
+
+
 ## Math
 - [x] Angle
 - [x] Color
