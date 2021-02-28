@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Entity | API | ProtoGL Documentation - v0.3.3</title>
-	<meta name="description" content="Documentation for API | ProtoGL Documentation - v0.3.3">
+	<title>Entity | API | ProtoGL Documentation - v0.4.0</title>
+	<meta name="description" content="Documentation for API | ProtoGL Documentation - v0.4.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
 	<script async src="../assets/js/search.js" id="search-script"></script>
@@ -23,7 +23,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">API | ProtoGL Documentation - v0.3.3</a>
+					<a href="../index.html" class="title">API | ProtoGL Documentation - v0.4.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -52,7 +52,7 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="../modules.html">API | ProtoGL Documentation - v0.3.3</a>
+					<a href="../modules.html">API | ProtoGL Documentation - v0.4.0</a>
 				</li>
 				<li>
 					<a href="../modules/entity.html">Entity</a>
@@ -118,10 +118,15 @@
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="entity.entity-1.html#addcomponent" class="tsd-kind-icon">add<wbr>Component</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="entity.entity-1.html#addcomponents" class="tsd-kind-icon">add<wbr>Components</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="entity.entity-1.html#getcomponent" class="tsd-kind-icon">get<wbr>Component</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="entity.entity-1.html#getcomponentbyname" class="tsd-kind-icon">get<wbr>Component<wbr>ByName</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="entity.entity-1.html#hascomponent" class="tsd-kind-icon">has<wbr>Component</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="entity.entity-1.html#hascomponentwithname" class="tsd-kind-icon">has<wbr>Component<wbr>With<wbr>Name</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="entity.entity-1.html#hascomponents" class="tsd-kind-icon">has<wbr>Components</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="entity.entity-1.html#hascomponentswithnames" class="tsd-kind-icon">has<wbr>Components<wbr>With<wbr>Names</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="entity.entity-1.html#removecomponent" class="tsd-kind-icon">remove<wbr>Component</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="entity.entity-1.html#removecomponentbyname" class="tsd-kind-icon">remove<wbr>Component<wbr>ByName</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="entity.entity-1.html#removecomponents" class="tsd-kind-icon">remove<wbr>Components</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="entity.entity-1.html#removecomponentsbyname" class="tsd-kind-icon">remove<wbr>Components<wbr>ByName</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="entity.entity-1.html#tick" class="tsd-kind-icon">tick</a></li>
 							</ul>
 						</section>
@@ -140,7 +145,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/af7b1dd/src/engine/entity/entity.ts#L19">entity/entity.ts:19</a></li>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/e00c907/src/engine/entity/entity.ts#L20">src/engine/entity/entity.ts:20</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -170,7 +175,7 @@
 					<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = ...</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/af7b1dd/src/engine/entity/entity.ts#L16">entity/entity.ts:16</a></li>
+							<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/e00c907/src/engine/entity/entity.ts#L17">src/engine/entity/entity.ts:17</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -192,7 +197,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/af7b1dd/src/engine/entity/entity.ts#L41">entity/entity.ts:41</a></li>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/e00c907/src/engine/entity/entity.ts#L38">src/engine/entity/entity.ts:38</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -218,12 +223,12 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/af7b1dd/src/engine/entity/entity.ts#L76">entity/entity.ts:76</a></li>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/e00c907/src/engine/entity/entity.ts#L102">src/engine/entity/entity.ts:102</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Add a given Component to the Entity</p>
+									<p>Add a Component to the Entity</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -249,12 +254,12 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/af7b1dd/src/engine/entity/entity.ts#L85">entity/entity.ts:85</a></li>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/e00c907/src/engine/entity/entity.ts#L111">src/engine/entity/entity.ts:111</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Add a given list of Components to the Entity</p>
+									<p>Add a list of Components to the Entity</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -274,27 +279,67 @@
 					<a name="getcomponent" class="tsd-anchor"></a>
 					<h3>get<wbr>Component</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Component&lt;T&gt;<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Component&lt;T&gt;<span class="tsd-signature-symbol">(</span>component<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ClassType</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/af7b1dd/src/engine/entity/entity.ts#L67">entity/entity.ts:67</a></li>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/e00c907/src/engine/entity/entity.ts#L62">src/engine/entity/entity.ts:62</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Getter for the named Component</p>
+									<p>Get a Component from the Entity by Component class</p>
 								</div>
-								<p>// TODO error handling for Components</p>
 							</div>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
 								<li>
 									<h4>T<span class="tsd-signature-symbol">: </span><a href="component.component-1.html" class="tsd-signature-type" data-tsd-kind="Class">Component</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
 									<div class="tsd-comment tsd-typography">
-										<p>the type of the retrieved Component</p>
+										<p>(autoinferred) the type of the Component to retrieve</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>component: <span class="tsd-signature-type">ClassType</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the Component class to retrieve</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+							<p>the retrieved Component</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+					<a name="getcomponentbyname" class="tsd-anchor"></a>
+					<h3>get<wbr>Component<wbr>ByName</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Component<wbr>ByName&lt;T&gt;<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/e00c907/src/engine/entity/entity.ts#L84">src/engine/entity/entity.ts:84</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Get a Component from the Entity by Component name</p>
+								</div>
+							</div>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>T<span class="tsd-signature-symbol">: </span><a href="component.component-1.html" class="tsd-signature-type" data-tsd-kind="Class">Component</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
+									<div class="tsd-comment tsd-typography">
+										<p>the type of the Component to retrieve</p>
 									</div>
 								</li>
 							</ul>
@@ -316,20 +361,52 @@
 					<a name="hascomponent" class="tsd-anchor"></a>
 					<h3>has<wbr>Component</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">has<wbr>Component<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+						<li class="tsd-signature tsd-kind-icon">has<wbr>Component<span class="tsd-signature-symbol">(</span>component<span class="tsd-signature-symbol">: </span><a href="component.component-1.html" class="tsd-signature-type" data-tsd-kind="Class">Component</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/af7b1dd/src/engine/entity/entity.ts#L124">entity/entity.ts:124</a></li>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/e00c907/src/engine/entity/entity.ts#L164">src/engine/entity/entity.ts:164</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Check if the Entity has the named Component</p>
+									<p>Check if the Entity has a Component by Component class</p>
 								</div>
-								<p>// TODO this doesn&#39;t appear to work in the distribution version of the demo. Why?</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>component: <a href="component.component-1.html" class="tsd-signature-type" data-tsd-kind="Class">Component</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the Component to check</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+							<p>a boolean indicating whether or not the Entity has the Component</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="hascomponentwithname" class="tsd-anchor"></a>
+					<h3>has<wbr>Component<wbr>With<wbr>Name</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">has<wbr>Component<wbr>With<wbr>Name<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/e00c907/src/engine/entity/entity.ts#L194">src/engine/entity/entity.ts:194</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the Entity has a Component by Component name</p>
+								</div>
+								<p>// TODO this doesn&#39;t appear to work in dist. Why?</p>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -349,18 +426,50 @@
 					<a name="hascomponents" class="tsd-anchor"></a>
 					<h3>has<wbr>Components</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">has<wbr>Components<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>names<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+						<li class="tsd-signature tsd-kind-icon">has<wbr>Components<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>components<span class="tsd-signature-symbol">: </span><a href="component.component-1.html" class="tsd-signature-type" data-tsd-kind="Class">Component</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/af7b1dd/src/engine/entity/entity.ts#L135">entity/entity.ts:135</a></li>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/e00c907/src/engine/entity/entity.ts#L175">src/engine/entity/entity.ts:175</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Check if the Entity has the named Components</p>
+									<p>Check if the Entity has a list of Components by Component class</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>components: <a href="component.component-1.html" class="tsd-signature-type" data-tsd-kind="Class">Component</a><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the Components to check</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+							<p>a boolean indicating whether or not the Entity has all of the Components</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="hascomponentswithnames" class="tsd-anchor"></a>
+					<h3>has<wbr>Components<wbr>With<wbr>Names</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">has<wbr>Components<wbr>With<wbr>Names<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>names<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/e00c907/src/engine/entity/entity.ts#L205">src/engine/entity/entity.ts:205</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the Entity has a list of Components by Component name</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -381,20 +490,50 @@
 					<a name="removecomponent" class="tsd-anchor"></a>
 					<h3>remove<wbr>Component</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">remove<wbr>Component<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">remove<wbr>Component<span class="tsd-signature-symbol">(</span>component<span class="tsd-signature-symbol">: </span><a href="component.component-1.html" class="tsd-signature-type" data-tsd-kind="Class">Component</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/af7b1dd/src/engine/entity/entity.ts#L98">entity/entity.ts:98</a></li>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/e00c907/src/engine/entity/entity.ts#L122">src/engine/entity/entity.ts:122</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Remove the named Component from the Entity</p>
+									<p>Remove a Component from the Entity by Component class</p>
 								</div>
-								<p>// TODO error handling for Components</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>component: <a href="component.component-1.html" class="tsd-signature-type" data-tsd-kind="Class">Component</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the Component to remove</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="removecomponentbyname" class="tsd-anchor"></a>
+					<h3>remove<wbr>Component<wbr>ByName</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">remove<wbr>Component<wbr>ByName<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/e00c907/src/engine/entity/entity.ts#L142">src/engine/entity/entity.ts:142</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Remove a Component from the Entity by Component name</p>
+								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -413,20 +552,50 @@
 					<a name="removecomponents" class="tsd-anchor"></a>
 					<h3>remove<wbr>Components</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">remove<wbr>Components<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>names<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">remove<wbr>Components<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>components<span class="tsd-signature-symbol">: </span><a href="component.component-1.html" class="tsd-signature-type" data-tsd-kind="Class">Component</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/af7b1dd/src/engine/entity/entity.ts#L109">entity/entity.ts:109</a></li>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/e00c907/src/engine/entity/entity.ts#L131">src/engine/entity/entity.ts:131</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Remove the named Components from the Entity</p>
+									<p>Remove a list of Components from the Entity by Component class</p>
 								</div>
-								<p>// TODO error handling for Components</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>components: <a href="component.component-1.html" class="tsd-signature-type" data-tsd-kind="Class">Component</a><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the Components to remove</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="removecomponentsbyname" class="tsd-anchor"></a>
+					<h3>remove<wbr>Components<wbr>ByName</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">remove<wbr>Components<wbr>ByName<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>names<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/e00c907/src/engine/entity/entity.ts#L151">src/engine/entity/entity.ts:151</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Remove a list of Components from the Entity by Component name</p>
+								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -451,7 +620,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/af7b1dd/src/engine/entity/entity.ts#L52">entity/entity.ts:52</a></li>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/e00c907/src/engine/entity/entity.ts#L49">src/engine/entity/entity.ts:49</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -539,17 +708,32 @@
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
 								<a href="entity.entity-1.html#getcomponent" class="tsd-kind-icon">get<wbr>Component</a>
 							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+								<a href="entity.entity-1.html#getcomponentbyname" class="tsd-kind-icon">get<wbr>Component<wbr>ByName</a>
+							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="entity.entity-1.html#hascomponent" class="tsd-kind-icon">has<wbr>Component</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="entity.entity-1.html#hascomponentwithname" class="tsd-kind-icon">has<wbr>Component<wbr>With<wbr>Name</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="entity.entity-1.html#hascomponents" class="tsd-kind-icon">has<wbr>Components</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="entity.entity-1.html#hascomponentswithnames" class="tsd-kind-icon">has<wbr>Components<wbr>With<wbr>Names</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="entity.entity-1.html#removecomponent" class="tsd-kind-icon">remove<wbr>Component</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="entity.entity-1.html#removecomponentbyname" class="tsd-kind-icon">remove<wbr>Component<wbr>ByName</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="entity.entity-1.html#removecomponents" class="tsd-kind-icon">remove<wbr>Components</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="entity.entity-1.html#removecomponentsbyname" class="tsd-kind-icon">remove<wbr>Components<wbr>ByName</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="entity.entity-1.html#tick" class="tsd-kind-icon">tick</a>
@@ -561,17 +745,11 @@
 					<li class=" tsd-kind-class tsd-parent-kind-namespace">
 						<a href="entity.entitymanager.html" class="tsd-kind-icon">Entity<wbr>Manager</a>
 					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-namespace">
-						<a href="entity.entityshadermap.html" class="tsd-kind-icon">Entity<wbr>Shader<wbr>Map</a>
-					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-namespace">
 						<a href="../interfaces/entity.entityconfig.html" class="tsd-kind-icon">Entity<wbr>Config</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-namespace">
 						<a href="../interfaces/entity.entitymanagerconfig.html" class="tsd-kind-icon">Entity<wbr>Manager<wbr>Config</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-namespace">
-						<a href="../modules/entity.html#entityshaderresolver" class="tsd-kind-icon">Entity<wbr>Shader<wbr>Resolver</a>
 					</li>
 				</ul>
 			</nav>
