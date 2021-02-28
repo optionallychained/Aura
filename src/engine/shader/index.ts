@@ -1,3 +1,5 @@
+export * from './entityShaderVariableResolver.type';
+export * from './shaderVariableResolver';
 export * from './attributeArray.type';
 export * from './uniformArray.type';
 export * from './uniformType.enum';

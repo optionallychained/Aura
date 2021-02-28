@@ -1,10 +1,9 @@
 import { EntityManager } from '../entity';
-import { EntityShaderMap } from '../entity/entityShaderMap';
-import { EntityShaderResolver } from '../entity/entityShaderResolver.type';
 import { InputManager } from '../input';
 import { ControlScheme } from '../input/controlScheme.type';
 import { Color, Vec2 } from '../math';
 import { WebGLRenderer } from '../screen';
+import { EntityShaderVariableResolver, ShaderVariableResolver } from '../shader';
 import { ShaderProgram } from '../shader/program';
 import { State } from '../state';
 import { System } from '../system';
@@ -159,7 +158,7 @@ export class Game {
             throw new ProtoGLError({
                 class: 'Game',
                 method: 'switchToState',
-                message: `Could not switch to State '${name}'`
+                message: `Failed to switch to State '${name}'`
             });
         }
     }
@@ -248,13 +247,13 @@ export class Game {
      * Facilitates extension of the system's Shader and Component libraries by extending the automatic retrieval of Entity data for piping
      *   to the GPU
      *
-     * Separated from overrideEntityShaderMapping() so as to avoid accidental consumer mistakes in changing built-in mappings
+     * Separated from overrideEntityShaderResolver() so as to avoid accidental consumer mistakes in changing built-in mappings
      *
      * @param variableName the name of the shader variable to register
      * @param resolve the EntityShaderResolver which will retrieve the relevant value from the Entity
      */
-    public registerEntityShaderMapping(variableName: string, resolve: EntityShaderResolver): void {
-        EntityShaderMap.registerEntityShaderMapping(variableName, resolve);
+    public registerEntityShaderResolver(variableName: string, resolve: EntityShaderVariableResolver): void {
+        ShaderVariableResolver.registerEntityShaderResolver(variableName, resolve);
     }
 
     /**
@@ -263,13 +262,13 @@ export class Game {
      * Facilitates extension of the system's Shader and Component libraries by extending the automatic retrieval of Entity data for piping
      *   to the GPU
      *
-     * Separated from registerEntityShaderMapping() so as to avoid accidental consumer mistakes in changing built-in mappings
+     * Separated from registerEntityShaderResolver() so as to avoid accidental consumer mistakes in changing built-in mappings
      *
      * @param variableName the name of the shader variable to override
      * @param resolve the EntityShaderResolver which will retrieve the relevant value from the Entity
      */
-    public overrideEntityShaderMapping(variableName: string, resolve: EntityShaderResolver): void {
-        EntityShaderMap.overrideEntityShaderMapping(variableName, resolve);
+    public overrideEntityShaderResolver(variableName: string, resolve: EntityShaderVariableResolver): void {
+        ShaderVariableResolver.overrideEntityShaderResolver(variableName, resolve);
     }
 
     /**

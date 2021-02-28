@@ -1,5 +1,6 @@
-import { EntityShaderMap } from '../entity';
+import { ProtoGLError } from '../core';
 import { Color } from '../math';
+import { ShaderVariableResolver } from '../shader';
 import { ShaderProgram } from '../shader/program';
 import { UniformType } from '../shader/uniformType.enum';
 import { RenderingMode } from './renderingMode.type';
@@ -89,7 +90,11 @@ export class WebGLRenderer {
         const gl = canvas.getContext('webgl');
 
         if (!gl) {
-            throw Error('No WebGL Context support');
+            throw new ProtoGLError({
+                class: 'WebGLRenderer',
+                method: 'construct',
+                message: 'Failed to retrieve WebGL Canvas context'
+            });
         }
 
         this.gl = gl;
@@ -122,8 +127,11 @@ export class WebGLRenderer {
 
         const buffer = gl.createBuffer();
         if (!buffer) {
-            // TODO
-            throw Error('Could not create buffer');
+            throw new ProtoGLError({
+                class: 'WebGLRenderer',
+                method: 'createVBO',
+                message: `Failed to create buffer with name '${name}'`
+            });
         }
 
         this.vbos.set(name, buffer);
@@ -162,8 +170,11 @@ export class WebGLRenderer {
         // create the shader program
         const program = gl.createProgram();
         if (!program) {
-            // TODO
-            throw Error('Failed to create Shader Program');
+            throw new ProtoGLError({
+                class: 'WebGLRenderer',
+                method: 'createShaderProgram',
+                message: `Failed to create Shader Program with name '${shader.name}'`
+            });
         }
 
         // link the program
@@ -180,7 +191,11 @@ export class WebGLRenderer {
             gl.deleteShader(fragmentCompiled);
             gl.deleteShader(vertexCompiled);
 
-            throw Error(`Failed to link shader program [${error ?? ''}]`);
+            throw new ProtoGLError({
+                class: 'WebGLRenderer',
+                method: 'createShaderProgram',
+                message: `Failed to link Shader Program with name '${shader.name}' : [${error ?? ''}]`
+            });
         }
 
         // perform one-time setup of the shader program's attribute and uniform locations
@@ -219,7 +234,7 @@ export class WebGLRenderer {
                     const location = uniform.location;
 
                     if (location) {
-                        this.loadUniform(location, uniform.type, EntityShaderMap.getShaderValueForEntity(uniform.name, e));
+                        this.loadUniform(location, uniform.type, ShaderVariableResolver.resolveShaderVariableForEntity(uniform.name, e));
                     }
                 }
 
@@ -293,11 +308,16 @@ export class WebGLRenderer {
     ): WebGLShader {
 
         const { gl } = this;
+        const typeString = type === WebGLRenderingContext['VERTEX_SHADER'] ? 'Vertex Shader' : 'Fragment Shader';
 
         // create the shader
         const shader = gl.createShader(type);
         if (!shader) {
-            throw Error('Failed to create shader');
+            throw new ProtoGLError({
+                class: 'WebGLRenderer',
+                method: 'compileShader',
+                message: `Failed to create ${typeString} with source : [${src}]`
+            });
         }
 
         // compile the shader source
@@ -311,7 +331,11 @@ export class WebGLRenderer {
 
             gl.deleteShader(shader);
 
-            throw Error(`Failed to compile shader [${error ?? ''}]`);
+            throw new ProtoGLError({
+                class: 'WebGLRenderer',
+                method: 'compileShader',
+                message: `Failed to compile ${typeString} : [${error ?? ''}]`
+            });
         }
 
         return shader;
@@ -374,7 +398,11 @@ export class WebGLRenderer {
 
         const program = this.shaderPrograms.get(name);
         if (!program) {
-            throw Error('Could not use program');
+            throw new ProtoGLError({
+                class: 'WebGLRenderer',
+                method: 'useShaderProgram',
+                message: `Failed to switch to Shader Program with name '${name}'`
+            });
         }
 
         gl.useProgram(program.program);
@@ -395,7 +423,11 @@ export class WebGLRenderer {
         const buffer = this.vbos.get(vbo.name);
 
         if (!buffer) {
-            throw Error('Failed to bind buffer');
+            throw new ProtoGLError({
+                class: 'WebGLRenderer',
+                method: 'useVBO',
+                message: `Failed to switch to VBO with name '${vbo.name}'`
+            });
         }
 
         gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
@@ -455,9 +487,12 @@ export class WebGLRenderer {
                 break;
 
             default:
-                // TODO this'll only ever happen if an application is using an extension of UniformType which is not explicitly supported
-                //   it might be nice to make UniformType extendable - or, just flesh it out as a built-in with every possible uniform type
-                throw Error(`Could not load uniform with value ${value.toString()}`);
+                // TODO avoid the need for this entirely by just fleshing out UniformType to include all possible types
+                throw new ProtoGLError({
+                    class: 'WebGLRenderer',
+                    method: 'loadUniform',
+                    message: `Failed to upload uniform to location '${location.toString()}' with value '${value.toString()}`
+                });
         }
     }
 }

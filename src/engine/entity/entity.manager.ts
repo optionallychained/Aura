@@ -1,8 +1,8 @@
 import { Model, Shader } from '../component';
 import { VBOConfig } from '../screen';
+import { ShaderVariableResolver } from '../shader';
 import { Entity } from './entity';
 import { EntityManagerConfig } from './entity.manager.config';
-import { EntityShaderMap } from './entityShaderMap';
 
 /**
  * Internal-use utility type for representing Entity list change hints to the vertex compilation routine
@@ -420,7 +420,7 @@ export class EntityManager {
                         // process every attribute for every vertex of the Entity
                         for (const attr of shaderInfo.vertex.attributes) {
                             // TODO entity change detection: recompile dynamic values only as necessary
-                            let value = EntityShaderMap.getShaderValueForEntity(attr.name, e);
+                            let value = ShaderVariableResolver.resolveShaderVariableForEntity(attr.name, e);
 
                             if (typeof value === 'number') {
                                 // handle numerical values by wrapping them in an array for setting into vertices
