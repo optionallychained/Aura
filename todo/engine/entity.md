@@ -6,7 +6,7 @@
 
 - [ ] Multiple Entity Managers for disparate purposes - World, UI, Text?
 
-- [ ] **Consider/Experiment:** class/prototype-based getComponent/hasComponent
+- [x] **Consider/Experiment:** class/prototype-based getComponent/hasComponent
 
 - [ ] **EntityManager optimisation**
     - [ ] Granular filter cache invalidation

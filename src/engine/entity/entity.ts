@@ -25,10 +25,6 @@ export class Entity {
      * @param config entity configuration
      */
     constructor(private readonly config: EntityConfig) {
-        // TODO initialization-time verification by way of EntityShaderMap and shader registrations that:
-        //   - an Entity can be rendered with its shader based on its components
-        //     - ...working off the knowledge of which Components are required to source which shader attributes+uniforms
-        //   - its Model is compatible with its Shader (?)
         if (config.components) {
             this.addComponents(...config.components);
         }
@@ -69,7 +65,7 @@ export class Entity {
             throw new ProtoGLError({
                 class: 'Entity',
                 method: 'getComponent',
-                message: `Failed to retrieve Component '${component.name}' for Entity with tag ${this.tag}`
+                message: `Failed to retrieve Component '${component.name}' for Entity with tag '${this.tag}'`
             });
         }
 
@@ -91,7 +87,7 @@ export class Entity {
             throw new ProtoGLError({
                 class: 'Entity',
                 method: 'getComponentByName',
-                message: `Failed to retrieve Component '${name}' for Entity with tag ${this.tag}`
+                message: `Failed to retrieve Component '${name}' for Entity with tag '${this.tag}'`
             });
         }
 

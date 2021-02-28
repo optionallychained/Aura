@@ -158,7 +158,7 @@ export class Game {
             throw new ProtoGLError({
                 class: 'Game',
                 method: 'switchToState',
-                message: `Failed to switch to State '${name}'`
+                message: `Failed to switch to State '${name}' : State does not exist`
             });
         }
     }
@@ -186,8 +186,6 @@ export class Game {
     /**
      * Remove a System from the Game
      *
-     * // TODO error handling for Systems
-     *
      * @param name the name of the System to remove
      */
     public removeSystem(name: string): void {
@@ -196,8 +194,6 @@ export class Game {
 
     /**
      * Remove a set of Systems from the Game
-     *
-     * // TODO error handling for Systems
      *
      * @param name the names of the Systems to remove
      */
@@ -210,10 +206,12 @@ export class Game {
     /**
      * Setter for generic Game data, useful for storing values which should be accessible to Entities, Systems or States
      *
-     * @param key the name of the data to store
-     * @param value the value of the data to store
+     * Requires a typeparam for no other reason than visual similarity to getData() and for the encouragement of typesafe thinking
      *
      * @typeparam T the type of the incoming data
+     *
+     * @param key the name of the data to store
+     * @param value the value of the data to store
      */
     public setData<T>(key: string, value: T): void {
         this.data.set(key, value);
@@ -222,14 +220,25 @@ export class Game {
     /**
      * Getter for generic Game data
      *
-     * // TODO error handling for Data
+     * @typeparam T the type of the retrieved data
      *
      * @param key the name of the data to retrieve
      *
-     * @typeparam T the type of the retrieved data
+     * @returns the retrieved data
      */
     public getData<T>(key: string): T {
-        return this.data.get(key) as T;
+        const data = this.data.get(key);
+
+        if (!data) {
+            // throw an error if the data is not found on the Game to allow type safety + simplistic no-questions consumer calls
+            throw new ProtoGLError({
+                class: 'Game',
+                method: 'getData',
+                message: `Failed to retrieve data with key '${key}'`
+            });
+        }
+
+        return data as T;
     }
 
     /**

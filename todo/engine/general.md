@@ -1,13 +1,12 @@
 # General
 
-- [ ] Unified error handling
-    - [ ] Entity
+- [x] Unified error handling
+    - [x] Entity
         - [x] Component management
-        - [ ] Construction verification
-    - [ ] Game
-        - [ ] System management
-        - [ ] Data
-        - [ ] State management
+    - [x] Game
+        - [x] System management
+        - [x] Data
+        - [x] State management
     - [x] WebGLRenderer
         - [x] GL API failures
     - [x] ShaderVariableResolver
@@ -15,8 +14,6 @@
         - [x] No value
         - [x] Register + Override misuse
         - [x] look at *Resolver.type in conjunction with decision on Entity->Component management; tweak handling as appropriate
-    - [ ] State
-        - [ ] Invalid Transition
     
 
 - [ ] Defined/configurable asset (image/sound) detection + loading
