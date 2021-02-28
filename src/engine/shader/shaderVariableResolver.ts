@@ -22,23 +22,23 @@ export class ShaderVariableResolver {
     private static readonly MAPPINGS = new Map<string, EntityShaderVariableResolver>([
         [
             'Position',
-            (e) => e.getComponent<Model>('Model').vertices
+            (e) => e.getComponent(Model).vertices
         ],
         [
             'Transform2D',
-            (e) => e.getComponent<Transform2D>('Transform2D').compute().float32Array
+            (e) => e.getComponent(Transform2D).compute().float32Array
         ],
         [
             'Transform3D',
-            (e) => e.getComponent<Transform3D>('Transform3D').compute().float32Array
+            (e) => e.getComponent(Transform3D).compute().float32Array
         ],
         [
             'Color',
-            (e) => e.getComponent<FlatColor>('FlatColor').color.float32Array
+            (e) => e.getComponent(FlatColor).color.float32Array
         ],
         [
             'VertexColor',
-            (e) => e.getComponent<MultiColor>('MultiColor').nextColor().float32Array
+            (e) => e.getComponent(MultiColor).nextColor().float32Array
         ]
     ]);
 
@@ -64,20 +64,7 @@ export class ShaderVariableResolver {
             });
         }
 
-        const value = resolve(entity);
-
-        if (value === undefined || value === null) {
-            throw new ProtoGLError({
-                class: 'ShaderVariableResolver',
-                method: 'resolveShaderVariableForEntity',
-                message: `
-                    Failed to retrieve value for shader variable name '${name}' from Entity with tag '${entity.tag}' : resolver returned
-                    nothing
-                `
-            });
-        }
-
-        return value;
+        return resolve(entity);
     }
 
     /**

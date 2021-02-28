@@ -1,4 +1,5 @@
 import { Component } from '../component';
+import { ProtoGLError } from '../core';
 import { EntityConfig } from './entity.config';
 
 /**
@@ -54,22 +55,51 @@ export class Entity {
     }
 
     /**
-     * Getter for the named Component
+     * Get a Component from the Entity by Component class
      *
-     * // TODO error handling for Components
+     * @typeparam T (autoinferred) the type of the Component to retrieve
      *
-     * @param name the name of the Component to retrieve
-     *
-     * @typeparam T the type of the retrieved Component
+     * @param component the Component class to retrieve
      *
      * @returns the retrieved Component
      */
-    public getComponent<T extends Component>(name: string): T {
+    public getComponent<T extends Component>(component: ClassType<T>): T {
+        // throw an error if the Component is not found on the Entity to allow type safety + simplistic no-questions consumer calls
+        if (!this.hasComponent(component)) {
+            throw new ProtoGLError({
+                class: 'Entity',
+                method: 'getComponent',
+                message: `Failed to retrieve Component '${component.name}' for Entity with tag ${this.tag}`
+            });
+        }
+
+        return this.components.get(component.name) as T;
+    }
+
+    /**
+     * Get a Component from the Entity by Component name
+     *
+     * @typeparam T the type of the Component to retrieve
+     *
+     * @param name the name of the Component to retrieve
+     *
+     * @returns the retrieved Component
+     */
+    public getComponentByName<T extends Component>(name: string): T {
+        // throw an error if the Component is not found on the Entity to allow type safety + simplistic no-questions consumer calls
+        if (!this.hasComponentWithName(name)) {
+            throw new ProtoGLError({
+                class: 'Entity',
+                method: 'getComponentByName',
+                message: `Failed to retrieve Component '${name}' for Entity with tag ${this.tag}`
+            });
+        }
+
         return this.components.get(name) as T;
     }
 
     /**
-     * Add a given Component to the Entity
+     * Add a Component to the Entity
      *
      * @param component the Component to add
      */
@@ -78,7 +108,7 @@ export class Entity {
     }
 
     /**
-     * Add a given list of Components to the Entity
+     * Add a list of Components to the Entity
      *
      * @param components the Components to add
      */
@@ -89,52 +119,96 @@ export class Entity {
     }
 
     /**
-     * Remove the named Component from the Entity
+     * Remove a Component from the Entity by Component class
      *
-     * // TODO error handling for Components
-     *
-     * @param name the name of the Component to remove
+     * @param component the Component to remove
      */
-    public removeComponent(name: string): void {
-        this.components.delete(name);
+    public removeComponent(component: Component): void {
+        this.components.delete(component.name);
     }
 
     /**
-     * Remove the named Components from the Entity
+     * Remove a list of Components from the Entity by Component class
      *
-     * // TODO error handling for Components
-     *
-     * @param names the names of the Components to remove
+     * @param components the Components to remove
      */
-    public removeComponents(...names: Array<string>): void {
-        for (const c of names) {
+    public removeComponents(...components: Array<Component>): void {
+        for (const c of components) {
             this.removeComponent(c);
         }
     }
 
     /**
-     * Check if the Entity has the named Component
+     * Remove a Component from the Entity by Component name
      *
-     * // TODO this doesn't appear to work in the distribution version of the demo. Why?
+     * @param name the name of the Component to remove
+     */
+    public removeComponentByName(name: string): void {
+        this.components.delete(name);
+    }
+
+    /**
+     * Remove a list of Components from the Entity by Component name
+     *
+     * @param names the names of the Components to remove
+     */
+    public removeComponentsByName(...names: Array<string>): void {
+        for (const n of names) {
+            this.removeComponentByName(n);
+        }
+    }
+
+    /**
+     * Check if the Entity has a Component by Component class
+     *
+     * @param component the Component to check
+     *
+     * @returns a boolean indicating whether or not the Entity has the Component
+     */
+    public hasComponent(component: Component): boolean {
+        return this.components.has(component.name);
+    }
+
+    /**
+     * Check if the Entity has a list of Components by Component class
+     *
+     * @param components the Components to check
+     *
+     * @returns a boolean indicating whether or not the Entity has all of the Components
+     */
+    public hasComponents(...components: Array<Component>): boolean {
+        for (const c of components) {
+            if (!this.hasComponent(c)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Check if the Entity has a Component by Component name
+     *
+     * // TODO this doesn't appear to work in dist. Why?
      *
      * @param name the name of the Component to check
      *
      * @returns a boolean indicating whether or not the Entity has the named Component
      */
-    public hasComponent(name: string): boolean {
+    public hasComponentWithName(name: string): boolean {
         return this.components.has(name);
     }
 
     /**
-     * Check if the Entity has the named Components
+     * Check if the Entity has a list of Components by Component name
      *
      * @param names the names of the Components to check
      *
      * @returns a boolean indicating whether or not the Entity has all of the named Components
      */
-    public hasComponents(...names: Array<string>): boolean {
-        for (const c of names) {
-            if (!this.hasComponent(c)) {
+    public hasComponentsWithNames(...names: Array<string>): boolean {
+        for (const n of names) {
+            if (!this.hasComponentWithName(n)) {
                 return false;
             }
         }

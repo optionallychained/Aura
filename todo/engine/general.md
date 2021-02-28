@@ -1,14 +1,25 @@
 # General
 
-- [ ] Defined/configurable asset (image/sound) detection + loading
-
 - [ ] Unified error handling
-    - ...Entity Components
-    - ...States + switching
-    - ...GL Errors
-    - ...System add/remove
-    - ...EntityAttributeMap
-    - ...etc
+    - [ ] Entity
+        - [x] Component management
+        - [ ] Construction verification
+    - [ ] Game
+        - [ ] System management
+        - [ ] Data
+        - [ ] State management
+    - [x] WebGLRenderer
+        - [x] GL API failures
+    - [x] ShaderVariableResolver
+        - [x] Resolver not found
+        - [x] No value
+        - [x] Register + Override misuse
+        - [x] look at *Resolver.type in conjunction with decision on Entity->Component management; tweak handling as appropriate
+    - [ ] State
+        - [ ] Invalid Transition
+    
+
+- [ ] Defined/configurable asset (image/sound) detection + loading
 
 - [ ] **Consider:** Observables for general use
     - ...see Input consideration

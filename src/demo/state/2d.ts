@@ -44,7 +44,7 @@ const rotateAndScale = (game: Core.Game): void => {
     const scale = new Vec2(scaleFactor, scaleFactor);
 
     for (const e of game.entityManager.filterEntitiesByTags('rect', 'triangle', 'triangleWire', 'rectWire')) {
-        const transform = e.getComponent<Component.TwoD.Transform2D>('Transform2D');
+        const transform = e.getComponent(Component.TwoD.Transform2D);
 
         transform.scale(scale);
         transform.rotate(rotations[i]);

@@ -146,7 +146,7 @@ export class EntityManager {
 
                 if (entities.length && vbo) {
                     // pull out the shader info once from the first Entity, as the shader is guaranteed to be the same for all
-                    const { programName } = entities[0].getComponent<Shader>('Shader');
+                    const { programName } = entities[0].getComponent(Shader);
 
                     this.config.renderer.render({
                         vbo,
@@ -170,7 +170,8 @@ export class EntityManager {
      * @returns the list of Entities with the Component
      */
     public filterEntitiesByComponent(component: string): Array<Entity> {
-        return this.memoizeFilter(component, (e) => e.hasComponent(component))
+        // TODO by class
+        return this.memoizeFilter(component, (e) => e.hasComponentWithName(component))
     }
 
     /**
@@ -181,7 +182,8 @@ export class EntityManager {
      * @returns the list of Entities with the Components
      */
     public filterEntitiesByComponents(...components: Array<string>): Array<Entity> {
-        return this.memoizeFilter(components.toString(), (e) => e.hasComponents(...components));
+        // TODO by class
+        return this.memoizeFilter(components.toString(), (e) => e.hasComponentsWithNames(...components));
     }
 
     /**
@@ -195,7 +197,8 @@ export class EntityManager {
      * @returns the list of Entities from the source with the Components
      */
     public filterEntitiesByComponentsFromSource(source: Array<Entity>, filterId: string, ...components: Array<string>): Array<Entity> {
-        return this.memoizeFilter(components.toString(), (e) => e.hasComponents(...components), filterId, source);
+        // TODO by class
+        return this.memoizeFilter(components.toString(), (e) => e.hasComponentsWithNames(...components), filterId, source);
     }
 
     /**
@@ -231,8 +234,8 @@ export class EntityManager {
             const changes: EntityChanges = [];
 
             for (const e of this.addList) {
-                const shader = e.getComponent<Shader>('Shader');
-                const model = e.getComponent<Model>('Model');
+                const shader = e.getComponent(Shader);
+                const model = e.getComponent(Model);
 
                 // grouped Entities are for optimising rendering; if an Entity lacks either a Shader or a Model, it is implicitly not
                 //   renderable
@@ -305,8 +308,8 @@ export class EntityManager {
             const changes: EntityChanges = [];
 
             for (const e of this.removeList) {
-                const shader = e.getComponent<Shader>('Shader');
-                const model = e.getComponent<Model>('Model');
+                const shader = e.getComponent(Shader);
+                const model = e.getComponent(Model);
 
                 // grouped Entities are for optimising rendering; if an Entity lacks either a Shader or a Model, it will not be in the
                 //   renderableEntities group
@@ -392,8 +395,8 @@ export class EntityManager {
                 }
 
                 // pull out the shader and model info once from the first Entity, as they're guaranteed to be the same for all
-                const shaderInfo = entities[0].getComponent<Shader>('Shader');
-                const modelInfo = entities[0].getComponent<Model>('Model');
+                const shaderInfo = entities[0].getComponent(Shader);
+                const modelInfo = entities[0].getComponent(Model);
 
                 // retrieve nominal information relating to all the Entities
                 const { glShape, vertexCount } = modelInfo;

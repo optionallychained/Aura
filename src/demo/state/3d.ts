@@ -40,7 +40,7 @@ const rotateAndScale = (game: Core.Game): void => {
     const scale = new Vec3(scaleFactor, scaleFactor, scaleFactor);
 
     for (const e of game.entityManager.filterEntitiesByTags('cube', 'cubeWire')) {
-        const transform = e.getComponent<Component.ThreeD.Transform3D>('Transform3D');
+        const transform = e.getComponent(Component.ThreeD.Transform3D);
 
         transform.scale(scale);
         transform.rotate(rotations[i]);
