@@ -2,10 +2,6 @@
 
 - **Optimisation/fundamentals:**
     - [ ] Index/Element Arrays
-    - [ ] *bindAttribLocation*
-        - ...bind all known attributes (EntityShaderMap) at ShaderProgram init
-        - ...explore how this improves vertexAttribPointer - at VBO *init*, not *switch*?
-        - ...maybe removed need for render-per-shader+model, in favour of render-per-shader?
 
 - [ ] Fullscreen
 
@@ -28,4 +24,13 @@
 - **Long-term:**
     - [ ] WebGL 2.0 as preferred context, w/ 1.0 as fallback
         - ...Vertex Array Objects over VBOs
-        - ...GLSL upgrade - split shader implementations
+        - ...GLSL upgrade - split shader implementations?
+    - **Re-evaluate EntityManager/WebGLRenderer relationship:**
+    - [ ] EntityManager/WebGLRenderer strong coupling by way of VBOs + ShaderPrograms
+        - ...maybe unpickable with WebGL2.0/VAOs
+    - [ ] EntityManager shader+model VBO provisioning - can we just go by shader?
+        - ...maybe unpickable with WebGL2.0/VAOs
+    - [ ] *bindAttribLocation*
+        - ...investigate value in binding all known attributes (ShaderVariableResolver) at shaderProgram init
+        - ...does this allow for movement of enableVertexAttribArray/vertexAttribPointer from useVBO() to createVBO?
+        - ...maybe leave this and related work on optimising vertex buffers to WebGL2.0/VAOs

@@ -18,6 +18,8 @@
         - [ ] Render entire batches only as necessary?
         - [ ] ...memoization of EntityShaderMap value resolutions?
 
+    - [ ] Potential optimisations alongside long-term WebGLRenderer to-dos
+
 - [ ] **Consider/Experiment:** optimisations for Transform[2|3]D.compute()
 
 - [ ] **Potentially:** "particles"
