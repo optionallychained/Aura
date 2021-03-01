@@ -28,7 +28,7 @@ export class Physics extends System {
      * @param frameDelta the time between the last frame and the current, for normalizing time-dependent operations
      */
     public tick(game: Game, frameDelta: number): void {
-        const movers = game.entityManager.filterEntitiesByComponent('Transform3D');
+        const movers = game.world.entityManager.filterEntitiesByComponent('Transform3D');
 
         for (const e of movers) {
             const transform = e.getComponent(Transform3D);

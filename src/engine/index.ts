@@ -18,3 +18,5 @@ export * as Shader from './shader';
 export * as State from './state';
 
 export * as System from './system';
+
+export * as World from './world';

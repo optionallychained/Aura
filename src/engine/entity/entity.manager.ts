@@ -56,8 +56,8 @@ export class EntityManager {
      */
     constructor(private readonly config: EntityManagerConfig) {
         // initialise the EntityManager's texture atlas, if applicable
-        if (config.textureAtlas) {
-            config.renderer.createTexture(config.textureAtlas.name, config.textureAtlas.path);
+        if (config.textureAtlasPath) {
+            config.renderer.createTexture(config.name, config.textureAtlasPath);
         }
     }
 
@@ -156,7 +156,7 @@ export class EntityManager {
                     this.config.renderer.render({
                         vbo,
                         shaderProgramName: programName,
-                        textureAtlasName: this.config.textureAtlas?.name,
+                        textureAtlasName: this.config.name,
                         entities
                     });
 
@@ -390,7 +390,7 @@ export class EntityManager {
             const vboIdentifier = `${shaderName}_${modelName}`;
 
             // name the VBO with this EntityManager instance's vboPrefix, facilitating multiple EntityManagers per Game instance
-            const vboName = `${this.config.vboPrefix}_${vboIdentifier}`;
+            const vboName = `${this.config.name}_${vboIdentifier}`;
 
             if (entities && entities.length) {
                 // retrieve the existing VBO for this combo; if none exists, create one

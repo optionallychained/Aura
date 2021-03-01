@@ -10,7 +10,7 @@ let frame = 0;
 const populate = (game: Core.Game): void => {
     const entities: Array<Entity.Entity> = [];
 
-    for (let i = 0; i < 1; i++) {
+    for (let i = 0; i < 100; i++) {
         const r = Math.round(Random.between(2, 2));
 
         switch (r) {
@@ -34,7 +34,7 @@ const populate = (game: Core.Game): void => {
         rotations.push(Angle.toRadians(Random.between(-3, 3)));
     }
 
-    game.entityManager.addEntities(...entities);
+    game.world.entityManager.addEntities(...entities);
 };
 
 const rotateAndScale = (game: Core.Game): void => {
@@ -43,7 +43,7 @@ const rotateAndScale = (game: Core.Game): void => {
     const scaleFactor = 1 + (Math.sin(frame * 0.025) * 0.8);
     const scale = new Vec2(scaleFactor, scaleFactor);
 
-    for (const e of game.entityManager.filterEntitiesByTags('rect', 'triangle', 'triangleWire', 'rectWire')) {
+    for (const e of game.world.entityManager.filterEntitiesByTags('rect', 'triangle', 'triangleWire', 'rectWire')) {
         const transform = e.getComponent(Component.TwoD.Transform2D);
 
         transform.scale(scale);

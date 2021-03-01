@@ -1,4 +1,3 @@
-import { EntityManager, EntityManagerConfig } from '../entity';
 import { InputManager } from '../input';
 import { ControlScheme } from '../input/controlScheme.type';
 import { Color, Vec2 } from '../math';
@@ -7,6 +6,7 @@ import { EntityShaderVariableResolver, ShaderVariableResolver } from '../shader'
 import { ShaderProgram } from '../shader/program';
 import { State } from '../state';
 import { System } from '../system';
+import { World } from '../world';
 import { GameConfig } from './game.config';
 import { ProtoGLError } from './protogl.error';
 
@@ -23,8 +23,7 @@ import { ProtoGLError } from './protogl.error';
  */
 export class Game {
 
-    /** the EntityManager to be used in handling and processing the game's Entities */
-    public readonly entityManager: EntityManager;
+    public readonly world: World;
 
     /** InputManager for handling all user input */
     public readonly inputManager: InputManager;
@@ -86,21 +85,11 @@ export class Game {
         this.renderer = new WebGLRenderer(this.canvas, config?.backgroundColor ?? this.defaultBackgroundColor);
         this.inputManager = new InputManager(this.canvas, config?.controlScheme ?? this.defaultControlScheme);
 
-        // configure the EntityManager
-        // TODO will be moved into subordinate classes like 'World','TextManager', but here for now
-        const entityManagerConfig: EntityManagerConfig = {
-            vboPrefix: 'world',
-            renderer: this.renderer
-        };
-
-        if (config?.worldTextureAtlasPath) {
-            entityManagerConfig.textureAtlas = {
-                name: 'world',
-                path: config.worldTextureAtlasPath
-            };
-        }
-
-        this.entityManager = new EntityManager(entityManagerConfig);
+        this.world = new World(
+            this.renderer,
+            config?.worldDimensions ?? config?.canvasDimensions ?? this.defaultCanvasDimensions,
+            config?.textureAtlasConfig?.world
+        );
     }
 
     /**
@@ -324,8 +313,8 @@ export class Game {
             this.currentState.tick(this, this.frameDelta);
         }
 
-        this.entityManager.tick(this.frameDelta);
-        this.entityManager.render();
+        this.world.tick(this.frameDelta);
+        this.world.render();
 
         // handle updating and displaying debug data when in debug mode
         if (this.config?.debugMode) {

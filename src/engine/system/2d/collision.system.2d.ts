@@ -31,7 +31,7 @@ export class Collision2D extends System {
      * @param frameDelta the time between the last frame and the current, for normalizing time-dependent operations
      */
     public tick(game: Game): void {
-        const collidables = game.entityManager.filterEntitiesByComponents('Transform2D', 'BoxCollider2D');
+        const collidables = game.world.entityManager.filterEntitiesByComponents('Transform2D', 'BoxCollider2D');
 
         for (let i = 0; i < collidables.length; i++) {
             for (let j = i + 1; j < collidables.length; j++) {

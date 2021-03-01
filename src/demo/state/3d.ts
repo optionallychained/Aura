@@ -30,7 +30,7 @@ const populate = (game: Core.Game): void => {
         rotations.push(new Vec3(angleX, angleY, angleZ));
     }
 
-    game.entityManager.addEntities(...entities);
+    game.world.entityManager.addEntities(...entities);
 };
 
 const rotateAndScale = (game: Core.Game): void => {
@@ -39,7 +39,7 @@ const rotateAndScale = (game: Core.Game): void => {
     const scaleFactor = 1 + (Math.sin(frame * 0.025) * 0.25);
     const scale = new Vec3(scaleFactor, scaleFactor, scaleFactor);
 
-    for (const e of game.entityManager.filterEntitiesByTags('cube', 'cubeWire')) {
+    for (const e of game.world.entityManager.filterEntitiesByTags('cube', 'cubeWire')) {
         const transform = e.getComponent(Component.ThreeD.Transform3D);
 
         transform.scale(scale);
@@ -58,7 +58,7 @@ export const state3D = new State.State({
         populate(game);
     },
     end: (game) => {
-        game.entityManager.clearEntities();
+        game.world.entityManager.clearEntities();
     },
     tick: (game) => {
         if (game.inputManager.isKeyDown(Input.Keys.SPACE)) {

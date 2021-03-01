@@ -17,8 +17,17 @@ export interface GameConfig {
     readonly controlScheme?: ControlScheme;
     /** Debug mode, enabling the display of frame data and potentially other useful stuff in the future; default value is false */
     readonly debugMode?: boolean;
-    /** File path for the texture atlas containing textures for world Entities. If not provided, textures will not be used */
-    readonly worldTextureAtlasPath?: string;
+    /** World dimensions; for decoupling Entity coordinate systems from GL screenspace coords. Default value is {canvasDimensions} */
+    readonly worldDimensions?: Vec2;
+    /** Texture atlas configurations for preset supported atlases, allowing for per-application specification of contextual texture packs */
+    readonly textureAtlasConfig?: {
+        /** World Entity texture atlas path; for Entities representing game objects. No default */
+        readonly world?: string;
+        /** Text Entity texture atlas path; for Entities representing rendered strings. Default will be the built-in engine font */
+        readonly text?: string;
+        /** UI Entity texture atlas path; for Entities representing UI elements. No default */
+        readonly ui?: string;
+    };
     /** Game init function; none is provided by default */
     readonly init?: () => void
 }
