@@ -54,7 +54,12 @@ export class EntityManager {
      *
      * @param renderer the renderer
      */
-    constructor(private readonly config: EntityManagerConfig) { }
+    constructor(private readonly config: EntityManagerConfig) {
+        // initialise the EntityManager's texture atlas, if applicable
+        if (config.textureAtlas) {
+            config.renderer.createTexture(config.textureAtlas.name, config.textureAtlas.path);
+        }
+    }
 
     /**
      * Getter for the number of active Entities
@@ -151,7 +156,7 @@ export class EntityManager {
                     this.config.renderer.render({
                         vbo,
                         shaderProgramName: programName,
-                        textureAtlasName: this.config.textureAtlasName,
+                        textureAtlasName: this.config.textureAtlas?.name,
                         entities
                     });
 

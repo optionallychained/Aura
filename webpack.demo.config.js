@@ -1,4 +1,5 @@
 const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = (env, options) => {
@@ -17,6 +18,11 @@ module.exports = (env, options) => {
             ],
         },
         plugins: [
+            new CopyWebpackPlugin({
+                patterns: [
+                    { from: './src/demo/res', to: 'res' }
+                ]
+            }),
             new HtmlWebpackPlugin({
                 title: 'ProtoGL Demo'
             })

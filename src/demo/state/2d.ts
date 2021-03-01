@@ -10,8 +10,8 @@ let frame = 0;
 const populate = (game: Core.Game): void => {
     const entities: Array<Entity.Entity> = [];
 
-    for (let i = 0; i < 100; i++) {
-        const r = Math.round(Random.between(1, 4));
+    for (let i = 0; i < 1; i++) {
+        const r = Math.round(Random.between(2, 2));
 
         switch (r) {
             case 1:

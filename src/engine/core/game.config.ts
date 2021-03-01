@@ -17,6 +17,8 @@ export interface GameConfig {
     readonly controlScheme?: ControlScheme;
     /** Debug mode, enabling the display of frame data and potentially other useful stuff in the future; default value is false */
     readonly debugMode?: boolean;
+    /** File path for the texture atlas containing textures for world Entities. If not provided, textures will not be used */
+    readonly worldTextureAtlasPath?: string;
     /** Game init function; none is provided by default */
     readonly init?: () => void
 }

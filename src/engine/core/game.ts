@@ -1,4 +1,4 @@
-import { EntityManager } from '../entity';
+import { EntityManager, EntityManagerConfig } from '../entity';
 import { InputManager } from '../input';
 import { ControlScheme } from '../input/controlScheme.type';
 import { Color, Vec2 } from '../math';
@@ -85,10 +85,22 @@ export class Game {
 
         this.renderer = new WebGLRenderer(this.canvas, config?.backgroundColor ?? this.defaultBackgroundColor);
         this.inputManager = new InputManager(this.canvas, config?.controlScheme ?? this.defaultControlScheme);
-        this.entityManager = new EntityManager({
-            vboPrefix: 'main',
+
+        // configure the EntityManager
+        // TODO will be moved into subordinate classes like 'World','TextManager', but here for now
+        const entityManagerConfig: EntityManagerConfig = {
+            vboPrefix: 'world',
             renderer: this.renderer
-        });
+        };
+
+        if (config?.worldTextureAtlasPath) {
+            entityManagerConfig.textureAtlas = {
+                name: 'world',
+                path: config.worldTextureAtlasPath
+            };
+        }
+
+        this.entityManager = new EntityManager(entityManagerConfig);
     }
 
     /**
