@@ -485,14 +485,6 @@ export class WebGLRenderer {
             case UniformType.NUMBER:
                 gl.uniform1f(location, value as number);
                 break;
-
-            default:
-                // TODO avoid the need for this entirely by just fleshing out UniformType to include all possible types
-                throw new ProtoGLError({
-                    class: 'WebGLRenderer',
-                    method: 'loadUniform',
-                    message: `Failed to upload uniform to location '${location.toString()}' with value '${value.toString()}`
-                });
         }
     }
 }
