@@ -17,7 +17,7 @@ export const FRAGMENT_TEXTURE = new FragmentShader({
     uniforms: [
         {
             name: 'u_Texture',
-            type: UniformType.NUMBER
+            type: UniformType.INTEGER
         }
     ]
 });

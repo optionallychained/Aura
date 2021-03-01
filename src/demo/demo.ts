@@ -5,7 +5,7 @@ import { state3D } from './state/3d';
 // instantiate a Game (canvas is automatically created)
 const game = new Core.Game({
     canvasDimensions: new Vec2(800, 600),
-    worldTextureAtlasPath: 'res/world.png',
+    worldTextureAtlasPath: 'res/cat.png',
     debugMode: true,
     init: () => { console.log('GAME -> init') }
 });

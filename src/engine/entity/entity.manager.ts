@@ -424,7 +424,8 @@ export class EntityManager {
                 let offset = 0;
                 for (const e of entities) {
                     // track the offset for pulling positional data out of an Entity's Model's vertices
-                    let v = 0;
+                    let p = 0;
+                    // let t = 0;
                     for (let i = 0; i < vertexCount; i++) {
                         // process every attribute for every vertex of the Entity
                         for (const attr of shaderInfo.vertex.attributes) {
@@ -435,11 +436,15 @@ export class EntityManager {
                                 // handle numerical values by wrapping them in an array for setting into vertices
                                 value = Float32Array.from([value]);
                             }
-                            else if (attr.name.includes('Position')) {
+                            else if (attr.name === 'a_Position') {
                                 // handle positions by pulling out only *this* vertex's position from the Model's array
-                                value = value.slice(v, v + attr.size);
-                                v += attr.size;
+                                value = value.slice(p, p + attr.size);
+                                p += attr.size;
                             }
+                            // else if (attr.name === 'a_TexCoord') {
+                            //     value = value.slice(t, t + attr.size);
+                            //     t += attr.size;
+                            // }
 
                             vertices.set(value, offset);
 

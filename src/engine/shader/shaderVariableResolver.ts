@@ -43,7 +43,7 @@ export class ShaderVariableResolver {
         ],
         [
             'TexCoord',
-            (e) => e.getComponent(Texture).texCoords.float32Array
+            (e) => e.getComponent(Texture).nextCoord().float32Array
         ],
         [
             'Texture',

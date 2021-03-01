@@ -229,9 +229,9 @@ export class WebGLRenderer {
             });
         }
 
-        // initialise the texture as transparent black to enable rendering during asynchronous load
+        // initialise the texture as solid purple to enable rendering during asynchronous load and for visual recognition of failed loads
         gl.bindTexture(gl.TEXTURE_2D, texture);
-        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 0, 0]));
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([255, 0, 255, 255]));
         gl.bindTexture(gl.TEXTURE_2D, null);
 
         // handle the asynchronous image load by loading the actual texture data into the texture
@@ -241,7 +241,6 @@ export class WebGLRenderer {
             gl.bindTexture(gl.TEXTURE_2D, texture);
             gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
             gl.generateMipmap(gl.TEXTURE_2D);
-            gl.bindTexture(gl.TEXTURE_2D, null);
         });
 
         this.textures.set(name, texture);
@@ -549,7 +548,11 @@ export class WebGLRenderer {
                 gl.uniformMatrix4fv(location, false, value as Float32Array);
                 break;
 
-            case UniformType.NUMBER:
+            case UniformType.INTEGER:
+                gl.uniform1i(location, value as number);
+                break;
+
+            case UniformType.FLOAT:
                 gl.uniform1f(location, value as number);
                 break;
         }
