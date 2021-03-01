@@ -77,6 +77,12 @@ export class WebGLRenderer {
     /** Active VBO name; used for frame-to-frame optimisation of VBO switching and vertexAttribPointer() calls */
     private activeVBOName: string | null = null;
 
+    /** A maintained list of Textures; mapped by their name for simple management and usage */
+    private readonly textures = new Map<string, WebGLTexture>();
+
+    /** Active Texture name; used for frame-to-frame optimisation of bindTexture() calls */
+    private activeTextureName: string | null = null;
+
     /** Current rendering mode; used for differentiating some rendering functionality between 2D and 3D States */
     private mode: RenderingMode = '2D';
 
@@ -203,6 +209,71 @@ export class WebGLRenderer {
     }
 
     /**
+     * Create a texture from an image with a given source
+     *
+     * // TODO lots of opportunity in here for configuration on a per-texture basis
+     *
+     * @param name the name of the texture used to reference it later on
+     * @param src the location of the image to load
+     */
+    public createTexture(name: string, src: string): void {
+        const { gl } = this;
+
+        const texture = gl.createTexture();
+
+        if (!texture) {
+            throw new ProtoGLError({
+                class: 'WebGLRenderer',
+                method: 'createTexture',
+                message: `Failed to create texture with name '${name}' and src '${src}'`
+            });
+        }
+
+        // initialise the texture as transparent black to enable rendering during asynchronous load
+        gl.bindTexture(gl.TEXTURE_2D, texture);
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 0, 0]));
+        gl.bindTexture(gl.TEXTURE_2D, null);
+
+        // handle the asynchronous image load by loading the actual texture data into the texture
+        const image = new Image();
+        image.src = src;
+        image.addEventListener('load', () => {
+            gl.bindTexture(gl.TEXTURE_2D, texture);
+            gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
+            gl.generateMipmap(gl.TEXTURE_2D);
+            gl.bindTexture(gl.TEXTURE_2D, null);
+        });
+
+        this.textures.set(name, texture);
+    }
+
+    /**
+     * Rendering mode switching routine; receives a State's rendering mode, indicating a transition towards either 2D or 3D rendering, and
+     *   configures WebGL to render in the mode if it's different than the last one
+     *
+     * Effectively allows a Game to comprise both 2D and 3D States
+     *
+     * @param mode the mode to switch to
+     */
+    public setRenderingMode(mode: RenderingMode): void {
+        const { gl } = this;
+
+        if (mode !== this.mode) {
+            if (mode === '2D') {
+                // disable the depth test for 2D rendering
+                gl.disable(gl.DEPTH_TEST);
+            }
+            else {
+                // enable and configure the depth test for 3D rendering
+                gl.enable(gl.DEPTH_TEST);
+                gl.depthFunc(gl.LESS);
+            }
+
+            this.mode = mode;
+        }
+    }
+
+    /**
      * Generic rendering method; using the information in a given WebGLRendererConfig, render some Entities
      *
      * @param config the WebGLRenderingConfig specifying what and how to render
@@ -218,6 +289,11 @@ export class WebGLRenderer {
         // switch VBOs if necessary
         if (config.vbo.name !== this.activeVBOName) {
             this.useVBO(config.vbo);
+        }
+
+        // switch textures if necessary
+        if (config.textureAtlasName && config.textureAtlasName !== this.activeTextureName) {
+            this.useTexture(config.textureAtlasName);
         }
 
         // TODO it'd be nice if we didn't have to ? the activeShaderProgram
@@ -247,32 +323,6 @@ export class WebGLRenderer {
         else {
             // if the shader program contains no uniforms, we can draw all the entities in one batch
             gl.drawArrays(config.vbo.glShape, 0, config.vbo.vertexCount * config.entities.length);
-        }
-    }
-
-    /**
-     * Rendering mode switching routine; receives a State's rendering mode, indicating a transition towards either 2D or 3D rendering, and
-     *   configures WebGL to render in the mode if it's different than the last one
-     *
-     * Effectively allows a Game to comprise both 2D and 3D States
-     *
-     * @param mode the mode to switch to
-     */
-    public setRenderingMode(mode: RenderingMode): void {
-        const { gl } = this;
-
-        if (mode !== this.mode) {
-            if (mode === '2D') {
-                // disable the depth test for 2D rendering
-                gl.disable(gl.DEPTH_TEST);
-            }
-            else {
-                // enable and configure the depth test for 3D rendering
-                gl.enable(gl.DEPTH_TEST);
-                gl.depthFunc(gl.LESS);
-            }
-
-            this.mode = mode;
         }
     }
 
@@ -447,6 +497,23 @@ export class WebGLRenderer {
         }
 
         this.activeVBOName = vbo.name;
+    }
+
+    private useTexture(name: string): void {
+        const { gl } = this;
+
+        const texture = this.textures.get(name);
+        if (!texture) {
+            throw new ProtoGLError({
+                class: 'WebGLRenderer',
+                method: 'useTexture',
+                message: `Failed to switch to Texture with name '${name}'`
+            });
+        }
+
+        gl.bindTexture(gl.TEXTURE_2D, texture);
+
+        this.activeTextureName = name;
     }
 
     /**

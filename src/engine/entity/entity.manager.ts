@@ -151,6 +151,7 @@ export class EntityManager {
                     this.config.renderer.render({
                         vbo,
                         shaderProgramName: programName,
+                        textureAtlasName: this.config.textureAtlasName,
                         entities
                     });
 

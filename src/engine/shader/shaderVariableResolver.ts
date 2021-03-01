@@ -1,6 +1,7 @@
 import { FlatColor, Model, MultiColor } from '../component';
 import { Transform2D } from '../component/2d';
 import { Transform3D } from '../component/3d';
+import { Texture } from '../component/texture.component';
 import { ProtoGLError } from '../core';
 import { Entity } from '../entity/entity'
 import { EntityShaderVariableResolver } from './entityShaderVariableResolver.type';
@@ -39,6 +40,15 @@ export class ShaderVariableResolver {
         [
             'VertexColor',
             (e) => e.getComponent(MultiColor).nextColor().float32Array
+        ],
+        [
+            'TexCoord',
+            (e) => e.getComponent(Texture).texCoords.float32Array
+        ],
+        [
+            'Texture',
+            // TODO temporary; we'll want this to be a texture unit associated with the Entity's texture (by name?)
+            (e) => 0
         ]
     ]);
 
