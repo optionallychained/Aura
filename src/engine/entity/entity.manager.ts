@@ -1,4 +1,5 @@
-import { Model, Shader } from '../component';
+import { Model, Shader, Texture } from '../component';
+import { ProtoGLError } from '../core';
 import { VBOConfig } from '../screen';
 import { ShaderVariableResolver } from '../shader';
 import { Entity } from './entity';
@@ -55,9 +56,8 @@ export class EntityManager {
      * @param renderer the renderer
      */
     constructor(private readonly config: EntityManagerConfig) {
-        // initialise the EntityManager's texture atlas, if applicable
-        if (config.textureAtlasPath) {
-            config.renderer.createTexture(config.name, config.textureAtlasPath);
+        if (config.textureAtlas) {
+            config.renderer.createTexture(config.textureAtlas);
         }
     }
 
@@ -156,7 +156,7 @@ export class EntityManager {
                     this.config.renderer.render({
                         vbo,
                         shaderProgramName: programName,
-                        textureAtlasName: this.config.name,
+                        textureAtlasName: this.config.textureAtlas?.name,
                         entities
                     });
 
@@ -425,7 +425,7 @@ export class EntityManager {
                 for (const e of entities) {
                     // track the offset for pulling positional data out of an Entity's Model's vertices
                     let p = 0;
-                    // let t = 0;
+                    let t = 0;
                     for (let i = 0; i < vertexCount; i++) {
                         // process every attribute for every vertex of the Entity
                         for (const attr of shaderInfo.vertex.attributes) {
@@ -441,10 +441,29 @@ export class EntityManager {
                                 value = value.slice(p, p + attr.size);
                                 p += attr.size;
                             }
-                            // else if (attr.name === 'a_TexCoord') {
-                            //     value = value.slice(t, t + attr.size);
-                            //     t += attr.size;
-                            // }
+                            else if (attr.name === 'a_TexCoord') {
+                                const { textureAtlas } = this.config;
+
+                                if (!textureAtlas) {
+                                    // TODO
+                                    throw new ProtoGLError({
+                                        class: 'EntityManager',
+                                        method: 'compileVertices',
+                                        message: 'Failed to resolve texture coordinates'
+                                    });
+                                }
+
+                                value = value.slice(t, t + 2);
+
+                                // TODO a bit hacky, look again
+                                const { row, column } = e.getComponent(Texture);
+
+                                // TODO using 'this' textureAtlas implicitly assumes that Entities are sourcing from this Atlas
+                                //   this might be tricksy...
+                                value = textureAtlas.resolveTextureCoordinates(value, row, column);
+
+                                t += 2;
+                            }
 
                             vertices.set(value, offset);
 

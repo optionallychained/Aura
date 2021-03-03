@@ -14,4 +14,6 @@ export interface GeometryConfig {
     readonly vertexCount: number;
     /** The GLShape (drawing mode) the Geometry should be rendered with */
     readonly glShape: GLShape;
+    /** Texture coordinates for each vertex in the Geometry's vertices, if applicable */
+    readonly textureCoordinates?: Float32Array;
 }

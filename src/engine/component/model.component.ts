@@ -1,3 +1,4 @@
+import { ProtoGLError } from '../core';
 import { Geometry, GLShape } from '../geometry';
 import { Component } from './component';
 
@@ -50,5 +51,21 @@ export class Model extends Component {
      */
     public get glShape(): GLShape {
         return this.geometry.glShape;
+    }
+
+    public get textureCoordinates(): Float32Array {
+        const { textureCoordinates } = this.geometry;
+
+        // TODO hmmm
+        // should textureCoordinates just be a required prop of Geometry?
+        if (!textureCoordinates) {
+            throw new ProtoGLError({
+                class: 'Model',
+                method: 'textureCoordinates',
+                message: `Failed to retrieve Texture Coordinates for model ${this.modelName}`
+            })
+        }
+
+        return textureCoordinates;
     }
 }

@@ -1,5 +1,6 @@
 import { ControlScheme } from '../input/controlScheme.type';
 import { Color, Vec2 } from '../math';
+import { TextureAtlas } from '../texture';
 
 /**
  * Interface desciribing the main Game Configuration object
@@ -22,11 +23,11 @@ export interface GameConfig {
     /** Texture atlas configurations for preset supported atlases, allowing for per-application specification of contextual texture packs */
     readonly textureAtlasConfig?: {
         /** World Entity texture atlas path; for Entities representing game objects. No default */
-        readonly world?: string;
+        readonly world?: TextureAtlas;
         /** Text Entity texture atlas path; for Entities representing rendered strings. Default will be the built-in engine font */
-        readonly text?: string;
+        readonly text?: TextureAtlas;
         /** UI Entity texture atlas path; for Entities representing UI elements. No default */
-        readonly ui?: string;
+        readonly ui?: TextureAtlas;
     };
     /** Game init function; none is provided by default */
     readonly init?: () => void

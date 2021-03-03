@@ -3,6 +3,7 @@ import { Color } from '../math';
 import { ShaderVariableResolver } from '../shader';
 import { ShaderProgram } from '../shader/program';
 import { UniformType } from '../shader/uniformType.enum';
+import { TextureAtlas } from '../texture';
 import { RenderingMode } from './renderingMode.type';
 import { VBOConfig } from './vbo.config';
 import { WebGLRendererConfig } from './webgl.renderer.config';
@@ -216,7 +217,7 @@ export class WebGLRenderer {
      * @param name the name of the texture used to reference it later on
      * @param src the location of the image to load
      */
-    public createTexture(name: string, src: string): void {
+    public createTexture(textureAtlas: TextureAtlas): void {
         const { gl } = this;
 
         const texture = gl.createTexture();
@@ -225,7 +226,7 @@ export class WebGLRenderer {
             throw new ProtoGLError({
                 class: 'WebGLRenderer',
                 method: 'createTexture',
-                message: `Failed to create texture with name '${name}' and src '${src}'`
+                message: `Failed to create texture with name '${textureAtlas.name}' and src '${textureAtlas.src}'`
             });
         }
 
@@ -236,14 +237,14 @@ export class WebGLRenderer {
 
         // handle the asynchronous image load by loading the actual texture data into the texture
         const image = new Image();
-        image.src = src;
+        image.src = textureAtlas.src;
         image.addEventListener('load', () => {
             gl.bindTexture(gl.TEXTURE_2D, texture);
             gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
             gl.generateMipmap(gl.TEXTURE_2D);
         });
 
-        this.textures.set(name, texture);
+        this.textures.set(textureAtlas.name, texture);
     }
 
     /**

@@ -53,4 +53,8 @@ export class Geometry {
     public get glShape(): GLShape {
         return this.config.glShape;
     }
+
+    public get textureCoordinates(): Float32Array | undefined {
+        return this.config.textureCoordinates;
+    }
 }
