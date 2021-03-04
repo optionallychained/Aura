@@ -45,5 +45,8 @@ export const BOX = new Geometry({
     ]),
     vertexSize: 3,
     vertexCount: 24,
-    glShape: GLShape.LINES
+    glShape: GLShape.LINES,
+    textureCoordinates: Float32Array.from([
+
+    ])
 });

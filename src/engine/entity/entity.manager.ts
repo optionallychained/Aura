@@ -175,7 +175,7 @@ export class EntityManager {
      *
      * @returns the list of Entities with the Component
      */
-    public filterEntitiesByComponent(component: string): Array<Entity> {
+    public filterEntitiesByComponentName(component: string): Array<Entity> {
         // TODO by class
         return this.memoizeFilter(component, (e) => e.hasComponentWithName(component))
     }
@@ -187,7 +187,7 @@ export class EntityManager {
      *
      * @returns the list of Entities with the Components
      */
-    public filterEntitiesByComponents(...components: Array<string>): Array<Entity> {
+    public filterEntitiesByComponentNames(...components: Array<string>): Array<Entity> {
         // TODO by class
         return this.memoizeFilter(components.toString(), (e) => e.hasComponentsWithNames(...components));
     }
@@ -202,7 +202,7 @@ export class EntityManager {
      *
      * @returns the list of Entities from the source with the Components
      */
-    public filterEntitiesByComponentsFromSource(source: Array<Entity>, filterId: string, ...components: Array<string>): Array<Entity> {
+    public filterEntitiesByComponentNamesFromSource(source: Array<Entity>, filterId: string, ...components: Array<string>): Array<Entity> {
         // TODO by class
         return this.memoizeFilter(components.toString(), (e) => e.hasComponentsWithNames(...components), filterId, source);
     }

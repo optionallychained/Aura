@@ -30,7 +30,7 @@ export class Font {
                     new Transform2D(Vec2.add(position, new Vec2(i * 0.25, 0)), new Vec2(0.25, 0.25)),
                     new Shader(PROGRAM_TEXTURE),
                     new Model(TwoD.BOX),
-                    new Texture('text', this.config.charset.indexOf(char.toUpperCase()), 0)
+                    new Texture(this.config.charset.indexOf(char.toUpperCase()), 0)
                 ]
             }));
 
