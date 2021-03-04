@@ -23,4 +23,6 @@ export * as Text from './text';
 
 export * as Texture from './texture';
 
+export * as UI from './ui';
+
 export * as World from './world';

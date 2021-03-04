@@ -1,6 +1,6 @@
 import { TextureAtlas } from '../texture';
 
 export interface FontConfig {
-    textureAtlas: TextureAtlas;
-    charset: Array<string>;
+    readonly textureAtlas: TextureAtlas;
+    readonly charset: Array<string>;
 }

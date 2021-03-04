@@ -1,7 +1,7 @@
 import { ControlScheme } from '../input/controlScheme.type';
 import { Color, Vec2 } from '../math';
 import { FontConfig } from '../text/font.config';
-import { TextureAtlas } from '../texture';
+import { UIConfig } from '../ui';
 import { WorldConfig } from '../world/world.config';
 
 /**
@@ -22,13 +22,12 @@ export interface GameConfig {
     readonly debugMode?: boolean;
     /** World dimensions; for decoupling Entity coordinate systems from GL screenspace coords. Default value is {canvasDimensions} */
     readonly worldDimensions?: Vec2;
-    /** Texture atlas configurations for preset supported atlases, allowing for per-application specification of contextual texture packs */
-    readonly textureAtlases?: {
-        /** Text Entity texture atlas path; for Entities representing rendered strings. Default will be the built-in engine font */
-        readonly text?: TextureAtlas;
-    };
+
+
+    readonly uiConfig?: UIConfig
     readonly worldConfig?: WorldConfig;
     readonly fontConfig?: FontConfig;
+
     /** Game init function; none is provided by default */
     readonly init?: () => void
 }

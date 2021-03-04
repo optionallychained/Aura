@@ -1,16 +1,17 @@
 import { EntityManager } from '../entity';
 import { WebGLRenderer } from '../screen';
-import { WorldConfig } from './world.config';
+import { UIConfig } from './ui.config';
 
-export class World {
+// TODO placeholder
+export class UI {
 
-    public readonly entityManager: EntityManager;
+    private readonly entityManager: EntityManager;
 
-    constructor(renderer: WebGLRenderer, config: WorldConfig) {
+    constructor(private readonly renderer: WebGLRenderer, private readonly config?: UIConfig) {
         this.entityManager = new EntityManager({
-            name: 'world',
+            name: 'ui',
             renderer,
-            textureAtlas: config.textureAtlas
+            textureAtlas: config?.textureAtlas
         });
     }
 

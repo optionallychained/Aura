@@ -5,7 +5,6 @@ import { TwoD } from '../geometry';
 import { Vec2 } from '../math';
 import { WebGLRenderer } from '../screen';
 import { PROGRAM_TEXTURE } from '../shader/program/2d';
-import { TextureAtlas } from '../texture';
 import { FontConfig } from './font.config';
 
 export class Font {
@@ -14,8 +13,8 @@ export class Font {
 
     constructor(private readonly renderer: WebGLRenderer, private readonly config: FontConfig) {
         this.entityManager = new EntityManager({
-            renderer,
             name: 'font',
+            renderer,
             textureAtlas: config.textureAtlas
         });
     }
@@ -39,10 +38,6 @@ export class Font {
         }
 
         this.entityManager.addEntities(...entities);
-    }
-
-    public renderText(text: string): void {
-        // this.entityManager.addEntity(new String(text));
     }
 
     public tick(frameDelta: number): void {
