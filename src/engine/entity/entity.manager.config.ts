@@ -1,4 +1,4 @@
-import { WebGLRenderer } from '../screen';
+import { WebGLRenderer } from '../renderer';
 import { TextureAtlas } from '../texture';
 
 /**

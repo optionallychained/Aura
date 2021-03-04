@@ -1,6 +1,6 @@
 import { Model, Shader, Texture } from '../component';
 import { ProtoGLError } from '../core';
-import { VBOConfig } from '../screen';
+import { VBOConfig } from '../renderer';
 import { ShaderVariableResolver } from '../shader';
 import { Entity } from './entity';
 import { EntityManagerConfig } from './entity.manager.config';
@@ -425,6 +425,7 @@ export class EntityManager {
                 for (const e of entities) {
                     // track the offset for pulling positional data out of an Entity's Model's vertices
                     let p = 0;
+                    // track the offset for pulling texture coordinate data out of an Entity's Model's texture coordinates
                     let t = 0;
                     for (let i = 0; i < vertexCount; i++) {
                         // process every attribute for every vertex of the Entity
@@ -453,14 +454,9 @@ export class EntityManager {
                                     });
                                 }
 
-                                value = value.slice(t, t + 2);
-
-                                // TODO a bit hacky, look again
                                 const { column, row } = e.getComponent(Texture);
 
-                                // TODO using 'this' textureAtlas implicitly assumes that Entities are sourcing from this Atlas
-                                //   this might be tricksy...
-                                value = textureAtlas.resolveTextureCoordinates(value, column, row);
+                                value = textureAtlas.resolveTextureCoordinates(value.slice(t, t + 2), column, row);
 
                                 t += 2;
                             }
@@ -479,7 +475,6 @@ export class EntityManager {
                     vertexCount,
                     vertexSize,
                     glShape,
-                    // set the VBO's changed flag to ensure data is (re)buffered to the GPU later on
                     changed: true
                 });
             }

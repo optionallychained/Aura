@@ -11,7 +11,7 @@ export * as Input from './input';
 // no name for math as we wanna be able to use them without namespacing
 export * from './math';
 
-export * as Screen from './screen';
+export * as Renderer from './renderer';
 
 export * as Shader from './shader';
 

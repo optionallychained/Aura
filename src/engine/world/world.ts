@@ -1,5 +1,5 @@
 import { EntityManager } from '../entity';
-import { WebGLRenderer } from '../screen';
+import { WebGLRenderer } from '../renderer';
 import { WorldConfig } from './world.config';
 
 export class World {

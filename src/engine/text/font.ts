@@ -3,7 +3,7 @@ import { Transform2D } from '../component/2d';
 import { Entity, EntityManager } from '../entity';
 import { TwoD } from '../geometry';
 import { Vec2 } from '../math';
-import { WebGLRenderer } from '../screen';
+import { WebGLRenderer } from '../renderer';
 import { PROGRAM_TEXTURE } from '../shader/program/2d';
 import { FontConfig } from './font.config';
 

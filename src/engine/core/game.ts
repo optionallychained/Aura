@@ -1,7 +1,7 @@
 import { InputManager } from '../input';
 import { ControlScheme } from '../input/controlScheme.type';
 import { Color, Vec2 } from '../math';
-import { WebGLRenderer } from '../screen';
+import { WebGLRenderer } from '../renderer';
 import { EntityShaderVariableResolver, ShaderVariableResolver } from '../shader';
 import { ShaderProgram } from '../shader/program';
 import { State } from '../state';
@@ -105,7 +105,7 @@ export class Game {
         this.world = new World(
             this.renderer,
             config?.worldConfig ?? {
-                dimensions: config?.canvasDimensions ?? this.defaultCanvasDimensions
+                dimensions: config?.worldConfig?.dimensions ?? config?.canvasDimensions ?? this.defaultCanvasDimensions
             }
         );
 
