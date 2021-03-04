@@ -446,11 +446,15 @@ export class EntityManager {
                                 const { textureAtlas } = this.config;
 
                                 if (!textureAtlas) {
-                                    // TODO
+                                    // if we're trying to render an Entity with a Texture-involved shader, but we have no Texture Atlas,
+                                    //   then something has gone wrong
                                     throw new ProtoGLError({
                                         class: 'EntityManager',
                                         method: 'compileVertices',
-                                        message: 'Failed to resolve texture coordinates'
+                                        message: `
+                                            Failed to render ${this.config.name} Entity '${e.tag}' with texture shader: No Texture Atlas
+                                            was configured for ${this.config.name} Entities
+                                        `
                                     });
                                 }
 

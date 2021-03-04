@@ -12,7 +12,7 @@ export const _createRect2 = (): Entity.Entity => {
             //     Color.random(),
             //     Color.random()
             // ]),
-            new Component.Texture('world', 1, 0),
+            new Component.Texture(1, 0),
             new Component.TwoD.Transform2D(
                 new Vec2(Random.between(-1, 1), Random.between(-1, 1)),
                 new Vec2(Random.between(0.5, 1.5), Random.between(0.5, 1.5))

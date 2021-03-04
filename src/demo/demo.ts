@@ -6,7 +6,6 @@ import { State2D } from './state/2d';
 const game = new Core.Game({
     canvasDimensions: new Vec2(800, 600),
     worldConfig: {
-        dimensions: new Vec2(800, 600),
         textureAtlas: new TextureAtlas('world', 'res/cat.png', 2, 1)
     },
     debugMode: true,
