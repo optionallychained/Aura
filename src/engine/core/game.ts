@@ -88,7 +88,7 @@ export class Game {
         this.world = new World(
             this.renderer,
             config?.worldDimensions ?? config?.canvasDimensions ?? this.defaultCanvasDimensions,
-            config?.textureAtlasConfig?.world
+            config?.textureAtlases?.world
         );
     }
 

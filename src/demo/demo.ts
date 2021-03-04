@@ -2,11 +2,14 @@ import { Core, Shader, Vec2 } from '../engine';
 import { TextureAtlas } from '../engine/texture';
 import { State2D } from './state/2d';
 
+// initialise our textures
+const worldTexture = new TextureAtlas('world', 'res/cat.png', 2, 1);
+
 // instantiate a Game (canvas is automatically created)
 const game = new Core.Game({
     canvasDimensions: new Vec2(800, 600),
-    textureAtlasConfig: {
-        world: new TextureAtlas('world', 'res/cat.png', 2, 1)
+    textureAtlases: {
+        world: worldTexture
     },
     debugMode: true,
     init: () => { console.log('GAME -> init') }

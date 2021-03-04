@@ -21,7 +21,7 @@ export interface GameConfig {
     /** World dimensions; for decoupling Entity coordinate systems from GL screenspace coords. Default value is {canvasDimensions} */
     readonly worldDimensions?: Vec2;
     /** Texture atlas configurations for preset supported atlases, allowing for per-application specification of contextual texture packs */
-    readonly textureAtlasConfig?: {
+    readonly textureAtlases?: {
         /** World Entity texture atlas path; for Entities representing game objects. No default */
         readonly world?: TextureAtlas;
         /** Text Entity texture atlas path; for Entities representing rendered strings. Default will be the built-in engine font */

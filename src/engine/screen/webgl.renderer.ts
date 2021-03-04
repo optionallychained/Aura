@@ -25,7 +25,7 @@ type AttributeLocationArray = Array<{
  */
 type UniformLocationArray = Array<{
     readonly name: string;
-    readonly location: WebGLUniformLocation | null;
+    readonly location: WebGLUniformLocation;
     readonly type: UniformType;
 }>;
 
@@ -79,10 +79,12 @@ export class WebGLRenderer {
     private activeVBOName: string | null = null;
 
     /** A maintained list of Textures; mapped by their name for simple management and usage */
-    private readonly textures = new Map<string, WebGLTexture>();
+    private readonly textures = new Map<string, { name: string; unit: number; texture: WebGLTexture; }>();
 
-    /** Active Texture name; used for frame-to-frame optimisation of bindTexture() calls */
-    private activeTextureName: string | null = null;
+    // /** Active Texture name; used for frame-to-frame optimisation of bindTexture() calls */
+    // private activeTextureName: string | null = null;
+
+    private activeTexture: { name: string; unit: number; texture: WebGLTexture; } | null = null;
 
     /** Current rendering mode; used for differentiating some rendering functionality between 2D and 3D States */
     private mode: RenderingMode = '2D';
@@ -217,8 +219,12 @@ export class WebGLRenderer {
      * @param name the name of the texture used to reference it later on
      * @param src the location of the image to load
      */
-    public createTexture(textureAtlas: TextureAtlas): void {
+    public createTexture(textureAtlas: TextureAtlas): WebGLTexture {
         const { gl } = this;
+
+        const unit = gl.TEXTURE0 + Object.keys(this.textures).length;
+
+        gl.activeTexture(unit);
 
         const texture = gl.createTexture();
 
@@ -244,7 +250,9 @@ export class WebGLRenderer {
             gl.generateMipmap(gl.TEXTURE_2D);
         });
 
-        this.textures.set(textureAtlas.name, texture);
+        this.textures.set(textureAtlas.name, { name: textureAtlas.name, texture, unit });
+
+        return texture;
     }
 
     /**
@@ -280,7 +288,6 @@ export class WebGLRenderer {
      */
     public render(config: WebGLRendererConfig): void {
         const { gl } = this;
-
         // switch shader programs if necessary
         if (config.shaderProgramName !== this.activeShaderProgram?.name) {
             this.useShaderProgram(config.shaderProgramName);
@@ -292,20 +299,33 @@ export class WebGLRenderer {
         }
 
         // switch textures if necessary
-        if (config.textureAtlasName && config.textureAtlasName !== this.activeTextureName) {
+        if (config.textureAtlasName && config.textureAtlasName !== this.activeTexture?.name) {
             this.useTexture(config.textureAtlasName);
         }
 
         // TODO it'd be nice if we didn't have to ? the activeShaderProgram
         const uniforms = this.activeShaderProgram?.uniformLocations;
 
+
         if (uniforms && uniforms.length) {
+            // TODO ultra-hacky
+            const textureUniform = uniforms.find((u) => u.name === 'u_Texture');
+            if (textureUniform) {
+                // TODO understand why texture.unit has to be subtracted from gl.TEXTURE0 ONLY for sampler2D uniform value
+                this.loadUniform(textureUniform.location, textureUniform.type, gl.TEXTURE0 - this.activeTexture!.unit);
+            }
+
             // if the shader program contains uniforms, we need to do one draw call per Entity (per uniform set variation)
             let offset = 0;
 
             for (const e of config.entities) {
                 // upload the Entity's uniform values
                 for (const uniform of uniforms) {
+                    // TODO ultra-hacky
+                    if (uniform.name === 'u_Texture') {
+                        continue;
+                    }
+
                     // TODO error handling for location not found
                     const location = uniform.location;
 
@@ -419,9 +439,19 @@ export class WebGLRenderer {
         const allUniforms = (spec.vertex.uniforms ?? []).concat(spec.fragment.uniforms);
 
         for (const uniform of allUniforms) {
+            const location = gl.getUniformLocation(program, uniform.name);
+
+            if (!location) {
+                throw new ProtoGLError({
+                    class: 'WebGLRenderer',
+                    method: 'initializeShaderProgram',
+                    message: `Failed to retrieve uniform location for uniform name '${uniform.name}' in shader program '${spec.name}'`
+                });
+            }
+
             uniformLocations.push({
                 name: uniform.name,
-                location: gl.getUniformLocation(program, uniform.name),
+                location,
                 type: uniform.type
             });
         }
@@ -511,9 +541,12 @@ export class WebGLRenderer {
             });
         }
 
-        gl.bindTexture(gl.TEXTURE_2D, texture);
+        gl.activeTexture(texture.unit);
 
-        this.activeTextureName = name;
+        // TODO test if we need this
+        // gl.bindTexture(gl.TEXTURE_2D, texture.texture);
+
+        this.activeTexture = texture;
     }
 
     /**

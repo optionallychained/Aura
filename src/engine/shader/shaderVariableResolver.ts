@@ -4,6 +4,7 @@ import { Transform3D } from '../component/3d';
 import { Texture } from '../component/texture.component';
 import { ProtoGLError } from '../core';
 import { Entity } from '../entity/entity'
+import { TextureAtlas } from '../texture';
 import { EntityShaderVariableResolver } from './entityShaderVariableResolver.type';
 
 /**
@@ -45,11 +46,10 @@ export class ShaderVariableResolver {
             'TexCoord',
             (e) => e.getComponent(Model).textureCoordinates
         ],
-        [
-            'Texture',
-            // TODO temporary; we'll want this to be a texture unit associated with the Entity's texture (by name?)
-            (e) => 0
-        ]
+        // [
+        //     'Texture',
+        //     (e) => TextureAtlas.getTextureIdentifier(e.getComponent<Texture>.textureName)
+        // ]
     ]);
 
     /**

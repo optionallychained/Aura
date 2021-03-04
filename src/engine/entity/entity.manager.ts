@@ -57,7 +57,7 @@ export class EntityManager {
      */
     constructor(private readonly config: EntityManagerConfig) {
         if (config.textureAtlas) {
-            config.renderer.createTexture(config.textureAtlas);
+            config.textureAtlas.setTextureIdentifier(config.renderer.createTexture(config.textureAtlas));
         }
     }
 

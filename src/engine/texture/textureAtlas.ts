@@ -1,4 +1,8 @@
+import { Texture } from '../component';
+
 export class TextureAtlas {
+
+    private textureIdentifier: WebGLTexture = -1;
 
     constructor(
         public readonly name: 'world' | 'text' | 'ui',
@@ -12,5 +16,9 @@ export class TextureAtlas {
             (column / this.columns) + (coords[0] / this.columns),
             1 - ((row / this.rows) + (coords[1] / this.rows))
         ]);
+    }
+
+    public setTextureIdentifier(identifier: WebGLTexture): void {
+        this.textureIdentifier = identifier;
     }
 }
