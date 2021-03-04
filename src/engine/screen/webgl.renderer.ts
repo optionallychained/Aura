@@ -542,9 +542,7 @@ export class WebGLRenderer {
         }
 
         gl.activeTexture(texture.unit);
-
-        // TODO test if we need this
-        // gl.bindTexture(gl.TEXTURE_2D, texture.texture);
+        gl.bindTexture(gl.TEXTURE_2D, texture.texture);
 
         this.activeTexture = texture;
     }

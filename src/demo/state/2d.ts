@@ -63,6 +63,9 @@ export const State2D = new State.State({
     renderingMode: '2D',
     init: (game) => {
         populate(game);
+
+        game.font.addString(new Vec2(-0.75, 0), 'hello');
+        game.font.addString(new Vec2(-0.75, -0.25), 'protogl');
     },
     tick: (game) => {
         if (game.inputManager.isKeyDown(Input.Keys.ENTER)) {

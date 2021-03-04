@@ -19,4 +19,8 @@ export * as State from './state';
 
 export * as System from './system';
 
+export * as Text from './text';
+
+export * as Texture from './texture';
+
 export * as World from './world';

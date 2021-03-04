@@ -456,11 +456,11 @@ export class EntityManager {
                                 value = value.slice(t, t + 2);
 
                                 // TODO a bit hacky, look again
-                                const { row, column } = e.getComponent(Texture);
+                                const { column, row } = e.getComponent(Texture);
 
                                 // TODO using 'this' textureAtlas implicitly assumes that Entities are sourcing from this Atlas
                                 //   this might be tricksy...
-                                value = textureAtlas.resolveTextureCoordinates(value, row, column);
+                                value = textureAtlas.resolveTextureCoordinates(value, column, row);
 
                                 t += 2;
                             }

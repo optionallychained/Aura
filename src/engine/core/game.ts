@@ -6,7 +6,11 @@ import { EntityShaderVariableResolver, ShaderVariableResolver } from '../shader'
 import { ShaderProgram } from '../shader/program';
 import { State } from '../state';
 import { System } from '../system';
+import { Font } from '../text';
+import { FontConfig } from '../text/font.config';
+import { TextureAtlas } from '../texture';
 import { World } from '../world';
+import { WorldConfig } from '../world/world.config';
 import { GameConfig } from './game.config';
 import { ProtoGLError } from './protogl.error';
 
@@ -24,6 +28,8 @@ import { ProtoGLError } from './protogl.error';
 export class Game {
 
     public readonly world: World;
+
+    public readonly font: Font;
 
     /** InputManager for handling all user input */
     public readonly inputManager: InputManager;
@@ -65,6 +71,15 @@ export class Game {
     /** Default background color */
     private readonly defaultBackgroundColor = new Color();
 
+    private readonly defaultFontConfig: FontConfig = {
+        textureAtlas: new TextureAtlas('text', 'res/font.png', 64, 1),
+        charset: [
+            'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y',
+            'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '(', ')', '[', ']', '+', '-', '*', '/', '!', '?', '\'', '"', '#', '£',
+            '$', '&', '%', '^', ',', '.', ':', ';', '<', '>', '_', ' ', '~', '~'
+        ]
+    };
+
     /**
      * Constructor. Initialise the Canvas, as well as the Renderer, EntityManager and InputManager
      *
@@ -87,9 +102,14 @@ export class Game {
 
         this.world = new World(
             this.renderer,
-            config?.worldDimensions ?? config?.canvasDimensions ?? this.defaultCanvasDimensions,
-            config?.textureAtlases?.world
+            config?.worldConfig ?? {
+                dimensions: config?.canvasDimensions ?? this.defaultCanvasDimensions
+            }
         );
+
+        this.font = new Font(this.renderer, config?.fontConfig ?? this.defaultFontConfig);
+
+        // this.font = new Font(this.renderer, config?.textureAtlases?.text ?? this.defaultTextAtlas);
     }
 
     /**
@@ -314,7 +334,10 @@ export class Game {
         }
 
         this.world.tick(this.frameDelta);
+        this.font.tick(this.frameDelta);
+
         this.world.render();
+        this.font.render();
 
         // handle updating and displaying debug data when in debug mode
         if (this.config?.debugMode) {
