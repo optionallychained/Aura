@@ -18,5 +18,4 @@ export const _createRectWire = (): Entity.Entity => {
             new Component.Shader(Shader.Program.TwoD.PROGRAM_COLOR_PER_VERTEX)
         ]
     });
-
 };

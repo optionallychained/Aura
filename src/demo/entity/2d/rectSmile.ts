@@ -1,17 +1,9 @@
-import { Color, Component, Entity, Geometry, Random, Shader, Vec2 } from '../../../engine';
+import { Component, Entity, Geometry, Random, Shader, Vec2 } from '../../../engine';
 
-export const _createRect2 = (): Entity.Entity => {
+export const _createRectSmile = (): Entity.Entity => {
     return new Entity.Entity({
-        tag: 'rect2',
+        tag: 'rectSmile',
         components: [
-            // new Component.MultiColor([
-            //     Color.random(),
-            //     Color.random(),
-            //     Color.random(),
-            //     Color.random(),
-            //     Color.random(),
-            //     Color.random()
-            // ]),
             new Component.Texture(1, 0),
             new Component.TwoD.Transform2D(
                 new Vec2(Random.between(-1, 1), Random.between(-1, 1)),
