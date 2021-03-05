@@ -1,4 +1,4 @@
-import { FragmentShader } from '../../fragment';
+import { FragmentShader } from '..';
 import { UniformType } from '../../uniformType.enum';
 
 /**
@@ -8,7 +8,7 @@ import { UniformType } from '../../uniformType.enum';
  * //   is it worth having the split at all?
  */
 export const FRAGMENT_BASIC = new FragmentShader({
-    name: 'fragment_basic_2d',
+    name: 'fragment_basic',
     source: `
         precision mediump float;
 

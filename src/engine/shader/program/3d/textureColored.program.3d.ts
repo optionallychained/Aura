@@ -1,4 +1,4 @@
-import { FRAGMENT_TEXTURE } from '../../fragment/generic';
+import { FRAGMENT_TEXTURE_COLORED } from '../../fragment/generic';
 import { VERTEX_TEXTURE_3D } from '../../vertex/3d';
 import { ShaderProgram } from '../shaderProgram';
 
@@ -8,8 +8,8 @@ import { ShaderProgram } from '../shaderProgram';
  * @see VERTEX_TEXTURE_3D
  * @see FRAGMENT_TEXTURE
  */
-export const PROGRAM_TEXTURE_3D = new ShaderProgram({
-    name: 'program_texture_3d',
+export const PROGRAM_TEXTURE_COLORED_3D = new ShaderProgram({
+    name: 'program_texture_colored_3d',
     vertex: VERTEX_TEXTURE_3D,
-    fragment: FRAGMENT_TEXTURE
+    fragment: FRAGMENT_TEXTURE_COLORED
 });

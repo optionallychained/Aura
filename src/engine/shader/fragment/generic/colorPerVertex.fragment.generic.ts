@@ -1,4 +1,4 @@
-import { FragmentShader } from '../../fragment';
+import { FragmentShader } from '..';
 
 /**
  * Built-in basic 2D Fragment Shader, shading fragments with a varying Color
@@ -7,7 +7,7 @@ import { FragmentShader } from '../../fragment';
  * //   is it worth having the split at all?
  */
 export const FRAGMENT_COLOR_PER_VERTEX = new FragmentShader({
-    name: 'fragment_color_per_vertex_2d',
+    name: 'fragment_color_per_vertex',
     source: `
         precision mediump float;
 

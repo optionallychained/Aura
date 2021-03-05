@@ -5,7 +5,7 @@ import { FragmentShader } from '../fragment.shader';
  * Built-in basic 2D Fragment Shader, supporting texture sampling with texcoords
  */
 export const FRAGMENT_TEXTURE = new FragmentShader({
-    name: 'fragment_texture_2d',
+    name: 'fragment_texture',
     source: `
         precision mediump float;
 

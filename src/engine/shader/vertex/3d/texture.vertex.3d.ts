@@ -4,7 +4,7 @@ import { VertexShader } from '../vertex.shader';
 /**
  * Built-in basic 3D Vertex Shader, transforming vertices by a uniform Mat3 and setting a varying texCoord
  */
-export const VERTEX_TEXTURE = new VertexShader({
+export const VERTEX_TEXTURE_3D = new VertexShader({
     name: 'vertex_texture_3d',
     source: `
         precision mediump float;
