@@ -1,8 +1,4 @@
-import { Texture } from '../component';
-
 export class TextureAtlas {
-
-    private textureIdentifier: WebGLTexture = -1;
 
     constructor(
         public readonly name: 'world' | 'text' | 'ui',
@@ -11,14 +7,10 @@ export class TextureAtlas {
         public readonly rows: number
     ) { }
 
-    public resolveTextureCoordinates(coords: Float32Array, column: number, row: number): Float32Array {
+    public resolveTextureCoordinates(coords: Float32Array, column: number, row: number, columnSpan: number, rowSpan: number): Float32Array {
         return Float32Array.from([
-            (column / this.columns) + (coords[0] / this.columns),
-            1 - ((row / this.rows) + (coords[1] / this.rows))
+            (column + coords[0]) / (this.columns - columnSpan + 1),
+            1 - ((row + coords[1]) / (this.rows - rowSpan + 1))
         ]);
-    }
-
-    public setTextureIdentifier(identifier: WebGLTexture): void {
-        this.textureIdentifier = identifier;
     }
 }

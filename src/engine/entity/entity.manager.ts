@@ -57,7 +57,7 @@ export class EntityManager {
      */
     constructor(private readonly config: EntityManagerConfig) {
         if (config.textureAtlas) {
-            config.textureAtlas.setTextureIdentifier(config.renderer.createTexture(config.textureAtlas));
+            config.renderer.createTexture(config.textureAtlas);
         }
     }
 
@@ -458,9 +458,9 @@ export class EntityManager {
                                     });
                                 }
 
-                                const { column, row } = e.getComponent(Texture);
+                                const { column, row, columnSpan, rowSpan } = e.getComponent(Texture);
 
-                                value = textureAtlas.resolveTextureCoordinates(value.slice(t, t + 2), column, row);
+                                value = textureAtlas.resolveTextureCoordinates(value.slice(t, t + 2), column, row, columnSpan, rowSpan);
 
                                 t += 2;
                             }

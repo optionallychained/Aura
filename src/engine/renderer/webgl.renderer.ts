@@ -219,7 +219,7 @@ export class WebGLRenderer {
      * @param name the name of the texture used to reference it later on
      * @param src the location of the image to load
      */
-    public createTexture(textureAtlas: TextureAtlas): WebGLTexture {
+    public createTexture(textureAtlas: TextureAtlas): void {
         const { gl } = this;
 
         const unit = gl.TEXTURE0 + Object.keys(this.textures).length;
@@ -251,8 +251,6 @@ export class WebGLRenderer {
         });
 
         this.textures.set(textureAtlas.name, { name: textureAtlas.name, texture, unit });
-
-        return texture;
     }
 
     /**
