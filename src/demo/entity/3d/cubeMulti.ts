@@ -23,7 +23,7 @@ export const _createCubeMulti = (): Entity.Entity => {
                 new Vec3(Random.between(0.1, 1), Random.between(0.1, 1), Random.between(0.1, 1)),
             ),
             new Component.Model(Geometry.ThreeD.BOX),
-            new Component.Shader(Shader.Program.ThreeD.PROGRAM_COLOR_PER_VERTEX)
+            new Component.Shader(Shader.Program.ThreeD.PROGRAM_COLOR_PER_VERTEX_3D)
         ]
     });
 };

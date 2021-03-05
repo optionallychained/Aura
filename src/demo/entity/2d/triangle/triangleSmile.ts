@@ -10,7 +10,7 @@ export const _createTriangleSmile = (): Entity.Entity => {
                 new Vec2(Random.between(0.5, 1.5), Random.between(0.5, 1.5))
             ),
             new Component.Model(Geometry.TwoD.TRIANGLE),
-            new Component.Shader(Shader.Program.TwoD.PROGRAM_TEXTURE)
+            new Component.Shader(Shader.Program.TwoD.PROGRAM_TEXTURE_2D)
         ]
     });
 };

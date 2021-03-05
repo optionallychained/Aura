@@ -11,7 +11,7 @@ export const _createCubeSmile = (): Entity.Entity => {
 
             ),
             new Component.Model(Geometry.ThreeD.BOX),
-            new Component.Shader(Shader.Program.ThreeD.PROGRAM_TEXTURE)
+            new Component.Shader(Shader.Program.ThreeD.PROGRAM_TEXTURE_3D)
         ]
     });
 };

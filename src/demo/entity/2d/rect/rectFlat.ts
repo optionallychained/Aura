@@ -10,7 +10,7 @@ export const _createRectFlat = (): Entity.Entity => {
                 new Vec2(Random.between(0.5, 1.5), Random.between(0.5, 1.5))
             ),
             new Component.Model(Geometry.TwoD.BOX),
-            new Component.Shader(Shader.Program.TwoD.PROGRAM_BASIC)
+            new Component.Shader(Shader.Program.TwoD.PROGRAM_BASIC_2D)
         ]
     });
 };
