@@ -17,15 +17,15 @@ const populate = (game: Core.Game): void => {
     const entities: Array<Entity.Entity> = [];
 
     const _generators = [
-        _createRect,
+        // _createRect,
         _createRectCat,
-        _createRectBatCat,
-        _createRectSmile,
-        _createRectWire,
+        // _createRectBatCat,
+        // _createRectSmile,
+        // _createRectWire,
         // _createRectWireTextured,
-        _createTriangle,
-        _createTriangleCat,
-        _createTriangleWire,
+        // _createTriangle,
+        // _createTriangleCat,
+        // _createTriangleWire,
         // _createTriangleWireTextured
     ];
 

@@ -4,7 +4,7 @@ import { VERTEX_BASIC } from '../../vertex/2d';
 
 
 /**
- * Built-in basic ShaderProgram, pairing the built-in basic Vertex and Fragment shaders
+ * Built-in basic 2D ShaderProgram, pairing the built-in basic 2D Vertex and Fragment shaders
  *
  * @see VERTEX_BASIC
  * @see FRAGMENT_BASIC

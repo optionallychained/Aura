@@ -2,7 +2,12 @@ import { EntityManager } from '../entity';
 import { WebGLRenderer } from '../renderer';
 import { UIConfig } from './ui.config';
 
-// TODO placeholder
+/**
+ * Core UI class; providing utility and management for Entities representing UI elements
+ *
+ * // TODO continue on branch ui
+ * // TODO this, World and Font might want to actually extend from EntityManager?
+ */
 export class UI {
 
     private readonly entityManager: EntityManager;

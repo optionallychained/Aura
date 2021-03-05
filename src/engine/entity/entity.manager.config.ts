@@ -9,6 +9,6 @@ export interface EntityManagerConfig {
     readonly name: string;
     /** The WebGLRenderer the EntityManager will use */
     readonly renderer: WebGLRenderer;
-
+    /** An optional TextureAtlas to use in rendering managed Entities with Texture Componnets */
     readonly textureAtlas?: TextureAtlas;
 }

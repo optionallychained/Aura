@@ -7,6 +7,12 @@ import { WebGLRenderer } from '../renderer';
 import { PROGRAM_TEXTURE } from '../shader/program/2d';
 import { FontConfig } from './font.config';
 
+/**
+ * Core Font class; providing utility and management for Entities representing strings and characters
+ *
+ * // TODO continue on branch text
+ * // TODO this, World and UI might want to actually extend from EntityManager?
+ */
 export class Font {
 
     public readonly entityManager: EntityManager;

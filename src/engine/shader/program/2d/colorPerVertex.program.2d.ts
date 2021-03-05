@@ -3,7 +3,7 @@ import { ShaderProgram } from '../../program';
 import { VERTEX_COLOR_PER_VERTEX } from '../../vertex/2d';
 
 /**
- * Built-in basic color per vertex ShaderProgram, pairing the built-in basic color per vertex Vertex and Fragment shaders
+ * Built-in basic 2D color per vertex ShaderProgram, pairing the built-in basic 2D color per vertex Vertex and Fragment shaders
  *
  * @see VERTEX_COLOR_PER_VERTEX
  * @see FRAGMENT_COLOR_PER_VERTEX

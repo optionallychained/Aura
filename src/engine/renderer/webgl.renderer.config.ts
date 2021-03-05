@@ -15,8 +15,8 @@ export interface WebGLRendererConfig {
     readonly shaderProgramName: string;
     /** The VBOConfig describing the VBO to use in this render call */
     readonly vbo: VBOConfig;
-    /** The name of the texture atlas to use for this render call; if applicable */
-    readonly textureAtlasName?: string;
     /** The list of Entities this draw call is rendering; used in uploading uniform values, if applicable */
     readonly entities: ReadonlyArray<Entity>;
+    /** The name of the texture atlas to use for this render call; if applicable */
+    readonly textureAtlasName?: string;
 }

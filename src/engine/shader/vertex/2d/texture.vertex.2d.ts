@@ -1,6 +1,9 @@
 import { UniformType } from '../../uniformType.enum';
 import { VertexShader } from '../vertex.shader';
 
+/**
+ * Built-in basic 2D Vertex Shader, transforming vertices by a uniform Mat3 and setting a varying texCoord
+ */
 export const VERTEX_TEXTURE = new VertexShader({
     name: 'vertex_texture_2d',
     source: `

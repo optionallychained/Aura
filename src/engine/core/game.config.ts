@@ -20,14 +20,12 @@ export interface GameConfig {
     readonly controlScheme?: ControlScheme;
     /** Debug mode, enabling the display of frame data and potentially other useful stuff in the future; default value is false */
     readonly debugMode?: boolean;
-    /** World dimensions; for decoupling Entity coordinate systems from GL screenspace coords. Default value is {canvasDimensions} */
-    readonly worldDimensions?: Vec2;
-
-
+    /** Optional configuration for the Game's UI */
     readonly uiConfig?: UIConfig
+    /** Optional configuration for the Game's World */
     readonly worldConfig?: WorldConfig;
+    /** Optional configuration for the Game's Font */
     readonly fontConfig?: FontConfig;
-
     /** Game init function; none is provided by default */
     readonly init?: () => void
 }

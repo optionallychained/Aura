@@ -26,10 +26,13 @@ import { ProtoGLError } from './protogl.error';
  */
 export class Game {
 
+    /** Core World; providing utility and management for Entities representing game objects */
     public readonly world: World;
 
+    /** Core Font; providing utility and management for Entities representing strings and characters */
     public readonly font: Font;
 
+    /** Core UI; providing utility and management for Entities representing UI elements */
     public readonly ui: UI;
 
     /** InputManager for handling all user input */
@@ -63,7 +66,7 @@ export class Game {
         fps: ''
     };
 
-    /** Default Canvas dimensions for use in initialization */
+    /** Default Canvas dimensions */
     private readonly defaultCanvasDimensions = new Vec2(window.innerWidth, window.innerHeight);
 
     /** Default ControlScheme */
@@ -72,9 +75,13 @@ export class Game {
     /** Default background color */
     private readonly defaultBackgroundColor = new Color();
 
-    // TODO engine src....
+    /** Default Font texture atlas, for configuring the built-in engine Font */
+    // TODO move into Font?
+    // TODO font should be built into and published with the engine itself...
     private readonly defaultFontAtlas = new TextureAtlas('text', 'res/font.png', 64, 1);
 
+    /** Default Font charset, for configuring the built-in engine Font */
+    // TODO move into Font?
     private readonly defaultFontCharset = [
         'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y',
         'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '(', ')', '[', ']', '+', '-', '*', '/', '!', '?', '\'', '"', '#', '£',
@@ -82,7 +89,7 @@ export class Game {
     ];
 
     /**
-     * Constructor. Initialise the Canvas, as well as the Renderer, EntityManager and InputManager
+     * Constructor. Initialise the Canvas, as well as the Renderer, InputManager, World, Font and UI
      *
      * @param config optional configuration
      */
@@ -118,6 +125,7 @@ export class Game {
             }
         );
 
+        // TODO move defaults into UI
         this.ui = new UI(
             this.renderer,
             config?.uiConfig
@@ -329,7 +337,7 @@ export class Game {
     /**
      * Main Game execution method, representing a single frame.
      *
-     * Calculates the frame delta, then executes all Systems, updates the current State, updates all Entities, and renders
+     * Calculates the frame delta, then executes all Systems, updates the current State, then ticks and renders the World, UI and Font
      */
     private run(): void {
         this.frameDelta = Date.now() - this.lastFrameTime;

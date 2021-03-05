@@ -47,6 +47,18 @@ interface ShaderProgramSpec {
 }
 
 /**
+ * Internal-use utility interface describing a texture's specification with information only required by the renderer
+ */
+interface TextureSpec {
+    /** The name of the texture */
+    name: string;
+    /** The GL Unit of the texture (eg gl.TEXTURE0) */
+    unit: number;
+    /** The WebGLTexture */
+    texture: WebGLTexture;
+}
+
+/**
  * Core WebGLRenderer; utilised by the EntityManager to defer the rendering of Entities to the Canvas
  *
  * Handles every aspect of WebGL API interaction; including the construction and maintenance of Shaders and VBOs, and the rendering of game
@@ -78,13 +90,11 @@ export class WebGLRenderer {
     /** Active VBO name; used for frame-to-frame optimisation of VBO switching and vertexAttribPointer() calls */
     private activeVBOName: string | null = null;
 
-    /** A maintained list of Textures; mapped by their name for simple management and usage */
-    private readonly textures = new Map<string, { name: string; unit: number; texture: WebGLTexture; }>();
+    /** A maintained list of texture specifications; mapped by their name for simple management and usage */
+    private readonly textures = new Map<string, TextureSpec>();
 
-    // /** Active Texture name; used for frame-to-frame optimisation of bindTexture() calls */
-    // private activeTextureName: string | null = null;
-
-    private activeTexture: { name: string; unit: number; texture: WebGLTexture; } | null = null;
+    /** Active texture specification; used for render-to-render optimisation of texture switching */
+    private activeTexture: TextureSpec | null = null;
 
     /** Current rendering mode; used for differentiating some rendering functionality between 2D and 3D States */
     private mode: RenderingMode = '2D';
@@ -215,19 +225,19 @@ export class WebGLRenderer {
      * Create a texture from an image with a given source
      *
      * // TODO lots of opportunity in here for configuration on a per-texture basis
+     * // TODO texParameter*()
      *
-     * @param name the name of the texture used to reference it later on
-     * @param src the location of the image to load
+     * @param textureAtlas the TextureAtlas representing the texture to load
      */
     public createTexture(textureAtlas: TextureAtlas): void {
         const { gl } = this;
 
+        // set the texture unit and make it active
         const unit = gl.TEXTURE0 + Object.keys(this.textures).length;
-
         gl.activeTexture(unit);
 
+        // create the texture
         const texture = gl.createTexture();
-
         if (!texture) {
             throw new ProtoGLError({
                 class: 'WebGLRenderer',
@@ -241,7 +251,7 @@ export class WebGLRenderer {
         gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([255, 0, 255, 255]));
         gl.bindTexture(gl.TEXTURE_2D, null);
 
-        // handle the asynchronous image load by loading the actual texture data into the texture
+        // handle the asynchronous image load by loading the actual image data into the texture when ready
         const image = new Image();
         image.src = textureAtlas.src;
         image.addEventListener('load', () => {
@@ -286,6 +296,7 @@ export class WebGLRenderer {
      */
     public render(config: WebGLRendererConfig): void {
         const { gl } = this;
+
         // switch shader programs if necessary
         if (config.shaderProgramName !== this.activeShaderProgram?.name) {
             this.useShaderProgram(config.shaderProgramName);
@@ -553,6 +564,11 @@ export class WebGLRenderer {
         this.activeVBOName = vbo.name;
     }
 
+    /**
+     * Internal-use texture switching routine; make the texture, specified by name, active for draw calls
+     *
+     * @param name the name of the texture to make active
+     */
     private useTexture(name: string): void {
         const { gl } = this;
 

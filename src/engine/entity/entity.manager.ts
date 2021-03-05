@@ -13,6 +13,9 @@ type EntityChanges = Array<{ shaderName: string; modelName: string; }>;
 /**
  * Core EntityManager; utilised by the Game to defer the management, updating and rendering of game Entities
  *
+ * Three EntityManagers in total are utilised by World, Font and UI so as to separate processing and utility for the three distinct Entity
+ *   types and allow for the consolidation of all update/rendering logic into the relationship between EntityManager and WebGLRenderer
+ *
  * Works to optimise Entity management and rendering by grouping Entities, precompiling vertex lists, handling VBOs and caching Entity
  *   filter/search results
  *
@@ -51,7 +54,7 @@ export class EntityManager {
     private readonly sourcedEntityFilterCache = new Map<string, Array<Entity>>();
 
     /**
-     * Constructor. Take and store the EntityManager's config
+     * Constructor. Take and store the EntityManager's config, and initialise the Texture Atlas if provided
      *
      * @param renderer the renderer
      */
@@ -443,6 +446,7 @@ export class EntityManager {
                                 p += attr.size;
                             }
                             else if (attr.name === 'a_TexCoord') {
+                                // handle texture coordinates by asking the Texture Atlas to resolve this vertex's texcoord
                                 const { textureAtlas } = this.config;
 
                                 if (!textureAtlas) {
@@ -459,9 +463,9 @@ export class EntityManager {
                                 }
 
                                 const { column, row, columnSpan, rowSpan } = e.getComponent(Texture);
-
                                 value = textureAtlas.resolveTextureCoordinates(value.slice(t, t + 2), column, row, columnSpan, rowSpan);
 
+                                // all texture coordinates are (currently?) of size 2
                                 t += 2;
                             }
 

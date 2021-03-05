@@ -2,6 +2,14 @@ import { EntityManager } from '../entity';
 import { WebGLRenderer } from '../renderer';
 import { WorldConfig } from './world.config';
 
+/**
+ * Core World class; providing utility and management for Entities representing game objects
+ *
+ * // TODO this is where perspective/ortho/camera stuff will go
+ *
+ * // TODO continue on branch world
+ * // TODO this, Font and UI might want to actually extend from EntityManager?
+ */
 export class World {
 
     public readonly entityManager: EntityManager;
