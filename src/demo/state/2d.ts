@@ -1,4 +1,4 @@
-import { Angle, Component, Core, Entity, Input, Random, State, Vec2 } from '../../engine';
+import { Angle, Color, Component, Core, Entity, Input, Random, State, Vec2 } from '../../engine';
 import { _createRectMulti } from '../entity/2d/rect/rectMulti';
 import { _createRectBatCat } from '../entity/2d/rect/rectBatCat';
 import { _createRectCat } from '../entity/2d/rect/rectCat';
@@ -38,7 +38,7 @@ const populate = (game: Core.Game): void => {
         _createTriangleWire
     ];
 
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 50; i++) {
         const r = Math.round(Random.between(1, _generators.length));
 
         entities.push(_generators[r - 1]());
@@ -72,8 +72,9 @@ export const State2D = new State.State({
     init: (game) => {
         populate(game);
 
-        game.font.addString(new Vec2(-0.75, 0), 'hello');
-        game.font.addString(new Vec2(-0.75, -0.25), 'protogl');
+        game.font.addString('red', new Vec2(-0.75, 0.25), new Color(255, 0, 0));
+        game.font.addString('green', new Vec2(-0.75, 0), new Color(0, 255, 0));
+        game.font.addString('blue', new Vec2(-0.75, -0.25), new Color(0, 0, 255));
     },
     end: (game) => {
         game.world.entityManager.clearEntities();

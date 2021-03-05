@@ -17,6 +17,7 @@ const game = new Core.Game({
 game.registerShader(Shader.Program.TwoD.PROGRAM_COLOR_PER_VERTEX);
 game.registerShader(Shader.Program.TwoD.PROGRAM_TEXTURE);
 game.registerShader(Shader.Program.TwoD.PROGRAM_BASIC);
+game.registerShader(Shader.Program.TwoD.PROGRAM_TEXTURE_COLORED);
 
 // register all built-in 3D Shader Programs
 game.registerShader(Shader.Program.ThreeD.PROGRAM_COLOR_PER_VERTEX);
@@ -30,4 +31,4 @@ game.addState(State2D);
 game.addState(state3D);
 
 // kick off the game's execution with the 3D state
-game.start('3D');
+game.start('2D');

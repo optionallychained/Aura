@@ -23,7 +23,7 @@ const populate = (game: Core.Game): void => {
         _createCubeWire
     ];
 
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 15; i++) {
         const r = Math.round(Random.between(1, _generators.length));
 
         entities.push(_generators[r - 1]());
