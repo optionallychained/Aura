@@ -1,6 +1,6 @@
 # Text
 
-- [ ] TextManager
+- [x] ~~TextManager~~ (Font)
     - ...w/ EntityManager for actual implementation of strings?
     - ...look at ProtoGL.js
 

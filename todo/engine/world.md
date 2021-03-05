@@ -1,8 +1,8 @@
 # World
 
-- [ ] Representation of a "World"
+- [x] Representation of a "World"
 
-- [ ] Supplant Game.entityManager with world, move EntityManager into World
+- [x] Supplant Game.entityManager with world, move EntityManager into World
 
 - [ ] Coordinate system + screenspace mapping
 
