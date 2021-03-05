@@ -5,7 +5,7 @@ import { state3D } from './state/3d';
 
 // instantiate a Game (canvas is automatically created)
 const game = new Core.Game({
-    canvasDimensions: new Vec2(800, 600),
+    canvasDimensions: new Vec2(1024, 768),
     worldConfig: {
         textureAtlas: new TextureAtlas('world', 'res/world.png', 2, 2)
     },
@@ -13,13 +13,15 @@ const game = new Core.Game({
     init: () => { console.log('GAME -> init') }
 });
 
-// register the built in color-per-vertex 2D shader program
+// register all built-in 2D Shader Programs
 game.registerShader(Shader.Program.TwoD.PROGRAM_COLOR_PER_VERTEX);
-
 game.registerShader(Shader.Program.TwoD.PROGRAM_TEXTURE);
+game.registerShader(Shader.Program.TwoD.PROGRAM_BASIC);
 
-// register the built in basic 3D shader program
+// register all built-in 3D Shader Programs
 game.registerShader(Shader.Program.ThreeD.PROGRAM_COLOR_PER_VERTEX);
+game.registerShader(Shader.Program.ThreeD.PROGRAM_TEXTURE);
+game.registerShader(Shader.Program.ThreeD.PROGRAM_BASIC);
 
 // add the 2D State to the Game
 game.addState(State2D);
@@ -28,4 +30,4 @@ game.addState(State2D);
 game.addState(state3D);
 
 // kick off the game's execution with the 3D state
-game.start('2D');
+game.start('3D');

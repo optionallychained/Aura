@@ -1,10 +1,10 @@
-import { Component, Entity, Geometry, Random, Shader, Vec2 } from '../../../engine';
+import { Component, Entity, Geometry, Random, Shader, Vec2 } from '../../../../engine';
 
-export const _createRectCat = (): Entity.Entity => {
+export const _createRectSmile = (): Entity.Entity => {
     return new Entity.Entity({
-        tag: 'rectCat',
+        tag: 'rectSmile',
         components: [
-            new Component.Texture(0, 1),
+            new Component.Texture(1, 0),
             new Component.TwoD.Transform2D(
                 new Vec2(Random.between(-1, 1), Random.between(-1, 1)),
                 new Vec2(Random.between(0.5, 1.5), Random.between(0.5, 1.5))

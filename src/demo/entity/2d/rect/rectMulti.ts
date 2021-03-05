@@ -1,8 +1,8 @@
-import { Color, Component, Entity, Geometry, Random, Shader, Vec2 } from '../../../engine';
+import { Color, Component, Entity, Geometry, Random, Shader, Vec2 } from '../../../../engine';
 
-export const _createRect = (): Entity.Entity => {
+export const _createRectMulti = (): Entity.Entity => {
     return new Entity.Entity({
-        tag: 'rect',
+        tag: 'rectMulti',
         components: [
             new Component.MultiColor([
                 Color.random(),

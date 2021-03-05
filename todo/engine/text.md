@@ -8,6 +8,9 @@
     - ...overrideable? (see asset discovery/loading approach)
 
 
+- [ ] text rendering in 3D scenes
+
+
 - [ ] (in tandem with UI/textboxes/panels)
     - [ ] Wrapping
     - [ ] Alignment

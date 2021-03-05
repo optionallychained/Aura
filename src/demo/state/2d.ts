@@ -1,14 +1,18 @@
 import { Angle, Component, Core, Entity, Input, Random, State, Vec2 } from '../../engine';
-import { _createRect } from '../entity/2d/rect';
-import { _createRectBatCat } from '../entity/2d/rectBatCat';
-import { _createRectCat } from '../entity/2d/rectCat';
-import { _createRectSmile } from '../entity/2d/rectSmile';
-import { _createRectWire } from '../entity/2d/rectWire';
-import { _createRectWireTextured } from '../entity/2d/rectWireTextured';
-import { _createTriangle } from '../entity/2d/triangle';
-import { _createTriangleCat } from '../entity/2d/triangleCat';
-import { _createTriangleWire } from '../entity/2d/triangleWire';
-import { _createTriangleWireTextured } from '../entity/2d/triangleWireTextured';
+import { _createRectMulti } from '../entity/2d/rect/rectMulti';
+import { _createRectBatCat } from '../entity/2d/rect/rectBatCat';
+import { _createRectCat } from '../entity/2d/rect/rectCat';
+import { _createRectSmile } from '../entity/2d/rect/rectSmile';
+import { _createRectWire } from '../entity/2d/rect/rectWire';
+import { _createTriangleFlat } from '../entity/2d/triangle/triangleFlat';
+import { _createTriangleCat } from '../entity/2d/triangle/triangleCat';
+import { _createTriangleWire } from '../entity/2d/triangle/triangleWire';
+import { _createRectFlat } from '../entity/2d/rect/rectFlat';
+import { _createRectBrick } from '../entity/2d/rect/rectBrick';
+import { _createTriangleBatCat } from '../entity/2d/triangle/triangleBatCat';
+import { _createTriangleBrick } from '../entity/2d/triangle/triangleBrick';
+import { _createTriangleMulti } from '../entity/2d/triangle/triangleMulti';
+import { _createTriangleSmile } from '../entity/2d/triangle/triangleSmile';
 
 const rotations: Array<number> = [];
 let frame = 0;
@@ -17,19 +21,24 @@ const populate = (game: Core.Game): void => {
     const entities: Array<Entity.Entity> = [];
 
     const _generators = [
-        // _createRect,
+        _createRectBatCat,
+        _createRectBrick,
         _createRectCat,
-        // _createRectBatCat,
-        // _createRectSmile,
-        // _createRectWire,
-        // _createRectWireTextured,
-        // _createTriangle,
-        // _createTriangleCat,
-        // _createTriangleWire,
-        // _createTriangleWireTextured
+        _createRectFlat,
+        _createRectMulti,
+        _createRectSmile,
+        _createRectWire,
+
+        _createTriangleBatCat,
+        _createTriangleBrick,
+        _createTriangleCat,
+        _createTriangleFlat,
+        _createTriangleMulti,
+        _createTriangleSmile,
+        _createTriangleWire
     ];
 
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 100; i++) {
         const r = Math.round(Random.between(1, _generators.length));
 
         entities.push(_generators[r - 1]());
@@ -65,6 +74,9 @@ export const State2D = new State.State({
 
         game.font.addString(new Vec2(-0.75, 0), 'hello');
         game.font.addString(new Vec2(-0.75, -0.25), 'protogl');
+    },
+    end: (game) => {
+        game.world.entityManager.clearEntities();
     },
     tick: (game) => {
         if (game.inputManager.isKeyDown(Input.Keys.ENTER)) {

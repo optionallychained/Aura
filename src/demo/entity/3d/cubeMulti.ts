@@ -1,8 +1,8 @@
 import { Color, Component, Entity, Geometry, Random, Shader, Vec3 } from '../../../engine';
 
-export const _createCube = (): Entity.Entity => {
+export const _createCubeMulti = (): Entity.Entity => {
     return new Entity.Entity({
-        tag: 'cube',
+        tag: 'cubeMulti',
         components: [
             new Component.MultiColor([
                 Color.random(),

@@ -1,5 +1,10 @@
 import { Angle, Component, Core, Entity, Input, Random, State, Vec3 } from '../../engine';
-import { _createCube } from '../entity/3d/cube';
+import { _createCubeBatCat } from '../entity/3d/cubeBatCat';
+import { _createCubeBrick } from '../entity/3d/cubeBrick';
+import { _createCubeCat } from '../entity/3d/cubeCat';
+import { _createCubeFlat } from '../entity/3d/cubeFlat';
+import { _createCubeMulti } from '../entity/3d/cubeMulti';
+import { _createCubeSmile } from '../entity/3d/cubeSmile';
 import { _createCubeWire } from '../entity/3d/cubeWire';
 
 const rotations: Array<Vec3> = [];
@@ -8,20 +13,20 @@ let frame = 0;
 const populate = (game: Core.Game): void => {
     const entities: Array<Entity.Entity> = [];
 
-    for (let i = 0; i < 25; i++) {
-        const r = Math.round(Random.between(1, 2));
+    const _generators = [
+        _createCubeBatCat,
+        _createCubeBrick,
+        _createCubeCat,
+        _createCubeFlat,
+        _createCubeMulti,
+        _createCubeSmile,
+        _createCubeWire
+    ];
 
-        switch (r) {
-            case 1:
-                entities.push(_createCube());
-                break;
-            case 2:
-                entities.push(_createCubeWire());
-                break;
-            default:
-                entities.push(_createCube());
-                break;
-        }
+    for (let i = 0; i < 10; i++) {
+        const r = Math.round(Random.between(1, _generators.length));
+
+        entities.push(_generators[r - 1]());
 
         const angleX = Angle.toRadians(Random.between(-3, 3));
         const angleY = Angle.toRadians(Random.between(-3, 3));
@@ -39,7 +44,7 @@ const rotateAndScale = (game: Core.Game): void => {
     const scaleFactor = 1 + (Math.sin(frame * 0.025) * 0.25);
     const scale = new Vec3(scaleFactor, scaleFactor, scaleFactor);
 
-    for (const e of game.world.entityManager.filterEntitiesByTags('cube', 'cubeWire')) {
+    for (const e of game.world.entityManager.filterEntitiesByComponentName('Transform3D')) {
         const transform = e.getComponent(Component.ThreeD.Transform3D);
 
         transform.scale(scale);
