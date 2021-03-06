@@ -4,7 +4,7 @@ export const _createCubeFlat = (): Entity.Entity => {
     return new Entity.Entity({
         tag: 'cubeFlat',
         components: [
-            new Component.FlatColor(Color.random()),
+            new Component.FlatColor(Color.random(true)),
             new Component.ThreeD.Transform3D(
                 new Vec3(Random.between(-1, 1), Random.between(-1, 1), 0.5),
                 new Vec3(Random.between(0.1, 1), Random.between(0.1, 1), Random.between(0.1, 1)),

@@ -4,7 +4,7 @@
  * For use in asking the game if a key is down:
  *
  *     ```
- *     if (game.inputManager.keyPressed(Input.Keys.ARROW_LEFT)) { ... }
+ *     if (game.input.keyPressed(Input.Keys.ARROW_LEFT)) { ... }
  *     ```
  */
 export enum Keys {

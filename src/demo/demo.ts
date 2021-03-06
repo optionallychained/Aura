@@ -23,6 +23,7 @@ game.registerShader(Shader.Program.TwoD.PROGRAM_TEXTURE_COLORED_2D);
 game.registerShader(Shader.Program.ThreeD.PROGRAM_COLOR_PER_VERTEX_3D);
 game.registerShader(Shader.Program.ThreeD.PROGRAM_TEXTURE_3D);
 game.registerShader(Shader.Program.ThreeD.PROGRAM_BASIC_3D);
+game.registerShader(Shader.Program.ThreeD.PROGRAM_TEXTURE_COLORED_3D);
 
 // add the 2D State to the Game
 game.addState(State2D);

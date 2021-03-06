@@ -75,15 +75,15 @@ export const State2D = new State.State({
     init: (game) => {
         populate(game);
 
-        game.font.addString('red', new Vec2(-0.75, 0.25), new Color(255, 0, 0));
-        game.font.addString('green', new Vec2(-0.75, 0), new Color(0, 255, 0));
-        game.font.addString('blue', new Vec2(-0.75, -0.25), new Color(0, 0, 255));
+        game.font.addString('hello', new Vec2(-0.75, 0.25), Color.random());
+        game.font.addString('protogl', new Vec2(-0.75, 0), Color.random());
+        game.font.addString('world', new Vec2(-0.75, -0.25), Color.random());
     },
     end: (game) => {
         game.world.entityManager.clearEntities();
     },
     tick: (game) => {
-        if (game.inputManager.isKeyDown(Input.Keys.ENTER)) {
+        if (game.input.isKeyDown(Input.Keys.ENTER)) {
             game.switchToState('3D');
         }
 

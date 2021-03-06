@@ -22,7 +22,7 @@ type EntityChanges = Array<{ shaderName: string; modelName: string; }>;
  * VBOs are provisioned on a per-shader+model combination basis. This is because Entities that share both a Shader and a Model can be
  *   rendered in batches, and thereby their vertices buffered to the GPU and drawn from as a single set
  *
- * The EntityManager is available on the Game instance at `game.entityManager`
+ * The EntityManagers are available on the Game instance at `game.[world|ui|font].entityManager`
  *
  * @see Game
  */

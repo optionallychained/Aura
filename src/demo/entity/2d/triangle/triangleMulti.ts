@@ -4,7 +4,7 @@ export const _createTriangleMulti = (): Entity.Entity => {
     return new Entity.Entity({
         tag: 'triangleMulti',
         components: [
-            new Component.MultiColor(Color.randomList(3)),
+            new Component.MultiColor(Color.randomList(3, true)),
             new Component.TwoD.Transform2D(
                 new Vec2(Random.between(-1, 1), Random.between(-1, 1)),
                 new Vec2(Random.between(0.5, 1.5), Random.between(0.5, 1.5))

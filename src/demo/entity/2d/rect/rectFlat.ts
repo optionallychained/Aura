@@ -4,7 +4,7 @@ export const _createRectFlat = (): Entity.Entity => {
     return new Entity.Entity({
         tag: 'rectFlat',
         components: [
-            new Component.FlatColor(Color.random()),
+            new Component.FlatColor(Color.random(true)),
             new Component.TwoD.Transform2D(
                 new Vec2(Random.between(-1, 1), Random.between(-1, 1)),
                 new Vec2(Random.between(0.5, 1.5), Random.between(0.5, 1.5))

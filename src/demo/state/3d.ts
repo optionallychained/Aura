@@ -69,7 +69,7 @@ export const state3D = new State.State({
         game.world.entityManager.clearEntities();
     },
     tick: (game) => {
-        if (game.inputManager.isKeyDown(Input.Keys.SPACE)) {
+        if (game.input.isKeyDown(Input.Keys.SPACE)) {
             game.switchToState('2D');
         }
 

@@ -1,4 +1,3 @@
-import { ProtoGLError } from '../core';
 import { Geometry, GLShape } from '../geometry';
 import { Component } from './component';
 

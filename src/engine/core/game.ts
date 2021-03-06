@@ -36,7 +36,7 @@ export class Game {
     public readonly ui: UI;
 
     /** InputManager for handling all user input */
-    public readonly inputManager: InputManager;
+    public readonly input: InputManager;
 
     /** the Canvas to render the game on */
     private readonly canvas: HTMLCanvasElement;
@@ -106,7 +106,7 @@ export class Game {
         this.canvas.height = config?.canvasDimensions?.y ?? this.defaultCanvasDimensions.y;
 
         this.renderer = new WebGLRenderer(this.canvas, config?.backgroundColor ?? this.defaultBackgroundColor);
-        this.inputManager = new InputManager(this.canvas, config?.controlScheme ?? this.defaultControlScheme);
+        this.input = new InputManager(this.canvas, config?.controlScheme ?? this.defaultControlScheme);
 
         // TODO move defaults into World
         this.world = new World(
