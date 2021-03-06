@@ -1,5 +1,8 @@
 import { ControlScheme } from '../input/controlScheme.type';
 import { Color, Vec2 } from '../math';
+import { FontConfig } from '../text/font.config';
+import { UIConfig } from '../ui';
+import { WorldConfig } from '../world/world.config';
 
 /**
  * Interface desciribing the main Game Configuration object
@@ -17,6 +20,12 @@ export interface GameConfig {
     readonly controlScheme?: ControlScheme;
     /** Debug mode, enabling the display of frame data and potentially other useful stuff in the future; default value is false */
     readonly debugMode?: boolean;
+    /** Optional configuration for the Game's UI */
+    readonly uiConfig?: UIConfig
+    /** Optional configuration for the Game's World */
+    readonly worldConfig?: WorldConfig;
+    /** Optional configuration for the Game's Font */
+    readonly fontConfig?: FontConfig;
     /** Game init function; none is provided by default */
     readonly init?: () => void
 }

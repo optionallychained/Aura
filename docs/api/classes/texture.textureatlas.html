@@ -1,0 +1,391 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>TextureAtlas | API | ProtoGL Documentation - v0.5.0</title>
+	<meta name="description" content="Documentation for API | ProtoGL Documentation - v0.5.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+	<script async src="../assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">API | ProtoGL Documentation - v0.5.0</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../modules.html">API | ProtoGL Documentation - v0.5.0</a>
+				</li>
+				<li>
+					<a href="../modules/texture.html">Texture</a>
+				</li>
+				<li>
+					<a href="texture.textureatlas.html">TextureAtlas</a>
+				</li>
+			</ul>
+			<h1>Class TextureAtlas</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Class representing a texture atlas; a uniformly-distributed grid composed of individual textures which Entities may sample from with
+						Texture Components</p>
+					</div>
+					<p>One part of the system&#39;s solution for texture support</p>
+					<p>Utilised by EntityManagers in configuring the WebGLRenderer and resolving texture coordinates for Entity vertex lists, three
+					TextureAtlases are supported to contain textures for game objects (World), text (Font) and UI elements (UI)</p>
+					<p>Atlases, if required, are configured in association with World, UI and Font by way of the top-level GameConfig object</p>
+					<p>Image dimensions must be power-of-2 in both x and y</p>
+					<p>// TODO Texture implementation is likely to change significantly in the future; all this is subject to change. Especially, a stronger
+					//   association between Entities and their Atlases (rather than indirectly via built-ins and Managers) is desirable</p>
+					<dl class="tsd-comment-tags">
+						<dt>see</dt>
+						<dd><p>Texture</p>
+						</dd>
+						<dt>see</dt>
+						<dd><p>GameConfig</p>
+						</dd>
+						<dt>see</dt>
+						<dd><p>WorldConfig</p>
+						</dd>
+						<dt>see</dt>
+						<dd><p>UIConfig</p>
+						</dd>
+						<dt>see</dt>
+						<dd><p>FontConfig</p>
+						</dd>
+						<dt>see</dt>
+						<dd><p>EntityManagerConfig</p>
+						</dd>
+					</dl>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">TextureAtlas</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="texture.textureatlas.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="texture.textureatlas.html#columns" class="tsd-kind-icon">columns</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="texture.textureatlas.html#name" class="tsd-kind-icon">name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="texture.textureatlas.html#rows" class="tsd-kind-icon">rows</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="texture.textureatlas.html#src" class="tsd-kind-icon">src</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="texture.textureatlas.html#resolvetexturecoordinates" class="tsd-kind-icon">resolve<wbr>Texture<wbr>Coordinates</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Texture<wbr>Atlas<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;world&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;text&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;ui&quot;</span>, src<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, columns<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, rows<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="texture.textureatlas.html" class="tsd-signature-type" data-tsd-kind="Class">TextureAtlas</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/747d582/src/engine/texture/textureAtlas.ts#L24">src/engine/texture/textureAtlas.ts:24</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Constructor. Take the Atlas&#39; name and filepath, as well as the dimensions of the atlas</p>
+								</div>
+								<p>Atlases must (currently?) be uniform, in that the Atlas should be divisible evenly along its x and y axis to yield individual
+									textures. However, an Entity can specify a column/row &quot;span&quot; so as to sample from multiple contiguous columns or rows in the Atlas,
+								allowing for packing of differently-sized textures</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>name: <span class="tsd-signature-type">&quot;world&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;text&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;ui&quot;</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the name of the Atlas, constrained to the three supported names</p>
+									</div>
+								</li>
+								<li>
+									<h5>src: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the file path of the image the Atlas will load</p>
+									</div>
+								</li>
+								<li>
+									<h5>columns: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the number of texture cells on the x-axis of the Atlas</p>
+									</div>
+								</li>
+								<li>
+									<h5>rows: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the number of texture cells on the y-axis of the Atlas</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="texture.textureatlas.html" class="tsd-signature-type" data-tsd-kind="Class">TextureAtlas</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="columns" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> columns</h3>
+					<div class="tsd-signature tsd-kind-icon">columns<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="name" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> name</h3>
+					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;world&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;text&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;ui&quot;</span></div>
+					<aside class="tsd-sources">
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="rows" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> rows</h3>
+					<div class="tsd-signature tsd-kind-icon">rows<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="src" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> src</h3>
+					<div class="tsd-signature tsd-kind-icon">src<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="resolvetexturecoordinates" class="tsd-anchor"></a>
+					<h3>resolve<wbr>Texture<wbr>Coordinates</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">resolve<wbr>Texture<wbr>Coordinates<span class="tsd-signature-symbol">(</span>coords<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Float32Array</span>, column<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, row<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, columnSpan<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, rowSpan<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Float32Array</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/747d582/src/engine/texture/textureAtlas.ts#L61">src/engine/texture/textureAtlas.ts:61</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Given a set of vertex texture coordinates retrieved from an Entity&#39;s Model, as well as the atlas positional data found in the
+									Entity&#39;s Texture, calculate the real texCoord value to build into the Entity&#39;s vertex list</p>
+								</div>
+								<p>Texture coordinates are specified on a Model with values ranging 0-&gt;1, as if sampling from a whole image. Using this in conjunction
+									with a Texture Component&#39;s positional data, we can treat those values as being &quot;within a designated sample space&quot;, simplifying the
+								specification of texture coordinates for Models as well as removing the need for Entities to explicitly define texture coordinates</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>coords: <span class="tsd-signature-type">Float32Array</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the base texture coordinates to scale</p>
+									</div>
+								</li>
+								<li>
+									<h5>column: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the column within the Atlas to sample from</p>
+									</div>
+								</li>
+								<li>
+									<h5>row: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the row within the Atlas to sample from</p>
+									</div>
+								</li>
+								<li>
+									<h5>columnSpan: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the number of columns to span in the sample</p>
+									</div>
+								</li>
+								<li>
+									<h5>rowSpan: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the number of rows to span in the sample</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Float32Array</span></h4>
+							<p>the corrected texture coordinates, sampling from (column -&gt; column + columnSpan), (row -&gt; row + rowSpan)</p>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="../modules.html">Exports</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/component.html">Component</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/core.html">Core</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/entity.html">Entity</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/geometry.html">Geometry</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/input.html">Input</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/renderer.html">Renderer</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/shader.html">Shader</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/state.html">State</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/system.html">System</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/text.html">Text</a>
+					</li>
+					<li class="current tsd-kind-namespace">
+						<a href="../modules/texture.html">Texture</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/ui.html">UI</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/world.html">World</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class tsd-parent-kind-namespace">
+						<a href="texture.textureatlas.html" class="tsd-kind-icon">Texture<wbr>Atlas</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="texture.textureatlas.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="texture.textureatlas.html#columns" class="tsd-kind-icon">columns</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="texture.textureatlas.html#name" class="tsd-kind-icon">name</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="texture.textureatlas.html#rows" class="tsd-kind-icon">rows</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="texture.textureatlas.html#src" class="tsd-kind-icon">src</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="texture.textureatlas.html#resolvetexturecoordinates" class="tsd-kind-icon">resolve<wbr>Texture<wbr>Coordinates</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer>
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

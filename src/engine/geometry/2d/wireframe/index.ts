@@ -1,2 +1,2 @@
-export * from './box.wireframe.geometry';
-export * from './triangle.wireframe.geometry';
+export * from './box.wireframe.geometry.2d';
+export * from './triangle.wireframe.geometry.2d';

@@ -8,6 +8,9 @@ import { GLShape } from './glShape.enum';
  *
  * Used to associate Entities with vertex sets and GL drawing modes to facilitate rendering in Model Components
  *
+ * Also defines Texture Coordinates so as to standardise the texture sampling method on a per-shape basis, working in conjunction with
+ *   TextureAtlas and Texture Components to create the system's support for textures
+ *
  * @see Model
  */
 export class Geometry {
@@ -52,5 +55,12 @@ export class Geometry {
      */
     public get glShape(): GLShape {
         return this.config.glShape;
+    }
+
+    /**
+     * Getter for the Geometry's textureCoordinates, as provided in its config
+     */
+    public get textureCoordinates(): Float32Array {
+        return this.config.textureCoordinates;
     }
 }

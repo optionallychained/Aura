@@ -1,5 +1,5 @@
 import { Game } from '../core';
-import { RenderingMode } from '../screen/renderingMode.type';
+import { RenderingMode } from '../renderer';
 import { StateConfig } from './state.config';
 
 /**

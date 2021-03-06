@@ -16,7 +16,9 @@
         - [x] look at *Resolver.type in conjunction with decision on Entity->Component management; tweak handling as appropriate
     
 
-- [ ] Defined/configurable asset (image/sound) detection + loading
+- [ ] Defined/configurable asset detection + loading
+    - [x] images
+    - [ ] sound
 
 - [ ] **Consider:** Observables for general use
     - ...see Input consideration

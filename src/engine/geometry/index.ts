@@ -1,3 +1,4 @@
+export * from './geometry.config';
 export * from './geometry';
 export * from './glShape.enum';
 

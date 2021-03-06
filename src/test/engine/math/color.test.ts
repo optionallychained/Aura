@@ -14,7 +14,8 @@ describe('Color', () => {
          * Tests for Color.random()
          */
         describe('random', () => {
-            it('should generate random colors with fixed alphas', () => {
+            // default fixed alpha
+            it('should generate a random color with default fixed alpha', () => {
                 const color = Color.random();
 
                 expect(color).toHaveProperty('r');
@@ -31,14 +32,29 @@ describe('Color', () => {
 
                 expect(color).toHaveProperty('a', 1);
             });
-        });
 
-        /**
-         * Tests for Color.randomWithAlpha()
-         */
-        describe('randomWithAlpha', () => {
-            it('should generate random colors with random alphas', () => {
-                const color = Color.randomWithAlpha();
+            // given fixed alpha
+            it('should generate a random color with given fixed alpha', () => {
+                const color = Color.random(false, 0.5);
+
+                expect(color).toHaveProperty('r');
+                expect(color.r).toBeGreaterThanOrEqual(0);
+                expect(color.r).toBeLessThan(255);
+
+                expect(color).toHaveProperty('g');
+                expect(color.g).toBeGreaterThanOrEqual(0);
+                expect(color.g).toBeLessThan(255);
+
+                expect(color).toHaveProperty('b');
+                expect(color.b).toBeGreaterThanOrEqual(0);
+                expect(color.b).toBeLessThan(255);
+
+                expect(color).toHaveProperty('a', 0.5);
+            });
+
+            // random alpha
+            it('should generate a random color with random alpha', () => {
+                const color = Color.random(true);
 
                 expect(color).toHaveProperty('r');
                 expect(color.r).toBeGreaterThanOrEqual(0);
@@ -55,6 +71,85 @@ describe('Color', () => {
                 expect(color).toHaveProperty('a');
                 expect(color.a).toBeGreaterThanOrEqual(0);
                 expect(color.a).toBeLessThan(1);
+            });
+        });
+
+        /**
+         * Tests for Color.randomList()
+         */
+        describe('randomList', () => {
+            // default fixed alpha
+            it('should generate a list of random colors with default fixed alphas', () => {
+                const colors = Color.randomList(5);
+
+                expect(Array.isArray(colors)).toBeTruthy();
+                expect(colors.length).toBe(5);
+
+                for (const color of colors) {
+                    expect(color).toHaveProperty('r');
+                    expect(color.r).toBeGreaterThanOrEqual(0);
+                    expect(color.r).toBeLessThan(255);
+
+                    expect(color).toHaveProperty('g');
+                    expect(color.g).toBeGreaterThanOrEqual(0);
+                    expect(color.g).toBeLessThan(255);
+
+                    expect(color).toHaveProperty('b');
+                    expect(color.b).toBeGreaterThanOrEqual(0);
+                    expect(color.b).toBeLessThan(255);
+
+                    expect(color).toHaveProperty('a', 1);
+                }
+            });
+
+            // given fixed alph
+            it('should generate a list of random colors with given fixed alphas', () => {
+                const colors = Color.randomList(3, false, 0.5);
+
+                expect(Array.isArray(colors)).toBeTruthy();
+                expect(colors.length).toBe(3);
+
+                for (const color of colors) {
+                    expect(color).toHaveProperty('r');
+                    expect(color.r).toBeGreaterThanOrEqual(0);
+                    expect(color.r).toBeLessThan(255);
+
+                    expect(color).toHaveProperty('g');
+                    expect(color.g).toBeGreaterThanOrEqual(0);
+                    expect(color.g).toBeLessThan(255);
+
+                    expect(color).toHaveProperty('b');
+                    expect(color.b).toBeGreaterThanOrEqual(0);
+                    expect(color.b).toBeLessThan(255);
+
+                    expect(color).toHaveProperty('a', 0.5);
+                }
+            });
+
+            // random alpha
+            it('should generate a list of random colors with random alphas', () => {
+                const colors = Color.randomList(8, true);
+
+                expect(Array.isArray(colors)).toBeTruthy();
+                expect(colors.length).toBe(8);
+
+                for (const color of colors) {
+                    expect(color).toHaveProperty('r');
+                    expect(color.r).toBeGreaterThanOrEqual(0);
+                    expect(color.r).toBeLessThan(255);
+
+                    expect(color).toHaveProperty('g');
+                    expect(color.g).toBeGreaterThanOrEqual(0);
+                    expect(color.g).toBeLessThan(255);
+
+                    expect(color).toHaveProperty('b');
+                    expect(color.b).toBeGreaterThanOrEqual(0);
+                    expect(color.b).toBeLessThan(255);
+
+                    expect(color).toHaveProperty('a');
+                    expect(color.a).toBeGreaterThanOrEqual(0);
+                    expect(color.a).toBeLessThan(1);
+                }
             });
         });
 

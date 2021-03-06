@@ -1,12 +1,15 @@
-import { EntityManager } from '../entity';
 import { InputManager } from '../input';
 import { ControlScheme } from '../input/controlScheme.type';
 import { Color, Vec2 } from '../math';
-import { WebGLRenderer } from '../screen';
+import { WebGLRenderer } from '../renderer';
 import { EntityShaderVariableResolver, ShaderVariableResolver } from '../shader';
 import { ShaderProgram } from '../shader/program';
 import { State } from '../state';
 import { System } from '../system';
+import { Font } from '../text';
+import { TextureAtlas } from '../texture';
+import { UI } from '../ui';
+import { World } from '../world';
 import { GameConfig } from './game.config';
 import { ProtoGLError } from './protogl.error';
 
@@ -23,11 +26,17 @@ import { ProtoGLError } from './protogl.error';
  */
 export class Game {
 
-    /** the EntityManager to be used in handling and processing the game's Entities */
-    public readonly entityManager: EntityManager;
+    /** Core World; providing utility and management for Entities representing game objects */
+    public readonly world: World;
+
+    /** Core Font; providing utility and management for Entities representing strings and characters */
+    public readonly font: Font;
+
+    /** Core UI; providing utility and management for Entities representing UI elements */
+    public readonly ui: UI;
 
     /** InputManager for handling all user input */
-    public readonly inputManager: InputManager;
+    public readonly input: InputManager;
 
     /** the Canvas to render the game on */
     private readonly canvas: HTMLCanvasElement;
@@ -57,7 +66,7 @@ export class Game {
         fps: ''
     };
 
-    /** Default Canvas dimensions for use in initialization */
+    /** Default Canvas dimensions */
     private readonly defaultCanvasDimensions = new Vec2(window.innerWidth, window.innerHeight);
 
     /** Default ControlScheme */
@@ -66,8 +75,21 @@ export class Game {
     /** Default background color */
     private readonly defaultBackgroundColor = new Color();
 
+    /** Default Font texture atlas, for configuring the built-in engine Font */
+    // TODO move into Font?
+    // TODO font should be built into and published with the engine itself...
+    private readonly defaultFontAtlas = new TextureAtlas('text', 'res/font.png', 64, 1);
+
+    /** Default Font charset, for configuring the built-in engine Font */
+    // TODO move into Font?
+    private readonly defaultFontCharset = [
+        'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y',
+        'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '(', ')', '[', ']', '+', '-', '*', '/', '!', '?', '\'', '"', '#', '£',
+        '$', '&', '%', '^', ',', '.', ':', ';', '<', '>', '_', ' ', '~', '~'
+    ];
+
     /**
-     * Constructor. Initialise the Canvas, as well as the Renderer, EntityManager and InputManager
+     * Constructor. Initialise the Canvas, as well as the Renderer, InputManager, World, Font and UI
      *
      * @param config optional configuration
      */
@@ -84,11 +106,30 @@ export class Game {
         this.canvas.height = config?.canvasDimensions?.y ?? this.defaultCanvasDimensions.y;
 
         this.renderer = new WebGLRenderer(this.canvas, config?.backgroundColor ?? this.defaultBackgroundColor);
-        this.inputManager = new InputManager(this.canvas, config?.controlScheme ?? this.defaultControlScheme);
-        this.entityManager = new EntityManager({
-            vboPrefix: 'main',
-            renderer: this.renderer
-        });
+        this.input = new InputManager(this.canvas, config?.controlScheme ?? this.defaultControlScheme);
+
+        // TODO move defaults into World
+        this.world = new World(
+            this.renderer,
+            config?.worldConfig ?? {
+                dimensions: config?.worldConfig?.dimensions ?? config?.canvasDimensions ?? this.defaultCanvasDimensions
+            }
+        );
+
+        // TODO move defaults into Font
+        this.font = new Font(
+            this.renderer,
+            config?.fontConfig ?? {
+                textureAtlas: this.defaultFontAtlas,
+                charset: this.defaultFontCharset
+            }
+        );
+
+        // TODO move defaults into UI
+        this.ui = new UI(
+            this.renderer,
+            config?.uiConfig
+        );
     }
 
     /**
@@ -296,7 +337,7 @@ export class Game {
     /**
      * Main Game execution method, representing a single frame.
      *
-     * Calculates the frame delta, then executes all Systems, updates the current State, updates all Entities, and renders
+     * Calculates the frame delta, then executes all Systems, updates the current State, then ticks and renders the World, UI and Font
      */
     private run(): void {
         this.frameDelta = Date.now() - this.lastFrameTime;
@@ -312,8 +353,13 @@ export class Game {
             this.currentState.tick(this, this.frameDelta);
         }
 
-        this.entityManager.tick(this.frameDelta);
-        this.entityManager.render();
+        this.world.tick(this.frameDelta);
+        this.ui.tick(this.frameDelta);
+        this.font.tick(this.frameDelta);
+
+        this.world.render();
+        this.ui.render();
+        this.font.render();
 
         // handle updating and displaying debug data when in debug mode
         if (this.config?.debugMode) {

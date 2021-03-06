@@ -1,5 +1,6 @@
-import { Model, Shader } from '../component';
-import { VBOConfig } from '../screen';
+import { Model, Shader, Texture } from '../component';
+import { ProtoGLError } from '../core';
+import { VBOConfig } from '../renderer';
 import { ShaderVariableResolver } from '../shader';
 import { Entity } from './entity';
 import { EntityManagerConfig } from './entity.manager.config';
@@ -12,13 +13,16 @@ type EntityChanges = Array<{ shaderName: string; modelName: string; }>;
 /**
  * Core EntityManager; utilised by the Game to defer the management, updating and rendering of game Entities
  *
+ * Three EntityManagers in total are utilised by World, Font and UI so as to separate processing and utility for the three distinct Entity
+ *   types and allow for the consolidation of all update/rendering logic into the relationship between EntityManager and WebGLRenderer
+ *
  * Works to optimise Entity management and rendering by grouping Entities, precompiling vertex lists, handling VBOs and caching Entity
  *   filter/search results
  *
  * VBOs are provisioned on a per-shader+model combination basis. This is because Entities that share both a Shader and a Model can be
  *   rendered in batches, and thereby their vertices buffered to the GPU and drawn from as a single set
  *
- * The EntityManager is available on the Game instance at `game.entityManager`
+ * The EntityManagers are available on the Game instance at `game.[world|ui|font].entityManager`
  *
  * @see Game
  */
@@ -50,11 +54,15 @@ export class EntityManager {
     private readonly sourcedEntityFilterCache = new Map<string, Array<Entity>>();
 
     /**
-     * Constructor. Take and store the EntityManager's config
+     * Constructor. Take and store the EntityManager's config, and initialise the Texture Atlas if provided
      *
      * @param renderer the renderer
      */
-    constructor(private readonly config: EntityManagerConfig) { }
+    constructor(private readonly config: EntityManagerConfig) {
+        if (config.textureAtlas) {
+            config.renderer.createTexture(config.textureAtlas);
+        }
+    }
 
     /**
      * Getter for the number of active Entities
@@ -151,6 +159,7 @@ export class EntityManager {
                     this.config.renderer.render({
                         vbo,
                         shaderProgramName: programName,
+                        textureAtlasName: this.config.textureAtlas?.name,
                         entities
                     });
 
@@ -169,7 +178,7 @@ export class EntityManager {
      *
      * @returns the list of Entities with the Component
      */
-    public filterEntitiesByComponent(component: string): Array<Entity> {
+    public filterEntitiesByComponentName(component: string): Array<Entity> {
         // TODO by class
         return this.memoizeFilter(component, (e) => e.hasComponentWithName(component))
     }
@@ -181,7 +190,7 @@ export class EntityManager {
      *
      * @returns the list of Entities with the Components
      */
-    public filterEntitiesByComponents(...components: Array<string>): Array<Entity> {
+    public filterEntitiesByComponentNames(...components: Array<string>): Array<Entity> {
         // TODO by class
         return this.memoizeFilter(components.toString(), (e) => e.hasComponentsWithNames(...components));
     }
@@ -196,7 +205,7 @@ export class EntityManager {
      *
      * @returns the list of Entities from the source with the Components
      */
-    public filterEntitiesByComponentsFromSource(source: Array<Entity>, filterId: string, ...components: Array<string>): Array<Entity> {
+    public filterEntitiesByComponentNamesFromSource(source: Array<Entity>, filterId: string, ...components: Array<string>): Array<Entity> {
         // TODO by class
         return this.memoizeFilter(components.toString(), (e) => e.hasComponentsWithNames(...components), filterId, source);
     }
@@ -384,7 +393,7 @@ export class EntityManager {
             const vboIdentifier = `${shaderName}_${modelName}`;
 
             // name the VBO with this EntityManager instance's vboPrefix, facilitating multiple EntityManagers per Game instance
-            const vboName = `${this.config.vboPrefix}_${vboIdentifier}`;
+            const vboName = `${this.config.name}_${vboIdentifier}`;
 
             if (entities && entities.length) {
                 // retrieve the existing VBO for this combo; if none exists, create one
@@ -418,7 +427,9 @@ export class EntityManager {
                 let offset = 0;
                 for (const e of entities) {
                     // track the offset for pulling positional data out of an Entity's Model's vertices
-                    let v = 0;
+                    let p = 0;
+                    // track the offset for pulling texture coordinate data out of an Entity's Model's texture coordinates
+                    let t = 0;
                     for (let i = 0; i < vertexCount; i++) {
                         // process every attribute for every vertex of the Entity
                         for (const attr of shaderInfo.vertex.attributes) {
@@ -429,10 +440,33 @@ export class EntityManager {
                                 // handle numerical values by wrapping them in an array for setting into vertices
                                 value = Float32Array.from([value]);
                             }
-                            else if (attr.name.includes('Position')) {
+                            else if (attr.name === 'a_Position') {
                                 // handle positions by pulling out only *this* vertex's position from the Model's array
-                                value = value.slice(v, v + attr.size);
-                                v += attr.size;
+                                value = value.slice(p, p + attr.size);
+                                p += attr.size;
+                            }
+                            else if (attr.name === 'a_TexCoord') {
+                                // handle texture coordinates by asking the Texture Atlas to resolve this vertex's texcoord
+                                const { textureAtlas } = this.config;
+
+                                if (!textureAtlas) {
+                                    // if we're trying to render an Entity with a Texture-involved shader, but we have no Texture Atlas,
+                                    //   then something has gone wrong
+                                    throw new ProtoGLError({
+                                        class: 'EntityManager',
+                                        method: 'compileVertices',
+                                        message: `
+                                            Failed to render ${this.config.name} Entity '${e.tag}' with texture shader: No Texture Atlas
+                                            was configured for ${this.config.name} Entities
+                                        `
+                                    });
+                                }
+
+                                const { column, row, columnSpan, rowSpan } = e.getComponent(Texture);
+                                value = textureAtlas.resolveTextureCoordinates(value.slice(t, t + 2), column, row, columnSpan, rowSpan);
+
+                                // all texture coordinates are (currently?) of size 2
+                                t += 2;
                             }
 
                             vertices.set(value, offset);
@@ -449,7 +483,6 @@ export class EntityManager {
                     vertexCount,
                     vertexSize,
                     glShape,
-                    // set the VBO's changed flag to ensure data is (re)buffered to the GPU later on
                     changed: true
                 });
             }

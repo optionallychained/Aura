@@ -1,16 +1,16 @@
-import { FRAGMENT_BASIC } from '../../fragment/2d';
+import { FRAGMENT_BASIC } from '../../fragment/generic';
 import { ShaderProgram } from '../../program';
-import { VERTEX_BASIC } from '../../vertex/2d';
+import { VERTEX_BASIC_2D } from '../../vertex/2d';
 
 
 /**
- * Built-in basic ShaderProgram, pairing the built-in basic Vertex and Fragment shaders
+ * Built-in basic 2D ShaderProgram, pairing the built-in basic 2D Vertex and Fragment shaders
  *
- * @see VERTEX_BASIC
+ * @see VERTEX_BASIC_2D
  * @see FRAGMENT_BASIC
  */
-export const PROGRAM_BASIC = new ShaderProgram({
+export const PROGRAM_BASIC_2D = new ShaderProgram({
     name: 'program_basic_2d',
-    vertex: VERTEX_BASIC,
+    vertex: VERTEX_BASIC_2D,
     fragment: FRAGMENT_BASIC
 });

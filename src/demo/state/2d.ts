@@ -1,8 +1,19 @@
-import { Angle, Component, Core, Entity, Input, Random, State, Vec2 } from '../../engine';
-import { _createRect } from '../entity/2d/rect';
-import { _createRectWire } from '../entity/2d/rectWire';
-import { _createTriangle } from '../entity/2d/triangle';
-import { _createTriangleWire } from '../entity/2d/triangleWire';
+import { Angle, Color, Component, Core, Entity, Input, Random, State, Vec2 } from '../../engine';
+import { _createRectMulti } from '../entity/2d/rect/rectMulti';
+import { _createRectBatCat } from '../entity/2d/rect/rectBatCat';
+import { _createRectCat } from '../entity/2d/rect/rectCat';
+import { _createRectSmile } from '../entity/2d/rect/rectSmile';
+import { _createRectWire } from '../entity/2d/rect/rectWire';
+import { _createTriangleFlat } from '../entity/2d/triangle/triangleFlat';
+import { _createTriangleCat } from '../entity/2d/triangle/triangleCat';
+import { _createTriangleWire } from '../entity/2d/triangle/triangleWire';
+import { _createRectFlat } from '../entity/2d/rect/rectFlat';
+import { _createRectBrick } from '../entity/2d/rect/rectBrick';
+import { _createTriangleBatCat } from '../entity/2d/triangle/triangleBatCat';
+import { _createTriangleBrick } from '../entity/2d/triangle/triangleBrick';
+import { _createTriangleMulti } from '../entity/2d/triangle/triangleMulti';
+import { _createTriangleSmile } from '../entity/2d/triangle/triangleSmile';
+import { _createPoint2D } from '../entity/2d/point';
 
 const rotations: Array<number> = [];
 let frame = 0;
@@ -10,31 +21,35 @@ let frame = 0;
 const populate = (game: Core.Game): void => {
     const entities: Array<Entity.Entity> = [];
 
-    for (let i = 0; i < 100; i++) {
-        const r = Math.round(Random.between(1, 4));
+    const _generators = [
+        // _createPoint2D,
 
-        switch (r) {
-            case 1:
-                entities.push(_createRectWire());
-                break;
-            case 2:
-                entities.push(_createRect());
-                break;
-            case 3:
-                entities.push(_createTriangle());
-                break;
-            case 4:
-                entities.push(_createTriangleWire());
-                break;
-            default:
-                entities.push(_createRect());
-                break;
-        }
+        _createRectBatCat,
+        _createRectBrick,
+        _createRectCat,
+        _createRectFlat,
+        _createRectMulti,
+        _createRectSmile,
+        _createRectWire,
+
+        _createTriangleBatCat,
+        _createTriangleBrick,
+        _createTriangleCat,
+        _createTriangleFlat,
+        _createTriangleMulti,
+        _createTriangleSmile,
+        _createTriangleWire
+    ];
+
+    for (let i = 0; i < 50; i++) {
+        const r = Math.round(Random.between(1, _generators.length));
+
+        entities.push(_generators[r - 1]());
 
         rotations.push(Angle.toRadians(Random.between(-3, 3)));
     }
 
-    game.entityManager.addEntities(...entities);
+    game.world.entityManager.addEntities(...entities);
 };
 
 const rotateAndScale = (game: Core.Game): void => {
@@ -43,7 +58,7 @@ const rotateAndScale = (game: Core.Game): void => {
     const scaleFactor = 1 + (Math.sin(frame * 0.025) * 0.8);
     const scale = new Vec2(scaleFactor, scaleFactor);
 
-    for (const e of game.entityManager.filterEntitiesByTags('rect', 'triangle', 'triangleWire', 'rectWire')) {
+    for (const e of game.world.entityManager.filterEntitiesByComponentName('Transform2D')) {
         const transform = e.getComponent(Component.TwoD.Transform2D);
 
         transform.scale(scale);
@@ -59,9 +74,16 @@ export const State2D = new State.State({
     renderingMode: '2D',
     init: (game) => {
         populate(game);
+
+        game.font.addString('hello', new Vec2(-0.75, 0.25), Color.random());
+        game.font.addString('protogl', new Vec2(-0.75, 0), Color.random());
+        game.font.addString('world', new Vec2(-0.75, -0.25), Color.random());
+    },
+    end: (game) => {
+        game.world.entityManager.clearEntities();
     },
     tick: (game) => {
-        if (game.inputManager.isKeyDown(Input.Keys.ENTER)) {
+        if (game.input.isKeyDown(Input.Keys.ENTER)) {
             game.switchToState('3D');
         }
 

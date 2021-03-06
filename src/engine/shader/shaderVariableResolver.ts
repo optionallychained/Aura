@@ -13,6 +13,8 @@ import { EntityShaderVariableResolver } from './entityShaderVariableResolver.typ
  * Allows for the registration of new mappings at application runtime, facilitating system extension by way of custom shaders and components
  *
  * Handles errors in the absence of shader values
+ *
+ * // TODO 'Texture' left in as seen below for refernece in resolution of sampler2D uniform hack found in WebGLRenderer
  */
 export class ShaderVariableResolver {
 
@@ -39,7 +41,16 @@ export class ShaderVariableResolver {
         [
             'VertexColor',
             (e) => e.getComponent(MultiColor).nextColor().float32Array
-        ]
+        ],
+        [
+            'TexCoord',
+            (e) => e.getComponent(Model).textureCoordinates
+        ],
+        // TODO related to the u_Texture hack described in WebGLRenderer->render()
+        // [
+        //     'Texture',
+        //     (e) => TextureAtlas.getTextureIdentifier(e.getComponent<Texture>.textureName)
+        // ]
     ]);
 
     /**

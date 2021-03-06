@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ThreeD | API | ProtoGL Documentation - v0.4.0</title>
-	<meta name="description" content="Documentation for API | ProtoGL Documentation - v0.4.0">
+	<title>ThreeD | API | ProtoGL Documentation - v0.5.0</title>
+	<meta name="description" content="Documentation for API | ProtoGL Documentation - v0.5.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
 	<script async src="../assets/js/search.js" id="search-script"></script>
@@ -23,7 +23,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">API | ProtoGL Documentation - v0.4.0</a>
+					<a href="../index.html" class="title">API | ProtoGL Documentation - v0.5.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -52,7 +52,7 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="../modules.html">API | ProtoGL Documentation - v0.4.0</a>
+					<a href="../modules.html">API | ProtoGL Documentation - v0.5.0</a>
 				</li>
 				<li>
 					<a href="shader.html">Shader</a>
@@ -78,8 +78,10 @@
 						<section class="tsd-index-section ">
 							<h3>Variables</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-variable tsd-parent-kind-namespace"><a href="shader.program.threed.html#program_basic" class="tsd-kind-icon">PROGRAM_<wbr>BASIC</a></li>
-								<li class="tsd-kind-variable tsd-parent-kind-namespace"><a href="shader.program.threed.html#program_color_per_vertex" class="tsd-kind-icon">PROGRAM_<wbr>COLOR_<wbr>PER_<wbr>VERTEX</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-namespace"><a href="shader.program.threed.html#program_basic_3d" class="tsd-kind-icon">PROGRAM_<wbr>BASIC_<wbr>3D</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-namespace"><a href="shader.program.threed.html#program_color_per_vertex_3d" class="tsd-kind-icon">PROGRAM_<wbr>COLOR_<wbr>PER_<wbr>VERTEX_<wbr>3D</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-namespace"><a href="shader.program.threed.html#program_texture_3d" class="tsd-kind-icon">PROGRAM_<wbr>TEXTURE_<wbr>3D</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-namespace"><a href="shader.program.threed.html#program_texture_colored_3d" class="tsd-kind-icon">PROGRAM_<wbr>TEXTURE_<wbr>COLORED_<wbr>3D</a></li>
 							</ul>
 						</section>
 					</div>
@@ -88,24 +90,96 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Variables</h2>
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-namespace">
-					<a name="program_basic" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> PROGRAM_<wbr>BASIC</h3>
-					<div class="tsd-signature tsd-kind-icon">PROGRAM_<wbr>BASIC<span class="tsd-signature-symbol">:</span> <a href="../classes/shader.program.shaderprogram.html" class="tsd-signature-type" data-tsd-kind="Class">ShaderProgram</a><span class="tsd-signature-symbol"> = ...</span></div>
+					<a name="program_basic_3d" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> PROGRAM_<wbr>BASIC_<wbr>3D</h3>
+					<div class="tsd-signature tsd-kind-icon">PROGRAM_<wbr>BASIC_<wbr>3D<span class="tsd-signature-symbol">:</span> <a href="../classes/shader.program.shaderprogram.html" class="tsd-signature-type" data-tsd-kind="Class">ShaderProgram</a><span class="tsd-signature-symbol"> = ...</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/e00c907/src/engine/shader/program/3d/basic.program.3d.ts#L5">src/engine/shader/program/3d/basic.program.3d.ts:5</a></li>
+							<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/747d582/src/engine/shader/program/3d/basic.program.3d.ts#L11">src/engine/shader/program/3d/basic.program.3d.ts:11</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Built-in basic 3D ShaderProgram, pairing the built-in basic 3D Vertex and Fragment shaders</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>see</dt>
+							<dd><p>VERTEX_BASIC_3D</p>
+							</dd>
+							<dt>see</dt>
+							<dd><p>FRAGMENT_BASIC</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-namespace">
-					<a name="program_color_per_vertex" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> PROGRAM_<wbr>COLOR_<wbr>PER_<wbr>VERTEX</h3>
-					<div class="tsd-signature tsd-kind-icon">PROGRAM_<wbr>COLOR_<wbr>PER_<wbr>VERTEX<span class="tsd-signature-symbol">:</span> <a href="../classes/shader.program.shaderprogram.html" class="tsd-signature-type" data-tsd-kind="Class">ShaderProgram</a><span class="tsd-signature-symbol"> = ...</span></div>
+					<a name="program_color_per_vertex_3d" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> PROGRAM_<wbr>COLOR_<wbr>PER_<wbr>VERTEX_<wbr>3D</h3>
+					<div class="tsd-signature tsd-kind-icon">PROGRAM_<wbr>COLOR_<wbr>PER_<wbr>VERTEX_<wbr>3D<span class="tsd-signature-symbol">:</span> <a href="../classes/shader.program.shaderprogram.html" class="tsd-signature-type" data-tsd-kind="Class">ShaderProgram</a><span class="tsd-signature-symbol"> = ...</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/e00c907/src/engine/shader/program/3d/colorPerVertex.program.3d.ts#L5">src/engine/shader/program/3d/colorPerVertex.program.3d.ts:5</a></li>
+							<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/747d582/src/engine/shader/program/3d/colorPerVertex.program.3d.ts#L11">src/engine/shader/program/3d/colorPerVertex.program.3d.ts:11</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Built-in basic 3D color per vertex ShaderProgram, pairing the built-in basic 3D color per vertex Vertex and Fragment shaders</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>see</dt>
+							<dd><p>VERTEX_COLOR_PER_VERTEX_3D</p>
+							</dd>
+							<dt>see</dt>
+							<dd><p>FRAGMENT_COLOR_PER_VERTEX</p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-namespace">
+					<a name="program_texture_3d" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> PROGRAM_<wbr>TEXTURE_<wbr>3D</h3>
+					<div class="tsd-signature tsd-kind-icon">PROGRAM_<wbr>TEXTURE_<wbr>3D<span class="tsd-signature-symbol">:</span> <a href="../classes/shader.program.shaderprogram.html" class="tsd-signature-type" data-tsd-kind="Class">ShaderProgram</a><span class="tsd-signature-symbol"> = ...</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/747d582/src/engine/shader/program/3d/texture.program.3d.ts#L11">src/engine/shader/program/3d/texture.program.3d.ts:11</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Built-in basic 3D ShaderProgram, pairing the built-in basic 2D texture Vertex and Fragment shaders</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>see</dt>
+							<dd><p>VERTEX_TEXTURE_3D</p>
+							</dd>
+							<dt>see</dt>
+							<dd><p>FRAGMENT_TEXTURE</p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-namespace">
+					<a name="program_texture_colored_3d" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> PROGRAM_<wbr>TEXTURE_<wbr>COLORED_<wbr>3D</h3>
+					<div class="tsd-signature tsd-kind-icon">PROGRAM_<wbr>TEXTURE_<wbr>COLORED_<wbr>3D<span class="tsd-signature-symbol">:</span> <a href="../classes/shader.program.shaderprogram.html" class="tsd-signature-type" data-tsd-kind="Class">ShaderProgram</a><span class="tsd-signature-symbol"> = ...</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/747d582/src/engine/shader/program/3d/textureColored.program.3d.ts#L11">src/engine/shader/program/3d/textureColored.program.3d.ts:11</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Built-in basic 3D ShaderProgram, pairing the built-in basic 2D texture Vertex and Fragment shaders</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>see</dt>
+							<dd><p>VERTEX_TEXTURE_3D</p>
+							</dd>
+							<dt>see</dt>
+							<dd><p>FRAGMENT_TEXTURE</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 			</section>
 		</div>
@@ -131,7 +205,7 @@
 						<a href="input.html">Input</a>
 					</li>
 					<li class=" tsd-kind-namespace">
-						<a href="screen.html">Screen</a>
+						<a href="renderer.html">Renderer</a>
 					</li>
 					<li class="current tsd-kind-namespace">
 						<a href="shader.html">Shader</a>
@@ -161,15 +235,33 @@
 					<li class=" tsd-kind-namespace">
 						<a href="system.html">System</a>
 					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="text.html">Text</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="texture.html">Texture</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="ui.html">UI</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="world.html">World</a>
+					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-variable tsd-parent-kind-namespace">
-						<a href="shader.program.threed.html#program_basic" class="tsd-kind-icon">PROGRAM_<wbr>BASIC</a>
+						<a href="shader.program.threed.html#program_basic_3d" class="tsd-kind-icon">PROGRAM_<wbr>BASIC_<wbr>3D</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-namespace">
-						<a href="shader.program.threed.html#program_color_per_vertex" class="tsd-kind-icon">PROGRAM_<wbr>COLOR_<wbr>PER_<wbr>VERTEX</a>
+						<a href="shader.program.threed.html#program_color_per_vertex_3d" class="tsd-kind-icon">PROGRAM_<wbr>COLOR_<wbr>PER_<wbr>VERTEX_<wbr>3D</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-namespace">
+						<a href="shader.program.threed.html#program_texture_3d" class="tsd-kind-icon">PROGRAM_<wbr>TEXTURE_<wbr>3D</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-namespace">
+						<a href="shader.program.threed.html#program_texture_colored_3d" class="tsd-kind-icon">PROGRAM_<wbr>TEXTURE_<wbr>COLORED_<wbr>3D</a>
 					</li>
 				</ul>
 			</nav>

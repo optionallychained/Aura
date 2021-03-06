@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>UniformType | API | ProtoGL Documentation - v0.4.0</title>
-	<meta name="description" content="Documentation for API | ProtoGL Documentation - v0.4.0">
+	<title>UniformType | API | ProtoGL Documentation - v0.5.0</title>
+	<meta name="description" content="Documentation for API | ProtoGL Documentation - v0.5.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
 	<script async src="../assets/js/search.js" id="search-script"></script>
@@ -23,7 +23,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">API | ProtoGL Documentation - v0.4.0</a>
+					<a href="../index.html" class="title">API | ProtoGL Documentation - v0.5.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -52,7 +52,7 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="../modules.html">API | ProtoGL Documentation - v0.4.0</a>
+					<a href="../modules.html">API | ProtoGL Documentation - v0.5.0</a>
 				</li>
 				<li>
 					<a href="../modules/shader.html">Shader</a>
@@ -83,9 +83,10 @@
 						<section class="tsd-index-section ">
 							<h3>Enumeration members</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="shader.uniformtype.html#float" class="tsd-kind-icon">FLOAT</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="shader.uniformtype.html#integer" class="tsd-kind-icon">INTEGER</a></li>
 								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="shader.uniformtype.html#mat3" class="tsd-kind-icon">MAT3</a></li>
 								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="shader.uniformtype.html#mat4" class="tsd-kind-icon">MAT4</a></li>
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="shader.uniformtype.html#number" class="tsd-kind-icon">NUMBER</a></li>
 								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="shader.uniformtype.html#vec2" class="tsd-kind-icon">VEC2</a></li>
 								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="shader.uniformtype.html#vec3" class="tsd-kind-icon">VEC3</a></li>
 								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="shader.uniformtype.html#vec4" class="tsd-kind-icon">VEC4</a></li>
@@ -97,12 +98,32 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Enumeration members</h2>
 				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="float" class="tsd-anchor"></a>
+					<h3>FLOAT</h3>
+					<div class="tsd-signature tsd-kind-icon">FLOAT<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;float&quot;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/747d582/src/engine/shader/uniformType.enum.ts#L12">src/engine/shader/uniformType.enum.ts:12</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="integer" class="tsd-anchor"></a>
+					<h3>INTEGER</h3>
+					<div class="tsd-signature tsd-kind-icon">INTEGER<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;integer&quot;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/747d582/src/engine/shader/uniformType.enum.ts#L11">src/engine/shader/uniformType.enum.ts:11</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
 					<a name="mat3" class="tsd-anchor"></a>
 					<h3>MAT3</h3>
 					<div class="tsd-signature tsd-kind-icon">MAT3<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;mat3&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/e00c907/src/engine/shader/uniformType.enum.ts#L9">src/engine/shader/uniformType.enum.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/747d582/src/engine/shader/uniformType.enum.ts#L9">src/engine/shader/uniformType.enum.ts:9</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -112,17 +133,7 @@
 					<div class="tsd-signature tsd-kind-icon">MAT4<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;mat4&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/e00c907/src/engine/shader/uniformType.enum.ts#L10">src/engine/shader/uniformType.enum.ts:10</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
-					<a name="number" class="tsd-anchor"></a>
-					<h3>NUMBER</h3>
-					<div class="tsd-signature tsd-kind-icon">NUMBER<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;number&quot;</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/e00c907/src/engine/shader/uniformType.enum.ts#L11">src/engine/shader/uniformType.enum.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/747d582/src/engine/shader/uniformType.enum.ts#L10">src/engine/shader/uniformType.enum.ts:10</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -132,7 +143,7 @@
 					<div class="tsd-signature tsd-kind-icon">VEC2<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;vec2&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/e00c907/src/engine/shader/uniformType.enum.ts#L6">src/engine/shader/uniformType.enum.ts:6</a></li>
+							<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/747d582/src/engine/shader/uniformType.enum.ts#L6">src/engine/shader/uniformType.enum.ts:6</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -142,7 +153,7 @@
 					<div class="tsd-signature tsd-kind-icon">VEC3<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;vec3&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/e00c907/src/engine/shader/uniformType.enum.ts#L7">src/engine/shader/uniformType.enum.ts:7</a></li>
+							<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/747d582/src/engine/shader/uniformType.enum.ts#L7">src/engine/shader/uniformType.enum.ts:7</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -152,7 +163,7 @@
 					<div class="tsd-signature tsd-kind-icon">VEC4<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;vec4&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/e00c907/src/engine/shader/uniformType.enum.ts#L8">src/engine/shader/uniformType.enum.ts:8</a></li>
+							<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/747d582/src/engine/shader/uniformType.enum.ts#L8">src/engine/shader/uniformType.enum.ts:8</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -180,7 +191,7 @@
 						<a href="../modules/input.html">Input</a>
 					</li>
 					<li class=" tsd-kind-namespace">
-						<a href="../modules/screen.html">Screen</a>
+						<a href="../modules/renderer.html">Renderer</a>
 					</li>
 					<li class="current tsd-kind-namespace">
 						<a href="../modules/shader.html">Shader</a>
@@ -202,6 +213,18 @@
 					<li class=" tsd-kind-namespace">
 						<a href="../modules/system.html">System</a>
 					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/text.html">Text</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/texture.html">Texture</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/ui.html">UI</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/world.html">World</a>
+					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
@@ -212,13 +235,16 @@
 						<a href="shader.uniformtype.html" class="tsd-kind-icon">Uniform<wbr>Type</a>
 						<ul>
 							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="shader.uniformtype.html#float" class="tsd-kind-icon">FLOAT</a>
+							</li>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="shader.uniformtype.html#integer" class="tsd-kind-icon">INTEGER</a>
+							</li>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
 								<a href="shader.uniformtype.html#mat3" class="tsd-kind-icon">MAT3</a>
 							</li>
 							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
 								<a href="shader.uniformtype.html#mat4" class="tsd-kind-icon">MAT4</a>
-							</li>
-							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="shader.uniformtype.html#number" class="tsd-kind-icon">NUMBER</a>
 							</li>
 							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
 								<a href="shader.uniformtype.html#vec2" class="tsd-kind-icon">VEC2</a>
