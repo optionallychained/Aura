@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>TwoD | API | ProtoGL Documentation - v0.5.0</title>
+	<title>FontConfig | API | ProtoGL Documentation - v0.5.0</title>
 	<meta name="description" content="Documentation for API | ProtoGL Documentation - v0.5.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,30 +55,78 @@
 					<a href="../modules.html">API | ProtoGL Documentation - v0.5.0</a>
 				</li>
 				<li>
-					<a href="system.html">System</a>
+					<a href="../modules/text.html">Text</a>
 				</li>
 				<li>
-					<a href="system.twod.html">TwoD</a>
+					<a href="text.fontconfig.html">FontConfig</a>
 				</li>
 			</ul>
-			<h1>Namespace TwoD</h1>
+			<h1>Interface FontConfig</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Interface desciribing a Font configuration object</p>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">FontConfig</span>
+					</li>
+				</ul>
+			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Classes</h3>
+							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-class tsd-parent-kind-namespace"><a href="../classes/system.twod.collision2d.html" class="tsd-kind-icon">Collision2D</a></li>
-								<li class="tsd-kind-class tsd-parent-kind-namespace"><a href="../classes/system.twod.physics2d.html" class="tsd-kind-icon">Physics2D</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="text.fontconfig.html#charset" class="tsd-kind-icon">charset</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="text.fontconfig.html#textureatlas" class="tsd-kind-icon">texture<wbr>Atlas</a></li>
 							</ul>
 						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="charset" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> charset</h3>
+					<div class="tsd-signature tsd-kind-icon">charset<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/747d582/src/engine/text/font.config.ts#L10">src/engine/text/font.config.ts:10</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Charset renderable by sampling from the texture</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="textureatlas" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> texture<wbr>Atlas</h3>
+					<div class="tsd-signature tsd-kind-icon">texture<wbr>Atlas<span class="tsd-signature-symbol">:</span> <a href="../classes/texture.textureatlas.html" class="tsd-signature-type" data-tsd-kind="Class">TextureAtlas</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/747d582/src/engine/text/font.config.ts#L8">src/engine/text/font.config.ts:8</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>TextureAtlas to use in rendering characters</p>
+						</div>
 					</div>
 				</section>
 			</section>
@@ -90,62 +138,66 @@
 						<a href="../modules.html">Exports</a>
 					</li>
 					<li class=" tsd-kind-namespace">
-						<a href="component.html">Component</a>
+						<a href="../modules/component.html">Component</a>
 					</li>
 					<li class=" tsd-kind-namespace">
-						<a href="core.html">Core</a>
+						<a href="../modules/core.html">Core</a>
 					</li>
 					<li class=" tsd-kind-namespace">
-						<a href="entity.html">Entity</a>
+						<a href="../modules/entity.html">Entity</a>
 					</li>
 					<li class=" tsd-kind-namespace">
-						<a href="geometry.html">Geometry</a>
+						<a href="../modules/geometry.html">Geometry</a>
 					</li>
 					<li class=" tsd-kind-namespace">
-						<a href="input.html">Input</a>
+						<a href="../modules/input.html">Input</a>
 					</li>
 					<li class=" tsd-kind-namespace">
-						<a href="renderer.html">Renderer</a>
+						<a href="../modules/renderer.html">Renderer</a>
 					</li>
 					<li class=" tsd-kind-namespace">
-						<a href="shader.html">Shader</a>
+						<a href="../modules/shader.html">Shader</a>
 					</li>
 					<li class=" tsd-kind-namespace">
-						<a href="state.html">State</a>
+						<a href="../modules/state.html">State</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/system.html">System</a>
 					</li>
 					<li class="current tsd-kind-namespace">
-						<a href="system.html">System</a>
-						<ul>
-							<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
-								<a href="system.threed.html">ThreeD</a>
-							</li>
-							<li class="current tsd-kind-namespace tsd-parent-kind-namespace">
-								<a href="system.twod.html">TwoD</a>
-							</li>
-						</ul>
+						<a href="../modules/text.html">Text</a>
 					</li>
 					<li class=" tsd-kind-namespace">
-						<a href="text.html">Text</a>
+						<a href="../modules/texture.html">Texture</a>
 					</li>
 					<li class=" tsd-kind-namespace">
-						<a href="texture.html">Texture</a>
+						<a href="../modules/ui.html">UI</a>
 					</li>
 					<li class=" tsd-kind-namespace">
-						<a href="ui.html">UI</a>
-					</li>
-					<li class=" tsd-kind-namespace">
-						<a href="world.html">World</a>
+						<a href="../modules/world.html">World</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-class tsd-parent-kind-namespace">
-						<a href="../classes/system.twod.collision2d.html" class="tsd-kind-icon">Collision2D</a>
+						<a href="../classes/text.font.html" class="tsd-kind-icon">Font</a>
 					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-namespace">
-						<a href="../classes/system.twod.physics2d.html" class="tsd-kind-icon">Physics2D</a>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface tsd-parent-kind-namespace">
+						<a href="text.fontconfig.html" class="tsd-kind-icon">Font<wbr>Config</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="text.fontconfig.html#charset" class="tsd-kind-icon">charset</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="text.fontconfig.html#textureatlas" class="tsd-kind-icon">texture<wbr>Atlas</a>
+							</li>
+						</ul>
 					</li>
+				</ul>
+				<ul class="after-current">
 				</ul>
 			</nav>
 		</div>
@@ -159,6 +211,9 @@
 				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
 				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>

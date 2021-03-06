@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>VertexShaderConfig | API | ProtoGL Documentation - v0.5.0</title>
+	<title>GeometryConfig | API | ProtoGL Documentation - v0.5.0</title>
 	<meta name="description" content="Documentation for API | ProtoGL Documentation - v0.5.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,16 +55,13 @@
 					<a href="../modules.html">API | ProtoGL Documentation - v0.5.0</a>
 				</li>
 				<li>
-					<a href="../modules/shader.html">Shader</a>
+					<a href="../modules/geometry.html">Geometry</a>
 				</li>
 				<li>
-					<a href="../modules/shader.vertex.html">Vertex</a>
-				</li>
-				<li>
-					<a href="shader.vertex.vertexshaderconfig.html">VertexShaderConfig</a>
+					<a href="geometry.geometryconfig.html">GeometryConfig</a>
 				</li>
 			</ul>
-			<h1>Interface VertexShaderConfig</h1>
+			<h1>Interface GeometryConfig</h1>
 		</div>
 	</div>
 </header>
@@ -74,7 +71,7 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Interface describing a VertexShader configuration object</p>
+						<p>Interface describing a Geometry&#39;s configuration object</p>
 					</div>
 				</div>
 			</section>
@@ -82,7 +79,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">VertexShaderConfig</span>
+						<span class="target">GeometryConfig</span>
 					</li>
 				</ul>
 			</section>
@@ -93,10 +90,12 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="shader.vertex.vertexshaderconfig.html#attributes" class="tsd-kind-icon">attributes</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="shader.vertex.vertexshaderconfig.html#name" class="tsd-kind-icon">name</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="shader.vertex.vertexshaderconfig.html#source" class="tsd-kind-icon">source</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="shader.vertex.vertexshaderconfig.html#uniforms" class="tsd-kind-icon">uniforms</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="geometry.geometryconfig.html#glshape" class="tsd-kind-icon">gl<wbr>Shape</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="geometry.geometryconfig.html#name" class="tsd-kind-icon">name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="geometry.geometryconfig.html#texturecoordinates" class="tsd-kind-icon">texture<wbr>Coordinates</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="geometry.geometryconfig.html#vertexcount" class="tsd-kind-icon">vertex<wbr>Count</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="geometry.geometryconfig.html#vertexsize" class="tsd-kind-icon">vertex<wbr>Size</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="geometry.geometryconfig.html#vertices" class="tsd-kind-icon">vertices</a></li>
 							</ul>
 						</section>
 					</div>
@@ -105,17 +104,17 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="attributes" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> attributes</h3>
-					<div class="tsd-signature tsd-kind-icon">attributes<span class="tsd-signature-symbol">:</span> <a href="../modules/shader.html#attributearray" class="tsd-signature-type" data-tsd-kind="Type alias">AttributeArray</a></div>
+					<a name="glshape" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> gl<wbr>Shape</h3>
+					<div class="tsd-signature tsd-kind-icon">gl<wbr>Shape<span class="tsd-signature-symbol">:</span> <a href="../enums/geometry.glshape.html" class="tsd-signature-type" data-tsd-kind="Enumeration">GLShape</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/747d582/src/engine/shader/vertex/vertex.shader.config.ts#L13">src/engine/shader/vertex/vertex.shader.config.ts:13</a></li>
+							<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/747d582/src/engine/geometry/geometry.config.ts#L16">src/engine/geometry/geometry.config.ts:16</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>An AttributeArray describing the attributes the VertexShader contains; used in automatic attribute vertex compilation</p>
+							<p>The GLShape (drawing mode) the Geometry should be rendered with</p>
 						</div>
 					</div>
 				</section>
@@ -125,42 +124,72 @@
 					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/747d582/src/engine/shader/vertex/vertex.shader.config.ts#L9">src/engine/shader/vertex/vertex.shader.config.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/747d582/src/engine/geometry/geometry.config.ts#L8">src/engine/geometry/geometry.config.ts:8</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>A name for the VertexShader</p>
+							<p>A name for the Geometry</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="source" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> source</h3>
-					<div class="tsd-signature tsd-kind-icon">source<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="texturecoordinates" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> texture<wbr>Coordinates</h3>
+					<div class="tsd-signature tsd-kind-icon">texture<wbr>Coordinates<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Float32Array</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/747d582/src/engine/shader/vertex/vertex.shader.config.ts#L11">src/engine/shader/vertex/vertex.shader.config.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/747d582/src/engine/geometry/geometry.config.ts#L18">src/engine/geometry/geometry.config.ts:18</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The VertexShader&#39;s source</p>
+							<p>Texture coordinates for each vertex in the Geometry&#39;s vertices</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="uniforms" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> uniforms</h3>
-					<div class="tsd-signature tsd-kind-icon">uniforms<span class="tsd-signature-symbol">:</span> <a href="../modules/shader.html#uniformarray" class="tsd-signature-type" data-tsd-kind="Type alias">UniformArray</a></div>
+					<a name="vertexcount" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> vertex<wbr>Count</h3>
+					<div class="tsd-signature tsd-kind-icon">vertex<wbr>Count<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/747d582/src/engine/shader/vertex/vertex.shader.config.ts#L15">src/engine/shader/vertex/vertex.shader.config.ts:15</a></li>
+							<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/747d582/src/engine/geometry/geometry.config.ts#L14">src/engine/geometry/geometry.config.ts:14</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>A UniformArray describing the uniforms the VertexShader contains; used in automatic uniform value retrieval and upload</p>
+							<p>The number of Vertices making up the Geometry</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="vertexsize" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> vertex<wbr>Size</h3>
+					<div class="tsd-signature tsd-kind-icon">vertex<wbr>Size<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/747d582/src/engine/geometry/geometry.config.ts#L12">src/engine/geometry/geometry.config.ts:12</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The size of each of the Geometry&#39;s vertices</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="vertices" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> vertices</h3>
+					<div class="tsd-signature tsd-kind-icon">vertices<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Float32Array</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/747d582/src/engine/geometry/geometry.config.ts#L10">src/engine/geometry/geometry.config.ts:10</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The vertices that make up the Geometry</p>
 						</div>
 					</div>
 				</section>
@@ -181,8 +210,16 @@
 					<li class=" tsd-kind-namespace">
 						<a href="../modules/entity.html">Entity</a>
 					</li>
-					<li class=" tsd-kind-namespace">
+					<li class="current tsd-kind-namespace">
 						<a href="../modules/geometry.html">Geometry</a>
+						<ul>
+							<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
+								<a href="../modules/geometry.threed.html">ThreeD</a>
+							</li>
+							<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
+								<a href="../modules/geometry.twod.html">TwoD</a>
+							</li>
+						</ul>
 					</li>
 					<li class=" tsd-kind-namespace">
 						<a href="../modules/input.html">Input</a>
@@ -190,27 +227,8 @@
 					<li class=" tsd-kind-namespace">
 						<a href="../modules/renderer.html">Renderer</a>
 					</li>
-					<li class="current tsd-kind-namespace">
+					<li class=" tsd-kind-namespace">
 						<a href="../modules/shader.html">Shader</a>
-						<ul>
-							<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
-								<a href="../modules/shader.fragment.html">Fragment</a>
-							</li>
-							<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
-								<a href="../modules/shader.program.html">Program</a>
-							</li>
-							<li class="current tsd-kind-namespace tsd-parent-kind-namespace">
-								<a href="../modules/shader.vertex.html">Vertex</a>
-								<ul>
-									<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
-										<a href="../modules/shader.vertex.threed.html">ThreeD</a>
-									</li>
-									<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
-										<a href="../modules/shader.vertex.twod.html">TwoD</a>
-									</li>
-								</ul>
-							</li>
-						</ul>
 					</li>
 					<li class=" tsd-kind-namespace">
 						<a href="../modules/state.html">State</a>
@@ -234,25 +252,34 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-enum tsd-parent-kind-namespace">
+						<a href="../enums/geometry.glshape.html" class="tsd-kind-icon">GLShape</a>
+					</li>
 					<li class=" tsd-kind-class tsd-parent-kind-namespace">
-						<a href="../classes/shader.vertex.vertexshader.html" class="tsd-kind-icon">Vertex<wbr>Shader</a>
+						<a href="../classes/geometry.geometry-1.html" class="tsd-kind-icon">Geometry</a>
 					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-namespace">
-						<a href="shader.vertex.vertexshaderconfig.html" class="tsd-kind-icon">Vertex<wbr>Shader<wbr>Config</a>
+						<a href="geometry.geometryconfig.html" class="tsd-kind-icon">Geometry<wbr>Config</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="shader.vertex.vertexshaderconfig.html#attributes" class="tsd-kind-icon">attributes</a>
+								<a href="geometry.geometryconfig.html#glshape" class="tsd-kind-icon">gl<wbr>Shape</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="shader.vertex.vertexshaderconfig.html#name" class="tsd-kind-icon">name</a>
+								<a href="geometry.geometryconfig.html#name" class="tsd-kind-icon">name</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="shader.vertex.vertexshaderconfig.html#source" class="tsd-kind-icon">source</a>
+								<a href="geometry.geometryconfig.html#texturecoordinates" class="tsd-kind-icon">texture<wbr>Coordinates</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="shader.vertex.vertexshaderconfig.html#uniforms" class="tsd-kind-icon">uniforms</a>
+								<a href="geometry.geometryconfig.html#vertexcount" class="tsd-kind-icon">vertex<wbr>Count</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="geometry.geometryconfig.html#vertexsize" class="tsd-kind-icon">vertex<wbr>Size</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="geometry.geometryconfig.html#vertices" class="tsd-kind-icon">vertices</a>
 							</li>
 						</ul>
 					</li>
