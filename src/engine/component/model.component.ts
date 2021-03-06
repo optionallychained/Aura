@@ -53,6 +53,9 @@ export class Model extends Component {
         return this.geometry.glShape;
     }
 
+    /**
+     * Getter for the Model's textureCoordinates, as provided in its Geometry config
+     */
     public get textureCoordinates(): Float32Array {
         return this.geometry.textureCoordinates;
     }

@@ -10,6 +10,8 @@
 
 - [ ] text rendering in 3D scenes
 
+- [ ] improve built-in font
+
 
 - [ ] (in tandem with UI/textboxes/panels)
     - [ ] Wrapping
@@ -17,3 +19,5 @@
     - [ ] Emphasis?
 
 - [ ] **Consider:** support canvas text as well as spritesheet font?
+
+- [ ] **Consider/Research:** (in tandem with texture re-look/custom texcoords/non-uniform atlases) TT Fonts 

@@ -8,28 +8,39 @@ export class Color {
     /**
      * Generate a random Color with r, g and b values
      *
+     * Alpha value may be randomised or given as a fixed value
+     *
+     * @param randomAlpha whether or not to generate a random alpha; default is false
+     * @param fixedAlpha a fixed Alpha to use if randomAlpha is false; default is 1
+     *
      * @returns a random Color
      */
-    public static random(): Color {
-        return new Color(
-            Random.between(0, 255),
-            Random.between(0, 255),
-            Random.between(0, 255)
-        );
+    public static random(randomAlpha = false, fixedAlpha = 1): Color {
+        const r = Random.between(0, 255),
+            g = Random.between(0, 255),
+            b = Random.between(0, 255),
+            a = randomAlpha ? Random.between(0, 1) : fixedAlpha;
+
+        return new Color(r, g, b, a);
     }
 
     /**
-     * Generate a random Color with r, g, b and a values, supporting transparency
+     * Convenience method for generating a list of random Colors of a certain length
      *
-     * @returns a random Color with transparency
+     * Alphas may be randomised or given as a fixed value for all generated Colors
+     *
+     * @param count the number of colors to generate
+     * @param randomAlpha whether or not to generate a random alpha for each Color; default is false
+     * @param fixedAlpha a fixed Alpha to use for each Color if randomAlpha is false; default is 1
      */
-    public static randomWithAlpha(): Color {
-        return new Color(
-            Random.between(0, 255),
-            Random.between(0, 255),
-            Random.between(0, 255),
-            Random.between(0, 1)
-        );
+    public static randomList(count: number, randomAlpha = false, fixedAlpha = 1): Array<Color> {
+        const array: Array<Color> = [];
+
+        for (let i = 0; i < count; i++) {
+            array.push(Color.random(randomAlpha, fixedAlpha));
+        }
+
+        return array;
     }
 
     /**
