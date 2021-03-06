@@ -13,6 +13,7 @@ import { _createTriangleBatCat } from '../entity/2d/triangle/triangleBatCat';
 import { _createTriangleBrick } from '../entity/2d/triangle/triangleBrick';
 import { _createTriangleMulti } from '../entity/2d/triangle/triangleMulti';
 import { _createTriangleSmile } from '../entity/2d/triangle/triangleSmile';
+import { _createPoint2D } from '../entity/2d/point';
 
 const rotations: Array<number> = [];
 let frame = 0;
@@ -21,6 +22,8 @@ const populate = (game: Core.Game): void => {
     const entities: Array<Entity.Entity> = [];
 
     const _generators = [
+        // _createPoint2D,
+
         _createRectBatCat,
         _createRectBrick,
         _createRectCat,

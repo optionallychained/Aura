@@ -6,6 +6,7 @@ import { _createCubeFlat } from '../entity/3d/cubeFlat';
 import { _createCubeMulti } from '../entity/3d/cubeMulti';
 import { _createCubeSmile } from '../entity/3d/cubeSmile';
 import { _createCubeWire } from '../entity/3d/cubeWire';
+import { _createPoint3D } from '../entity/3d/point';
 
 const rotations: Array<Vec3> = [];
 let frame = 0;
@@ -14,6 +15,8 @@ const populate = (game: Core.Game): void => {
     const entities: Array<Entity.Entity> = [];
 
     const _generators = [
+        // _createPoint3D,
+
         _createCubeBatCat,
         _createCubeBrick,
         _createCubeCat,

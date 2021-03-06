@@ -19,6 +19,8 @@ export const VERTEX_TEXTURE_2D = new VertexShader({
         void main() {
             v_TexCoord = a_TexCoord;
 
+            gl_PointSize = 1.0;
+
             gl_Position = vec4(u_Transform2D * vec3(a_Position, 1.0), 1.0);
         }
     `,
