@@ -9,13 +9,14 @@ export const VERTEX_BASIC_2D = new VertexShader({
     source: `
         uniform mat3 u_Transform2D;
         uniform mat3 u_Projection;
+        uniform mat3 u_View;
 
         attribute vec2 a_Position;
 
         void main() {
             gl_PointSize = 1.0;
 
-            gl_Position = vec4(u_Projection * u_Transform2D * vec3(a_Position, 1.0), 1.0);
+            gl_Position = vec4(u_Projection * u_View * u_Transform2D * vec3(a_Position, 1.0), 1.0);
         }
     `,
     attributes: [
@@ -31,6 +32,10 @@ export const VERTEX_BASIC_2D = new VertexShader({
         },
         {
             name: 'u_Projection',
+            type: UniformType.MAT3
+        },
+        {
+            name: 'u_View',
             type: UniformType.MAT3
         }
     ]

@@ -1,4 +1,4 @@
-import { Angle, Color, Component, Core, Entity, Input, Random, State, Vec2 } from '../../engine';
+import { Angle, Color, Component, Core, Entity, Input, Mat3, Random, State, Vec2 } from '../../engine';
 import { _createRectMulti } from '../entity/2d/rect/rectMulti';
 import { _createRectBatCat } from '../entity/2d/rect/rectBatCat';
 import { _createRectCat } from '../entity/2d/rect/rectCat';
@@ -14,6 +14,7 @@ import { _createTriangleBrick } from '../entity/2d/triangle/triangleBrick';
 import { _createTriangleMulti } from '../entity/2d/triangle/triangleMulti';
 import { _createTriangleSmile } from '../entity/2d/triangle/triangleSmile';
 import { _createPoint2D } from '../entity/2d/point';
+import { WebGLRenderer } from '../../engine/renderer';
 
 const rotations: Array<number> = [];
 let frame = 0;
@@ -56,10 +57,14 @@ const rotateAndScale = (game: Core.Game): void => {
     let i = 0;
 
     const scaleFactor = 1 + (Math.sin(frame * 0.025) * 0.8);
+    const translateFactor = (Math.cos(frame * 0.05) * 2.5);
     const scale = new Vec2(scaleFactor, scaleFactor);
+    const translate = new Vec2(translateFactor, 0);
 
     for (const e of game.world.entityManager.filterEntitiesByComponentName('Transform2D')) {
         const transform = e.getComponent(Component.TwoD.Transform2D);
+
+        // transform.translate(translate);
 
         // transform.scale(scale);
         // transform.rotate(rotations[i]);
@@ -86,6 +91,23 @@ export const State2D = new State.State({
         if (game.input.isKeyDown(Input.Keys.ENTER)) {
             game.switchToState('3D');
         }
+
+        const translate = new Vec2();
+        if (game.input.isKeyDown(Input.Keys.D)) {
+            translate.setX(-2);
+        }
+        else if (game.input.isKeyDown(Input.Keys.A)) {
+            translate.setX(2);
+        }
+
+        if (game.input.isKeyDown(Input.Keys.W)) {
+            translate.setY(-2);
+        }
+        else if (game.input.isKeyDown(Input.Keys.S)) {
+            translate.setY(2);
+        }
+
+        WebGLRenderer.VIEW = Mat3.translate(WebGLRenderer.VIEW, translate);
 
         rotateAndScale(game);
     }

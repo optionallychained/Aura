@@ -41,6 +41,10 @@ export class ShaderVariableResolver {
             (e) => WebGLRenderer.PROJECTION.float32Array
         ],
         [
+            'View',
+            (e) => WebGLRenderer.VIEW.float32Array
+        ],
+        [
             'Color',
             (e) => e.getComponent(FlatColor).color.float32Array
         ],
