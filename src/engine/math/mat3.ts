@@ -269,6 +269,14 @@ export class Mat3 {
         ]);
     }
 
+    public static projection(width: number, height: number): Mat3 {
+        return new Mat3([
+            2 / width, 0, 0,
+            0, 2 / height, 0,
+            0, 0, 1
+        ]);
+    }
+
     /**
      * Constructor. Take and store the Mat3's values
      *

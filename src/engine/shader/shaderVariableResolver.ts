@@ -3,6 +3,7 @@ import { Transform2D } from '../component/2d';
 import { Transform3D } from '../component/3d';
 import { ProtoGLError } from '../core';
 import { Entity } from '../entity/entity'
+import { WebGLRenderer } from '../renderer';
 import { EntityShaderVariableResolver } from './entityShaderVariableResolver.type';
 
 /**
@@ -33,6 +34,11 @@ export class ShaderVariableResolver {
         [
             'Transform3D',
             (e) => e.getComponent(Transform3D).compute().float32Array
+        ],
+        // TODO kind of a unique thing similar to Texture in that Entity is irrelevant
+        [
+            'Projection',
+            (e) => WebGLRenderer.PROJECTION.float32Array
         ],
         [
             'Color',

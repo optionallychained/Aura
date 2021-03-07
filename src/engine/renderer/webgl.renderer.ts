@@ -1,5 +1,5 @@
 import { ProtoGLError } from '../core';
-import { Color } from '../math';
+import { Color, Mat3 } from '../math';
 import { ShaderVariableResolver } from '../shader';
 import { ShaderProgram } from '../shader/program';
 import { UniformType } from '../shader/uniformType.enum';
@@ -71,6 +71,9 @@ interface TextureSpec {
  * @see EntityManager
  */
 export class WebGLRenderer {
+
+    // TODO 2D only for the moment
+    public static PROJECTION = new Mat3();
 
     /** The WebGLRenderingContext retrieved from the Canvas */
     private readonly gl: WebGLRenderingContext;
@@ -398,6 +401,10 @@ export class WebGLRenderer {
         // enable transparency
         gl.enable(gl.BLEND);
         gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+
+        WebGLRenderer.PROJECTION = Mat3.projection(gl.canvas.width, gl.canvas.height);
+
+        gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
     }
 
     /**

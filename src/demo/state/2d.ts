@@ -24,24 +24,24 @@ const populate = (game: Core.Game): void => {
     const _generators = [
         // _createPoint2D,
 
-        _createRectBatCat,
-        _createRectBrick,
-        _createRectCat,
+        // _createRectBatCat,
+        // _createRectBrick,
+        // _createRectCat,
         _createRectFlat,
-        _createRectMulti,
-        _createRectSmile,
-        _createRectWire,
+        // _createRectMulti,
+        // _createRectSmile,
+        // _createRectWire,
 
-        _createTriangleBatCat,
-        _createTriangleBrick,
-        _createTriangleCat,
-        _createTriangleFlat,
-        _createTriangleMulti,
-        _createTriangleSmile,
-        _createTriangleWire
+        // _createTriangleBatCat,
+        // _createTriangleBrick,
+        // _createTriangleCat,
+        // _createTriangleFlat,
+        // _createTriangleMulti,
+        // _createTriangleSmile,
+        // _createTriangleWire
     ];
 
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 1; i++) {
         const r = Math.round(Random.between(1, _generators.length));
 
         entities.push(_generators[r - 1]());
@@ -61,8 +61,8 @@ const rotateAndScale = (game: Core.Game): void => {
     for (const e of game.world.entityManager.filterEntitiesByComponentName('Transform2D')) {
         const transform = e.getComponent(Component.TwoD.Transform2D);
 
-        transform.scale(scale);
-        transform.rotate(rotations[i]);
+        // transform.scale(scale);
+        // transform.rotate(rotations[i]);
         i++;
     }
 
@@ -75,9 +75,9 @@ export const State2D = new State.State({
     init: (game) => {
         populate(game);
 
-        game.font.addString('hello', new Vec2(-0.75, 0.25), Color.random());
-        game.font.addString('protogl', new Vec2(-0.75, 0), Color.random());
-        game.font.addString('world', new Vec2(-0.75, -0.25), Color.random());
+        // game.font.addString('hello', new Vec2(-0.75, 0.25), Color.random());
+        // game.font.addString('protogl', new Vec2(-0.75, 0), Color.random());
+        // game.font.addString('world', new Vec2(-0.75, -0.25), Color.random());
     },
     end: (game) => {
         game.world.entityManager.clearEntities();
