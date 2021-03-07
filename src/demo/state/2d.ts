@@ -15,9 +15,13 @@ import { _createTriangleMulti } from '../entity/2d/triangle/triangleMulti';
 import { _createTriangleSmile } from '../entity/2d/triangle/triangleSmile';
 import { _createPoint2D } from '../entity/2d/point';
 import { WebGLRenderer } from '../../engine/renderer';
+import { _createLine2D } from '../entity/2d/line';
+import { _createCamera } from '../entity/2d/camera';
 
 const rotations: Array<number> = [];
 let frame = 0;
+
+const camera = _createCamera();
 
 const populate = (game: Core.Game): void => {
     const entities: Array<Entity.Entity> = [];
@@ -50,6 +54,8 @@ const populate = (game: Core.Game): void => {
         rotations.push(Angle.toRadians(Random.between(-3, 3)));
     }
 
+    entities.push(_createLine2D());
+
     game.world.entityManager.addEntities(...entities);
 };
 
@@ -57,17 +63,18 @@ const rotateAndScale = (game: Core.Game): void => {
     let i = 0;
 
     const scaleFactor = 1 + (Math.sin(frame * 0.025) * 0.8);
-    const translateFactor = (Math.cos(frame * 0.05) * 2.5);
+    const translateFactorX = (Math.sin(frame * 0.05) * 2.5);
+    const translateFactorY = (Math.cos(frame * 0.05) * 2.5);
     const scale = new Vec2(scaleFactor, scaleFactor);
-    const translate = new Vec2(translateFactor, 0);
+    const translate = new Vec2(translateFactorX, translateFactorY);
 
-    for (const e of game.world.entityManager.filterEntitiesByComponentName('Transform2D')) {
+    for (const e of game.world.entityManager.filterEntitiesByTag('rectFlat')) {
         const transform = e.getComponent(Component.TwoD.Transform2D);
 
-        // transform.translate(translate);
+        transform.translate(translate);
 
         // transform.scale(scale);
-        // transform.rotate(rotations[i]);
+        // transform.rotate(rotations[i] * 2);
         i++;
     }
 
@@ -92,22 +99,30 @@ export const State2D = new State.State({
             game.switchToState('3D');
         }
 
-        const translate = new Vec2();
+
+        const cameraTransform = camera.getComponent(Component.TwoD.Transform2D);
         if (game.input.isKeyDown(Input.Keys.D)) {
-            translate.setX(-2);
+            cameraTransform.translate(new Vec2(-10, 0));
         }
         else if (game.input.isKeyDown(Input.Keys.A)) {
-            translate.setX(2);
+            cameraTransform.translate(new Vec2(10, 0));
         }
 
         if (game.input.isKeyDown(Input.Keys.W)) {
-            translate.setY(-2);
+            cameraTransform.translate(new Vec2(0, -10));
         }
         else if (game.input.isKeyDown(Input.Keys.S)) {
-            translate.setY(2);
+            cameraTransform.translate(new Vec2(0, 10));
         }
 
-        WebGLRenderer.VIEW = Mat3.translate(WebGLRenderer.VIEW, translate);
+        if (game.input.isKeyDown(Input.Keys.Q)) {
+            cameraTransform.rotate(Angle.toRadians(-1));
+        }
+        else if (game.input.isKeyDown(Input.Keys.E)) {
+            cameraTransform.rotate(Angle.toRadians(1));
+        }
+
+        WebGLRenderer.VIEW = cameraTransform.compute();
 
         rotateAndScale(game);
     }
