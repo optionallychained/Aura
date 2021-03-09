@@ -2,7 +2,7 @@ import { InputManager } from '../input';
 import { ControlScheme } from '../input/controlScheme.type';
 import { Color, Vec2 } from '../math';
 import { WebGLRenderer } from '../renderer';
-import { EntityShaderVariableResolver, ShaderVariableResolver } from '../shader';
+import { EntityShaderVariableResolver, RenderShaderVariableResolver, ShaderVariableResolver } from '../shader';
 import { ShaderProgram } from '../shader/program';
 import { State } from '../state';
 import { System } from '../system';
@@ -302,9 +302,9 @@ export class Game {
      * @param variableName the name of the shader variable to register
      * @param resolve the EntityShaderResolver which will retrieve the relevant value from the Entity
      */
-    public registerEntityShaderResolver(variableName: string, resolve: EntityShaderVariableResolver): void {
-        ShaderVariableResolver.registerEntityShaderResolver(variableName, resolve);
-    }
+    // public registerEntityShaderResolver(variableName: string, resolve: EntityShaderVariableResolver): void {
+    //     ShaderVariableResolver.registerEntityShaderResolver(variableName, resolve);
+    // }
 
     /**
      * Override an existing Entity Shader value resolution mapping for a given Shader attribute/uniform variable name
@@ -317,10 +317,20 @@ export class Game {
      * @param variableName the name of the shader variable to override
      * @param resolve the EntityShaderResolver which will retrieve the relevant value from the Entity
      */
-    public overrideEntityShaderResolver(variableName: string, resolve: EntityShaderVariableResolver): void {
-        ShaderVariableResolver.overrideEntityShaderResolver(variableName, resolve);
+    // public overrideEntityShaderResolver(variableName: string, resolve: EntityShaderVariableResolver): void {
+    //     ShaderVariableResolver.overrideEntityShaderResolver(variableName, resolve);
+    // }
+
+    public registerShaderVariableResolver(
+        variableName: string, variation: 'render' | 'entity', resolve: EntityShaderVariableResolver | RenderShaderVariableResolver): void {
+
+        ShaderVariableResolver.registerShaderVariableResolver(variableName, variation, resolve);
     }
 
+    public overrideShaderVariableResolver(
+        variableName: string, variation: 'render' | 'entity', resolve: EntityShaderVariableResolver | RenderShaderVariableResolver): void {
+        ShaderVariableResolver.overrideShaderVariableResolver(variableName, variation, resolve);
+    }
     /**
      * Begin game execution by first calling init() (if provided in the GameConfig) and then switching to the given state
      *

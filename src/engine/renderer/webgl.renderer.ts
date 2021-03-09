@@ -1,5 +1,5 @@
 import { ProtoGLError } from '../core';
-import { Color, Mat3, Vec2 } from '../math';
+import { Color, Mat3 } from '../math';
 import { ShaderVariableResolver } from '../shader';
 import { ShaderProgram } from '../shader/program';
 import { UniformType } from '../shader/uniformType.enum';
@@ -42,8 +42,10 @@ interface ShaderProgramSpec {
     readonly program: WebGLProgram;
     /** The attribute information associated with the shader program */
     readonly attributeLocations: AttributeLocationArray;
+    // TODO
+    readonly renderUniformLocations: UniformLocationArray;
     /** the uniform information associated with the shader program */
-    readonly uniformLocations: UniformLocationArray;
+    readonly entityUniformLocations: UniformLocationArray;
 }
 
 /**
@@ -75,6 +77,7 @@ export class WebGLRenderer {
     // TODO 2D only for the moment
     public static PROJECTION = new Mat3();
     public static VIEW = new Mat3();
+    public static ACTIVE_TEXTURE_UNIT = -1;
 
     /** The WebGLRenderingContext retrieved from the Canvas */
     private readonly gl: WebGLRenderingContext;
@@ -237,7 +240,7 @@ export class WebGLRenderer {
         const { gl } = this;
 
         // set the texture unit and make it active
-        const unit = gl.TEXTURE0 + Object.keys(this.textures).length;
+        const unit = gl.TEXTURE0 + this.textures.size;
         gl.activeTexture(unit);
 
         // create the texture
@@ -259,7 +262,9 @@ export class WebGLRenderer {
         const image = new Image();
         image.src = textureAtlas.src;
         image.addEventListener('load', () => {
+            gl.activeTexture(unit);
             gl.bindTexture(gl.TEXTURE_2D, texture);
+
             gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
             gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
             gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_NEAREST);
@@ -318,60 +323,27 @@ export class WebGLRenderer {
             this.useTexture(config.textureAtlasName);
         }
 
-        const uniforms = this.activeShaderProgram?.uniformLocations;
+        const renderUniforms = this.activeShaderProgram?.renderUniformLocations;
+        const entityUniforms = this.activeShaderProgram?.entityUniformLocations;
 
-        if (uniforms && uniforms.length) {
-            /**
-             * // TODO ultra-hacky...
-             *
-             * u_Texture represents a bit of a 'unique' (for now?) uniform in comparison to the way other uniforms work within the system
-             *
-             * Where other uniforms are guaranteed to/may change on a per-Entity basis, since Texture Atlases are specified and designated
-             *   on a per-EntityManager basis, the value of the Texture uniform is uniquely per-render-call
-             *
-             * Additionally, due to the way TextureAtlases are configured in conjunction with Texture Components, it is not possible to
-             *   infer the value of u_Texture from an Entity, so we can't rely on the ShaderVariableResolver as it currently exists to
-             *   get the uniform value
-             *
-             * This little hack/workaround finds and uploads the uniform directly once per render call, and the 'continue' clause in the
-             *   entity-uniform loop below pairs to achieve
-             *
-             * Less hacky solution left to 'later' because:
-             *     - this does work, for now
-             *     - brain mush on viable solutions
-             *     - only after some further work will it become clear if u_Texture is *actually* a unique use-case or if it represents
-             *         a new 'class'/'type' of uniform which we'll want to handle generically and separately from 'Entity Uniforms'
-             *     - the issue is possibly indicative that the whole texture implementation is flawed and might want looking at fresh
-             *
-             * ideas (probably bad ones):
-             *     - Have Entities (by way of Texture) specify their TextureAtlas; moving it 'down' from the Manager
-             *     - split uniform specification for shaders and expand ShaderVariableResolver to handle the new type separately?
-             *     - somehow leverage the fact that there are 3 and only 3 definitely-named texture atlases?
-             *     - resolve in conjunction with generifying atlases/allowing for more than the 3/allowing for per-Entity?
-             *     - ...
-             */
-            const textureUniform = uniforms.find((u) => u.name === 'u_Texture');
-            if (textureUniform) {
-                // TODO in conjunction with resolving the hack, understand why the textureunit must be subtracted from TEXTURE0
-                //   specifically for the sampler2D value; but not for the creation/binding of the texture unit...
-                this.loadUniform(textureUniform.location, textureUniform.type, gl.TEXTURE0 - this.activeTexture!.unit);
+        // handle 'render' uniforms
+        if (renderUniforms?.length) {
+            for (const uniform of renderUniforms) {
+                this.loadUniform(uniform.location, uniform.type, ShaderVariableResolver.resolveRenderShaderVariable(uniform.name));
             }
+        }
 
+        if (entityUniforms?.length) {
             // if the shader program contains uniforms, we need to do one draw call per Entity (per uniform set variation)
             let offset = 0;
 
             for (const e of config.entities) {
                 // upload the Entity's uniform values
-                for (const uniform of uniforms) {
-                    // TODO ultra-hacky (see above)
-                    if (uniform.name === 'u_Texture') {
-                        continue;
-                    }
-
+                for (const uniform of entityUniforms) {
                     const location = uniform.location;
 
                     if (location) {
-                        this.loadUniform(location, uniform.type, ShaderVariableResolver.resolveShaderVariableForEntity(uniform.name, e));
+                        this.loadUniform(location, uniform.type, ShaderVariableResolver.resolveEntityShaderVariable(uniform.name, e));
                     }
                 }
 
@@ -481,11 +453,14 @@ export class WebGLRenderer {
         }
 
         // retrieve all uniform locations
-        const uniformLocations: UniformLocationArray = [];
+        const renderUniformLocations: UniformLocationArray = [];
+        const entityUniformLocations: UniformLocationArray = [];
+
         const allUniforms = (spec.vertex.uniforms ?? []).concat(spec.fragment.uniforms);
 
         for (const uniform of allUniforms) {
             const location = gl.getUniformLocation(program, uniform.name);
+            const locationArray = uniform.variation === 'render' ? renderUniformLocations : entityUniformLocations;
 
             if (!location) {
                 throw new ProtoGLError({
@@ -495,7 +470,7 @@ export class WebGLRenderer {
                 });
             }
 
-            uniformLocations.push({
+            locationArray.push({
                 name: uniform.name,
                 location,
                 type: uniform.type
@@ -507,7 +482,8 @@ export class WebGLRenderer {
             name: spec.name,
             program,
             attributeLocations,
-            uniformLocations
+            renderUniformLocations,
+            entityUniformLocations
         });
 
         // switch off of the program to clean up
@@ -596,6 +572,9 @@ export class WebGLRenderer {
         gl.bindTexture(gl.TEXTURE_2D, texture.texture);
 
         this.activeTexture = texture;
+
+        // TODO temporary?
+        WebGLRenderer.ACTIVE_TEXTURE_UNIT = texture.unit - gl.TEXTURE0;
     }
 
     /**

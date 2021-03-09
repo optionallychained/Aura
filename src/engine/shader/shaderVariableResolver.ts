@@ -31,11 +31,10 @@ export class ShaderVariableResolver {
             'View',
             () => WebGLRenderer.VIEW.float32Array
         ],
-        // TODO related to the u_Texture hack described in WebGLRenderer->render()
-        // [
-        //     'Texture',
-        //     () => WebGLRenderer.ACTIVE_TEXTURE
-        // ]
+        [
+            'Texture',
+            () => WebGLRenderer.ACTIVE_TEXTURE_UNIT
+        ]
     ]);
 
     /**
