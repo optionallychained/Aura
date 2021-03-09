@@ -4,6 +4,7 @@ debug.log
 coverage
 
 dist
+docs
 publish
 
 vscode-profile*
