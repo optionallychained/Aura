@@ -5,6 +5,9 @@ import { ProtoGLError } from '../core';
 import { Entity } from '../entity/entity'
 import { WebGLRenderer } from '../renderer';
 import { EntityShaderVariableResolver } from './entityShaderVariableResolver.type';
+import { RenderShaderVariableResolver } from './renderShaderVariableResolver.type';
+
+type VariableResolver = RenderShaderVariableResolver | EntityShaderVariableResolver;
 
 /**
  * Utility class for automatically retrieving attribute and uniform shader values from Entities and their Components
@@ -19,10 +22,26 @@ import { EntityShaderVariableResolver } from './entityShaderVariableResolver.typ
  */
 export class ShaderVariableResolver {
 
+    private static RENDER_MAPPINGS = new Map<string, RenderShaderVariableResolver>([
+        [
+            'Projection',
+            () => WebGLRenderer.PROJECTION.float32Array
+        ],
+        [
+            'View',
+            () => WebGLRenderer.VIEW.float32Array
+        ],
+        // TODO related to the u_Texture hack described in WebGLRenderer->render()
+        // [
+        //     'Texture',
+        //     () => WebGLRenderer.ACTIVE_TEXTURE
+        // ]
+    ]);
+
     /**
      * The internal map of Shader Variable Name => Resolution function
      */
-    private static readonly MAPPINGS = new Map<string, EntityShaderVariableResolver>([
+    private static readonly ENTITY_MAPPINGS = new Map<string, EntityShaderVariableResolver>([
         [
             'Position',
             (e) => e.getComponent(Model).vertices
@@ -35,15 +54,6 @@ export class ShaderVariableResolver {
             'Transform3D',
             (e) => e.getComponent(Transform3D).compute().float32Array
         ],
-        // TODO kind of a unique thing similar to Texture in that Entity is irrelevant
-        [
-            'Projection',
-            (e) => WebGLRenderer.PROJECTION.float32Array
-        ],
-        [
-            'View',
-            (e) => WebGLRenderer.VIEW.float32Array
-        ],
         [
             'Color',
             (e) => e.getComponent(FlatColor).color.float32Array
@@ -55,13 +65,24 @@ export class ShaderVariableResolver {
         [
             'TexCoord',
             (e) => e.getComponent(Model).textureCoordinates
-        ],
-        // TODO related to the u_Texture hack described in WebGLRenderer->render()
-        // [
-        //     'Texture',
-        //     (e) => TextureAtlas.getTextureIdentifier(e.getComponent<Texture>.textureName)
-        // ]
+        ]
     ]);
+
+    public static resolveRenderShaderVariable(name: string): Float32Array | number {
+        const resolve = ShaderVariableResolver.RENDER_MAPPINGS.get(name.replace(/(a|u)_/, ''));
+
+        if (!resolve) {
+            throw new ProtoGLError({
+                class: 'ShaderVariableResolver',
+                method: 'resolveRenderShaderVariable',
+                message: `
+                    Failed to retrieve value for shader variable name '${name}' : no resolver exists for this variable
+                `
+            });
+        }
+
+        return resolve();
+    }
 
     /**
      * Retrieve an attribute or uniform value given by its name from the given Entity by executing the associated EntityShaderResolver
@@ -71,13 +92,13 @@ export class ShaderVariableResolver {
      *
      * @returns the value of the attribute or uniform to build into vertex lists or pipe to the GPU for draw calls
      */
-    public static resolveShaderVariableForEntity(name: string, entity: Entity): Float32Array | number {
-        const resolve = ShaderVariableResolver.MAPPINGS.get(name.replace(/(a|u)_/, ''));
+    public static resolveEntityShaderVariable(name: string, entity: Entity): Float32Array | number {
+        const resolve = ShaderVariableResolver.ENTITY_MAPPINGS.get(name.replace(/(a|u)_/, ''));
 
         if (!resolve) {
             throw new ProtoGLError({
                 class: 'ShaderVariableResolver',
-                method: 'resolveShaderVariableForEntity',
+                method: 'resolveEntityShaderVariable',
                 message: `
                     Failed to retrieve value for shader variable name '${name}' from Entity with tag '${entity.tag}' : no resolver exists
                     for this variable
@@ -86,6 +107,36 @@ export class ShaderVariableResolver {
         }
 
         return resolve(entity);
+    }
+
+    public static registerShaderVariableResolver(variableName: string, variation: 'render' | 'entity', resolve: VariableResolver): void {
+        const mappings = variation === 'render' ? ShaderVariableResolver.RENDER_MAPPINGS : ShaderVariableResolver.ENTITY_MAPPINGS;
+
+        if (mappings.get(variableName)) {
+            throw new ProtoGLError({
+                class: 'ShaderVariableResolver',
+                method: 'registerShaderVariableResolver',
+                message: 'TEMP'
+            });
+        }
+
+        mappings.set(variableName, resolve);
+    }
+
+    public static overrideShaderVariableResolver(variableName: string, variation: 'render' | 'entity', resolve: VariableResolver): void {
+        const mappings = variation === 'render' ? ShaderVariableResolver.RENDER_MAPPINGS : ShaderVariableResolver.ENTITY_MAPPINGS;
+
+        if (!mappings.get(variableName)) {
+            // TODO we could just fall silently through to registration in this case; decide on this as well as the overall philosophy of
+            //   separating overrides + additions
+            throw new ProtoGLError({
+                class: 'ShaderVariableResolver',
+                method: 'overrideShaderResolver',
+                message: 'TEMP'
+            });
+        }
+
+        mappings.set(variableName, resolve);
     }
 
     /**
@@ -99,20 +150,20 @@ export class ShaderVariableResolver {
      * @param variableName the name of the shader variable to register
      * @param resolve the EntityShaderResolver which will retrieve the relevant value from the Entity
      */
-    public static registerEntityShaderResolver(variableName: string, resolve: EntityShaderVariableResolver): void {
-        if (ShaderVariableResolver.MAPPINGS.get(variableName)) {
-            throw new ProtoGLError({
-                class: 'ShaderVariableResolver',
-                method: 'registerEntityShaderResolver',
-                message: `
-                    Failed to register value resolver for shader variable name '${variableName}'; resolver already exists.
-                    If this is an intentional override, use 'overrideEntityShaderResolver().
-                `
-            });
-        }
+    // public static registerEntityShaderResolver(variableName: string, resolve: EntityShaderVariableResolver): void {
+    //     if (ShaderVariableResolver.ENTITY_MAPPINGS.get(variableName)) {
+    //         throw new ProtoGLError({
+    //             class: 'ShaderVariableResolver',
+    //             method: 'registerEntityShaderResolver',
+    //             message: `
+    //                 Failed to register value resolver for shader variable name '${variableName}'; resolver already exists.
+    //                 If this is an intentional override, use 'overrideEntityShaderResolver().
+    //             `
+    //         });
+    //     }
 
-        ShaderVariableResolver.MAPPINGS.set(variableName, resolve);
-    }
+    //     ShaderVariableResolver.ENTITY_MAPPINGS.set(variableName, resolve);
+    // }
 
     /**
      * Override an existing Entity Shader value resolution mapping for a given Shader attribute/uniform variable name
@@ -125,20 +176,20 @@ export class ShaderVariableResolver {
      * @param variableName the name of the shader variable to override
      * @param resolve the EntityShaderResolver which will retrieve the relevant value from the Entity
      */
-    public static overrideEntityShaderResolver(variableName: string, resolve: EntityShaderVariableResolver): void {
-        if (!ShaderVariableResolver.MAPPINGS.get(variableName)) {
-            // TODO we could just fall silently through to registration in this case; decide on this as well as the overall philosophy of
-            //   separating overrides + additions
-            throw new ProtoGLError({
-                class: 'ShaderVariableResolver',
-                method: 'overrideEntityShaderResolver',
-                message: `
-                    Failed to override value resolver for shader variable name '${variableName}'; resolver does not exist.
-                    Register new resolvers with 'registerEntityShaderResolver()'
-                `
-            });
-        }
+    // public static overrideEntityShaderResolver(variableName: string, resolve: EntityShaderVariableResolver): void {
+    //     if (!ShaderVariableResolver.ENTITY_MAPPINGS.get(variableName)) {
+    //         // TODO we could just fall silently through to registration in this case; decide on this as well as the overall philosophy of
+    //         //   separating overrides + additions
+    //         throw new ProtoGLError({
+    //             class: 'ShaderVariableResolver',
+    //             method: 'overrideEntityShaderResolver',
+    //             message: `
+    //                 Failed to override value resolver for shader variable name '${variableName}'; resolver does not exist.
+    //                 Register new resolvers with 'registerEntityShaderResolver()'
+    //             `
+    //         });
+    //     }
 
-        ShaderVariableResolver.MAPPINGS.set(variableName, resolve);
-    }
+    //     ShaderVariableResolver.ENTITY_MAPPINGS.set(variableName, resolve);
+    // }
 }

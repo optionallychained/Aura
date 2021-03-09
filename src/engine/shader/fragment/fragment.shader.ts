@@ -13,12 +13,18 @@ import { UniformArray } from '../uniformArray.type';
  */
 export class FragmentShader {
 
+    public readonly renderUniforms: UniformArray;
+    public readonly entityUniforms: UniformArray;
+
     /**
      * Constructor. Take and store the FragmentShader's config
      *
      * @param config the FragmentShader's configuration
      */
-    constructor(private readonly config: FragmentShaderConfig) { }
+    constructor(private readonly config: FragmentShaderConfig) {
+        this.renderUniforms = config.uniforms.filter((u) => u.variation === 'render');
+        this.entityUniforms = config.uniforms.filter((u) => u.variation === 'entity');
+    }
 
     /**
      * Getter for the FragmentShader's name, as provided in its config
@@ -32,12 +38,5 @@ export class FragmentShader {
      */
     public get source(): string {
         return this.config.source;
-    }
-
-    /**
-     * Getter for the FragmentShader's UniformArray specification, as provided in its config
-     */
-    public get uniforms(): UniformArray {
-        return this.config.uniforms;
     }
 }

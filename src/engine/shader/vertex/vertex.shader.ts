@@ -14,12 +14,18 @@ import { VertexShaderConfig } from './vertex.shader.config';
  */
 export class VertexShader {
 
+    public readonly renderUniforms: UniformArray;
+    public readonly entityUniforms: UniformArray;
+
     /**
      * Constructor. Take and store the VertexShader's config
      *
      * @param config the VertexShader's config
      */
-    constructor(private readonly config: VertexShaderConfig) { }
+    constructor(private readonly config: VertexShaderConfig) {
+        this.renderUniforms = config.uniforms.filter((u) => u.variation === 'render');
+        this.entityUniforms = config.uniforms.filter((u) => u.variation === 'entity');
+    }
 
     /**
      * Getter for the VertexShader's name, as provided in its config
@@ -40,12 +46,5 @@ export class VertexShader {
      */
     public get attributes(): AttributeArray {
         return this.config.attributes;
-    }
-
-    /**
-     * Getter for the VertexShader's UniformArray specification, as provided in its config
-     */
-    public get uniforms(): UniformArray {
-        return this.config.uniforms;
     }
 }

@@ -1,4 +1,5 @@
 export * from './entityShaderVariableResolver.type';
+export * from './renderShaderVariableResolver.type';
 export * from './shaderVariableResolver';
 export * from './attributeArray.type';
 export * from './uniformArray.type';
