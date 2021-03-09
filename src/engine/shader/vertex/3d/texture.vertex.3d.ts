@@ -37,7 +37,8 @@ export const VERTEX_TEXTURE_3D = new VertexShader({
     uniforms: [
         {
             name: 'u_Transform3D',
-            type: UniformType.MAT4
+            type: UniformType.MAT4,
+            variation: 'entity'
         }
     ]
 });

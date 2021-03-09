@@ -21,11 +21,13 @@ export const FRAGMENT_TEXTURE_COLORED = new FragmentShader({
     uniforms: [
         {
             name: 'u_Texture',
-            type: UniformType.INTEGER
+            type: UniformType.INTEGER,
+            variation: 'render'
         },
         {
             name: 'u_Color',
-            type: UniformType.VEC4
+            type: UniformType.VEC4,
+            variation: 'entity'
         }
     ]
 });

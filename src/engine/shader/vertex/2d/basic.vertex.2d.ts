@@ -28,15 +28,18 @@ export const VERTEX_BASIC_2D = new VertexShader({
     uniforms: [
         {
             name: 'u_Transform2D',
-            type: UniformType.MAT3
+            type: UniformType.MAT3,
+            variation: 'entity'
         },
         {
             name: 'u_Projection',
-            type: UniformType.MAT3
+            type: UniformType.MAT3,
+            variation: 'render'
         },
         {
             name: 'u_View',
-            type: UniformType.MAT3
+            type: UniformType.MAT3,
+            variation: 'render'
         }
     ]
 });

@@ -21,7 +21,8 @@ export const FRAGMENT_BASIC = new FragmentShader({
     uniforms: [
         {
             name: 'u_Color',
-            type: UniformType.VEC4
+            type: UniformType.VEC4,
+            variation: 'entity'
         }
     ]
 });

@@ -37,7 +37,8 @@ export const VERTEX_COLOR_PER_VERTEX_2D = new VertexShader({
     uniforms: [
         {
             name: 'u_Transform2D',
-            type: UniformType.MAT3
+            type: UniformType.MAT3,
+            variation: 'entity'
         }
     ]
 });
