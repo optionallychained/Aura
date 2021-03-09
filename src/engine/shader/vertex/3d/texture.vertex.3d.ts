@@ -1,4 +1,5 @@
 import { UniformType } from '../../uniformType.enum';
+import { UniformVariation } from '../../uniformVariation.enum';
 import { VertexShader } from '../vertex.shader';
 
 /**
@@ -38,7 +39,7 @@ export const VERTEX_TEXTURE_3D = new VertexShader({
         {
             name: 'u_Transform3D',
             type: UniformType.MAT4,
-            variation: 'entity'
+            variation: UniformVariation.ENTITY
         }
     ]
 });

@@ -2,7 +2,7 @@ import { InputManager } from '../input';
 import { ControlScheme } from '../input/controlScheme.type';
 import { Color, Vec2 } from '../math';
 import { WebGLRenderer } from '../renderer';
-import { EntityShaderVariableResolver, RenderShaderVariableResolver, ShaderVariableResolver } from '../shader';
+import { ShaderVariableResolver, UniformVariation, VariableResolver } from '../shader';
 import { ShaderProgram } from '../shader/program';
 import { State } from '../state';
 import { System } from '../system';
@@ -321,16 +321,14 @@ export class Game {
     //     ShaderVariableResolver.overrideEntityShaderResolver(variableName, resolve);
     // }
 
-    public registerShaderVariableResolver(
-        variableName: string, variation: 'render' | 'entity', resolve: EntityShaderVariableResolver | RenderShaderVariableResolver): void {
-
-        ShaderVariableResolver.registerShaderVariableResolver(variableName, variation, resolve);
+    public registerShaderVariableResolver(variableName: string, variation: UniformVariation, resolve: VariableResolver): void {
+        ShaderVariableResolver.registerVariableResolver(variableName, variation, resolve);
     }
 
-    public overrideShaderVariableResolver(
-        variableName: string, variation: 'render' | 'entity', resolve: EntityShaderVariableResolver | RenderShaderVariableResolver): void {
-        ShaderVariableResolver.overrideShaderVariableResolver(variableName, variation, resolve);
+    public overrideShaderVariableResolver(variableName: string, variation: UniformVariation, resolve: VariableResolver): void {
+        ShaderVariableResolver.overrideVariableResolver(variableName, variation, resolve);
     }
+
     /**
      * Begin game execution by first calling init() (if provided in the GameConfig) and then switching to the given state
      *

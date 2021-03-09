@@ -1,4 +1,5 @@
 import { UniformType } from '../../uniformType.enum';
+import { UniformVariation } from '../../uniformVariation.enum';
 import { VertexShader } from '../../vertex';
 
 /**
@@ -29,17 +30,17 @@ export const VERTEX_BASIC_2D = new VertexShader({
         {
             name: 'u_Transform2D',
             type: UniformType.MAT3,
-            variation: 'entity'
+            variation: UniformVariation.ENTITY
         },
         {
             name: 'u_Projection',
             type: UniformType.MAT3,
-            variation: 'render'
+            variation: UniformVariation.STATIC
         },
         {
             name: 'u_View',
             type: UniformType.MAT3,
-            variation: 'render'
+            variation: UniformVariation.STATIC
         }
     ]
 });

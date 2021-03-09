@@ -1,6 +1,6 @@
 import { ProtoGLError } from '../core';
 import { Color, Mat3 } from '../math';
-import { ShaderVariableResolver } from '../shader';
+import { ShaderVariableResolver, UniformVariation } from '../shader';
 import { ShaderProgram } from '../shader/program';
 import { UniformType } from '../shader/uniformType.enum';
 import { TextureAtlas } from '../texture';
@@ -43,7 +43,7 @@ interface ShaderProgramSpec {
     /** The attribute information associated with the shader program */
     readonly attributeLocations: AttributeLocationArray;
     // TODO
-    readonly renderUniformLocations: UniformLocationArray;
+    readonly staticUniformLocations: UniformLocationArray;
     /** the uniform information associated with the shader program */
     readonly entityUniformLocations: UniformLocationArray;
 }
@@ -323,13 +323,13 @@ export class WebGLRenderer {
             this.useTexture(config.textureAtlasName);
         }
 
-        const renderUniforms = this.activeShaderProgram?.renderUniformLocations;
+        const staticUniforms = this.activeShaderProgram?.staticUniformLocations;
         const entityUniforms = this.activeShaderProgram?.entityUniformLocations;
 
-        // handle 'render' uniforms
-        if (renderUniforms?.length) {
-            for (const uniform of renderUniforms) {
-                this.loadUniform(uniform.location, uniform.type, ShaderVariableResolver.resolveRenderShaderVariable(uniform.name));
+        // handle 'static' uniforms
+        if (staticUniforms?.length) {
+            for (const uniform of staticUniforms) {
+                this.loadUniform(uniform.location, uniform.type, ShaderVariableResolver.resolveStaticVariable(uniform.name));
             }
         }
 
@@ -343,7 +343,7 @@ export class WebGLRenderer {
                     const location = uniform.location;
 
                     if (location) {
-                        this.loadUniform(location, uniform.type, ShaderVariableResolver.resolveEntityShaderVariable(uniform.name, e));
+                        this.loadUniform(location, uniform.type, ShaderVariableResolver.resolveEntityVariable(uniform.name, e));
                     }
                 }
 
@@ -453,14 +453,14 @@ export class WebGLRenderer {
         }
 
         // retrieve all uniform locations
-        const renderUniformLocations: UniformLocationArray = [];
+        const staticUniformLocations: UniformLocationArray = [];
         const entityUniformLocations: UniformLocationArray = [];
 
         const allUniforms = (spec.vertex.uniforms ?? []).concat(spec.fragment.uniforms);
 
         for (const uniform of allUniforms) {
             const location = gl.getUniformLocation(program, uniform.name);
-            const locationArray = uniform.variation === 'render' ? renderUniformLocations : entityUniformLocations;
+            const locationArray = uniform.variation === UniformVariation.STATIC ? staticUniformLocations : entityUniformLocations;
 
             if (!location) {
                 throw new ProtoGLError({
@@ -482,7 +482,7 @@ export class WebGLRenderer {
             name: spec.name,
             program,
             attributeLocations,
-            renderUniformLocations,
+            staticUniformLocations,
             entityUniformLocations
         });
 

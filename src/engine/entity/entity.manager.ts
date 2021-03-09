@@ -434,7 +434,7 @@ export class EntityManager {
                         // process every attribute for every vertex of the Entity
                         for (const attr of shaderInfo.vertex.attributes) {
                             // TODO entity change detection: recompile dynamic values only as necessary
-                            let value = ShaderVariableResolver.resolveEntityShaderVariable(attr.name, e);
+                            let value = ShaderVariableResolver.resolveEntityVariable(attr.name, e);
 
                             if (typeof value === 'number') {
                                 // handle numerical values by wrapping them in an array for setting into vertices

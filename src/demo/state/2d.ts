@@ -27,33 +27,33 @@ const camera = _createCamera();
 const populate = (game: Core.Game): void => {
     const entities: Array<Entity.Entity> = [];
 
-    // const _generators = [
-    //     // _createPoint2D,
+    const _generators = [
+        // _createPoint2D,
 
-    //     // _createRectBatCat,
-    //     // _createRectBrick,
-    //     // _createRectCat,
-    //     _createRectFlat,
-    //     // _createRectMulti,
-    //     // _createRectSmile,
-    //     // _createRectWire,
+        _createRectBatCat,
+        // _createRectBrick,
+        // _createRectCat,
+        // _createRectFlat,
+        // _createRectMulti,
+        // _createRectSmile,
+        // _createRectWire,
 
-    //     // _createTriangleBatCat,
-    //     // _createTriangleBrick,
-    //     // _createTriangleCat,
-    //     // _createTriangleFlat,
-    //     // _createTriangleMulti,
-    //     // _createTriangleSmile,
-    //     // _createTriangleWire
-    // ];
+        // _createTriangleBatCat,
+        // _createTriangleBrick,
+        // _createTriangleCat,
+        // _createTriangleFlat,
+        // _createTriangleMulti,
+        // _createTriangleSmile,
+        // _createTriangleWire
+    ];
 
-    // for (let i = 0; i < 4; i++) {
-    //     const r = Math.round(Random.between(1, _generators.length));
+    for (let i = 0; i < 1; i++) {
+        const r = Math.round(Random.between(1, _generators.length));
 
-    //     entities.push(_generators[r - 1]());
+        entities.push(_generators[r - 1]());
 
-    //     rotations.push(Angle.toRadians(Random.between(-3, 3)));
-    // }
+        rotations.push(Angle.toRadians(Random.between(-3, 3)));
+    }
 
     entities.push(_createLine2D(0));
     entities.push(_createLine2D(Angle.toRadians(90)));
@@ -80,11 +80,11 @@ const rotateAndScale = (game: Core.Game): void => {
     const scale = new Vec2(scaleFactor, scaleFactor);
     const translate = new Vec2(translateFactorX, translateFactorY);
 
-    for (const e of game.world.entityManager.filterEntitiesByTag('rectFlat')) {
+    for (const e of game.world.entityManager.filterEntitiesByTags('rectFlat', 'rectBatCat')) {
         const transform = e.getComponent(Component.TwoD.Transform2D);
 
-        transform.translate(translate);
-        transform.scale(scale);
+        // transform.translate(translate);
+        // transform.scale(scale);
         transform.rotate(rotations[i]);
         i++;
     }
@@ -98,7 +98,7 @@ export const State2D = new State.State({
     init: (game) => {
         populate(game);
 
-        // game.font.addString('hello', new Vec2(-0.75, 0.25), Color.random());
+        game.font.addString('hello', new Vec2(-0.75, 0.25), Color.random());
         // game.font.addString('protogl', new Vec2(-0.75, 0), Color.random());
         // game.font.addString('world', new Vec2(-0.75, -0.25), Color.random());
     },
