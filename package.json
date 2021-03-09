@@ -3,6 +3,7 @@
     "version": "0.5.0",
     "author": "jonnopon",
     "license": "MIT",
+    "homepage": "https://jonnopon.github.io/ProtoGL",
     "repository": {
         "type": "git",
         "url": "git://git@github.com/jonnopon/ProtoGL.git"
@@ -28,7 +29,7 @@
         "preengine:dist": "npm run lint",
         "engine:dist": "webpack --config webpack.engine.config.js",
         "engine:publish": "tsc --project ./tsconfig.publish.json",
-        "prepublishOnly": "npm run engine:dist && npm run engine:publish"
+        "prepublishOnly": "npm run docs:deploy && npm run engine:dist && npm run engine:publish"
     },
     "devDependencies": {
         "@types/jest": "^26.0.20",
