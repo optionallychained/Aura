@@ -1,0 +1,412 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>State | API | ProtoGL Documentation - v0.5.0</title>
+	<meta name="description" content="Documentation for API | ProtoGL Documentation - v0.5.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+	<script async src="../assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">API | ProtoGL Documentation - v0.5.0</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../modules.html">API | ProtoGL Documentation - v0.5.0</a>
+				</li>
+				<li>
+					<a href="../modules/state.html">State</a>
+				</li>
+				<li>
+					<a href="state.state-1.html">State</a>
+				</li>
+			</ul>
+			<h1>Class State</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Class representing a State</p>
+					</div>
+					<p>A State is roughly equivalent to a Scene; a literal distinct <em>state</em> that the game can be in</p>
+					<p>Example States may include Menu, Game, Pause, Dead, etc</p>
+					<dl class="tsd-comment-tags">
+						<dt>see</dt>
+						<dd><p>Game</p>
+						</dd>
+					</dl>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">State</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="state.state-1.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Accessors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="state.state-1.html#name" class="tsd-kind-icon">name</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="state.state-1.html#renderingmode" class="tsd-kind-icon">rendering<wbr>Mode</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="state.state-1.html#end" class="tsd-kind-icon">end</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="state.state-1.html#init" class="tsd-kind-icon">init</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="state.state-1.html#tick" class="tsd-kind-icon">tick</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>State<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><a href="../interfaces/state.stateconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">StateConfig</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="state.state-1.html" class="tsd-signature-type" data-tsd-kind="Class">State</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/bfcb1a8/src/engine/state/state.ts#L14">src/engine/state/state.ts:14</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Constructor. Take and store the State&#39;s config</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>config: <a href="../interfaces/state.stateconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">StateConfig</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the State&#39;s configuration</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="state.state-1.html" class="tsd-signature-type" data-tsd-kind="Class">State</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Accessors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="name" class="tsd-anchor"></a>
+					<h3>name</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> name<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/bfcb1a8/src/engine/state/state.ts#L28">src/engine/state/state.ts:28</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Getter for the State&#39;s name, as provided in its Config</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<p>the State&#39;s name</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="renderingmode" class="tsd-anchor"></a>
+					<h3>rendering<wbr>Mode</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> renderingMode<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules/renderer.html#renderingmode" class="tsd-signature-type" data-tsd-kind="Type alias">RenderingMode</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/bfcb1a8/src/engine/state/state.ts#L37">src/engine/state/state.ts:37</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Getter for the State&#39;s rendering mode, as provided in its Config</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="../modules/renderer.html#renderingmode" class="tsd-signature-type" data-tsd-kind="Type alias">RenderingMode</a></h4>
+							<p>the State&#39;s rendering mode</p>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="end" class="tsd-anchor"></a>
+					<h3>end</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">end<span class="tsd-signature-symbol">(</span>game<span class="tsd-signature-symbol">: </span><a href="core.game.html" class="tsd-signature-type" data-tsd-kind="Class">Game</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/bfcb1a8/src/engine/state/state.ts#L71">src/engine/state/state.ts:71</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>State shutdown method, called when the State is &#39;switched away from&#39; by the Game.</p>
+								</div>
+								<p>Useful for cleaning up Systems and Entities before State closure</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>game: <a href="core.game.html" class="tsd-signature-type" data-tsd-kind="Class">Game</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the Game the State is running within</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="init" class="tsd-anchor"></a>
+					<h3>init</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">init<span class="tsd-signature-symbol">(</span>game<span class="tsd-signature-symbol">: </span><a href="core.game.html" class="tsd-signature-type" data-tsd-kind="Class">Game</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/bfcb1a8/src/engine/state/state.ts#L48">src/engine/state/state.ts:48</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>State initialisation method, called when the State is &#39;switched to&#39; by the Game.</p>
+								</div>
+								<p>Useful for configuring the game with Systems and Entities before State kickoff</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>game: <a href="core.game.html" class="tsd-signature-type" data-tsd-kind="Class">Game</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the Game the State is running within</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="tick" class="tsd-anchor"></a>
+					<h3>tick</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">tick<span class="tsd-signature-symbol">(</span>game<span class="tsd-signature-symbol">: </span><a href="core.game.html" class="tsd-signature-type" data-tsd-kind="Class">Game</a>, frameDelta<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/bfcb1a8/src/engine/state/state.ts#L60">src/engine/state/state.ts:60</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>State frame update method, called for every frame the State is active.</p>
+								</div>
+								<p>Useful for handling per-frame logic necessary to progress the State</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>game: <a href="core.game.html" class="tsd-signature-type" data-tsd-kind="Class">Game</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the Game the State is running within</p>
+									</div>
+								</li>
+								<li>
+									<h5>frameDelta: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the time between the last frame and the current, for normalizing time-dependent operations</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="../modules.html">Exports</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/component.html">Component</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/core.html">Core</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/entity.html">Entity</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/geometry.html">Geometry</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/input.html">Input</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/renderer.html">Renderer</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/shader.html">Shader</a>
+					</li>
+					<li class="current tsd-kind-namespace">
+						<a href="../modules/state.html">State</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/system.html">System</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/text.html">Text</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/texture.html">Texture</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/ui.html">UI</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/world.html">World</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class tsd-parent-kind-namespace">
+						<a href="state.state-1.html" class="tsd-kind-icon">State</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="state.state-1.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="state.state-1.html#name" class="tsd-kind-icon">name</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="state.state-1.html#renderingmode" class="tsd-kind-icon">rendering<wbr>Mode</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="state.state-1.html#end" class="tsd-kind-icon">end</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="state.state-1.html#init" class="tsd-kind-icon">init</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="state.state-1.html#tick" class="tsd-kind-icon">tick</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-namespace">
+						<a href="../interfaces/state.stateconfig.html" class="tsd-kind-icon">State<wbr>Config</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer>
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

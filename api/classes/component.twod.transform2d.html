@@ -1,0 +1,466 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Transform2D | API | ProtoGL Documentation - v0.5.0</title>
+	<meta name="description" content="Documentation for API | ProtoGL Documentation - v0.5.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+	<script async src="../assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">API | ProtoGL Documentation - v0.5.0</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../modules.html">API | ProtoGL Documentation - v0.5.0</a>
+				</li>
+				<li>
+					<a href="../modules/component.html">Component</a>
+				</li>
+				<li>
+					<a href="../modules/component.twod.html">TwoD</a>
+				</li>
+				<li>
+					<a href="component.twod.transform2d.html">Transform2D</a>
+				</li>
+			</ul>
+			<h1>Class Transform2D</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Built-in Transform2D Component, defining the position, scale, rotation and velocity of a two dimensional Entity</p>
+					</div>
+					<p>Maintains and provides abstractions for a Mat3 transformations matrix</p>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<a href="component.component-1.html" class="tsd-signature-type" data-tsd-kind="Class">Component</a>
+						<ul class="tsd-hierarchy">
+							<li>
+								<span class="target">Transform2D</span>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><a href="component.twod.transform2d.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="component.twod.transform2d.html#initialangle" class="tsd-kind-icon">initial<wbr>Angle</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="component.twod.transform2d.html#initialposition" class="tsd-kind-icon">initial<wbr>Position</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="component.twod.transform2d.html#initialscale" class="tsd-kind-icon">initial<wbr>Scale</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="component.twod.transform2d.html#name" class="tsd-kind-icon">name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="component.twod.transform2d.html#velocity" class="tsd-kind-icon">velocity</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="component.twod.transform2d.html#compute" class="tsd-kind-icon">compute</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="component.twod.transform2d.html#rotate" class="tsd-kind-icon">rotate</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="component.twod.transform2d.html#scale" class="tsd-kind-icon">scale</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="component.twod.transform2d.html#translate" class="tsd-kind-icon">translate</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Transform2D<span class="tsd-signature-symbol">(</span>initialPosition<span class="tsd-signature-symbol">?: </span><a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a>, initialScale<span class="tsd-signature-symbol">?: </span><a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a>, initialAngle<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, velocity<span class="tsd-signature-symbol">?: </span><a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="component.twod.transform2d.html" class="tsd-signature-type" data-tsd-kind="Class">Transform2D</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="component.component-1.html">Component</a>.<a href="component.component-1.html#constructor">constructor</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/bfcb1a8/src/engine/component/2d/transform.component.2d.ts#L18">src/engine/component/2d/transform.component.2d.ts:18</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Constructor. Take and store the initial position, scale, angle and velocity</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>initialPosition: <a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a><span class="tsd-signature-symbol"> = ...</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the position of the Entity, expressed as a Vec2. Defaults to 0,0</p>
+									</div>
+								</li>
+								<li>
+									<h5>initialScale: <a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a><span class="tsd-signature-symbol"> = ...</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the starting scale of the Entity, expressed as a Vec2. Defaults to 1,1</p>
+									</div>
+								</li>
+								<li>
+									<h5>initialAngle: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 0</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the starting rotation of the Entity. Defaults to 0</p>
+									</div>
+								</li>
+								<li>
+									<h5>velocity: <a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a><span class="tsd-signature-symbol"> = ...</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the velocity of the Entity, expressed as a Vec2. Defaults to 0,0</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="component.twod.transform2d.html" class="tsd-signature-type" data-tsd-kind="Class">Transform2D</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="initialangle" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> initial<wbr>Angle</h3>
+					<div class="tsd-signature tsd-kind-icon">initial<wbr>Angle<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 0</span></div>
+					<aside class="tsd-sources">
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="initialposition" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> initial<wbr>Position</h3>
+					<div class="tsd-signature tsd-kind-icon">initial<wbr>Position<span class="tsd-signature-symbol">:</span> <a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a><span class="tsd-signature-symbol"> = ...</span></div>
+					<aside class="tsd-sources">
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="initialscale" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> initial<wbr>Scale</h3>
+					<div class="tsd-signature tsd-kind-icon">initial<wbr>Scale<span class="tsd-signature-symbol">:</span> <a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a><span class="tsd-signature-symbol"> = ...</span></div>
+					<aside class="tsd-sources">
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="name" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> name</h3>
+					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="component.component-1.html">Component</a>.<a href="component.component-1.html#name">name</a></p>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="velocity" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> velocity</h3>
+					<div class="tsd-signature tsd-kind-icon">velocity<span class="tsd-signature-symbol">:</span> <a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a><span class="tsd-signature-symbol"> = ...</span></div>
+					<aside class="tsd-sources">
+					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="compute" class="tsd-anchor"></a>
+					<h3>compute</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">compute<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="mat3.html" class="tsd-signature-type" data-tsd-kind="Class">Mat3</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/bfcb1a8/src/engine/component/2d/transform.component.2d.ts#L76">src/engine/component/2d/transform.component.2d.ts:76</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Compute the composite Transform Matrix for the maintained translation, scaling and rotation</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="mat3.html" class="tsd-signature-type" data-tsd-kind="Class">Mat3</a></h4>
+							<p>the Transform matrix</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="rotate" class="tsd-anchor"></a>
+					<h3>rotate</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">rotate<span class="tsd-signature-symbol">(</span>angle<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/bfcb1a8/src/engine/component/2d/transform.component.2d.ts#L56">src/engine/component/2d/transform.component.2d.ts:56</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Abstraction for Mat3.rotate, adding a given angle (in radians) to the current rotation angle</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>angle: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the angle (radians) to rotate by</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="scale" class="tsd-anchor"></a>
+					<h3>scale</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">scale<span class="tsd-signature-symbol">(</span>factor<span class="tsd-signature-symbol">: </span><a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/bfcb1a8/src/engine/component/2d/transform.component.2d.ts#L67">src/engine/component/2d/transform.component.2d.ts:67</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Abstraction for Mat3.scale, updating the existing scale factor with the given</p>
+								</div>
+								<p>Multiplies the two Vec2s so as to ensure an Entity&#39;s initialScale is preserved as the baseline</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>factor: <a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the factor to scale by</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="translate" class="tsd-anchor"></a>
+					<h3>translate</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">translate<span class="tsd-signature-symbol">(</span>translate<span class="tsd-signature-symbol">: </span><a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/bfcb1a8/src/engine/component/2d/transform.component.2d.ts#L47">src/engine/component/2d/transform.component.2d.ts:47</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Abstraction for Mat3.translate, adding a given translation onto the existing translationVector</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>translate: <a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the Vec2 to translate by</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="../modules.html">Exports</a>
+					</li>
+					<li class="current tsd-kind-namespace">
+						<a href="../modules/component.html">Component</a>
+						<ul>
+							<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
+								<a href="../modules/component.threed.html">ThreeD</a>
+							</li>
+							<li class="current tsd-kind-namespace tsd-parent-kind-namespace">
+								<a href="../modules/component.twod.html">TwoD</a>
+							</li>
+						</ul>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/core.html">Core</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/entity.html">Entity</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/geometry.html">Geometry</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/input.html">Input</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/renderer.html">Renderer</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/shader.html">Shader</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/state.html">State</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/system.html">System</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/text.html">Text</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/texture.html">Texture</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/ui.html">UI</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/world.html">World</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-class tsd-parent-kind-namespace">
+						<a href="component.twod.boxcollider2d.html" class="tsd-kind-icon">Box<wbr>Collider2D</a>
+					</li>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class tsd-parent-kind-namespace">
+						<a href="component.twod.transform2d.html" class="tsd-kind-icon">Transform2D</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
+								<a href="component.twod.transform2d.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="component.twod.transform2d.html#initialangle" class="tsd-kind-icon">initial<wbr>Angle</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="component.twod.transform2d.html#initialposition" class="tsd-kind-icon">initial<wbr>Position</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="component.twod.transform2d.html#initialscale" class="tsd-kind-icon">initial<wbr>Scale</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="component.twod.transform2d.html#name" class="tsd-kind-icon">name</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="component.twod.transform2d.html#velocity" class="tsd-kind-icon">velocity</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="component.twod.transform2d.html#compute" class="tsd-kind-icon">compute</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="component.twod.transform2d.html#rotate" class="tsd-kind-icon">rotate</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="component.twod.transform2d.html#scale" class="tsd-kind-icon">scale</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="component.twod.transform2d.html#translate" class="tsd-kind-icon">translate</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer>
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
