@@ -1,15 +1,19 @@
-import { Color, Component, Entity, Geometry, Random, Shader, Vec2 } from '../../../../engine';
+import { Color, Component, Entity, Geometry, Shader, Vec2 } from '../../../../engine';
 
-export const _createRectFlat = (): Entity.Entity => {
+export const _createRectFlat = (qx: number, qy: number): Entity.Entity => {
+
+    const position = new Vec2(
+        (-1024 / 2) + ((1024 / 4) * qx),
+        (-768 / 2) + ((768 / 4) * qy)
+    );
+
     return new Entity.Entity({
         tag: 'rectFlat',
         components: [
-            new Component.FlatColor(Color.random(true)),
+            new Component.FlatColor(Color.random()),
             new Component.TwoD.Transform2D(
-                new Vec2(0, 0),
-                new Vec2(500, 500),
-                // new Vec2(Random.between(-1, 1), Random.between(-1, 1)),
-                // new Vec2(Random.between(0.5, 1.5), Random.between(0.5, 1.5))
+                position,
+                new Vec2(1024 / 4, 1024 / 4),
             ),
             new Component.Model(Geometry.TwoD.BOX),
             new Component.Shader(Shader.Program.TwoD.PROGRAM_BASIC_2D)

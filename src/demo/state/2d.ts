@@ -20,41 +20,53 @@ import { _createCamera } from '../entity/2d/camera';
 
 const rotations: Array<number> = [];
 let frame = 0;
+let cameraZoom = 1;
 
 const camera = _createCamera();
 
 const populate = (game: Core.Game): void => {
     const entities: Array<Entity.Entity> = [];
 
-    const _generators = [
-        // _createPoint2D,
+    // const _generators = [
+    //     // _createPoint2D,
 
-        // _createRectBatCat,
-        // _createRectBrick,
-        // _createRectCat,
-        _createRectFlat,
-        // _createRectMulti,
-        // _createRectSmile,
-        // _createRectWire,
+    //     // _createRectBatCat,
+    //     // _createRectBrick,
+    //     // _createRectCat,
+    //     _createRectFlat,
+    //     // _createRectMulti,
+    //     // _createRectSmile,
+    //     // _createRectWire,
 
-        // _createTriangleBatCat,
-        // _createTriangleBrick,
-        // _createTriangleCat,
-        // _createTriangleFlat,
-        // _createTriangleMulti,
-        // _createTriangleSmile,
-        // _createTriangleWire
-    ];
+    //     // _createTriangleBatCat,
+    //     // _createTriangleBrick,
+    //     // _createTriangleCat,
+    //     // _createTriangleFlat,
+    //     // _createTriangleMulti,
+    //     // _createTriangleSmile,
+    //     // _createTriangleWire
+    // ];
 
-    for (let i = 0; i < 1; i++) {
-        const r = Math.round(Random.between(1, _generators.length));
+    // for (let i = 0; i < 4; i++) {
+    //     const r = Math.round(Random.between(1, _generators.length));
 
-        entities.push(_generators[r - 1]());
+    //     entities.push(_generators[r - 1]());
 
-        rotations.push(Angle.toRadians(Random.between(-3, 3)));
-    }
+    //     rotations.push(Angle.toRadians(Random.between(-3, 3)));
+    // }
 
-    entities.push(_createLine2D());
+    entities.push(_createLine2D(0));
+    entities.push(_createLine2D(Angle.toRadians(90)));
+
+    entities.push(_createRectFlat(1, 1));
+    entities.push(_createRectFlat(1, 3));
+    entities.push(_createRectFlat(3, 1));
+    entities.push(_createRectFlat(3, 3));
+
+    rotations.push(Angle.toRadians(Random.between(-3, 3)));
+    rotations.push(Angle.toRadians(Random.between(-3, 3)));
+    rotations.push(Angle.toRadians(Random.between(-3, 3)));
+    rotations.push(Angle.toRadians(Random.between(-3, 3)));
 
     game.world.entityManager.addEntities(...entities);
 };
@@ -72,9 +84,8 @@ const rotateAndScale = (game: Core.Game): void => {
         const transform = e.getComponent(Component.TwoD.Transform2D);
 
         transform.translate(translate);
-
-        // transform.scale(scale);
-        // transform.rotate(rotations[i] * 2);
+        transform.scale(scale);
+        transform.rotate(rotations[i]);
         i++;
     }
 
@@ -116,11 +127,20 @@ export const State2D = new State.State({
         }
 
         if (game.input.isKeyDown(Input.Keys.Q)) {
-            cameraTransform.rotate(Angle.toRadians(-1));
-        }
-        else if (game.input.isKeyDown(Input.Keys.E)) {
             cameraTransform.rotate(Angle.toRadians(1));
         }
+        else if (game.input.isKeyDown(Input.Keys.E)) {
+            cameraTransform.rotate(Angle.toRadians(-1));
+        }
+
+        if (game.input.isKeyDown(Input.Keys.Z)) {
+            cameraZoom -= 0.01;
+        }
+        else if (game.input.isKeyDown(Input.Keys.X)) {
+            cameraZoom += 0.01;
+        }
+
+        cameraTransform.scale(new Vec2(cameraZoom, cameraZoom));
 
         WebGLRenderer.VIEW = cameraTransform.compute();
 

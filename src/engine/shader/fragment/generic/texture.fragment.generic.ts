@@ -20,7 +20,8 @@ export const FRAGMENT_TEXTURE = new FragmentShader({
     uniforms: [
         {
             name: 'u_Texture',
-            type: UniformType.INTEGER
+            type: UniformType.INTEGER,
+            // TODO use this to split the definitions inline with the current architecutre (no magic) class: 'instance' | 'uniform'
         }
     ]
 });
