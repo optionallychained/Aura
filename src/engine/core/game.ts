@@ -108,28 +108,23 @@ export class Game {
         this.renderer = new WebGLRenderer(this.canvas, config?.backgroundColor ?? this.defaultBackgroundColor);
         this.input = new InputManager(this.canvas, config?.controlScheme ?? this.defaultControlScheme);
 
-        // TODO move defaults into World
-        this.world = new World(
-            this.renderer,
-            config?.worldConfig ?? {
-                dimensions: config?.worldConfig?.dimensions ?? config?.canvasDimensions ?? this.defaultCanvasDimensions
-            }
-        );
+        this.world = new World({
+            renderer: this.renderer,
+            dimensions: config?.world?.dimensions ?? config?.canvasDimensions ?? this.defaultCanvasDimensions,
+            textureAtlas: config?.world?.textureAtlas
+        });
+
+        this.ui = new UI({
+            renderer: this.renderer,
+            textureAtlas: config?.ui?.textureAtlas
+        });
 
         // TODO move defaults into Font
-        this.font = new Font(
-            this.renderer,
-            config?.fontConfig ?? {
-                textureAtlas: this.defaultFontAtlas,
-                charset: this.defaultFontCharset
-            }
-        );
-
-        // TODO move defaults into UI
-        this.ui = new UI(
-            this.renderer,
-            config?.uiConfig
-        );
+        this.font = new Font({
+            renderer: this.renderer,
+            charset: config?.font?.charset ?? this.defaultFontCharset,
+            textureAtlas: config?.font?.textureAtlas ?? this.defaultFontAtlas
+        });
     }
 
     /**

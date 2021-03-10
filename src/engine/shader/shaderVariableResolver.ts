@@ -4,6 +4,7 @@ import { Transform3D } from '../component/3d';
 import { ProtoGLError } from '../core';
 import { Entity } from '../entity/entity'
 import { WebGLRenderer } from '../renderer';
+import { World } from '../world';
 import { UniformVariation } from './uniformVariation.enum';
 
 /** Internal-use utility type defining a 'static' shader variable resolution function */
@@ -61,7 +62,7 @@ export class ShaderVariableResolver {
         ],
         [
             'View',
-            () => WebGLRenderer.VIEW.float32Array
+            () => World.VIEW.float32Array
         ],
         [
             'Texture',

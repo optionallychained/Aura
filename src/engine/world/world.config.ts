@@ -1,12 +1,6 @@
+import { EntityManagerConfig } from '../entity';
 import { Vec2 } from '../math';
-import { TextureAtlas } from '../texture';
 
-/**
- * Interface desciribing a World configuration object
- */
-export interface WorldConfig {
-    /** World dimensions */
-    readonly dimensions: Vec2;
-    /** An optional TextureAtlas to use in rendering game objects with Textures */
-    readonly textureAtlas?: TextureAtlas;
+export interface WorldConfig extends Omit<EntityManagerConfig, 'name'> {
+    dimensions: Vec2;
 }

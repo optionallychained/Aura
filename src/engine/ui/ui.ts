@@ -1,5 +1,4 @@
-import { EntityManager } from '../entity';
-import { WebGLRenderer } from '../renderer';
+import { EntityManager, } from '../entity';
 import { UIConfig } from './ui.config';
 
 /**
@@ -8,23 +7,12 @@ import { UIConfig } from './ui.config';
  * // TODO continue on branch ui
  * // TODO this, World and Font might want to actually extend from EntityManager?
  */
-export class UI {
+export class UI extends EntityManager<UIConfig> {
 
-    private readonly entityManager: EntityManager;
-
-    constructor(private readonly renderer: WebGLRenderer, private readonly config?: UIConfig) {
-        this.entityManager = new EntityManager({
+    constructor(config: UIConfig) {
+        super({
             name: 'ui',
-            renderer,
-            textureAtlas: config?.textureAtlas
+            ...config
         });
-    }
-
-    public tick(frameDelta: number): void {
-        this.entityManager.tick(frameDelta);
-    }
-
-    public render(): void {
-        this.entityManager.render();
     }
 }

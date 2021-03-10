@@ -3,7 +3,6 @@ import { Transform2D } from '../component/2d';
 import { Entity, EntityManager } from '../entity';
 import { TwoD } from '../geometry';
 import { Color, Vec2 } from '../math';
-import { WebGLRenderer } from '../renderer';
 import { PROGRAM_TEXTURE_COLORED_2D } from '../shader/program/2d';
 import { FontConfig } from './font.config';
 
@@ -13,15 +12,13 @@ import { FontConfig } from './font.config';
  * // TODO continue on branch text
  * // TODO this, World and UI might want to actually extend from EntityManager?
  */
-export class Font {
+export class Font extends EntityManager<FontConfig> {
 
-    public readonly entityManager: EntityManager;
 
-    constructor(private readonly renderer: WebGLRenderer, private readonly config: FontConfig) {
-        this.entityManager = new EntityManager({
+    constructor(config: FontConfig) {
+        super({
             name: 'font',
-            renderer,
-            textureAtlas: config.textureAtlas
+            ...config
         });
     }
 
@@ -44,14 +41,6 @@ export class Font {
             i++;
         }
 
-        this.entityManager.addEntities(...entities);
-    }
-
-    public tick(frameDelta: number): void {
-        this.entityManager.tick(frameDelta);
-    }
-
-    public render(): void {
-        this.entityManager.render();
+        this.addEntities(...entities);
     }
 }

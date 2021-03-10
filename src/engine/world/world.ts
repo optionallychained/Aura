@@ -1,5 +1,5 @@
 import { EntityManager } from '../entity';
-import { WebGLRenderer } from '../renderer';
+import { Mat3 } from '../math';
 import { WorldConfig } from './world.config';
 
 /**
@@ -10,23 +10,20 @@ import { WorldConfig } from './world.config';
  * // TODO continue on branch world
  * // TODO this, Font and UI might want to actually extend from EntityManager?
  */
-export class World {
+export class World extends EntityManager<WorldConfig> {
 
-    public readonly entityManager: EntityManager;
+    // TODO 2D only for the moment
+    // TODO potentially temporary
+    public static VIEW = new Mat3();
 
-    constructor(renderer: WebGLRenderer, config: WorldConfig) {
-        this.entityManager = new EntityManager({
+    constructor(config: WorldConfig) {
+        super({
             name: 'world',
-            renderer,
-            textureAtlas: config.textureAtlas
+            ...config
         });
     }
 
-    public tick(frameDelta: number): void {
-        this.entityManager.tick(frameDelta);
-    }
-
-    public render(): void {
-        this.entityManager.render();
+    public x(): void {
+        //
     }
 }

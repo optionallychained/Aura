@@ -1,9 +1,7 @@
-import { TextureAtlas } from '../texture';
+import { EntityManagerConfig } from '../entity';
 
 /**
  * Interface desciribing a UI configuration object
  */
-export interface UIConfig {
-    /** An optional TextureAtlas to use in rendering UI elements with Textures */
-    textureAtlas?: TextureAtlas;
-}
+/* eslint-disable @typescript-eslint/no-empty-interface */
+export interface UIConfig extends Omit<EntityManagerConfig, 'name'> { }

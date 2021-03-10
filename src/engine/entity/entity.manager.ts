@@ -26,7 +26,7 @@ type EntityChanges = Array<{ shaderName: string; modelName: string; }>;
  *
  * @see Game
  */
-export class EntityManager {
+export abstract class EntityManager<TConfig extends EntityManagerConfig> {
 
     /** Flat list of all Entities currently in play, used for efficiently executing frame ticks and in filtering */
     private entities: Array<Entity> = [];
@@ -58,7 +58,7 @@ export class EntityManager {
      *
      * @param renderer the renderer
      */
-    constructor(private readonly config: EntityManagerConfig) {
+    constructor(protected readonly config: TConfig & { name: string }) {
         if (config.textureAtlas) {
             config.renderer.createTexture(config.textureAtlas);
         }
@@ -446,9 +446,9 @@ export class EntityManager {
                                 p += attr.size;
                             }
                             else if (attr.name === 'a_TexCoord') {
-                                // handle texture coordinates by asking the Texture Atlas to resolve this vertex's texcoord
                                 const { textureAtlas } = this.config;
 
+                                // handle texture coordinates by asking the Texture Atlas to resolve this vertex's texcoord
                                 if (!textureAtlas) {
                                     // if we're trying to render an Entity with a Texture-involved shader, but we have no Texture Atlas,
                                     //   then something has gone wrong

@@ -38,7 +38,7 @@ const populate = (game: Core.Game): void => {
         rotations.push(new Vec3(angleX, angleY, angleZ));
     }
 
-    game.world.entityManager.addEntities(...entities);
+    game.world.addEntities(...entities);
 };
 
 const rotateAndScale = (game: Core.Game): void => {
@@ -47,7 +47,7 @@ const rotateAndScale = (game: Core.Game): void => {
     const scaleFactor = 1 + (Math.sin(frame * 0.025) * 0.25);
     const scale = new Vec3(scaleFactor, scaleFactor, scaleFactor);
 
-    for (const e of game.world.entityManager.filterEntitiesByComponentName('Transform3D')) {
+    for (const e of game.world.filterEntitiesByComponentName('Transform3D')) {
         const transform = e.getComponent(Component.ThreeD.Transform3D);
 
         transform.scale(scale);
@@ -66,7 +66,7 @@ export const state3D = new State.State({
         populate(game);
     },
     end: (game) => {
-        game.world.entityManager.clearEntities();
+        game.world.clearEntities();
     },
     tick: (game) => {
         if (game.input.isKeyDown(Input.Keys.SPACE)) {

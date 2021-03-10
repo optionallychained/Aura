@@ -77,7 +77,6 @@ export class WebGLRenderer {
     // TODO 2D only for the moment
     // TODO potentially temporary
     public static PROJECTION = new Mat3();
-    public static VIEW = new Mat3();
     public static ACTIVE_TEXTURE_UNIT = -1;
 
     /** The WebGLRenderingContext retrieved from the Canvas */
@@ -380,7 +379,6 @@ export class WebGLRenderer {
 
         // TODO temporary?
         WebGLRenderer.PROJECTION = Mat3.projection(gl.canvas.width, gl.canvas.height);
-        WebGLRenderer.VIEW = new Mat3();
 
         gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
     }

@@ -17,6 +17,7 @@ import { _createPoint2D } from '../entity/2d/point';
 import { WebGLRenderer } from '../../engine/renderer';
 import { _createLine2D } from '../entity/2d/line';
 import { _createCamera } from '../entity/2d/camera';
+import { World } from '../../engine/world';
 
 const rotations: Array<number> = [];
 let frame = 0;
@@ -68,7 +69,7 @@ const populate = (game: Core.Game): void => {
     rotations.push(Angle.toRadians(Random.between(-3, 3)));
     rotations.push(Angle.toRadians(Random.between(-3, 3)));
 
-    game.world.entityManager.addEntities(...entities);
+    game.world.addEntities(...entities);
 };
 
 const rotateAndScale = (game: Core.Game): void => {
@@ -80,7 +81,7 @@ const rotateAndScale = (game: Core.Game): void => {
     const scale = new Vec2(scaleFactor, scaleFactor);
     const translate = new Vec2(translateFactorX, translateFactorY);
 
-    for (const e of game.world.entityManager.filterEntitiesByTags('rectFlat', 'rectBatCat')) {
+    for (const e of game.world.filterEntitiesByTags('rectFlat', 'rectBatCat')) {
         const transform = e.getComponent(Component.TwoD.Transform2D);
 
         // transform.translate(translate);
@@ -103,7 +104,7 @@ export const State2D = new State.State({
         // game.font.addString('world', new Vec2(-0.75, -0.25), Color.random());
     },
     end: (game) => {
-        game.world.entityManager.clearEntities();
+        game.world.clearEntities();
     },
     tick: (game) => {
         if (game.input.isKeyDown(Input.Keys.ENTER)) {
@@ -142,7 +143,7 @@ export const State2D = new State.State({
 
         cameraTransform.scale(new Vec2(cameraZoom, cameraZoom));
 
-        WebGLRenderer.VIEW = cameraTransform.compute();
+        World.VIEW = cameraTransform.compute();
 
         rotateAndScale(game);
     }
