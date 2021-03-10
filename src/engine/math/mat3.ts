@@ -269,6 +269,14 @@ export class Mat3 {
         ]);
     }
 
+    /**
+     * Generate a 3x3 projection matrix for a given screen width and height
+     *
+     * @param width the width of the screen
+     * @param height the height of the screen
+     *
+     * @returns the 3x3 projection matrix
+     */
     public static projection(width: number, height: number): Mat3 {
         return new Mat3([
             2 / width, 0, 0,

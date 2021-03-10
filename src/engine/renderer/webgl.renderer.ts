@@ -42,9 +42,9 @@ interface ShaderProgramSpec {
     readonly program: WebGLProgram;
     /** The attribute information associated with the shader program */
     readonly attributeLocations: AttributeLocationArray;
-    // TODO
+    /** The uniform information for all 'static' (once per render call) uniforms */
     readonly staticUniformLocations: UniformLocationArray;
-    /** the uniform information associated with the shader program */
+    /** the uniform information for all 'entity' (once per Entity) uniforms */
     readonly entityUniformLocations: UniformLocationArray;
 }
 
@@ -75,6 +75,7 @@ interface TextureSpec {
 export class WebGLRenderer {
 
     // TODO 2D only for the moment
+    // TODO potentially temporary
     public static PROJECTION = new Mat3();
     public static VIEW = new Mat3();
     public static ACTIVE_TEXTURE_UNIT = -1;
@@ -280,6 +281,8 @@ export class WebGLRenderer {
      *
      * Effectively allows a Game to comprise both 2D and 3D States
      *
+     * // TODO do we want to support mixed-mode states? Maybe complicates World/View/Projection handling over just saying a game is 2D | 3D
+     *
      * @param mode the mode to switch to
      */
     public setRenderingMode(mode: RenderingMode): void {
@@ -326,7 +329,7 @@ export class WebGLRenderer {
         const staticUniforms = this.activeShaderProgram?.staticUniformLocations;
         const entityUniforms = this.activeShaderProgram?.entityUniformLocations;
 
-        // handle 'static' uniforms
+        // handle 'static' uniforms (vary once per render call)
         if (staticUniforms?.length) {
             for (const uniform of staticUniforms) {
                 this.loadUniform(uniform.location, uniform.type, ShaderVariableResolver.resolveStaticVariable(uniform.name));
@@ -334,7 +337,7 @@ export class WebGLRenderer {
         }
 
         if (entityUniforms?.length) {
-            // if the shader program contains uniforms, we need to do one draw call per Entity (per uniform set variation)
+            // if the shader program contains 'entity' uniforms, we need to do one draw call per Entity (per uniform set variation)
             let offset = 0;
 
             for (const e of config.entities) {
@@ -375,6 +378,7 @@ export class WebGLRenderer {
         gl.enable(gl.BLEND);
         gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
+        // TODO temporary?
         WebGLRenderer.PROJECTION = Mat3.projection(gl.canvas.width, gl.canvas.height);
         WebGLRenderer.VIEW = new Mat3();
 

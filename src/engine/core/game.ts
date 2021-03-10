@@ -285,6 +285,9 @@ export class Game {
     /**
      * Register and create a given ShaderProgram so as to make it available for use in Entity Shader Components
      *
+     * // TODO automagic shader creation on first-use might be nice
+     * //   con: potentially leads to GL API calls for creating shader programs at runtime rather than inittime...
+     *
      * @param shader the ShaderProgram to register
      */
     public registerShader(shader: ShaderProgram): void {
@@ -292,39 +295,33 @@ export class Game {
     }
 
     /**
-     * Register a new Entity Shader value resolution mapping for a given Shader attribute/uniform variable name
+     * Register a new Shader value resolution mapping for a given Shader attribute/uniform variable name
      *
-     * Facilitates extension of the system's Shader and Component libraries by extending the automatic retrieval of Entity data for piping
-     *   to the GPU
+     * Facilitates extension of the system's Shader and Component libraries by extending the automatic retrieval of Entity and Game data
+     *   for piping to the GPU
      *
      * Separated from overrideEntityShaderResolver() so as to avoid accidental consumer mistakes in changing built-in mappings
      *
      * @param variableName the name of the shader variable to register
+     * @param variation the frequency of variable variation; per render call (static) or per Entity (entity). For Attributes, always Entity
      * @param resolve the EntityShaderResolver which will retrieve the relevant value from the Entity
      */
-    // public registerEntityShaderResolver(variableName: string, resolve: EntityShaderVariableResolver): void {
-    //     ShaderVariableResolver.registerEntityShaderResolver(variableName, resolve);
-    // }
-
-    /**
-     * Override an existing Entity Shader value resolution mapping for a given Shader attribute/uniform variable name
-     *
-     * Facilitates extension of the system's Shader and Component libraries by extending the automatic retrieval of Entity data for piping
-     *   to the GPU
-     *
-     * Separated from registerEntityShaderResolver() so as to avoid accidental consumer mistakes in changing built-in mappings
-     *
-     * @param variableName the name of the shader variable to override
-     * @param resolve the EntityShaderResolver which will retrieve the relevant value from the Entity
-     */
-    // public overrideEntityShaderResolver(variableName: string, resolve: EntityShaderVariableResolver): void {
-    //     ShaderVariableResolver.overrideEntityShaderResolver(variableName, resolve);
-    // }
-
     public registerShaderVariableResolver(variableName: string, variation: UniformVariation, resolve: VariableResolver): void {
         ShaderVariableResolver.registerVariableResolver(variableName, variation, resolve);
     }
 
+    /**
+     * Override an existing  Shader value resolution mapping for a given Shader attribute/uniform variable name
+     *
+     * Facilitates extension of the system's Shader and Component libraries by extending the automatic retrieval of Entity and Game data
+     *   for piping to the GPU
+     *
+     * Separated from registerEntityShaderResolver() so as to avoid accidental consumer mistakes in changing built-in mappings
+     *
+     * @param variableName the name of the shader variable to override
+     * @param variation the frequency of variable variation; per render call (static) or per Entity (entity). For Attributes, always Entity
+     * @param resolve the EntityShaderResolver which will retrieve the relevant value from the Entity
+     */
     public overrideShaderVariableResolver(variableName: string, variation: UniformVariation, resolve: VariableResolver): void {
         ShaderVariableResolver.overrideVariableResolver(variableName, variation, resolve);
     }
