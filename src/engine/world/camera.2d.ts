@@ -3,7 +3,7 @@ import { Entity } from '../entity';
 
 export class Camera2D extends Entity {
 
-    public static readonly TAG = 'camera_2d';
+    public static readonly TAG = 'camera2D';
 
     constructor() {
         super({

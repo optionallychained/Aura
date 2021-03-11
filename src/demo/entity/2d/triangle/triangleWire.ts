@@ -1,16 +1,19 @@
 import { Color, Component, Entity, Geometry, Random, Shader, Vec2 } from '../../../../engine';
 
-export const _createTriangleWire = (): Entity.Entity => {
-    return new Entity.Entity({
-        tag: 'triangleWire',
-        components: [
-            new Component.MultiColor(Color.randomList(3, true)),
-            new Component.TwoD.Transform2D(
-                new Vec2(Random.between(-1, 1), Random.between(-1, 1)),
-                new Vec2(Random.between(0.5, 1.5), Random.between(0.5, 1.5))
-            ),
-            new Component.Model(Geometry.TwoD.Wireframe.TRIANGLE),
-            new Component.Shader(Shader.Program.TwoD.PROGRAM_COLOR_PER_VERTEX_2D)
-        ]
-    });
-};
+export class TriangleWire extends Entity.Entity {
+
+    constructor() {
+        super({
+            tag: 'triangleWire',
+            components: [
+                new Component.MultiColor(Color.randomList(3, true)),
+                new Component.Model(Geometry.TwoD.Wireframe.TRIANGLE),
+                new Component.Shader(Shader.Program.TwoD.PROGRAM_COLOR_PER_VERTEX_2D),
+                new Component.TwoD.Transform2D(
+                    new Vec2(Random.between(-1, 1), Random.between(-1, 1)),
+                    new Vec2(Random.between(0.5, 1.5), Random.between(0.5, 1.5))
+                )
+            ]
+        });
+    }
+}
