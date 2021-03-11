@@ -381,13 +381,30 @@ export class Mat4 {
     }
 
     // TODO placeholder
-    public static perspective(): Mat4 {
-        return new Mat4();
+    public static perspective(fov: number, aspect: number, near: number, far: number): Mat4 {
+        const _fov = Math.tan(Math.PI * 0.5 - 0.5 * fov);
+        const _range = 1 / (near - far);
+
+        return new Mat4([
+            _fov / aspect, 0, 0, 0,
+            0, _fov, 0, 0,
+            0, 0, (near + far) * _range, -1,
+            0, 0, near * far * _range * 2, 0
+        ]);
     }
 
     // TODO placeholder
-    public static ortho(): Mat4 {
-        return new Mat4();
+    public static ortho(left: number, right: number, bottom: number, top: number, near: number, far: number): Mat4 {
+        return new Mat4([
+            2 / (right - left), 0, 0, 0,
+            0, 2 / (top - bottom), 0, 0,
+            0, 0, 2 / (near - far), 0,
+
+            (left + right) / (left - right),
+            (bottom + top) / (bottom - top),
+            (near + far) / (near - far),
+            1
+        ]);
     }
 
     /**

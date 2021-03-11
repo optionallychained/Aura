@@ -55,8 +55,8 @@ export class ShaderVariableResolver {
      */
     private static STATIC_MAPPINGS = new Map<string, StaticShaderVariableResolver>([
         [
-            'Projection2D',
-            (game) => game.renderer.getProjection2D().float32Array
+            'Projection',
+            (game) => game.renderer.getProjection().float32Array
         ],
         [
             'Perspective',

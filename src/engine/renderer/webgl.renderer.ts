@@ -77,7 +77,7 @@ interface TextureSpec {
 export class WebGLRenderer {
 
     // TODO potentially temporary
-    private projection2D = new Mat3();
+    private projection = new Mat3();
     private perspective = new Mat4();
     private ortho = new Mat4();
 
@@ -132,8 +132,8 @@ export class WebGLRenderer {
         this.init();
     }
 
-    public getProjection2D(): Mat3 {
-        return this.projection2D;
+    public getProjection(): Mat3 {
+        return this.projection;
     }
 
     public getPerspective(): Mat4 {
@@ -397,11 +397,12 @@ export class WebGLRenderer {
         gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
         // configure the projection matrix
-        this.projection2D = Mat3.projection(gl.canvas.width, gl.canvas.height);
+        this.projection = Mat3.projection(gl.canvas.width, gl.canvas.height);
 
         // TODO placeholder
-        this.perspective = Mat4.perspective();
-        this.ortho = Mat4.ortho();
+        // TODO review math/values, esp. for near/far
+        this.perspective = Mat4.perspective(90, gl.canvas.width / gl.canvas.height, 400, -400);
+        this.ortho = Mat4.ortho(0, gl.canvas.width, 0, gl.canvas.height, 400, -400);
 
         gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
     }
