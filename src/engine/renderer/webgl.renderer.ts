@@ -315,6 +315,8 @@ export class WebGLRenderer {
                 // enable and configure the depth test for 3D rendering
                 gl.enable(gl.DEPTH_TEST);
                 gl.depthFunc(gl.LESS);
+
+                // gl.enable(gl.CULL_FACE);
             }
 
             this.mode = mode;
@@ -401,8 +403,8 @@ export class WebGLRenderer {
 
         // TODO placeholder
         // TODO review math/values, esp. for near/far
-        this.perspective = Mat4.perspective(90, gl.canvas.width / gl.canvas.height, 400, -400);
-        this.ortho = Mat4.ortho(0, gl.canvas.width, 0, gl.canvas.height, 400, -400);
+        this.perspective = Mat4.perspective(90, gl.canvas.width / gl.canvas.height, 1, 2000);
+        this.ortho = Mat4.ortho(-gl.canvas.width / 2, gl.canvas.width / 2, -gl.canvas.height / 2, gl.canvas.height / 2, 400, -400);
 
         gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
     }

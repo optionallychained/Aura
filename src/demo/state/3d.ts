@@ -1,4 +1,5 @@
-import { Angle, Component, Core, Entity, Input, Random, State, Vec3 } from '../../engine';
+import { Angle, Component, Core, Entity, Input, Random, State, Vec2, Vec3 } from '../../engine';
+import { Axis3D } from '../entity/3d/axis';
 import { CubeBatCat } from '../entity/3d/cubeBatCat';
 import { CubeBrick } from '../entity/3d/cubeBrick';
 import { CubeCat } from '../entity/3d/cubeCat';
@@ -15,28 +16,40 @@ let frame = 0;
 const populate = (game: Core.Game): void => {
     const entities: Array<Entity.Entity> = [];
 
-    const _entities = [
-        CubeBatCat,
-        CubeBrick,
-        CubeCat,
-        CubeFlat,
-        CubeMulti,
-        CubeSmile,
-        CubeWire,
-        Point3D
-    ];
+    // const _entities = [
+    //     CubeBatCat,
+    //     CubeBrick,
+    //     CubeCat,
+    //     CubeFlat,
+    //     CubeMulti,
+    //     CubeSmile,
+    //     CubeWire,
+    //     Point3D
+    // ];
 
-    for (let i = 0; i < 15; i++) {
-        const r = Math.round(Random.between(1, _entities.length));
+    // for (let i = 0; i < 15; i++) {
+    //     const r = Math.round(Random.between(1, _entities.length));
 
-        entities.push(new _entities[r - 1]());
+    //     entities.push(new _entities[r - 1]());
 
-        const angleX = Angle.toRadians(Random.between(-3, 3));
-        const angleY = Angle.toRadians(Random.between(-3, 3));
-        const angleZ = Angle.toRadians(Random.between(-3, 3));
+    //     const angleX = Angle.toRadians(Random.between(-3, 3));
+    //     const angleY = Angle.toRadians(Random.between(-3, 3));
+    //     const angleZ = Angle.toRadians(Random.between(-3, 3));
 
-        rotations.push(new Vec3(angleX, angleY, angleZ));
-    }
+    //     rotations.push(new Vec3(angleX, angleY, angleZ));
+    // }
+
+    entities.push(new Axis3D('x'));
+    entities.push(new Axis3D('y'));
+    entities.push(new Axis3D('z'));
+
+    entities.push(new CubeFlat());
+
+    rotations.push(new Vec3(
+        Angle.toRadians(Random.between(-3, 3)),
+        Angle.toRadians(Random.between(-3, 3)),
+        Angle.toRadians(Random.between(-3, 3))
+    ));
 
     game.world.addEntities(...entities);
 };
@@ -47,10 +60,10 @@ const rotateAndScale = (game: Core.Game): void => {
     const scaleFactor = 1 + (Math.sin(frame * 0.025) * 0.25);
     const scale = new Vec3(scaleFactor, scaleFactor, scaleFactor);
 
-    for (const e of game.world.filterEntitiesByComponentName('Transform3D')) {
+    for (const e of game.world.filterEntitiesByTag('cubeFlat')) {
         const transform = e.getComponent(Component.ThreeD.Transform3D);
 
-        transform.scale(scale);
+        // transform.scale(scale);
         transform.rotate(rotations[i]);
 
         i++;
@@ -71,6 +84,44 @@ export const state3D = new State.State({
     tick: (game) => {
         if (game.input.isKeyDown(Input.Keys.SPACE)) {
             game.switchToState('2D');
+        }
+
+        const camera3D = game.world.getCamera3D();
+        const cameraTransform = camera3D.getComponent(Component.ThreeD.Transform3D);
+
+        if (game.input.isKeyDown(Input.Keys.A)) {
+            cameraTransform.translate(new Vec3(10, 0));
+        }
+        else if (game.input.isKeyDown(Input.Keys.D)) {
+            cameraTransform.translate(new Vec3(-10, 0, 0));
+        }
+
+        if (game.input.isKeyDown(Input.Keys.W)) {
+            cameraTransform.translate(new Vec3(0, 0, 10));
+        }
+        else if (game.input.isKeyDown(Input.Keys.S)) {
+            cameraTransform.translate(new Vec3(0, 0, -10));
+        }
+
+        if (game.input.isKeyDown(Input.Keys.Q)) {
+            cameraTransform.translate(new Vec3(0, -10, 0));
+        }
+        else if (game.input.isKeyDown(Input.Keys.E)) {
+            cameraTransform.translate(new Vec3(0, 10, 0));
+        }
+
+        if (game.input.isKeyDown(Input.Keys.ARROW_UP)) {
+            cameraTransform.rotate(new Vec3(Angle.toRadians(1), 0, 0));
+        }
+        else if (game.input.isKeyDown(Input.Keys.ARROW_DOWN)) {
+            cameraTransform.rotate(new Vec3(Angle.toRadians(-1), 0, 0));
+        }
+
+        if (game.input.isKeyDown(Input.Keys.ARROW_LEFT)) {
+            cameraTransform.rotate(new Vec3(0, Angle.toRadians(-1), 0));
+        }
+        else if (game.input.isKeyDown(Input.Keys.ARROW_RIGHT)) {
+            cameraTransform.rotate(new Vec3(0, Angle.toRadians(1), 0));
         }
 
         rotateAndScale(game);

@@ -50,8 +50,8 @@ const populate = (game: Core.Game): void => {
     //     rotations.push(Angle.toRadians(Random.between(-3, 3)));
     // }
 
-    entities.push(new Axis2D(0));
-    entities.push(new Axis2D(Angle.toRadians(90)));
+    entities.push(new Axis2D('x'));
+    entities.push(new Axis2D('y'));
 
     entities.push(new RectFlat(1, 1));
     entities.push(new RectFlat(1, 3));
@@ -108,11 +108,11 @@ export const State2D = new State.State({
         const camera2D = game.world.getCamera2D();
         const cameraTransform = camera2D.getComponent(Component.TwoD.Transform2D);
 
-        if (game.input.isKeyDown(Input.Keys.D)) {
-            cameraTransform.translate(new Vec2(-10, 0));
-        }
-        else if (game.input.isKeyDown(Input.Keys.A)) {
+        if (game.input.isKeyDown(Input.Keys.A)) {
             cameraTransform.translate(new Vec2(10, 0));
+        }
+        else if (game.input.isKeyDown(Input.Keys.D)) {
+            cameraTransform.translate(new Vec2(-10, 0));
         }
 
         if (game.input.isKeyDown(Input.Keys.W)) {

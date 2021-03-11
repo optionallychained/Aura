@@ -72,7 +72,7 @@ export class ShaderVariableResolver {
         ],
         [
             'View3D',
-            (game) => game.world.getCamera3D().getComponent(Transform2D).compute().float32Array
+            (game) => game.world.getCamera3D().getComponent(Transform3D).compute().float32Array
         ],
         [
             'Texture',
