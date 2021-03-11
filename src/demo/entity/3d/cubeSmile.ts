@@ -18,4 +18,6 @@ export class CubeSmile extends Entity.Entity {
             ]
         });
     }
+
+    public tick(frameDelta: number): void { }
 }

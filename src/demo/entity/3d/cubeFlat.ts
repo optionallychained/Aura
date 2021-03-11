@@ -16,4 +16,6 @@ export class CubeFlat extends Entity.Entity {
             ]
         });
     }
+
+    public tick(frameDelta: number): void { }
 }

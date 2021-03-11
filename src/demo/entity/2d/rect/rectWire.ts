@@ -16,4 +16,6 @@ export class RectWire extends Entity.Entity {
             ]
         });
     }
+
+    public tick(frameDelta: number): void { }
 }

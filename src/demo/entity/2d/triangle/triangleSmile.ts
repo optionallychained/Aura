@@ -17,4 +17,6 @@ export class TriangleSmile extends Entity.Entity {
             ]
         });
     }
+
+    public tick(frameDelta: number): void { }
 }

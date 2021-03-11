@@ -13,4 +13,6 @@ export class Camera2D extends Entity {
             ]
         });
     }
+
+    public tick(frameDelta: number): void { }
 }

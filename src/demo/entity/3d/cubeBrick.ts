@@ -18,4 +18,6 @@ export class CubeBrick extends Entity.Entity {
             ]
         });
     }
+
+    public tick(frameDelta: number): void { }
 }

@@ -8,6 +8,4 @@ export interface EntityConfig {
     readonly tag: string;
     /** Components to initialise the Entity with, for convenient setup */
     readonly components?: ReadonlyArray<Component>;
-    /** Entity frame tick function; none is provided by default */
-    readonly tick?: (frameDelta: number) => void;
 }

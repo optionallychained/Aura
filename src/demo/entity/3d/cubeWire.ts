@@ -16,4 +16,6 @@ export class CubeWire extends Entity.Entity {
             ]
         });
     }
+
+    public tick(frameDelta: number): void { }
 }

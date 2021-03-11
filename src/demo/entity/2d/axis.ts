@@ -13,4 +13,6 @@ export class Axis2D extends Entity.Entity {
             ]
         });
     }
+
+    public tick(frameDelta: number): void { }
 }

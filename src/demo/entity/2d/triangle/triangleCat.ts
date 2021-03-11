@@ -17,4 +17,6 @@ export class TriangleCat extends Entity.Entity {
             ]
         });
     }
+
+    public tick(frameDelta: number): void { }
 }

@@ -16,4 +16,6 @@ export class TriangleMulti extends Entity.Entity {
             ]
         });
     }
+
+    public tick(frameDelta: number): void { }
 }

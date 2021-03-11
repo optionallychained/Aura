@@ -17,5 +17,7 @@ export class RectCat extends Entity.Entity {
             ]
         });
     }
+
+    public tick(frameDelta: number): void { }
 }
 

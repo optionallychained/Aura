@@ -13,4 +13,6 @@ export class Camera3D extends Entity {
             ]
         });
     }
+
+    public tick(frameDelta: number): void { }
 }

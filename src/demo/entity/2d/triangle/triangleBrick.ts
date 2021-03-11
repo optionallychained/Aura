@@ -17,4 +17,6 @@ export class TriangleBrick extends Entity.Entity {
             ]
         });
     }
+
+    public tick(frameDelta: number): void { }
 }

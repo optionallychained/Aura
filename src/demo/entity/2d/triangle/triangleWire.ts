@@ -16,4 +16,6 @@ export class TriangleWire extends Entity.Entity {
             ]
         });
     }
+
+    public tick(frameDelta: number): void { }
 }

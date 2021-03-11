@@ -16,4 +16,6 @@ export class RectMulti extends Entity.Entity {
             ]
         });
     }
+
+    public tick(frameDelta: number): void { }
 }

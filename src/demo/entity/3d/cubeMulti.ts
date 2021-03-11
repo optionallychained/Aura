@@ -16,4 +16,6 @@ export class CubeMulti extends Entity.Entity {
             ]
         });
     }
+
+    public tick(frameDelta: number): void { }
 }

@@ -16,4 +16,6 @@ export class TriangleFlat extends Entity.Entity {
             ]
         });
     }
+
+    public tick(frameDelta: number): void { }
 }

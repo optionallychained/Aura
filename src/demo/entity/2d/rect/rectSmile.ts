@@ -17,4 +17,6 @@ export class RectSmile extends Entity.Entity {
             ]
         });
     }
+
+    public tick(frameDelta: number): void { }
 }

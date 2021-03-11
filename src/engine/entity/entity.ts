@@ -11,7 +11,7 @@ import { EntityConfig } from './entity.config';
  *
  * @see Component
  */
-export class Entity {
+export abstract class Entity {
 
     /** Unique id for the Entity */
     public readonly id = (+new Date()).toString(16) + (Math.random() * 10000000 | 0).toString(16);
@@ -46,9 +46,7 @@ export class Entity {
      *
      * @param frameDelta the time between the last frame and the current, for normalizing time-dependent operations
      */
-    public tick(frameDelta: number): void {
-        this.config.tick?.(frameDelta);
-    }
+    public abstract tick(frameDelta: number): void;
 
     /**
      * Get a Component from the Entity by Component class

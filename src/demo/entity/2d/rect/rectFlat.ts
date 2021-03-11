@@ -21,4 +21,6 @@ export class RectFlat extends Entity.Entity {
             ]
         });
     }
+
+    public tick(frameDelta: number): void { }
 }

@@ -17,4 +17,6 @@ export class RectBrick extends Entity.Entity {
             ]
         });
     }
+
+    public tick(frameDelta: number): void { }
 }

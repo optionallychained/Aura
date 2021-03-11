@@ -16,4 +16,6 @@ export class Point3D extends Entity.Entity {
             ]
         });
     }
+
+    public tick(frameDelta: number): void { }
 }

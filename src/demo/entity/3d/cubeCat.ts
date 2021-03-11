@@ -18,4 +18,6 @@ export class CubeCat extends Entity.Entity {
             ]
         });
     }
+
+    public tick(frameDelta: number): void { }
 }
