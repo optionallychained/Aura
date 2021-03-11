@@ -43,7 +43,56 @@ const populate = (game: Core.Game): void => {
     entities.push(new Axis3D('y'));
     entities.push(new Axis3D('z'));
 
-    entities.push(new CubeFlat());
+    entities.push(new CubeFlat(1, 1, 1));
+    entities.push(new CubeFlat(3, 1, 1));
+    entities.push(new CubeFlat(1, 3, 1));
+    entities.push(new CubeFlat(3, 3, 1));
+    entities.push(new CubeFlat(1, 1, 3));
+    entities.push(new CubeFlat(3, 1, 3));
+    entities.push(new CubeFlat(1, 3, 3));
+    entities.push(new CubeFlat(3, 3, 3));
+
+    rotations.push(new Vec3(
+        Angle.toRadians(Random.between(-3, 3)),
+        Angle.toRadians(Random.between(-3, 3)),
+        Angle.toRadians(Random.between(-3, 3))
+    ));
+
+    rotations.push(new Vec3(
+        Angle.toRadians(Random.between(-3, 3)),
+        Angle.toRadians(Random.between(-3, 3)),
+        Angle.toRadians(Random.between(-3, 3))
+    ));
+
+    rotations.push(new Vec3(
+        Angle.toRadians(Random.between(-3, 3)),
+        Angle.toRadians(Random.between(-3, 3)),
+        Angle.toRadians(Random.between(-3, 3))
+    ));
+
+    rotations.push(new Vec3(
+        Angle.toRadians(Random.between(-3, 3)),
+        Angle.toRadians(Random.between(-3, 3)),
+        Angle.toRadians(Random.between(-3, 3))
+    ));
+
+    rotations.push(new Vec3(
+        Angle.toRadians(Random.between(-3, 3)),
+        Angle.toRadians(Random.between(-3, 3)),
+        Angle.toRadians(Random.between(-3, 3))
+    ));
+
+    rotations.push(new Vec3(
+        Angle.toRadians(Random.between(-3, 3)),
+        Angle.toRadians(Random.between(-3, 3)),
+        Angle.toRadians(Random.between(-3, 3))
+    ));
+
+    rotations.push(new Vec3(
+        Angle.toRadians(Random.between(-3, 3)),
+        Angle.toRadians(Random.between(-3, 3)),
+        Angle.toRadians(Random.between(-3, 3))
+    ));
 
     rotations.push(new Vec3(
         Angle.toRadians(Random.between(-3, 3)),
@@ -63,7 +112,7 @@ const rotateAndScale = (game: Core.Game): void => {
     for (const e of game.world.filterEntitiesByTag('cubeFlat')) {
         const transform = e.getComponent(Component.ThreeD.Transform3D);
 
-        // transform.scale(scale);
+        transform.scale(scale);
         // transform.rotate(rotations[i]);
 
         i++;
