@@ -13,7 +13,6 @@ export class CubeBatCat extends Entity.Entity {
                 new Component.ThreeD.Transform3D(
                     new Vec3(Random.between(-1, 1), Random.between(-1, 1), 0.5),
                     new Vec3(Random.between(0.1, 1), Random.between(0.1, 1), Random.between(0.1, 1))
-
                 )
             ]
         });

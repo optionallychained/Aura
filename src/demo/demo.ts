@@ -20,9 +20,10 @@ game.registerShader(Shader.Program.TwoD.PROGRAM_BASIC_2D);
 game.registerShader(Shader.Program.TwoD.PROGRAM_TEXTURE_COLORED_2D);
 
 // register all built-in 3D Shader Programs
+game.registerShader(Shader.Program.ThreeD.PROGRAM_BASIC_PERSPECTIVE_3D);
+game.registerShader(Shader.Program.ThreeD.PROGRAM_BASIC_ORTHO_3D);
 game.registerShader(Shader.Program.ThreeD.PROGRAM_COLOR_PER_VERTEX_3D);
 game.registerShader(Shader.Program.ThreeD.PROGRAM_TEXTURE_3D);
-game.registerShader(Shader.Program.ThreeD.PROGRAM_BASIC_3D);
 game.registerShader(Shader.Program.ThreeD.PROGRAM_TEXTURE_COLORED_3D);
 
 // add the 2D State to the Game
