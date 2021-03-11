@@ -380,6 +380,16 @@ export class Mat4 {
         ]);
     }
 
+    // TODO placeholder
+    public static perspective(): Mat4 {
+        return new Mat4();
+    }
+
+    // TODO placeholder
+    public static ortho(): Mat4 {
+        return new Mat4();
+    }
+
     /**
      * Constructor. Take and store the Mat4's values
      *

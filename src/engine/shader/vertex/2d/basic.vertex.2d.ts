@@ -9,7 +9,7 @@ export const VERTEX_BASIC_2D = new VertexShader({
     name: 'vertex_basic_2d',
     source: `
         uniform mat3 u_Transform2D;
-        uniform mat3 u_Projection;
+        uniform mat3 u_Projection2D;
         uniform mat3 u_View2D;
 
         attribute vec2 a_Position;
@@ -17,7 +17,7 @@ export const VERTEX_BASIC_2D = new VertexShader({
         void main() {
             gl_PointSize = 1.0;
 
-            gl_Position = vec4(u_Projection * u_View2D * u_Transform2D * vec3(a_Position, 1.0), 1.0);
+            gl_Position = vec4(u_Projection2D * u_View2D * u_Transform2D * vec3(a_Position, 1.0), 1.0);
         }
     `,
     attributes: [
@@ -33,7 +33,7 @@ export const VERTEX_BASIC_2D = new VertexShader({
             variation: ShaderVariableVariation.ENTITY
         },
         {
-            name: 'u_Projection',
+            name: 'u_Projection2D',
             type: UniformType.MAT3,
             variation: ShaderVariableVariation.STATIC
         },

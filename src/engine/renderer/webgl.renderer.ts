@@ -1,5 +1,5 @@
 import { Game, ProtoGLError } from '../core';
-import { Color, Mat3 } from '../math';
+import { Color, Mat3, Mat4 } from '../math';
 import { ShaderVariableResolver, ShaderVariableVariation } from '../shader';
 import { ShaderProgram } from '../shader/program';
 import { UniformType } from '../shader/uniformType.enum';
@@ -76,9 +76,10 @@ interface TextureSpec {
  */
 export class WebGLRenderer {
 
-    // TODO 2D only for the moment
     // TODO potentially temporary
-    private projection = new Mat3();
+    private projection2D = new Mat3();
+    private perspective = new Mat4();
+    private ortho = new Mat4();
 
     /** The WebGLRenderingContext retrieved from the Canvas */
     private readonly gl: WebGLRenderingContext;
@@ -131,8 +132,16 @@ export class WebGLRenderer {
         this.init();
     }
 
-    public getProjection(): Mat3 {
-        return this.projection;
+    public getProjection2D(): Mat3 {
+        return this.projection2D;
+    }
+
+    public getPerspective(): Mat4 {
+        return this.perspective;
+    }
+
+    public getOrtho(): Mat4 {
+        return this.ortho;
     }
 
     public get activeTextureUnit(): number {
@@ -388,7 +397,11 @@ export class WebGLRenderer {
         gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
         // configure the projection matrix
-        this.projection = Mat3.projection(gl.canvas.width, gl.canvas.height);
+        this.projection2D = Mat3.projection(gl.canvas.width, gl.canvas.height);
+
+        // TODO placeholder
+        this.perspective = Mat4.perspective();
+        this.ortho = Mat4.ortho();
 
         gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
     }
