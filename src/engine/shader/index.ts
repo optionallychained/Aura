@@ -2,7 +2,7 @@ export * from './shaderVariableResolver';
 export * from './attributeArray.type';
 export * from './uniformArray.type';
 export * from './uniformType.enum';
-export * from './uniformVariation.enum';
+export * from './shaderVariableVariation.enum';
 
 export * as Fragment from './fragment';
 export * as Program from './program';

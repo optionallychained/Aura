@@ -11,7 +11,7 @@
  *   - example: an Entity's Transformation Matrix as specified/required by a Vertex Shader
  *   - example: an Entity's FlatColor as specified/required by a Fragment Shader
  */
-export enum UniformVariation {
+export enum ShaderVariableVariation {
     STATIC = 'static',
     ENTITY = 'entity'
 }

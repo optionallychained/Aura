@@ -1,5 +1,5 @@
 import { UniformType } from './uniformType.enum';
-import { UniformVariation } from './uniformVariation.enum';
+import { ShaderVariableVariation } from './shaderVariableVariation.enum';
 
 /**
  * Utility type representing an array of shader uniform specifications, used in defining VertexShaders and FragmentShaders and aiding the
@@ -8,6 +8,6 @@ import { UniformVariation } from './uniformVariation.enum';
  * Uniform 'variation' is a special field which directs the WebGLRenderer on how and how often to retrieve and upload the specified uniform
  *
  * @see UniformType
- * @see UniformVariation
+ * @see ShaderVariableVariation
  */
-export type UniformArray = Array<{ readonly name: string; readonly type: UniformType; readonly variation: UniformVariation }>;
+export type UniformArray = Array<{ readonly name: string; readonly type: UniformType; readonly variation: ShaderVariableVariation }>;

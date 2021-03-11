@@ -2,7 +2,7 @@ import { InputManager } from '../input';
 import { ControlScheme } from '../input/controlScheme.type';
 import { Color, Vec2 } from '../math';
 import { WebGLRenderer } from '../renderer';
-import { ShaderVariableResolver, UniformVariation, VariableResolver } from '../shader';
+import { ShaderVariableResolver, ShaderVariableVariation, VariableResolver } from '../shader';
 import { ShaderProgram } from '../shader/program';
 import { State } from '../state';
 import { System } from '../system';
@@ -38,11 +38,11 @@ export class Game {
     /** InputManager for handling all user input */
     public readonly input: InputManager;
 
-    /** the Canvas to render the game on */
-    private readonly canvas: HTMLCanvasElement;
-
     /** Renderer */
-    private readonly renderer: WebGLRenderer;
+    public readonly renderer: WebGLRenderer;
+
+    /** the Canvas to render the game on */
+    public readonly canvas: HTMLCanvasElement;
 
     /** Frame time calculation utilities */
     private frameDelta = 0;
@@ -105,7 +105,7 @@ export class Game {
         this.canvas.width = config?.canvasDimensions?.x ?? this.defaultCanvasDimensions.x;
         this.canvas.height = config?.canvasDimensions?.y ?? this.defaultCanvasDimensions.y;
 
-        this.renderer = new WebGLRenderer(this.canvas, config?.backgroundColor ?? this.defaultBackgroundColor);
+        this.renderer = new WebGLRenderer(this, config?.backgroundColor ?? this.defaultBackgroundColor);
         this.input = new InputManager(this.canvas, config?.controlScheme ?? this.defaultControlScheme);
 
         this.world = new World({
@@ -301,7 +301,7 @@ export class Game {
      * @param variation the frequency of variable variation; per render call (static) or per Entity (entity). For Attributes, always Entity
      * @param resolve the EntityShaderResolver which will retrieve the relevant value from the Entity
      */
-    public registerShaderVariableResolver(variableName: string, variation: UniformVariation, resolve: VariableResolver): void {
+    public registerShaderVariableResolver(variableName: string, variation: ShaderVariableVariation, resolve: VariableResolver): void {
         ShaderVariableResolver.registerVariableResolver(variableName, variation, resolve);
     }
 
@@ -317,7 +317,7 @@ export class Game {
      * @param variation the frequency of variable variation; per render call (static) or per Entity (entity). For Attributes, always Entity
      * @param resolve the EntityShaderResolver which will retrieve the relevant value from the Entity
      */
-    public overrideShaderVariableResolver(variableName: string, variation: UniformVariation, resolve: VariableResolver): void {
+    public overrideShaderVariableResolver(variableName: string, variation: ShaderVariableVariation, resolve: VariableResolver): void {
         ShaderVariableResolver.overrideVariableResolver(variableName, variation, resolve);
     }
 

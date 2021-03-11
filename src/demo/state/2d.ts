@@ -143,7 +143,7 @@ export const State2D = new State.State({
 
         cameraTransform.scale(new Vec2(cameraZoom, cameraZoom));
 
-        World.VIEW = cameraTransform.compute();
+        game.world.setCamera(cameraTransform.compute());
 
         rotateAndScale(game);
     }

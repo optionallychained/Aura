@@ -1,6 +1,6 @@
-import { ProtoGLError } from '../core';
+import { Game, ProtoGLError } from '../core';
 import { Color, Mat3 } from '../math';
-import { ShaderVariableResolver, UniformVariation } from '../shader';
+import { ShaderVariableResolver, ShaderVariableVariation } from '../shader';
 import { ShaderProgram } from '../shader/program';
 import { UniformType } from '../shader/uniformType.enum';
 import { TextureAtlas } from '../texture';
@@ -56,6 +56,8 @@ interface TextureSpec {
     name: string;
     /** The GL Unit of the texture (eg gl.TEXTURE0) */
     unit: number;
+    /** the Unit index of the texture (eg. unit - gl.TEXTURE0) to upload as a uniform to a Sampler*D() */
+    uniformUnit: number;
     /** The WebGLTexture */
     texture: WebGLTexture;
 }
@@ -76,8 +78,7 @@ export class WebGLRenderer {
 
     // TODO 2D only for the moment
     // TODO potentially temporary
-    public static PROJECTION = new Mat3();
-    public static ACTIVE_TEXTURE_UNIT = -1;
+    private projection = new Mat3();
 
     /** The WebGLRenderingContext retrieved from the Canvas */
     private readonly gl: WebGLRenderingContext;
@@ -112,8 +113,8 @@ export class WebGLRenderer {
      * @param canvas the Canvas we're drawing to
      * @param clearColor the Game's background color, to be set as the gl clearColor once on init
      */
-    constructor(canvas: HTMLCanvasElement, clearColor: Color) {
-        const gl = canvas.getContext('webgl');
+    constructor(private readonly game: Game, clearColor: Color) {
+        const gl = game.canvas.getContext('webgl');
 
         if (!gl) {
             throw new ProtoGLError({
@@ -128,6 +129,15 @@ export class WebGLRenderer {
         this.backgroundColor = clearColor.float32Array;
 
         this.init();
+    }
+
+    public getProjection(): Mat3 {
+        return this.projection;
+    }
+
+    public get activeTextureUnit(): number {
+        // TODO error handling
+        return this.activeTexture?.uniformUnit ?? -1;
     }
 
     /**
@@ -271,7 +281,7 @@ export class WebGLRenderer {
             gl.generateMipmap(gl.TEXTURE_2D);
         });
 
-        this.textures.set(textureAtlas.name, { name: textureAtlas.name, texture, unit });
+        this.textures.set(textureAtlas.name, { name: textureAtlas.name, texture, unit, uniformUnit: unit - gl.TEXTURE0 });
     }
 
     /**
@@ -331,7 +341,7 @@ export class WebGLRenderer {
         // handle 'static' uniforms (vary once per render call)
         if (staticUniforms?.length) {
             for (const uniform of staticUniforms) {
-                this.loadUniform(uniform.location, uniform.type, ShaderVariableResolver.resolveStaticVariable(uniform.name));
+                this.loadUniform(uniform.location, uniform.type, ShaderVariableResolver.resolveStaticVariable(uniform.name, this.game));
             }
         }
 
@@ -377,8 +387,8 @@ export class WebGLRenderer {
         gl.enable(gl.BLEND);
         gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
-        // TODO temporary?
-        WebGLRenderer.PROJECTION = Mat3.projection(gl.canvas.width, gl.canvas.height);
+        // configure the projection matrix
+        this.projection = Mat3.projection(gl.canvas.width, gl.canvas.height);
 
         gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
     }
@@ -462,7 +472,7 @@ export class WebGLRenderer {
 
         for (const uniform of allUniforms) {
             const location = gl.getUniformLocation(program, uniform.name);
-            const locationArray = uniform.variation === UniformVariation.STATIC ? staticUniformLocations : entityUniformLocations;
+            const locationArray = uniform.variation === ShaderVariableVariation.STATIC ? staticUniformLocations : entityUniformLocations;
 
             if (!location) {
                 throw new ProtoGLError({
@@ -574,9 +584,6 @@ export class WebGLRenderer {
         gl.bindTexture(gl.TEXTURE_2D, texture.texture);
 
         this.activeTexture = texture;
-
-        // TODO temporary?
-        WebGLRenderer.ACTIVE_TEXTURE_UNIT = texture.unit - gl.TEXTURE0;
     }
 
     /**

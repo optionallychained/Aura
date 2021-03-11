@@ -1,14 +1,12 @@
 import { FlatColor, Model, MultiColor } from '../component';
 import { Transform2D } from '../component/2d';
 import { Transform3D } from '../component/3d';
-import { ProtoGLError } from '../core';
+import { Game, ProtoGLError } from '../core';
 import { Entity } from '../entity/entity'
-import { WebGLRenderer } from '../renderer';
-import { World } from '../world';
-import { UniformVariation } from './uniformVariation.enum';
+import { ShaderVariableVariation } from './shaderVariableVariation.enum';
 
 /** Internal-use utility type defining a 'static' shader variable resolution function */
-type StaticShaderVariableResolver = () => Float32Array | number;
+type StaticShaderVariableResolver = (game: Game) => Float32Array | number;
 
 /** Internal-use utility type defining an 'entity' shader variable resolution function */
 type EntityShaderVariableResolver = (e: Entity) => Float32Array | number;
@@ -58,15 +56,15 @@ export class ShaderVariableResolver {
     private static STATIC_MAPPINGS = new Map<string, StaticShaderVariableResolver>([
         [
             'Projection',
-            () => WebGLRenderer.PROJECTION.float32Array
+            (game) => game.renderer.getProjection().float32Array
         ],
         [
             'View',
-            () => World.VIEW.float32Array
+            (game) => game.world.getCamera().float32Array
         ],
         [
             'Texture',
-            () => WebGLRenderer.ACTIVE_TEXTURE_UNIT
+            (game) => game.renderer.activeTextureUnit
         ]
     ]);
 
@@ -117,7 +115,7 @@ export class ShaderVariableResolver {
      *
      * @returns the value of the attribute or uniform to build into vertex lists or upload as a uniform
      */
-    public static resolveStaticVariable(name: string): Float32Array | number {
+    public static resolveStaticVariable(name: string, game: Game): Float32Array | number {
         const resolve = ShaderVariableResolver.STATIC_MAPPINGS.get(name.replace(/(a|u)_/, ''));
 
         if (!resolve) {
@@ -130,7 +128,7 @@ export class ShaderVariableResolver {
             });
         }
 
-        return resolve();
+        return resolve(game);
     }
 
     /**
@@ -170,15 +168,15 @@ export class ShaderVariableResolver {
      * @param variation the frequency of variable variation; per render call (static) or per Entity (entity). For Attributes, always Entity
      * @param resolve the VariableResolver which will retrieve the value for <variableName> at vertex compilation or render time
      */
-    public static registerVariableResolver(variableName: string, variation: UniformVariation, resolve: VariableResolver): void {
-        let mappings;
+    public static registerVariableResolver(variableName: string, variation: ShaderVariableVariation, resolve: VariableResolver): void {
+        let mappings: Map<string, VariableResolver>;
 
         switch (variation) {
-            case UniformVariation.STATIC:
+            case ShaderVariableVariation.STATIC:
                 mappings = ShaderVariableResolver.STATIC_MAPPINGS;
                 break;
 
-            case UniformVariation.ENTITY:
+            case ShaderVariableVariation.ENTITY:
                 mappings = ShaderVariableResolver.ENTITY_MAPPINGS;
                 break;
         }
@@ -208,15 +206,15 @@ export class ShaderVariableResolver {
      * @param variation the frequency of variable variation; per render call (static) or per Entity (entity). For Attributes, always Entity
      * @param resolve the VariableResolver which will retrieve the value for <variableName> at vertex compilation or render time
      */
-    public static overrideVariableResolver(variableName: string, variation: UniformVariation, resolve: VariableResolver): void {
-        let mappings;
+    public static overrideVariableResolver(variableName: string, variation: ShaderVariableVariation, resolve: VariableResolver): void {
+        let mappings: Map<string, VariableResolver>;
 
         switch (variation) {
-            case UniformVariation.STATIC:
+            case ShaderVariableVariation.STATIC:
                 mappings = ShaderVariableResolver.STATIC_MAPPINGS;
                 break;
 
-            case UniformVariation.ENTITY:
+            case ShaderVariableVariation.ENTITY:
                 mappings = ShaderVariableResolver.ENTITY_MAPPINGS;
                 break;
         }

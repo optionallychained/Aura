@@ -14,7 +14,9 @@ export class World extends EntityManager<WorldConfig> {
 
     // TODO 2D only for the moment
     // TODO potentially temporary
-    public static VIEW = new Mat3();
+    // public static VIEW = new Mat3();
+
+    private camera = new Mat3();
 
     constructor(config: WorldConfig) {
         super({
@@ -23,7 +25,11 @@ export class World extends EntityManager<WorldConfig> {
         });
     }
 
-    public x(): void {
-        //
+    public getCamera(): Mat3 {
+        return this.camera;
+    }
+
+    public setCamera(camera: Mat3): void {
+        this.camera = camera;
     }
 }
