@@ -1,4 +1,4 @@
-import { Angle, Color, Component, Core, Entity, Input, Mat3, Random, State, Vec2 } from '../../engine';
+import { Angle, Color, Component, Core, Entity, Input, Random, State, Vec2 } from '../../engine';
 import { _createRectMulti } from '../entity/2d/rect/rectMulti';
 import { _createRectBatCat } from '../entity/2d/rect/rectBatCat';
 import { _createRectCat } from '../entity/2d/rect/rectCat';
@@ -14,47 +14,42 @@ import { _createTriangleBrick } from '../entity/2d/triangle/triangleBrick';
 import { _createTriangleMulti } from '../entity/2d/triangle/triangleMulti';
 import { _createTriangleSmile } from '../entity/2d/triangle/triangleSmile';
 import { _createPoint2D } from '../entity/2d/point';
-import { WebGLRenderer } from '../../engine/renderer';
 import { _createLine2D } from '../entity/2d/line';
-import { _createCamera } from '../entity/2d/camera';
-import { World } from '../../engine/world';
 
 const rotations: Array<number> = [];
 let frame = 0;
 let cameraZoom = 1;
 
-const camera = _createCamera();
-
 const populate = (game: Core.Game): void => {
     const entities: Array<Entity.Entity> = [];
 
-    const _generators = [
-        // _createPoint2D,
+    // const _generators = [
+    //     // _createPoint2D,
 
-        _createRectBatCat,
-        // _createRectBrick,
-        // _createRectCat,
-        // _createRectFlat,
-        // _createRectMulti,
-        // _createRectSmile,
-        // _createRectWire,
+    //     // _createRectBatCat,
+    //     // _createRectBrick,
+    //     // _createRectCat,
+    //     // _createRectFlat,
+    //     // _createRectMulti,
+    //     // _createRectSmile,
+    //     // _createRectWire,
 
-        // _createTriangleBatCat,
-        // _createTriangleBrick,
-        // _createTriangleCat,
-        // _createTriangleFlat,
-        // _createTriangleMulti,
-        // _createTriangleSmile,
-        // _createTriangleWire
-    ];
+    //     // _createTriangleBatCat,
+    //     // _createTriangleBrick,
+    //     // _createTriangleCat,
+    //     // _createTriangleFlat,
+    //     // _createTriangleMulti,
+    //     // _createTriangleSmile,
+    //     // _createTriangleWire
+    // ];
 
-    for (let i = 0; i < 1; i++) {
-        const r = Math.round(Random.between(1, _generators.length));
+    // for (let i = 0; i < 1; i++) {
+    //     const r = Math.round(Random.between(1, _generators.length));
 
-        entities.push(_generators[r - 1]());
+    //     entities.push(_generators[r - 1]());
 
-        rotations.push(Angle.toRadians(Random.between(-3, 3)));
-    }
+    //     rotations.push(Angle.toRadians(Random.between(-3, 3)));
+    // }
 
     entities.push(_createLine2D(0));
     entities.push(_createLine2D(Angle.toRadians(90)));
@@ -99,7 +94,7 @@ export const State2D = new State.State({
     init: (game) => {
         populate(game);
 
-        game.font.addString('hello', new Vec2(-0.75, 0.25), Color.random());
+        // game.font.addString('hello', new Vec2(-0.75, 0.25), Color.random());
         // game.font.addString('protogl', new Vec2(-0.75, 0), Color.random());
         // game.font.addString('world', new Vec2(-0.75, -0.25), Color.random());
     },
@@ -111,8 +106,9 @@ export const State2D = new State.State({
             game.switchToState('3D');
         }
 
+        const camera2D = game.world.getCamera2D();
+        const cameraTransform = camera2D.getComponent(Component.TwoD.Transform2D);
 
-        const cameraTransform = camera.getComponent(Component.TwoD.Transform2D);
         if (game.input.isKeyDown(Input.Keys.D)) {
             cameraTransform.translate(new Vec2(-10, 0));
         }
@@ -142,8 +138,6 @@ export const State2D = new State.State({
         }
 
         cameraTransform.scale(new Vec2(cameraZoom, cameraZoom));
-
-        game.world.setCamera(cameraTransform.compute());
 
         rotateAndScale(game);
     }

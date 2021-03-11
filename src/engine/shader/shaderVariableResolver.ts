@@ -59,8 +59,12 @@ export class ShaderVariableResolver {
             (game) => game.renderer.getProjection().float32Array
         ],
         [
-            'View',
-            (game) => game.world.getCamera().float32Array
+            'View2D',
+            (game) => game.world.getCamera2D().getComponent(Transform2D).compute().float32Array
+        ],
+        [
+            'View3D',
+            (game) => game.world.getCamera3D().getComponent(Transform2D).compute().float32Array
         ],
         [
             'Texture',

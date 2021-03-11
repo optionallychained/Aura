@@ -58,9 +58,13 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
      *
      * @param renderer the renderer
      */
-    constructor(protected readonly config: TConfig & { name: string }) {
+    constructor(protected readonly config: TConfig & { name: string; initialEntities?: Array<Entity>; }) {
         if (config.textureAtlas) {
             config.renderer.createTexture(config.textureAtlas);
+        }
+
+        if (config.initialEntities) {
+            this.entities = config.initialEntities;
         }
     }
 

@@ -1,35 +1,68 @@
+import { ProtoGLError } from '../core';
 import { EntityManager } from '../entity';
-import { Mat3 } from '../math';
+import { Camera2D } from './camera.2d';
+import { Camera3D } from './camera.3d';
 import { WorldConfig } from './world.config';
 
 /**
  * Core World class; providing utility and management for Entities representing game objects
- *
- * // TODO this is where perspective/ortho/camera stuff will go
  *
  * // TODO continue on branch world
  * // TODO this, Font and UI might want to actually extend from EntityManager?
  */
 export class World extends EntityManager<WorldConfig> {
 
-    // TODO 2D only for the moment
-    // TODO potentially temporary
-    // public static VIEW = new Mat3();
-
-    private camera = new Mat3();
+    // TODO set up for multiple cameras, with only one 'active'
 
     constructor(config: WorldConfig) {
         super({
             name: 'world',
-            ...config
+            ...config,
+
+            initialEntities: [
+                new Camera2D(),
+                new Camera3D()
+            ]
         });
     }
 
-    public getCamera(): Mat3 {
-        return this.camera;
+    public getCamera2D(): Camera2D {
+        const camera = this.filterEntitiesByTag(Camera2D.TAG)[0];
+
+        if (!camera) {
+            throw new ProtoGLError({
+                class: 'World',
+                method: 'getCamera',
+                message: 'Failed to retrieve Camera2D'
+            });
+        }
+
+        return camera;
     }
 
-    public setCamera(camera: Mat3): void {
-        this.camera = camera;
+    public getCamera3D(): Camera3D {
+        const camera = this.filterEntitiesByTag(Camera3D.TAG)[0];
+
+        if (!camera) {
+            throw new ProtoGLError({
+                class: 'World',
+                method: 'getCamera',
+                message: 'Failed to retrieve Camera3D'
+            });
+        }
+
+        return camera;
+    }
+
+    public setCamera2D(camera: Camera2D): void {
+        this.removeEntity(this.filterEntitiesByTag(Camera2D.TAG)[0]);
+
+        this.addEntity(camera);
+    }
+
+    public setCamera3D(camera: Camera3D): void {
+        this.removeEntity(this.filterEntitiesByTag(Camera3D.TAG)[0]);
+
+        this.addEntity(camera);
     }
 }
