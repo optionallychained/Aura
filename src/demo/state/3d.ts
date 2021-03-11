@@ -64,7 +64,7 @@ const rotateAndScale = (game: Core.Game): void => {
         const transform = e.getComponent(Component.ThreeD.Transform3D);
 
         // transform.scale(scale);
-        transform.rotate(rotations[i]);
+        // transform.rotate(rotations[i]);
 
         i++;
     }
@@ -110,18 +110,25 @@ export const state3D = new State.State({
             cameraTransform.translate(new Vec3(0, 10, 0));
         }
 
-        if (game.input.isKeyDown(Input.Keys.ARROW_UP)) {
+        if (game.input.isKeyDown(Input.Keys.I)) {
             cameraTransform.rotate(new Vec3(Angle.toRadians(1), 0, 0));
         }
-        else if (game.input.isKeyDown(Input.Keys.ARROW_DOWN)) {
+        else if (game.input.isKeyDown(Input.Keys.K)) {
             cameraTransform.rotate(new Vec3(Angle.toRadians(-1), 0, 0));
         }
 
-        if (game.input.isKeyDown(Input.Keys.ARROW_LEFT)) {
+        if (game.input.isKeyDown(Input.Keys.J)) {
             cameraTransform.rotate(new Vec3(0, Angle.toRadians(-1), 0));
         }
-        else if (game.input.isKeyDown(Input.Keys.ARROW_RIGHT)) {
+        else if (game.input.isKeyDown(Input.Keys.L)) {
             cameraTransform.rotate(new Vec3(0, Angle.toRadians(1), 0));
+        }
+
+        if (game.input.isKeyDown(Input.Keys.U)) {
+            cameraTransform.rotate(new Vec3(0, 0, Angle.toRadians(1)));
+        }
+        else if (game.input.isKeyDown(Input.Keys.O)) {
+            cameraTransform.rotate(new Vec3(0, 0, Angle.toRadians(-1)));
         }
 
         rotateAndScale(game);
