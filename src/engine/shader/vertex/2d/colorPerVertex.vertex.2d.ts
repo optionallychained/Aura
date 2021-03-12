@@ -1,5 +1,5 @@
 import { UniformType } from '../../uniformType.enum';
-import { ShaderVariableVariation } from '../../shaderVariableVariation.enum';
+import { UniformVariation } from '../../uniformVariation.enum';
 import { VertexShader } from '../../vertex';
 
 /**
@@ -39,7 +39,7 @@ export const VERTEX_COLOR_PER_VERTEX_2D = new VertexShader({
         {
             name: 'u_Transform2D',
             type: UniformType.MAT3,
-            variation: ShaderVariableVariation.ENTITY
+            variation: UniformVariation.ENTITY
         }
     ]
 });

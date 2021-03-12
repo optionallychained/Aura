@@ -11,6 +11,8 @@ import { VertexShaderConfig } from './vertex.shader.config';
  * Used in constructing ShaderPrograms for registration on the game/renderer and use in Entity Shader components
  *
  * @see ShaderProgram
+ * @see UniformArray
+ * @see AttributeArray
  */
 export class VertexShader {
 

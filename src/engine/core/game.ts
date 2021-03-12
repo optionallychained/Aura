@@ -2,7 +2,6 @@ import { InputManager } from '../input';
 import { ControlScheme } from '../input/controlScheme.type';
 import { Color, Vec2 } from '../math';
 import { WebGLRenderer } from '../renderer';
-import { ShaderVariableResolver, ShaderVariableVariation, VariableResolver } from '../shader';
 import { ShaderProgram } from '../shader/program';
 import { State } from '../state';
 import { System } from '../system';
@@ -287,38 +286,6 @@ export class Game {
      */
     public registerShader(shader: ShaderProgram): void {
         this.renderer.createShaderProgram(shader);
-    }
-
-    /**
-     * Register a new Shader value resolution mapping for a given Shader attribute/uniform variable name
-     *
-     * Facilitates extension of the system's Shader and Component libraries by extending the automatic retrieval of Entity and Game data
-     *   for piping to the GPU
-     *
-     * Separated from overrideEntityShaderResolver() so as to avoid accidental consumer mistakes in changing built-in mappings
-     *
-     * @param variableName the name of the shader variable to register
-     * @param variation the frequency of variable variation; per render call (static) or per Entity (entity). For Attributes, always Entity
-     * @param resolve the EntityShaderResolver which will retrieve the relevant value from the Entity
-     */
-    public registerShaderVariableResolver(variableName: string, variation: ShaderVariableVariation, resolve: VariableResolver): void {
-        ShaderVariableResolver.registerVariableResolver(variableName, variation, resolve);
-    }
-
-    /**
-     * Override an existing  Shader value resolution mapping for a given Shader attribute/uniform variable name
-     *
-     * Facilitates extension of the system's Shader and Component libraries by extending the automatic retrieval of Entity and Game data
-     *   for piping to the GPU
-     *
-     * Separated from registerEntityShaderResolver() so as to avoid accidental consumer mistakes in changing built-in mappings
-     *
-     * @param variableName the name of the shader variable to override
-     * @param variation the frequency of variable variation; per render call (static) or per Entity (entity). For Attributes, always Entity
-     * @param resolve the EntityShaderResolver which will retrieve the relevant value from the Entity
-     */
-    public overrideShaderVariableResolver(variableName: string, variation: ShaderVariableVariation, resolve: VariableResolver): void {
-        ShaderVariableResolver.overrideVariableResolver(variableName, variation, resolve);
     }
 
     /**

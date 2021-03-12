@@ -1,6 +1,6 @@
 import { FragmentShader } from '..';
 import { UniformType } from '../../uniformType.enum';
-import { ShaderVariableVariation } from '../../shaderVariableVariation.enum';
+import { UniformVariation } from '../../uniformVariation.enum';
 
 /**
  * Built-in basic 2D Fragment Shader, shading fragments with a uniform color
@@ -23,7 +23,7 @@ export const FRAGMENT_BASIC = new FragmentShader({
         {
             name: 'u_Color',
             type: UniformType.VEC4,
-            variation: ShaderVariableVariation.ENTITY
+            variation: UniformVariation.ENTITY
         }
     ]
 });

@@ -1,5 +1,5 @@
 import { UniformType } from '../../uniformType.enum';
-import { ShaderVariableVariation } from '../../shaderVariableVariation.enum';
+import { UniformVariation } from '../../uniformVariation.enum';
 import { FragmentShader } from '../fragment.shader';
 
 /**
@@ -23,12 +23,12 @@ export const FRAGMENT_TEXTURE_COLORED = new FragmentShader({
         {
             name: 'u_Texture',
             type: UniformType.INTEGER,
-            variation: ShaderVariableVariation.STATIC
+            variation: UniformVariation.STATIC
         },
         {
             name: 'u_Color',
             type: UniformType.VEC4,
-            variation: ShaderVariableVariation.ENTITY
+            variation: UniformVariation.ENTITY
         }
     ]
 });

@@ -1,5 +1,5 @@
 import { UniformType } from '../../uniformType.enum';
-import { ShaderVariableVariation } from '../../shaderVariableVariation.enum';
+import { UniformVariation } from '../../uniformVariation.enum';
 import { VertexShader } from '../../vertex';
 
 /**
@@ -32,17 +32,17 @@ export const VERTEX_BASIC_PERSPECTIVE_3D = new VertexShader({
         {
             name: 'u_Transform3D',
             type: UniformType.MAT4,
-            variation: ShaderVariableVariation.ENTITY
+            variation: UniformVariation.ENTITY
         },
         {
             name: 'u_Perspective',
             type: UniformType.MAT4,
-            variation: ShaderVariableVariation.STATIC
+            variation: UniformVariation.STATIC
         },
         {
             name: 'u_View3D',
             type: UniformType.MAT4,
-            variation: ShaderVariableVariation.STATIC
+            variation: UniformVariation.STATIC
         }
     ]
 });

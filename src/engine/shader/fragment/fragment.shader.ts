@@ -10,6 +10,7 @@ import { UniformArray } from '../uniformArray.type';
  * Used in constructing ShaderPrograms for registration on the game/renderer and use in Entity Shader components
  *
  * @see ShaderProgram
+ * @see UniformArray
  */
 export class FragmentShader {
 

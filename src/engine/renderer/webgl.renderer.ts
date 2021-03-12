@@ -1,6 +1,6 @@
 import { Game, ProtoGLError } from '../core';
 import { Color, Mat3, Mat4 } from '../math';
-import { ShaderVariableResolver, ShaderVariableVariation } from '../shader';
+import { ShaderVariableResolver, UniformVariation } from '../shader';
 import { ShaderProgram } from '../shader/program';
 import { UniformType } from '../shader/uniformType.enum';
 import { TextureAtlas } from '../texture';
@@ -352,7 +352,7 @@ export class WebGLRenderer {
         // handle 'static' uniforms (vary once per render call)
         if (staticUniforms?.length) {
             for (const uniform of staticUniforms) {
-                this.loadUniform(uniform.location, uniform.type, ShaderVariableResolver.resolveStaticVariable(uniform.name, this.game));
+                this.loadUniform(uniform.location, uniform.type, ShaderVariableResolver.resolveStaticUniform(uniform.name, this.game));
             }
         }
 
@@ -366,7 +366,7 @@ export class WebGLRenderer {
                     const location = uniform.location;
 
                     if (location) {
-                        this.loadUniform(location, uniform.type, ShaderVariableResolver.resolveEntityVariable(uniform.name, e));
+                        this.loadUniform(location, uniform.type, ShaderVariableResolver.resolveEntityUniform(uniform.name, e));
                     }
                 }
 
@@ -488,7 +488,7 @@ export class WebGLRenderer {
 
         for (const uniform of allUniforms) {
             const location = gl.getUniformLocation(program, uniform.name);
-            const locationArray = uniform.variation === ShaderVariableVariation.STATIC ? staticUniformLocations : entityUniformLocations;
+            const locationArray = uniform.variation === UniformVariation.STATIC ? staticUniformLocations : entityUniformLocations;
 
             if (!location) {
                 throw new ProtoGLError({

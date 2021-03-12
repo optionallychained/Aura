@@ -438,7 +438,7 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
                         // process every attribute for every vertex of the Entity
                         for (const attr of shaderInfo.vertex.attributes) {
                             // TODO entity change detection: recompile dynamic values only as necessary
-                            let value = ShaderVariableResolver.resolveEntityVariable(attr.name, e);
+                            let value = ShaderVariableResolver.resolveAttribute(attr.name, e);
 
                             if (typeof value === 'number') {
                                 // handle numerical values by wrapping them in an array for setting into vertices
@@ -450,9 +450,9 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
                                 p += attr.size;
                             }
                             else if (attr.name === 'a_TexCoord') {
+                                // handle texture coordinates by asking the Texture Atlas to resolve this vertex's texcoord
                                 const { textureAtlas } = this.config;
 
-                                // handle texture coordinates by asking the Texture Atlas to resolve this vertex's texcoord
                                 if (!textureAtlas) {
                                     // if we're trying to render an Entity with a Texture-involved shader, but we have no Texture Atlas,
                                     //   then something has gone wrong
