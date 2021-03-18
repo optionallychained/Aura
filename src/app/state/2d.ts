@@ -7,11 +7,11 @@ const player = new RectFlat(new Vec2(0, 0), new Vec2(100, 100));
 const populate = (game: Core.Game): void => {
     const entities: Array<Entity.Entity> = [];
 
-    for (let i = -game.world.dimensions.x / 2; i <= game.world.dimensions.x / 2; i += game.world.dimensions.x / 10) {
-        entities.push(new Axis2D(Angle.toRadians(90), i, 0, game.world.dimensions.y));
+    for (let x = -game.world.dimensions.x / 2; x <= game.world.dimensions.x / 2; x += game.world.dimensions.x / 10) {
+        entities.push(new Axis2D(Angle.toRadians(90), x, 0, game.world.dimensions.y));
 
-        for (let j = -game.world.dimensions.y / 2; j <= game.world.dimensions.y / 2 + 10; j += game.world.dimensions.y / 10) {
-            entities.push(new Axis2D(0, 0, j, game.world.dimensions.x));
+        for (let y = -game.world.dimensions.y / 2; y <= game.world.dimensions.y / 2 + 10; y += game.world.dimensions.y / 10) {
+            entities.push(new Axis2D(0, 0, y, game.world.dimensions.x));
         }
     }
 
@@ -32,10 +32,6 @@ export const State2D = new State.State({
         game.world.clearEntities();
     },
     tick: (game) => {
-        if (game.input.isKeyDown(Input.Keys.ENTER)) {
-            game.switchToState('3D');
-        }
-
         const playerTransform = player.getComponent(Component.TwoD.Transform2D);
 
         if (game.input.isKeyDown(Input.Keys.A)) {

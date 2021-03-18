@@ -119,8 +119,7 @@ export class ShaderVariableResolver {
         ],
         [
             'u_View3D',
-            (game) => new Mat4().float32Array
-            // (game) => Mat4.invert(game.world.getCamera3D().getComponent(Transform3D).compute())!.float32Array
+            (game) => game.world.getCamera3D().getViewMatrix().float32Array
         ],
         [
             'u_Texture',

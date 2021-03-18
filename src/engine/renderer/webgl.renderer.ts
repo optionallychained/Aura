@@ -403,7 +403,7 @@ export class WebGLRenderer {
         this.projectionMatrix = Mat3.projection(gl.canvas.width, gl.canvas.height);
         // TODO placeholder
         // TODO review math/values, esp. for near/far
-        this.perspectiveMatrix = Mat4.perspective(90, gl.canvas.width / gl.canvas.height, 0.1, 2000);
+        this.perspectiveMatrix = Mat4.perspective(90, gl.canvas.width / gl.canvas.height, 0.1, 1000000);
         this.orthoMatrix = Mat4.ortho(-gl.canvas.width / 2, gl.canvas.width / 2, -gl.canvas.height / 2, gl.canvas.height / 2, 400, -400);
 
         gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);

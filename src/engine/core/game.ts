@@ -1,6 +1,6 @@
 import { InputManager } from '../input';
 import { ControlScheme } from '../input/controlScheme.type';
-import { Color, Vec2 } from '../math';
+import { Color, Vec2, Vec3 } from '../math';
 import { WebGLRenderer } from '../renderer';
 import { ShaderProgram } from '../shader/program';
 import { State } from '../state';
@@ -111,7 +111,7 @@ export class Game {
             game: this,
             textureAtlas: config?.world?.textureAtlas,
             camera: config?.world?.camera,
-            dimensions: config?.world?.dimensions ?? new Vec2(this.canvas.width, this.canvas.height),
+            dimensions: config?.world?.dimensions ?? new Vec3(this.canvas.width, this.canvas.height, 1000),
         });
 
         this.ui = new UI({

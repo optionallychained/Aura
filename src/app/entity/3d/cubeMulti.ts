@@ -2,16 +2,16 @@ import { Color, Component, Entity, Geometry, Random, Shader, Vec3 } from '../../
 
 export class CubeMulti extends Entity.Entity {
 
-    constructor() {
+    constructor(position: Vec3, scale: Vec3) {
         super({
             tag: 'cubeMulti',
             components: [
-                new Component.MultiColor(Color.randomList(12, false, Random.between(0, 1))),
+                new Component.MultiColor(Color.randomList(12)),
                 new Component.Model(Geometry.ThreeD.BOX),
-                new Component.Shader(Shader.Program.ThreeD.PROGRAM_COLOR_PER_VERTEX_3D),
+                new Component.Shader(Shader.Program.ThreeD.PROGRAM_COLOR_PER_VERTEX_PERSPECTIVE_3D),
                 new Component.ThreeD.Transform3D(
-                    new Vec3(Random.between(-1, 1), Random.between(-1, 1), 0.5),
-                    new Vec3(Random.between(0.1, 1), Random.between(0.1, 1), Random.between(0.1, 1)),
+                    position,
+                    scale
                 )
             ]
         });

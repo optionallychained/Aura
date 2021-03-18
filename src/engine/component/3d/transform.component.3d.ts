@@ -40,16 +40,16 @@ export class Transform3D extends Component {
     }
 
     /**
-    * Abstraction for Mat4.translate, translating the maintained translationMatrix with the given translation
-    *
-    * @param translate the Vec3 to translate by
-    */
+     * Translate the Transform3D by adding the given translation vector to the maintained
+     *
+     * @param translate the Vec3 to translate by
+     */
     public translate(translate: Vec3): void {
         this.mutable.position = Vec3.add(this.position, translate);
     }
 
     /**
-     * Abstraction for Mat4.rotate, rotating the maintained rotationMatrix by the given angle (radians)
+     * Rotate the Transform2D by adding the given angle (radians) to the maintained
      *
      * @param angles the angles (radians) around the x, y and z axes to rotate by, expressed as a Vec3
      */
@@ -58,7 +58,7 @@ export class Transform3D extends Component {
     }
 
     /**
-     * Abstraction for Mat4.scale, scaling the maintained scaleMatrix by the given factor
+     * Scale the Transform3D by a given factor
      *
      * @param factor the Vec3 to scale by
      */
@@ -66,12 +66,26 @@ export class Transform3D extends Component {
         this.mutable.scale = Vec3.mult(this.scale, factor);
     }
 
+    /**
+     * Set the scale of the Transform3D to a given factor
+     *
+     * @param factor the Vec3 scale factor to adopt
+     */
     public scaleTo(factor: Vec3): void {
         this.mutable.scale = factor;
     }
 
     /**
-     * Compute the composite Transform Matrix for the maintained translation, scaling and rotation
+     * Reset all transformations back to their initial values
+     */
+    public reset(): void {
+        this.mutable.position = this.initialPosition;
+        this.mutable.scale = this.initialScale;
+        this.mutable.angles = this.initialAngles
+    }
+
+    /**
+     * Compute the composite Transform Matrix from the maintained translation, scaling and rotation
      *
      * @returns the Transform matrix
      */

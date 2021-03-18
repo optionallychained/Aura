@@ -1,4 +1,4 @@
-import { Core, Shader, Vec2 } from '../engine';
+import { Angle, Core, Shader, Vec2, Vec3 } from '../engine';
 import { TextureAtlas } from '../engine/texture';
 import { State2D } from './state/2d';
 import { state3D } from './state/3d';
@@ -8,7 +8,11 @@ const game = new Core.Game({
     canvasDimensions: new Vec2(1024, 768),
     world: {
         textureAtlas: new TextureAtlas('world', 'res/world.png', 2, 2),
-        dimensions: new Vec2(1024 * 2, 768 * 2)
+        dimensions: new Vec3(1024 * 100, 768 * 100, 1000000),
+        camera: {
+            position: new Vec3(0, 10000, 500),
+            angle: new Vec3(0, 0, 0)
+        }
     },
     debugMode: true,
     init: () => { console.log('GAME -> init') }
@@ -24,6 +28,7 @@ game.registerShader(Shader.Program.TwoD.PROGRAM_TEXTURE_COLORED_2D);
 game.registerShader(Shader.Program.ThreeD.PROGRAM_BASIC_PERSPECTIVE_3D);
 game.registerShader(Shader.Program.ThreeD.PROGRAM_BASIC_ORTHO_3D);
 game.registerShader(Shader.Program.ThreeD.PROGRAM_COLOR_PER_VERTEX_3D);
+game.registerShader(Shader.Program.ThreeD.PROGRAM_COLOR_PER_VERTEX_PERSPECTIVE_3D);
 game.registerShader(Shader.Program.ThreeD.PROGRAM_TEXTURE_3D);
 game.registerShader(Shader.Program.ThreeD.PROGRAM_TEXTURE_COLORED_3D);
 

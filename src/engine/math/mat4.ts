@@ -1,3 +1,4 @@
+import { Angle } from './angle';
 import { Vec3 } from './vec3';
 
 /**
@@ -380,17 +381,40 @@ export class Mat4 {
         ]);
     }
 
-    // TODO placeholder
-    public static perspective(fov: number, aspect: number, near: number, far: number): Mat4 {
-        const _fov = Math.tan(Math.PI * 0.5 - 0.5 * fov);
-        const _range = 1 / (near - far);
 
-        return new Mat4([
-            _fov / aspect, 0, 0, 0,
-            0, _fov, 0, 0,
-            0, 0, (near + far) * _range, -1,
-            0, 0, near * far * _range * 2, 0
-        ]);
+    // public static infinitePerspective(fov: number, aspect: number, near: number): Mat4 {
+    //     const _fov = 1 / Math.tan(Angle.toRadians(fov) / 2);
+
+    //     return new Mat4([
+    //         _fov / aspect, 0, 0, 0,
+    //         0, _fov, 0, 0,
+    //         0, 0, -1, -1,
+    //         0, 0, -2 * near, 0
+    //     ])
+    // }
+
+    // TODO placeholder
+    public static perspective(fov: number, aspect: number, near: number, far?: number): Mat4 {
+        const _fov = 1 / Math.tan(Angle.toRadians(fov) / 2);
+
+        if (far) {
+            const _invRange = 1 / (near - far);
+
+            return new Mat4([
+                _fov / aspect, 0, 0, 0,
+                0, _fov, 0, 0,
+                0, 0, (far + near) * _invRange, -1,
+                0, 0, 2 * far * near * _invRange, 0
+            ]);
+        }
+        else {
+            return new Mat4([
+                _fov / aspect, 0, 0, 0,
+                0, _fov, 0, 0,
+                0, 0, -1, -1,
+                0, 0, -2 * near, 0
+            ]);
+        }
     }
 
     // TODO placeholder
@@ -404,6 +428,19 @@ export class Mat4 {
             (bottom + top) / (bottom - top),
             (near + far) / (near - far),
             1
+        ]);
+    }
+
+    public static lookAt(eye: Vec3, target: Vec3, up: Vec3): Mat4 {
+        const z = Vec3.normalize(Vec3.sub(eye, target));
+        const x = Vec3.normalize(Vec3.cross(up, z));
+        const y = Vec3.normalize(Vec3.cross(z, x));
+
+        return new Mat4([
+            x.x, x.y, x.z, 0,
+            y.x, y.y, y.z, 0,
+            z.x, z.y, z.z, 0,
+            eye.x, eye.y, eye.z, 1
         ]);
     }
 

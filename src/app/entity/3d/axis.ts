@@ -2,7 +2,7 @@ import { Angle, Color, Component, Entity, Geometry, Shader, Vec2, Vec3 } from '.
 
 export class Axis3D extends Entity.Entity {
 
-    constructor(axis: 'x' | 'y' | 'z') {
+    constructor(axis: 'x' | 'y' | 'z', offset: Vec3, length: number) {
         let angleX, angleY, angleZ;
 
         // TODO axis rotation
@@ -29,8 +29,8 @@ export class Axis3D extends Entity.Entity {
                 new Component.Model(Geometry.ThreeD.LINE),
                 new Component.Shader(Shader.Program.ThreeD.PROGRAM_BASIC_PERSPECTIVE_3D),
                 new Component.ThreeD.Transform3D(
-                    new Vec3(),
-                    new Vec3(1024 * 4, 1, 1),
+                    offset,
+                    new Vec3(length, 1, 1),
                     new Vec3(angleX, angleY, angleZ)
                 )
             ]
