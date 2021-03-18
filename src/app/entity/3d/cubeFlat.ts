@@ -1,14 +1,8 @@
-import { Color, Component, Entity, Geometry, Random, Shader, Vec3 } from '../../../engine';
+import { Color, Component, Entity, Geometry, Shader, Vec3 } from '../../../engine';
 
 export class CubeFlat extends Entity.Entity {
 
-    constructor(qx: number, qy: number, qz: number) {
-        const position = new Vec3(
-            (-1024 / 2) + ((1024 / 4) * qx),
-            (-768 / 2) + ((768 / 4) * qy),
-            (500 / 2) + ((-500 / 4) * qz)
-        );
-
+    constructor(position: Vec3, scale: Vec3) {
         super({
             tag: 'cubeFlat',
             components: [
@@ -17,10 +11,7 @@ export class CubeFlat extends Entity.Entity {
                 new Component.Shader(Shader.Program.ThreeD.PROGRAM_BASIC_PERSPECTIVE_3D),
                 new Component.ThreeD.Transform3D(
                     position,
-                    new Vec3(1024 / 4, 768 / 4, 150),
-
-                    // new Vec3(Random.between(-1, 1), Random.between(-1, 1), 0.5),
-                    // new Vec3(Random.between(0.1, 1), Random.between(0.1, 1), Random.between(0.1, 1)),
+                    scale
                 )
             ]
         });

@@ -3,7 +3,6 @@ import { Axis2D } from '../entity/2d/axis';
 import { RectFlat } from '../entity/2d/rect/rectFlat';
 
 const player = new RectFlat(new Vec2(0, 0), new Vec2(100, 100));
-const head = new RectFlat(new Vec2(0, 200), new Vec2(100, 100));
 
 const populate = (game: Core.Game): void => {
     const entities: Array<Entity.Entity> = [];
@@ -28,10 +27,6 @@ export const State2D = new State.State({
     renderingMode: '2D',
     init: (game) => {
         populate(game);
-
-        // game.font.addString('hello', new Vec2(-0.75, 0.25), Color.random());
-        // game.font.addString('protogl', new Vec2(-0.75, 0), Color.random());
-        // game.font.addString('world', new Vec2(-0.75, -0.25), Color.random());
     },
     end: (game) => {
         game.world.clearEntities();
@@ -41,39 +36,34 @@ export const State2D = new State.State({
             game.switchToState('3D');
         }
 
-        // const camera2D = game.world.getCamera2D();
-        // const cameraTransform = camera2D.getComponent(Component.TwoD.Transform2D);
-
-        const bodyTransform = player.getComponent(Component.TwoD.Transform2D);
-
-        // bodyTransform.rotate(Angle.toRadians(1));
+        const playerTransform = player.getComponent(Component.TwoD.Transform2D);
 
         if (game.input.isKeyDown(Input.Keys.A)) {
-            bodyTransform.translate(new Vec2(-10, 0));
+            playerTransform.translate(new Vec2(-10, 0));
         }
         else if (game.input.isKeyDown(Input.Keys.D)) {
-            bodyTransform.translate(new Vec2(10, 0));
+            playerTransform.translate(new Vec2(10, 0));
         }
 
         if (game.input.isKeyDown(Input.Keys.W)) {
-            bodyTransform.translate(new Vec2(0, 10));
+            playerTransform.translate(new Vec2(0, 10));
         }
         else if (game.input.isKeyDown(Input.Keys.S)) {
-            bodyTransform.translate(new Vec2(0, -10));
+            playerTransform.translate(new Vec2(0, -10));
         }
 
         if (game.input.isKeyDown(Input.Keys.Q)) {
-            bodyTransform.rotate(Angle.toRadians(-1));
+            playerTransform.rotate(Angle.toRadians(-1));
         }
         else if (game.input.isKeyDown(Input.Keys.E)) {
-            bodyTransform.rotate(Angle.toRadians(1));
+            playerTransform.rotate(Angle.toRadians(1));
         }
 
         if (game.input.isKeyDown(Input.Keys.Z)) {
-            bodyTransform.scaleBy(new Vec2(0.99, 0.99));
+            playerTransform.scaleBy(new Vec2(0.99, 0.99));
         }
         else if (game.input.isKeyDown(Input.Keys.X)) {
-            bodyTransform.scaleBy(new Vec2(1.01, 1.01));
+            playerTransform.scaleBy(new Vec2(1.01, 1.01));
         }
 
 
