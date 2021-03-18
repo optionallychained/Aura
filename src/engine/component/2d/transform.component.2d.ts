@@ -4,18 +4,18 @@ import { Component } from '../component';
 /**
  * Built-in Transform2D Component, defining the position, scale, rotation and velocity of a two dimensional Entity
  *
- * Maintains and provides abstractions for a Mat3 transformations matrix
+ * Maintains and provides abstractions for a Mat3 transformation matrix
  */
 export class Transform2D extends Component {
 
-    /** Maintained scale vector */
-    private scaleVector: Vec2;
-
     /** Maintained translation vector */
-    private translationVector: Vec2;
+    public readonly position: Vec2;
 
-    /** Maintained rotation angle in radians */
-    private rotation = 0;
+    /** Maintained scale vector */
+    public readonly scale: Vec2;
+
+    /** Maintained rotation angle */
+    public readonly angle: number;
 
     /**
      * Constructor. Take and store the initial position, scale, angle and velocity
@@ -34,54 +34,66 @@ export class Transform2D extends Component {
 
         super('Transform2D');
 
-        this.translationVector = initialPosition;
-        this.scaleVector = initialScale;
-        this.rotation = initialAngle;
+        this.position = initialPosition;
+        this.scale = initialScale;
+        this.angle = initialAngle;
     }
 
     /**
-     * Abstraction for Mat3.translate, adding a given translation onto the existing translationVector
+     * Translate the Transform2D by adding the given translation vector to the maintained
      *
      * @param translate the Vec2 to translate by
      */
     public translate(translate: Vec2): void {
-        this.translationVector = Vec2.add(this.translationVector, translate);
+        this.mutable.position = Vec2.add(this.position, translate);
     }
 
     /**
-     * Abstraction for Mat3.rotate, adding a given angle (in radians) to the current rotation angle
+     * Rotate the Transform2D by adding the given angle (radians) to the maintained
      *
      * @param angle the angle (radians) to rotate by
      */
     public rotate(angle: number): void {
-        this.rotation += angle;
+        this.mutable.angle += angle;
     }
 
     /**
-     * Abstraction for Mat3.scale, updating the existing scale factor with the given
+     * Scale the Transform2D by a given factor
      *
-     * Multiplies the two Vec2s so as to ensure an Entity's initialScale is preserved as the baseline
-     *
-     * @param factor the factor to scale by
+     * @param factor the Vec2 to scale by
      */
-    public scale(factor: Vec2): void {
-        this.scaleVector = Vec2.mult(this.initialScale, factor);
+    public scaleBy(factor: Vec2): void {
+        this.mutable.scale = Vec2.mult(this.scale, factor);
     }
 
     /**
-     * Compute the composite Transform Matrix for the maintained translation, scaling and rotation
+     * Set the scale of the Transform2D to a given factor
+     *
+     * @param factor the Vec2 scale factor to adopt
+     */
+    public scaleTo(factor: Vec2): void {
+        this.mutable.scale = factor;
+    }
+
+    /**
+     * Compute the composite Transform Matrix from the maintained translation, scaling and rotation
      *
      * @returns the Transform matrix
      */
     public compute(): Mat3 {
-        const trans = Mat3.translate(new Mat3(), this.translationVector);
-        const rot = Mat3.rotate(new Mat3(), this.rotation);
-        const scale = Mat3.scale(new Mat3(), this.scaleVector);
-
-        let compute = Mat3.mult(new Mat3(), scale);
-        compute = Mat3.mult(compute, rot);
-        compute = Mat3.mult(compute, trans);
+        let compute = Mat3.translate(new Mat3(), this.position);
+        compute = Mat3.rotate(compute, this.angle);
+        compute = Mat3.scale(compute, this.scale);
 
         return compute;
+    }
+
+    /**
+     * Getter for a Mutable cast of the Transform2D instance; used for enabling internal-only mutation of translation, rotation and scale
+     *
+     * @returns the typecasted Mutable Transform2D instance
+     */
+    private get mutable(): Mutable<Transform2D> {
+        return this as Mutable<Transform2D>;
     }
 }

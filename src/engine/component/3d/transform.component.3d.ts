@@ -4,18 +4,18 @@ import { Component } from '../component';
 /**
  * Built-in Transform3D Component, defining the position, scale, rotation and velocity of a three dimensional Entity
  *
- * Maintains and provides abstractions for a Mat4 transformations matrix
+ * Maintains and provides abstractions for a Mat4 transformation matrix
  */
 export class Transform3D extends Component {
 
-    /** Maintined scale vector */
-    private scaleVector: Vec3;
-
     /** Maintained translation vector */
-    private translationVector: Vec3;
+    public readonly position: Vec3;
 
-    /** Maintained rotation vector (around the x, y, and z axes) in radians */
-    private rotation: Vec3;
+    /** Maintained scale vector */
+    public readonly scale: Vec3;
+
+    /** Maintained rotation angles */
+    public readonly angles: Vec3;
 
     /**
      * Constructor. Take and store the initial position, scale, angle and velocity
@@ -28,44 +28,46 @@ export class Transform3D extends Component {
     constructor(
         public readonly initialPosition = new Vec3(),
         public readonly initialScale = new Vec3(1, 1, 1),
-        public readonly initialRotation = new Vec3(),
+        public readonly initialAngles = new Vec3(),
         public readonly velocity = new Vec3()
     ) {
 
         super('Transform3D');
 
-        this.translationVector = initialPosition;
-        this.scaleVector = initialScale;
-        this.rotation = initialRotation;
+        this.position = initialPosition;
+        this.scale = initialScale;
+        this.angles = initialAngles;
     }
 
     /**
-     * Abstraction for Mat4.translate, adding a given translation onto the existing translationVector
-     *
-     * @param translate the Vec4 to translate by
-     */
+    * Abstraction for Mat4.translate, translating the maintained translationMatrix with the given translation
+    *
+    * @param translate the Vec3 to translate by
+    */
     public translate(translate: Vec3): void {
-        this.translationVector = Vec3.add(this.translationVector, translate);
+        this.mutable.position = Vec3.add(this.position, translate);
     }
 
     /**
-     * Abstraction for Mat4.rotate, adding a given angle (in radians) to the current rotation angle
+     * Abstraction for Mat4.rotate, rotating the maintained rotationMatrix by the given angle (radians)
      *
-     * @param angle the angles around the x, y and z axes (radians) to rotate by, expressed as a Vec3
+     * @param angles the angles (radians) around the x, y and z axes to rotate by, expressed as a Vec3
      */
-    public rotate(factor: Vec3): void {
-        this.rotation = Vec3.add(this.rotation, factor);
+    public rotate(angles: Vec3): void {
+        this.mutable.angles = Vec3.add(this.angles, angles);
     }
 
     /**
-     * Abstraction for Mat4.scale, updating the existing scale factor with the given
+     * Abstraction for Mat4.scale, scaling the maintained scaleMatrix by the given factor
      *
-     * Multiplies the two Vec4s so as to ensure an Entity's initialScale is preserved as the baseline
-     *
-     * @param factor the factor to scale by
+     * @param factor the Vec3 to scale by
      */
-    public scale(factor: Vec3): void {
-        this.scaleVector = Vec3.mult(this.initialScale, factor);
+    public scaleBy(factor: Vec3): void {
+        this.mutable.scale = Vec3.mult(this.scale, factor);
+    }
+
+    public scaleTo(factor: Vec3): void {
+        this.mutable.scale = factor;
     }
 
     /**
@@ -74,22 +76,21 @@ export class Transform3D extends Component {
      * @returns the Transform matrix
      */
     public compute(): Mat4 {
-        const trans = Mat4.translate(new Mat4(), this.translationVector);
-
-        const rotX = Mat4.rotateX(new Mat4(), this.rotation.x);
-        const rotY = Mat4.rotateY(new Mat4(), this.rotation.y);
-        const rotZ = Mat4.rotateZ(new Mat4(), this.rotation.z);
-
-        let rot = Mat4.mult(new Mat4(), rotX);
-        rot = Mat4.mult(rot, rotY);
-        rot = Mat4.mult(rot, rotZ);
-
-        const scale = Mat4.scale(new Mat4(), this.scaleVector);
-
-        let compute = Mat4.mult(new Mat4(), scale);
-        compute = Mat4.mult(compute, rot);
-        compute = Mat4.mult(compute, trans);
+        let compute = Mat4.translate(new Mat4(), this.position);
+        compute = Mat4.rotateX(compute, this.angles.x);
+        compute = Mat4.rotateY(compute, this.angles.y);
+        compute = Mat4.rotateZ(compute, this.angles.z);
+        compute = Mat4.scale(compute, this.scale);
 
         return compute;
+    }
+
+    /**
+    * Getter for a Mutable cast of the Transform3D instance; used for enabling internal-only mutation of translation, rotation and scale
+    *
+    * @returns the typecasted Mutable Transform3D instance
+    */
+    private get mutable(): Mutable<Transform3D> {
+        return this as Mutable<Transform3D>;
     }
 }
