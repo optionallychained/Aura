@@ -3,9 +3,9 @@
         {
             "type": "chrome",
             "request": "launch",
-            "name": "Debug",
+            "name": "Debug App",
             "url": "http://localhost:8080",
-            "preLaunchTask": "Start Game",
+            "preLaunchTask": "Start App",
             "sourceMaps": true,
             "pathMapping": {
                 "webpack:///": "${workspaceFolder}/dev"

@@ -2,9 +2,9 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Start Game",
+            "label": "Start App",
             "type": "npm",
-            "script": "demo:debug",
+            "script": "app:debug",
             "isBackground": true,
             "problemMatcher": {
                 "owner": "typescript",

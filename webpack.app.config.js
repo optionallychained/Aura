@@ -6,7 +6,7 @@ module.exports = (env, options) => {
     const dev = options.mode === 'development';
 
     const config = {
-        entry: './src/demo/demo.ts',
+        entry: './src/app/app.ts',
         devtool: dev ? 'inline-source-map' : false,
         module: {
             rules: [
@@ -20,18 +20,18 @@ module.exports = (env, options) => {
         plugins: [
             new CopyWebpackPlugin({
                 patterns: [
-                    { from: './src/demo/res', to: 'res' }
+                    { from: './src/app/res', to: 'res' }
                 ]
             }),
             new HtmlWebpackPlugin({
-                title: 'ProtoGL Demo'
+                title: 'ProtoGL App'
             })
         ],
         resolve: {
             extensions: ['.ts', '.js']
         },
         output: {
-            filename: 'demo.js',
+            filename: 'app.js',
             path: path.resolve(__dirname, dev ? 'dev' : 'dist'),
         }
     };

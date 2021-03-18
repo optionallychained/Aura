@@ -112,7 +112,7 @@ const rotateAndScale = (game: Core.Game): void => {
     for (const e of game.world.filterEntitiesByTag('cubeFlat')) {
         const transform = e.getComponent(Component.ThreeD.Transform3D);
 
-        transform.scale(scale);
+        transform.scaleBy(scale);
         // transform.rotate(rotations[i]);
 
         i++;
@@ -139,24 +139,24 @@ export const state3D = new State.State({
         const cameraTransform = camera3D.getComponent(Component.ThreeD.Transform3D);
 
         if (game.input.isKeyDown(Input.Keys.A)) {
-            cameraTransform.translate(new Vec3(10, 0));
+            cameraTransform.translate(new Vec3(-10, 0));
         }
         else if (game.input.isKeyDown(Input.Keys.D)) {
-            cameraTransform.translate(new Vec3(-10, 0, 0));
+            cameraTransform.translate(new Vec3(10, 0, 0));
         }
 
         if (game.input.isKeyDown(Input.Keys.W)) {
-            cameraTransform.translate(new Vec3(0, 0, 10));
+            cameraTransform.translate(new Vec3(0, 0, -10));
         }
         else if (game.input.isKeyDown(Input.Keys.S)) {
-            cameraTransform.translate(new Vec3(0, 0, -10));
+            cameraTransform.translate(new Vec3(0, 0, 10));
         }
 
         if (game.input.isKeyDown(Input.Keys.Q)) {
-            cameraTransform.translate(new Vec3(0, -10, 0));
+            cameraTransform.translate(new Vec3(0, 10, 0));
         }
         else if (game.input.isKeyDown(Input.Keys.E)) {
-            cameraTransform.translate(new Vec3(0, 10, 0));
+            cameraTransform.translate(new Vec3(0, -10, 0));
         }
 
         if (game.input.isKeyDown(Input.Keys.I)) {
