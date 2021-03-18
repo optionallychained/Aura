@@ -11,6 +11,8 @@ export const VERTEX_COLOR_PER_VERTEX_2D = new VertexShader({
         precision mediump float;
 
         uniform mat3 u_Transform2D;
+        uniform mat3 u_Projection;
+        uniform mat3 u_View2D;
 
         attribute vec2 a_Position;
         attribute vec4 a_VertexColor;
@@ -22,7 +24,7 @@ export const VERTEX_COLOR_PER_VERTEX_2D = new VertexShader({
 
             gl_PointSize = 1.0;
 
-            gl_Position = vec4(u_Transform2D * vec3(a_Position, 1.0), 1.0);
+            gl_Position = vec4(u_Projection * u_View2D * u_Transform2D * vec3(a_Position, 1.0), 1.0);
         }
     `,
     attributes: [
@@ -40,6 +42,16 @@ export const VERTEX_COLOR_PER_VERTEX_2D = new VertexShader({
             name: 'u_Transform2D',
             type: UniformType.MAT3,
             variation: UniformVariation.ENTITY
+        },
+        {
+            name: 'u_Projection',
+            type: UniformType.MAT3,
+            variation: UniformVariation.STATIC
+        },
+        {
+            name: 'u_View2D',
+            type: UniformType.MAT3,
+            variation: UniformVariation.STATIC
         }
     ]
 });

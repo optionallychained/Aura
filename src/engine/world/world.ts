@@ -22,8 +22,8 @@ export class World extends EntityManager<WorldConfig> {
 
         this.camera2D = new Camera2D(
             config.camera?.position,
+            config.camera?.zoom,
             config.camera?.angle,
-            config.camera?.zoom
         );
     }
 

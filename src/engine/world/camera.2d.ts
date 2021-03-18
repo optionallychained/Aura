@@ -9,6 +9,7 @@ interface FollowRules {
 }
 
 // TODO limit camera movement to world boundaries?
+// TODO (after transform parenting work) redefinable as an Entity?
 export class Camera2D {
 
     private transform: Transform2D;
@@ -18,7 +19,7 @@ export class Camera2D {
         rules: DeepRequired<FollowRules>;
     } | undefined;
 
-    constructor(positionOffset = new Vec2(), angleOffset = 0, scaleOffset = new Vec2(1, 1)) {
+    constructor(positionOffset = new Vec2(), scaleOffset = new Vec2(1, 1), angleOffset = 0) {
         this.transform = new Transform2D(positionOffset, scaleOffset, angleOffset);
     }
 
