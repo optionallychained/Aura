@@ -21,11 +21,11 @@ export interface GameConfig {
     /** Debug mode, enabling the display of frame data and potentially other useful stuff in the future; default value is false */
     readonly debugMode?: boolean;
     /** Optional configuration for the Game's World */
-    readonly world?: Partial<Omit<WorldConfig, 'renderer'>>;
+    readonly world?: Partial<Omit<WorldConfig, 'game'>>;
     /** Optional configuration for the Game's UI */
-    readonly ui?: Omit<UIConfig, 'renderer'>;
+    readonly ui?: Omit<UIConfig, 'game'>;
     /** Optional configuration for the Game's Font */
-    readonly font?: Omit<FontConfig, 'renderer'>;
+    readonly font?: Omit<FontConfig, 'game'>;
     /** Game init function; none is provided by default */
     readonly init?: () => void
 }

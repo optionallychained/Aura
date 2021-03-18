@@ -1,13 +1,8 @@
-import { Color, Component, Entity, Geometry, Shader, Vec2 } from '../../../../engine';
+import { Angle, Color, Component, Entity, Geometry, Shader, Vec2 } from '../../../../engine';
 
 export class RectFlat extends Entity.Entity {
 
-    constructor(qx: number, qy: number) {
-        const position = new Vec2(
-            (-1024 / 2) + ((1024 / 4) * qx),
-            (-768 / 2) + ((768 / 4) * qy)
-        );
-
+    constructor(position: Vec2, scale: Vec2) {
         super({
             tag: 'rectFlat',
             components: [
@@ -16,7 +11,7 @@ export class RectFlat extends Entity.Entity {
                 new Component.Shader(Shader.Program.TwoD.PROGRAM_BASIC_2D),
                 new Component.TwoD.Transform2D(
                     position,
-                    new Vec2(1024 / 4, 1024 / 4),
+                    scale
                 )
             ]
         });

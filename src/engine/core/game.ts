@@ -105,22 +105,23 @@ export class Game {
         this.canvas.height = config?.canvasDimensions?.y ?? this.defaultCanvasDimensions.y;
 
         this.renderer = new WebGLRenderer(this, config?.backgroundColor ?? this.defaultBackgroundColor);
-        this.input = new InputManager(this.canvas, config?.controlScheme ?? this.defaultControlScheme);
+        this.input = new InputManager(this, config?.controlScheme ?? this.defaultControlScheme);
 
         this.world = new World({
-            renderer: this.renderer,
-            dimensions: config?.world?.dimensions ?? config?.canvasDimensions ?? this.defaultCanvasDimensions,
-            textureAtlas: config?.world?.textureAtlas
+            game: this,
+            textureAtlas: config?.world?.textureAtlas,
+            camera: config?.world?.camera,
+            dimensions: config?.world?.dimensions ?? new Vec2(this.canvas.width, this.canvas.height),
         });
 
         this.ui = new UI({
-            renderer: this.renderer,
+            game: this,
             textureAtlas: config?.ui?.textureAtlas
         });
 
         // TODO move defaults into Font
         this.font = new Font({
-            renderer: this.renderer,
+            game: this,
             charset: config?.font?.charset ?? this.defaultFontCharset,
             textureAtlas: config?.font?.textureAtlas ?? this.defaultFontAtlas
         });

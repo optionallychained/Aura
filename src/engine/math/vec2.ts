@@ -182,6 +182,19 @@ export class Vec2 {
     }
 
     /**
+     * Clamp the components of a given Vec2 to between the components of the given min and max
+     *
+     * @param v the Vec2 to clamp
+     * @param min the Vec2 representing the minimum x and y values for v
+     * @param max the Vec2 representing the maximum x and y values for v
+     *
+     * @returns the clamped Vec2
+     */
+    public static clamp(v: Vec2, min: Vec2, max: Vec2): Vec2 {
+        return new Vec2(Math.min(Math.max(v.x, min.x), max.x), Math.min(Math.max(v.y, min.y), max.y));
+    }
+
+    /**
      * Constructor. Take and store the Vec2's x and y properties
      *
      * @param x the Vec2's x; defaults to 0

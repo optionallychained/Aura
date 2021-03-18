@@ -1,12 +1,12 @@
-import { WebGLRenderer } from '../renderer';
+import { Game } from '../core';
 import { TextureAtlas } from '../texture';
 
 /**
  * Interface desciribing an EntityManager configuration object
  */
 export interface EntityManagerConfig {
-    /** The WebGLRenderer the EntityManager will use */
-    readonly renderer: WebGLRenderer;
-    /** An optional TextureAtlas to use in rendering managed Entities with Texture Componnets */
+    /** The Game the EntityManager belongs to */
+    readonly game: Game;
+    /** An optional TextureAtlas to use in rendering managed Entities with Texture Components */
     readonly textureAtlas?: TextureAtlas;
 }

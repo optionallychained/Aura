@@ -1,3 +1,4 @@
+import { Game } from '../core';
 import { Vec2 } from '../math';
 import { ControlScheme } from './controlScheme.type';
 import { Keys } from './keys.enum';
@@ -39,19 +40,19 @@ export class InputManager {
      * @param canvas the Canvas
      * @param controlScheme the ControlScheme given to the Game's Config, used for optimising event registration and handling
      */
-    constructor(canvas: HTMLCanvasElement, controlScheme: ControlScheme) {
+    constructor(game: Game, controlScheme: ControlScheme) {
         switch (controlScheme) {
             case 'keyboard':
                 this.initializeKeyboard();
                 break;
 
             case 'mouse':
-                this.initializeMouse(canvas);
+                this.initializeMouse(game.canvas);
                 break;
 
             default:
                 this.initializeKeyboard();
-                this.initializeMouse(canvas);
+                this.initializeMouse(game.canvas);
         }
     }
 

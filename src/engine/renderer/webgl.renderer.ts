@@ -76,10 +76,12 @@ interface TextureSpec {
  */
 export class WebGLRenderer {
 
+    /** 2D Projection Matrix */
+    private projectionMatrix = new Mat3();
+
     // TODO potentially temporary
-    private projection = new Mat3();
-    private perspective = new Mat4();
-    private ortho = new Mat4();
+    private perspectiveMatrix = new Mat4();
+    private orthoMatrix = new Mat4();
 
     /** The WebGLRenderingContext retrieved from the Canvas */
     private readonly gl: WebGLRenderingContext;
@@ -132,16 +134,16 @@ export class WebGLRenderer {
         this.init();
     }
 
-    public getProjection(): Mat3 {
-        return this.projection;
+    public get projection(): Mat3 {
+        return this.projectionMatrix;
     }
 
-    public getPerspective(): Mat4 {
-        return this.perspective;
+    public get perspective(): Mat4 {
+        return this.perspectiveMatrix;
     }
 
-    public getOrtho(): Mat4 {
-        return this.ortho;
+    public get ortho(): Mat4 {
+        return this.orthoMatrix;
     }
 
     public get activeTextureUnit(): number {
@@ -398,13 +400,11 @@ export class WebGLRenderer {
         gl.enable(gl.BLEND);
         gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
-        // configure the projection matrix
-        this.projection = Mat3.projection(gl.canvas.width, gl.canvas.height);
-
+        this.projectionMatrix = Mat3.projection(gl.canvas.width, gl.canvas.height);
         // TODO placeholder
         // TODO review math/values, esp. for near/far
-        this.perspective = Mat4.perspective(90, gl.canvas.width / gl.canvas.height, 1, 2000);
-        this.ortho = Mat4.ortho(-gl.canvas.width / 2, gl.canvas.width / 2, -gl.canvas.height / 2, gl.canvas.height / 2, 400, -400);
+        this.perspectiveMatrix = Mat4.perspective(90, gl.canvas.width / gl.canvas.height, 0.1, 2000);
+        this.orthoMatrix = Mat4.ortho(-gl.canvas.width / 2, gl.canvas.width / 2, -gl.canvas.height / 2, gl.canvas.height / 2, 400, -400);
 
         gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
     }

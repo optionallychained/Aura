@@ -3,6 +3,7 @@ import { Transform2D } from '../component/2d';
 import { Transform3D } from '../component/3d';
 import { Game, ProtoGLError } from '../core';
 import { Entity } from '../entity';
+import { Mat4 } from '../math';
 
 /**
  * Internal-use utility type representing a Shader Variable Resolution Function which retrieves a value from the Game
@@ -102,23 +103,24 @@ export class ShaderVariableResolver {
     private static readonly STATIC_UNIFORM_MAPPINGS = new Map<string, StaticShaderVariableResolver>([
         [
             'u_Projection',
-            (game) => game.renderer.getProjection().float32Array
+            (game) => game.renderer.projection.float32Array
         ],
         [
             'u_Perspective',
-            (game) => game.renderer.getPerspective().float32Array
+            (game) => game.renderer.perspective.float32Array
         ],
         [
             'u_Ortho',
-            (game) => game.renderer.getOrtho().float32Array
+            (game) => game.renderer.ortho.float32Array
         ],
         [
             'u_View2D',
-            (game) => game.world.getCamera2D().getComponent(Transform2D).compute().float32Array
+            (game) => game.world.getCamera2D().getViewMatrix().float32Array
         ],
         [
             'u_View3D',
-            (game) => game.world.getCamera3D().getComponent(Transform3D).compute().float32Array
+            (game) => new Mat4().float32Array
+            // (game) => Mat4.invert(game.world.getCamera3D().getComponent(Transform3D).compute())!.float32Array
         ],
         [
             'u_Texture',

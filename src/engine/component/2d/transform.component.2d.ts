@@ -76,6 +76,15 @@ export class Transform2D extends Component {
     }
 
     /**
+     * Reset all transformations back to their initial values
+     */
+    public reset(): void {
+        this.mutable.position = this.initialPosition;
+        this.mutable.scale = this.initialScale;
+        this.mutable.angle = this.initialAngle;
+    }
+
+    /**
      * Compute the composite Transform Matrix from the maintained translation, scaling and rotation
      *
      * @returns the Transform matrix

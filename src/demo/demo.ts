@@ -7,7 +7,8 @@ import { state3D } from './state/3d';
 const game = new Core.Game({
     canvasDimensions: new Vec2(1024, 768),
     world: {
-        textureAtlas: new TextureAtlas('world', 'res/world.png', 2, 2)
+        textureAtlas: new TextureAtlas('world', 'res/world.png', 2, 2),
+        dimensions: new Vec2(1024 * 2, 768 * 2)
     },
     debugMode: true,
     init: () => { console.log('GAME -> init') }
@@ -33,4 +34,4 @@ game.addState(State2D);
 game.addState(state3D);
 
 // kick off the game's execution with the 3D state
-game.start('3D');
+game.start('2D');
