@@ -356,6 +356,39 @@ export class Mat4 {
     }
 
     /**
+     * Create a rotation matrix for a given angle (radians) around an arbitrary given axis
+     *
+     * @param axis the axis to rotate around
+     * @param angle the angle (radians) to rotate by
+     *
+     * @returns the rotation Matrix
+     */
+    public static fromAxisRotation(axis: Vec3, angle: number): Mat4 {
+        const { x, y, z } = Vec3.normalize(axis),
+
+            sin = Math.sin(angle), cos = Math.cos(angle), t = 1 - cos;
+
+        return new Mat4([
+            x * x * t + cos,
+            y * x * t + z * sin,
+            z * x * t - y * sin,
+            0,
+
+            x * y * t - z * sin,
+            y * y * t + cos,
+            z * y * t + x * sin,
+            0,
+
+            x * z * t + y * sin,
+            y * z * t - x * sin,
+            z * z * t + cos,
+            0,
+
+            0, 0, 0, 1
+        ]);
+    }
+
+    /**
      * Scale a Mat4 by factors on the x, y and z axes, given as a Vec3
      *
      * @param m the Mat4 to scale

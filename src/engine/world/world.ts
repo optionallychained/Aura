@@ -1,6 +1,5 @@
-import { ProtoGLError } from '../core';
 import { EntityManager } from '../entity';
-import { Vec2, Vec3 } from '../math';
+import { Vec3 } from '../math';
 import { Camera2D } from './camera.2d';
 import { Camera3D } from './camera.3d';
 import { WorldConfig } from './world.config';
@@ -31,7 +30,7 @@ export class World extends EntityManager<WorldConfig> {
             config.camera?.position,
             new Vec3(1, 1, 1),
             config.camera?.angle
-        )
+        );
     }
 
     public get dimensions(): Vec3 {
