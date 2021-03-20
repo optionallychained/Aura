@@ -11,6 +11,10 @@ export class Transform3D extends Component {
     /** Maintained translation vector */
     public readonly position: Vec3;
 
+    public readonly forward: Vec3;
+
+    public readonly up: Vec3;
+
     /** Maintained scale vector */
     public readonly scale: Vec3;
 
@@ -37,6 +41,48 @@ export class Transform3D extends Component {
         this.position = initialPosition;
         this.scale = initialScale;
         this.angles = initialAngles;
+
+        this.forward = new Vec3(0, 0, -1);
+        this.up = new Vec3(0, 1, 0);
+
+        this.rotateX(initialAngles.x);
+        this.rotateY(initialAngles.y);
+        this.rotateZ(initialAngles.z);
+    }
+
+    public moveForward(amount: number): void {
+        this.mutable.position = Vec3.add(this.position, Vec3.scale(this.forward, amount));
+    }
+
+    public moveRight(amount: number): void {
+        const right = Vec3.normalize(Vec3.cross(this.forward, this.up));
+
+        this.mutable.position = Vec3.add(this.position, Vec3.scale(right, amount));
+    }
+
+    public moveUp(amount: number): void {
+        this.mutable.position = Vec3.add(this.position, Vec3.scale(this.up, amount));
+    }
+
+    public rotateX(angle: number): void {
+        const right = Vec3.normalize(Vec3.cross(this.forward, this.up));
+
+        const mat = Mat4.fromAxisRotation(right, angle);
+
+        this.mutable.forward = Vec3.normalize(Vec3.transformByMat4(this.forward, mat));
+        this.mutable.up = Vec3.normalize(Vec3.transformByMat4(this.up, mat));
+    }
+
+    public rotateY(angle: number): void {
+        const mat = Mat4.fromAxisRotation(this.up, angle);
+
+        this.mutable.forward = Vec3.normalize(Vec3.transformByMat4(this.forward, mat));
+    }
+
+    public rotateZ(angle: number): void {
+        const mat = Mat4.fromAxisRotation(this.forward, angle);
+
+        this.mutable.up = Vec3.normalize(Vec3.transformByMat4(this.up, mat));
     }
 
     /**
@@ -54,7 +100,10 @@ export class Transform3D extends Component {
      * @param angles the angles (radians) around the x, y and z axes to rotate by, expressed as a Vec3
      */
     public rotate(angles: Vec3): void {
-        this.mutable.angles = Vec3.add(this.angles, angles);
+        // this.mutable.angles = Vec3.add(this.angles, angles);
+        this.rotateX(angles.x);
+        this.rotateY(angles.y);
+        this.rotateZ(angles.z);
     }
 
     /**
@@ -90,6 +139,11 @@ export class Transform3D extends Component {
      * @returns the Transform matrix
      */
     public compute(): Mat4 {
+        return Mat4.scale(Mat4.lookAt(this.position, Vec3.add(this.position, this.forward), this.up), this.scale);
+
+        // return Mat4.lookAt(this.position, Vec3.add(this.position, this.forward), this.up);
+
+
         let compute = Mat4.translate(new Mat4(), this.position);
         compute = Mat4.rotateX(compute, this.angles.x);
         compute = Mat4.rotateY(compute, this.angles.y);

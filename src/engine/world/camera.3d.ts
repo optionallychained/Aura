@@ -15,9 +15,19 @@ interface FollowRules {
 // TODO play with the idea of using a lookAt Matrix natively and utilising its forward,up,right vectors
 export class Camera3D {
 
-    private position: Vec3;
-    private forward: Vec3;
-    private up: Vec3;
+    private transform: Transform3D;
+
+    // private position: Vec3;
+    // private forward: Vec3;
+    // private up: Vec3;
+
+    // private pitch: number;
+    // private yaw: number;
+    // private roll: number;
+
+    // private lastPitch = 0;
+    // private lastYaw = 0;
+    // private lastRoll = 0;
 
     private following: {
         transform: Transform3D;
@@ -25,10 +35,16 @@ export class Camera3D {
     } | undefined;
 
     constructor(positionOffset = new Vec3(), scaleOffset = new Vec3(1, 1, 1), angleOffset = new Vec3()) {
-        this.position = positionOffset;
+        // this.position = positionOffset;
 
-        this.forward = new Vec3(0, 0, -1);
-        this.up = new Vec3(0, 1, 0);
+        // this.forward = new Vec3(0, 0, -1);
+        // this.up = new Vec3(0, 1, 0);
+
+        this.transform = new Transform3D(positionOffset, scaleOffset, angleOffset);
+
+        // this.rotateX(angleOffset.x);
+        // this.rotateY(angleOffset.y);
+        // this.rotateZ(angleOffset.z);
     }
 
     public attachTo(entity: Entity, rules?: FollowRules): void {
@@ -63,38 +79,45 @@ export class Camera3D {
     }
 
     public moveForward(amount: number): void {
-        this.position = Vec3.add(this.position, Vec3.scale(this.forward, amount));
+        this.transform.moveForward(amount);
+
+        // this.position = Vec3.add(this.position, Vec3.scale(this.forward, amount));
     }
 
     public moveRight(amount: number): void {
-        const right = Vec3.normalize(Vec3.cross(this.forward, this.up));
+        this.transform.moveRight(amount);
+        // const right = Vec3.normalize(Vec3.cross(this.forward, this.up));
 
-        this.position = Vec3.add(this.position, Vec3.scale(right, amount));
+        // this.position = Vec3.add(this.position, Vec3.scale(right, amount));
     }
 
     public moveUp(amount: number): void {
-        this.position = Vec3.add(this.position, Vec3.scale(this.up, amount));
+        this.transform.moveUp(amount);
+        // this.position = Vec3.add(this.position, Vec3.scale(this.up, amount));
     }
 
     public rotateX(angle: number): void {
-        const right = Vec3.normalize(Vec3.cross(this.forward, this.up));
+        this.transform.rotateX(angle);
+        // const right = Vec3.normalize(Vec3.cross(this.forward, this.up));
 
-        const mat = Mat4.fromAxisRotation(right, angle);
+        // const mat = Mat4.fromAxisRotation(right, angle);
 
-        this.forward = Vec3.normalize(Vec3.transformByMat4(this.forward, mat));
-        this.up = Vec3.normalize(Vec3.transformByMat4(this.up, mat));
+        // this.forward = Vec3.normalize(Vec3.transformByMat4(this.forward, mat));
+        // this.up = Vec3.normalize(Vec3.transformByMat4(this.up, mat));
     }
 
     public rotateY(angle: number): void {
-        const mat = Mat4.fromAxisRotation(this.up, angle);
+        this.transform.rotateY(angle);
+        // const mat = Mat4.fromAxisRotation(this.up, angle);
 
-        this.forward = Vec3.normalize(Vec3.transformByMat4(this.forward, mat));
+        // this.forward = Vec3.normalize(Vec3.transformByMat4(this.forward, mat));
     }
 
     public rotateZ(angle: number): void {
-        const mat = Mat4.fromAxisRotation(this.forward, angle);
+        this.transform.rotateZ(angle);
+        // const mat = Mat4.fromAxisRotation(this.forward, angle);
 
-        this.up = Vec3.normalize(Vec3.transformByMat4(this.up, mat));
+        // this.up = Vec3.normalize(Vec3.transformByMat4(this.up, mat));
     }
 
     public zoom(factor: Vec3): void {
@@ -107,10 +130,95 @@ export class Camera3D {
     public reset(): void {
     }
 
-    public getViewMatrix(): Mat4 {
-        const transform = Mat4.lookAt(this.position, Vec3.add(this.position, this.forward), this.up);
+    public update(): void {
+        // let pitch = this.pitch, yaw = this.yaw, roll = this.roll;
 
-        return Mat4.invert(transform) ?? transform;
+        // if (this.following) {
+        //     const { transform, rules } = this.following;
+
+        //     pitch += rules.angle.x ? transform.angles.x : 0;
+        //     yaw += rules.angle.y ? transform.angles.y : 0;
+        //     roll += rules.angle.z ? transform.angles.z : 0;
+
+        //     this.rotateX(pitch);
+        //     this.rotateY(yaw);
+        //     this.rotateZ(roll);
+        // }
+    }
+
+    public getViewMatrix(): Mat4 {
+
+        let t: Mat4;
+
+        if (this.following) {
+            const { transform, rules } = this.following;
+
+
+
+            t = transform.compute();
+
+            t = Mat4.scale(t, Vec3.invert(transform.scale));
+            t = Mat4.translate(t, this.transform.position);
+
+
+
+            // t = Mat4.translate(t, this.position);
+
+            // const self = Mat4.translate(new Mat4(), this.position);
+
+
+            // t = Mat4.mult(t, self);
+
+        }
+        else {
+            t = this.transform.compute();
+        }
+
+        return Mat4.invert(t) ?? t;
+
+
+        // let position = this.position;
+
+        // if (this.following) {
+        //     const { transform, rules } = this.following;
+
+        //     position = Vec3.add(position, new Vec3(
+        //         rules.position.x ? transform.position.x : 0,
+        //         rules.position.y ? transform.position.y : 0,
+        //         rules.position.z ? transform.position.z : 0,
+        //     ));
+
+
+        //     const { x, y, z } = transform.angles;
+
+        //     if (x !== this.lastPitch && rules.angle.x) {
+        //         const diff = this.lastPitch - x;
+
+        //         this.rotateX(-diff);
+
+        //         this.lastPitch = x;
+        //     }
+
+        //     if (y !== this.lastYaw && rules.angle.y) {
+        //         const diff = this.lastYaw - y;
+
+        //         this.rotateY(diff);
+
+        //         this.lastYaw = y;
+        //     }
+
+        //     if (z !== this.lastRoll && rules.angle.z) {
+        //         const diff = this.lastRoll - z;
+
+        //         this.rotateZ(-diff);
+
+        //         this.lastRoll = z;
+        //     }
+        // }
+
+        // const transform = Mat4.lookAt(position, Vec3.add(position, this.forward), this.up);
+
+        // return Mat4.invert(transform) ?? transform;
     }
 
     // private actualPosition(): Vec3 {

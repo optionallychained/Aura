@@ -10,7 +10,7 @@ const game = new Core.Game({
         textureAtlas: new TextureAtlas('world', 'res/world.png', 2, 2),
         dimensions: new Vec3(1024 * 100, 768 * 100, 1000000),
         camera: {
-            position: new Vec3(0, 250, 250),
+            position: new Vec3(0, 150, 500),
             angle: new Vec3(0, 0, 0)
         }
     },

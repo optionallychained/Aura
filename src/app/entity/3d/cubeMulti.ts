@@ -2,9 +2,9 @@ import { Color, Component, Entity, Geometry, Random, Shader, Vec3 } from '../../
 
 export class CubeMulti extends Entity.Entity {
 
-    constructor(position: Vec3, scale: Vec3) {
+    constructor(position: Vec3, scale: Vec3, tag = 'cubeMulti') {
         super({
-            tag: 'cubeMulti',
+            tag,
             components: [
                 new Component.MultiColor(Color.randomList(12)),
                 new Component.Model(Geometry.ThreeD.BOX),
