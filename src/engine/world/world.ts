@@ -27,9 +27,8 @@ export class World extends EntityManager<WorldConfig> {
         );
 
         this.camera3D = new Camera3D(
-            config.camera?.position,
-            new Vec3(1, 1, 1),
-            config.camera?.angle
+            config.cameraOffsets?.position,
+            config.cameraOffsets?.angles
         );
     }
 

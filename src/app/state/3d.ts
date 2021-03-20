@@ -38,7 +38,7 @@ const populate = (game: Core.Game): void => {
 
     game.world.addEntities(...entities);
 
-    game.world.getCamera3D().attachTo(player, { angle: { x: true, y: true, z: true } });
+    game.world.getCamera3D().attachTo(player);
 };
 
 export const state3D = new State.State({
@@ -51,161 +51,81 @@ export const state3D = new State.State({
         game.world.clearEntities();
     },
     tick: (game) => {
-        let i = 0;
+        // let i = 0;
         for (const e of game.world.filterEntitiesByTag('cubeMulti')) {
-            e.getComponent(Component.ThreeD.Transform3D).rotate(rotations[i]);
+            // e.getComponent(Component.ThreeD.Transform3D).lookAt(player.getComponent(Component.ThreeD.Transform3D));
+            // e.getComponent(Component.ThreeD.Transform3D).rotate(rotations[i]);
 
-            i++;
+            // e.getComponent(Component.ThreeD.Transform3D).rotate(rotations[i]);
+            // i++;
         }
 
         const playerTransform = player.getComponent(Component.ThreeD.Transform3D);
+        const camera = game.world.getCamera3D();
+
+        const transform = playerTransform;
 
         if (game.input.isKeyDown(Input.Keys.A)) {
-            playerTransform.moveRight(-350);
-            // playerTransform.translate(new Vec3(-350, 0, 0));
+            transform.moveRight(-350);
         }
         else if (game.input.isKeyDown(Input.Keys.D)) {
-            playerTransform.moveRight(350);
-            // playerTransform.translate(new Vec3(350, 0, 0));
+            transform.moveRight(350);
         }
 
         if (game.input.isKeyDown(Input.Keys.W)) {
-            playerTransform.moveForward(350);
-            // playerTransform.translate(new Vec3(0, 0, -350));
+            transform.moveForward(350);
         }
         else if (game.input.isKeyDown(Input.Keys.S)) {
-            playerTransform.moveForward(-350);
-            // playerTransform.translate(new Vec3(0, 0, 350));
+            transform.moveForward(-350);
         }
 
         if (game.input.isKeyDown(Input.Keys.Q)) {
-            playerTransform.moveUp(-350);
-            // playerTransform.translate(new Vec3(0, -350, 0));
+            transform.moveUp(-350);
         }
         else if (game.input.isKeyDown(Input.Keys.E)) {
-            playerTransform.moveUp(350);
-            // playerTransform.translate(new Vec3(0, 350, 0));
+            transform.moveUp(350);
         }
 
         if (game.input.isKeyDown(Input.Keys.O)) {
-            playerTransform.rotateZ(Angle.toRadians(2.5));
-            // playerTransform.rotate(new Vec3(0, 0, Angle.toRadians(2.5)));
+            transform.rotateZ(Angle.toRadians(2.5));
         }
         else if (game.input.isKeyDown(Input.Keys.U)) {
-            playerTransform.rotateZ(Angle.toRadians(-2.5));
-            // playerTransform.rotate(new Vec3(0, 0, Angle.toRadians(-2.5)));
+            transform.rotateZ(Angle.toRadians(-2.5));
         }
 
         if (game.input.isKeyDown(Input.Keys.L)) {
-            playerTransform.rotateY(Angle.toRadians(-2.5));
-            // playerTransform.rotate(new Vec3(0, Angle.toRadians(2.5), 0));
+            transform.rotateY(Angle.toRadians(-2.5));
         }
         else if (game.input.isKeyDown(Input.Keys.J)) {
-            playerTransform.rotateY(Angle.toRadians(2.5));
-            // playerTransform.rotate(new Vec3(0, Angle.toRadians(-2.5), 0));
+            transform.rotateY(Angle.toRadians(2.5));
         }
 
         if (game.input.isKeyDown(Input.Keys.I)) {
-            playerTransform.rotateX(Angle.toRadians(2.5));
-            // playerTransform.rotate(new Vec3(Angle.toRadians(2.5), 0, 0));
+            transform.rotateX(Angle.toRadians(2.5));
         }
         else if (game.input.isKeyDown(Input.Keys.K)) {
-            playerTransform.rotateX(Angle.toRadians(-2.5));
-            // playerTransform.rotate(new Vec3(Angle.toRadians(-2.5), 0, 0));
+            transform.rotateX(Angle.toRadians(-2.5));
         }
 
+        if (game.input.isKeyDown(Input.Keys.NUM_PAD_4)) {
+            camera.rotateY(Angle.toRadians(-2.5));
+        }
+        else if (game.input.isKeyDown(Input.Keys.NUM_PAD_6)) {
+            camera.rotateY(Angle.toRadians(2.5));
+        }
 
+        if (game.input.isKeyDown(Input.Keys.NUM_PAD_8)) {
+            camera.rotateX(Angle.toRadians(-2.5));
+        }
+        else if (game.input.isKeyDown(Input.Keys.NUM_PAD_5)) {
+            camera.rotateX(Angle.toRadians(2.5));
+        }
 
-        const camera = game.world.getCamera3D();
-
-        // if (game.input.isKeyDown(Input.Keys.A)) {
-        //     camera.moveRight(-500);
-        // }
-        // else if (game.input.isKeyDown(Input.Keys.D)) {
-        //     camera.moveRight(500);
-        // }
-
-        // if (game.input.isKeyDown(Input.Keys.W)) {
-        //     camera.moveForward(500);
-        // }
-        // else if (game.input.isKeyDown(Input.Keys.S)) {
-        //     camera.moveForward(-500);
-        // }
-
-        // if (game.input.isKeyDown(Input.Keys.Q)) {
-        //     camera.moveUp(-500);
-        // }
-        // else if (game.input.isKeyDown(Input.Keys.E)) {
-        //     camera.moveUp(500);
-        // }
-
-
-        // if (game.input.isKeyDown(Input.Keys.I)) {
-        //     camera.rotateX(Angle.toRadians(2));
-        // }
-        // else if (game.input.isKeyDown(Input.Keys.K)) {
-        //     camera.rotateX(Angle.toRadians(-2));
-        // }
-
-        // if (game.input.isKeyDown(Input.Keys.L)) {
-        //     camera.rotateY(Angle.toRadians(-2));
-        // }
-        // else if (game.input.isKeyDown(Input.Keys.J)) {
-        //     camera.rotateY(Angle.toRadians(2));
-        // }
-
-        // if (game.input.isKeyDown(Input.Keys.U)) {
-        //     camera.rotateZ(Angle.toRadians(-2));
-        // }
-        // else if (game.input.isKeyDown(Input.Keys.O)) {
-        //     camera.rotateZ(Angle.toRadians(2));
-        // }
-
-        // if (game.input.isKeyDown(Input.Keys.L)) {
-        //     game.world.getCamera3D().moveRight(250);
-        // }
-        // else if (game.input.isKeyDown(Input.Keys.J)) {
-        //     game.world.getCamera3D().moveRight(-250);
-        // }
-
-        // if (game.input.isKeyDown(Input.Keys.I)) {
-        //     game.world.getCamera3D().moveForward(250);
-        // }
-        // else if (game.input.isKeyDown(Input.Keys.K)) {
-        //     game.world.getCamera3D().moveForward(-250);
-        // }
-
-        // if (game.input.isKeyDown(Input.Keys.U)) {
-        //     game.world.getCamera3D().moveUp(-250);
-        // }
-        // else if (game.input.isKeyDown(Input.Keys.O)) {
-        //     game.world.getCamera3D().moveUp(250);
-        // }
-
-
-        // if (game.input.isKeyDown(Input.Keys.NUM_PAD_6)) {
-        //     game.world.getCamera3D().rotate(new Vec3(0, Angle.toRadians(2.5), 0));
-        // }
-        // else if (game.input.isKeyDown(Input.Keys.NUM_PAD_4)) {
-        //     game.world.getCamera3D().rotate(new Vec3(0, Angle.toRadians(-2.5), 0));
-        // }
-
-        // if (game.input.isKeyDown(Input.Keys.NUM_PAD_8)) {
-        //     game.world.getCamera3D().rotate(new Vec3(Angle.toRadians(2.5), 0, 0));
-        // }
-        // else if (game.input.isKeyDown(Input.Keys.NUM_PAD_5)) {
-        //     game.world.getCamera3D().rotate(new Vec3(Angle.toRadians(-2.5), 0, 0));
-        // }
-
-        // if (game.input.isKeyDown(Input.Keys.NUM_PAD_9)) {
-        //     game.world.getCamera3D().rotate(new Vec3(0, 0, Angle.toRadians(2.5)));
-        // }
-        // else if (game.input.isKeyDown(Input.Keys.NUM_PAD_7)) {
-        //     game.world.getCamera3D().rotate(new Vec3(0, 0, Angle.toRadians(-2.5)));
-        // }
-
-        // if (game.input.isKeyDown(Input.Keys.SPACE)) {
-        //     game.world.getCamera3D().reset();
-        // }
+        if (game.input.isKeyDown(Input.Keys.NUM_PAD_9)) {
+            camera.rotateZ(Angle.toRadians(2.5));
+        }
+        else if (game.input.isKeyDown(Input.Keys.NUM_PAD_7)) {
+            camera.rotateZ(Angle.toRadians(-2.5));
+        }
     }
 });

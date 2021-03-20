@@ -8,18 +8,28 @@ import { Component } from '../component';
  */
 export class Transform3D extends Component {
 
-    /** Maintained translation vector */
-    public readonly position: Vec3;
+    // track a positional offset, relative to world axes, enabling 'absolute' movement
+    public readonly offsetPosition = new Vec3();
 
-    public readonly forward: Vec3;
+    // track position, relative to own axes, enabling 'relative' movement
+    public position = new Vec3();
 
-    public readonly up: Vec3;
+    // track forward vector
+    public readonly forward = new Vec3(0, 0, -1);
+
+    // track up vector
+    public readonly up = new Vec3(0, 1, 0);
+
+    // track right vector
+    public readonly right = new Vec3(1, 0, 0);
 
     /** Maintained scale vector */
     public readonly scale: Vec3;
 
     /** Maintained rotation angles */
-    public readonly angles: Vec3;
+    public readonly angles = new Vec3();
+
+    public readonly target: Transform3D | undefined;
 
     /**
      * Constructor. Take and store the initial position, scale, angle and velocity
@@ -38,72 +48,91 @@ export class Transform3D extends Component {
 
         super('Transform3D');
 
-        this.position = initialPosition;
+        this.offsetPosition = initialPosition;
         this.scale = initialScale;
-        this.angles = initialAngles;
 
-        this.forward = new Vec3(0, 0, -1);
-        this.up = new Vec3(0, 1, 0);
-
-        this.rotateX(initialAngles.x);
-        this.rotateY(initialAngles.y);
-        this.rotateZ(initialAngles.z);
+        this.rotate(initialAngles);
     }
 
+    // move forward relative to own axes
     public moveForward(amount: number): void {
         this.mutable.position = Vec3.add(this.position, Vec3.scale(this.forward, amount));
     }
 
+    // move right relative to own axes
     public moveRight(amount: number): void {
-        const right = Vec3.normalize(Vec3.cross(this.forward, this.up));
-
-        this.mutable.position = Vec3.add(this.position, Vec3.scale(right, amount));
+        this.mutable.position = Vec3.add(this.position, Vec3.scale(this.right, amount));
     }
 
+    // move up relative to own axes
     public moveUp(amount: number): void {
         this.mutable.position = Vec3.add(this.position, Vec3.scale(this.up, amount));
     }
 
-    public rotateX(angle: number): void {
-        const right = Vec3.normalize(Vec3.cross(this.forward, this.up));
+    // convenience wrapper for movements
+    public move(amounts: Vec3): void {
+        if (amounts.x) {
+            this.moveRight(amounts.x);
+        }
 
-        const mat = Mat4.fromAxisRotation(right, angle);
+        if (amounts.y) {
+            this.moveUp(amounts.y);
+        }
+
+        if (amounts.z) {
+            this.moveForward(amounts.z);
+        }
+    }
+
+    // move relative to world axes
+    public offset(translate: Vec3): void {
+        this.mutable.offsetPosition = Vec3.add(this.offsetPosition, translate);
+    }
+
+    // pitch
+    public rotateX(angle: number): void {
+        // track the angles
+        this.angles.setX(this.angles.x + angle);
+
+        const mat = Mat4.fromAxisRotation(this.right, angle);
 
         this.mutable.forward = Vec3.normalize(Vec3.transformByMat4(this.forward, mat));
         this.mutable.up = Vec3.normalize(Vec3.transformByMat4(this.up, mat));
     }
 
+    // yaw
     public rotateY(angle: number): void {
+        this.angles.setY(this.angles.y + angle);
+
         const mat = Mat4.fromAxisRotation(this.up, angle);
 
         this.mutable.forward = Vec3.normalize(Vec3.transformByMat4(this.forward, mat));
+        this.mutable.right = Vec3.normalize(Vec3.transformByMat4(this.right, mat));
     }
 
+    // roll
     public rotateZ(angle: number): void {
+        this.angles.setZ(this.angles.z + angle);
+
         const mat = Mat4.fromAxisRotation(this.forward, angle);
 
         this.mutable.up = Vec3.normalize(Vec3.transformByMat4(this.up, mat));
+        this.mutable.right = Vec3.normalize(Vec3.transformByMat4(this.right, mat));
     }
 
-    /**
-     * Translate the Transform3D by adding the given translation vector to the maintained
-     *
-     * @param translate the Vec3 to translate by
-     */
-    public translate(translate: Vec3): void {
-        this.mutable.position = Vec3.add(this.position, translate);
-    }
-
-    /**
-     * Rotate the Transform2D by adding the given angle (radians) to the maintained
-     *
-     * @param angles the angles (radians) around the x, y and z axes to rotate by, expressed as a Vec3
-     */
+    // convenience wrapper for rotation
     public rotate(angles: Vec3): void {
-        // this.mutable.angles = Vec3.add(this.angles, angles);
-        this.rotateX(angles.x);
-        this.rotateY(angles.y);
-        this.rotateZ(angles.z);
+        if (angles.x) {
+            this.rotateX(angles.x);
+        }
+
+        if (angles.y) {
+            this.rotateY(angles.y);
+        }
+
+        if (angles.z) {
+            this.rotateZ(angles.z);
+        }
     }
 
     /**
@@ -124,33 +153,37 @@ export class Transform3D extends Component {
         this.mutable.scale = factor;
     }
 
-    /**
-     * Reset all transformations back to their initial values
-     */
-    public reset(): void {
-        this.mutable.position = this.initialPosition;
-        this.mutable.scale = this.initialScale;
-        this.mutable.angles = this.initialAngles
+    public lookAt(transform: Transform3D): void {
+        this.mutable.target = transform;
     }
 
     /**
-     * Compute the composite Transform Matrix from the maintained translation, scaling and rotation
-     *
-     * @returns the Transform matrix
+     * Reset all transformations
      */
+    public reset(): void {
+        // undo the cumulative rotations
+        // will implicitly reset forward,up,right back to equivalents post initialAngles rotation
+        const invAngles = Vec3.negate(this.angles);
+        this.rotate(invAngles);
+
+        // reset position, scale, angles + world offset
+        this.mutable.position = this.initialPosition;
+        this.mutable.scale = this.initialScale;
+        this.mutable.angles = this.initialAngles;
+        this.mutable.offsetPosition = new Vec3();
+    }
+
+    // using lookAt because it's convenient
+    // TODO related to Mat4 lookAt todo...should we really be doing this?
     public compute(): Mat4 {
-        return Mat4.scale(Mat4.lookAt(this.position, Vec3.add(this.position, this.forward), this.up), this.scale);
+        const position = Vec3.add(this.position, this.offsetPosition);
 
-        // return Mat4.lookAt(this.position, Vec3.add(this.position, this.forward), this.up);
+        // TODO this does not work
+        if (this.target) {
+            return Mat4.scale(Mat4.lookAt(position, Vec3.sub(this.target.position, position), this.up), this.scale);
+        }
 
-
-        let compute = Mat4.translate(new Mat4(), this.position);
-        compute = Mat4.rotateX(compute, this.angles.x);
-        compute = Mat4.rotateY(compute, this.angles.y);
-        compute = Mat4.rotateZ(compute, this.angles.z);
-        compute = Mat4.scale(compute, this.scale);
-
-        return compute;
+        return Mat4.scale(Mat4.lookAt(position, Vec3.add(position, this.forward), this.up), this.scale);
     }
 
     /**

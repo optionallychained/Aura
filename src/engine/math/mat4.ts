@@ -469,6 +469,11 @@ export class Mat4 {
         const x = Vec3.normalize(Vec3.cross(up, z));
         const y = Vec3.normalize(Vec3.cross(z, x));
 
+        // TODO lots of lookAt examples use (Vec3.dot(x, eye), Vec3.dot(y, eye), Vec3.dot(z, eye)) for the translation component
+        //   when I do this...shit breaks
+        // is this fundamentally flawed?
+
+        // TODO is using lookAt matrices for Transform3D...good?
         return new Mat4([
             x.x, x.y, x.z, 0,
             y.x, y.y, y.z, 0,

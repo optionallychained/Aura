@@ -32,7 +32,7 @@ export class Physics extends System {
 
         for (const e of movers) {
             const transform = e.getComponent(Transform3D);
-            transform.translate(Vec3.scale(transform.velocity, frameDelta / 1000));
+            transform.move(Vec3.scale(transform.velocity, frameDelta / 1000));
         }
     }
 }

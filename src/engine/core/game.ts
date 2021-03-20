@@ -110,7 +110,7 @@ export class Game {
         this.world = new World({
             game: this,
             textureAtlas: config?.world?.textureAtlas,
-            camera: config?.world?.camera,
+            cameraOffsets: config?.world?.cameraOffsets,
             dimensions: config?.world?.dimensions ?? new Vec3(this.canvas.width, this.canvas.height, 1000),
         });
 
