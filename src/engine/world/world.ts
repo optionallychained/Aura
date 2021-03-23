@@ -1,7 +1,6 @@
+import { Camera2D, Camera3D } from '../camera';
 import { EntityManager } from '../entity';
 import { Vec3 } from '../math';
-import { Camera2D } from './camera.2d';
-import { Camera3D } from './camera.3d';
 import { WorldConfig } from './world.config';
 
 /**

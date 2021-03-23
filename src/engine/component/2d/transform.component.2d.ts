@@ -1,4 +1,4 @@
-import { Mat3, Vec2 } from '../../math';
+import { Mat3, Vec2, Vec3 } from '../../math';
 import { Component } from '../component';
 
 /**
@@ -8,14 +8,17 @@ import { Component } from '../component';
  */
 export class Transform2D extends Component {
 
-    /** Maintained translation vector */
-    public readonly position: Vec2;
+    public readonly offsetPosition = new Vec2();
 
-    /** Maintained scale vector */
-    public readonly scale: Vec2;
+    public readonly position = new Vec2();
 
-    /** Maintained rotation angle */
-    public readonly angle: number;
+    public readonly up = new Vec2(0, 1);
+
+    public readonly right = new Vec2(1, 0);
+
+    public readonly scale = new Vec2();
+
+    public readonly angle: number = 0;
 
     /**
      * Constructor. Take and store the initial position, scale, angle and velocity
@@ -34,27 +37,40 @@ export class Transform2D extends Component {
 
         super('Transform2D');
 
-        this.position = initialPosition;
+        this.offsetPosition = initialPosition;
         this.scale = initialScale;
         this.angle = initialAngle;
     }
 
-    /**
-     * Translate the Transform2D by adding the given translation vector to the maintained
-     *
-     * @param translate the Vec2 to translate by
-     */
-    public translate(translate: Vec2): void {
-        this.mutable.position = Vec2.add(this.position, translate);
+    public moveRight(amount: number): void {
+        this.mutable.position = Vec2.add(this.position, Vec2.scale(this.right, amount));
     }
 
-    /**
-     * Rotate the Transform2D by adding the given angle (radians) to the maintained
-     *
-     * @param angle the angle (radians) to rotate by
-     */
+    public moveUp(amount: number): void {
+        this.mutable.position = Vec2.add(this.position, Vec2.scale(this.up, amount));
+    }
+
+    public move(amounts: Vec2): void {
+        if (amounts.x) {
+            this.moveRight(amounts.x);
+        }
+
+        if (amounts.y) {
+            this.moveUp(amounts.y);
+        }
+    }
+
+    public translate(translate: Vec2): void {
+        this.mutable.offsetPosition = Vec2.add(this.offsetPosition, translate);
+    }
+
     public rotate(angle: number): void {
         this.mutable.angle += angle;
+
+        const mat = Mat3.fromRotation(angle);
+
+        this.mutable.up = Vec2.normalize(Vec2.transformByMat3(this.up, mat));
+        this.mutable.right = Vec2.normalize(Vec2.transformByMat3(this.right, mat));
     }
 
     /**
@@ -79,9 +95,10 @@ export class Transform2D extends Component {
      * Reset all transformations back to their initial values
      */
     public reset(): void {
-        this.mutable.position = this.initialPosition;
-        this.mutable.scale = this.initialScale;
         this.mutable.angle = this.initialAngle;
+        this.mutable.offsetPosition = this.initialPosition;
+        this.mutable.scale = this.initialScale;
+        this.mutable.position = new Vec2();
     }
 
     /**
@@ -90,7 +107,9 @@ export class Transform2D extends Component {
      * @returns the Transform matrix
      */
     public compute(): Mat3 {
-        let compute = Mat3.translate(new Mat3(), this.position);
+        const position = Vec2.add(this.position, this.offsetPosition);
+
+        let compute = Mat3.translate(new Mat3(), position);
         compute = Mat3.rotate(compute, this.angle);
         compute = Mat3.scale(compute, this.scale);
 

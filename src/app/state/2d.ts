@@ -33,19 +33,24 @@ export const State2D = new State.State({
     },
     tick: (game) => {
         const playerTransform = player.getComponent(Component.TwoD.Transform2D);
+        const camera = game.world.getCamera2D();
 
         if (game.input.isKeyDown(Input.Keys.A)) {
-            playerTransform.translate(new Vec2(-10, 0));
+            // playerTransform.translate(new Vec2(-10, 0));
+            playerTransform.moveRight(-10);
         }
         else if (game.input.isKeyDown(Input.Keys.D)) {
-            playerTransform.translate(new Vec2(10, 0));
+            // playerTransform.translate(new Vec2(10, 0));
+            playerTransform.moveRight(10);
         }
 
         if (game.input.isKeyDown(Input.Keys.W)) {
-            playerTransform.translate(new Vec2(0, 10));
+            // playerTransform.translate(new Vec2(0, 10));
+            playerTransform.moveUp(10);
         }
         else if (game.input.isKeyDown(Input.Keys.S)) {
-            playerTransform.translate(new Vec2(0, -10));
+            // playerTransform.translate(new Vec2(0, -10));
+            playerTransform.moveUp(-10);
         }
 
         if (game.input.isKeyDown(Input.Keys.Q)) {
@@ -64,35 +69,39 @@ export const State2D = new State.State({
 
 
         if (game.input.isKeyDown(Input.Keys.L)) {
-            game.world.getCamera2D().translate(new Vec2(10, 0));
+            camera.moveRight(10);
+            // camera.translate(new Vec2(10, 0));
         }
         else if (game.input.isKeyDown(Input.Keys.J)) {
-            game.world.getCamera2D().translate(new Vec2(-10, 0));
+            camera.moveRight(-10);
+            // camera.translate(new Vec2(-10));
         }
 
         if (game.input.isKeyDown(Input.Keys.I)) {
-            game.world.getCamera2D().translate(new Vec2(0, 10));
+            camera.moveUp(10);
+            // camera.translate(new Vec2(0, 10));
         }
         else if (game.input.isKeyDown(Input.Keys.K)) {
-            game.world.getCamera2D().translate(new Vec2(0, -10));
+            camera.moveUp(-10);
+            // camera.translate(new Vec2(0, -10));
         }
 
         if (game.input.isKeyDown(Input.Keys.U)) {
-            game.world.getCamera2D().rotate(Angle.toRadians(-1));
+            camera.rotate(Angle.toRadians(-1));
         }
         else if (game.input.isKeyDown(Input.Keys.O)) {
-            game.world.getCamera2D().rotate(Angle.toRadians(1));
+            camera.rotate(Angle.toRadians(1));
         }
 
         if (game.input.isKeyDown(Input.Keys.ARROW_UP)) {
-            game.world.getCamera2D().zoom(new Vec2(0.99, 0.99));
+            camera.zoom(new Vec2(0.99, 0.99));
         }
         else if (game.input.isKeyDown(Input.Keys.ARROW_DOWN)) {
-            game.world.getCamera2D().zoom(new Vec2(1.01, 1.01));
+            camera.zoom(new Vec2(1.01, 1.01));
         }
 
         if (game.input.isKeyDown(Input.Keys.SPACE)) {
-            game.world.getCamera2D().reset();
+            camera.reset();
         }
     }
 });

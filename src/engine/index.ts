@@ -1,3 +1,5 @@
+export * as Camera from './camera';
+
 export * as Component from './component';
 
 export * as Core from './core';

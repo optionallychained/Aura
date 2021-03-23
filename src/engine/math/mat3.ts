@@ -246,6 +246,22 @@ export class Mat3 {
     }
 
     /**
+     * // TODO
+     *
+     * @param angle
+     * @returns
+     */
+    public static fromRotation(angle: number): Mat3 {
+        const sin = Math.sin(angle), cos = Math.cos(angle);
+
+        return new Mat3([
+            cos, -sin, 0,
+            sin, cos, 0,
+            0, 0, 1
+        ]);
+    }
+
+    /**
      * Scale a Mat3 by factors on the x and y axes, given as a Vec2
      *
      * @param m the Mat3 to scale

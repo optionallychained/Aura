@@ -46,8 +46,8 @@ export class Camera3D {
         this.transform.moveUp(amount);
     }
 
-    public offset(translate: Vec3): void {
-        this.transform.offset(translate);
+    public translate(translate: Vec3): void {
+        this.transform.translate(translate);
     }
 
     public rotateX(angle: number): void {

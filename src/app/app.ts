@@ -38,4 +38,4 @@ game.addState(State2D);
 game.addState(state3D);
 
 // kick off the game's execution with the 3D state
-game.start('3D');
+game.start('2D');

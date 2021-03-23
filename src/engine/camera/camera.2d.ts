@@ -50,6 +50,14 @@ export class Camera2D {
         this.following = undefined;
     }
 
+    public moveRight(amount: number): void {
+        this.transform.moveRight(amount);
+    }
+
+    public moveUp(amount: number): void {
+        this.transform.moveUp(amount);
+    }
+
     public translate(translate: Vec2): void {
         this.transform.translate(translate);
     }
@@ -71,33 +79,45 @@ export class Camera2D {
     }
 
     public getViewMatrix(): Mat3 {
-        // TODO will maybe become obsolete with Transform parenting
-        //   ...this may actually serve as a good basis for Transform parenting?
-
-        let transform: Mat3;
+        let view: Mat3;
 
         if (this.following) {
-            transform = Mat3.translate(new Mat3(), this.actualPosition());
-            transform = Mat3.rotate(transform, this.actualAngle());
-            transform = Mat3.scale(transform, this.transform.scale);
+            const { transform } = this.following;
+
+            // const position = Vec2.add(this.transform.position, this.transform.offsetPosition);
+
+
+            // view = Mat3.translate(new Mat3(), Vec)
+
+            // view = Mat3.scale(transform.compute(), Vec2.invert(transform.scale));
+
+            // view = Mat3.translate(view, Vec2.add(this.transform.position, this.transform.offsetPosition));
+
+            // view = Mat3.rotate(view, this.transform.angle);
+
+            view = Mat3.translate(new Mat3(), this.actualPosition());
+            view = Mat3.rotate(view, this.actualAngle());
+            view = Mat3.scale(view, this.transform.scale);
         }
         else {
             // if we're not following we can just fall back to the Transform2D's own compute()
-            transform = this.transform.compute();
+            view = this.transform.compute();
         }
 
-        return Mat3.invert(transform) ?? transform;
+        return Mat3.invert(view) ?? view;
     }
 
     private actualPosition(): Vec2 {
-        let { position } = this.transform;
+        let position = Vec2.add(this.transform.position, this.transform.offsetPosition);
 
         if (this.following) {
             const { transform, rules } = this.following;
 
+            const tPosition = Vec2.add(transform.position, transform.offsetPosition);
+
             const addition = new Vec2(
-                rules.position.x ? transform.position.x : 0,
-                rules.position.y ? transform.position.y : 0
+                rules.position.x ? tPosition.x : 0,
+                rules.position.y ? tPosition.y : 0
             );
 
             position = Vec2.add(position, addition);

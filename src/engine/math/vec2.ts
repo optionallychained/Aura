@@ -1,3 +1,4 @@
+import { Mat3 } from './mat3';
 import { Vec3 } from './vec3';
 
 /**
@@ -192,6 +193,20 @@ export class Vec2 {
      */
     public static clamp(v: Vec2, min: Vec2, max: Vec2): Vec2 {
         return new Vec2(Math.min(Math.max(v.x, min.x), max.x), Math.min(Math.max(v.y, min.y), max.y));
+    }
+
+    public static transformByMat3(v: Vec2, m: Mat3): Vec2 {
+        const { x, y } = v;
+
+        const a = m.array,
+            m00 = a[0], m01 = a[1],
+            m10 = a[3], m11 = a[4],
+            m20 = a[6], m21 = a[7];
+
+        return new Vec2(
+            m00 * x + m10 * y + m20,
+            m01 * x + m11 * y + m21
+        );
     }
 
     /**

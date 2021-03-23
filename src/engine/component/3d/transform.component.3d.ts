@@ -85,7 +85,7 @@ export class Transform3D extends Component {
     }
 
     // move relative to world axes
-    public offset(translate: Vec3): void {
+    public translate(translate: Vec3): void {
         this.mutable.offsetPosition = Vec3.add(this.offsetPosition, translate);
     }
 
@@ -167,10 +167,10 @@ export class Transform3D extends Component {
         this.rotate(invAngles);
 
         // reset position, scale, angles + world offset
-        this.mutable.position = this.initialPosition;
+        this.mutable.offsetPosition = this.initialPosition;
         this.mutable.scale = this.initialScale;
         this.mutable.angles = this.initialAngles;
-        this.mutable.offsetPosition = new Vec3();
+        this.mutable.position = new Vec3();
     }
 
     // using lookAt because it's convenient
