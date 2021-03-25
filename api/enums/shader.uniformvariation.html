@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>EntityManagerConfig | API | Aura Documentation - v0.5.0</title>
+	<title>UniformVariation | API | Aura Documentation - v0.5.0</title>
 	<meta name="description" content="Documentation for API | Aura Documentation - v0.5.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,13 +55,13 @@
 					<a href="../modules.html">API | Aura Documentation - v0.5.0</a>
 				</li>
 				<li>
-					<a href="../modules/entity.html">Entity</a>
+					<a href="../modules/shader.html">Shader</a>
 				</li>
 				<li>
-					<a href="entity.entitymanagerconfig.html">EntityManagerConfig</a>
+					<a href="shader.uniformvariation.html">UniformVariation</a>
 				</li>
 			</ul>
-			<h1>Interface EntityManagerConfig</h1>
+			<h1>Enumeration UniformVariation</h1>
 		</div>
 	</div>
 </header>
@@ -71,71 +71,50 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Interface desciribing an EntityManager configuration object</p>
+						<p>Enum standardising the specification of Shader uniform &#39;variation&#39; hints</p>
 					</div>
+					<p>Uniform &#39;variation&#39; is a special field which determines both how often a uniform will vary, and how it can be retrieved by the Renderer:</p>
+					<ul>
+						<li>STATIC - unassociated with Entities, retrievable from the Game and to be uploaded once per render call</li>
+						<li>ENTITY - associated with Entities, retrievable from each Entity to be rendered and uploaded once per draw call</li>
+					</ul>
 				</div>
-			</section>
-			<section class="tsd-panel tsd-hierarchy">
-				<h3>Hierarchy</h3>
-				<ul class="tsd-hierarchy">
-					<li>
-						<span class="target">EntityManagerConfig</span>
-						<ul class="tsd-hierarchy">
-							<li>
-								<a href="ui.uiconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">UIConfig</a>
-							</li>
-							<li>
-								<a href="world.worldconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">WorldConfig</a>
-							</li>
-						</ul>
-					</li>
-				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Properties</h3>
+							<h3>Enumeration members</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="entity.entitymanagerconfig.html#game" class="tsd-kind-icon">game</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="entity.entitymanagerconfig.html#textureatlas" class="tsd-kind-icon">texture<wbr>Atlas</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="shader.uniformvariation.html#entity" class="tsd-kind-icon">ENTITY</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="shader.uniformvariation.html#static" class="tsd-kind-icon">STATIC</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="game" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> game</h3>
-					<div class="tsd-signature tsd-kind-icon">game<span class="tsd-signature-symbol">:</span> <a href="../classes/core.game.html" class="tsd-signature-type" data-tsd-kind="Class">Game</a></div>
+				<h2>Enumeration members</h2>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="entity" class="tsd-anchor"></a>
+					<h3>ENTITY</h3>
+					<div class="tsd-signature tsd-kind-icon">ENTITY<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;entity&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/entity/entity.manager.config.ts#L9">src/engine/entity/entity.manager.config.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/shader/uniformVariation.enum.ts#L10">src/engine/shader/uniformVariation.enum.ts:10</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The Game the EntityManager belongs to</p>
-						</div>
-					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="textureatlas" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> texture<wbr>Atlas</h3>
-					<div class="tsd-signature tsd-kind-icon">texture<wbr>Atlas<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="../classes/texture.textureatlas.html" class="tsd-signature-type" data-tsd-kind="Class">TextureAtlas</a></div>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="static" class="tsd-anchor"></a>
+					<h3>STATIC</h3>
+					<div class="tsd-signature tsd-kind-icon">STATIC<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;static&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/entity/entity.manager.config.ts#L11">src/engine/entity/entity.manager.config.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/shader/uniformVariation.enum.ts#L9">src/engine/shader/uniformVariation.enum.ts:9</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>An optional TextureAtlas to use in rendering managed Entities with Texture Components</p>
-						</div>
-					</div>
 				</section>
 			</section>
 		</div>
@@ -154,7 +133,7 @@
 					<li class=" tsd-kind-namespace">
 						<a href="../modules/core.html">Core</a>
 					</li>
-					<li class="current tsd-kind-namespace">
+					<li class=" tsd-kind-namespace">
 						<a href="../modules/entity.html">Entity</a>
 					</li>
 					<li class=" tsd-kind-namespace">
@@ -166,8 +145,19 @@
 					<li class=" tsd-kind-namespace">
 						<a href="../modules/renderer.html">Renderer</a>
 					</li>
-					<li class=" tsd-kind-namespace">
+					<li class="current tsd-kind-namespace">
 						<a href="../modules/shader.html">Shader</a>
+						<ul>
+							<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
+								<a href="../modules/shader.fragment.html">Fragment</a>
+							</li>
+							<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
+								<a href="../modules/shader.program.html">Program</a>
+							</li>
+							<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
+								<a href="../modules/shader.vertex.html">Vertex</a>
+							</li>
+						</ul>
 					</li>
 					<li class=" tsd-kind-namespace">
 						<a href="../modules/state.html">State</a>
@@ -191,30 +181,33 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class tsd-parent-kind-namespace">
-						<a href="../classes/entity.entity-1.html" class="tsd-kind-icon">Entity</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-namespace tsd-has-type-parameter">
-						<a href="../classes/entity.entitymanager.html" class="tsd-kind-icon">Entity<wbr>Manager</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-namespace">
-						<a href="entity.entityconfig.html" class="tsd-kind-icon">Entity<wbr>Config</a>
+					<li class=" tsd-kind-enum tsd-parent-kind-namespace">
+						<a href="shader.uniformtype.html" class="tsd-kind-icon">Uniform<wbr>Type</a>
 					</li>
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface tsd-parent-kind-namespace">
-						<a href="entity.entitymanagerconfig.html" class="tsd-kind-icon">Entity<wbr>Manager<wbr>Config</a>
+					<li class="current tsd-kind-enum tsd-parent-kind-namespace">
+						<a href="shader.uniformvariation.html" class="tsd-kind-icon">Uniform<wbr>Variation</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="entity.entitymanagerconfig.html#game" class="tsd-kind-icon">game</a>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="shader.uniformvariation.html#entity" class="tsd-kind-icon">ENTITY</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="entity.entitymanagerconfig.html#textureatlas" class="tsd-kind-icon">texture<wbr>Atlas</a>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="shader.uniformvariation.html#static" class="tsd-kind-icon">STATIC</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-class tsd-parent-kind-namespace">
+						<a href="../classes/shader.shadervariableresolver.html" class="tsd-kind-icon">Shader<wbr>Variable<wbr>Resolver</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-namespace">
+						<a href="../modules/shader.html#attributearray" class="tsd-kind-icon">Attribute<wbr>Array</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-namespace">
+						<a href="../modules/shader.html#uniformarray" class="tsd-kind-icon">Uniform<wbr>Array</a>
+					</li>
 				</ul>
 			</nav>
 		</div>
@@ -228,9 +221,6 @@
 				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
 				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>

@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ShaderVariableResolver | API | ProtoGL Documentation - v0.5.0</title>
-	<meta name="description" content="Documentation for API | ProtoGL Documentation - v0.5.0">
+	<title>ShaderVariableResolver | API | Aura Documentation - v0.5.0</title>
+	<meta name="description" content="Documentation for API | Aura Documentation - v0.5.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
 	<script async src="../assets/js/search.js" id="search-script"></script>
@@ -23,7 +23,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">API | ProtoGL Documentation - v0.5.0</a>
+					<a href="../index.html" class="title">API | Aura Documentation - v0.5.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -52,7 +52,7 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="../modules.html">API | ProtoGL Documentation - v0.5.0</a>
+					<a href="../modules.html">API | Aura Documentation - v0.5.0</a>
 				</li>
 				<li>
 					<a href="../modules/shader.html">Shader</a>
@@ -71,12 +71,58 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Utility class for automatically retrieving attribute and uniform shader values from Entities and their Components</p>
+						<p>Utility class for automatically retrieving attribute and uniform shader values from Entities, Components and other Game constructs</p>
 					</div>
-					<p>Sets out the system&#39;s default mappings of standardised attribute/uniform names to defined Component properties</p>
-					<p>Allows for the registration of new mappings at application runtime, facilitating system extension by way of custom shaders and components</p>
-					<p>Handles errors in the absence of shader values</p>
-					<p>// TODO &#39;Texture&#39; left in as seen below for refernece in resolution of sampler2D uniform hack found in WebGLRenderer</p>
+					<p>Forms a critical component of the system&#39;s rendering approach, where Entities are able to specify their own Shaders. Utilised by the
+					EntityManager in the construction of Vertex Buffers, and by the WebGLRenderer in the upload of Uniforms</p>
+					<p>Works in conjunction with VertexShader + FragmentShader configuration objects, which specify the names, sizes, types, and variation
+					patterns of their attributes and uniforms</p>
+					<p>Mappings of &lt;shaderVariableName =&gt; ResolutionFunction&gt; are broken into three categories - Attribute, EntityUniform and StaticUniform:</p>
+					<ul>
+						<li><p>Attribute - attributes, varying per vertex, to be retrieved from Entities in the construction of Vertex Buffers by the EntityManager</p>
+							<ul>
+								<li>example: <code>attribute vec2 a_Position;</code> - a vertex position, retrieved from an Entity&#39;s Model Component</li>
+							</ul>
+						</li>
+						<li><p>EntityUniform - uniforms, varying per Entity, to be retrieved from Entities and uploaded once per draw call by the WebGLRenderer</p>
+							<ul>
+								<li>example: <code>uniform mat3 u_Transform2D;</code> - an Entity&#39;s Transformation Matrix, retrieved from its Transform Component</li>
+							</ul>
+						</li>
+						<li><p>StaticUniform - uniforms, unrelated to Entities, to be retrieved from the Game and uploaded once per render call by the WebGLRenderer</p>
+							<ul>
+								<li>example: <code>uniform mat3 u_View2D;</code> - the 2D View Matrix, retrieved from the Game&#39;s World/Camera</li>
+							</ul>
+						</li>
+					</ul>
+					<p>The mappings built into the class represent the supported set of built-in Attribute/Uniform names which, when used in Shaders, will
+					automatically be retrieved; thereby also setting out the relationship between a variable name and the Entity/engine data it reflects</p>
+					<p>Allows for the registration of new mappings at application initialisation, facilitating the extension of the system&#39;s built-in Shader and
+					Component library</p>
+					<p>Allows for the overriding of built-in mappings as an explicit choice separate from registration; supporting the augmentation of default
+					engine functionality but avoiding user error</p>
+					<p>Handles errors in the absence of Resulution Functions for given names, preventing invalid WebGL draws</p>
+					<p>// TODO the information in this class <em>could</em> be used to &#39;verify&#39; an Entity&#39;s makeup - that it can be rendered with its designated Shader</p>
+					<dl class="tsd-comment-tags">
+						<dt>see</dt>
+						<dd><p>EntityShaderVariableResolver</p>
+						</dd>
+						<dt>see</dt>
+						<dd><p>StaticShaderVariableResolver</p>
+						</dd>
+						<dt>see</dt>
+						<dd><p>VertexShader</p>
+						</dd>
+						<dt>see</dt>
+						<dd><p>FragmentShader</p>
+						</dd>
+						<dt>see</dt>
+						<dd><p>EntityManager</p>
+						</dd>
+						<dt>see</dt>
+						<dd><p>WebGLRenderer</p>
+						</dd>
+					</dl>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-hierarchy">
@@ -100,9 +146,15 @@
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="shader.shadervariableresolver.html#overrideentityshaderresolver" class="tsd-kind-icon">override<wbr>Entity<wbr>Shader<wbr>Resolver</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="shader.shadervariableresolver.html#registerentityshaderresolver" class="tsd-kind-icon">register<wbr>Entity<wbr>Shader<wbr>Resolver</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="shader.shadervariableresolver.html#resolveshadervariableforentity" class="tsd-kind-icon">resolve<wbr>Shader<wbr>Variable<wbr>For<wbr>Entity</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="shader.shadervariableresolver.html#overrideattributeresolver" class="tsd-kind-icon">override<wbr>Attribute<wbr>Resolver</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="shader.shadervariableresolver.html#overrideentityuniformresolver" class="tsd-kind-icon">override<wbr>Entity<wbr>Uniform<wbr>Resolver</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="shader.shadervariableresolver.html#overridestaticuniformresolver" class="tsd-kind-icon">override<wbr>Static<wbr>Uniform<wbr>Resolver</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="shader.shadervariableresolver.html#registerattributeresolver" class="tsd-kind-icon">register<wbr>Attribute<wbr>Resolver</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="shader.shadervariableresolver.html#registerentityuniformresolver" class="tsd-kind-icon">register<wbr>Entity<wbr>Uniform<wbr>Resolver</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="shader.shadervariableresolver.html#registerstaticuniformresolver" class="tsd-kind-icon">register<wbr>Static<wbr>Uniform<wbr>Resolver</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="shader.shadervariableresolver.html#resolveattribute" class="tsd-kind-icon">resolve<wbr>Attribute</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="shader.shadervariableresolver.html#resolveentityuniform" class="tsd-kind-icon">resolve<wbr>Entity<wbr>Uniform</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="shader.shadervariableresolver.html#resolvestaticuniform" class="tsd-kind-icon">resolve<wbr>Static<wbr>Uniform</a></li>
 							</ul>
 						</section>
 					</div>
@@ -128,38 +180,35 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
-					<a name="overrideentityshaderresolver" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> override<wbr>Entity<wbr>Shader<wbr>Resolver</h3>
+					<a name="overrideattributeresolver" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> override<wbr>Attribute<wbr>Resolver</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">override<wbr>Entity<wbr>Shader<wbr>Resolver<span class="tsd-signature-symbol">(</span>variableName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, resolve<span class="tsd-signature-symbol">: </span><a href="../modules/shader.html#entityshadervariableresolver" class="tsd-signature-type" data-tsd-kind="Type alias">EntityShaderVariableResolver</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">override<wbr>Attribute<wbr>Resolver<span class="tsd-signature-symbol">(</span>attributeName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, resolve<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">EntityShaderVariableResolver</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/ea026c6/src/engine/shader/shaderVariableResolver.ts#L128">src/engine/shader/shaderVariableResolver.ts:128</a></li>
+									<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/shader/shaderVariableResolver.ts#L277">src/engine/shader/shaderVariableResolver.ts:277</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Override an existing Entity Shader value resolution mapping for a given Shader attribute/uniform variable name</p>
+									<p>Override an existing resolution function for a given known Shader Attribute name</p>
 								</div>
-								<p>Facilitates system extension by way of allowing a consumer to redefine a resolution for a built-in shader variable name and/or a
-								built-in Component</p>
-								<p>Separated from registerEntityShaderResolver() so as to avoid accidental consumer mistakes in changing built-in mappings</p>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>variableName: <span class="tsd-signature-type">string</span></h5>
+									<h5>attributeName: <span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>the name of the shader variable to override</p>
+										<p>the name of the Attribute to override</p>
 									</div>
 								</li>
 								<li>
-									<h5>resolve: <a href="../modules/shader.html#entityshadervariableresolver" class="tsd-signature-type" data-tsd-kind="Type alias">EntityShaderVariableResolver</a></h5>
+									<h5>resolve: <span class="tsd-signature-type">EntityShaderVariableResolver</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>the EntityShaderResolver which will retrieve the relevant value from the Entity</p>
+										<p>the replacement resolution function</p>
 									</div>
 								</li>
 							</ul>
@@ -168,38 +217,35 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
-					<a name="registerentityshaderresolver" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> register<wbr>Entity<wbr>Shader<wbr>Resolver</h3>
+					<a name="overrideentityuniformresolver" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> override<wbr>Entity<wbr>Uniform<wbr>Resolver</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">register<wbr>Entity<wbr>Shader<wbr>Resolver<span class="tsd-signature-symbol">(</span>variableName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, resolve<span class="tsd-signature-symbol">: </span><a href="../modules/shader.html#entityshadervariableresolver" class="tsd-signature-type" data-tsd-kind="Type alias">EntityShaderVariableResolver</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">override<wbr>Entity<wbr>Uniform<wbr>Resolver<span class="tsd-signature-symbol">(</span>uniformName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, resolve<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">EntityShaderVariableResolver</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/ea026c6/src/engine/shader/shaderVariableResolver.ts#L102">src/engine/shader/shaderVariableResolver.ts:102</a></li>
+									<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/shader/shaderVariableResolver.ts#L300">src/engine/shader/shaderVariableResolver.ts:300</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Register a new Entity Shader value resolution mapping for a given Shader attribute/uniform variable name</p>
+									<p>Override an existing resolution function for a given known Shader Uniform name, where that Uniform varies per Entity</p>
 								</div>
-								<p>Facilitates system extension by way of allowing a consumer to define a resolution for a custom shader variable name and/or a custom
-								Component</p>
-								<p>Separated from overrideEntityShaderResolver() so as to avoid accidental consumer mistakes in changing built-in mappings</p>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>variableName: <span class="tsd-signature-type">string</span></h5>
+									<h5>uniformName: <span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>the name of the shader variable to register</p>
+										<p>the name of the Uniform to override</p>
 									</div>
 								</li>
 								<li>
-									<h5>resolve: <a href="../modules/shader.html#entityshadervariableresolver" class="tsd-signature-type" data-tsd-kind="Type alias">EntityShaderVariableResolver</a></h5>
+									<h5>resolve: <span class="tsd-signature-type">EntityShaderVariableResolver</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>the EntityShaderResolver which will retrieve the relevant value from the Entity</p>
+										<p>the replacement resolution function</p>
 									</div>
 								</li>
 							</ul>
@@ -208,29 +254,178 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
-					<a name="resolveshadervariableforentity" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> resolve<wbr>Shader<wbr>Variable<wbr>For<wbr>Entity</h3>
+					<a name="overridestaticuniformresolver" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> override<wbr>Static<wbr>Uniform<wbr>Resolver</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">resolve<wbr>Shader<wbr>Variable<wbr>For<wbr>Entity<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, entity<span class="tsd-signature-symbol">: </span><a href="entity.entity-1.html" class="tsd-signature-type" data-tsd-kind="Class">Entity</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Float32Array</span></li>
+						<li class="tsd-signature tsd-kind-icon">override<wbr>Static<wbr>Uniform<wbr>Resolver<span class="tsd-signature-symbol">(</span>uniformName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, resolve<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">StaticShaderVariableResolver</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/ProtoGL/blob/ea026c6/src/engine/shader/shaderVariableResolver.ts#L74">src/engine/shader/shaderVariableResolver.ts:74</a></li>
+									<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/shader/shaderVariableResolver.ts#L325">src/engine/shader/shaderVariableResolver.ts:325</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Retrieve an attribute or uniform value given by its name from the given Entity by executing the associated EntityShaderResolver</p>
+									<p>Override an existing resolution function for a given known Shader Uniform name, where that Uniform is unassocated with any given
+									Entity</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>name: <span class="tsd-signature-type">string</span></h5>
+									<h5>uniformName: <span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>the name of the attribute or uniform to retrieve a value for</p>
+										<p>the name of the Uniform to override</p>
+									</div>
+								</li>
+								<li>
+									<h5>resolve: <span class="tsd-signature-type">StaticShaderVariableResolver</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the replacement resolution function</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="registerattributeresolver" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> register<wbr>Attribute<wbr>Resolver</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">register<wbr>Attribute<wbr>Resolver<span class="tsd-signature-symbol">(</span>attributeName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, resolve<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">EntityShaderVariableResolver</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/shader/shaderVariableResolver.ts#L208">src/engine/shader/shaderVariableResolver.ts:208</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Register a new resolution function for a given unknown Shader Attribute name</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>attributeName: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the name of the Attribute to register</p>
+									</div>
+								</li>
+								<li>
+									<h5>resolve: <span class="tsd-signature-type">EntityShaderVariableResolver</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the resolution function to register</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="registerentityuniformresolver" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> register<wbr>Entity<wbr>Uniform<wbr>Resolver</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">register<wbr>Entity<wbr>Uniform<wbr>Resolver<span class="tsd-signature-symbol">(</span>uniformName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, resolve<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">EntityShaderVariableResolver</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/shader/shaderVariableResolver.ts#L231">src/engine/shader/shaderVariableResolver.ts:231</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Register a new resolution function for a given unknown Shader Uniform name, where that Uniform varies per Entity</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>uniformName: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the name of the Uniform to register</p>
+									</div>
+								</li>
+								<li>
+									<h5>resolve: <span class="tsd-signature-type">EntityShaderVariableResolver</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the resolution function to register</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="registerstaticuniformresolver" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> register<wbr>Static<wbr>Uniform<wbr>Resolver</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">register<wbr>Static<wbr>Uniform<wbr>Resolver<span class="tsd-signature-symbol">(</span>uniformName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, resolve<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">StaticShaderVariableResolver</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/shader/shaderVariableResolver.ts#L254">src/engine/shader/shaderVariableResolver.ts:254</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Register a new resolution function for a given unknown Shader Uniform name, where that Uniform is unassocated with any given Entity</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>uniformName: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the name of the Uniform to register</p>
+									</div>
+								</li>
+								<li>
+									<h5>resolve: <span class="tsd-signature-type">StaticShaderVariableResolver</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the resolution function to register</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="resolveattribute" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> resolve<wbr>Attribute</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">resolve<wbr>Attribute<span class="tsd-signature-symbol">(</span>attributeName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, entity<span class="tsd-signature-symbol">: </span><a href="entity.entity-1.html" class="tsd-signature-type" data-tsd-kind="Class">Entity</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Float32Array</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/shader/shaderVariableResolver.ts#L138">src/engine/shader/shaderVariableResolver.ts:138</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Resolve an Attribute value, given its name, from an Entity</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>attributeName: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the name of the attribute to resolve a value for</p>
 									</div>
 								</li>
 								<li>
@@ -241,7 +436,83 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Float32Array</span></h4>
-							<p>the value of the attribute or uniform to build into vertex lists or pipe to the GPU for draw calls</p>
+							<p>the resolved Attribute value</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="resolveentityuniform" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> resolve<wbr>Entity<wbr>Uniform</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">resolve<wbr>Entity<wbr>Uniform<span class="tsd-signature-symbol">(</span>uniformName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, entity<span class="tsd-signature-symbol">: </span><a href="entity.entity-1.html" class="tsd-signature-type" data-tsd-kind="Class">Entity</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Float32Array</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/shader/shaderVariableResolver.ts#L162">src/engine/shader/shaderVariableResolver.ts:162</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Resolve a Uniform value, given its name, from an Entity</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>uniformName: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the name of the uniform to resolve a value for</p>
+									</div>
+								</li>
+								<li>
+									<h5>entity: <a href="entity.entity-1.html" class="tsd-signature-type" data-tsd-kind="Class">Entity</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the Entity to retrieve the value from</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Float32Array</span></h4>
+							<p>the resolved Uniform value</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="resolvestaticuniform" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> resolve<wbr>Static<wbr>Uniform</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">resolve<wbr>Static<wbr>Uniform<span class="tsd-signature-symbol">(</span>uniformName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, game<span class="tsd-signature-symbol">: </span><a href="core.game.html" class="tsd-signature-type" data-tsd-kind="Class">Game</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Float32Array</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/shader/shaderVariableResolver.ts#L186">src/engine/shader/shaderVariableResolver.ts:186</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Resolve a Uniform value, given its name, from the Game</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>uniformName: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the name of the uniform to resolve a value for</p>
+									</div>
+								</li>
+								<li>
+									<h5>game: <a href="core.game.html" class="tsd-signature-type" data-tsd-kind="Class">Game</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the Game instance to retrieve the value from</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Float32Array</span></h4>
+							<p>the resolved Uniform value</p>
 						</li>
 					</ul>
 				</section>
@@ -252,6 +523,9 @@
 				<ul>
 					<li class=" ">
 						<a href="../modules.html">Exports</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/camera.html">Camera</a>
 					</li>
 					<li class=" tsd-kind-namespace">
 						<a href="../modules/component.html">Component</a>
@@ -310,6 +584,9 @@
 					<li class=" tsd-kind-enum tsd-parent-kind-namespace">
 						<a href="../enums/shader.uniformtype.html" class="tsd-kind-icon">Uniform<wbr>Type</a>
 					</li>
+					<li class=" tsd-kind-enum tsd-parent-kind-namespace">
+						<a href="../enums/shader.uniformvariation.html" class="tsd-kind-icon">Uniform<wbr>Variation</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-namespace">
@@ -319,13 +596,31 @@
 								<a href="shader.shadervariableresolver.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
-								<a href="shader.shadervariableresolver.html#overrideentityshaderresolver" class="tsd-kind-icon">override<wbr>Entity<wbr>Shader<wbr>Resolver</a>
+								<a href="shader.shadervariableresolver.html#overrideattributeresolver" class="tsd-kind-icon">override<wbr>Attribute<wbr>Resolver</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
-								<a href="shader.shadervariableresolver.html#registerentityshaderresolver" class="tsd-kind-icon">register<wbr>Entity<wbr>Shader<wbr>Resolver</a>
+								<a href="shader.shadervariableresolver.html#overrideentityuniformresolver" class="tsd-kind-icon">override<wbr>Entity<wbr>Uniform<wbr>Resolver</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
-								<a href="shader.shadervariableresolver.html#resolveshadervariableforentity" class="tsd-kind-icon">resolve<wbr>Shader<wbr>Variable<wbr>For<wbr>Entity</a>
+								<a href="shader.shadervariableresolver.html#overridestaticuniformresolver" class="tsd-kind-icon">override<wbr>Static<wbr>Uniform<wbr>Resolver</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="shader.shadervariableresolver.html#registerattributeresolver" class="tsd-kind-icon">register<wbr>Attribute<wbr>Resolver</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="shader.shadervariableresolver.html#registerentityuniformresolver" class="tsd-kind-icon">register<wbr>Entity<wbr>Uniform<wbr>Resolver</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="shader.shadervariableresolver.html#registerstaticuniformresolver" class="tsd-kind-icon">register<wbr>Static<wbr>Uniform<wbr>Resolver</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="shader.shadervariableresolver.html#resolveattribute" class="tsd-kind-icon">resolve<wbr>Attribute</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="shader.shadervariableresolver.html#resolveentityuniform" class="tsd-kind-icon">resolve<wbr>Entity<wbr>Uniform</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="shader.shadervariableresolver.html#resolvestaticuniform" class="tsd-kind-icon">resolve<wbr>Static<wbr>Uniform</a>
 							</li>
 						</ul>
 					</li>
@@ -333,9 +628,6 @@
 				<ul class="after-current">
 					<li class=" tsd-kind-type-alias tsd-parent-kind-namespace">
 						<a href="../modules/shader.html#attributearray" class="tsd-kind-icon">Attribute<wbr>Array</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-namespace">
-						<a href="../modules/shader.html#entityshadervariableresolver" class="tsd-kind-icon">Entity<wbr>Shader<wbr>Variable<wbr>Resolver</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-namespace">
 						<a href="../modules/shader.html#uniformarray" class="tsd-kind-icon">Uniform<wbr>Array</a>
