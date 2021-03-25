@@ -18,8 +18,8 @@ module.exports = {
         extensions: ['.ts', '.js']
     },
     output: {
-        filename: 'protogl.min.js',
+        filename: 'aura.min.js',
         path: path.resolve(__dirname, 'publish/_min'),
-        library: 'ProtoGL'
+        library: 'Aura'
     }
 };

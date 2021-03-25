@@ -24,7 +24,7 @@ module.exports = (env, options) => {
                 ]
             }),
             new HtmlWebpackPlugin({
-                title: 'ProtoGL App'
+                title: 'Aura App'
             })
         ],
         resolve: {

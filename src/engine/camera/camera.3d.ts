@@ -1,5 +1,5 @@
 import { Transform3D } from '../component/3d';
-import { ProtoGLError } from '../core';
+import { AuraError } from '../core';
 import { Entity } from '../entity';
 import { Angle, Mat4, Vec3 } from '../math';
 
@@ -22,7 +22,7 @@ export class Camera3D {
             };
         }
         catch (e) {
-            throw new ProtoGLError({
+            throw new AuraError({
                 class: 'Camera3D',
                 method: 'attachTo',
                 message: `Failed to attach to entity with tag '${entity.tag}'`

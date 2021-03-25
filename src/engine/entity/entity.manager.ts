@@ -1,5 +1,5 @@
 import { Model, Shader, Texture } from '../component';
-import { ProtoGLError } from '../core';
+import { AuraError } from '../core';
 import { VBOConfig } from '../renderer';
 import { ShaderVariableResolver } from '../shader';
 import { Entity } from './entity';
@@ -456,7 +456,7 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
                                 if (!textureAtlas) {
                                     // if we're trying to render an Entity with a Texture-involved shader, but we have no Texture Atlas,
                                     //   then something has gone wrong
-                                    throw new ProtoGLError({
+                                    throw new AuraError({
                                         class: 'EntityManager',
                                         method: 'compileVertices',
                                         message: `

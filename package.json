@@ -3,10 +3,10 @@
     "version": "0.5.0",
     "author": "jonnopon",
     "license": "MIT",
-    "homepage": "https://jonnopon.github.io/ProtoGL",
+    "homepage": "https://jonnopon.github.io/Aura",
     "repository": {
         "type": "git",
-        "url": "git://git@github.com/jonnopon/ProtoGL.git"
+        "url": "git://git@github.com/jonnopon/Aura.git"
     },
     "main": "publish/index.js",
     "types": "publish/index.d.ts",

@@ -1,4 +1,4 @@
-import { Game, ProtoGLError } from '../core';
+import { Game, AuraError } from '../core';
 import { Color, Mat3, Mat4 } from '../math';
 import { ShaderVariableResolver, UniformVariation } from '../shader';
 import { ShaderProgram } from '../shader/program';
@@ -120,7 +120,7 @@ export class WebGLRenderer {
         const gl = game.canvas.getContext('webgl');
 
         if (!gl) {
-            throw new ProtoGLError({
+            throw new AuraError({
                 class: 'WebGLRenderer',
                 method: 'construct',
                 message: 'Failed to retrieve WebGL Canvas context'
@@ -174,7 +174,7 @@ export class WebGLRenderer {
 
         const buffer = gl.createBuffer();
         if (!buffer) {
-            throw new ProtoGLError({
+            throw new AuraError({
                 class: 'WebGLRenderer',
                 method: 'createVBO',
                 message: `Failed to create buffer with name '${name}'`
@@ -217,7 +217,7 @@ export class WebGLRenderer {
         // create the shader program
         const program = gl.createProgram();
         if (!program) {
-            throw new ProtoGLError({
+            throw new AuraError({
                 class: 'WebGLRenderer',
                 method: 'createShaderProgram',
                 message: `Failed to create Shader Program with name '${shader.name}'`
@@ -238,7 +238,7 @@ export class WebGLRenderer {
             gl.deleteShader(fragmentCompiled);
             gl.deleteShader(vertexCompiled);
 
-            throw new ProtoGLError({
+            throw new AuraError({
                 class: 'WebGLRenderer',
                 method: 'createShaderProgram',
                 message: `Failed to link Shader Program with name '${shader.name}' : [${error ?? ''}]`
@@ -267,7 +267,7 @@ export class WebGLRenderer {
         // create the texture
         const texture = gl.createTexture();
         if (!texture) {
-            throw new ProtoGLError({
+            throw new AuraError({
                 class: 'WebGLRenderer',
                 method: 'createTexture',
                 message: `Failed to create texture with name '${textureAtlas.name}' and src '${textureAtlas.src}'`
@@ -429,7 +429,7 @@ export class WebGLRenderer {
         // create the shader
         const shader = gl.createShader(type);
         if (!shader) {
-            throw new ProtoGLError({
+            throw new AuraError({
                 class: 'WebGLRenderer',
                 method: 'compileShader',
                 message: `Failed to create ${typeString} with source : [${src}]`
@@ -447,7 +447,7 @@ export class WebGLRenderer {
 
             gl.deleteShader(shader);
 
-            throw new ProtoGLError({
+            throw new AuraError({
                 class: 'WebGLRenderer',
                 method: 'compileShader',
                 message: `Failed to compile ${typeString} : [${error ?? ''}]`
@@ -491,7 +491,7 @@ export class WebGLRenderer {
             const locationArray = uniform.variation === UniformVariation.STATIC ? staticUniformLocations : entityUniformLocations;
 
             if (!location) {
-                throw new ProtoGLError({
+                throw new AuraError({
                     class: 'WebGLRenderer',
                     method: 'initializeShaderProgram',
                     message: `Failed to retrieve uniform location for uniform name '${uniform.name}' in shader program '${spec.name}'`
@@ -528,7 +528,7 @@ export class WebGLRenderer {
 
         const program = this.shaderPrograms.get(name);
         if (!program) {
-            throw new ProtoGLError({
+            throw new AuraError({
                 class: 'WebGLRenderer',
                 method: 'useShaderProgram',
                 message: `Failed to switch to Shader Program with name '${name}'`
@@ -553,7 +553,7 @@ export class WebGLRenderer {
         const buffer = this.vbos.get(vbo.name);
 
         if (!buffer) {
-            throw new ProtoGLError({
+            throw new AuraError({
                 class: 'WebGLRenderer',
                 method: 'useVBO',
                 message: `Failed to switch to VBO with name '${vbo.name}'`
@@ -589,7 +589,7 @@ export class WebGLRenderer {
 
         const texture = this.textures.get(name);
         if (!texture) {
-            throw new ProtoGLError({
+            throw new AuraError({
                 class: 'WebGLRenderer',
                 method: 'useTexture',
                 message: `Failed to switch to Texture with name '${name}'`

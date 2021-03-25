@@ -10,7 +10,7 @@ import { TextureAtlas } from '../texture';
 import { UI } from '../ui';
 import { World } from '../world';
 import { GameConfig } from './game.config';
-import { ProtoGLError } from './protogl.error';
+import { AuraError } from './aura.error';
 
 /**
  * Core Game object; instantiated with or without a configuration object as a first step in creating a game
@@ -191,7 +191,7 @@ export class Game {
             this.renderer.setRenderingMode(this.currentState.renderingMode);
         }
         else {
-            throw new ProtoGLError({
+            throw new AuraError({
                 class: 'Game',
                 method: 'switchToState',
                 message: `Failed to switch to State '${name}' : State does not exist`
@@ -267,7 +267,7 @@ export class Game {
 
         if (!data) {
             // throw an error if the data is not found on the Game to allow type safety + simplistic no-questions consumer calls
-            throw new ProtoGLError({
+            throw new AuraError({
                 class: 'Game',
                 method: 'getData',
                 message: `Failed to retrieve data with key '${key}'`

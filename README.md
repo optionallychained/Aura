@@ -1,37 +1,35 @@
-[![logo](https://github.com/jonnopon/ProtoGL/blob/master/assets/logo.png?raw=true)](#)
+# Aura
 
 [![NPM](https://badge.fury.io/js/protogl.svg)](https://badge.fury.io/js/protogl)
 
-ProtoGL is a TypeScript game engine designed for the swift implementation of prototype WebGL browser games, providing a large base of built-in utility.
+Aura is a work-in-progress TypeScript/WebGL general-purpose game engine, designed to enable the swift implementation of both 2D and 3D browser games and providing a large base of built-in utility.
 
-Built on the Entity-Component-System architecture and operating on the concept of distinct game states, ProtoGL aims to enable a compartmentalised approach
-to prototype creation, supporting developments of varying complexity.
+Built on the Entity-Component-System architecture and operating on the concept of distinct game States, Aura aims to enable a compartmentalised approach to game creation, supporting developments of varying complexity.
 
-See [ProtoGL-Starter](https://github.com/jonnopon/ProtoGL-Starter) for getting up and running with ProtoGL fast.
+See [Aura-Template](https://github.com/jonnopon/Aura-Template) for getting up and running with Aura fast.
 
-Lofty/long-term Goals:
+Goals:
 - Zero (or close to) dependencies
 - Simplistic and easy-to-approach API and project structure
-- Large base of built-in utility (geometry, components, systems, physics, text, UI, shaders, etc)
-- 2D rendering with OpenGL *(...and canvas?)*
-- 3D rendering with OpenGL
-- Keyboard/Mouse, Gamepad, Touch support
-- Solid documentation
-- Automated testing
-- Efficient and optimised builds
-- *Maybe* Desktop + Mobile builds via Electron and/or Cordova
+- Flexible rendering engine, with support for custom Shaders and Components
+- Large base of built-in utility, serving many use-cases out of the box
+- Support for both 2D and 3D game creation
+- Multiple input/control schemes (Keyboard/Mouse, Gamepad, Touch)
+- Approachable documentation
+- Comprehensive testing
+- *Potentially*: Desktop and Mobile builds
 
 
 ## Documentation
 
-[ProtoGL Documentation](https://jonnopon.github.io/ProtoGL/)
+*(Under Construction)* [Aura Documentation](https://jonnopon.github.io/Aura/)
 
 
 ## Usage
 
 ### Quickstart
 
-Fork or clone [ProtoGL-Starter](https://github.com/jonnopon/ProtoGL-Starter) to get up and running fast
+Fork or clone [Aura-Template](https://github.com/jonnopon/Aura-Template) to get up and running fast
 
 ### NPM
 
@@ -40,5 +38,5 @@ Fork or clone [ProtoGL-Starter](https://github.com/jonnopon/ProtoGL-Starter) to 
 ### CDN
 
 ```html
-<script src="https://unpkg.com/protogl/publish/_min/protogl.min.js"></script>
+<script src="https://unpkg.com/protogl/publish/_min/aura.min.js"></script>
 ```

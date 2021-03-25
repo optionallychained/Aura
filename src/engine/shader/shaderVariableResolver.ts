@@ -1,7 +1,7 @@
 import { FlatColor, Model, MultiColor } from '../component';
 import { Transform2D } from '../component/2d';
 import { Transform3D } from '../component/3d';
-import { Game, ProtoGLError } from '../core';
+import { Game, AuraError } from '../core';
 import { Entity } from '../entity';
 import { Mat4 } from '../math';
 
@@ -139,7 +139,7 @@ export class ShaderVariableResolver {
         const resolve = ShaderVariableResolver.ENTITY_ATTRIBUTE_MAPPINGS.get(attributeName);
 
         if (!resolve) {
-            throw new ProtoGLError({
+            throw new AuraError({
                 class: 'ShaderVariableResolver',
                 method: 'resolveAttribute',
                 message: `
@@ -163,7 +163,7 @@ export class ShaderVariableResolver {
         const resolve = ShaderVariableResolver.ENTITY_UNIFORM_MAPPINGS.get(uniformName);
 
         if (!resolve) {
-            throw new ProtoGLError({
+            throw new AuraError({
                 class: 'ShaderVariableResolver',
                 method: 'resolveEntityUniform',
                 message: `
@@ -187,7 +187,7 @@ export class ShaderVariableResolver {
         const resolve = ShaderVariableResolver.STATIC_UNIFORM_MAPPINGS.get(uniformName);
 
         if (!resolve) {
-            throw new ProtoGLError({
+            throw new AuraError({
                 class: 'ShaderVariableResolver',
                 method: 'resolveStaticUniform',
                 message: `
@@ -209,7 +209,7 @@ export class ShaderVariableResolver {
         const existing = ShaderVariableResolver.ENTITY_ATTRIBUTE_MAPPINGS.get(attributeName);
 
         if (existing) {
-            throw new ProtoGLError({
+            throw new AuraError({
                 class: 'ShaderVariableResolver',
                 method: 'registerAttributeResolver',
                 message: `
@@ -232,7 +232,7 @@ export class ShaderVariableResolver {
         const existing = ShaderVariableResolver.ENTITY_UNIFORM_MAPPINGS.get(uniformName);
 
         if (existing) {
-            throw new ProtoGLError({
+            throw new AuraError({
                 class: 'ShaderVariableResolver',
                 method: 'registerEntityUniformResolver',
                 message: `
@@ -255,7 +255,7 @@ export class ShaderVariableResolver {
         const existing = ShaderVariableResolver.STATIC_UNIFORM_MAPPINGS.get(uniformName);
 
         if (existing) {
-            throw new ProtoGLError({
+            throw new AuraError({
                 class: 'ShaderVariableResolver',
                 method: 'registerStaticUniformResolver',
                 message: `
@@ -278,7 +278,7 @@ export class ShaderVariableResolver {
         const existing = ShaderVariableResolver.ENTITY_ATTRIBUTE_MAPPINGS.get(attributeName);
 
         if (!existing) {
-            throw new ProtoGLError({
+            throw new AuraError({
                 class: 'ShaderVariableResolver',
                 method: 'overrideAttributeResolver',
                 message: `
@@ -301,7 +301,7 @@ export class ShaderVariableResolver {
         const existing = ShaderVariableResolver.ENTITY_UNIFORM_MAPPINGS.get(uniformName);
 
         if (!existing) {
-            throw new ProtoGLError({
+            throw new AuraError({
                 class: 'ShaderVariableResolver',
                 method: 'overrideEntityUniformResolver',
                 message: `
@@ -326,7 +326,7 @@ export class ShaderVariableResolver {
         const existing = ShaderVariableResolver.STATIC_UNIFORM_MAPPINGS.get(uniformName);
 
         if (!existing) {
-            throw new ProtoGLError({
+            throw new AuraError({
                 class: 'ShaderVariableResolver',
                 method: 'overrideStaticUniformResolver',
                 message: `

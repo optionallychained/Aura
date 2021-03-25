@@ -5,7 +5,7 @@
     "out": "./docs/api",
     "theme": "default",
     "excludePrivate": true,
-    "name": "API | ProtoGL Documentation",
+    "name": "API | Aura Documentation",
     "includeVersion": true,
     "hideGenerator": true
 }

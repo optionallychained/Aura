@@ -1,5 +1,5 @@
 import { Component } from '../component';
-import { ProtoGLError } from '../core';
+import { AuraError } from '../core';
 import { EntityConfig } from './entity.config';
 
 /**
@@ -60,7 +60,7 @@ export abstract class Entity {
     public getComponent<T extends Component>(component: ClassType<T>): T {
         // throw an error if the Component is not found on the Entity to allow type safety + simplistic no-questions consumer calls
         if (!this.hasComponent(component)) {
-            throw new ProtoGLError({
+            throw new AuraError({
                 class: 'Entity',
                 method: 'getComponent',
                 message: `Failed to retrieve Component '${component.name}' for Entity with tag '${this.tag}'`
@@ -82,7 +82,7 @@ export abstract class Entity {
     public getComponentByName<T extends Component>(name: string): T {
         // throw an error if the Component is not found on the Entity to allow type safety + simplistic no-questions consumer calls
         if (!this.hasComponentWithName(name)) {
-            throw new ProtoGLError({
+            throw new AuraError({
                 class: 'Entity',
                 method: 'getComponentByName',
                 message: `Failed to retrieve Component '${name}' for Entity with tag '${this.tag}'`

@@ -1,5 +1,5 @@
 import { Transform2D } from '../component/2d';
-import { ProtoGLError } from '../core';
+import { AuraError } from '../core';
 import { Entity } from '../entity';
 import { Mat3, Vec2 } from '../math';
 
@@ -38,7 +38,7 @@ export class Camera2D {
         }
         catch (e) {
             // re-throw the Component not found error for specificity
-            throw new ProtoGLError({
+            throw new AuraError({
                 class: 'Camera2D',
                 method: 'follow',
                 message: `Failed to follow Entity with tag '${entity.tag}' : the Entity lacks a Transform2D`
