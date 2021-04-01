@@ -5,7 +5,7 @@ import { Game } from './game';
 import { State3D } from '../state/state.3d';
 import { AuraError } from './aura.error';
 
-export class Game3D extends Game<GameConfig3D> {
+export class Game3D extends Game {
 
     public readonly world: World3D;
 

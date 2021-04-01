@@ -1,10 +1,9 @@
-import { AuraError, Game, Game2D, Game3D, GameConfig2D, GameConfig3D } from '../core';
+import { AuraError, Game } from '../core';
 import { Color, Mat3, Mat4 } from '../math';
 import { ShaderVariableResolver, UniformVariation } from '../shader';
 import { ShaderProgram } from '../shader/program';
 import { UniformType } from '../shader/uniformType.enum';
 import { TextureAtlas } from '../texture';
-import { RenderingMode } from './renderingMode.type';
 import { VBOConfig } from './vbo.config';
 import { WebGLRendererConfig } from './webgl.renderer.config';
 
@@ -76,8 +75,6 @@ interface TextureSpec {
  */
 export class Renderer {
 
-    // protected abstract readonly game: Game2D | Game3D;
-
     /** 2D Projection Matrix */
     // TODO move into World 'projection'
     private projectionMatrix = new Mat3();
@@ -111,7 +108,7 @@ export class Renderer {
     private activeTexture: TextureSpec | null = null;
 
     /** Current rendering mode; used for differentiating some rendering functionality between 2D and 3D States */
-    private mode: RenderingMode = '2D';
+    private mode: '2D' | '3D' = '2D';
 
     /**
      * Constructor. Retrieve and store the WebGLRenderingContext from the given Canvas, then perform one-time setup of the context
@@ -134,10 +131,7 @@ export class Renderer {
 
         this.backgroundColor = clearColor.float32Array;
         this.init();
-        // this.configure();
     }
-
-    // public abstract configure(): void;
 
     public get projection(): Mat3 {
         return this.projectionMatrix;
@@ -310,19 +304,12 @@ export class Renderer {
      *
      * @param mode the mode to switch to
     //  */
-    public setRenderingMode(mode: RenderingMode): void {
+    public setRenderingMode(mode: '2D' | '3D'): void {
         const { gl } = this;
 
-        if (mode === '2D') {
-            // disable the depth test for 2D rendering
-            gl.disable(gl.DEPTH_TEST);
-        }
-        else {
-            // enable and configure the depth test for 3D rendering
+        if (mode === '3D') {
             gl.enable(gl.DEPTH_TEST);
             gl.depthFunc(gl.LESS);
-
-            // gl.enable(gl.CULL_FACE);
         }
 
         this.mode = mode;

@@ -9,7 +9,7 @@ import { Font } from '../text';
 import { UI } from '../ui';
 import { InputManager } from '../input';
 
-export class Game2D extends Game<GameConfig2D> {
+export class Game2D extends Game {
 
     public readonly world: World2D;
 

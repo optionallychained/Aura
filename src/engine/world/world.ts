@@ -4,7 +4,7 @@ import { EntityManager } from '../entity';
 import { Vec2, Vec3 } from '../math';
 import { WorldConfig2D, WorldConfig3D } from './world.config';
 
-export abstract class World<TConfig extends WorldConfig2D | WorldConfig3D = WorldConfig2D | WorldConfig3D> extends EntityManager<TConfig> {
+export abstract class World<TConfig extends WorldConfig2D | WorldConfig3D> extends EntityManager<TConfig> {
 
     // TODO readonly w/ mutable cast?
     public abstract activeCamera: Camera2D | Camera3D;
@@ -16,6 +16,8 @@ export abstract class World<TConfig extends WorldConfig2D | WorldConfig3D = Worl
             name: 'world',
             ...config
         });
+
+        // TODO review config storage at the EntityManager level
     }
 
     public abstract get dimensions(): Vec2 | Vec3;

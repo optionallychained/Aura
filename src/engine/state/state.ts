@@ -1,6 +1,5 @@
-import { Game, Game2D, Game3D, GameConfig2D, GameConfig3D } from '../core';
-import { RenderingMode } from '../renderer';
-import { StateConfig2D, StateConfig3D } from './state.config';
+import { Game2D, Game3D } from '../core';
+import { StateConfig } from './state.config';
 
 /**
  * Class representing a State
@@ -11,14 +10,14 @@ import { StateConfig2D, StateConfig3D } from './state.config';
  *
  * @see Game
  */
-export abstract class State<TConfig extends StateConfig2D | StateConfig3D = StateConfig2D | StateConfig3D> {
+export abstract class State<TGame extends Game2D | Game3D> {
 
     /**
      * Constructor. Take and store the State's config
      *
      * @param config the State's configuration
      */
-    constructor(protected readonly config: TConfig) { }
+    constructor(protected readonly config: StateConfig<TGame>) { }
 
     /**
      * Getter for the State's name, as provided in its Config
@@ -29,11 +28,17 @@ export abstract class State<TConfig extends StateConfig2D | StateConfig3D = Stat
         return this.config.name;
     }
 
-    public abstract init(game: Game): void;
+    public init(game: TGame): void {
+        this.config.init?.(game);
+    }
 
-    public abstract tick(game: Game, frameDetla: number): void;
+    public tick(game: TGame, frameDelta: number): void {
+        this.config.tick(game, frameDelta);
+    }
 
-    public abstract end(game: Game): void;
+    public end(game: TGame): void {
+        this.config.end?.(game);
+    }
 
     /**
      * State initialisation method, called when the State is 'switched to' by the Game.

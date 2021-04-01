@@ -2,16 +2,15 @@ import { ControlScheme, InputManager } from '../input';
 import { Color, Vec2 } from '../math';
 import { Renderer } from '../renderer';
 import { ShaderProgram } from '../shader/program';
-import { State } from '../state';
-import { State2D } from '../state/state.2d';
-import { State3D } from '../state/state.3d';
+import { State2D, State3D } from '../state';
 import { System } from '../system';
 import { Font } from '../text';
 import { TextureAtlas } from '../texture';
 import { UI } from '../ui';
-import { World } from '../world';
+import { World2D } from '../world/world.2d';
+import { World3D } from '../world/world.3d';
 import { AuraError } from './aura.error';
-import { GameConfig2D, GameConfig3D } from './game.config';
+import { GameConfig } from './game.config';
 
 interface ConfigDefaults {
     backgroundColor: Color;
@@ -21,8 +20,8 @@ interface ConfigDefaults {
     fontCharset: Array<string>;
 }
 
-export abstract class Game<TConfig extends GameConfig2D | GameConfig3D = GameConfig2D | GameConfig3D> {
-    public abstract readonly world: World;
+export abstract class Game {
+    public abstract readonly world: World2D | World3D;
 
     public readonly font: Font;
     public readonly ui: UI;
@@ -30,8 +29,8 @@ export abstract class Game<TConfig extends GameConfig2D | GameConfig3D = GameCon
     public readonly renderer: Renderer;
     public readonly canvas: HTMLCanvasElement;
 
-    protected abstract readonly states: Map<string, State>;
-    protected abstract currentState: State | undefined;
+    protected readonly states = new Map<string, State2D | State3D>();
+    protected currentState: State2D | State3D | undefined;
 
     // TODO 2D/3D split for Systems?
     protected readonly systems = new Map<string, System>();
@@ -41,6 +40,7 @@ export abstract class Game<TConfig extends GameConfig2D | GameConfig3D = GameCon
 
     protected readonly data = new Map<string, unknown>();
 
+    protected debugMode: GameConfig['debugMode'];
     protected readonly debugData = {
         frameCount: 0,
         fps: ''
@@ -58,7 +58,9 @@ export abstract class Game<TConfig extends GameConfig2D | GameConfig3D = GameCon
         fontAtlas: new TextureAtlas('text', 'res/font.png', 64, 1),
     }
 
-    constructor(protected readonly config?: TConfig) {
+    protected init: GameConfig['init'];
+
+    constructor(config?: GameConfig) {
         if (config?.canvasId) {
             this.canvas = document.getElementById(config.canvasId) as HTMLCanvasElement;
 
@@ -91,14 +93,17 @@ export abstract class Game<TConfig extends GameConfig2D | GameConfig3D = GameCon
             charset: config?.font?.charset ?? this.defaults.fontCharset,
             textureAtlas: config?.font?.textureAtlas ?? this.defaults.fontAtlas
         });
+
+        this.debugMode = config?.debugMode;
+        this.init = config?.init;
     }
 
-    public abstract addState(state: State): void;
+    public abstract addState(state: State2D | State3D): void;
 
-    public abstract addStates(...states: Array<State>): void;
+    public abstract addStates(...states: Array<State2D | State3D>): void;
 
     public switchToState(name: string): void {
-        this.currentState?.end(this);
+        this.currentState?.end(this as any);
 
         this.currentState = this.states.get(name);
 
@@ -110,7 +115,7 @@ export abstract class Game<TConfig extends GameConfig2D | GameConfig3D = GameCon
             });
         }
 
-        this.currentState.init(this);
+        this.currentState.init(this as any);
     }
 
     public addSystem(system: System): void {
@@ -160,7 +165,7 @@ export abstract class Game<TConfig extends GameConfig2D | GameConfig3D = GameCon
     }
 
     public start(state: string): void {
-        this.config?.init?.();
+        this.init?.();
 
         this.switchToState(state);
 
@@ -180,7 +185,7 @@ export abstract class Game<TConfig extends GameConfig2D | GameConfig3D = GameCon
         });
 
         if (this.currentState) {
-            this.currentState.tick(this, this.frameDetla);
+            this.currentState.tick(this as any, this.frameDetla);
         }
 
         this.world.tick(this.frameDetla);
@@ -191,7 +196,7 @@ export abstract class Game<TConfig extends GameConfig2D | GameConfig3D = GameCon
         this.ui.render();
         this.font.render();
 
-        if (this.config?.debugMode) {
+        if (this.debugMode) {
             this.debugData.frameCount++;
 
             if (this.debugData.frameCount % 10 === 0) {

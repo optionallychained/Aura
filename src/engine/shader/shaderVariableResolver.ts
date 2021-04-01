@@ -1,13 +1,13 @@
 import { FlatColor, Model, MultiColor } from '../component';
 import { Transform2D } from '../component/2d';
 import { Transform3D } from '../component/3d';
-import { AuraError, Game, Game2D, Game3D, GameConfig2D, GameConfig3D } from '../core';
+import { AuraError, Game } from '../core';
 import { Entity } from '../entity';
 
 /**
  * Internal-use utility type representing a Shader Variable Resolution Function which retrieves a value from the Game
  */
-type StaticShaderVariableResolver = (game: Game<GameConfig2D | GameConfig3D>) => Float32Array | number;
+type StaticShaderVariableResolver = (game: Game) => Float32Array | number;
 
 /**
  * Internal-use utility type representing a Shader Variable Resolution Function which retrieves a value from an Entity
@@ -182,7 +182,7 @@ export class ShaderVariableResolver {
      *
      * @returns the resolved Uniform value
      */
-    public static resolveStaticUniform(uniformName: string, game: Game<GameConfig2D | GameConfig3D>): Float32Array | number {
+    public static resolveStaticUniform(uniformName: string, game: Game): Float32Array | number {
         const resolve = ShaderVariableResolver.STATIC_UNIFORM_MAPPINGS.get(uniformName);
 
         if (!resolve) {

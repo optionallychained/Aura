@@ -4,7 +4,7 @@ import { FontConfig } from '../text/font.config';
 import { UIConfig } from '../ui';
 import { WorldConfig2D, WorldConfig3D } from '../world';
 
-interface GameConfig {
+export interface GameConfig {
     readonly canvasDimensions?: Vec2;
     readonly canvasId?: string;
     readonly backgroundColor?: Color;

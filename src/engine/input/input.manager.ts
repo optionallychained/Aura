@@ -40,7 +40,7 @@ export class InputManager {
      * @param canvas the Canvas
      * @param controlScheme the ControlScheme given to the Game's Config, used for optimising event registration and handling
      */
-    constructor(game: Game<GameConfig2D | GameConfig3D>, public readonly controlScheme: ControlScheme) {
+    constructor(game: Game, public readonly controlScheme: ControlScheme) {
         switch (controlScheme) {
             case 'keyboard':
                 this.initializeKeyboard();

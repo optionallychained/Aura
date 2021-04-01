@@ -1,17 +1,8 @@
-import { Game, Game2D, Game3D, GameConfig2D, GameConfig3D } from '../core';
+import { Game2D, Game3D } from '../core';
 
-interface StateConfig {
+export interface StateConfig<TGame extends Game2D | Game3D> {
     readonly name: string;
-}
-
-export interface StateConfig2D extends StateConfig {
-    readonly tick: (game: Game2D, frameDetla: number) => void;
-    readonly init?: (game: Game2D) => void;
-    readonly end?: (game: Game2D) => void;
-}
-
-export interface StateConfig3D extends StateConfig {
-    readonly tick: (game: Game3D, frameDelta: number) => void;
-    readonly init?: (game: Game3D) => void;
-    readonly end?: (game: Game3D) => void;
+    readonly tick: (game: TGame, frameDelta: number) => void;
+    readonly init?: (game: TGame) => void;
+    readonly end?: (game: TGame) => void;
 }
