@@ -1,18 +1,17 @@
-import { Game } from '../core';
-import { RenderingMode } from '../renderer';
+import { Game, Game2D, Game3D, GameConfig2D, GameConfig3D } from '../core';
 
-/**
- * Interface describing a State Configuration object
- */
-export interface StateConfig {
-    /** A name for the State; none is provided by default */
+interface StateConfig {
     readonly name: string;
-    /** The rendering mode of the State, enabling Games to mix 2D and 3D States; '2D' or '3D'; none is provided by default */
-    readonly renderingMode: RenderingMode;
-    /** State frame tick function */
-    readonly tick: (game: Game, frameDelta: number) => void;
-    /** State initialisation function; optional */
-    readonly init?: (game: Game) => void;
-    /** State end/shutdown function; optional */
-    readonly end?: (game: Game) => void;
+}
+
+export interface StateConfig2D extends StateConfig {
+    readonly tick: (game: Game2D, frameDetla: number) => void;
+    readonly init?: (game: Game2D) => void;
+    readonly end?: (game: Game2D) => void;
+}
+
+export interface StateConfig3D extends StateConfig {
+    readonly tick: (game: Game3D, frameDelta: number) => void;
+    readonly init?: (game: Game3D) => void;
+    readonly end?: (game: Game3D) => void;
 }

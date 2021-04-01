@@ -1,6 +1,6 @@
-import { Game } from '../core';
+import { Game, Game2D, Game3D, GameConfig2D, GameConfig3D } from '../core';
 import { RenderingMode } from '../renderer';
-import { StateConfig } from './state.config';
+import { StateConfig2D, StateConfig3D } from './state.config';
 
 /**
  * Class representing a State
@@ -11,14 +11,14 @@ import { StateConfig } from './state.config';
  *
  * @see Game
  */
-export class State {
+export abstract class State<TConfig extends StateConfig2D | StateConfig3D = StateConfig2D | StateConfig3D> {
 
     /**
      * Constructor. Take and store the State's config
      *
      * @param config the State's configuration
      */
-    constructor(private readonly config: StateConfig) { }
+    constructor(protected readonly config: TConfig) { }
 
     /**
      * Getter for the State's name, as provided in its Config
@@ -29,14 +29,11 @@ export class State {
         return this.config.name;
     }
 
-    /**
-     * Getter for the State's rendering mode, as provided in its Config
-     *
-     * @returns the State's rendering mode
-     */
-    public get renderingMode(): RenderingMode {
-        return this.config.renderingMode;
-    }
+    public abstract init(game: Game): void;
+
+    public abstract tick(game: Game, frameDetla: number): void;
+
+    public abstract end(game: Game): void;
 
     /**
      * State initialisation method, called when the State is 'switched to' by the Game.
@@ -45,9 +42,9 @@ export class State {
      *
      * @param game the Game the State is running within
      */
-    public init(game: Game): void {
-        this.config.init?.(game);
-    }
+    // public init(game: TGame): void {
+    //     this.config.init?.(game);
+    // }
 
     /**
      * State frame update method, called for every frame the State is active.
@@ -57,9 +54,9 @@ export class State {
      * @param game the Game the State is running within
      * @param frameDelta the time between the last frame and the current, for normalizing time-dependent operations
      */
-    public tick(game: Game, frameDelta: number): void {
-        this.config.tick(game, frameDelta);
-    }
+    // public tick(game: TGame, frameDelta: number): void {
+    //     this.config.tick(game, frameDelta);
+    // }
 
     /**
      * State shutdown method, called when the State is 'switched away from' by the Game.
@@ -68,7 +65,7 @@ export class State {
      *
      * @param game the Game the State is running within
      */
-    public end(game: Game): void {
-        this.config.end?.(game);
-    }
+    // public end(game: TGame): void {
+    //     this.config.end?.(game);
+    // }
 }

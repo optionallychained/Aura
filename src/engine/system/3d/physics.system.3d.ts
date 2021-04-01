@@ -1,5 +1,5 @@
 import { Transform3D } from '../../component/3d';
-import { Game } from '../../core';
+import { Game, Game2D, Game3D } from '../../core';
 import { Vec3 } from '../../math';
 import { System } from '../system';
 

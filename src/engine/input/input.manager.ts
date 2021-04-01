@@ -1,4 +1,4 @@
-import { Game } from '../core';
+import { Game, Game2D, Game3D, GameConfig2D, GameConfig3D } from '../core';
 import { Vec2 } from '../math';
 import { ControlScheme } from './controlScheme.type';
 import { Keys } from './keys.enum';
@@ -40,7 +40,7 @@ export class InputManager {
      * @param canvas the Canvas
      * @param controlScheme the ControlScheme given to the Game's Config, used for optimising event registration and handling
      */
-    constructor(game: Game, controlScheme: ControlScheme) {
+    constructor(game: Game<GameConfig2D | GameConfig3D>, public readonly controlScheme: ControlScheme) {
         switch (controlScheme) {
             case 'keyboard':
                 this.initializeKeyboard();

@@ -1,45 +1,45 @@
 import { Camera2D, Camera3D } from '../camera';
+import { AuraError } from '../core';
 import { EntityManager } from '../entity';
-import { Vec3 } from '../math';
-import { WorldConfig } from './world.config';
+import { Vec2, Vec3 } from '../math';
+import { WorldConfig2D, WorldConfig3D } from './world.config';
 
-/**
- * Core World class; providing utility and management for Entities representing game objects
- */
-export class World extends EntityManager<WorldConfig> {
+export abstract class World<TConfig extends WorldConfig2D | WorldConfig3D = WorldConfig2D | WorldConfig3D> extends EntityManager<TConfig> {
 
-    private camera2D: Camera2D;
-    private camera3D: Camera3D;
+    // TODO readonly w/ mutable cast?
+    public abstract activeCamera: Camera2D | Camera3D;
 
-    // TODO set up for multiple cameras, with only one 'active'
+    protected abstract readonly cameras: Map<string, Camera2D | Camera3D>;
 
-    constructor(config: WorldConfig) {
+    constructor(config: TConfig) {
         super({
             name: 'world',
             ...config
         });
-
-        this.camera2D = new Camera2D(
-            // config.camera?.position,
-            // config.camera?.zoom,
-            // config.camera?.angle,
-        );
-
-        this.camera3D = new Camera3D(
-            config.cameraOffsets?.position,
-            config.cameraOffsets?.angles
-        );
     }
 
-    public get dimensions(): Vec3 {
-        return this.config.dimensions;
+    public abstract get dimensions(): Vec2 | Vec3;
+
+    // TODO add name to camera as game states
+    public addCamera(name: string, camera: Camera2D | Camera3D): void {
+        this.cameras.set(name, camera);
     }
 
-    public getCamera2D(): Camera2D {
-        return this.camera2D;
+    public removeCamera(name: string): void {
+        this.cameras.delete(name);
     }
 
-    public getCamera3D(): Camera3D {
-        return this.camera3D;
+    public switchToCamera(name: string): void {
+        const camera = this.cameras.get(name);
+
+        if (!camera) {
+            throw new AuraError({
+                class: 'World',
+                method: 'switchToCamera',
+                message: `Failed to switch to Camera with name ${name}`
+            });
+        }
+
+        this.activeCamera = camera;
     }
 }

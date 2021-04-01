@@ -1,4 +1,4 @@
-import { Game } from '../../core';
+import { Game, Game2D, Game3D } from '../../core';
 import { Entity } from '../../entity';
 import { Vec2 } from '../../math';
 import { Component } from '../component';

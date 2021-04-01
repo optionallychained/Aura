@@ -19,7 +19,7 @@ export class Camera2D {
         rules: DeepRequired<FollowRules>;
     } | undefined;
 
-    constructor(positionOffset = new Vec2(), scaleOffset = new Vec2(1, 1), angleOffset = 0) {
+    constructor(positionOffset = new Vec2(), angleOffset = 0, scaleOffset = new Vec2(1, 1)) {
         this.transform = new Transform2D(positionOffset, scaleOffset, angleOffset);
     }
 
