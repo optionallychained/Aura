@@ -1,4 +1,5 @@
 import { Game } from '../core';
+import { Renderer } from '../renderer';
 import { TextureAtlas } from '../texture';
 
 /**
@@ -6,7 +7,7 @@ import { TextureAtlas } from '../texture';
  */
 export interface EntityManagerConfig {
     /** The Game the EntityManager belongs to */
-    readonly game: Game;
+    readonly renderer: Renderer;
     /** An optional TextureAtlas to use in rendering managed Entities with Texture Components */
     readonly textureAtlas?: TextureAtlas;
 }

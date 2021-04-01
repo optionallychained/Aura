@@ -3,11 +3,6 @@ import { World2D } from '../world/world.2d';
 import { GameConfig2D } from './game.config';
 import { Game } from './game';
 import { State2D } from '../state/state.2d';
-import { AuraError } from './aura.error';
-import { World3D } from '../world/world.3d';
-import { Font } from '../text';
-import { UI } from '../ui';
-import { InputManager } from '../input';
 
 export class Game2D extends Game {
 
@@ -20,7 +15,7 @@ export class Game2D extends Game {
         super(config);
 
         this.world = new World2D({
-            game: this,
+            renderer: this.renderer,
             dimensions: config?.world?.dimensions ?? new Vec2(this.canvas.width, this.canvas.height),
             textureAtlas: config?.world?.textureAtlas,
             cameraOffsets: config?.world?.cameraOffsets
@@ -37,5 +32,24 @@ export class Game2D extends Game {
         for (const state of states) {
             this.addState(state);
         }
+    }
+
+    public initState(): void {
+        // TODO because typesafety on game param
+        this.currentState?.init(this);
+    }
+
+    public endState(): void {
+        // TODO because typesafety on game param
+        this.currentState?.end(this);
+    }
+
+    protected update(): void {
+        // TODO relevant because Systems will be split 2D/3D and want typesafety on game param
+        this.systems.forEach((s) => {
+            s.tick(this, this.frameDelta);
+        });
+
+        this.currentState?.tick(this, this.frameDelta);
     }
 }

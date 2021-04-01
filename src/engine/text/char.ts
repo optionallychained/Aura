@@ -1,5 +1,6 @@
 import { FlatColor, Model, Shader, Texture } from '../component';
 import { Transform2D } from '../component/2d';
+import { Game } from '../core';
 import { Entity } from '../entity';
 import { BOX } from '../geometry/2d';
 import { Color, Vec2 } from '../math';
@@ -20,5 +21,5 @@ export class Char extends Entity {
         });
     }
 
-    public tick(frameDelta: number): void { }
+    public tick(game: Game, frameDelta: number): void { }
 }

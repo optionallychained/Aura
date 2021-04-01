@@ -1,5 +1,5 @@
 import { Component } from '../component';
-import { AuraError } from '../core';
+import { AuraError, Game } from '../core';
 import { EntityConfig } from './entity.config';
 
 /**
@@ -46,7 +46,7 @@ export abstract class Entity {
      *
      * @param frameDelta the time between the last frame and the current, for normalizing time-dependent operations
      */
-    public abstract tick(frameDelta: number): void;
+    public abstract tick(game: Game, frameDelta: number): void;
 
     /**
      * Get a Component from the Entity by Component class

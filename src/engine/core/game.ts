@@ -35,7 +35,7 @@ export abstract class Game {
     // TODO 2D/3D split for Systems?
     protected readonly systems = new Map<string, System>();
 
-    protected frameDetla = 0;
+    protected frameDelta = 0;
     protected lastFrameTime = 0;
 
     protected readonly data = new Map<string, unknown>();
@@ -84,12 +84,12 @@ export abstract class Game {
         this.input = new InputManager(this, config?.controlScheme ?? this.defaults.controlScheme);
 
         this.ui = new UI({
-            game: this,
+            renderer: this.renderer,
             textureAtlas: config?.ui?.textureAtlas
         });
 
         this.font = new Font({
-            game: this,
+            renderer: this.renderer,
             charset: config?.font?.charset ?? this.defaults.fontCharset,
             textureAtlas: config?.font?.textureAtlas ?? this.defaults.fontAtlas
         });
@@ -102,8 +102,12 @@ export abstract class Game {
 
     public abstract addStates(...states: Array<State2D | State3D>): void;
 
+    public abstract endState(): void;
+
+    public abstract initState(): void;
+
     public switchToState(name: string): void {
-        this.currentState?.end(this as any);
+        this.endState();
 
         this.currentState = this.states.get(name);
 
@@ -115,7 +119,7 @@ export abstract class Game {
             });
         }
 
-        this.currentState.init(this as any);
+        this.initState();
     }
 
     public addSystem(system: System): void {
@@ -156,7 +160,7 @@ export abstract class Game {
         return data as T;
     }
 
-    public removeData(key: string): void {
+    public deleteData(key: string): void {
         this.data.delete(key);
     }
 
@@ -172,25 +176,21 @@ export abstract class Game {
         this.run();
     }
 
+    protected abstract update(): void;
+
     private run(): void {
         const now = Date.now();
 
-        this.frameDetla = now - this.lastFrameTime;
+        this.frameDelta = now - this.lastFrameTime;
         this.lastFrameTime = now;
 
+        this.update();
+
+        this.world.tick(this, this.frameDelta);
+        this.ui.tick(this, this.frameDelta);
+        this.font.tick(this, this.frameDelta);
+
         this.renderer.clearScreen();
-
-        this.systems.forEach((s) => {
-            s.tick(this, this.frameDetla);
-        });
-
-        if (this.currentState) {
-            this.currentState.tick(this as any, this.frameDetla);
-        }
-
-        this.world.tick(this.frameDetla);
-        this.ui.tick(this.frameDetla);
-        this.font.tick(this.frameDetla);
 
         this.world.render();
         this.ui.render();
@@ -201,7 +201,7 @@ export abstract class Game {
 
             if (this.debugData.frameCount % 10 === 0) {
                 this.debugData.frameCount = 0;
-                this.debugData.fps = (1000 / this.frameDetla).toFixed(1);
+                this.debugData.fps = (1000 / this.frameDelta).toFixed(1);
             }
         }
 

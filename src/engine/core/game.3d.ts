@@ -3,7 +3,6 @@ import { World3D } from '../world/world.3d';
 import { GameConfig3D } from './game.config';
 import { Game } from './game';
 import { State3D } from '../state/state.3d';
-import { AuraError } from './aura.error';
 
 export class Game3D extends Game {
 
@@ -16,7 +15,7 @@ export class Game3D extends Game {
         super(config);
 
         this.world = new World3D({
-            game: this,
+            renderer: this.renderer,
             dimensions: config?.world?.dimensions ?? new Vec3(this.canvas.width, this.canvas.height, 100),
             textureAtlas: config?.world?.textureAtlas,
             cameraOffsets: config?.world?.cameraOffsets
@@ -33,5 +32,24 @@ export class Game3D extends Game {
         for (const state of states) {
             this.addState(state);
         }
+    }
+
+    public initState(): void {
+        // TODO because typesafety on game param
+        this.currentState?.init(this);
+    }
+
+    public endState(): void {
+        // TODO because typesafety on game param
+        this.currentState?.end(this);
+    }
+
+    protected update(): void {
+        // TODO relevant because Systems will be split 2D/3D and want typesafety on game param
+        this.systems.forEach((s) => {
+            s.tick(this, this.frameDelta);
+        });
+
+        this.currentState?.tick(this, this.frameDelta);
     }
 }

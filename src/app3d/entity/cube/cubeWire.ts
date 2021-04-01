@@ -1,4 +1,4 @@
-import { Color, Component, Entity, Geometry, Random, Shader, Vec3 } from '../../../engine';
+import { Color, Component, Core, Entity, Geometry, Random, Shader, Vec3 } from '../../../engine';
 
 export class CubeWire extends Entity.Entity {
 
@@ -17,5 +17,5 @@ export class CubeWire extends Entity.Entity {
         });
     }
 
-    public tick(frameDelta: number): void { }
+    public tick(game: Core.Game, frameDelta: number): void { }
 }

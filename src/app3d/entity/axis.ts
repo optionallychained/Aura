@@ -1,4 +1,4 @@
-import { Angle, Color, Component, Entity, Geometry, Shader, Vec2, Vec3 } from '../../engine';
+import { Angle, Color, Component, Core, Entity, Geometry, Shader, Vec2, Vec3 } from '../../engine';
 
 export class Axis3D extends Entity.Entity {
 
@@ -37,5 +37,5 @@ export class Axis3D extends Entity.Entity {
         });
     }
 
-    public tick(frameDelta: number): void { }
+    public tick(game: Core.Game, frameDelta: number): void { }
 }

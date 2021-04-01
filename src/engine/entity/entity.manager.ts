@@ -1,5 +1,5 @@
 import { Model, Shader, Texture } from '../component';
-import { AuraError } from '../core';
+import { AuraError, Game } from '../core';
 import { VBOConfig } from '../renderer';
 import { ShaderVariableResolver } from '../shader';
 import { Entity } from './entity';
@@ -58,13 +58,9 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
      *
      * @param renderer the renderer
      */
-    constructor(protected readonly config: TConfig & { name: string; initialEntities?: Array<Entity>; }) {
+    constructor(protected readonly config: TConfig & { name: string }) {
         if (config.textureAtlas) {
-            config.game.renderer.createTexture(config.textureAtlas);
-        }
-
-        if (config.initialEntities) {
-            this.entities = config.initialEntities;
+            config.renderer.createTexture(config.textureAtlas);
         }
     }
 
@@ -125,7 +121,7 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
      *
      * @param frameDelta the time between the last frame and the current, for normalizing time-dependent operations
      */
-    public tick(frameDelta: number): void {
+    public tick(game: Game, frameDelta: number): void {
         const added = this.loadEntities();
         const removed = this.cleanEntities();
 
@@ -136,7 +132,7 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
         }
 
         for (const e of this.entities) {
-            e.tick(frameDelta);
+            e.tick(game, frameDelta);
         }
     }
 
@@ -160,7 +156,7 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
                     // pull out the shader info once from the first Entity, as the shader is guaranteed to be the same for all
                     const { programName } = entities[0].getComponent(Shader);
 
-                    this.config.game.renderer.render({
+                    this.config.renderer.render({
                         vbo,
                         shaderProgramName: programName,
                         textureAtlasName: this.config.textureAtlas?.name,
@@ -404,7 +400,7 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
                 const existingVBO = this.vbos.get(vboIdentifier);
 
                 if (!existingVBO) {
-                    this.config.game.renderer.createVBO(vboName);
+                    this.config.renderer.createVBO(vboName);
                 }
 
                 // pull out the shader and model info once from the first Entity, as they're guaranteed to be the same for all
@@ -492,7 +488,7 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
             }
             else {
                 // if there are no Entities for a given shader+model combo, delete the associated VBO
-                this.config.game.renderer.deleteVBO(vboName);
+                this.config.renderer.deleteVBO(vboName);
                 this.vbos.delete(vboIdentifier);
             }
         }
