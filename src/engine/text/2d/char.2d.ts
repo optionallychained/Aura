@@ -1,12 +1,12 @@
-import { FlatColor, Model, Shader, Texture } from '../component';
-import { Transform2D } from '../component/2d';
-import { Game } from '../core';
-import { Entity } from '../entity';
-import { BOX } from '../geometry/2d';
-import { Color, Vec2 } from '../math';
-import { PROGRAM_TEXTURE_COLORED_2D } from '../shader/program/2d';
+import { FlatColor, Model, Shader, Texture } from '../../component';
+import { Transform2D } from '../../component/2d';
+import { Game } from '../../core';
+import { Entity } from '../../entity';
+import { BOX } from '../../geometry/2d';
+import { Color, Vec2 } from '../../math';
+import { PROGRAM_TEXTURE_COLORED_2D } from '../../shader/program/2d';
 
-export class Char extends Entity {
+export class Char2D extends Entity {
 
     constructor(position: Vec2, scale: Vec2, texCoords: Vec2, color: Color) {
         super({

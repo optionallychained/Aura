@@ -4,10 +4,13 @@ import { GameConfig2D } from './game.config';
 import { Game } from './game';
 import { State2D } from '../state/state.2d';
 import { System2D } from '../system/2d';
+import { Font2D } from '../text/2d';
 
 export class Game2D extends Game {
 
     public readonly world: World2D;
+
+    public readonly font: Font2D;
 
     protected readonly states = new Map<string, State2D>();
     protected currentState: State2D | undefined;
@@ -16,6 +19,12 @@ export class Game2D extends Game {
 
     constructor(config?: GameConfig2D) {
         super(config);
+
+        this.font = new Font2D({
+            renderer: this.renderer,
+            charset: config?.font?.charset ?? this.defaults.fontCharset,
+            textureAtlas: config?.font?.textureAtlas ?? this.defaults.fontAtlas
+        });
 
         this.world = new World2D({
             renderer: this.renderer,

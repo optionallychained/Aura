@@ -4,10 +4,13 @@ import { GameConfig3D } from './game.config';
 import { Game } from './game';
 import { State3D } from '../state/state.3d';
 import { System3D } from '../system/3d';
+import { Font3D } from '../text/3d';
 
 export class Game3D extends Game {
 
     public readonly world: World3D;
+
+    public readonly font: Font3D;
 
     protected readonly states = new Map<string, State3D>();
     protected currentState: State3D | undefined;
@@ -16,6 +19,12 @@ export class Game3D extends Game {
 
     constructor(config?: GameConfig3D) {
         super(config);
+
+        this.font = new Font3D({
+            renderer: this.renderer,
+            charset: config?.font?.charset ?? this.defaults.fontCharset,
+            textureAtlas: config?.font?.textureAtlas ?? this.defaults.fontAtlas
+        });
 
         this.world = new World3D({
             renderer: this.renderer,

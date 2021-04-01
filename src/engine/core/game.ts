@@ -5,7 +5,8 @@ import { ShaderProgram } from '../shader/program';
 import { State2D, State3D } from '../state';
 import { System2D } from '../system/2d';
 import { System3D } from '../system/3d';
-import { Font } from '../text';
+import { Font2D } from '../text/2d';
+import { Font3D } from '../text/3d';
 import { TextureAtlas } from '../texture';
 import { UI } from '../ui';
 import { World2D } from '../world/world.2d';
@@ -24,7 +25,8 @@ interface ConfigDefaults {
 export abstract class Game {
     public abstract readonly world: World2D | World3D;
 
-    public readonly font: Font;
+    public abstract readonly font: Font2D | Font3D;
+
     public readonly ui: UI;
     public readonly input: InputManager;
     public readonly renderer: Renderer;
@@ -86,12 +88,6 @@ export abstract class Game {
         this.ui = new UI({
             renderer: this.renderer,
             textureAtlas: config?.ui?.textureAtlas
-        });
-
-        this.font = new Font({
-            renderer: this.renderer,
-            charset: config?.font?.charset ?? this.defaults.fontCharset,
-            textureAtlas: config?.font?.textureAtlas ?? this.defaults.fontAtlas
         });
 
         this.debugMode = config?.debugMode;
