@@ -1,11 +1,22 @@
 {
     "configurations": [
         {
+            "name": "Debug 2D",
             "type": "chrome",
             "request": "launch",
-            "name": "Debug App",
             "url": "http://localhost:8080",
-            "preLaunchTask": "Start App",
+            "preLaunchTask": "Start 2D",
+            "sourceMaps": true,
+            "pathMapping": {
+                "webpack:///": "${workspaceFolder}/dev"
+            }
+        },
+        {
+            "name": "Debug 3D",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://localhost:8080",
+            "preLaunchTask": "Start 3D",
             "sourceMaps": true,
             "pathMapping": {
                 "webpack:///": "${workspaceFolder}/dev"

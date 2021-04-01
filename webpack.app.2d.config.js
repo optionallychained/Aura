@@ -6,7 +6,7 @@ module.exports = (env, options) => {
     const dev = options.mode === 'development';
 
     const config = {
-        entry: './src/app/app.ts',
+        entry: './src/app2d/app.2d.ts',
         devtool: dev ? 'inline-source-map' : false,
         module: {
             rules: [
@@ -20,19 +20,19 @@ module.exports = (env, options) => {
         plugins: [
             new CopyWebpackPlugin({
                 patterns: [
-                    { from: './src/app/res', to: 'res' }
+                    { from: './src/app2d/res', to: 'res' }
                 ]
             }),
             new HtmlWebpackPlugin({
-                title: 'Aura App'
+                title: 'Aura2D App'
             })
         ],
         resolve: {
             extensions: ['.ts', '.js']
         },
         output: {
-            filename: 'app.js',
-            path: path.resolve(__dirname, dev ? 'dev' : 'dist'),
+            filename: 'app2d.js',
+            path: path.resolve(__dirname, dev ? 'dev' : 'dist/2d'),
         }
     };
 
