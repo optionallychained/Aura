@@ -1,24 +1,23 @@
-import { FlatColor, Model, Shader, Texture } from '../../component';
+import { FlatColor, Model, Shader } from '../../component';
 import { Transform2D } from '../../component/2d';
 import { Game } from '../../core';
 import { Entity } from '../../entity';
 import { BOX } from '../../geometry/2d';
 import { Color, Vec2 } from '../../math';
-import { PROGRAM_TEXTURE_COLORED_2D } from '../../shader/program/2d';
+import { PROGRAM_BASIC_2D } from '../../shader/program/2d';
 
-export class Char2D extends Entity {
+export class Panel2D extends Entity {
 
-    constructor(position: Vec2, scale: Vec2, texCoords: Vec2, color: Color) {
+    constructor(position: Vec2, scale: Vec2, color: Color) {
         super({
-            tag: 'font_char_2d',
+            tag: 'ui_panel_2d',
             components: [
                 new Transform2D(position, scale),
-                new Shader(PROGRAM_TEXTURE_COLORED_2D),
+                new Shader(PROGRAM_BASIC_2D),
                 new Model(BOX),
-                new Texture(texCoords.x, texCoords.y),
                 new FlatColor(color)
             ]
-        });
+        })
     }
 
     public tick(game: Game, frameDelta: number): void { }

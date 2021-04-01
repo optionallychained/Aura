@@ -8,7 +8,8 @@ import { System3D } from '../system/3d';
 import { Font2D } from '../text/2d';
 import { Font3D } from '../text/3d';
 import { TextureAtlas } from '../texture';
-import { UI } from '../ui';
+import { UI2D } from '../ui/2d';
+import { UI3D } from '../ui/3d';
 import { World2D } from '../world/world.2d';
 import { World3D } from '../world/world.3d';
 import { AuraError } from './aura.error';
@@ -27,7 +28,8 @@ export abstract class Game {
 
     public abstract readonly font: Font2D | Font3D;
 
-    public readonly ui: UI;
+    public abstract readonly ui: UI2D | UI3D;
+
     public readonly input: InputManager;
     public readonly renderer: Renderer;
     public readonly canvas: HTMLCanvasElement;
@@ -84,11 +86,6 @@ export abstract class Game {
 
         this.renderer = new Renderer(this, config?.backgroundColor ?? this.defaults.backgroundColor);
         this.input = new InputManager(this, config?.controlScheme ?? this.defaults.controlScheme);
-
-        this.ui = new UI({
-            renderer: this.renderer,
-            textureAtlas: config?.ui?.textureAtlas
-        });
 
         this.debugMode = config?.debugMode;
         this.init = config?.init;

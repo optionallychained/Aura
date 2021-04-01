@@ -5,12 +5,15 @@ import { Game } from './game';
 import { State2D } from '../state/state.2d';
 import { System2D } from '../system/2d';
 import { Font2D } from '../text/2d';
+import { UI2D } from '../ui/2d';
 
 export class Game2D extends Game {
 
     public readonly world: World2D;
 
     public readonly font: Font2D;
+
+    public readonly ui: UI2D;
 
     protected readonly states = new Map<string, State2D>();
     protected currentState: State2D | undefined;
@@ -24,6 +27,11 @@ export class Game2D extends Game {
             renderer: this.renderer,
             charset: config?.font?.charset ?? this.defaults.fontCharset,
             textureAtlas: config?.font?.textureAtlas ?? this.defaults.fontAtlas
+        });
+
+        this.ui = new UI2D({
+            renderer: this.renderer,
+            textureAtlas: config?.ui?.textureAtlas
         });
 
         this.world = new World2D({

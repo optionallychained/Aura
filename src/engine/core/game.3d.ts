@@ -5,12 +5,15 @@ import { Game } from './game';
 import { State3D } from '../state/state.3d';
 import { System3D } from '../system/3d';
 import { Font3D } from '../text/3d';
+import { UI3D } from '../ui/3d';
 
 export class Game3D extends Game {
 
     public readonly world: World3D;
 
     public readonly font: Font3D;
+
+    public readonly ui: UI3D;
 
     protected readonly states = new Map<string, State3D>();
     protected currentState: State3D | undefined;
@@ -24,6 +27,11 @@ export class Game3D extends Game {
             renderer: this.renderer,
             charset: config?.font?.charset ?? this.defaults.fontCharset,
             textureAtlas: config?.font?.textureAtlas ?? this.defaults.fontAtlas
+        });
+
+        this.ui = new UI3D({
+            renderer: this.renderer,
+            textureAtlas: config?.ui?.textureAtlas
         });
 
         this.world = new World3D({
