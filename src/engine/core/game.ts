@@ -3,7 +3,8 @@ import { Color, Vec2 } from '../math';
 import { Renderer } from '../renderer';
 import { ShaderProgram } from '../shader/program';
 import { State2D, State3D } from '../state';
-import { System } from '../system';
+import { System2D } from '../system/2d';
+import { System3D } from '../system/3d';
 import { Font } from '../text';
 import { TextureAtlas } from '../texture';
 import { UI } from '../ui';
@@ -29,11 +30,10 @@ export abstract class Game {
     public readonly renderer: Renderer;
     public readonly canvas: HTMLCanvasElement;
 
-    protected readonly states = new Map<string, State2D | State3D>();
-    protected currentState: State2D | State3D | undefined;
+    protected abstract readonly states: Map<string, State2D | State3D>;
+    protected abstract currentState: State2D | State3D | undefined;
 
-    // TODO 2D/3D split for Systems?
-    protected readonly systems = new Map<string, System>();
+    protected abstract readonly systems: Map<string, System2D | System3D>;
 
     protected frameDelta = 0;
     protected lastFrameTime = 0;
@@ -122,15 +122,9 @@ export abstract class Game {
         this.initState();
     }
 
-    public addSystem(system: System): void {
-        this.systems.set(system.name, system);
-    }
+    public abstract addSystem(system: System2D | System3D): void;
 
-    public addSystems(...systems: Array<System>): void {
-        for (const system of systems) {
-            this.addSystem(system);
-        }
-    }
+    public abstract addSystems(...systems: Array<System2D | System3D>): void;
 
     public removeSystem(name: string): void {
         this.systems.delete(name);

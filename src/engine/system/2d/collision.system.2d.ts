@@ -1,7 +1,7 @@
 import { BoxCollider2D, Transform2D } from '../../component/2d';
-import { Game, Game2D, Game3D } from '../../core';
+import { Game2D } from '../../core';
 import { Entity } from '../../entity';
-import { System } from '../system';
+import { System2D } from './system.2d';
 
 /**
  * Built-in 2D Collision System, handling the collision testing of two dimensional Entities which are capable of colliding with one another
@@ -13,14 +13,9 @@ import { System } from '../system';
  * @see BoxCollider2D
  * @see Transform2D
  */
-export class Collision2D extends System {
+export class Collision2D extends System2D {
 
-    /**
-     * Constructor. Provide the name 'Collision2D' to the parent class
-     */
-    constructor() {
-        super('Collision2D');
-    }
+    public readonly name = 'Collision2D';
 
     /**
      * Concrete update function implementing the Collision System's per-frame functionality.
@@ -30,7 +25,7 @@ export class Collision2D extends System {
      * @param game the Game the System is running within
      * @param frameDelta the time between the last frame and the current, for normalizing time-dependent operations
      */
-    public tick(game: Game): void {
+    public tick(game: Game2D, frameDelta: number): void {
         const collidables = game.world.filterEntitiesByComponentNames('Transform2D', 'BoxCollider2D');
 
         for (let i = 0; i < collidables.length; i++) {

@@ -3,6 +3,7 @@ import { World2D } from '../world/world.2d';
 import { GameConfig2D } from './game.config';
 import { Game } from './game';
 import { State2D } from '../state/state.2d';
+import { System2D } from '../system/2d';
 
 export class Game2D extends Game {
 
@@ -10,6 +11,8 @@ export class Game2D extends Game {
 
     protected readonly states = new Map<string, State2D>();
     protected currentState: State2D | undefined;
+
+    protected readonly systems = new Map<string, System2D>();
 
     constructor(config?: GameConfig2D) {
         super(config);
@@ -42,6 +45,16 @@ export class Game2D extends Game {
     public endState(): void {
         // TODO because typesafety on game param
         this.currentState?.end(this);
+    }
+
+    public addSystem(system: System2D): void {
+        this.systems.set(system.name, system);
+    }
+
+    public addSystems(...systems: Array<System2D>): void {
+        for (const system of systems) {
+            this.addSystem(system);
+        }
     }
 
     protected update(): void {

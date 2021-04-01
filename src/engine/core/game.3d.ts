@@ -3,6 +3,7 @@ import { World3D } from '../world/world.3d';
 import { GameConfig3D } from './game.config';
 import { Game } from './game';
 import { State3D } from '../state/state.3d';
+import { System3D } from '../system/3d';
 
 export class Game3D extends Game {
 
@@ -10,6 +11,8 @@ export class Game3D extends Game {
 
     protected readonly states = new Map<string, State3D>();
     protected currentState: State3D | undefined;
+
+    protected readonly systems = new Map<string, System3D>();
 
     constructor(config?: GameConfig3D) {
         super(config);
@@ -42,6 +45,16 @@ export class Game3D extends Game {
     public endState(): void {
         // TODO because typesafety on game param
         this.currentState?.end(this);
+    }
+
+    public addSystem(system: System3D): void {
+        this.systems.set(system.name, system);
+    }
+
+    public addSystems(...systems: Array<System3D>): void {
+        for (const system of systems) {
+            this.addSystem(system);
+        }
     }
 
     protected update(): void {

@@ -1,7 +1,7 @@
 import { Transform3D } from '../../component/3d';
-import { Game, Game2D, Game3D } from '../../core';
+import { Game3D } from '../../core';
 import { Vec3 } from '../../math';
-import { System } from '../system';
+import { System3D } from './system.3d';
 
 /**
  * Built-in 3D Physics System, handling the movement of three dimensional Entities which are capable of moving
@@ -10,14 +10,9 @@ import { System } from '../system';
  *
  * @see Transform2D
  */
-export class Physics extends System {
+export class Physics extends System3D {
 
-    /**
-     * Constructor. Provide the name 'Physics3D' to the parent class
-     */
-    constructor() {
-        super('Physics3D');
-    }
+    public readonly name = 'Physics3D';
 
     /**
      * Concrete update function implementing the Physics System's per-frame functionality.
@@ -27,7 +22,7 @@ export class Physics extends System {
      * @param game the Game the System is running within
      * @param frameDelta the time between the last frame and the current, for normalizing time-dependent operations
      */
-    public tick(game: Game, frameDelta: number): void {
+    public tick(game: Game3D, frameDelta: number): void {
         const movers = game.world.filterEntitiesByComponentName('Transform3D');
 
         for (const e of movers) {

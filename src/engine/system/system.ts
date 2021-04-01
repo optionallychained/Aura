@@ -1,4 +1,4 @@
-import { Game } from '../core';
+import { Game2D, Game3D } from '../core';
 
 /**
  * Abstract class representing a System; a distinct purposeful processing method that runs on a per-frame basis, operating on Entities to
@@ -12,14 +12,9 @@ import { Game } from '../core';
  * @see PhysicsSystem
  * @see CollisionSystem
  */
-export abstract class System {
+export abstract class System<TGame extends Game2D | Game3D> {
 
-    /**
-     * Constructor. Take and store the System's name
-     *
-     * @param name the System's name
-     */
-    constructor(public readonly name: string) { }
+    public abstract readonly name: string;
 
     /**
      * Abstract update function called by the Game on a per-frame basis when the System is active. The functional body of the System itself
@@ -27,5 +22,5 @@ export abstract class System {
      * @param game the Game the System is running within
      * @param frameDelta the time between the last frame and the current, for normalizing time-dependent operations
      */
-    public abstract tick(game: Game, frameDelta: number): void;
+    public abstract tick(game: TGame, frameDelta: number): void;
 }
