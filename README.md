@@ -1,6 +1,6 @@
 # Aura
 
-[![NPM](https://badge.fury.io/js/protogl.svg)](https://badge.fury.io/js/protogl)
+[![NPM](https://badge.fury.io/js/aura.ts.svg)](https://badge.fury.io/js/aura.ts)
 
 Aura is a work-in-progress TypeScript/WebGL general-purpose game engine, designed to enable the swift implementation of both 2D and 3D browser games and providing a large base of built-in utility.
 
@@ -33,10 +33,10 @@ Fork or clone [Aura-Template](https://github.com/jonnopon/Aura-Template) to get 
 
 ### NPM
 
-`npm install protogl`
+`npm install aura.ts`
 
 ### CDN
 
 ```html
-<script src="https://unpkg.com/protogl/publish/_min/aura.min.js"></script>
+<script src="https://unpkg.com/aura.ts/publish/_min/aura.min.js"></script>
 ```
