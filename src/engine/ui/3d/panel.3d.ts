@@ -6,6 +6,7 @@ import { BOX } from '../../geometry/3d';
 import { Color, Vec3 } from '../../math';
 import { PROGRAM_BASIC_ORTHO_3D } from '../../shader/program/3d';
 
+// TODO continue on branch ui
 export class Panel3D extends Entity {
 
     constructor(position: Vec3, scale: Vec3, color: Color) {

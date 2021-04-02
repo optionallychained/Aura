@@ -1,7 +1,13 @@
 import { EntityManagerConfig } from '../entity';
 
-/**
- * Interface desciribing a UI configuration object
- */
 /* eslint-disable @typescript-eslint/no-empty-interface */
-export interface UIConfig extends EntityManagerConfig { }
+
+/**
+ * Interface desciribing a UI2D configuration object
+ */
+export interface UIConfig2D extends EntityManagerConfig { }
+
+/**
+ * Interface desciribing a UI3D configuration object
+ */
+export interface UIConfig3D extends EntityManagerConfig { }

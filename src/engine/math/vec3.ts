@@ -255,7 +255,7 @@ export class Vec3 {
     }
 
     /**
-     * Transform a Vec3 by a given Mat4
+     * Transform a Vec3 by a given Mat4 transformation matrix
      *
      * @param v the Vec3 to transform
      * @param m the Mat4 to transform by

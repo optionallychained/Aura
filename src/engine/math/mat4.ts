@@ -356,7 +356,9 @@ export class Mat4 {
     }
 
     /**
-     * Create a rotation matrix for a given angle (radians) around an arbitrary given axis
+     * Create a Mat4 representing a rotation by a given angle (radians) around an arbitrary given axis
+     *
+     * Useful convenience method effectively equivalent to rotating a new Mat4 by angles scaled along the x, y and z axes
      *
      * @param axis the axis to rotate around
      * @param angle the angle (radians) to rotate by
@@ -414,19 +416,18 @@ export class Mat4 {
         ]);
     }
 
-
-    // public static infinitePerspective(fov: number, aspect: number, near: number): Mat4 {
-    //     const _fov = 1 / Math.tan(Angle.toRadians(fov) / 2);
-
-    //     return new Mat4([
-    //         _fov / aspect, 0, 0, 0,
-    //         0, _fov, 0, 0,
-    //         0, 0, -1, -1,
-    //         0, 0, -2 * near, 0
-    //     ])
-    // }
-
-    // TODO placeholder
+    /**
+     * Create a 4x4 perspective projection matrix for a given field of view, aspect ratio and near and far planes
+     *
+     * If far is not provided, an infinite projection matrix will be created
+     *
+     * @param fov the vertical field of view
+     * @param aspect the aspect ratio
+     * @param near the near plane
+     * @param far the far plane
+     *
+     * @returns the 4x4 perspective projection matrix
+     */
     public static perspective(fov: number, aspect: number, near: number, far?: number): Mat4 {
         const _fov = 1 / Math.tan(Angle.toRadians(fov) / 2);
 
@@ -450,7 +451,18 @@ export class Mat4 {
         }
     }
 
-    // TODO placeholder
+    /**
+     * Create a 4x4 orthographic projection matrix for a given viewing box definition
+     *
+     * @param left the left of the viewing box
+     * @param right the right of the viewing box
+     * @param bottom the bottom of the viewing box
+     * @param top the top of the viewing box
+     * @param near the near plane
+     * @param far the far plane
+     *
+     * @returns the 4x4 orthographic projection matrix
+     */
     public static ortho(left: number, right: number, bottom: number, top: number, near: number, far: number): Mat4 {
         return new Mat4([
             2 / (right - left), 0, 0, 0,
@@ -464,16 +476,22 @@ export class Mat4 {
         ]);
     }
 
+    /**
+     * Create a 4x4 lookAt matrix, representing the orientation required to have an object face a target
+     *
+     * Note: **does not** produce a View Matrix, instead a more generally-useful lookAt Matrix. For use as a View, must be inverted
+     *
+     * @param eye the position of the object
+     * @param target the target to look at
+     * @param up the up axis of the object
+     *
+     * @returns the lookAt matrix
+     */
     public static lookAt(eye: Vec3, target: Vec3, up: Vec3): Mat4 {
         const z = Vec3.normalize(Vec3.sub(eye, target));
         const x = Vec3.normalize(Vec3.cross(up, z));
         const y = Vec3.normalize(Vec3.cross(z, x));
 
-        // TODO lots of lookAt examples use (Vec3.dot(x, eye), Vec3.dot(y, eye), Vec3.dot(z, eye)) for the translation component
-        //   when I do this...shit breaks
-        // is this fundamentally flawed?
-
-        // TODO is using lookAt matrices for Transform3D...good?
         return new Mat4([
             x.x, x.y, x.z, 0,
             y.x, y.y, y.z, 0,

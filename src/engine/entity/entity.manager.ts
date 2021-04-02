@@ -11,20 +11,28 @@ import { EntityManagerConfig } from './entity.manager.config';
 type EntityChanges = Array<{ shaderName: string; modelName: string; }>;
 
 /**
- * Core EntityManager; utilised by the Game to defer the management, updating and rendering of game Entities
+ * Abstract core EntityManager; implementing the generic and abstractable behaviour for the management, updating and rendering of Entities
  *
- * Three EntityManagers in total are utilised by World, Font and UI so as to separate processing and utility for the three distinct Entity
- *   types and allow for the consolidation of all update/rendering logic into the relationship between EntityManager and WebGLRenderer
+ * Three concrete EntityManagers are utilised by the core Game to manage World objects, UI objects and Font objects; separating processing
+ *   and utility for the three distince use-cases for Entities. These are then broken down into 2D and 3D variants for the type correction
+ *   of their consumer APIs
  *
  * Works to optimise Entity management and rendering by grouping Entities, precompiling vertex lists, handling VBOs and caching Entity
  *   filter/search results
  *
  * VBOs are provisioned on a per-shader+model combination basis. This is because Entities that share both a Shader and a Model can be
- *   rendered in batches, and thereby their vertices buffered to the GPU and drawn from as a single set
+ *   rendered in batches, and thereby their vertices buffered  to the GPU and drawn from as a single set
  *
- * The EntityManagers are available on the Game instance at `game.[world|ui|font].entityManager`
+ * Receives and works with a single TextureAtlas, thereby allowing for texture sources per Entity use-case
+ *
+ * The concrete EntityManagers are available on the Game instance at `game.[world|ui|font]`
+ *
+ * @typeparam TConfig the configuration object type, extending the core EntityManagerConfig, used by concrete extensions
  *
  * @see Game
+ * @see World
+ * @see Font
+ * @see UI
  */
 export abstract class EntityManager<TConfig extends EntityManagerConfig> {
 

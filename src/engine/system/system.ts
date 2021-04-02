@@ -1,26 +1,31 @@
 import { Game2D, Game3D } from '../core';
 
 /**
- * Abstract class representing a System; a distinct purposeful processing method that runs on a per-frame basis, operating on Entities to
- *   produce game behavior
+ * Abstract class representing a System, broken down into concrete 2D and 3D variants in System2D and System3D
  *
- * All Systems should extend from this class and provide an easy-to-guess and sensible name (eg. Physics2D => 'Physics2D')
+ * A System is at its core a distinct and purposeful processing method that runs once per frame, intended for the production of Game
+ *   behavior by way of operating on given sets of Entities
  *
- * Example Systems include Physics and Collision
+ * Example Systems may include Physics and Collision
  *
- * @see Game
- * @see PhysicsSystem
- * @see CollisionSystem
+ * The typeparam specifies which concrete Game type the System belongs to, allowing for concrete System2Ds and System3Ds to receive a
+ *   type-correct Game instance in their tick lifecycle method, and enabling the assurance that a Game is only configured with the
+ *   corresponding 2D or 3D System type
+ *
+ * @typeparam TGame the concrete Game type the State belongs to
  */
 export abstract class System<TGame extends Game2D | Game3D> {
 
+    /** Abstract name for the System, to be implemented by concrete Systems */
     public abstract readonly name: string;
 
     /**
-     * Abstract update function called by the Game on a per-frame basis when the System is active. The functional body of the System itself
+     * Abstract tick lifecycle method, called once per frame while the System is active
      *
-     * @param game the Game the System is running within
-     * @param frameDelta the time between the last frame and the current, for normalizing time-dependent operations
+     * Receives the type-correct Game instance as well as the frameDelta so as to provide full flexibility on the System's behavior
+     *
+     * @param game the Game2D or Game3D the System is running within
+     * @param frameDelta the Game's frameDelta for normalizing time-dependent operations
      */
     public abstract tick(game: TGame, frameDelta: number): void;
 }

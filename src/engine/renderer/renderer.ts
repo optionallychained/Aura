@@ -5,7 +5,7 @@ import { ShaderProgram } from '../shader/program';
 import { UniformType } from '../shader/uniformType.enum';
 import { TextureAtlas } from '../texture';
 import { VBOConfig } from './vbo.config';
-import { WebGLRendererConfig } from './webgl.renderer.config';
+import { RendererConfig } from './renderer.config';
 
 /**
  * Internal-use utility type for representing attribute location and size information required only by the renderer
@@ -62,7 +62,7 @@ interface TextureSpec {
 }
 
 /**
- * Core WebGLRenderer; utilised by the EntityManager to defer the rendering of Entities to the Canvas
+ * Core WebGL Renderer; utilised by the EntityManager to defer the rendering of Entities to the Canvas
  *
  * Handles every aspect of WebGL API interaction; including the construction and maintenance of Shaders and VBOs, and the rendering of game
  *   objects by way of a per-render-call configuration object
@@ -75,11 +75,8 @@ interface TextureSpec {
  */
 export class Renderer {
 
-    /** 2D Projection Matrix */
-    // TODO move into World 'projection'
+    // TODO temporary; to be moved into World
     private projectionMatrix = new Mat3();
-
-    // TODO potentially temporary
     private perspectiveMatrix = new Mat4();
     private orthoMatrix = new Mat4();
 
@@ -111,9 +108,9 @@ export class Renderer {
     private mode: '2D' | '3D' = '2D';
 
     /**
-     * Constructor. Retrieve and store the WebGLRenderingContext from the given Canvas, then perform one-time setup of the context
+     * Constructor. Retrieve and store the Game the Renderer belongs to, then perform one-time setup of the Canvas context
      *
-     * @param canvas the Canvas we're drawing to
+     * @param game the Game the Renderer belongs to
      * @param clearColor the Game's background color, to be set as the gl clearColor once on init
      */
     constructor(private readonly game: Game, clearColor: Color) {
@@ -133,20 +130,26 @@ export class Renderer {
         this.init();
     }
 
+    // TODO temporary; to be moved into World
     public get projection(): Mat3 {
         return this.projectionMatrix;
     }
 
+    // TODO temporary; to be moved into World
     public get perspective(): Mat4 {
         return this.perspectiveMatrix;
     }
 
+    // TODO temporary; to be moved into World
     public get ortho(): Mat4 {
         return this.orthoMatrix;
     }
 
+    /**
+     * Getter for the active texture unit, used for configuring Sampler2Ds in shaders
+     */
     public get activeTextureUnit(): number {
-        // TODO error handling
+        // TODO error handling?
         return this.activeTexture?.uniformUnit ?? -1;
     }
 
@@ -316,11 +319,11 @@ export class Renderer {
     }
 
     /**
-     * Generic rendering method; using the information in a given WebGLRendererConfig, render some Entities
+     * Generic rendering method; using the information in a given RendererConfig, render some Entities
      *
-     * @param config the WebGLRenderingConfig specifying what and how to render
+     * @param config the RendererConfig specifying what and how to render
      */
-    public render(config: WebGLRendererConfig): void {
+    public render(config: RendererConfig): void {
         const { gl } = this;
 
         // switch shader programs if necessary
@@ -391,7 +394,8 @@ export class Renderer {
         gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
         this.projectionMatrix = Mat3.projection(gl.canvas.width, gl.canvas.height);
-        // TODO placeholder
+
+        // TODO placeholder; to be moved into World
         // TODO review math/values, esp. for near/far
         this.perspectiveMatrix = Mat4.perspective(90, gl.canvas.width / gl.canvas.height, 0.1, 1000000);
         this.orthoMatrix = Mat4.ortho(-gl.canvas.width / 2, gl.canvas.width / 2, -gl.canvas.height / 2, gl.canvas.height / 2, 400, -400);

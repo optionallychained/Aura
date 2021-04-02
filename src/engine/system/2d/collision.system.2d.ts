@@ -4,25 +4,22 @@ import { Entity } from '../../entity';
 import { System2D } from './system.2d';
 
 /**
- * Built-in 2D Collision System, handling the collision testing of two dimensional Entities which are capable of colliding with one another
+ * Built-in concrete 2D Collision System, handling the collision testing of two dimensional Entities which are capable of colliding with one
+ *   another
  *
  * To be eligible for collision, an Entity must have a Transform2D and a BoxCollider2D
- *
- * // TODO reimplement
- *
- * @see BoxCollider2D
- * @see Transform2D
  */
 export class Collision2D extends System2D {
 
+    /** Provide the System's name */
     public readonly name = 'Collision2D';
 
     /**
-     * Concrete update function implementing the Collision System's per-frame functionality.
+     * Concrete tick lifecycle methid implementing the Collision System's per-frame functionality
      *
      * Check for collision between all eligible Entities and call their collision handling methods if appropriate
      *
-     * @param game the Game the System is running within
+     * @param game the Game2D the System is running within
      * @param frameDelta the time between the last frame and the current, for normalizing time-dependent operations
      */
     public tick(game: Game2D, frameDelta: number): void {

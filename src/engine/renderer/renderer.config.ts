@@ -2,7 +2,7 @@ import { Entity } from '../entity';
 import { VBOConfig } from './vbo.config';
 
 /**
- * Interface describing a WebGLRenderer configuration object, containing all the information the WebGLRenderer needs to execute a *single*
+ * Interface describing a Renderer configuration object, containing all the information the Renderer needs to execute a *single*
  *   render() call
  *
  * Constructed by the EntityManager in its management and rendering of Entities
@@ -10,7 +10,7 @@ import { VBOConfig } from './vbo.config';
  * @see WebGLRenderer
  * @see EntityManager
  */
-export interface WebGLRendererConfig {
+export interface RendererConfig {
     /** The name of the shader program to use for this render call */
     readonly shaderProgramName: string;
     /** The VBOConfig describing the VBO to use in this render call */
