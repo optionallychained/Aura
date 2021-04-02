@@ -1,5 +1,5 @@
-import { FlatColor, Model, Shader } from '../../component';
 import { Transform2D } from '../../component/2d';
+import { FlatColor, Model, Shader } from '../../component/generic';
 import { Game } from '../../core';
 import { Entity } from '../../entity';
 import { BOX } from '../../geometry/2d';

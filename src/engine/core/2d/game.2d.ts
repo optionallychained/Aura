@@ -1,11 +1,12 @@
-import { Vec2 } from '../../math';
-import { World2D } from '../../world/2d/world.2d';
-import { GameConfig2D } from '../game.config';
-import { Game } from '../game';
-import { State2D } from '../../state/2d/state.2d';
-import { System2D } from '../../system/2d';
 import { Font2D } from '../../font/2d';
+import { Vec2 } from '../../math';
+import { State2D } from '../../state/2d';
+import { System2D } from '../../system/2d';
 import { UI2D } from '../../ui/2d';
+import { World2D } from '../../world/2d';
+import { Game } from '../game';
+import { Game2DConfig } from './game.2d.config';
+
 
 /**
  * Concrete Game2D object, setting out the 2D-specific properties and runtime behaviour of 2D Aura Games
@@ -38,7 +39,7 @@ export class Game2D extends Game {
      *
      * @param config the optional GameConfig2D
      */
-    constructor(config?: GameConfig2D) {
+    constructor(config?: Game2DConfig) {
         super(config);
 
         // initialsie a Font2D

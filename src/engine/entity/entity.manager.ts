@@ -1,4 +1,4 @@
-import { Model, Shader, Texture } from '../component';
+import { Model, Shader, Texture } from '../component/generic';
 import { AuraError, Game } from '../core';
 import { VBOConfig } from '../renderer';
 import { ShaderVariableResolver } from '../shader';

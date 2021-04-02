@@ -1,6 +1,7 @@
 import { Mat4, Vec3 } from '../../math';
 import { Component } from '../component';
 
+
 /**
  * Built-in Transform3D Component, defining the position, scale, rotation and velocity of a three dimensional Entity
  *

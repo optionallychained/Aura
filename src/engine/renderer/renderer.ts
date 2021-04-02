@@ -1,11 +1,10 @@
 import { AuraError, Game } from '../core';
 import { Color, Mat3, Mat4 } from '../math';
-import { ShaderVariableResolver, UniformVariation } from '../shader';
+import { ShaderVariableResolver, UniformType, UniformVariation } from '../shader';
 import { ShaderProgram } from '../shader/program';
-import { UniformType } from '../shader/uniformType.enum';
 import { TextureAtlas } from '../texture';
-import { VBOConfig } from './vbo.config';
 import { RendererConfig } from './renderer.config';
+import { VBOConfig } from './vbo.config';
 
 /**
  * Internal-use utility type for representing attribute location and size information required only by the renderer

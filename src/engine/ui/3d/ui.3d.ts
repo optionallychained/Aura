@@ -1,7 +1,7 @@
 import { Color, Vec3 } from '../../math';
 import { UI } from '../ui';
-import { UIConfig3D } from '../ui.config';
 import { Panel3D } from './panel.3d';
+import { UI3DConfig } from './ui.3d.config';
 
 /**
  * Concrete UI3D, a UI EntityManager setting out the 3D-specific properties and behavior of UI object management for 3D Games
@@ -9,7 +9,7 @@ import { Panel3D } from './panel.3d';
  * Implements and type-narrows the abstract elements of the parent class UI so as to produce consumer type-safety on things like Panel
  *   management
  */
-export class UI3D extends UI<UIConfig3D> {
+export class UI3D extends UI<UI3DConfig> {
 
     /**
      * Concrete Panel addition routine, narrowing the generic types to ensure the correct configuration of a UI3D

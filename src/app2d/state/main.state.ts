@@ -1,11 +1,10 @@
 import { Angle, Component, Core, Entity, Input, State, Vec2 } from '../../engine';
-import { Game2D } from '../../engine/core';
 import { Axis2D } from '../entity/axis';
 import { RectFlat } from '../entity/rect/rectFlat';
 
 const player = new RectFlat(new Vec2(0, 0), new Vec2(100, 100));
 
-const populate = (game: Core.Game2D): void => {
+const populate = (game: Core.TwoD.Game2D): void => {
     const entities: Array<Entity.Entity> = [];
 
     for (let x = -game.world.dimensions.x / 2; x <= game.world.dimensions.x / 2; x += game.world.dimensions.x / 10) {
@@ -23,7 +22,7 @@ const populate = (game: Core.Game2D): void => {
     game.world.activeCamera.attachTo(player);
 };
 
-export const MainState = new State.State2D({
+export const MAIN_STATE = new State.TwoD.State2D({
     name: 'main',
     init: (game) => {
         populate(game);

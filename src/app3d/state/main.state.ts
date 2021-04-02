@@ -6,7 +6,7 @@ const player = new CubeMulti(new Vec3(0, 1500, 1000000 / 2), new Vec3(100, 100, 
 
 const rotations: Array<Vec3> = [];
 
-const populate = (game: Core.Game3D): void => {
+const populate = (game: Core.ThreeD.Game3D): void => {
     const entities: Array<Entity.Entity> = [];
 
     entities.push(player);
@@ -41,7 +41,7 @@ const populate = (game: Core.Game3D): void => {
     game.world.activeCamera.attachTo(player);
 };
 
-export const MainState = new State.State3D({
+export const MAIN_STATE = new State.ThreeD.State3D({
     name: 'main',
     init: (game) => {
         populate(game);

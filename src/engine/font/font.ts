@@ -1,6 +1,7 @@
 import { EntityManager } from '../entity';
 import { Color, Vec2, Vec3 } from '../math';
-import { FontConfig2D, FontConfig3D } from './font.config';
+import { Font2DConfig } from './2d';
+import { Font3DConfig } from './3d';
 
 /**
  * Abstract Font, an EntityManager which sets out the fundamental properties and runtime behavior of Font object management, and broken
@@ -12,7 +13,7 @@ import { FontConfig2D, FontConfig3D } from './font.config';
  *
  * // TODO continue on branch text
  */
-export abstract class Font<TConfig extends FontConfig2D | FontConfig3D> extends EntityManager<TConfig> {
+export abstract class Font<TConfig extends Font2DConfig | Font3DConfig> extends EntityManager<TConfig> {
 
     /**
      * Constructor. Take the type-correct Fontr Config and pass it up to the parent class

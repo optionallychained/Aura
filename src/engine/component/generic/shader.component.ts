@@ -1,7 +1,8 @@
-import { FragmentShader } from '../../shader/fragment/fragment.shader';
+import { FragmentShader } from '../../shader/fragment';
 import { ShaderProgram } from '../../shader/program';
-import { VertexShader } from '../../shader/vertex/vertex.shader';
+import { VertexShader } from '../../shader/vertex';
 import { Component } from '../component';
+
 
 /**
  * Built-in Shader Component, defining the Shader an Entity will use in rendering

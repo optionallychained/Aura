@@ -1,6 +1,6 @@
 import { UniformType } from '../../uniformType.enum';
 import { UniformVariation } from '../../uniformVariation.enum';
-import { VertexShader } from '../../vertex';
+import { VertexShader } from '../vertex.shader';
 
 /**
  * Built-in basic 2D Vertex Shader, transforming vertices by a uniform Mat3

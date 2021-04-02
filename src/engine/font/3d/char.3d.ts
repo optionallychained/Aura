@@ -1,10 +1,11 @@
-import { FlatColor, Model, Shader, Texture } from '../../component';
 import { Transform3D } from '../../component/3d';
+import { FlatColor, Model, Shader, Texture } from '../../component/generic';
 import { Game } from '../../core';
 import { Entity } from '../../entity';
 import { BOX } from '../../geometry/3d';
 import { Color, Vec2, Vec3 } from '../../math';
 import { PROGRAM_TEXTURE_COLORED_3D } from '../../shader/program/3d';
+
 
 // TODO continue on branch text
 export class Char3D extends Entity {

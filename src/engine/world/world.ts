@@ -1,8 +1,10 @@
-import { Camera2D, Camera3D } from '../camera';
+import { Camera2D } from '../camera/2d';
+import { Camera3D } from '../camera/3d';
 import { AuraError } from '../core';
 import { EntityManager } from '../entity';
 import { Vec2, Vec3 } from '../math';
-import { WorldConfig2D, WorldConfig3D } from './world.config';
+import { World2DConfig } from './2d';
+import { World3DConfig } from './3d';
 
 /**
  * Abstract World, an EntityManager which sets out the fundamental properties and runtime behavior of World object management, and broken
@@ -12,7 +14,7 @@ import { WorldConfig2D, WorldConfig3D } from './world.config';
  *
  * @typeparam TConfig the specific configuration object type, allowing for the type-correct configuration of the World Manager
  */
-export abstract class World<TConfig extends WorldConfig2D | WorldConfig3D> extends EntityManager<TConfig> {
+export abstract class World<TConfig extends World2DConfig | World3DConfig> extends EntityManager<TConfig> {
 
     /** Abstract reference to the active Camera, to be implemented and managed and the type to be narrowed by the subclass */
     public abstract activeCamera: Camera2D | Camera3D;

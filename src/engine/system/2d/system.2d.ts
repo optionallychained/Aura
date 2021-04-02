@@ -1,4 +1,4 @@
-import { Game2D } from '../../core';
+import { Game2D } from '../../core/2d';
 import { System } from '../system';
 
 /**

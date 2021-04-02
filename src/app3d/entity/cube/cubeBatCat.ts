@@ -6,10 +6,10 @@ export class CubeBatCat extends Entity.Entity {
         super({
             tag: 'cubeBatCat',
             components: [
-                new Component.Texture(1, 1),
-                new Component.FlatColor(new Color(255, 255, 255, Random.between(0, 1))),
-                new Component.Model(Geometry.ThreeD.BOX),
-                new Component.Shader(Shader.Program.ThreeD.PROGRAM_TEXTURE_COLORED_3D),
+                new Component.Generic.Texture(1, 1),
+                new Component.Generic.FlatColor(new Color(255, 255, 255, Random.between(0, 1))),
+                new Component.Generic.Model(Geometry.ThreeD.BOX),
+                new Component.Generic.Shader(Shader.Program.ThreeD.PROGRAM_TEXTURE_COLORED_3D),
                 new Component.ThreeD.Transform3D(
                     new Vec3(Random.between(-1, 1), Random.between(-1, 1), 0.5),
                     new Vec3(Random.between(0.1, 1), Random.between(0.1, 1), Random.between(0.1, 1))

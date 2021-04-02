@@ -1,8 +1,8 @@
 import { Entity } from '../../entity';
 import { Color, Vec2 } from '../../math';
 import { Font } from '../font';
-import { FontConfig2D } from '../font.config';
 import { Char2D } from './char.2d';
+import { Font2DConfig } from './font.2d.config';
 
 /**
  * Concrete Font2D, a Font EntityManager setting out the 2D-specific properties and behavior of Font object management for 2D Games
@@ -10,7 +10,7 @@ import { Char2D } from './char.2d';
  * Implements and type-narrows the abstract elements of the parent class Font so as to produce consumer type-safety on things like String
  *   management
  */
-export class Font2D extends Font<FontConfig2D> {
+export class Font2D extends Font<Font2DConfig> {
 
     /**
      * Concrete String addition routine, narrowing the generic types to ensure the correct configuration of a Font2D

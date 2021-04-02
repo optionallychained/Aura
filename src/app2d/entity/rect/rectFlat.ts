@@ -6,9 +6,9 @@ export class RectFlat extends Entity.Entity {
         super({
             tag: 'rectFlat',
             components: [
-                new Component.FlatColor(Color.random()),
-                new Component.Model(Geometry.TwoD.BOX),
-                new Component.Shader(Shader.Program.TwoD.PROGRAM_BASIC_2D),
+                new Component.Generic.FlatColor(Color.random()),
+                new Component.Generic.Model(Geometry.TwoD.BOX),
+                new Component.Generic.Shader(Shader.Program.TwoD.PROGRAM_BASIC_2D),
                 new Component.TwoD.Transform2D(
                     position,
                     scale

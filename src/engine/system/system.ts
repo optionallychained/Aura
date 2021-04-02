@@ -1,4 +1,5 @@
-import { Game2D, Game3D } from '../core';
+import { Game2D } from '../core/2d';
+import { Game3D } from '../core/3d';
 
 /**
  * Abstract class representing a System, broken down into concrete 2D and 3D variants in System2D and System3D
@@ -13,6 +14,12 @@ import { Game2D, Game3D } from '../core';
  *   corresponding 2D or 3D System type
  *
  * @typeparam TGame the concrete Game type the State belongs to
+ *
+ * // TODO consider: change towards a SystemConfig/direct-construct System2D/3D similar to States
+ * //   - pro: Systems and States are similar and familiar
+ * //   - con: additional methods for Systems become "floating" module scoped members instead of qualified class methods?
+ * //   - alternative: change States towards the way Systems are implemented?
+ * //   - thoughts: is having the two structures be similar desirable?
  */
 export abstract class System<TGame extends Game2D | Game3D> {
 

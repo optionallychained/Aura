@@ -1,6 +1,7 @@
-import { EntityManager, } from '../entity';
+import { EntityManager } from '../entity';
 import { Color, Vec2, Vec3 } from '../math';
-import { UIConfig2D, UIConfig3D } from './ui.config';
+import { UI2DConfig } from './2d';
+import { UI3DConfig } from './3d';
 
 /**
  * Abstract UI, an EntityManager which sets out the fundamental properties and runtime behavior of UI object management, and broken
@@ -12,7 +13,7 @@ import { UIConfig2D, UIConfig3D } from './ui.config';
  *
  * // TODO continue on branch ui
  */
-export abstract class UI<TConfig extends UIConfig2D | UIConfig3D> extends EntityManager<TConfig> {
+export abstract class UI<TConfig extends UI2DConfig | UI3DConfig> extends EntityManager<TConfig> {
 
     /**
      * Constructor. Take the type-correct UI Config and pass it up to the parent class

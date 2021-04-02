@@ -1,7 +1,7 @@
 import { Color, Vec2 } from '../../math';
 import { UI } from '../ui';
-import { UIConfig2D } from '../ui.config';
 import { Panel2D } from './panel.2d';
+import { UI2DConfig } from './ui.2d.config';
 
 /**
  * Concrete UI2D, a UI EntityManager setting out the 2D-specific properties and behavior of UI object management for 2D Games
@@ -9,7 +9,7 @@ import { Panel2D } from './panel.2d';
  * Implements and type-narrows the abstract elements of the parent class UI so as to produce consumer type-safety on things like Panel
  *   management
  */
-export class UI2D extends UI<UIConfig2D> {
+export class UI2D extends UI<UI2DConfig> {
 
     /**
      * Concrete Panel addition routine, narrowing the generic types to ensure the correct configuration of a UI2D

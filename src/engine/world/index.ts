@@ -1,5 +1,4 @@
-export * from './world.config';
 export * from './world';
 
-export * from './2d';
-export * from './3d';
+export * as TwoD from './2d';
+export * as ThreeD from './3d';

@@ -1,4 +1,5 @@
-import { Game2D, Game3D } from '../core';
+import { Game2D } from '../core/2d';
+import { Game3D } from '../core/3d';
 
 /**
  * Interface describing a State Configuration object, providing a name as well as its lifecycle methods

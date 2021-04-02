@@ -1,4 +1,4 @@
-import { Angle, Color, Component, Core, Entity, Geometry, Shader, Vec2, Vec3 } from '../../engine';
+import { Angle, Color, Component, Core, Entity, Geometry, Shader, Vec3 } from '../../engine';
 
 export class Axis3D extends Entity.Entity {
 
@@ -25,9 +25,9 @@ export class Axis3D extends Entity.Entity {
         super({
             tag: 'axis3D',
             components: [
-                new Component.FlatColor(Color.random()),
-                new Component.Model(Geometry.ThreeD.LINE),
-                new Component.Shader(Shader.Program.ThreeD.PROGRAM_BASIC_PERSPECTIVE_3D),
+                new Component.Generic.FlatColor(Color.random()),
+                new Component.Generic.Model(Geometry.ThreeD.LINE),
+                new Component.Generic.Shader(Shader.Program.ThreeD.PROGRAM_BASIC_PERSPECTIVE_3D),
                 new Component.ThreeD.Transform3D(
                     offset,
                     new Vec3(length, 1, 1),

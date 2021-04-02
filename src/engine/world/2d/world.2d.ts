@@ -1,7 +1,7 @@
-import { Camera2D } from '../../camera';
+import { Camera2D } from '../../camera/2d';
 import { Vec2 } from '../../math';
 import { World } from '../world';
-import { WorldConfig2D } from '../world.config';
+import { World2DConfig } from './world.2d.config';
 
 /**
  * Concrete World2D, a World EntityManager setting out the 2D-specific properties and behavior of World object management for 2D Games
@@ -9,7 +9,7 @@ import { WorldConfig2D } from '../world.config';
  * Implements and type-narrows the abstract elements of the parent class World so as to produce consumer type-safety on things like Camera
  *   management
  */
-export class World2D extends World<WorldConfig2D> {
+export class World2D extends World<World2DConfig> {
 
     /** Concrete 2D active Camera */
     public readonly activeCamera: Camera2D;
@@ -24,7 +24,7 @@ export class World2D extends World<WorldConfig2D> {
      *
      * @param config the WorldConfig2D
      */
-    constructor(config: WorldConfig2D) {
+    constructor(config: World2DConfig) {
         super(config);
 
         const defaultCamera = new Camera2D(

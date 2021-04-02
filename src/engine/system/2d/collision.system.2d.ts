@@ -1,5 +1,5 @@
 import { BoxCollider2D, Transform2D } from '../../component/2d';
-import { Game2D } from '../../core';
+import { Game2D } from '../../core/2d';
 import { Entity } from '../../entity';
 import { System2D } from './system.2d';
 

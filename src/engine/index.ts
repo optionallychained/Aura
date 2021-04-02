@@ -6,6 +6,8 @@ export * as Core from './core';
 
 export * as Entity from './entity';
 
+export * as Font from './font';
+
 export * as Geometry from './geometry';
 
 export * as Input from './input';
@@ -20,8 +22,6 @@ export * as Shader from './shader';
 export * as State from './state';
 
 export * as System from './system';
-
-export * as Font from './font';
 
 export * as Texture from './texture';
 

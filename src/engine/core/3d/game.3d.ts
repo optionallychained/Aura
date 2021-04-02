@@ -1,11 +1,11 @@
-import { Vec3 } from '../../math';
-import { World3D } from '../../world/3d/world.3d';
-import { GameConfig3D } from '../game.config';
-import { Game } from '../game';
-import { State3D } from '../../state/3d/state.3d';
-import { System3D } from '../../system/3d';
 import { Font3D } from '../../font/3d';
+import { Vec3 } from '../../math';
+import { State3D } from '../../state/3d';
+import { System3D } from '../../system/3d';
 import { UI3D } from '../../ui/3d';
+import { World3D } from '../../world/3d';
+import { Game } from '../game';
+import { Game3DConfig } from './game.3d.config';
 
 /**
  * Concrete Game3D object, setting out the 3D-specific properties and runtime behaviour of 3D Aura Games
@@ -38,7 +38,7 @@ export class Game3D extends Game {
      *
      * @param config the optional GameConfig3D
      */
-    constructor(config?: GameConfig3D) {
+    constructor(config?: Game3DConfig) {
         super(config);
 
         // initialise a Font3D

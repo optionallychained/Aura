@@ -1,7 +1,7 @@
-import { Camera3D } from '../../camera';
+import { Camera3D } from '../../camera/3d';
 import { Vec3 } from '../../math';
 import { World } from '../world';
-import { WorldConfig3D } from '../world.config';
+import { World3DConfig } from './world.3d.config';
 
 /**
  * Concrete World3D, a World EntityManager setting out the 3D-specific properties and behavior of World object management for 3D Games
@@ -9,7 +9,7 @@ import { WorldConfig3D } from '../world.config';
  * Implements and type-narrows the abstract elements of the parent class World so as to produce consumer type-safety on things like Camera
  *   management
  */
-export class World3D extends World<WorldConfig3D> {
+export class World3D extends World<World3DConfig> {
 
     /** Concrete 3D active Camera */
     public readonly activeCamera: Camera3D;
@@ -24,7 +24,7 @@ export class World3D extends World<WorldConfig3D> {
      *
      * @param config the WorldConfig3D
      */
-    constructor(config: WorldConfig3D) {
+    constructor(config: World3DConfig) {
         super(config);
 
         const defaultCamera = new Camera3D(

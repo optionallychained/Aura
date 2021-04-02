@@ -1,8 +1,8 @@
 import { Entity } from '../../entity';
 import { Color, Vec2, Vec3 } from '../../math';
 import { Font } from '../font';
-import { FontConfig3D } from '../font.config';
 import { Char3D } from './char.3d';
+import { Font3DConfig } from './font.3d.config';
 
 /**
  * Concrete Font3D, a Font EntityManager setting out the 3D-specific properties and behavior of Font object management for 3D Games
@@ -10,7 +10,7 @@ import { Char3D } from './char.3d';
  * Implements and type-narrows the abstract elements of the parent class Font so as to produce consumer type-safety on things like String
  *   management
  */
-export class Font3D extends Font<FontConfig3D> {
+export class Font3D extends Font<Font3DConfig> {
 
     /**
      * Concrete String addition routine, narrowing the generic types to ensure the correct configuration of a Font3D
