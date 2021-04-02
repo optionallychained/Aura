@@ -1,4 +1,4 @@
-import { Component } from './component';
+import { Component } from '../component';
 
 /**
  * Built-in Texture component, defining the position within a texture atlas an Entity will sample from

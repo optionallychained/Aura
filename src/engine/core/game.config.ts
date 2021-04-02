@@ -1,6 +1,6 @@
 import { ControlScheme } from '../input/controlScheme.type';
 import { Color, Vec2 } from '../math';
-import { FontConfig2D, FontConfig3D } from '../text';
+import { FontConfig2D, FontConfig3D } from '../font';
 import { TextureAtlas } from '../texture';
 import { UIConfig2D, UIConfig3D } from '../ui';
 import { WorldConfig2D, WorldConfig3D } from '../world';

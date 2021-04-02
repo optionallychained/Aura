@@ -1,7 +1,7 @@
-import { Transform3D } from '../component/3d';
-import { AuraError } from '../core';
-import { Entity } from '../entity';
-import { Angle, Mat4, Vec3 } from '../math';
+import { Transform3D } from '../../component/3d';
+import { AuraError } from '../../core';
+import { Entity } from '../../entity';
+import { Angle, Mat4, Vec3 } from '../../math';
 
 export class Camera3D {
 

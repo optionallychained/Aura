@@ -1,5 +1,5 @@
-import { Geometry, GLShape } from '../geometry';
-import { Component } from './component';
+import { Geometry, GLShape } from '../../geometry';
+import { Component } from '../component';
 
 /**
  * Built-in Model Component, defining the Geometry the Entity will use to define its shape

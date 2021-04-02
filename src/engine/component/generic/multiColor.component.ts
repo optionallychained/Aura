@@ -1,5 +1,5 @@
-import { Color } from '../math';
-import { Component } from './component';
+import { Color } from '../../math';
+import { Component } from '../component';
 
 /**
  * Built-in MultiColor Component, defining an arbitrary number of colors for the Entity

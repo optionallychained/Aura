@@ -1,5 +1,5 @@
-import { Color } from '../math';
-import { Component } from './component';
+import { Color } from '../../math';
+import { Component } from '../component';
 
 /**
  * Built-in FlatColor Component, defining a basic singular color for the Entity

@@ -21,7 +21,7 @@ export * as State from './state';
 
 export * as System from './system';
 
-export * as Text from './text';
+export * as Font from './font';
 
 export * as Texture from './texture';
 

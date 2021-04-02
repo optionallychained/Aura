@@ -1,7 +1,7 @@
-import { Transform2D } from '../component/2d';
-import { AuraError } from '../core';
-import { Entity } from '../entity';
-import { Mat3, Vec2 } from '../math';
+import { Transform2D } from '../../component/2d';
+import { AuraError } from '../../core';
+import { Entity } from '../../entity';
+import { Mat3, Vec2 } from '../../math';
 
 interface FollowRules {
     position?: { x?: boolean; y?: boolean; };

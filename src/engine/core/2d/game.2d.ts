@@ -1,11 +1,11 @@
-import { Vec2 } from '../math';
-import { World2D } from '../world/2d/world.2d';
-import { GameConfig2D } from './game.config';
-import { Game } from './game';
-import { State2D } from '../state/state.2d';
-import { System2D } from '../system/2d';
-import { Font2D } from '../text/2d';
-import { UI2D } from '../ui/2d';
+import { Vec2 } from '../../math';
+import { World2D } from '../../world/2d/world.2d';
+import { GameConfig2D } from '../game.config';
+import { Game } from '../game';
+import { State2D } from '../../state/2d/state.2d';
+import { System2D } from '../../system/2d';
+import { Font2D } from '../../font/2d';
+import { UI2D } from '../../ui/2d';
 
 /**
  * Concrete Game2D object, setting out the 2D-specific properties and runtime behaviour of 2D Aura Games

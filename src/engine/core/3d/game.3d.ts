@@ -1,11 +1,11 @@
-import { Vec3 } from '../math';
-import { World3D } from '../world/3d/world.3d';
-import { GameConfig3D } from './game.config';
-import { Game } from './game';
-import { State3D } from '../state/state.3d';
-import { System3D } from '../system/3d';
-import { Font3D } from '../text/3d';
-import { UI3D } from '../ui/3d';
+import { Vec3 } from '../../math';
+import { World3D } from '../../world/3d/world.3d';
+import { GameConfig3D } from '../game.config';
+import { Game } from '../game';
+import { State3D } from '../../state/3d/state.3d';
+import { System3D } from '../../system/3d';
+import { Font3D } from '../../font/3d';
+import { UI3D } from '../../ui/3d';
 
 /**
  * Concrete Game3D object, setting out the 3D-specific properties and runtime behaviour of 3D Aura Games
