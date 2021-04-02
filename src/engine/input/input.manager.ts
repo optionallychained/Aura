@@ -35,12 +35,12 @@ export class InputManager {
     ];
 
     /**
-     * Constructor. Take and store the game's Canvas for registering input events upon
+     * Constructor. Initialise event handlers as appropriate based on the controlScheme
      *
-     * @param canvas the Canvas
+     * @param game the Game the InputManager belongs to
      * @param controlScheme the ControlScheme given to the Game's Config, used for optimising event registration and handling
      */
-    constructor(game: Game, controlScheme: ControlScheme) {
+    constructor(game: Game, public readonly controlScheme: ControlScheme) {
         switch (controlScheme) {
             case 'keyboard':
                 this.initializeKeyboard();

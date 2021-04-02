@@ -1,5 +1,5 @@
-import { Model, Shader, Texture } from '../component';
-import { AuraError } from '../core';
+import { Model, Shader, Texture } from '../component/generic';
+import { AuraError, Game } from '../core';
 import { VBOConfig } from '../renderer';
 import { ShaderVariableResolver } from '../shader';
 import { Entity } from './entity';
@@ -11,20 +11,28 @@ import { EntityManagerConfig } from './entity.manager.config';
 type EntityChanges = Array<{ shaderName: string; modelName: string; }>;
 
 /**
- * Core EntityManager; utilised by the Game to defer the management, updating and rendering of game Entities
+ * Abstract core EntityManager; implementing the generic and abstractable behaviour for the management, updating and rendering of Entities
  *
- * Three EntityManagers in total are utilised by World, Font and UI so as to separate processing and utility for the three distinct Entity
- *   types and allow for the consolidation of all update/rendering logic into the relationship between EntityManager and WebGLRenderer
+ * Three concrete EntityManagers are utilised by the core Game to manage World objects, UI objects and Font objects; separating processing
+ *   and utility for the three distince use-cases for Entities. These are then broken down into 2D and 3D variants for the type correction
+ *   of their consumer APIs
  *
  * Works to optimise Entity management and rendering by grouping Entities, precompiling vertex lists, handling VBOs and caching Entity
  *   filter/search results
  *
  * VBOs are provisioned on a per-shader+model combination basis. This is because Entities that share both a Shader and a Model can be
- *   rendered in batches, and thereby their vertices buffered to the GPU and drawn from as a single set
+ *   rendered in batches, and thereby their vertices buffered  to the GPU and drawn from as a single set
  *
- * The EntityManagers are available on the Game instance at `game.[world|ui|font].entityManager`
+ * Receives and works with a single TextureAtlas, thereby allowing for texture sources per Entity use-case
+ *
+ * The concrete EntityManagers are available on the Game instance at `game.[world|ui|font]`
+ *
+ * @typeparam TConfig the configuration object type, extending the core EntityManagerConfig, used by concrete extensions
  *
  * @see Game
+ * @see World
+ * @see Font
+ * @see UI
  */
 export abstract class EntityManager<TConfig extends EntityManagerConfig> {
 
@@ -58,13 +66,9 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
      *
      * @param renderer the renderer
      */
-    constructor(protected readonly config: TConfig & { name: string; initialEntities?: Array<Entity>; }) {
+    constructor(protected readonly config: TConfig & { name: string }) {
         if (config.textureAtlas) {
-            config.game.renderer.createTexture(config.textureAtlas);
-        }
-
-        if (config.initialEntities) {
-            this.entities = config.initialEntities;
+            config.renderer.createTexture(config.textureAtlas);
         }
     }
 
@@ -125,7 +129,7 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
      *
      * @param frameDelta the time between the last frame and the current, for normalizing time-dependent operations
      */
-    public tick(frameDelta: number): void {
+    public tick(game: Game, frameDelta: number): void {
         const added = this.loadEntities();
         const removed = this.cleanEntities();
 
@@ -136,7 +140,7 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
         }
 
         for (const e of this.entities) {
-            e.tick(frameDelta);
+            e.tick(game, frameDelta);
         }
     }
 
@@ -160,7 +164,7 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
                     // pull out the shader info once from the first Entity, as the shader is guaranteed to be the same for all
                     const { programName } = entities[0].getComponent(Shader);
 
-                    this.config.game.renderer.render({
+                    this.config.renderer.render({
                         vbo,
                         shaderProgramName: programName,
                         textureAtlasName: this.config.textureAtlas?.name,
@@ -404,7 +408,7 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
                 const existingVBO = this.vbos.get(vboIdentifier);
 
                 if (!existingVBO) {
-                    this.config.game.renderer.createVBO(vboName);
+                    this.config.renderer.createVBO(vboName);
                 }
 
                 // pull out the shader and model info once from the first Entity, as they're guaranteed to be the same for all
@@ -492,7 +496,7 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
             }
             else {
                 // if there are no Entities for a given shader+model combo, delete the associated VBO
-                this.config.game.renderer.deleteVBO(vboName);
+                this.config.renderer.deleteVBO(vboName);
                 this.vbos.delete(vboIdentifier);
             }
         }

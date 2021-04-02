@@ -1,33 +1,27 @@
 import { Transform2D } from '../../component/2d';
-import { Game } from '../../core';
+import { Game2D } from '../../core/2d';
 import { Vec2 } from '../../math';
-import { System } from '../system';
+import { System2D } from './system.2d';
 
 /**
- * Built-in 2D Physics System, handling the movement of two dimensional Entities which are capable of moving
+ * Built-in concrete 2D Physics System, handling the movement of two dimensional Entities which are capable of moving
  *
  * To be eligible for movement, an Entity must have a Transform2D
- *
- * @see Transform2D
  */
-export class Physics2D extends System {
+export class Physics2D extends System2D {
+
+    /** Provide the System's name */
+    public readonly name = 'Physics2D';
 
     /**
-     * Constructor. Provide the name 'Physics2D' to the parent class
-     */
-    constructor() {
-        super('Physics2D');
-    }
-
-    /**
-     * Concrete update function implementing the Physics System's per-frame functionality.
+     * Concrete tick lifecycle methid implementing the Physics System's per-frame functionality
      *
      * Move every eligible Entity by their velocity, normalized using the frameDelta
      *
-     * @param game the Game the System is running within
+     * @param game the Game2D the System is running within
      * @param frameDelta the time between the last frame and the current, for normalizing time-dependent operations
      */
-    public tick(game: Game, frameDelta: number): void {
+    public tick(game: Game2D, frameDelta: number): void {
         const movers = game.world.filterEntitiesByComponentName('Transform2D');
 
         for (const e of movers) {

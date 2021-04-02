@@ -1,2 +1,4 @@
-export * from './camera.2d';
-export * from './camera.3d';
+export * from './camera';
+
+export * as TwoD from './2d';
+export * as ThreeD from './3d';

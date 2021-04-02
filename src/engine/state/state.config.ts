@@ -1,18 +1,22 @@
-import { Game } from '../core';
-import { RenderingMode } from '../renderer';
+import { Game2D } from '../core/2d';
+import { Game3D } from '../core/3d';
 
 /**
- * Interface describing a State Configuration object
+ * Interface describing a State Configuration object, providing a name as well as its lifecycle methods
+ *
+ * The typeparam specifies which concrete Game type the State belongs to, allowing for the concrete State2D and State3D to receive a
+ *   type-correct Game instance in their lifecycle methods, and enabling the assurance that a Game is only configured with the corresponding
+ *   2D or 3D State type
+ *
+ * @typeparam TGame the concrete Game Type the State belongs to
  */
-export interface StateConfig {
-    /** A name for the State; none is provided by default */
+export interface StateConfig<TGame extends Game2D | Game3D> {
+    /** A name for the State */
     readonly name: string;
-    /** The rendering mode of the State, enabling Games to mix 2D and 3D States; '2D' or '3D'; none is provided by default */
-    readonly renderingMode: RenderingMode;
-    /** State frame tick function */
-    readonly tick: (game: Game, frameDelta: number) => void;
-    /** State initialisation function; optional */
-    readonly init?: (game: Game) => void;
-    /** State end/shutdown function; optional */
-    readonly end?: (game: Game) => void;
+    /** tick lifecycle method for the State; called once per frame as an update routine */
+    readonly tick: (game: TGame, frameDelta: number) => void;
+    /** optional init lifecycle method for the State; called when the State is switched to */
+    readonly init?: (game: TGame) => void;
+    /** optional end lifecycle method for the State; called when the State is switched away from */
+    readonly end?: (game: TGame) => void;
 }

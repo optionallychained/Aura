@@ -195,6 +195,14 @@ export class Vec2 {
         return new Vec2(Math.min(Math.max(v.x, min.x), max.x), Math.min(Math.max(v.y, min.y), max.y));
     }
 
+    /**
+     * Transform a Vec2 by a given Mat3 transformation matrix
+     *
+     * @param v the Vec2 to transform
+     * @param m the Mat3 to transform by
+     *
+     * @returns the transformed Vec2
+     */
     public static transformByMat3(v: Vec2, m: Mat3): Vec2 {
         const { x, y } = v;
 

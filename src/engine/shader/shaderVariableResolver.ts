@@ -1,9 +1,9 @@
-import { FlatColor, Model, MultiColor } from '../component';
 import { Transform2D } from '../component/2d';
 import { Transform3D } from '../component/3d';
-import { Game, AuraError } from '../core';
+import { FlatColor, Model, MultiColor } from '../component/generic';
+import { AuraError, Game } from '../core';
 import { Entity } from '../entity';
-import { Mat4 } from '../math';
+
 
 /**
  * Internal-use utility type representing a Shader Variable Resolution Function which retrieves a value from the Game
@@ -115,11 +115,11 @@ export class ShaderVariableResolver {
         ],
         [
             'u_View2D',
-            (game) => game.world.getCamera2D().getViewMatrix().float32Array
+            (game) => game.world.activeCamera.getViewMatrix().float32Array
         ],
         [
             'u_View3D',
-            (game) => game.world.getCamera3D().getViewMatrix().float32Array
+            (game) => game.world.activeCamera.getViewMatrix().float32Array
         ],
         [
             'u_Texture',

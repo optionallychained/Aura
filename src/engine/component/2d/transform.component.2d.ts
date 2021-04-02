@@ -1,4 +1,4 @@
-import { Mat3, Vec2, Vec3 } from '../../math';
+import { Mat3, Vec2 } from '../../math';
 import { Component } from '../component';
 
 /**

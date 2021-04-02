@@ -3,6 +3,7 @@ import { Entity } from '../../entity';
 import { Vec2 } from '../../math';
 import { Component } from '../component';
 
+
 /**
  * Built-in 2D Collision Box Component, defining an AABB of a given size and with a given collision handling method
  */

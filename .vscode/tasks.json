@@ -2,9 +2,34 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Start App",
+            "label": "Start 2D",
             "type": "npm",
-            "script": "app:debug",
+            "script": "app:2d:debug",
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "typescript",
+                "source": "ts",
+                "applyTo": "closedDocuments",
+                "fileLocation": [
+                    "relative",
+                    "${cwd}"
+                ],
+                "pattern": "$tsc",
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": {
+                        "regexp": "(.*?)",
+                    },
+                    "endsPattern": {
+                        "regexp": "Compiled"
+                    }
+                }
+            }
+        },
+        {
+            "label": "Start 3D",
+            "type": "npm",
+            "script": "app:3d:debug",
             "isBackground": true,
             "problemMatcher": {
                 "owner": "typescript",

@@ -216,7 +216,7 @@ export class Mat3 {
     }
 
     /**
-     * Rotate a Mat3 by a given angle angle (radians)
+     * Rotate a Mat3 by a given angle (radians)
      *
      * @param m the Mat3 to rotate
      * @param angle the angle to rotate by
@@ -246,10 +246,13 @@ export class Mat3 {
     }
 
     /**
-     * // TODO
+     * Create a Mat3 representing a rotation by a given angle (radians)
      *
-     * @param angle
-     * @returns
+     * Useful convenience method effectively equivalent to `Mat3.rotate(new Mat3(), <angle>)`
+     *
+     * @param angle the angle to rotate by
+     *
+     * @returns the rotation Matrix
      */
     public static fromRotation(angle: number): Mat3 {
         const sin = Math.sin(angle), cos = Math.cos(angle);
@@ -286,7 +289,7 @@ export class Mat3 {
     }
 
     /**
-     * Generate a 3x3 projection matrix for a given screen width and height
+     * Create a 3x3 projection matrix for a given screen width and height
      *
      * @param width the width of the screen
      * @param height the height of the screen
