@@ -4,7 +4,7 @@ import { Game } from '../../core';
 import { Entity } from '../../entity';
 import { BOX } from '../../geometry/3d';
 import { Color, Vec3 } from '../../math';
-import { PROGRAM_BASIC_ORTHO_3D } from '../../shader/program/3d';
+import { PROGRAM_BASIC_3D } from '../../shader/program/3d';
 
 // TODO continue on branch ui
 export class Panel3D extends Entity {
@@ -14,8 +14,7 @@ export class Panel3D extends Entity {
             tag: 'ui_panel_2d',
             components: [
                 new Transform3D(position, scale),
-                // TODO when come to UI, consider!
-                new Shader(PROGRAM_BASIC_ORTHO_3D),
+                new Shader(PROGRAM_BASIC_3D),
                 new Model(BOX),
                 new FlatColor(color)
             ]

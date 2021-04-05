@@ -27,7 +27,7 @@ export class Axis3D extends Entity.Entity {
             components: [
                 new Component.Generic.FlatColor(Color.random()),
                 new Component.Generic.Model(Geometry.ThreeD.LINE),
-                new Component.Generic.Shader(Shader.Program.ThreeD.PROGRAM_BASIC_PERSPECTIVE_3D),
+                new Component.Generic.Shader(Shader.Program.ThreeD.PROGRAM_BASIC_3D),
                 new Component.ThreeD.Transform3D(
                     offset,
                     new Vec3(length, 1, 1),

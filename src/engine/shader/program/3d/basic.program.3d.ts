@@ -1,5 +1,5 @@
 import { FRAGMENT_BASIC } from '../../fragment/generic';
-import { VERTEX_BASIC_ORTHO_3D } from '../../vertex/3d';
+import { VERTEX_BASIC_3D } from '../../vertex/3d';
 import { ShaderProgram } from '../shaderProgram';
 
 /**
@@ -8,8 +8,8 @@ import { ShaderProgram } from '../shaderProgram';
  * @see VERTEX_BASIC_3D
  * @see FRAGMENT_BASIC
  */
-export const PROGRAM_BASIC_ORTHO_3D = new ShaderProgram({
-    name: 'program_basic_ortho_3d',
-    vertex: VERTEX_BASIC_ORTHO_3D,
+export const PROGRAM_BASIC_3D = new ShaderProgram({
+    name: 'program_basic_3d',
+    vertex: VERTEX_BASIC_3D,
     fragment: FRAGMENT_BASIC
 });

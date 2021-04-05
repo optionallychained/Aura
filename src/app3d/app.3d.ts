@@ -16,10 +16,8 @@ const game = new Core.ThreeD.Game3D({
     init: () => { console.log('GAME 3D -> init'); }
 });
 
-game.registerShader(Shader.Program.ThreeD.PROGRAM_BASIC_PERSPECTIVE_3D);
-game.registerShader(Shader.Program.ThreeD.PROGRAM_BASIC_ORTHO_3D);
+game.registerShader(Shader.Program.ThreeD.PROGRAM_BASIC_3D);
 game.registerShader(Shader.Program.ThreeD.PROGRAM_COLOR_PER_VERTEX_3D);
-game.registerShader(Shader.Program.ThreeD.PROGRAM_COLOR_PER_VERTEX_PERSPECTIVE_3D);
 game.registerShader(Shader.Program.ThreeD.PROGRAM_TEXTURE_3D);
 game.registerShader(Shader.Program.ThreeD.PROGRAM_TEXTURE_COLORED_3D);
 

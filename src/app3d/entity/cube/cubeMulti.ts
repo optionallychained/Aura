@@ -8,7 +8,7 @@ export class CubeMulti extends Entity.Entity {
             components: [
                 new Component.Generic.MultiColor(Color.randomList(12)),
                 new Component.Generic.Model(Geometry.ThreeD.BOX),
-                new Component.Generic.Shader(Shader.Program.ThreeD.PROGRAM_COLOR_PER_VERTEX_PERSPECTIVE_3D),
+                new Component.Generic.Shader(Shader.Program.ThreeD.PROGRAM_COLOR_PER_VERTEX_3D),
                 new Component.ThreeD.Transform3D(
                     position,
                     scale

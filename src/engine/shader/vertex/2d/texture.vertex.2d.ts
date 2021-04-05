@@ -12,7 +12,7 @@ export const VERTEX_TEXTURE_2D = new VertexShader({
 
         uniform mat3 u_Transform2D;
         uniform mat3 u_Projection;
-        uniform mat3 u_View2D;
+        uniform mat3 u_View;
 
         attribute vec2 a_Position;
         attribute vec2 a_TexCoord;
@@ -24,7 +24,7 @@ export const VERTEX_TEXTURE_2D = new VertexShader({
 
             gl_PointSize = 1.0;
 
-            gl_Position = vec4(u_Projection * u_View2D * u_Transform2D * vec3(a_Position, 1.0), 1.0);
+            gl_Position = vec4(u_Projection * u_View * u_Transform2D * vec3(a_Position, 1.0), 1.0);
         }
     `,
     attributes: [
@@ -49,7 +49,7 @@ export const VERTEX_TEXTURE_2D = new VertexShader({
             variation: UniformVariation.STATIC
         },
         {
-            name: 'u_View2D',
+            name: 'u_View',
             type: UniformType.MAT3,
             variation: UniformVariation.STATIC
         }

@@ -8,7 +8,7 @@ export class CubeFlat extends Entity.Entity {
             components: [
                 new Component.Generic.FlatColor(Color.random()),
                 new Component.Generic.Model(Geometry.ThreeD.BOX),
-                new Component.Generic.Shader(Shader.Program.ThreeD.PROGRAM_BASIC_PERSPECTIVE_3D),
+                new Component.Generic.Shader(Shader.Program.ThreeD.PROGRAM_BASIC_3D),
                 new Component.ThreeD.Transform3D(
                     position,
                     scale

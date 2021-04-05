@@ -192,8 +192,8 @@ export class Renderer {
         const { vertex, fragment } = shader;
 
         // compile the shader sources
-        const vertexCompiled = this.compileShader(gl.VERTEX_SHADER, vertex.source);
-        const fragmentCompiled = this.compileShader(gl.FRAGMENT_SHADER, fragment.source);
+        const vertexCompiled = this.compileShader(shader.name, gl.VERTEX_SHADER, vertex.source);
+        const fragmentCompiled = this.compileShader(shader.name, gl.FRAGMENT_SHADER, fragment.source);
 
         // create the shader program
         const program = gl.createProgram();
@@ -386,6 +386,7 @@ export class Renderer {
      * @returns the compiled WebGLShader
      */
     private compileShader(
+        name: string,
         type: WebGLRenderingContext['VERTEX_SHADER'] | WebGLRenderingContext['FRAGMENT_SHADER'],
         src: string
     ): WebGLShader {
@@ -399,7 +400,7 @@ export class Renderer {
             throw new AuraError({
                 class: 'WebGLRenderer',
                 method: 'compileShader',
-                message: `Failed to create ${typeString} with source : [${src}]`
+                message: `Failed to create ${typeString} with name ${name}`
             });
         }
 
@@ -417,7 +418,7 @@ export class Renderer {
             throw new AuraError({
                 class: 'WebGLRenderer',
                 method: 'compileShader',
-                message: `Failed to compile ${typeString} : [${error ?? ''}]`
+                message: `Failed to compile ${typeString} with name ${name} : [${error ?? ''}]`
             });
         }
 

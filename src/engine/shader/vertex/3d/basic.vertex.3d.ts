@@ -5,21 +5,21 @@ import { VertexShader } from '../vertex.shader';
 /**
  * Built-in basic 3D Vertex Shader, transforming vertices by a uniform Mat3
  */
-export const VERTEX_BASIC_PERSPECTIVE_3D = new VertexShader({
-    name: 'vertex_basic_perspective_3d',
+export const VERTEX_BASIC_3D = new VertexShader({
+    name: 'vertex_basic_3d',
     source: `
         precision mediump float;
 
         uniform mat4 u_Transform3D;
-        uniform mat4 u_Perspective;
-        uniform mat4 u_View3D;
+        uniform mat4 u_Projection;
+        uniform mat4 u_View;
 
         attribute vec3 a_Position;
 
         void main() {
             gl_PointSize = 1.0;
 
-            gl_Position = u_Perspective * u_View3D * u_Transform3D * vec4(a_Position, 1.0);
+            gl_Position = u_Projection * u_View * u_Transform3D * vec4(a_Position, 1.0);
         }
     `,
     attributes: [
@@ -35,12 +35,12 @@ export const VERTEX_BASIC_PERSPECTIVE_3D = new VertexShader({
             variation: UniformVariation.ENTITY
         },
         {
-            name: 'u_Perspective',
+            name: 'u_Projection',
             type: UniformType.MAT4,
             variation: UniformVariation.STATIC
         },
         {
-            name: 'u_View3D',
+            name: 'u_View',
             type: UniformType.MAT4,
             variation: UniformVariation.STATIC
         }
