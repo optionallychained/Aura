@@ -28,6 +28,7 @@ export class World3D extends World<World3DConfig> {
         super(config);
 
         const defaultCamera = new Camera3D({
+            name: 'default',
             offset: config.camera?.offset,
             projection: config.camera?.projection ?? {
                 mode: 'perspective',
@@ -39,7 +40,7 @@ export class World3D extends World<World3DConfig> {
             }
         });
 
-        this.cameras.set('default', defaultCamera);
+        this.addCamera(defaultCamera);
         this.activeCamera = defaultCamera;
     }
 
@@ -56,7 +57,7 @@ export class World3D extends World<World3DConfig> {
      * @param name the name of the Camera to add
      * @param camera the Camera3D to add
      */
-    public addCamera(name: string, camera: Camera3D): void {
-        this.cameras.set(name, camera);
+    public addCamera(camera: Camera3D): void {
+        this.cameras.set(camera.name, camera);
     }
 }

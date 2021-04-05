@@ -2,6 +2,7 @@ import { Transform2D } from '../../component/2d';
 import { Vec2 } from '../../math';
 
 export interface Camera2DConfig {
+    name: string;
     offset?: {
         position?: Vec2;
         angle?: number;

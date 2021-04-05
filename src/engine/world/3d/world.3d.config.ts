@@ -8,5 +8,5 @@ import { Vec3 } from '../../math';
 export interface World3DConfig extends EntityManagerConfig {
     /** 3D world dimensions */
     dimensions: Vec3;
-    camera?: Partial<Camera3DConfig>;
+    camera?: Partial<Omit<Camera3DConfig, 'name'>>;
 }

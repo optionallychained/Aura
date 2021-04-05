@@ -45,7 +45,7 @@ export abstract class World<TConfig extends World2DConfig | World3DConfig> exten
      * @param name a name for the Camera
      * @param camera the Camera2D or Camera3D to add; the type will be narrowed by the subclass
      */
-    public abstract addCamera(name: string, camera: Camera2D | Camera3D): void;
+    public abstract addCamera(camera: Camera2D | Camera3D): void;
 
     /**
      * Remove a Camera by name

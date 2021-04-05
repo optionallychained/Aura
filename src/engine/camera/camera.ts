@@ -17,4 +17,8 @@ export abstract class Camera<TConfig extends Camera2DConfig | Camera3DConfig> {
     }
 
     public abstract getViewMatrix(): Mat3 | Mat4;
+
+    public get name(): string {
+        return this.config.name;
+    }
 }

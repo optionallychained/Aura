@@ -2,6 +2,7 @@ import { Transform3D } from '../../component/3d';
 import { Vec3 } from '../../math';
 
 export interface Camera3DConfig {
+    name: string;
     offset?: {
         position?: Vec3;
         angles?: Vec3;
