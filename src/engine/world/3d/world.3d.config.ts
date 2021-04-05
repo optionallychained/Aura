@@ -1,3 +1,4 @@
+import { Camera3DConfig } from '../../camera/3d';
 import { EntityManagerConfig } from '../../entity';
 import { Vec3 } from '../../math';
 
@@ -7,9 +8,5 @@ import { Vec3 } from '../../math';
 export interface World3DConfig extends EntityManagerConfig {
     /** 3D world dimensions */
     dimensions: Vec3;
-    /** 3D Camera offsets */
-    cameraOffsets?: {
-        position?: Vec3;
-        angles?: Vec3;
-    };
+    camera?: Partial<Camera3DConfig>;
 }

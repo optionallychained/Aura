@@ -1,3 +1,4 @@
+import { Camera2DConfig } from '../../camera/2d';
 import { EntityManagerConfig } from '../../entity';
 import { Vec2 } from '../../math';
 
@@ -7,9 +8,5 @@ import { Vec2 } from '../../math';
 export interface World2DConfig extends EntityManagerConfig {
     /** 2D world dimensions */
     dimensions: Vec2;
-    /** 2D Camera offsets */
-    cameraOffsets?: {
-        position?: Vec2;
-        angle?: number;
-    };
+    camera?: Partial<Camera2DConfig>;
 }

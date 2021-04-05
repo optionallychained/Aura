@@ -74,11 +74,6 @@ interface TextureSpec {
  */
 export class Renderer {
 
-    // TODO temporary; to be moved into World
-    private projectionMatrix = new Mat3();
-    private perspectiveMatrix = new Mat4();
-    private orthoMatrix = new Mat4();
-
     /** The WebGLRenderingContext retrieved from the Canvas */
     private readonly gl: WebGLRenderingContext;
 
@@ -127,21 +122,6 @@ export class Renderer {
 
         this.backgroundColor = clearColor.float32Array;
         this.init();
-    }
-
-    // TODO temporary; to be moved into World
-    public get projection(): Mat3 {
-        return this.projectionMatrix;
-    }
-
-    // TODO temporary; to be moved into World
-    public get perspective(): Mat4 {
-        return this.perspectiveMatrix;
-    }
-
-    // TODO temporary; to be moved into World
-    public get ortho(): Mat4 {
-        return this.orthoMatrix;
     }
 
     /**
@@ -392,13 +372,7 @@ export class Renderer {
         gl.enable(gl.BLEND);
         gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
-        this.projectionMatrix = Mat3.projection(gl.canvas.width, gl.canvas.height);
-
-        // TODO placeholder; to be moved into World
-        // TODO review math/values, esp. for near/far
-        this.perspectiveMatrix = Mat4.perspective(90, gl.canvas.width / gl.canvas.height, 0.1, 1000000);
-        this.orthoMatrix = Mat4.ortho(-gl.canvas.width / 2, gl.canvas.width / 2, -gl.canvas.height / 2, gl.canvas.height / 2, 400, -400);
-
+        // viewport
         gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
     }
 

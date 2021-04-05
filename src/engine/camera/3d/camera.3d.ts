@@ -2,36 +2,71 @@ import { Transform3D } from '../../component/3d';
 import { AuraError } from '../../core';
 import { Entity } from '../../entity';
 import { Mat4, Vec3 } from '../../math';
+import { Camera } from '../camera';
+import { Camera3DConfig, Camera3DFollow, Camera3DFollowRules } from './camera.3d.config';
 
-export class Camera3D {
+export class Camera3D extends Camera<Camera3DConfig> {
+
+    public projection: Mat4;
+
+    protected following: Camera3DFollow | undefined;
 
     private transform: Transform3D;
 
-    private following: {
-        transform: Transform3D;
-    } | undefined;
+    constructor(config: Camera3DConfig) {
+        super(config);
 
-    constructor(positionOffset = new Vec3(), angleOffsets = new Vec3()) {
-        this.transform = new Transform3D(positionOffset, new Vec3(1, 1, 1), angleOffsets);
+        if (config.projection.mode === 'ortho') {
+            this.projection = Mat4.ortho(
+                -config.projection.width / 2,
+                config.projection.width / 2,
+                -config.projection.height / 2,
+                config.projection.height / 2,
+                config.projection.near,
+                config.projection.far ?? -config.projection.near
+            );
+        }
+        else {
+            this.projection = Mat4.perspective(
+                config.projection.fov ?? 90,
+                config.projection.width / config.projection.height,
+                config.projection.near,
+                config.projection.far
+            );
+        }
+
+        this.transform = new Transform3D(
+            config.offset?.position,
+            new Vec3(1, 1, 1),
+            config.offset?.angles
+        );
     }
 
-    public attachTo(entity: Entity): void {
+    public attachTo(entity: Entity, rules?: Camera3DFollowRules): void {
         try {
             this.following = {
-                transform: entity.getComponent(Transform3D)
+                transform: entity.getComponent(Transform3D),
+                rules: {
+                    position: {
+                        x: rules?.position?.x ?? true,
+                        y: rules?.position?.y ?? true,
+                        z: rules?.position?.z ?? true
+                    },
+                    angles: {
+                        x: rules?.angles?.x ?? false,
+                        y: rules?.angles?.y ?? false,
+                        z: rules?.angles?.z ?? false
+                    }
+                }
             };
         }
         catch (e) {
             throw new AuraError({
                 class: 'Camera3D',
                 method: 'attachTo',
-                message: `Failed to attach to entity with tag '${entity.tag}'`
-            });
+                message: `Failed to attach to entity with tag ${entity.tag} : the Entity lacks a Transform3D`
+            })
         }
-    }
-
-    public detach(): void {
-        this.following = undefined;
     }
 
     public moveForward(amount: number): void {
@@ -44,10 +79,6 @@ export class Camera3D {
 
     public moveUp(amount: number): void {
         this.transform.moveUp(amount);
-    }
-
-    public translate(translate: Vec3): void {
-        this.transform.translate(translate);
     }
 
     public rotateX(angle: number): void {
@@ -67,9 +98,11 @@ export class Camera3D {
     }
 
     public zoom(factor: Vec3): void {
+        this.transform.scaleBy(factor);
     }
 
     public zoomTo(factor: Vec3): void {
+        this.transform.scaleTo(factor);
     }
 
     public reset(): void {
@@ -86,8 +119,6 @@ export class Camera3D {
 
             view = Mat4.translate(view, Vec3.add(this.transform.position, this.transform.offsetPosition));
 
-            // TODO rotates around self...not really what we want?
-            // might need an entirely different type of camera or view matrix calculation to rotate around player
             view = Mat4.rotateX(view, this.transform.angles.x);
             view = Mat4.rotateY(view, this.transform.angles.y);
             view = Mat4.rotateZ(view, this.transform.angles.z);

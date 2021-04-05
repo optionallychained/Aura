@@ -60,7 +60,7 @@ export class Game2D extends Game {
             renderer: this.renderer,
             dimensions: config?.world?.dimensions ?? new Vec2(this.canvas.width, this.canvas.height),
             textureAtlas: config?.world?.textureAtlas,
-            cameraOffsets: config?.world?.cameraOffsets
+            camera: config?.world?.camera
         });
 
         // configure the Renderer

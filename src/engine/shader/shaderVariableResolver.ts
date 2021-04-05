@@ -103,22 +103,10 @@ export class ShaderVariableResolver {
     private static readonly STATIC_UNIFORM_MAPPINGS = new Map<string, StaticShaderVariableResolver>([
         [
             'u_Projection',
-            (game) => game.renderer.projection.float32Array
+            (game) => game.world.activeCamera.projection.float32Array
         ],
         [
-            'u_Perspective',
-            (game) => game.renderer.perspective.float32Array
-        ],
-        [
-            'u_Ortho',
-            (game) => game.renderer.ortho.float32Array
-        ],
-        [
-            'u_View2D',
-            (game) => game.world.activeCamera.getViewMatrix().float32Array
-        ],
-        [
-            'u_View3D',
+            'u_View',
             (game) => game.world.activeCamera.getViewMatrix().float32Array
         ],
         [

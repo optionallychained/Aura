@@ -1,35 +1,20 @@
-import { Transform2D } from '../component/2d';
-import { Transform3D } from '../component/3d';
 import { Entity } from '../entity';
-import { Mat3, Mat4, Vec2, Vec3 } from '../math';
+import { Mat3, Mat4 } from '../math';
+import { Camera2DConfig, Camera2DFollow, Camera2DFollowRules } from './2d';
+import { Camera3DConfig, Camera3DFollow, Camera3DFollowRules } from './3d';
 
-interface Follow {
-    transform: Transform2D | Transform3D;
-}
+export abstract class Camera<TConfig extends Camera2DConfig | Camera3DConfig> {
+    public abstract projection: Mat3 | Mat4;
 
-export abstract class Camera<TVector = Vec2 | Vec3, TMatrix = Mat3 | Mat4> {
+    protected abstract following: Camera2DFollow | Camera3DFollow | undefined;
 
-    constructor(protected positionOffset: TVector, protected angleOffset: TVector, protected scaleOffset: TVector) { }
+    constructor(protected readonly config: TConfig) { }
 
-    public abstract attachTo<TFollow extends Follow>(entity: Entity, rules: TFollow): void;
+    public abstract attachTo(entity: Entity, rules?: Camera2DFollowRules | Camera3DFollowRules): void;
 
-    public abstract detach: void;
+    public detach(): void {
+        this.following = undefined;
+    }
 
-    // public abstract moveForward(amount: number): void;
-
-    public abstract moveRight(amount: number): void;
-
-    public abstract moveUp(amount: number): void;
-
-    public abstract offset(translate: TVector): void;
-
-    public abstract rotate(angles: TVector): void;
-
-    public abstract zoom(factor: TVector): void;
-
-    public abstract zoomTo(factor: TVector): void;
-
-    public abstract reset(): void;
-
-    public abstract getViewMatrix(): TMatrix;
+    public abstract getViewMatrix(): Mat3 | Mat4;
 }

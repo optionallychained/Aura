@@ -27,11 +27,13 @@ export class World2D extends World<World2DConfig> {
     constructor(config: World2DConfig) {
         super(config);
 
-        const defaultCamera = new Camera2D(
-            config.cameraOffsets?.position,
-            config.cameraOffsets?.angle
-            // TODO scaleOffset?
-        );
+        const defaultCamera = new Camera2D({
+            offset: config.camera?.offset,
+            projection: config.camera?.projection ?? {
+                width: config.dimensions.x,
+                height: config.dimensions.y
+            }
+        });
 
         this.cameras.set('default', defaultCamera);
         this.activeCamera = defaultCamera;

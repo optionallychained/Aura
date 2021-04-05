@@ -6,8 +6,10 @@ const game = new Core.ThreeD.Game3D({
     world: {
         textureAtlas: new Texture.TextureAtlas('world', 'res/world.png', 2, 2),
         dimensions: new Vec3(1024 * 100, 768 * 100, 1000000),
-        cameraOffsets: {
-            position: new Vec3(0, 150, 500)
+        camera: {
+            offset: {
+                position: new Vec3(0, 150, 500)
+            }
         }
     },
     debugMode: true,

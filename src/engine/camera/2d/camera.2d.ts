@@ -2,28 +2,30 @@ import { Transform2D } from '../../component/2d';
 import { AuraError } from '../../core';
 import { Entity } from '../../entity';
 import { Mat3, Vec2 } from '../../math';
+import { Camera } from '../camera';
+import { Camera2DConfig, Camera2DFollow, Camera2DFollowRules } from './camera.2d.config';
 
-interface FollowRules {
-    position?: { x?: boolean; y?: boolean; };
-    angle?: boolean;
-}
+export class Camera2D extends Camera<Camera2DConfig> {
 
-// TODO limit camera movement to world boundaries?
-// TODO (after transform parenting work) redefinable as an Entity?
-export class Camera2D {
+    public projection: Mat3;
+
+    protected following: Camera2DFollow | undefined;
 
     private transform: Transform2D;
 
-    private following: {
-        transform: Transform2D;
-        rules: DeepRequired<FollowRules>;
-    } | undefined;
+    constructor(config: Camera2DConfig) {
+        super(config);
 
-    constructor(positionOffset = new Vec2(), angleOffset = 0, scaleOffset = new Vec2(1, 1)) {
-        this.transform = new Transform2D(positionOffset, scaleOffset, angleOffset);
+        this.projection = Mat3.projection(config.projection.width, config.projection.height);
+
+        this.transform = new Transform2D(
+            config?.offset?.position,
+            new Vec2(1, 1),
+            config?.offset?.angle
+        );
     }
 
-    public attachTo(entity: Entity, rules?: FollowRules): void {
+    public attachTo(entity: Entity, rules?: Camera2DFollowRules): void {
         try {
             this.following = {
                 transform: entity.getComponent(Transform2D),
@@ -37,17 +39,12 @@ export class Camera2D {
             };
         }
         catch (e) {
-            // re-throw the Component not found error for specificity
             throw new AuraError({
                 class: 'Camera2D',
-                method: 'follow',
-                message: `Failed to follow Entity with tag '${entity.tag}' : the Entity lacks a Transform2D`
-            });
+                method: 'attachTo',
+                message: `Failed to attach to Entity with tag ${entity.tag} : the Entity lacks a Transform2D`
+            })
         }
-    }
-
-    public detach(): void {
-        this.following = undefined;
     }
 
     public moveRight(amount: number): void {
@@ -84,23 +81,11 @@ export class Camera2D {
         if (this.following) {
             const { transform } = this.following;
 
-            // const position = Vec2.add(this.transform.position, this.transform.offsetPosition);
-
-
-            // view = Mat3.translate(new Mat3(), Vec)
-
-            // view = Mat3.scale(transform.compute(), Vec2.invert(transform.scale));
-
-            // view = Mat3.translate(view, Vec2.add(this.transform.position, this.transform.offsetPosition));
-
-            // view = Mat3.rotate(view, this.transform.angle);
-
             view = Mat3.translate(new Mat3(), this.actualPosition());
             view = Mat3.rotate(view, this.actualAngle());
             view = Mat3.scale(view, this.transform.scale);
         }
         else {
-            // if we're not following we can just fall back to the Transform2D's own compute()
             view = this.transform.compute();
         }
 

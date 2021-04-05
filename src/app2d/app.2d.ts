@@ -5,7 +5,7 @@ const game = new Core.TwoD.Game2D({
     canvasDimensions: new Vec2(1024, 768),
     world: {
         textureAtlas: new Texture.TextureAtlas('world', 'res/world.png', 2, 2),
-        dimensions: new Vec2(1024 * 2, 768 * 2),
+        dimensions: new Vec2(1024 * 2, 768 * 2)
     },
     debugMode: true,
     init: () => { console.log('GAME 2D -> init'); }

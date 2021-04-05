@@ -59,7 +59,7 @@ export class Game3D extends Game {
             renderer: this.renderer,
             dimensions: config?.world?.dimensions ?? new Vec3(this.canvas.width, this.canvas.height, 1000),
             textureAtlas: config?.world?.textureAtlas,
-            cameraOffsets: config?.world?.cameraOffsets
+            camera: config?.world?.camera
         });
 
         // configure the Renderer
