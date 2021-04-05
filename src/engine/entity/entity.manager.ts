@@ -8,7 +8,7 @@ import { EntityManagerConfig } from './entity.manager.config';
 /**
  * Internal-use utility type for representing Entity list change hints to the vertex compilation routine
  */
-type EntityChanges = Array<{ shaderName: string; modelName: string; }>;
+type EntityChanges = Array<{ programName: string; modelName: string; }>;
 
 /**
  * Abstract core EntityManager; implementing the generic and abstractable behaviour for the management, updating and rendering of Entities
@@ -251,26 +251,23 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
             const changes: EntityChanges = [];
 
             for (const e of this.addList) {
-                const shader = e.getComponent(Shader);
-                const model = e.getComponent(Model);
-
-                // grouped Entities are for optimising rendering; if an Entity lacks either a Shader or a Model, it is implicitly not
-                //   renderable
-                if (!shader || !model) {
+                if (!e.hasComponent(Shader) || !e.hasComponent(Model)) {
+                    // grouped Entities are for optimising rendering; if an Entity lacks either a Shader or a Model, it is implicitly not
+                    //   renderable
                     continue;
                 }
 
                 // get the shader and model name for provisioning vertices and VBOs
-                const shaderName = shader.programName;
-                const modelName = model.modelName;
+                const { programName } = e.getComponent(Shader);
+                const { modelName } = e.getComponent(Model);
 
                 // mark that the vertices for this shader+model combo should be recompiled
                 // TODO entity change detection: further optimise vertex compilation and buffering by recompiling and buffering on a per
                 //   Entity basis
-                changes.push({ shaderName, modelName });
+                changes.push({ programName, modelName });
 
                 // retrieve the existing Entities associated with this Shader
-                let forShader = this.renderableEntities.get(shaderName);
+                let forShader = this.renderableEntities.get(programName);
 
                 if (forShader) {
                     // retrieve the existing Entities associated with both this Shader and this Model
@@ -295,7 +292,7 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
                 }
 
                 // update the main Entity Shader group with the new per-Shader Entity map
-                this.renderableEntities.set(shaderName, forShader);
+                this.renderableEntities.set(programName, forShader);
             }
 
             // compile the vertices for the altered groups
@@ -325,21 +322,18 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
             const changes: EntityChanges = [];
 
             for (const e of this.removeList) {
-                const shader = e.getComponent(Shader);
-                const model = e.getComponent(Model);
-
-                // grouped Entities are for optimising rendering; if an Entity lacks either a Shader or a Model, it will not be in the
-                //   renderableEntities group
-                if (!shader || !model) {
+                if (!e.hasComponent(Shader) || !e.hasComponent(Model)) {
+                    // grouped Entities are for optimising rendering; if an Entity lacks either a Shader or a Model, it is implicitly not
+                    //   renderable
                     continue;
                 }
 
                 // get the shader and model name for provisioning vertices and VBOs
-                const shaderName = shader.programName;
-                const modelName = model.modelName;
+                const { programName } = e.getComponent(Shader);
+                const { modelName } = e.getComponent(Model);
 
                 // retrieve the Entities associated with this Shader
-                const forShader = this.renderableEntities.get(shaderName);
+                const forShader = this.renderableEntities.get(programName);
 
                 if (forShader) {
                     // retrieve the Entities associated with both this Shader and this Model
@@ -352,7 +346,7 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
                         // mark that the vertices for this shader+model combo should be recompiled
                         // TODO entity change detection: further optimise vertex compilation and buffering by recompiling and buffering on
                         //   a per Entity basis
-                        changes.push({ shaderName, modelName });
+                        changes.push({ programName, modelName });
 
                         // delete the shader+model combo outright if it's now empty
                         if (!forModel.length) {
@@ -361,7 +355,7 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
 
                         // delete the shader group container if it's now empty
                         if (!forShader.size) {
-                            this.renderableEntities.delete(shaderName);
+                            this.renderableEntities.delete(programName);
                         }
                     }
                 }
@@ -393,7 +387,7 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
      * @param changes the list of Shader+Model combinations that were altered and require compiling
      */
     private compileVertices(changes: EntityChanges): void {
-        for (const { shaderName, modelName } of changes) {
+        for (const { programName: shaderName, modelName } of changes) {
             // TODO if there's no Entity list under this combination, something has gone wrong? handle the issue?
             const entities = this.renderableEntities.get(shaderName)?.get(modelName);
 
