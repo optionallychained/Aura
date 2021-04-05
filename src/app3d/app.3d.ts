@@ -23,4 +23,4 @@ game.registerShader(Shader.Program.ThreeD.PROGRAM_TEXTURE_COLORED_3D);
 
 game.addState(MAIN_STATE);
 
-game.start('main');
+game.start(MAIN_STATE.name);

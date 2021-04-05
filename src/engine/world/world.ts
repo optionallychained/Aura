@@ -10,7 +10,20 @@ import { World3DConfig } from './3d';
  * Abstract World, an EntityManager which sets out the fundamental properties and runtime behavior of World object management, and broken
  *   down into concrete 2D and 3D variants for use in Game2D and Game3D respectively
  *
- * Implements World-specific utilities like Camera management and projection matrix configuration
+ * Implements World-specific utilities like Camera management
+ *
+ * NB: World (0,0,0) is considered to be in the 'center', with:
+ *     - positive X   -> right
+ *     - positive Y   -> up
+ *     - (positive Z) -> "in"/"forward"
+ *
+ * ...this entails the world coordinate limits:
+ *     - left:   -dimensions.x / 2
+ *     - right:  dimensions.x / 2
+ *     - bottom: -dimensions.y / 2
+ *     - top:    dimensions.y / 2
+ *     - (far):  dimensions.z / 2
+ *     - (near): -dimensions.z / 2
  *
  * @typeparam TConfig the specific configuration object type, allowing for the type-correct configuration of the World Manager
  */
@@ -46,6 +59,17 @@ export abstract class World<TConfig extends World2DConfig | World3DConfig> exten
      * @param camera the Camera2D or Camera3D to add; the type will be narrowed by the subclass
      */
     public abstract addCamera(camera: Camera2D | Camera3D): void;
+
+    /**
+     * Abstract Camera get routine, to be implemented and the return type narrowed by the subclass
+     *
+     * The implementation will throw an error if the Camera is not found for runtime safety
+     *
+     * @param name the name of the Camera to get
+     *
+     * @returns the retrieved Camera
+     */
+    public abstract getCamera(name: string): Camera2D | Camera3D;
 
     /**
      * Remove a Camera by name

@@ -1,4 +1,5 @@
 import { Camera2D } from '../../camera/2d';
+import { AuraError } from '../../core';
 import { Vec2 } from '../../math';
 import { World } from '../world';
 import { World2DConfig } from './world.2d.config';
@@ -18,15 +19,16 @@ export class World2D extends World<World2DConfig> {
     protected readonly cameras = new Map<string, Camera2D>();
 
     /**
-     * Constructor. Take the type-correct WorldConfig2D and pass it up to the parent class
+     * Constructor. Take the type-correct World2DConfig and pass it up to the parent class
      *
      * Initialise the default Camera2D based on the 2D-specific configuration
      *
-     * @param config the WorldConfig2D
+     * @param config the World2DConfig
      */
     constructor(config: World2DConfig) {
         super(config);
 
+        // configure, add and make active the default Camera2D
         const defaultCamera = new Camera2D({
             name: 'default',
             offset: config.camera?.offset,
@@ -55,5 +57,28 @@ export class World2D extends World<World2DConfig> {
      */
     public addCamera(camera: Camera2D): void {
         this.cameras.set(camera.name, camera);
+    }
+
+    /**
+     * Concrete Camera retrieval routine, narrowing the return type to Camera2D
+     *
+     * Throws an error if the Camera is not found for runtime safety
+     *
+     * @param name the name of the Camera to retrieve
+     *
+     * @returns the retreived Camera2D
+     */
+    public getCamera(name: string): Camera2D {
+        const camera = this.cameras.get(name);
+
+        if (!camera) {
+            throw new AuraError({
+                class: 'World2D',
+                method: 'getCamera',
+                message: `Failed to retrieve 2D Camera with name ${name}`
+            });
+        }
+
+        return camera;
     }
 }

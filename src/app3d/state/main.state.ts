@@ -50,15 +50,6 @@ export const MAIN_STATE = new State.ThreeD.State3D({
         game.world.clearEntities();
     },
     tick: (game) => {
-        // let i = 0;
-        for (const e of game.world.filterEntitiesByTag('cubeMulti')) {
-            // e.getComponent(Component.ThreeD.Transform3D).lookAt(player.getComponent(Component.ThreeD.Transform3D));
-            // e.getComponent(Component.ThreeD.Transform3D).rotate(rotations[i]);
-
-            // e.getComponent(Component.ThreeD.Transform3D).rotate(rotations[i]);
-            // i++;
-        }
-
         const playerTransform = player.getComponent(Component.ThreeD.Transform3D);
         const camera = game.world.activeCamera;
 

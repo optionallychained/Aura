@@ -1,5 +1,5 @@
 import { AuraError, Game } from '../core';
-import { Color, Mat3, Mat4 } from '../math';
+import { Color } from '../math';
 import { ShaderVariableResolver, UniformType, UniformVariation } from '../shader';
 import { ShaderProgram } from '../shader/program';
 import { TextureAtlas } from '../texture';
@@ -281,8 +281,6 @@ export class Renderer {
      *   configures WebGL to render in the mode if it's different than the last one
      *
      * Effectively allows a Game to comprise both 2D and 3D States
-     *
-     * // TODO do we want to support mixed-mode states? Maybe complicates World/View/Projection handling over just saying a game is 2D | 3D
      *
      * @param mode the mode to switch to
     //  */

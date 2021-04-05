@@ -18,4 +18,4 @@ game.registerShader(Shader.Program.TwoD.PROGRAM_TEXTURE_COLORED_2D);
 
 game.addState(MAIN_STATE);
 
-game.start('main');
+game.start(MAIN_STATE.name);

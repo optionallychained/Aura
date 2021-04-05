@@ -4,7 +4,7 @@ import { World3DConfig } from '../../world/3d';
 import { GameConfig } from '../game.config';
 
 /**
- * Interface describing the Game3D Configuration object, adding 3D-relevant World configuration
+ * Interface describing the Game3D Configuration object, adding 3D-relevant World, UI and Font configurations
  */
 export interface Game3DConfig extends GameConfig {
     /** 3D World configuration; world size is defaulted to the Canvas size, with a z size of 1000 */

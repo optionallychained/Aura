@@ -35,20 +35,16 @@ export const MAIN_STATE = new State.TwoD.State2D({
         const camera = game.world.activeCamera;
 
         if (game.input.isKeyDown(Input.Keys.A)) {
-            // playerTransform.translate(new Vec2(-10, 0));
             playerTransform.moveRight(-10);
         }
         else if (game.input.isKeyDown(Input.Keys.D)) {
-            // playerTransform.translate(new Vec2(10, 0));
             playerTransform.moveRight(10);
         }
 
         if (game.input.isKeyDown(Input.Keys.W)) {
-            // playerTransform.translate(new Vec2(0, 10));
             playerTransform.moveUp(10);
         }
         else if (game.input.isKeyDown(Input.Keys.S)) {
-            // playerTransform.translate(new Vec2(0, -10));
             playerTransform.moveUp(-10);
         }
 
@@ -69,20 +65,16 @@ export const MAIN_STATE = new State.TwoD.State2D({
 
         if (game.input.isKeyDown(Input.Keys.L)) {
             camera.moveRight(10);
-            // camera.translate(new Vec2(10, 0));
         }
         else if (game.input.isKeyDown(Input.Keys.J)) {
             camera.moveRight(-10);
-            // camera.translate(new Vec2(-10));
         }
 
         if (game.input.isKeyDown(Input.Keys.I)) {
             camera.moveUp(10);
-            // camera.translate(new Vec2(0, 10));
         }
         else if (game.input.isKeyDown(Input.Keys.K)) {
             camera.moveUp(-10);
-            // camera.translate(new Vec2(0, -10));
         }
 
         if (game.input.isKeyDown(Input.Keys.U)) {

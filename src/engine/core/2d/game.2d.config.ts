@@ -4,7 +4,7 @@ import { World2DConfig } from '../../world/2d';
 import { GameConfig } from '../game.config';
 
 /**
- * Interface describing the Game2D Configuration object, adding 2D-relevant World configuration
+ * Interface describing the Game2D Configuration object, adding 2D-relevant World, UI and Font configurations
  */
 export interface Game2DConfig extends GameConfig {
     /** 2D World configuration; world size is defaulted to the Canvas size */

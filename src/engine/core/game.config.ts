@@ -3,7 +3,7 @@ import { Color, Vec2 } from '../math';
 import { TextureAtlas } from '../texture';
 
 /**
- * Interface describing the generic Game Configuration object, with configuration for both 2D and 3D games
+ * Interface describing the generic Game Configuration object, with configuration relevant both to 2D and 3D games
  *
  * All configuration is optional; default values will be provided if unprovided
  */
@@ -23,7 +23,7 @@ export interface GameConfig {
 }
 
 /**
- * Interface describing the generic Game configuration defaults object
+ * Interface describing the generic Game configuration defaults object, just used to type-secure the generic Game's defaults
  */
 export interface GameConfigDefaults {
     canvasDimensions: Vec2;

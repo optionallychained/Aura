@@ -1,4 +1,5 @@
 import { Camera3D } from '../../camera/3d';
+import { AuraError } from '../../core';
 import { Vec3 } from '../../math';
 import { World } from '../world';
 import { World3DConfig } from './world.3d.config';
@@ -8,6 +9,8 @@ import { World3DConfig } from './world.3d.config';
  *
  * Implements and type-narrows the abstract elements of the parent class World so as to produce consumer type-safety on things like Camera
  *   management
+ *
+ * NB: the default 3D Camera uses Perspective Projection
  */
 export class World3D extends World<World3DConfig> {
 
@@ -18,15 +21,16 @@ export class World3D extends World<World3DConfig> {
     protected readonly cameras = new Map<string, Camera3D>();
 
     /**
-     * Constructor. Take the type-correct WorldConfig3D and pass it up to the parent class
+     * Constructor. Take the type-correct World3DConfig and pass it up to the parent class
      *
      * Initialise the default Camera3D based on the 3D-specific configuration
      *
-     * @param config the WorldConfig3D
+     * @param config the World3DConfig
      */
     constructor(config: World3DConfig) {
         super(config);
 
+        // configure, add and make active the default Camera3D
         const defaultCamera = new Camera3D({
             name: 'default',
             offset: config.camera?.offset,
@@ -59,5 +63,28 @@ export class World3D extends World<World3DConfig> {
      */
     public addCamera(camera: Camera3D): void {
         this.cameras.set(camera.name, camera);
+    }
+
+    /**
+     * Concrete Camera retrieval routine, narrowing the return type to Camera3D
+     *
+     * Throws an error if the Camera is not found for runtime safety
+     *
+     * @param name the name of the Camera to retrieve
+     *
+     * @returns the retreived Camera3D
+     */
+    public getCamera(name: string): Camera3D {
+        const camera = this.cameras.get(name);
+
+        if (!camera) {
+            throw new AuraError({
+                class: 'World3D',
+                method: 'getCamera',
+                message: `Failed to retrieve 3D Camera with name ${name}`
+            });
+        }
+
+        return camera;
     }
 }
