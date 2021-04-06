@@ -17,6 +17,9 @@ import { Camera3DConfig, Camera3DFollow, Camera3DFollowRules } from './camera.3d
  * //   - freecam (this)
  * //   - third person camera (lookat ?)
  * //   - first person camera (gimbal locked transform3d ?)
+ *
+ * // TODO for now, due to the way the view matrix is computed, follow rules have no effect
+ * //   this will be solved alongside the review of Transform3D + thereby Camera3D implementation
  */
 export class Camera3D extends Camera<Camera3DConfig> {
 

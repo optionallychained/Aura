@@ -158,7 +158,7 @@ export class Camera2D extends Camera<Camera2DConfig> {
      * @returns the actual position of the Camera2D
      */
     private actualPosition(): Vec2 {
-        let position = this.transform.position;
+        let { position } = this.transform;
 
         if (this.following) {
             const { transform, rules } = this.following;
