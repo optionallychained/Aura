@@ -1,21 +1,16 @@
-import { Core, Shader, Texture, Vec2 } from '../engine';
+import { Core, Shader, Vec2 } from '../engine';
+import { DEAD_STATE } from './state/dead.state';
 import { MAIN_STATE } from './state/main.state';
+import { MENU_STATE } from './state/menu.state';
 
 const game = new Core.TwoD.Game2D({
-    canvasDimensions: new Vec2(1024, 768),
-    world: {
-        textureAtlas: new Texture.TextureAtlas('world', 'res/world.png', 2, 2),
-        dimensions: new Vec2(1024 * 2, 768 * 2)
-    },
-    debugMode: true,
-    init: () => { console.log('GAME 2D -> init'); }
+    canvasDimensions: new Vec2(1024, 768)
 });
 
-game.registerShader(Shader.Program.TwoD.PROGRAM_COLOR_PER_VERTEX_2D);
-game.registerShader(Shader.Program.TwoD.PROGRAM_TEXTURE_2D);
 game.registerShader(Shader.Program.TwoD.PROGRAM_BASIC_2D);
+
 game.registerShader(Shader.Program.TwoD.PROGRAM_TEXTURE_COLORED_2D);
 
-game.addState(MAIN_STATE);
+game.addStates(MENU_STATE, MAIN_STATE, DEAD_STATE);
 
-game.start(MAIN_STATE.name);
+game.start(MENU_STATE.name);
