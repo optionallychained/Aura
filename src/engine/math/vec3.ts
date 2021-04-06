@@ -1,3 +1,4 @@
+import { Mutable } from '../types';
 import { Mat4 } from './mat4';
 
 /**

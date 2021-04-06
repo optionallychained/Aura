@@ -28,3 +28,6 @@ export * as Texture from './texture';
 export * as UI from './ui';
 
 export * as World from './world';
+
+// no name for types as we wanna be able to use them without namespacing
+export * from './types';

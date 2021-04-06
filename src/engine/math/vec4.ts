@@ -1,3 +1,5 @@
+import { Mutable } from '../types';
+
 /**
  * Class representing a four-dimensional Vector with properties x, y, z and w and providing static utilities for mathematical operations
  */

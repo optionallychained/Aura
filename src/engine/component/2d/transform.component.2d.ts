@@ -1,4 +1,5 @@
 import { Mat3, Vec2 } from '../../math';
+import { Mutable } from '../../types';
 import { Component } from '../component';
 
 /**

@@ -1,3 +1,4 @@
+import { Mutable } from '../types';
 import { Angle } from './angle';
 import { Vec3 } from './vec3';
 

@@ -1,5 +1,6 @@
 import { Transform2D } from '../../component/2d';
 import { Vec2 } from '../../math';
+import { DeepRequired } from '../../types';
 import { CameraConfig } from '../camera.config';
 
 /**

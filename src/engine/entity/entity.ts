@@ -1,5 +1,6 @@
 import { Component } from '../component';
 import { AuraError, Game } from '../core';
+import { ClassType } from '../types';
 import { EntityConfig } from './entity.config';
 
 /**

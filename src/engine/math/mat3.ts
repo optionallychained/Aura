@@ -1,3 +1,4 @@
+import { Mutable } from '../types';
 import { Vec2 } from './vec2';
 
 /**
