@@ -249,7 +249,7 @@ export abstract class Game {
     public getData<T>(key: string): T {
         const data = this.data.get(key);
 
-        if (!data) {
+        if (data === undefined) {
             throw new AuraError({
                 class: 'Game',
                 method: 'getData',
