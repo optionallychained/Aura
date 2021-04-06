@@ -118,10 +118,12 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
     }
 
     /**
-     * Purge all active Entities
+     * Purge all active Entities immediately
      */
     public clearEntities(): void {
         this.removeEntities(...this.entities);
+        this.cleanEntities();
+        this.invalidateFilterCaches();
     }
 
     /**
