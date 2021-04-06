@@ -1,6 +1,6 @@
 # Aura
 
-[![NPM](https://badge.fury.io/js/aura.svg)](https://badge.fury.io/js/aura.ts)
+[![NPM](https://badge.fury.io/js/aura.svg)](https://badge.fury.io/js/aura)
 
 Aura is a work-in-progress TypeScript/WebGL general-purpose game engine, designed to enable the swift implementation of both 2D and 3D browser games and providing a large base of built-in utility.
 
