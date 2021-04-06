@@ -13,4 +13,6 @@ game.registerShader(Shader.Program.TwoD.PROGRAM_TEXTURE_COLORED_2D);
 
 game.addStates(MENU_STATE, MAIN_STATE, DEAD_STATE);
 
-game.start(MENU_STATE.name);
+game.setData('points', 1);
+
+game.start(DEAD_STATE.name);
