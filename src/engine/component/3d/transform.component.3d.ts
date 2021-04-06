@@ -13,11 +13,8 @@ import { Component } from '../component';
  */
 export class Transform3D extends Component {
 
-    /** Absolute position, relative to world axes, augmented in translate() */
-    public readonly absolutePosition = new Vec3();
-
-    /** Relative position, relative to own axes, augmented in move*() */
-    public readonly relativePosition = new Vec3();
+    /** Maintained position */
+    public readonly position = new Vec3();
 
     /** Maintained 'forward' Axis */
     public readonly forward = new Vec3(0, 0, -1);
@@ -57,13 +54,6 @@ export class Transform3D extends Component {
     }
 
     /**
-     * Getter for 'position'; a combination of the Transform3D's relative and absolute positions
-     */
-    public get position(): Vec3 {
-        return Vec3.add(this.absolutePosition, this.relativePosition);
-    }
-
-    /**
      * Move along the right axis by a given amount
      *
      * Facilitates relative movement
@@ -71,7 +61,7 @@ export class Transform3D extends Component {
      * @param amount the amount to move by
      */
     public moveRight(amount: number): void {
-        this.mutable.relativePosition = Vec3.add(this.relativePosition, Vec3.scale(this.right, amount));
+        this.mutable.position = Vec3.add(this.position, Vec3.scale(this.right, amount));
     }
 
     /**
@@ -82,7 +72,7 @@ export class Transform3D extends Component {
      * @param amount the amount to move by
      */
     public moveUp(amount: number): void {
-        this.mutable.relativePosition = Vec3.add(this.relativePosition, Vec3.scale(this.up, amount));
+        this.mutable.position = Vec3.add(this.position, Vec3.scale(this.up, amount));
     }
 
     /**
@@ -93,7 +83,7 @@ export class Transform3D extends Component {
      * @param amount the amount to move by
      */
     public moveForward(amount: number): void {
-        this.mutable.relativePosition = Vec3.add(this.relativePosition, Vec3.scale(this.forward, amount));
+        this.mutable.position = Vec3.add(this.position, Vec3.scale(this.forward, amount));
     }
 
     /**
@@ -118,10 +108,12 @@ export class Transform3D extends Component {
     /**
      * Move along the World axes by a given translation vector
      *
+     * Facilitates absolute movement
+     *
      * @param translate the translation vector
      */
     public translate(translate: Vec3): void {
-        this.mutable.absolutePosition = Vec3.add(this.absolutePosition, translate);
+        this.mutable.position = Vec3.add(this.position, translate);
     }
 
     /**
@@ -217,8 +209,7 @@ export class Transform3D extends Component {
 
         // reset all transformation members
         this.mutable.angles = new Vec3();
-        this.mutable.absolutePosition = new Vec3();
-        this.mutable.relativePosition = new Vec3();
+        this.mutable.position = new Vec3();
         this.mutable.scale = new Vec3(1, 1, 1);
 
         // retread the construction transformation to reconfigure
@@ -233,10 +224,8 @@ export class Transform3D extends Component {
      * @returns the Transform matrix
      */
     public compute(): Mat4 {
-        const { position } = this;
-
         // using a lookAt Matrix because it's convenient for orientation
-        return Mat4.scale(Mat4.lookAt(position, Vec3.add(position, this.forward), this.up), this.scale);
+        return Mat4.scale(Mat4.lookAt(this.position, Vec3.add(this.position, this.forward), this.up), this.scale);
     }
 
     /**

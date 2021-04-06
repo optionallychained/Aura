@@ -10,11 +10,8 @@ import { Component } from '../component';
  */
 export class Transform2D extends Component {
 
-    /** Absolute position, relative to world axes, augmented in translate() */
-    public readonly absolutePosition = new Vec2();
-
-    /** Relative position, relative to own axes, augmented in move*() */
-    public readonly relativePosition = new Vec2();
+    /** Maintained position */
+    public readonly position = new Vec2();
 
     /** Maintained 'up' Axis */
     public readonly up = new Vec2(0, 1);
@@ -51,13 +48,6 @@ export class Transform2D extends Component {
     }
 
     /**
-     * Getter for 'position'; a combination of the Transform2D's relative and absolute positions
-     */
-    public get position(): Vec2 {
-        return Vec2.add(this.absolutePosition, this.relativePosition);
-    }
-
-    /**
      * Move along the right axis by a given amount
      *
      * Facilitates relative movement
@@ -65,7 +55,7 @@ export class Transform2D extends Component {
      * @param amount the amount to move by
      */
     public moveRight(amount: number): void {
-        this.mutable.relativePosition = Vec2.add(this.relativePosition, Vec2.scale(this.right, amount));
+        this.mutable.position = Vec2.add(this.position, Vec2.scale(this.right, amount));
     }
 
     /**
@@ -76,7 +66,7 @@ export class Transform2D extends Component {
      * @param the amount to move by
      */
     public moveUp(amount: number): void {
-        this.mutable.relativePosition = Vec2.add(this.relativePosition, Vec2.scale(this.up, amount));
+        this.mutable.position = Vec2.add(this.position, Vec2.scale(this.up, amount));
     }
 
     /**
@@ -100,7 +90,7 @@ export class Transform2D extends Component {
      * @param translate the translation vector
      */
     public translate(translate: Vec2): void {
-        this.mutable.absolutePosition = Vec2.add(this.absolutePosition, translate);
+        this.mutable.position = Vec2.add(this.position, translate);
     }
 
     /**
@@ -146,8 +136,7 @@ export class Transform2D extends Component {
 
         // reset all transformation members
         this.mutable.angle = 0;
-        this.mutable.absolutePosition = new Vec2();
-        this.mutable.relativePosition = new Vec2();
+        this.mutable.position = new Vec2();
         this.mutable.scale = new Vec2(1, 1);
 
         // retread the construction transformation to reconfigure

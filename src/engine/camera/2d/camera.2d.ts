@@ -163,11 +163,9 @@ export class Camera2D extends Camera<Camera2DConfig> {
         if (this.following) {
             const { transform, rules } = this.following;
 
-            const tPosition = transform.position;
-
             const addition = new Vec2(
-                rules.position.x ? tPosition.x : 0,
-                rules.position.y ? tPosition.y : 0
+                rules.position.x ? transform.position.x : 0,
+                rules.position.y ? transform.position.y : 0
             );
 
             position = Vec2.add(position, addition);

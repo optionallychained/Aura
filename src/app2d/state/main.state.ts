@@ -2,10 +2,12 @@ import { Angle, Component, Core, Entity, Input, State, Vec2 } from '../../engine
 import { Axis2D } from '../entity/axis';
 import { RectFlat } from '../entity/rect/rectFlat';
 
-const player = new RectFlat(new Vec2(0, 0), new Vec2(100, 100));
-
 const populate = (game: Core.TwoD.Game2D): void => {
     const entities: Array<Entity.Entity> = [];
+
+    const player = new RectFlat(new Vec2(0, 0), new Vec2(100, 100), 'player');
+
+    entities.push(player);
 
     for (let x = -game.world.dimensions.x / 2; x <= game.world.dimensions.x / 2; x += game.world.dimensions.x / 10) {
         entities.push(new Axis2D(Angle.toRadians(90), x, 0, game.world.dimensions.y));
@@ -14,8 +16,6 @@ const populate = (game: Core.TwoD.Game2D): void => {
             entities.push(new Axis2D(0, 0, y, game.world.dimensions.x));
         }
     }
-
-    entities.push(player);
 
     game.world.addEntities(...entities);
 
@@ -31,7 +31,7 @@ export const MAIN_STATE = new State.TwoD.State2D({
         game.world.clearEntities();
     },
     tick: (game) => {
-        const playerTransform = player.getComponent(Component.TwoD.Transform2D);
+        const playerTransform = game.world.filterEntitiesByTag('player')[0]?.getComponent(Component.TwoD.Transform2D);
         const camera = game.world.activeCamera;
 
         if (game.input.isKeyDown(Input.Keys.A)) {

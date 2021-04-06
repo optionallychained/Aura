@@ -2,9 +2,9 @@ import { Color, Component, Core, Entity, Geometry, Shader, Vec2 } from '../../..
 
 export class RectFlat extends Entity.Entity {
 
-    constructor(position: Vec2, scale: Vec2) {
+    constructor(position: Vec2, scale: Vec2, tag = 'rectFlat') {
         super({
-            tag: 'rectFlat',
+            tag,
             components: [
                 new Component.Generic.FlatColor(Color.random()),
                 new Component.Generic.Model(Geometry.TwoD.BOX),

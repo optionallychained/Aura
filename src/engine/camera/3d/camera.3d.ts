@@ -9,6 +9,14 @@ import { Camera3DConfig, Camera3DFollow, Camera3DFollowRules } from './camera.3d
  * Concrete Camera3D, representing a 3D Camera and narrowing generic types to their corresponding 3D variants
  *
  * Supports both Orthographic and Perspecitve Projection approaches by way of the projection configuration member 'mode'
+ *
+ * // TODO due to being backed by the non-gimbal-locked Transform3D, technically produces a 'free' camera with 6-degrees of freedom
+ * //   suitable for use as a first or third person spaceship camera, for example
+ * //
+ * // Alongside implementing a Transform3D that does have gimbal lock, probably want to split into a few use cases:
+ * //   - freecam (this)
+ * //   - third person camera (lookat ?)
+ * //   - first person camera (gimbal locked transform3d ?)
  */
 export class Camera3D extends Camera<Camera3DConfig> {
 
@@ -68,9 +76,9 @@ export class Camera3D extends Camera<Camera3DConfig> {
      *     - position.x - true
      *     - position.y - true
      *     - position.z - true
-     *     - angles.x   - false
-     *     - angles.y   - false
-     *     - angles.z   - false
+     *     - angles.x (pitch)   - true
+     *     - angles.y (yaw)     - true
+     *     - angles.z (roll)    - false
      *
      * @param entity the Entity to follow
      * @param rules the Camera3DFollowRules, specifying how the Camera should follow the Entity
@@ -86,8 +94,8 @@ export class Camera3D extends Camera<Camera3DConfig> {
                         z: rules?.position?.z ?? true
                     },
                     angles: {
-                        x: rules?.angles?.x ?? false,
-                        y: rules?.angles?.y ?? false,
+                        x: rules?.angles?.x ?? true,
+                        y: rules?.angles?.y ?? true,
                         z: rules?.angles?.z ?? false
                     }
                 }

@@ -15,15 +15,15 @@ import { World3DConfig } from './3d';
  * NB: World (0,0,0) is considered to be in the 'center', with:
  *     - positive X   -> right
  *     - positive Y   -> up
- *     - (positive Z) -> "in"/"forward"
+ *     - (positive Z) -> "out"
  *
  * ...this entails the world coordinate limits:
  *     - left:   -dimensions.x / 2
  *     - right:  dimensions.x / 2
  *     - bottom: -dimensions.y / 2
  *     - top:    dimensions.y / 2
- *     - (far):  dimensions.z / 2
- *     - (near): -dimensions.z / 2
+ *     - (far):  -dimensions.z / 2
+ *     - (near): dimensions.z / 2
  *
  * @typeparam TConfig the specific configuration object type, allowing for the type-correct configuration of the World Manager
  */
