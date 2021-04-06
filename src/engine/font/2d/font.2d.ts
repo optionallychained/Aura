@@ -26,7 +26,7 @@ export class Font2D extends Font<Font2DConfig> {
         let i = 0;
         for (const char of text) {
             entities.push(new Char2D(
-                Vec2.add(position, new Vec2(i * 0.25, 0)),
+                Vec2.add(position, new Vec2(i * scale.x, 0)),
                 scale,
                 new Vec2(this.config.charset.indexOf(char.toUpperCase()), 0),
                 color

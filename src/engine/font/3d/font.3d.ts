@@ -26,7 +26,7 @@ export class Font3D extends Font<Font3DConfig> {
         let i = 0;
         for (const char of text) {
             entities.push(new Char3D(
-                Vec3.add(position, new Vec3(i * 0.25, 0, 0)),
+                Vec3.add(position, new Vec3(i * scale.x, 0, 0)),
                 scale,
                 new Vec2(this.config.charset.indexOf(char.toUpperCase()), 0),
                 color
