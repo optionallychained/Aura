@@ -89,7 +89,7 @@ export class Camera3D extends Camera<Camera3DConfig> {
     public attachTo(entity: Entity, rules?: Camera3DFollowRules): void {
         try {
             this.following = {
-                transform: entity.getComponent(Transform3D),
+                transform: entity.getComponent<Transform3D>('Transform3D'),
                 rules: {
                     position: {
                         x: rules?.position?.x ?? true,

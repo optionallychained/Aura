@@ -187,7 +187,7 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
      */
     public filterEntitiesByComponentName(component: string): Array<Entity> {
         // TODO by class
-        return this.memoizeFilter(component, (e) => e.hasComponentWithName(component))
+        return this.memoizeFilter(component, (e) => e.hasComponent(component))
     }
 
     /**
@@ -199,7 +199,7 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
      */
     public filterEntitiesByComponentNames(...components: Array<string>): Array<Entity> {
         // TODO by class
-        return this.memoizeFilter(components.toString(), (e) => e.hasComponentsWithNames(...components));
+        return this.memoizeFilter(components.toString(), (e) => e.hasComponents(...components));
     }
 
     /**
@@ -214,7 +214,7 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
      */
     public filterEntitiesByComponentNamesFromSource(source: Array<Entity>, filterId: string, ...components: Array<string>): Array<Entity> {
         // TODO by class
-        return this.memoizeFilter(components.toString(), (e) => e.hasComponentsWithNames(...components), filterId, source);
+        return this.memoizeFilter(components.toString(), (e) => e.hasComponents(...components), filterId, source);
     }
 
     /**
@@ -250,15 +250,15 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
             const changes: EntityChanges = new Set<string>();
 
             for (const e of this.addList) {
-                if (!e.hasComponent(Shader) || !e.hasComponent(Model)) {
+                if (!e.hasComponent('Shader') || !e.hasComponent('Model')) {
                     // grouped Entities are for optimising rendering; if an Entity lacks either a Shader or a Model, it is implicitly not
                     //   renderable
                     continue;
                 }
 
                 // get the shader and model name for provisioning vertices and VBOs
-                const { programName } = e.getComponent(Shader);
-                const { modelName } = e.getComponent(Model);
+                const { programName } = e.getComponent<Shader>('Shader');
+                const { modelName } = e.getComponent<Model>('Model');
 
                 // mark that the vertices for this shader+model combo should be recompiled
                 // TODO entity change detection: further optimise vertex compilation and buffering by recompiling and buffering on a per
@@ -321,15 +321,15 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
             const changes: EntityChanges = new Set<string>();
 
             for (const e of this.removeList) {
-                if (!e.hasComponent(Shader) || !e.hasComponent(Model)) {
+                if (!e.hasComponent('Shader') || !e.hasComponent('Model')) {
                     // grouped Entities are for optimising rendering; if an Entity lacks either a Shader or a Model, it is implicitly not
                     //   renderable
                     continue;
                 }
 
                 // get the shader and model name for provisioning vertices and VBOs
-                const { programName } = e.getComponent(Shader);
-                const { modelName } = e.getComponent(Model);
+                const { programName } = e.getComponent<Shader>('Shader');
+                const { modelName } = e.getComponent<Model>('Model');
 
                 // retrieve the Entities associated with this Shader
                 const forShader = this.renderableEntities.get(programName);
@@ -408,8 +408,8 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
                 }
 
                 // pull out the shader and model info once from the first Entity, as they're guaranteed to be the same for all
-                const shaderInfo = entities[0].getComponent(Shader);
-                const modelInfo = entities[0].getComponent(Model);
+                const shaderInfo = entities[0].getComponent<Shader>('Shader');
+                const modelInfo = entities[0].getComponent<Model>('Model');
 
                 // retrieve nominal information relating to all the Entities
                 const { glShape, vertexCount } = modelInfo;
@@ -466,7 +466,7 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
                                     });
                                 }
 
-                                const { column, row, columnSpan, rowSpan } = e.getComponent(Texture);
+                                const { column, row, columnSpan, rowSpan } = e.getComponent<Texture>('Texture');
                                 value = textureAtlas.resolveTextureCoordinates(value.slice(t, t + 2), column, row, columnSpan, rowSpan);
 
                                 // all texture coordinates are (currently?) of size 2

@@ -28,8 +28,8 @@ export class Collision2D extends System2D {
         for (let i = 0; i < collidables.length; i++) {
             for (let j = i + 1; j < collidables.length; j++) {
                 if (this.collides(collidables[i], collidables[j])) {
-                    (collidables[i].getComponent(BoxCollider2D)).onCollision(game, collidables[j]);
-                    (collidables[j].getComponent(BoxCollider2D)).onCollision(game, collidables[i]);
+                    (collidables[i].getComponent<BoxCollider2D>('BoxCollider2D')).onCollision(game, collidables[j]);
+                    (collidables[j].getComponent<BoxCollider2D>('BoxCollider2D')).onCollision(game, collidables[i]);
                 }
             }
         }
@@ -44,11 +44,11 @@ export class Collision2D extends System2D {
      * @returns a boolean indicating whether or not the two Entities collide
      */
     private collides(e1: Entity, e2: Entity): boolean {
-        const e1Transform = e1.getComponent(Transform2D);
-        const e1Box = e1.getComponent(BoxCollider2D);
+        const e1Transform = e1.getComponent<Transform2D>('Transform2D');
+        const e1Box = e1.getComponent<BoxCollider2D>('BoxCollider2D');
 
-        const e2Transform = e2.getComponent(Transform2D);
-        const e2Box = e2.getComponent(BoxCollider2D);
+        const e2Transform = e2.getComponent<Transform2D>('Transform2D');
+        const e2Box = e2.getComponent<BoxCollider2D>('BoxCollider2D');
 
         const e1Pos = e1Transform.position;
         const e1Dim = e1Box.dimensions;

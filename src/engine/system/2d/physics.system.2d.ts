@@ -25,7 +25,7 @@ export class Physics2D extends System2D {
         const movers = game.world.filterEntitiesByComponentName('Transform2D');
 
         for (const e of movers) {
-            const transform = e.getComponent(Transform2D);
+            const transform = e.getComponent<Transform2D>('Transform2D');
             transform.move(Vec2.scale(transform.velocity, frameDelta / 1000));
         }
     }

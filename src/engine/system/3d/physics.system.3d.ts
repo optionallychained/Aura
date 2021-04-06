@@ -25,7 +25,7 @@ export class Physics extends System3D {
         const movers = game.world.filterEntitiesByComponentName('Transform3D');
 
         for (const e of movers) {
-            const transform = e.getComponent(Transform3D);
+            const transform = e.getComponent<Transform3D>('Transform3D');
             transform.move(Vec3.scale(transform.velocity, frameDelta / 1000));
         }
     }

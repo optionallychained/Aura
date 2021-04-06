@@ -54,7 +54,7 @@ export class Camera2D extends Camera<Camera2DConfig> {
     public attachTo(entity: Entity, rules?: Camera2DFollowRules): void {
         try {
             this.following = {
-                transform: entity.getComponent(Transform2D),
+                transform: entity.getComponent<Transform2D>('Transform2D'),
                 rules: {
                     position: {
                         x: rules?.position?.x ?? true,

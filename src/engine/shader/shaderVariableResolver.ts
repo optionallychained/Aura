@@ -63,19 +63,19 @@ export class ShaderVariableResolver {
     private static readonly ENTITY_ATTRIBUTE_MAPPINGS = new Map<string, EntityShaderVariableResolver>([
         [
             'a_Position',
-            (e) => e.getComponent(Model).vertices
+            (e) => e.getComponent<Model>('Model').vertices
         ],
         [
             'a_Color',
-            (e) => e.getComponent(FlatColor).color.float32Array
+            (e) => e.getComponent<FlatColor>('FlatColor').color.float32Array
         ],
         [
             'a_VertexColor',
-            (e) => e.getComponent(MultiColor).nextColor().float32Array
+            (e) => e.getComponent<MultiColor>('MultiColor').nextColor().float32Array
         ],
         [
             'a_TexCoord',
-            (e) => e.getComponent(Model).textureCoordinates
+            (e) => e.getComponent<Model>('Model').textureCoordinates
         ]
     ]);
 
@@ -85,15 +85,15 @@ export class ShaderVariableResolver {
     private static readonly ENTITY_UNIFORM_MAPPINGS = new Map<string, EntityShaderVariableResolver>([
         [
             'u_Transform2D',
-            (e) => e.getComponent(Transform2D).compute().float32Array
+            (e) => e.getComponent<Transform2D>('Transform2D').compute().float32Array
         ],
         [
             'u_Transform3D',
-            (e) => e.getComponent(Transform3D).compute().float32Array
+            (e) => e.getComponent<Transform3D>('Transform3D').compute().float32Array
         ],
         [
             'u_Color',
-            (e) => e.getComponent(FlatColor).color.float32Array
+            (e) => e.getComponent<FlatColor>('FlatColor').color.float32Array
         ]
     ]);
 

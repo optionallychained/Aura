@@ -56,11 +56,11 @@ export const MAIN_STATE = new State.ThreeD.State3D({
         // let i = 0;
         // const cubes = game.world.filterEntitiesByTag('cubeMulti');
         // for (const e of cubes) {
-        //     e.getComponent(Transform3D).rotate(rotations[i]);
+        //     e.getComponent<Transform3D>('Transform3D').rotate(rotations[i]);
         //     i++;
         // }
 
-        const playerTransform = game.world.filterEntitiesByTag('player')[0]?.getComponent(Component.ThreeD.Transform3D);
+        const playerTransform = game.world.filterEntitiesByTag('player')[0]?.getComponent<Component.ThreeD.Transform3D>('Transform3D');
         const camera = game.world.activeCamera;
 
         // playerTransform?.rotateZ(Angle.toRadians(1.5));

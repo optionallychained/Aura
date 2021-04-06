@@ -1,6 +1,5 @@
 import { Component } from '../component';
 import { AuraError, Game } from '../core';
-import { ClassType } from '../types';
 import { EntityConfig } from './entity.config';
 
 /**
@@ -9,6 +8,8 @@ import { EntityConfig } from './entity.config';
  * An Entity is any object existing within the game; be it a player, enemy, pickup, level object, camera, UI element, etc
  *
  * Entities maintain a list of Components, which give them their properties and behaviour and allow Systems to operate on them as necessary
+ *
+ * // TODO look at ways of reimplementing get/has Component by Type/Class
  *
  * @see Component
  */
@@ -50,48 +51,54 @@ export abstract class Entity {
     public abstract tick(game: Game, frameDelta: number): void;
 
     /**
-     * Get a Component from the Entity by Component class
+     * Get a Component from the Entity by name
      *
-     * @typeparam T (autoinferred) the type of the Component to retrieve
+     * Throws an error if the Component is not found on the Entity to allow type safety + simplistic no-questions consumer calls
      *
-     * @param component the Component class to retrieve
-     *
-     * @returns the retrieved Component
-     */
-    public getComponent<T extends Component>(component: ClassType<T>): T {
-        // throw an error if the Component is not found on the Entity to allow type safety + simplistic no-questions consumer calls
-        if (!this.hasComponent(component)) {
-            throw new AuraError({
-                class: 'Entity',
-                method: 'getComponent',
-                message: `Failed to retrieve Component '${component.name}' for Entity with tag '${this.tag}'`
-            });
-        }
-
-        return this.components.get(component.name) as T;
-    }
-
-    /**
-     * Get a Component from the Entity by Component name
-     *
-     * @typeparam T the type of the Component to retrieve
+     * @typeparam T the type of the Component that will be returned
      *
      * @param name the name of the Component to retrieve
      *
-     * @returns the retrieved Component
+     * @returns the Component
      */
-    public getComponentByName<T extends Component>(name: string): T {
-        // throw an error if the Component is not found on the Entity to allow type safety + simplistic no-questions consumer calls
-        if (!this.hasComponentWithName(name)) {
+    public getComponent<T extends Component>(name: string): T {
+        if (!this.hasComponent(name)) {
             throw new AuraError({
                 class: 'Entity',
-                method: 'getComponentByName',
-                message: `Failed to retrieve Component '${name}' for Entity with tag '${this.tag}'`
+                method: 'getComponent',
+                message: `Failed to retrieve Component ${name} for Entity with tag ${this.tag}`
             });
         }
 
         return this.components.get(name) as T;
     }
+
+    // /**
+    //  * // TODO DEAD - this does NOT work in distribution builds
+    //  * //   reason: (component).name is the *prototype name*, at runtime in obfuscated builds indeterminate
+    //  *
+    //  * it would be nice to be able to reimplement the pattern (entity).getComponent(Class)...somehow. Enforced prototype naming?
+    //  *
+    //  * Get a Component from the Entity by Component class
+    //  *
+    //  * @typeparam T (autoinferred) the type of the Component to retrieve
+    //  *
+    //  * @param component the Component class to retrieve
+    //  *
+    //  * @returns the retrieved Component
+    //  */
+    // public getComponentByType<T extends Component>(component: ClassType<T>): T {
+    //     // throw an error if the Component is not found on the Entity to allow type safety + simplistic no-questions consumer calls
+    //     if (!this.hasComponent(component)) {
+    //         throw new AuraError({
+    //             class: 'Entity',
+    //             method: 'getComponent',
+    //             message: `Failed to retrieve Component '${component.name}' for Entity with tag '${this.tag}'`
+    //         });
+    //     }
+
+    //     return this.components.get(component.name) as T;
+    // }
 
     /**
      * Add a Component to the Entity
@@ -154,34 +161,6 @@ export abstract class Entity {
     }
 
     /**
-     * Check if the Entity has a Component by Component class
-     *
-     * @param component the Component to check
-     *
-     * @returns a boolean indicating whether or not the Entity has the Component
-     */
-    public hasComponent(component: Component): boolean {
-        return this.components.has(component.name);
-    }
-
-    /**
-     * Check if the Entity has a list of Components by Component class
-     *
-     * @param components the Components to check
-     *
-     * @returns a boolean indicating whether or not the Entity has all of the Components
-     */
-    public hasComponents(...components: Array<Component>): boolean {
-        for (const c of components) {
-            if (!this.hasComponent(c)) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    /**
      * Check if the Entity has a Component by Component name
      *
      * // TODO this doesn't appear to work in dist. Why?
@@ -190,7 +169,7 @@ export abstract class Entity {
      *
      * @returns a boolean indicating whether or not the Entity has the named Component
      */
-    public hasComponentWithName(name: string): boolean {
+    public hasComponent(name: string): boolean {
         return this.components.has(name);
     }
 
@@ -201,9 +180,9 @@ export abstract class Entity {
      *
      * @returns a boolean indicating whether or not the Entity has all of the named Components
      */
-    public hasComponentsWithNames(...names: Array<string>): boolean {
+    public hasComponents(...names: Array<string>): boolean {
         for (const n of names) {
-            if (!this.hasComponentWithName(n)) {
+            if (!this.hasComponent(n)) {
                 return false;
             }
         }
