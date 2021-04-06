@@ -50,22 +50,19 @@ export class Collision2D extends System2D {
         const e2Transform = e2.getComponent(Transform2D);
         const e2Box = e2.getComponent(BoxCollider2D);
 
-        // TODO collision after world coords involving transforms
-        return false;
+        const e1Pos = e1Transform.position;
+        const e1Dim = e1Box.dimensions;
+        const e2Pos = e2Transform.position;
+        const e2Dim = e2Box.dimensions;
 
-        // const e1Pos = e1Transform.position;
-        // const e1Dim = e1Box.dimensions;
-        // const e2Pos = e2Transform.position;
-        // const e2Dim = e2Box.dimensions;
-
-        // return (
-        //     e1Pos.x < (e2Pos.x + e2Dim.x)
-        //     &&
-        //     (e1Pos.x + e1Dim.x) > e2Pos.x
-        //     &&
-        //     e1Pos.y < (e2Pos.y + e2Dim.y)
-        //     &&
-        //     (e1Pos.y + e1Dim.y) > e2Pos.y
-        // )
+        return (
+            e1Pos.x < (e2Pos.x + e2Dim.x)
+            &&
+            (e1Pos.x + e1Dim.x) > e2Pos.x
+            &&
+            e1Pos.y < (e2Pos.y + e2Dim.y)
+            &&
+            (e1Pos.y + e1Dim.y) > e2Pos.y
+        );
     }
 }
