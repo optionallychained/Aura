@@ -4,18 +4,32 @@ import { Component } from '../component';
 /**
  * Built-in Transform3D Component, defining the position, scale, rotation and velocity of a three dimensional Entity
  *
- * Maintains and provides abstractions for a Mat4 transformations matrix
+ * Provides for both relative movement along own axes as well as absolute movement along the world axes
+ *
+ * Produces the Mat4 Transformation Matrix used in shaders to position Game Objects
+ *
+ * NB: this Transform3D does not suffer gimbal lock
+ * // TODO maybe we want a version that *does*?
  */
 export class Transform3D extends Component {
 
-    /** Maintined scale vector */
-    private scaleVector: Vec3;
+    /** Maintained position */
+    public readonly position = new Vec3();
 
-    /** Maintained translation vector */
-    private translationVector: Vec3;
+    /** Maintained 'forward' Axis */
+    public readonly forward = new Vec3(0, 0, -1);
 
-    /** Maintained rotation vector (around the x, y, and z axes) in radians */
-    private rotation: Vec3;
+    /** Maintained 'up' Axis */
+    public readonly up = new Vec3(0, 1, 0);
+
+    /** Maintained 'right' Axis */
+    public readonly right = new Vec3(1, 0, 0);
+
+    /** Maintained scale factor */
+    public readonly scale = new Vec3(1, 1, 1);
+
+    /** Maintained rotation angles (radians) */
+    public readonly angles = new Vec3();
 
     /**
      * Constructor. Take and store the initial position, scale, angle and velocity
@@ -28,68 +42,198 @@ export class Transform3D extends Component {
     constructor(
         public readonly initialPosition = new Vec3(),
         public readonly initialScale = new Vec3(1, 1, 1),
-        public readonly initialRotation = new Vec3(),
+        public readonly initialAngles = new Vec3(),
         public readonly velocity = new Vec3()
     ) {
 
         super('Transform3D');
 
-        this.translationVector = initialPosition;
-        this.scaleVector = initialScale;
-        this.rotation = initialRotation;
+        this.translate(initialPosition);
+        this.scaleTo(initialScale);
+        this.rotate(initialAngles);
     }
 
     /**
-     * Abstraction for Mat4.translate, adding a given translation onto the existing translationVector
+     * Move along the right axis by a given amount
      *
-     * @param translate the Vec4 to translate by
+     * Facilitates relative movement
+     *
+     * @param amount the amount to move by
+     */
+    public moveRight(amount: number): void {
+        this.mutable.position = Vec3.add(this.position, Vec3.scale(this.right, amount));
+    }
+
+    /**
+     * Move along the up axis by a given amount
+     *
+     * Facilitates relative movement
+     *
+     * @param amount the amount to move by
+     */
+    public moveUp(amount: number): void {
+        this.mutable.position = Vec3.add(this.position, Vec3.scale(this.up, amount));
+    }
+
+    /**
+     * Move along the forward axis by a given amount
+     *
+     * Facilitates relative movement
+     *
+     * @param amount the amount to move by
+     */
+    public moveForward(amount: number): void {
+        this.mutable.position = Vec3.add(this.position, Vec3.scale(this.forward, amount));
+    }
+
+    /**
+     * Convenience wrapper for moveRight(), moveUp() and moveForward(), taking a Vec3 to represent the Right, Up and Forward amounts
+     *
+     * @param amounts the Right, Up and Forward amounts to move by
+     */
+    public move(amounts: Vec3): void {
+        if (amounts.x) {
+            this.moveRight(amounts.x);
+        }
+
+        if (amounts.y) {
+            this.moveUp(amounts.y);
+        }
+
+        if (amounts.z) {
+            this.moveForward(amounts.z);
+        }
+    }
+
+    /**
+     * Move along the World axes by a given translation vector
+     *
+     * Facilitates absolute movement
+     *
+     * @param translate the translation vector
      */
     public translate(translate: Vec3): void {
-        this.translationVector = Vec3.add(this.translationVector, translate);
+        this.mutable.position = Vec3.add(this.position, translate);
     }
 
     /**
-     * Abstraction for Mat4.rotate, adding a given angle (in radians) to the current rotation angle
+     * Rotate by a given angle (radians) around the X axis; pitch
      *
-     * @param angle the angles around the x, y and z axes (radians) to rotate by, expressed as a Vec3
+     * @param angle the angle (radians) to rotate by
      */
-    public rotate(factor: Vec3): void {
-        this.rotation = Vec3.add(this.rotation, factor);
+    public rotateX(angle: number): void {
+        this.angles.setX(this.angles.x + angle);
+
+        const mat = Mat4.fromAxisRotation(this.right, angle);
+
+        // adjust the forward and up axes according to the rotation
+        this.mutable.forward = Vec3.normalize(Vec3.transformByMat4(this.forward, mat));
+        this.mutable.up = Vec3.normalize(Vec3.transformByMat4(this.up, mat));
     }
 
     /**
-     * Abstraction for Mat4.scale, updating the existing scale factor with the given
+     * Rotate by a given angle (radians) around the Y axis; yaw
      *
-     * Multiplies the two Vec4s so as to ensure an Entity's initialScale is preserved as the baseline
-     *
-     * @param factor the factor to scale by
+     * @param angle the angle (radians) to rotate by
      */
-    public scale(factor: Vec3): void {
-        this.scaleVector = Vec3.mult(this.initialScale, factor);
+    public rotateY(angle: number): void {
+        this.angles.setY(this.angles.y + angle);
+
+        const mat = Mat4.fromAxisRotation(this.up, angle);
+
+        // adjust the forward and right axes according to the rotation
+        this.mutable.forward = Vec3.normalize(Vec3.transformByMat4(this.forward, mat));
+        this.mutable.right = Vec3.normalize(Vec3.transformByMat4(this.right, mat));
     }
 
     /**
-     * Compute the composite Transform Matrix for the maintained translation, scaling and rotation
+     * Rotate by a given angle (radians) around the Z axis; roll
+     *
+     * @param angle the angle (radians) to rotate by
+     */
+    public rotateZ(angle: number): void {
+        this.angles.setZ(this.angles.z + angle);
+
+        const mat = Mat4.fromAxisRotation(this.forward, angle);
+
+        // adjust the up and right axes according to the rotation
+        this.mutable.up = Vec3.normalize(Vec3.transformByMat4(this.up, mat));
+        this.mutable.right = Vec3.normalize(Vec3.transformByMat4(this.right, mat));
+    }
+
+    /**
+     * Convenience wrapper for rotateX(), rotateY() and rotateZ(), taking a Vec3 representing the X, Y and Z angles (radians) to rotate by
+     *
+     * @param angles the X, Y and Z angles (radians) to rotate by
+     */
+    public rotate(angles: Vec3): void {
+        if (angles.x) {
+            this.rotateX(angles.x);
+        }
+
+        if (angles.y) {
+            this.rotateY(angles.y);
+        }
+
+        if (angles.z) {
+            this.rotateZ(angles.z);
+        }
+    }
+
+    /**
+     * Scale the Transform3D by a given factor, relative to its current scale
+     *
+     * @param factor the Vec3 to scale by
+     */
+    public scaleBy(factor: Vec3): void {
+        this.mutable.scale = Vec3.mult(this.scale, factor);
+    }
+
+    /**
+     * Scale the Transform3D to a given absolute factor
+     *
+     * @param factor the Vec3 scale factor to adopt
+     */
+    public scaleTo(factor: Vec3): void {
+        this.mutable.scale = factor;
+    }
+
+    /**
+     * Reset all transformations back to their initial values, including the Transform's axes
+     */
+    public reset(): void {
+        // reset the axes
+        this.mutable.right = new Vec3(1, 0, 0);
+        this.mutable.up = new Vec3(0, 1, 0);
+        this.mutable.forward = new Vec3(0, 0, 1);
+
+        // reset all transformation members
+        this.mutable.angles = new Vec3();
+        this.mutable.position = new Vec3();
+        this.mutable.scale = new Vec3(1, 1, 1);
+
+        // retread the construction transformation to reconfigure
+        this.translate(this.initialPosition);
+        this.scaleTo(this.initialScale);
+        this.rotate(this.initialAngles);
+    }
+
+    /**
+     * Compute the composite Transform Matrix from the maintained translation, scaling and rotation
      *
      * @returns the Transform matrix
      */
     public compute(): Mat4 {
-        const trans = Mat4.translate(new Mat4(), this.translationVector);
+        // using a lookAt Matrix because it's convenient for orientation
+        return Mat4.scale(Mat4.lookAt(this.position, Vec3.add(this.position, this.forward), this.up), this.scale);
+    }
 
-        const rotX = Mat4.rotateX(new Mat4(), this.rotation.x);
-        const rotY = Mat4.rotateY(new Mat4(), this.rotation.y);
-        const rotZ = Mat4.rotateZ(new Mat4(), this.rotation.z);
-
-        let rot = Mat4.mult(new Mat4(), rotX);
-        rot = Mat4.mult(rot, rotY);
-        rot = Mat4.mult(rot, rotZ);
-
-        const scale = Mat4.scale(new Mat4(), this.scaleVector);
-
-        let compute = Mat4.mult(new Mat4(), scale);
-        compute = Mat4.mult(compute, rot);
-        compute = Mat4.mult(compute, trans);
-
-        return compute;
+    /**
+    * Getter for a Mutable cast of the Transform3D instance; used for enabling internal-only mutation of translation, rotation and scale
+    *
+    * @returns the typecasted Mutable Transform3D instance
+    */
+    private get mutable(): Mutable<Transform3D> {
+        return this as Mutable<Transform3D>;
     }
 }

@@ -1,3 +1,4 @@
+import { Game } from '../core';
 import { Vec2 } from '../math';
 import { ControlScheme } from './controlScheme.type';
 import { Keys } from './keys.enum';
@@ -34,24 +35,24 @@ export class InputManager {
     ];
 
     /**
-     * Constructor. Take and store the game's Canvas for registering input events upon
+     * Constructor. Initialise event handlers as appropriate based on the controlScheme
      *
-     * @param canvas the Canvas
+     * @param game the Game the InputManager belongs to
      * @param controlScheme the ControlScheme given to the Game's Config, used for optimising event registration and handling
      */
-    constructor(canvas: HTMLCanvasElement, controlScheme: ControlScheme) {
+    constructor(game: Game, public readonly controlScheme: ControlScheme) {
         switch (controlScheme) {
             case 'keyboard':
                 this.initializeKeyboard();
                 break;
 
             case 'mouse':
-                this.initializeMouse(canvas);
+                this.initializeMouse(game.canvas);
                 break;
 
             default:
                 this.initializeKeyboard();
-                this.initializeMouse(canvas);
+                this.initializeMouse(game.canvas);
         }
     }
 

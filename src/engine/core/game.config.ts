@@ -1,31 +1,34 @@
-import { ControlScheme } from '../input/controlScheme.type';
+import { ControlScheme } from '../input';
 import { Color, Vec2 } from '../math';
-import { FontConfig } from '../text/font.config';
-import { UIConfig } from '../ui';
-import { WorldConfig } from '../world/world.config';
+import { TextureAtlas } from '../texture';
 
 /**
- * Interface desciribing the main Game Configuration object
+ * Interface describing the generic Game Configuration object, with configuration relevant both to 2D and 3D games
  *
- * @see Game
+ * All configuration is optional; default values will be provided if unprovided
  */
 export interface GameConfig {
-    /** Game Canvas dimensions; default value is (window.innerWidth, window.innerHeight) */
+    /** Dimensions of the Canvas; default value is (window.innerWidth, window.innerHeight) */
     readonly canvasDimensions?: Vec2;
-    /** Game Canvas ID. If not provided, a Canvas will be created */
+    /** ID of the Canvas; a Canvas will be created if not provided */
     readonly canvasId?: string;
-    /** Game background color; default value is black */
+    /** Background Color for the Game; default value is black */
     readonly backgroundColor?: Color;
-    /** Game control scheme, used to optimise InputManager event registrations; default value is 'keyboard' */
+    /** Game Control Scheme; default value is 'keyboard' */
     readonly controlScheme?: ControlScheme;
-    /** Debug mode, enabling the display of frame data and potentially other useful stuff in the future; default value is false */
+    /** Debug Mode, enabling game stat display; default value is false */
     readonly debugMode?: boolean;
-    /** Optional configuration for the Game's UI */
-    readonly uiConfig?: UIConfig
-    /** Optional configuration for the Game's World */
-    readonly worldConfig?: WorldConfig;
-    /** Optional configuration for the Game's Font */
-    readonly fontConfig?: FontConfig;
     /** Game init function; none is provided by default */
-    readonly init?: () => void
+    readonly init?: () => void;
+}
+
+/**
+ * Interface describing the generic Game configuration defaults object, just used to type-secure the generic Game's defaults
+ */
+export interface GameConfigDefaults {
+    canvasDimensions: Vec2;
+    backgroundColor: Color;
+    controlScheme: ControlScheme;
+    fontAtlas: TextureAtlas;
+    fontCharset: Array<string>;
 }

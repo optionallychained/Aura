@@ -1,3 +1,4 @@
+import { Mat3 } from './mat3';
 import { Vec3 } from './vec3';
 
 /**
@@ -178,6 +179,41 @@ export class Vec2 {
         return new Vec2(
             v.x * ca - v.y * sa,
             v.x * sa + v.y * ca
+        );
+    }
+
+    /**
+     * Clamp the components of a given Vec2 to between the components of the given min and max
+     *
+     * @param v the Vec2 to clamp
+     * @param min the Vec2 representing the minimum x and y values for v
+     * @param max the Vec2 representing the maximum x and y values for v
+     *
+     * @returns the clamped Vec2
+     */
+    public static clamp(v: Vec2, min: Vec2, max: Vec2): Vec2 {
+        return new Vec2(Math.min(Math.max(v.x, min.x), max.x), Math.min(Math.max(v.y, min.y), max.y));
+    }
+
+    /**
+     * Transform a Vec2 by a given Mat3 transformation matrix
+     *
+     * @param v the Vec2 to transform
+     * @param m the Mat3 to transform by
+     *
+     * @returns the transformed Vec2
+     */
+    public static transformByMat3(v: Vec2, m: Mat3): Vec2 {
+        const { x, y } = v;
+
+        const a = m.array,
+            m00 = a[0], m01 = a[1],
+            m10 = a[3], m11 = a[4],
+            m20 = a[6], m21 = a[7];
+
+        return new Vec2(
+            m00 * x + m10 * y + m20,
+            m01 * x + m11 * y + m21
         );
     }
 

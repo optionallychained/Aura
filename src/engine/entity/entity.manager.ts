@@ -1,5 +1,5 @@
-import { Model, Shader, Texture } from '../component';
-import { ProtoGLError } from '../core';
+import { Model, Shader, Texture } from '../component/generic';
+import { AuraError, Game } from '../core';
 import { VBOConfig } from '../renderer';
 import { ShaderVariableResolver } from '../shader';
 import { Entity } from './entity';
@@ -8,25 +8,33 @@ import { EntityManagerConfig } from './entity.manager.config';
 /**
  * Internal-use utility type for representing Entity list change hints to the vertex compilation routine
  */
-type EntityChanges = Array<{ shaderName: string; modelName: string; }>;
+type EntityChanges = Array<{ programName: string; modelName: string; }>;
 
 /**
- * Core EntityManager; utilised by the Game to defer the management, updating and rendering of game Entities
+ * Abstract core EntityManager; implementing the generic and abstractable behaviour for the management, updating and rendering of Entities
  *
- * Three EntityManagers in total are utilised by World, Font and UI so as to separate processing and utility for the three distinct Entity
- *   types and allow for the consolidation of all update/rendering logic into the relationship between EntityManager and WebGLRenderer
+ * Three concrete EntityManagers are utilised by the core Game to manage World objects, UI objects and Font objects; separating processing
+ *   and utility for the three distince use-cases for Entities. These are then broken down into 2D and 3D variants for the type correction
+ *   of their consumer APIs
  *
  * Works to optimise Entity management and rendering by grouping Entities, precompiling vertex lists, handling VBOs and caching Entity
  *   filter/search results
  *
  * VBOs are provisioned on a per-shader+model combination basis. This is because Entities that share both a Shader and a Model can be
- *   rendered in batches, and thereby their vertices buffered to the GPU and drawn from as a single set
+ *   rendered in batches, and thereby their vertices buffered  to the GPU and drawn from as a single set
  *
- * The EntityManagers are available on the Game instance at `game.[world|ui|font].entityManager`
+ * Receives and works with a single TextureAtlas, thereby allowing for texture sources per Entity use-case
+ *
+ * The concrete EntityManagers are available on the Game instance at `game.[world|ui|font]`
+ *
+ * @typeparam TConfig the configuration object type, extending the core EntityManagerConfig, used by concrete extensions
  *
  * @see Game
+ * @see World
+ * @see Font
+ * @see UI
  */
-export class EntityManager {
+export abstract class EntityManager<TConfig extends EntityManagerConfig> {
 
     /** Flat list of all Entities currently in play, used for efficiently executing frame ticks and in filtering */
     private entities: Array<Entity> = [];
@@ -58,7 +66,7 @@ export class EntityManager {
      *
      * @param renderer the renderer
      */
-    constructor(private readonly config: EntityManagerConfig) {
+    constructor(protected readonly config: TConfig & { name: string }) {
         if (config.textureAtlas) {
             config.renderer.createTexture(config.textureAtlas);
         }
@@ -121,7 +129,7 @@ export class EntityManager {
      *
      * @param frameDelta the time between the last frame and the current, for normalizing time-dependent operations
      */
-    public tick(frameDelta: number): void {
+    public tick(game: Game, frameDelta: number): void {
         const added = this.loadEntities();
         const removed = this.cleanEntities();
 
@@ -132,7 +140,7 @@ export class EntityManager {
         }
 
         for (const e of this.entities) {
-            e.tick(frameDelta);
+            e.tick(game, frameDelta);
         }
     }
 
@@ -243,26 +251,23 @@ export class EntityManager {
             const changes: EntityChanges = [];
 
             for (const e of this.addList) {
-                const shader = e.getComponent(Shader);
-                const model = e.getComponent(Model);
-
-                // grouped Entities are for optimising rendering; if an Entity lacks either a Shader or a Model, it is implicitly not
-                //   renderable
-                if (!shader || !model) {
+                if (!e.hasComponent(Shader) || !e.hasComponent(Model)) {
+                    // grouped Entities are for optimising rendering; if an Entity lacks either a Shader or a Model, it is implicitly not
+                    //   renderable
                     continue;
                 }
 
                 // get the shader and model name for provisioning vertices and VBOs
-                const shaderName = shader.programName;
-                const modelName = model.modelName;
+                const { programName } = e.getComponent(Shader);
+                const { modelName } = e.getComponent(Model);
 
                 // mark that the vertices for this shader+model combo should be recompiled
                 // TODO entity change detection: further optimise vertex compilation and buffering by recompiling and buffering on a per
                 //   Entity basis
-                changes.push({ shaderName, modelName });
+                changes.push({ programName, modelName });
 
                 // retrieve the existing Entities associated with this Shader
-                let forShader = this.renderableEntities.get(shaderName);
+                let forShader = this.renderableEntities.get(programName);
 
                 if (forShader) {
                     // retrieve the existing Entities associated with both this Shader and this Model
@@ -287,7 +292,7 @@ export class EntityManager {
                 }
 
                 // update the main Entity Shader group with the new per-Shader Entity map
-                this.renderableEntities.set(shaderName, forShader);
+                this.renderableEntities.set(programName, forShader);
             }
 
             // compile the vertices for the altered groups
@@ -317,21 +322,18 @@ export class EntityManager {
             const changes: EntityChanges = [];
 
             for (const e of this.removeList) {
-                const shader = e.getComponent(Shader);
-                const model = e.getComponent(Model);
-
-                // grouped Entities are for optimising rendering; if an Entity lacks either a Shader or a Model, it will not be in the
-                //   renderableEntities group
-                if (!shader || !model) {
+                if (!e.hasComponent(Shader) || !e.hasComponent(Model)) {
+                    // grouped Entities are for optimising rendering; if an Entity lacks either a Shader or a Model, it is implicitly not
+                    //   renderable
                     continue;
                 }
 
                 // get the shader and model name for provisioning vertices and VBOs
-                const shaderName = shader.programName;
-                const modelName = model.modelName;
+                const { programName } = e.getComponent(Shader);
+                const { modelName } = e.getComponent(Model);
 
                 // retrieve the Entities associated with this Shader
-                const forShader = this.renderableEntities.get(shaderName);
+                const forShader = this.renderableEntities.get(programName);
 
                 if (forShader) {
                     // retrieve the Entities associated with both this Shader and this Model
@@ -344,7 +346,7 @@ export class EntityManager {
                         // mark that the vertices for this shader+model combo should be recompiled
                         // TODO entity change detection: further optimise vertex compilation and buffering by recompiling and buffering on
                         //   a per Entity basis
-                        changes.push({ shaderName, modelName });
+                        changes.push({ programName, modelName });
 
                         // delete the shader+model combo outright if it's now empty
                         if (!forModel.length) {
@@ -353,7 +355,7 @@ export class EntityManager {
 
                         // delete the shader group container if it's now empty
                         if (!forShader.size) {
-                            this.renderableEntities.delete(shaderName);
+                            this.renderableEntities.delete(programName);
                         }
                     }
                 }
@@ -385,7 +387,7 @@ export class EntityManager {
      * @param changes the list of Shader+Model combinations that were altered and require compiling
      */
     private compileVertices(changes: EntityChanges): void {
-        for (const { shaderName, modelName } of changes) {
+        for (const { programName: shaderName, modelName } of changes) {
             // TODO if there's no Entity list under this combination, something has gone wrong? handle the issue?
             const entities = this.renderableEntities.get(shaderName)?.get(modelName);
 
@@ -434,7 +436,7 @@ export class EntityManager {
                         // process every attribute for every vertex of the Entity
                         for (const attr of shaderInfo.vertex.attributes) {
                             // TODO entity change detection: recompile dynamic values only as necessary
-                            let value = ShaderVariableResolver.resolveShaderVariableForEntity(attr.name, e);
+                            let value = ShaderVariableResolver.resolveAttribute(attr.name, e);
 
                             if (typeof value === 'number') {
                                 // handle numerical values by wrapping them in an array for setting into vertices
@@ -452,7 +454,7 @@ export class EntityManager {
                                 if (!textureAtlas) {
                                     // if we're trying to render an Entity with a Texture-involved shader, but we have no Texture Atlas,
                                     //   then something has gone wrong
-                                    throw new ProtoGLError({
+                                    throw new AuraError({
                                         class: 'EntityManager',
                                         method: 'compileVertices',
                                         message: `

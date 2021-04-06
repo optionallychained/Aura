@@ -1,3 +1,5 @@
+import { Mat4 } from './mat4';
+
 /**
  * Class representing a three-dimensional Vector with properties x, y and z and providing static utilities for mathematical operations
  */
@@ -249,6 +251,31 @@ export class Vec3 {
             rotate[0] + origin.x,
             rotate[1] + origin.y,
             rotate[2] + origin.z
+        );
+    }
+
+    /**
+     * Transform a Vec3 by a given Mat4 transformation matrix
+     *
+     * @param v the Vec3 to transform
+     * @param m the Mat4 to transform by
+     *
+     * @returns the transformed Vec3
+     */
+    public static transformByMat4(v: Vec3, m: Mat4): Vec3 {
+        const { x, y, z } = v;
+
+        const a = m.array,
+
+            m00 = a[0], m01 = a[1], m02 = a[2],
+            m10 = a[4], m11 = a[5], m12 = a[6],
+            m20 = a[8], m21 = a[9], m22 = a[10],
+            m30 = a[12], m31 = a[13], m32 = a[14];
+
+        return new Vec3(
+            m00 * x + m10 * y + m20 * z + m30,
+            m01 * x + m11 * y + m21 * z + m31,
+            m02 * x + m12 * y + m22 * z + m32
         );
     }
 

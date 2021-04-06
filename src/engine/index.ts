@@ -1,8 +1,12 @@
+export * as Camera from './camera';
+
 export * as Component from './component';
 
 export * as Core from './core';
 
 export * as Entity from './entity';
+
+export * as Font from './font';
 
 export * as Geometry from './geometry';
 
@@ -18,8 +22,6 @@ export * as Shader from './shader';
 export * as State from './state';
 
 export * as System from './system';
-
-export * as Text from './text';
 
 export * as Texture from './texture';
 

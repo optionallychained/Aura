@@ -1,6 +1,6 @@
 import { FRAGMENT_COLOR_PER_VERTEX } from '../../fragment/generic';
-import { ShaderProgram } from '../../program';
 import { VERTEX_COLOR_PER_VERTEX_2D } from '../../vertex/2d';
+import { ShaderProgram } from '../shaderProgram';
 
 /**
  * Built-in basic 2D color per vertex ShaderProgram, pairing the built-in basic 2D color per vertex Vertex and Fragment shaders

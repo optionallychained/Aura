@@ -1,5 +1,5 @@
-import { FragmentShader } from '../fragment/fragment.shader';
-import { VertexShader } from '../vertex/vertex.shader';
+import { FragmentShader } from '../fragment';
+import { VertexShader } from '../vertex';
 
 /**
  * Interface describing a ShaderProgram configuration object

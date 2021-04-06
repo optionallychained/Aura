@@ -1,6 +1,6 @@
 import { FRAGMENT_BASIC } from '../../fragment/generic';
-import { ShaderProgram } from '../../program';
 import { VERTEX_BASIC_3D } from '../../vertex/3d';
+import { ShaderProgram } from '../shaderProgram';
 
 /**
  * Built-in basic 3D ShaderProgram, pairing the built-in basic 3D Vertex and Fragment shaders
