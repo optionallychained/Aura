@@ -6,8 +6,6 @@ Aura is a work-in-progress TypeScript/WebGL general-purpose game engine, designe
 
 Built on the Entity-Component-System architecture and operating on the concept of distinct game States, Aura aims to enable a compartmentalised approach to game creation, supporting developments of varying complexity.
 
-See [Aura-Template](https://github.com/jonnopon/Aura-Template) for getting up and running with Aura fast.
-
 Goals:
 - Zero (or close to) dependencies
 - Simplistic and easy-to-approach API and project structure
@@ -29,11 +27,17 @@ Goals:
 
 ### Quickstart
 
-Fork or clone [Aura-Template](https://github.com/jonnopon/Aura-Template) to get up and running fast
+To get up and running with Aura fast, see the following Template Repositories:
+
+- [Aura-Template-2D](https://github.com/jonnopon/Aura-Template-2D) for 2D games
+
+- [Aura-Template-3D](https://github.com/jonnopon/Aura-Template-3D) for 3D games
+
 
 ### NPM
 
 `npm install aura`
+
 
 ### CDN
 
