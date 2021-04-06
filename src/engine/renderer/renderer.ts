@@ -178,6 +178,12 @@ export class Renderer {
         if (buffer) {
             gl.deleteBuffer(buffer);
             this.vbos.delete(name);
+            this.activeVBOName = '';
+
+            // disable attribute arrays
+            for (const attr of this.activeShaderProgram?.attributeLocations ?? []) {
+                gl.disableVertexAttribArray(attr.location);
+            }
         }
     }
 
@@ -309,7 +315,7 @@ export class Renderer {
         }
 
         // switch VBOs if necessary
-        if (config.vbo.name !== this.activeVBOName) {
+        if (config.vbo.name !== this.activeVBOName || config.vbo.changed) {
             this.useVBO(config.vbo);
         }
 

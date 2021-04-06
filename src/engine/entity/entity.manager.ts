@@ -8,7 +8,7 @@ import { EntityManagerConfig } from './entity.manager.config';
 /**
  * Internal-use utility type for representing Entity list change hints to the vertex compilation routine
  */
-type EntityChanges = Array<{ programName: string; modelName: string; }>;
+type EntityChanges = Set<string>;
 
 /**
  * Abstract core EntityManager; implementing the generic and abstractable behaviour for the management, updating and rendering of Entities
@@ -163,12 +163,9 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
                 const vbo = this.vbos.get(`${shaderName}_${modelName}`);
 
                 if (entities.length && vbo) {
-                    // pull out the shader info once from the first Entity, as the shader is guaranteed to be the same for all
-                    const { programName } = entities[0].getComponent(Shader);
-
                     this.config.renderer.render({
                         vbo,
-                        shaderProgramName: programName,
+                        shaderProgramName: shaderName,
                         textureAtlasName: this.config.textureAtlas?.name,
                         entities
                     });
@@ -250,7 +247,7 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
      */
     private loadEntities(): boolean {
         if (this.addList.length) {
-            const changes: EntityChanges = [];
+            const changes: EntityChanges = new Set<string>();
 
             for (const e of this.addList) {
                 if (!e.hasComponent(Shader) || !e.hasComponent(Model)) {
@@ -266,7 +263,7 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
                 // mark that the vertices for this shader+model combo should be recompiled
                 // TODO entity change detection: further optimise vertex compilation and buffering by recompiling and buffering on a per
                 //   Entity basis
-                changes.push({ programName, modelName });
+                changes.add(`${programName}-${modelName}`);
 
                 // retrieve the existing Entities associated with this Shader
                 let forShader = this.renderableEntities.get(programName);
@@ -321,7 +318,7 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
      */
     private cleanEntities(): boolean {
         if (this.removeList.length) {
-            const changes: EntityChanges = [];
+            const changes: EntityChanges = new Set<string>();
 
             for (const e of this.removeList) {
                 if (!e.hasComponent(Shader) || !e.hasComponent(Model)) {
@@ -348,7 +345,7 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
                         // mark that the vertices for this shader+model combo should be recompiled
                         // TODO entity change detection: further optimise vertex compilation and buffering by recompiling and buffering on
                         //   a per Entity basis
-                        changes.push({ programName, modelName });
+                        changes.add(`${programName}-${modelName}`);
 
                         // delete the shader+model combo outright if it's now empty
                         if (!forModel.length) {
@@ -389,12 +386,15 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
      * @param changes the list of Shader+Model combinations that were altered and require compiling
      */
     private compileVertices(changes: EntityChanges): void {
-        for (const { programName: shaderName, modelName } of changes) {
+        for (const change of changes) {
+            const programName = change.substring(0, change.indexOf('-'));
+            const modelName = change.substring(change.indexOf('-') + 1);
+
             // TODO if there's no Entity list under this combination, something has gone wrong? handle the issue?
-            const entities = this.renderableEntities.get(shaderName)?.get(modelName);
+            const entities = this.renderableEntities.get(programName)?.get(modelName);
 
             // identify a VBO by the shader+model combo it represents
-            const vboIdentifier = `${shaderName}_${modelName}`;
+            const vboIdentifier = `${programName}_${modelName}`;
 
             // name the VBO with this EntityManager instance's vboPrefix, facilitating multiple EntityManagers per Game instance
             const vboName = `${this.config.name}_${vboIdentifier}`;
