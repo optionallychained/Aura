@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Font | API | Aura Documentation - v0.5.0</title>
-	<meta name="description" content="Documentation for API | Aura Documentation - v0.5.0">
+	<title>UI3D | API | Aura Documentation - v0.8.0</title>
+	<meta name="description" content="Documentation for API | Aura Documentation - v0.8.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
 	<script async src="../assets/js/search.js" id="search-script"></script>
@@ -23,7 +23,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">API | Aura Documentation - v0.5.0</a>
+					<a href="../index.html" class="title">API | Aura Documentation - v0.8.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -52,16 +52,19 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="../modules.html">API | Aura Documentation - v0.5.0</a>
+					<a href="../modules.html">API | Aura Documentation - v0.8.0</a>
 				</li>
 				<li>
-					<a href="../modules/text.html">Text</a>
+					<a href="../modules/ui.html">UI</a>
 				</li>
 				<li>
-					<a href="text.font.html">Font</a>
+					<a href="../modules/ui.threed.html">ThreeD</a>
+				</li>
+				<li>
+					<a href="ui.threed.ui3d.html">UI3D</a>
 				</li>
 			</ul>
-			<h1>Class Font</h1>
+			<h1>Class UI3D</h1>
 		</div>
 	</div>
 </header>
@@ -71,20 +74,20 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Core Font class; providing utility and management for Entities representing strings and characters</p>
+						<p>Concrete UI3D, a UI EntityManager setting out the 3D-specific properties and behavior of UI object management for 3D Games</p>
 					</div>
-					<p>// TODO continue on branch text
-					// TODO this, World and UI might want to actually extend from EntityManager?</p>
+					<p>Implements and type-narrows the abstract elements of the parent class UI so as to produce consumer type-safety on things like Panel
+					management</p>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<a href="entity.entitymanager.html" class="tsd-signature-type" data-tsd-kind="Class">EntityManager</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/text.fontconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">FontConfig</a><span class="tsd-signature-symbol">&gt;</span>
+						<a href="ui.ui-1.html" class="tsd-signature-type" data-tsd-kind="Class">UI</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/ui.threed.ui3dconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">UI3DConfig</a><span class="tsd-signature-symbol">&gt;</span>
 						<ul class="tsd-hierarchy">
 							<li>
-								<span class="target">Font</span>
+								<span class="target">UI3D</span>
 							</li>
 						</ul>
 					</li>
@@ -94,80 +97,88 @@
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
-						<section class="tsd-index-section ">
+						<section class="tsd-index-section tsd-is-inherited">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><a href="text.font.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><a href="ui.threed.ui3d.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
-						<section class="tsd-index-section tsd-is-private-protected">
+						<section class="tsd-index-section tsd-is-inherited tsd-is-private-protected">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="text.font.html#config" class="tsd-kind-icon">config</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="ui.threed.ui3d.html#config" class="tsd-kind-icon">config</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Accessors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited"><a href="text.font.html#entitycount" class="tsd-kind-icon">entity<wbr>Count</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited"><a href="ui.threed.ui3d.html#entitycount" class="tsd-kind-icon">entity<wbr>Count</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="text.font.html#addentities" class="tsd-kind-icon">add<wbr>Entities</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="text.font.html#addentity" class="tsd-kind-icon">add<wbr>Entity</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="text.font.html#addstring" class="tsd-kind-icon">add<wbr>String</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="text.font.html#clearentities" class="tsd-kind-icon">clear<wbr>Entities</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="text.font.html#filterentitiesbycomponentname" class="tsd-kind-icon">filter<wbr>Entities<wbr>ByComponent<wbr>Name</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="text.font.html#filterentitiesbycomponentnames" class="tsd-kind-icon">filter<wbr>Entities<wbr>ByComponent<wbr>Names</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="text.font.html#filterentitiesbycomponentnamesfromsource" class="tsd-kind-icon">filter<wbr>Entities<wbr>ByComponent<wbr>Names<wbr>From<wbr>Source</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="text.font.html#filterentitiesbytag" class="tsd-kind-icon">filter<wbr>Entities<wbr>ByTag</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="text.font.html#filterentitiesbytags" class="tsd-kind-icon">filter<wbr>Entities<wbr>ByTags</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="text.font.html#removeentities" class="tsd-kind-icon">remove<wbr>Entities</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="text.font.html#removeentity" class="tsd-kind-icon">remove<wbr>Entity</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="text.font.html#render" class="tsd-kind-icon">render</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="text.font.html#tick" class="tsd-kind-icon">tick</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="ui.threed.ui3d.html#addentities" class="tsd-kind-icon">add<wbr>Entities</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="ui.threed.ui3d.html#addentity" class="tsd-kind-icon">add<wbr>Entity</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="ui.threed.ui3d.html#addpanel" class="tsd-kind-icon">add<wbr>Panel</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="ui.threed.ui3d.html#clearentities" class="tsd-kind-icon">clear<wbr>Entities</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="ui.threed.ui3d.html#filterentitiesbycomponentname" class="tsd-kind-icon">filter<wbr>Entities<wbr>ByComponent<wbr>Name</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="ui.threed.ui3d.html#filterentitiesbycomponentnames" class="tsd-kind-icon">filter<wbr>Entities<wbr>ByComponent<wbr>Names</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="ui.threed.ui3d.html#filterentitiesbycomponentnamesfromsource" class="tsd-kind-icon">filter<wbr>Entities<wbr>ByComponent<wbr>Names<wbr>From<wbr>Source</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="ui.threed.ui3d.html#filterentitiesbytag" class="tsd-kind-icon">filter<wbr>Entities<wbr>ByTag</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="ui.threed.ui3d.html#filterentitiesbytags" class="tsd-kind-icon">filter<wbr>Entities<wbr>ByTags</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="ui.threed.ui3d.html#removeentities" class="tsd-kind-icon">remove<wbr>Entities</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="ui.threed.ui3d.html#removeentity" class="tsd-kind-icon">remove<wbr>Entity</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="ui.threed.ui3d.html#render" class="tsd-kind-icon">render</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="ui.threed.ui3d.html#tick" class="tsd-kind-icon">tick</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group ">
+			<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
 				<h2>Constructors</h2>
 				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Font<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><a href="../interfaces/text.fontconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">FontConfig</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="text.font.html" class="tsd-signature-type" data-tsd-kind="Class">Font</a></li>
+						<li class="tsd-signature tsd-kind-icon">new UI3D<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><a href="../interfaces/ui.threed.ui3dconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">UI3DConfig</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="ui.threed.ui3d.html" class="tsd-signature-type" data-tsd-kind="Class">UI3D</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="entity.entitymanager.html">EntityManager</a>.<a href="entity.entitymanager.html#constructor">constructor</a></p>
+								<p>Inherited from <a href="ui.ui-1.html">UI</a>.<a href="ui.ui-1.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/text/font.ts#L12">src/engine/text/font.ts:12</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/0d7d554/src/engine/ui/ui.ts#L16">src/engine/ui/ui.ts:16</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Constructor. Take the type-correct UI Config and pass it up to the parent class</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>config: <a href="../interfaces/text.fontconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">FontConfig</a></h5>
+									<h5>config: <a href="../interfaces/ui.threed.ui3dconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">UI3DConfig</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the type-correct UI Config</p>
+									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="text.font.html" class="tsd-signature-type" data-tsd-kind="Class">Font</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="ui.threed.ui3d.html" class="tsd-signature-type" data-tsd-kind="Class">UI3D</a></h4>
 						</li>
 					</ul>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-private-protected">
+			<section class="tsd-panel-group tsd-member-group tsd-is-inherited tsd-is-private-protected">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
 					<a name="config" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagProtected">Protected</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> config</h3>
-					<div class="tsd-signature tsd-kind-icon">config<span class="tsd-signature-symbol">:</span> <a href="../interfaces/text.fontconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">FontConfig</a><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-symbol">{ </span>initialEntities<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="entity.entity-1.html" class="tsd-signature-type" data-tsd-kind="Class">Entity</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span></div>
+					<div class="tsd-signature tsd-kind-icon">config<span class="tsd-signature-symbol">:</span> <a href="../interfaces/ui.threed.ui3dconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">UI3DConfig</a><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-symbol">{ </span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="entity.entitymanager.html">EntityManager</a>.<a href="entity.entitymanager.html#config">config</a></p>
+						<p>Inherited from <a href="ui.ui-1.html">UI</a>.<a href="ui.ui-1.html#config">config</a></p>
 					</aside>
 				</section>
 			</section>
@@ -183,7 +194,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/entity/entity.manager.ts#L76">src/engine/entity/entity.manager.ts:76</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/0d7d554/src/engine/entity/entity.manager.ts#L80">src/engine/entity/entity.manager.ts:80</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -208,9 +219,9 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="entity.entitymanager.html">EntityManager</a>.<a href="entity.entitymanager.html#addentities">addEntities</a></p>
+								<p>Inherited from <a href="ui.ui-1.html">UI</a>.<a href="ui.ui-1.html#addentities">addEntities</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/entity/entity.manager.ts#L94">src/engine/entity/entity.manager.ts:94</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/0d7d554/src/engine/entity/entity.manager.ts#L98">src/engine/entity/entity.manager.ts:98</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -240,9 +251,9 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="entity.entitymanager.html">EntityManager</a>.<a href="entity.entitymanager.html#addentity">addEntity</a></p>
+								<p>Inherited from <a href="ui.ui-1.html">UI</a>.<a href="ui.ui-1.html#addentity">addEntity</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/entity/entity.manager.ts#L85">src/engine/entity/entity.manager.ts:85</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/0d7d554/src/engine/entity/entity.manager.ts#L89">src/engine/entity/entity.manager.ts:89</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -263,29 +274,44 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="addstring" class="tsd-anchor"></a>
-					<h3>add<wbr>String</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">add<wbr>String<span class="tsd-signature-symbol">(</span>text<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, position<span class="tsd-signature-symbol">: </span><a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a>, color<span class="tsd-signature-symbol">: </span><a href="color.html" class="tsd-signature-type" data-tsd-kind="Class">Color</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+					<a name="addpanel" class="tsd-anchor"></a>
+					<h3>add<wbr>Panel</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+						<li class="tsd-signature tsd-kind-icon">add<wbr>Panel<span class="tsd-signature-symbol">(</span>position<span class="tsd-signature-symbol">: </span><a href="vec3.html" class="tsd-signature-type" data-tsd-kind="Class">Vec3</a>, scale<span class="tsd-signature-symbol">: </span><a href="vec3.html" class="tsd-signature-type" data-tsd-kind="Class">Vec3</a>, color<span class="tsd-signature-symbol">: </span><a href="color.html" class="tsd-signature-type" data-tsd-kind="Class">Color</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Overrides <a href="ui.ui-1.html">UI</a>.<a href="ui.ui-1.html#addpanel">addPanel</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/text/font.ts#L22">src/engine/text/font.ts:22</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/0d7d554/src/engine/ui/3d/ui.3d.ts#L21">src/engine/ui/3d/ui.3d.ts:21</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Concrete Panel addition routine, narrowing the generic types to ensure the correct configuration of a UI3D</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>text: <span class="tsd-signature-type">string</span></h5>
+									<h5>position: <a href="vec3.html" class="tsd-signature-type" data-tsd-kind="Class">Vec3</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the Vec3 position of the panel</p>
+									</div>
 								</li>
 								<li>
-									<h5>position: <a href="vec2.html" class="tsd-signature-type" data-tsd-kind="Class">Vec2</a></h5>
+									<h5>scale: <a href="vec3.html" class="tsd-signature-type" data-tsd-kind="Class">Vec3</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the Vec3 scale of the panel</p>
+									</div>
 								</li>
 								<li>
 									<h5>color: <a href="color.html" class="tsd-signature-type" data-tsd-kind="Class">Color</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the Color of the panel</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -301,14 +327,14 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="entity.entitymanager.html">EntityManager</a>.<a href="entity.entitymanager.html#clearentities">clearEntities</a></p>
+								<p>Inherited from <a href="ui.ui-1.html">UI</a>.<a href="ui.ui-1.html#clearentities">clearEntities</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/entity/entity.manager.ts#L119">src/engine/entity/entity.manager.ts:119</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/0d7d554/src/engine/entity/entity.manager.ts#L123">src/engine/entity/entity.manager.ts:123</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Purge all active Entities</p>
+									<p>Purge all active Entities immediately</p>
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -324,9 +350,9 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="entity.entitymanager.html">EntityManager</a>.<a href="entity.entitymanager.html#filterentitiesbycomponentname">filterEntitiesByComponentName</a></p>
+								<p>Inherited from <a href="ui.ui-1.html">UI</a>.<a href="ui.ui-1.html#filterentitiesbycomponentname">filterEntitiesByComponentName</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/entity/entity.manager.ts#L185">src/engine/entity/entity.manager.ts:185</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/0d7d554/src/engine/entity/entity.manager.ts#L188">src/engine/entity/entity.manager.ts:188</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -357,9 +383,9 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="entity.entitymanager.html">EntityManager</a>.<a href="entity.entitymanager.html#filterentitiesbycomponentnames">filterEntitiesByComponentNames</a></p>
+								<p>Inherited from <a href="ui.ui-1.html">UI</a>.<a href="ui.ui-1.html#filterentitiesbycomponentnames">filterEntitiesByComponentNames</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/entity/entity.manager.ts#L197">src/engine/entity/entity.manager.ts:197</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/0d7d554/src/engine/entity/entity.manager.ts#L200">src/engine/entity/entity.manager.ts:200</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -390,9 +416,9 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="entity.entitymanager.html">EntityManager</a>.<a href="entity.entitymanager.html#filterentitiesbycomponentnamesfromsource">filterEntitiesByComponentNamesFromSource</a></p>
+								<p>Inherited from <a href="ui.ui-1.html">UI</a>.<a href="ui.ui-1.html#filterentitiesbycomponentnamesfromsource">filterEntitiesByComponentNamesFromSource</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/entity/entity.manager.ts#L212">src/engine/entity/entity.manager.ts:212</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/0d7d554/src/engine/entity/entity.manager.ts#L215">src/engine/entity/entity.manager.ts:215</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -436,9 +462,9 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="entity.entitymanager.html">EntityManager</a>.<a href="entity.entitymanager.html#filterentitiesbytag">filterEntitiesByTag</a></p>
+								<p>Inherited from <a href="ui.ui-1.html">UI</a>.<a href="ui.ui-1.html#filterentitiesbytag">filterEntitiesByTag</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/entity/entity.manager.ts#L224">src/engine/entity/entity.manager.ts:224</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/0d7d554/src/engine/entity/entity.manager.ts#L227">src/engine/entity/entity.manager.ts:227</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -469,9 +495,9 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="entity.entitymanager.html">EntityManager</a>.<a href="entity.entitymanager.html#filterentitiesbytags">filterEntitiesByTags</a></p>
+								<p>Inherited from <a href="ui.ui-1.html">UI</a>.<a href="ui.ui-1.html#filterentitiesbytags">filterEntitiesByTags</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/entity/entity.manager.ts#L235">src/engine/entity/entity.manager.ts:235</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/0d7d554/src/engine/entity/entity.manager.ts#L238">src/engine/entity/entity.manager.ts:238</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -502,9 +528,9 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="entity.entitymanager.html">EntityManager</a>.<a href="entity.entitymanager.html#removeentities">removeEntities</a></p>
+								<p>Inherited from <a href="ui.ui-1.html">UI</a>.<a href="ui.ui-1.html#removeentities">removeEntities</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/entity/entity.manager.ts#L112">src/engine/entity/entity.manager.ts:112</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/0d7d554/src/engine/entity/entity.manager.ts#L116">src/engine/entity/entity.manager.ts:116</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -534,9 +560,9 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="entity.entitymanager.html">EntityManager</a>.<a href="entity.entitymanager.html#removeentity">removeEntity</a></p>
+								<p>Inherited from <a href="ui.ui-1.html">UI</a>.<a href="ui.ui-1.html#removeentity">removeEntity</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/entity/entity.manager.ts#L103">src/engine/entity/entity.manager.ts:103</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/0d7d554/src/engine/entity/entity.manager.ts#L107">src/engine/entity/entity.manager.ts:107</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -566,9 +592,9 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="entity.entitymanager.html">EntityManager</a>.<a href="entity.entitymanager.html#render">render</a></p>
+								<p>Inherited from <a href="ui.ui-1.html">UI</a>.<a href="ui.ui-1.html#render">render</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/entity/entity.manager.ts#L153">src/engine/entity/entity.manager.ts:153</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/0d7d554/src/engine/entity/entity.manager.ts#L159">src/engine/entity/entity.manager.ts:159</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -589,14 +615,14 @@
 					<a name="tick" class="tsd-anchor"></a>
 					<h3>tick</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">tick<span class="tsd-signature-symbol">(</span>frameDelta<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">tick<span class="tsd-signature-symbol">(</span>game<span class="tsd-signature-symbol">: </span><a href="core.game.html" class="tsd-signature-type" data-tsd-kind="Class">Game</a>, frameDelta<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="entity.entitymanager.html">EntityManager</a>.<a href="entity.entitymanager.html#tick">tick</a></p>
+								<p>Inherited from <a href="ui.ui-1.html">UI</a>.<a href="ui.ui-1.html#tick">tick</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/entity/entity.manager.ts#L128">src/engine/entity/entity.manager.ts:128</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/0d7d554/src/engine/entity/entity.manager.ts#L134">src/engine/entity/entity.manager.ts:134</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -606,6 +632,9 @@
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
+								<li>
+									<h5>game: <a href="core.game.html" class="tsd-signature-type" data-tsd-kind="Class">Game</a></h5>
+								</li>
 								<li>
 									<h5>frameDelta: <span class="tsd-signature-type">number</span></h5>
 									<div class="tsd-comment tsd-typography">
@@ -638,6 +667,9 @@
 						<a href="../modules/entity.html">Entity</a>
 					</li>
 					<li class=" tsd-kind-namespace">
+						<a href="../modules/font.html">Font</a>
+					</li>
+					<li class=" tsd-kind-namespace">
 						<a href="../modules/geometry.html">Geometry</a>
 					</li>
 					<li class=" tsd-kind-namespace">
@@ -655,14 +687,19 @@
 					<li class=" tsd-kind-namespace">
 						<a href="../modules/system.html">System</a>
 					</li>
-					<li class="current tsd-kind-namespace">
-						<a href="../modules/text.html">Text</a>
-					</li>
 					<li class=" tsd-kind-namespace">
 						<a href="../modules/texture.html">Texture</a>
 					</li>
-					<li class=" tsd-kind-namespace">
+					<li class="current tsd-kind-namespace">
 						<a href="../modules/ui.html">UI</a>
+						<ul>
+							<li class="current tsd-kind-namespace tsd-parent-kind-namespace">
+								<a href="../modules/ui.threed.html">ThreeD</a>
+							</li>
+							<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
+								<a href="../modules/ui.twod.html">TwoD</a>
+							</li>
+						</ul>
 					</li>
 					<li class=" tsd-kind-namespace">
 						<a href="../modules/world.html">World</a>
@@ -672,67 +709,67 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-class tsd-parent-kind-namespace">
-						<a href="text.char.html" class="tsd-kind-icon">Char</a>
+						<a href="ui.threed.panel3d.html" class="tsd-kind-icon">Panel3D</a>
 					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-namespace">
-						<a href="text.font.html" class="tsd-kind-icon">Font</a>
+						<a href="ui.threed.ui3d.html" class="tsd-kind-icon">UI3D</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
-								<a href="text.font.html#constructor" class="tsd-kind-icon">constructor</a>
+								<a href="ui.threed.ui3d.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-								<a href="text.font.html#config" class="tsd-kind-icon">config</a>
+								<a href="ui.threed.ui3d.html#config" class="tsd-kind-icon">config</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
-								<a href="text.font.html#entitycount" class="tsd-kind-icon">entity<wbr>Count</a>
+								<a href="ui.threed.ui3d.html#entitycount" class="tsd-kind-icon">entity<wbr>Count</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="text.font.html#addentities" class="tsd-kind-icon">add<wbr>Entities</a>
+								<a href="ui.threed.ui3d.html#addentities" class="tsd-kind-icon">add<wbr>Entities</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="text.font.html#addentity" class="tsd-kind-icon">add<wbr>Entity</a>
+								<a href="ui.threed.ui3d.html#addentity" class="tsd-kind-icon">add<wbr>Entity</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="text.font.html#addstring" class="tsd-kind-icon">add<wbr>String</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="text.font.html#clearentities" class="tsd-kind-icon">clear<wbr>Entities</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+								<a href="ui.threed.ui3d.html#addpanel" class="tsd-kind-icon">add<wbr>Panel</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="text.font.html#filterentitiesbycomponentname" class="tsd-kind-icon">filter<wbr>Entities<wbr>ByComponent<wbr>Name</a>
+								<a href="ui.threed.ui3d.html#clearentities" class="tsd-kind-icon">clear<wbr>Entities</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="text.font.html#filterentitiesbycomponentnames" class="tsd-kind-icon">filter<wbr>Entities<wbr>ByComponent<wbr>Names</a>
+								<a href="ui.threed.ui3d.html#filterentitiesbycomponentname" class="tsd-kind-icon">filter<wbr>Entities<wbr>ByComponent<wbr>Name</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="text.font.html#filterentitiesbycomponentnamesfromsource" class="tsd-kind-icon">filter<wbr>Entities<wbr>ByComponent<wbr>Names<wbr>From<wbr>Source</a>
+								<a href="ui.threed.ui3d.html#filterentitiesbycomponentnames" class="tsd-kind-icon">filter<wbr>Entities<wbr>ByComponent<wbr>Names</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="text.font.html#filterentitiesbytag" class="tsd-kind-icon">filter<wbr>Entities<wbr>ByTag</a>
+								<a href="ui.threed.ui3d.html#filterentitiesbycomponentnamesfromsource" class="tsd-kind-icon">filter<wbr>Entities<wbr>ByComponent<wbr>Names<wbr>From<wbr>Source</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="text.font.html#filterentitiesbytags" class="tsd-kind-icon">filter<wbr>Entities<wbr>ByTags</a>
+								<a href="ui.threed.ui3d.html#filterentitiesbytag" class="tsd-kind-icon">filter<wbr>Entities<wbr>ByTag</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="text.font.html#removeentities" class="tsd-kind-icon">remove<wbr>Entities</a>
+								<a href="ui.threed.ui3d.html#filterentitiesbytags" class="tsd-kind-icon">filter<wbr>Entities<wbr>ByTags</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="text.font.html#removeentity" class="tsd-kind-icon">remove<wbr>Entity</a>
+								<a href="ui.threed.ui3d.html#removeentities" class="tsd-kind-icon">remove<wbr>Entities</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="text.font.html#render" class="tsd-kind-icon">render</a>
+								<a href="ui.threed.ui3d.html#removeentity" class="tsd-kind-icon">remove<wbr>Entity</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="text.font.html#tick" class="tsd-kind-icon">tick</a>
+								<a href="ui.threed.ui3d.html#render" class="tsd-kind-icon">render</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="ui.threed.ui3d.html#tick" class="tsd-kind-icon">tick</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-namespace">
-						<a href="../interfaces/text.fontconfig.html" class="tsd-kind-icon">Font<wbr>Config</a>
+						<a href="../interfaces/ui.threed.ui3dconfig.html" class="tsd-kind-icon">UI3DConfig</a>
 					</li>
 				</ul>
 			</nav>

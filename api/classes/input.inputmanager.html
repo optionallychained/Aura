@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>InputManager | API | Aura Documentation - v0.5.0</title>
-	<meta name="description" content="Documentation for API | Aura Documentation - v0.5.0">
+	<title>InputManager | API | Aura Documentation - v0.8.0</title>
+	<meta name="description" content="Documentation for API | Aura Documentation - v0.8.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
 	<script async src="../assets/js/search.js" id="search-script"></script>
@@ -23,7 +23,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">API | Aura Documentation - v0.5.0</a>
+					<a href="../index.html" class="title">API | Aura Documentation - v0.8.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -52,7 +52,7 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="../modules.html">API | Aura Documentation - v0.5.0</a>
+					<a href="../modules.html">API | Aura Documentation - v0.8.0</a>
 				</li>
 				<li>
 					<a href="../modules/input.html">Input</a>
@@ -99,6 +99,12 @@
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="input.inputmanager.html#controlscheme" class="tsd-kind-icon">control<wbr>Scheme</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="input.inputmanager.html#iskeydown" class="tsd-kind-icon">is<wbr>Key<wbr>Down</a></li>
@@ -120,18 +126,21 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/input/input.manager.ts#L35">src/engine/input/input.manager.ts:35</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/0d7d554/src/engine/input/input.manager.ts#L35">src/engine/input/input.manager.ts:35</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Constructor. Take and store the game&#39;s Canvas for registering input events upon</p>
+									<p>Constructor. Initialise event handlers as appropriate based on the controlScheme</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>game: <a href="core.game.html" class="tsd-signature-type" data-tsd-kind="Class">Game</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the Game the InputManager belongs to</p>
+									</div>
 								</li>
 								<li>
 									<h5>controlScheme: <a href="../modules/input.html#controlscheme" class="tsd-signature-type" data-tsd-kind="Type alias">ControlScheme</a></h5>
@@ -146,6 +155,16 @@
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="controlscheme" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> control<wbr>Scheme</h3>
+					<div class="tsd-signature tsd-kind-icon">control<wbr>Scheme<span class="tsd-signature-symbol">:</span> <a href="../modules/input.html#controlscheme" class="tsd-signature-type" data-tsd-kind="Type alias">ControlScheme</a></div>
+					<aside class="tsd-sources">
+					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="iskeydown" class="tsd-anchor"></a>
@@ -157,7 +176,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/input/input.manager.ts#L66">src/engine/input/input.manager.ts:66</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/0d7d554/src/engine/input/input.manager.ts#L66">src/engine/input/input.manager.ts:66</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -189,7 +208,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/input/input.manager.ts#L75">src/engine/input/input.manager.ts:75</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/0d7d554/src/engine/input/input.manager.ts#L75">src/engine/input/input.manager.ts:75</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -223,6 +242,9 @@
 						<a href="../modules/entity.html">Entity</a>
 					</li>
 					<li class=" tsd-kind-namespace">
+						<a href="../modules/font.html">Font</a>
+					</li>
+					<li class=" tsd-kind-namespace">
 						<a href="../modules/geometry.html">Geometry</a>
 					</li>
 					<li class="current tsd-kind-namespace">
@@ -239,9 +261,6 @@
 					</li>
 					<li class=" tsd-kind-namespace">
 						<a href="../modules/system.html">System</a>
-					</li>
-					<li class=" tsd-kind-namespace">
-						<a href="../modules/text.html">Text</a>
 					</li>
 					<li class=" tsd-kind-namespace">
 						<a href="../modules/texture.html">Texture</a>
@@ -266,6 +285,9 @@
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
 								<a href="input.inputmanager.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="input.inputmanager.html#controlscheme" class="tsd-kind-icon">control<wbr>Scheme</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="input.inputmanager.html#iskeydown" class="tsd-kind-icon">is<wbr>Key<wbr>Down</a>

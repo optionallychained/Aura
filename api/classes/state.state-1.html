@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>State | API | Aura Documentation - v0.5.0</title>
-	<meta name="description" content="Documentation for API | Aura Documentation - v0.5.0">
+	<title>State | API | Aura Documentation - v0.8.0</title>
+	<meta name="description" content="Documentation for API | Aura Documentation - v0.8.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
 	<script async src="../assets/js/search.js" id="search-script"></script>
@@ -23,7 +23,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">API | Aura Documentation - v0.5.0</a>
+					<a href="../index.html" class="title">API | Aura Documentation - v0.8.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -52,7 +52,7 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="../modules.html">API | Aura Documentation - v0.5.0</a>
+					<a href="../modules.html">API | Aura Documentation - v0.8.0</a>
 				</li>
 				<li>
 					<a href="../modules/state.html">State</a>
@@ -61,7 +61,7 @@
 					<a href="state.state-1.html">State</a>
 				</li>
 			</ul>
-			<h1>Class State</h1>
+			<h1>Class State&lt;TGame&gt;</h1>
 		</div>
 	</div>
 </header>
@@ -71,22 +71,41 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Class representing a State</p>
+						<p>Abstract class representing a State, broken down into concrete 2D and 3D variants in State2D and State3D</p>
 					</div>
 					<p>A State is roughly equivalent to a Scene; a literal distinct <em>state</em> that the game can be in</p>
 					<p>Example States may include Menu, Game, Pause, Dead, etc</p>
-					<dl class="tsd-comment-tags">
-						<dt>see</dt>
-						<dd><p>Game</p>
-						</dd>
-					</dl>
+					<p>The typeparam specifies which concrete Game type the State belongs to, allowing for the concrete State2D and State3D to receive a
+						type-correct Game instance in their lifecycle methods, and enabling the assurance that a Game is only configured with the corresponding
+					2D or 3D State type</p>
 				</div>
+			</section>
+			<section class="tsd-panel tsd-type-parameters">
+				<h3>Type parameters</h3>
+				<ul class="tsd-type-parameters">
+					<li>
+						<h4>TGame<span class="tsd-signature-symbol">: </span><a href="core.twod.game2d.html" class="tsd-signature-type" data-tsd-kind="Class">Game2D</a><span class="tsd-signature-symbol"> | </span><a href="core.threed.game3d.html" class="tsd-signature-type" data-tsd-kind="Class">Game3D</a></h4>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>the concrete Game Type the State belongs to</p>
+							</div>
+						</div>
+					</li>
+				</ul>
 			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
 						<span class="target">State</span>
+						<ul class="tsd-hierarchy">
+							<li>
+								<a href="state.twod.state2d.html" class="tsd-signature-type" data-tsd-kind="Class">State2D</a>
+							</li>
+							<li>
+								<a href="state.threed.state3d.html" class="tsd-signature-type" data-tsd-kind="Class">State3D</a>
+							</li>
+						</ul>
 					</li>
 				</ul>
 			</section>
@@ -97,14 +116,19 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="state.state-1.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-has-type-parameter"><a href="state.state-1.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-private-protected">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="state.state-1.html#config" class="tsd-kind-icon">config</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Accessors</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="state.state-1.html#name" class="tsd-kind-icon">name</a></li>
-								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="state.state-1.html#renderingmode" class="tsd-kind-icon">rendering<wbr>Mode</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -120,17 +144,17 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Constructors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-has-type-parameter">
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
-					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>State<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><a href="../interfaces/state.stateconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">StateConfig</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="state.state-1.html" class="tsd-signature-type" data-tsd-kind="Class">State</a></li>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>State&lt;TGame&gt;<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><a href="../interfaces/state.stateconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">StateConfig</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TGame</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="state.state-1.html" class="tsd-signature-type" data-tsd-kind="Class">State</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TGame</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/state/state.ts#L14">src/engine/state/state.ts:14</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/0d7d554/src/engine/state/state.ts#L18">src/engine/state/state.ts:18</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -138,18 +162,34 @@
 									<p>Constructor. Take and store the State&#39;s config</p>
 								</div>
 							</div>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>TGame<span class="tsd-signature-symbol">: </span><a href="core.twod.game2d.html" class="tsd-signature-type" data-tsd-kind="Class">Game2D</a><span class="tsd-signature-symbol"> | </span><a href="core.threed.game3d.html" class="tsd-signature-type" data-tsd-kind="Class">Game3D</a></h4>
+								</li>
+							</ul>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>config: <a href="../interfaces/state.stateconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">StateConfig</a></h5>
+									<h5>config: <a href="../interfaces/state.stateconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">StateConfig</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TGame</span><span class="tsd-signature-symbol">&gt;</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>the State&#39;s configuration</p>
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="state.state-1.html" class="tsd-signature-type" data-tsd-kind="Class">State</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="state.state-1.html" class="tsd-signature-type" data-tsd-kind="Class">State</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TGame</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-private-protected">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+					<a name="config" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> config</h3>
+					<div class="tsd-signature tsd-kind-icon">config<span class="tsd-signature-symbol">:</span> <a href="../interfaces/state.stateconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">StateConfig</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TGame</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -164,7 +204,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/state/state.ts#L28">src/engine/state/state.ts:28</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/0d7d554/src/engine/state/state.ts#L32">src/engine/state/state.ts:32</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -177,29 +217,6 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
-					<a name="renderingmode" class="tsd-anchor"></a>
-					<h3>rendering<wbr>Mode</h3>
-					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> renderingMode<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules/renderer.html#renderingmode" class="tsd-signature-type" data-tsd-kind="Type alias">RenderingMode</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/state/state.ts#L37">src/engine/state/state.ts:37</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Getter for the State&#39;s rendering mode, as provided in its Config</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <a href="../modules/renderer.html#renderingmode" class="tsd-signature-type" data-tsd-kind="Type alias">RenderingMode</a></h4>
-							<p>the State&#39;s rendering mode</p>
-						</li>
-					</ul>
-				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
@@ -207,27 +224,27 @@
 					<a name="end" class="tsd-anchor"></a>
 					<h3>end</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">end<span class="tsd-signature-symbol">(</span>game<span class="tsd-signature-symbol">: </span><a href="core.game.html" class="tsd-signature-type" data-tsd-kind="Class">Game</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">end<span class="tsd-signature-symbol">(</span>game<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TGame</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/state/state.ts#L71">src/engine/state/state.ts:71</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/0d7d554/src/engine/state/state.ts#L66">src/engine/state/state.ts:66</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>State shutdown method, called when the State is &#39;switched away from&#39; by the Game.</p>
+									<p>Generic end lifecycle method, calling down to the end() provided in the State&#39;s config</p>
 								</div>
-								<p>Useful for cleaning up Systems and Entities before State closure</p>
+								<p>Called when the State is switched away from, facilitating State cleanup</p>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>game: <a href="core.game.html" class="tsd-signature-type" data-tsd-kind="Class">Game</a></h5>
+									<h5>game: <span class="tsd-signature-type">TGame</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>the Game the State is running within</p>
+										<p>the game the State is running within</p>
 									</div>
 								</li>
 							</ul>
@@ -239,27 +256,27 @@
 					<a name="init" class="tsd-anchor"></a>
 					<h3>init</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">init<span class="tsd-signature-symbol">(</span>game<span class="tsd-signature-symbol">: </span><a href="core.game.html" class="tsd-signature-type" data-tsd-kind="Class">Game</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">init<span class="tsd-signature-symbol">(</span>game<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TGame</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/state/state.ts#L48">src/engine/state/state.ts:48</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/0d7d554/src/engine/state/state.ts#L43">src/engine/state/state.ts:43</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>State initialisation method, called when the State is &#39;switched to&#39; by the Game.</p>
+									<p>Generic init lifecycle method, calling down to the init() provided in the State&#39;s config</p>
 								</div>
-								<p>Useful for configuring the game with Systems and Entities before State kickoff</p>
+								<p>Called when the State is switched to, facilitating State initialisation</p>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>game: <a href="core.game.html" class="tsd-signature-type" data-tsd-kind="Class">Game</a></h5>
+									<h5>game: <span class="tsd-signature-type">TGame</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>the Game the State is running within</p>
+										<p>the game the State is running within</p>
 									</div>
 								</li>
 							</ul>
@@ -271,33 +288,33 @@
 					<a name="tick" class="tsd-anchor"></a>
 					<h3>tick</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">tick<span class="tsd-signature-symbol">(</span>game<span class="tsd-signature-symbol">: </span><a href="core.game.html" class="tsd-signature-type" data-tsd-kind="Class">Game</a>, frameDelta<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">tick<span class="tsd-signature-symbol">(</span>game<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TGame</span>, frameDelta<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/state/state.ts#L60">src/engine/state/state.ts:60</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/0d7d554/src/engine/state/state.ts#L55">src/engine/state/state.ts:55</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>State frame update method, called for every frame the State is active.</p>
+									<p>Generic tick lifecycle method, calling down to the tick() provided in the State&#39;s config</p>
 								</div>
-								<p>Useful for handling per-frame logic necessary to progress the State</p>
+								<p>Called once per frame as an update routine, facilitating State frame logic</p>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>game: <a href="core.game.html" class="tsd-signature-type" data-tsd-kind="Class">Game</a></h5>
+									<h5>game: <span class="tsd-signature-type">TGame</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>the Game the State is running within</p>
+										<p>the game the State is running within</p>
 									</div>
 								</li>
 								<li>
 									<h5>frameDelta: <span class="tsd-signature-type">number</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>the time between the last frame and the current, for normalizing time-dependent operations</p>
+										<p>the Game&#39;s frameDelta for normalizing time-dependent operations</p>
 									</div>
 								</li>
 							</ul>
@@ -326,6 +343,9 @@
 						<a href="../modules/entity.html">Entity</a>
 					</li>
 					<li class=" tsd-kind-namespace">
+						<a href="../modules/font.html">Font</a>
+					</li>
+					<li class=" tsd-kind-namespace">
 						<a href="../modules/geometry.html">Geometry</a>
 					</li>
 					<li class=" tsd-kind-namespace">
@@ -339,12 +359,17 @@
 					</li>
 					<li class="current tsd-kind-namespace">
 						<a href="../modules/state.html">State</a>
+						<ul>
+							<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
+								<a href="../modules/state.threed.html">ThreeD</a>
+							</li>
+							<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
+								<a href="../modules/state.twod.html">TwoD</a>
+							</li>
+						</ul>
 					</li>
 					<li class=" tsd-kind-namespace">
 						<a href="../modules/system.html">System</a>
-					</li>
-					<li class=" tsd-kind-namespace">
-						<a href="../modules/text.html">Text</a>
 					</li>
 					<li class=" tsd-kind-namespace">
 						<a href="../modules/texture.html">Texture</a>
@@ -361,17 +386,17 @@
 				<ul class="before-current">
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-class tsd-parent-kind-namespace">
+					<li class="current tsd-kind-class tsd-parent-kind-namespace tsd-has-type-parameter">
 						<a href="state.state-1.html" class="tsd-kind-icon">State</a>
 						<ul>
-							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-has-type-parameter">
 								<a href="state.state-1.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+								<a href="state.state-1.html#config" class="tsd-kind-icon">config</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
 								<a href="state.state-1.html#name" class="tsd-kind-icon">name</a>
-							</li>
-							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
-								<a href="state.state-1.html#renderingmode" class="tsd-kind-icon">rendering<wbr>Mode</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="state.state-1.html#end" class="tsd-kind-icon">end</a>
@@ -386,7 +411,7 @@
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-namespace">
+					<li class=" tsd-kind-interface tsd-parent-kind-namespace tsd-has-type-parameter">
 						<a href="../interfaces/state.stateconfig.html" class="tsd-kind-icon">State<wbr>Config</a>
 					</li>
 				</ul>
@@ -402,6 +427,9 @@
 				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
 				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>

@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Entity | API | Aura Documentation - v0.5.0</title>
-	<meta name="description" content="Documentation for API | Aura Documentation - v0.5.0">
+	<title>Entity | API | Aura Documentation - v0.8.0</title>
+	<meta name="description" content="Documentation for API | Aura Documentation - v0.8.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
 	<script async src="../assets/js/search.js" id="search-script"></script>
@@ -23,7 +23,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">API | Aura Documentation - v0.5.0</a>
+					<a href="../index.html" class="title">API | Aura Documentation - v0.8.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -52,7 +52,7 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="../modules.html">API | Aura Documentation - v0.5.0</a>
+					<a href="../modules.html">API | Aura Documentation - v0.8.0</a>
 				</li>
 				<li>
 					<a href="../modules/entity.html">Entity</a>
@@ -75,6 +75,7 @@
 					</div>
 					<p>An Entity is any object existing within the game; be it a player, enemy, pickup, level object, camera, UI element, etc</p>
 					<p>Entities maintain a list of Components, which give them their properties and behaviour and allow Systems to operate on them as necessary</p>
+					<p>// TODO look at ways of reimplementing get/has Component by Type/Class</p>
 					<dl class="tsd-comment-tags">
 						<dt>see</dt>
 						<dd><p>Component</p>
@@ -89,7 +90,16 @@
 						<span class="target">Entity</span>
 						<ul class="tsd-hierarchy">
 							<li>
-								<a href="text.char.html" class="tsd-signature-type" data-tsd-kind="Class">Char</a>
+								<a href="font.twod.char2d.html" class="tsd-signature-type" data-tsd-kind="Class">Char2D</a>
+							</li>
+							<li>
+								<a href="font.threed.char3d.html" class="tsd-signature-type" data-tsd-kind="Class">Char3D</a>
+							</li>
+							<li>
+								<a href="ui.twod.panel2d.html" class="tsd-signature-type" data-tsd-kind="Class">Panel2D</a>
+							</li>
+							<li>
+								<a href="ui.threed.panel3d.html" class="tsd-signature-type" data-tsd-kind="Class">Panel3D</a>
 							</li>
 						</ul>
 					</li>
@@ -123,11 +133,8 @@
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="entity.entity-1.html#addcomponent" class="tsd-kind-icon">add<wbr>Component</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="entity.entity-1.html#addcomponents" class="tsd-kind-icon">add<wbr>Components</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="entity.entity-1.html#getcomponent" class="tsd-kind-icon">get<wbr>Component</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="entity.entity-1.html#getcomponentbyname" class="tsd-kind-icon">get<wbr>Component<wbr>ByName</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="entity.entity-1.html#hascomponent" class="tsd-kind-icon">has<wbr>Component</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="entity.entity-1.html#hascomponentwithname" class="tsd-kind-icon">has<wbr>Component<wbr>With<wbr>Name</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="entity.entity-1.html#hascomponents" class="tsd-kind-icon">has<wbr>Components</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="entity.entity-1.html#hascomponentswithnames" class="tsd-kind-icon">has<wbr>Components<wbr>With<wbr>Names</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="entity.entity-1.html#removecomponent" class="tsd-kind-icon">remove<wbr>Component</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="entity.entity-1.html#removecomponentbyname" class="tsd-kind-icon">remove<wbr>Component<wbr>ByName</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="entity.entity-1.html#removecomponents" class="tsd-kind-icon">remove<wbr>Components</a></li>
@@ -150,7 +157,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/entity/entity.ts#L20">src/engine/entity/entity.ts:20</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/0d7d554/src/engine/entity/entity.ts#L22">src/engine/entity/entity.ts:22</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -180,7 +187,7 @@
 					<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = ...</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/entity/entity.ts#L17">src/engine/entity/entity.ts:17</a></li>
+							<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/0d7d554/src/engine/entity/entity.ts#L19">src/engine/entity/entity.ts:19</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -202,7 +209,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/entity/entity.ts#L38">src/engine/entity/entity.ts:38</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/0d7d554/src/engine/entity/entity.ts#L40">src/engine/entity/entity.ts:40</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -228,7 +235,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/entity/entity.ts#L100">src/engine/entity/entity.ts:100</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/0d7d554/src/engine/entity/entity.ts#L108">src/engine/entity/entity.ts:108</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -259,7 +266,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/entity/entity.ts#L109">src/engine/entity/entity.ts:109</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/0d7d554/src/engine/entity/entity.ts#L117">src/engine/entity/entity.ts:117</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -284,67 +291,27 @@
 					<a name="getcomponent" class="tsd-anchor"></a>
 					<h3>get<wbr>Component</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Component&lt;T&gt;<span class="tsd-signature-symbol">(</span>component<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ClassType</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Component&lt;T&gt;<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/entity/entity.ts#L60">src/engine/entity/entity.ts:60</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/0d7d554/src/engine/entity/entity.ts#L64">src/engine/entity/entity.ts:64</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Get a Component from the Entity by Component class</p>
+									<p>Get a Component from the Entity by name</p>
 								</div>
+								<p>Throws an error if the Component is not found on the Entity to allow type safety + simplistic no-questions consumer calls</p>
 							</div>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
 								<li>
 									<h4>T<span class="tsd-signature-symbol">: </span><a href="component.component-1.html" class="tsd-signature-type" data-tsd-kind="Class">Component</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
 									<div class="tsd-comment tsd-typography">
-										<p>(autoinferred) the type of the Component to retrieve</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>component: <span class="tsd-signature-type">ClassType</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>the Component class to retrieve</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
-							<p>the retrieved Component</p>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
-					<a name="getcomponentbyname" class="tsd-anchor"></a>
-					<h3>get<wbr>Component<wbr>ByName</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Component<wbr>ByName&lt;T&gt;<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/entity/entity.ts#L82">src/engine/entity/entity.ts:82</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Get a Component from the Entity by Component name</p>
-								</div>
-							</div>
-							<h4 class="tsd-type-parameters-title">Type parameters</h4>
-							<ul class="tsd-type-parameters">
-								<li>
-									<h4>T<span class="tsd-signature-symbol">: </span><a href="component.component-1.html" class="tsd-signature-type" data-tsd-kind="Class">Component</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
-									<div class="tsd-comment tsd-typography">
-										<p>the type of the Component to retrieve</p>
+										<p>the type of the Component that will be returned</p>
 									</div>
 								</li>
 							</ul>
@@ -358,7 +325,7 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
-							<p>the retrieved Component</p>
+							<p>the Component</p>
 						</li>
 					</ul>
 				</section>
@@ -366,45 +333,13 @@
 					<a name="hascomponent" class="tsd-anchor"></a>
 					<h3>has<wbr>Component</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">has<wbr>Component<span class="tsd-signature-symbol">(</span>component<span class="tsd-signature-symbol">: </span><a href="component.component-1.html" class="tsd-signature-type" data-tsd-kind="Class">Component</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+						<li class="tsd-signature tsd-kind-icon">has<wbr>Component<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/entity/entity.ts#L162">src/engine/entity/entity.ts:162</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Check if the Entity has a Component by Component class</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>component: <a href="component.component-1.html" class="tsd-signature-type" data-tsd-kind="Class">Component</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>the Component to check</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-							<p>a boolean indicating whether or not the Entity has the Component</p>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="hascomponentwithname" class="tsd-anchor"></a>
-					<h3>has<wbr>Component<wbr>With<wbr>Name</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">has<wbr>Component<wbr>With<wbr>Name<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/entity/entity.ts#L192">src/engine/entity/entity.ts:192</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/0d7d554/src/engine/entity/entity.ts#L172">src/engine/entity/entity.ts:172</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -431,45 +366,13 @@
 					<a name="hascomponents" class="tsd-anchor"></a>
 					<h3>has<wbr>Components</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">has<wbr>Components<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>components<span class="tsd-signature-symbol">: </span><a href="component.component-1.html" class="tsd-signature-type" data-tsd-kind="Class">Component</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+						<li class="tsd-signature tsd-kind-icon">has<wbr>Components<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>names<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/entity/entity.ts#L173">src/engine/entity/entity.ts:173</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Check if the Entity has a list of Components by Component class</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>components: <a href="component.component-1.html" class="tsd-signature-type" data-tsd-kind="Class">Component</a><span class="tsd-signature-symbol">[]</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>the Components to check</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-							<p>a boolean indicating whether or not the Entity has all of the Components</p>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="hascomponentswithnames" class="tsd-anchor"></a>
-					<h3>has<wbr>Components<wbr>With<wbr>Names</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">has<wbr>Components<wbr>With<wbr>Names<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>names<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/entity/entity.ts#L203">src/engine/entity/entity.ts:203</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/0d7d554/src/engine/entity/entity.ts#L183">src/engine/entity/entity.ts:183</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -501,7 +404,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/entity/entity.ts#L120">src/engine/entity/entity.ts:120</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/0d7d554/src/engine/entity/entity.ts#L128">src/engine/entity/entity.ts:128</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -532,7 +435,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/entity/entity.ts#L140">src/engine/entity/entity.ts:140</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/0d7d554/src/engine/entity/entity.ts#L148">src/engine/entity/entity.ts:148</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -563,7 +466,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/entity/entity.ts#L129">src/engine/entity/entity.ts:129</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/0d7d554/src/engine/entity/entity.ts#L137">src/engine/entity/entity.ts:137</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -594,7 +497,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/entity/entity.ts#L149">src/engine/entity/entity.ts:149</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/0d7d554/src/engine/entity/entity.ts#L157">src/engine/entity/entity.ts:157</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -619,13 +522,13 @@
 					<a name="tick" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> tick</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">tick<span class="tsd-signature-symbol">(</span>frameDelta<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">tick<span class="tsd-signature-symbol">(</span>game<span class="tsd-signature-symbol">: </span><a href="core.game.html" class="tsd-signature-type" data-tsd-kind="Class">Game</a>, frameDelta<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/jonnopon/Aura/blob/fc0870c/src/engine/entity/entity.ts#L49">src/engine/entity/entity.ts:49</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/0d7d554/src/engine/entity/entity.ts#L51">src/engine/entity/entity.ts:51</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -640,6 +543,9 @@
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
+								<li>
+									<h5>game: <a href="core.game.html" class="tsd-signature-type" data-tsd-kind="Class">Game</a></h5>
+								</li>
 								<li>
 									<h5>frameDelta: <span class="tsd-signature-type">number</span></h5>
 									<div class="tsd-comment tsd-typography">
@@ -672,6 +578,9 @@
 						<a href="../modules/entity.html">Entity</a>
 					</li>
 					<li class=" tsd-kind-namespace">
+						<a href="../modules/font.html">Font</a>
+					</li>
+					<li class=" tsd-kind-namespace">
 						<a href="../modules/geometry.html">Geometry</a>
 					</li>
 					<li class=" tsd-kind-namespace">
@@ -688,9 +597,6 @@
 					</li>
 					<li class=" tsd-kind-namespace">
 						<a href="../modules/system.html">System</a>
-					</li>
-					<li class=" tsd-kind-namespace">
-						<a href="../modules/text.html">Text</a>
 					</li>
 					<li class=" tsd-kind-namespace">
 						<a href="../modules/texture.html">Texture</a>
@@ -728,20 +634,11 @@
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
 								<a href="entity.entity-1.html#getcomponent" class="tsd-kind-icon">get<wbr>Component</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
-								<a href="entity.entity-1.html#getcomponentbyname" class="tsd-kind-icon">get<wbr>Component<wbr>ByName</a>
-							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="entity.entity-1.html#hascomponent" class="tsd-kind-icon">has<wbr>Component</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="entity.entity-1.html#hascomponentwithname" class="tsd-kind-icon">has<wbr>Component<wbr>With<wbr>Name</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="entity.entity-1.html#hascomponents" class="tsd-kind-icon">has<wbr>Components</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="entity.entity-1.html#hascomponentswithnames" class="tsd-kind-icon">has<wbr>Components<wbr>With<wbr>Names</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="entity.entity-1.html#removecomponent" class="tsd-kind-icon">remove<wbr>Component</a>
