@@ -20,7 +20,7 @@ Goals:
 
 ## Documentation
 
-*(Under Construction)* [Aura Documentation](https://jonnopon.github.io/Aura/)
+*(Under Construction)* [Aura Documentation](https://optionallychained.github.io/Aura/)
 
 
 ## Usage
@@ -29,9 +29,9 @@ Goals:
 
 To get up and running with Aura fast, see the following Template Repositories:
 
-- [Aura-Template-2D](https://github.com/jonnopon/Aura-Template-2D) for 2D games
+- [Aura-Template-2D](https://github.com/optionallychained/Aura-Template-2D) for 2D games
 
-- [Aura-Template-3D](https://github.com/jonnopon/Aura-Template-3D) for 3D games
+- [Aura-Template-3D](https://github.com/optionallychained/Aura-Template-3D) for 3D games
 
 
 ### NPM

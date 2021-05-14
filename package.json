@@ -1,12 +1,12 @@
 {
     "name": "aura",
-    "version": "0.8.0",
-    "author": "jonnopon",
+    "version": "0.8.1",
+    "author": "optionallychained",
     "license": "MIT",
-    "homepage": "https://jonnopon.github.io/Aura",
+    "homepage": "https://optionallychained.github.io/Aura",
     "repository": {
         "type": "git",
-        "url": "git://git@github.com/jonnopon/Aura.git"
+        "url": "git://git@github.com/optionallychained/Aura.git"
     },
     "main": "publish/index.js",
     "types": "publish/index.d.ts",
