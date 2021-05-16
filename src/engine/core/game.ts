@@ -80,6 +80,7 @@ export abstract class Game {
     protected readonly defaults: GameConfigDefaults = {
         backgroundColor: new Color(),
         canvasDimensions: new Vec2(window.innerWidth, window.innerHeight),
+        canvasParent: document.body,
         controlScheme: 'keyboard',
         fontCharset: [
             'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y',
@@ -113,7 +114,21 @@ export abstract class Game {
         }
         else {
             this.canvas = document.createElement('canvas');
-            document.body.append(this.canvas);
+            let parent: HTMLElement;
+
+            if (config?.canvasParent) {
+                if (typeof config.canvasParent === 'string') {
+                    parent = document.getElementById(config.canvasParent) as HTMLCanvasElement;
+                }
+                else {
+                    parent = config.canvasParent;
+                }
+            }
+            else {
+                parent = this.defaults.canvasParent;
+            }
+
+            parent.append(this.canvas);
         }
 
         this.canvas.width = config?.canvasDimensions?.x ?? this.defaults.canvasDimensions.x;

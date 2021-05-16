@@ -12,6 +12,8 @@ export interface GameConfig {
     readonly canvasDimensions?: Vec2;
     /** ID of the Canvas; a Canvas will be created if not provided */
     readonly canvasId?: string;
+    /** ID or HTMLElement of the container to place an automatically-created Canvas within */
+    readonly canvasParent?: string | HTMLElement;
     /** Background Color for the Game; default value is black */
     readonly backgroundColor?: Color;
     /** Game Control Scheme; default value is 'keyboard' */
@@ -27,6 +29,7 @@ export interface GameConfig {
  */
 export interface GameConfigDefaults {
     canvasDimensions: Vec2;
+    canvasParent: HTMLElement;
     backgroundColor: Color;
     controlScheme: ControlScheme;
     fontAtlas: TextureAtlas;
