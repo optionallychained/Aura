@@ -118,7 +118,7 @@ export abstract class Game {
 
             if (config?.canvasParent) {
                 if (typeof config.canvasParent === 'string') {
-                    parent = document.getElementById(config.canvasParent) as HTMLCanvasElement;
+                    parent = document.getElementById(config.canvasParent) as HTMLElement;
                 }
                 else {
                     parent = config.canvasParent;

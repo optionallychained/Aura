@@ -269,6 +269,11 @@ export class Renderer {
         // handle the asynchronous image load by loading the actual image data into the texture when ready
         const image = new Image();
         image.src = textureAtlas.src;
+
+        if (!this.imageIsSameOrigin(image, textureAtlas.src)) {
+            image.crossOrigin = '';
+        }
+
         image.addEventListener('load', () => {
             gl.activeTexture(unit);
             gl.bindTexture(gl.TEXTURE_2D, texture);
@@ -615,5 +620,18 @@ export class Renderer {
                 gl.uniform1f(location, value as number);
                 break;
         }
+    }
+
+    /**
+     * Check if a given Image is sourced from the same origin as that which Aura is running on, used as a check for including the
+     *   'crossOrigin' field on images loaded as textures, thereby enabling cross-origin textures
+     *
+     * @param image the Image
+     * @param url the source URL of the Image
+     *
+     * @returns whether or not the image is sourced from the same origin
+     */
+    private imageIsSameOrigin(image: HTMLImageElement, url: string): boolean {
+        return new URL(url, window.location.href).origin === window.location.origin;
     }
 }
