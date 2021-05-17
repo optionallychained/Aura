@@ -38,6 +38,8 @@ export class TextureAtlas {
     constructor(
         public readonly name: 'world' | 'text' | 'ui',
         public readonly src: string,
+        public readonly width: number,
+        public readonly height: number,
         public readonly columns: number,
         public readonly rows: number
     ) { }
@@ -45,6 +47,8 @@ export class TextureAtlas {
     /**
      * Given a set of vertex texture coordinates retrieved from an Entity's Model, as well as the atlas positional data found in the
      *   Entity's Texture, calculate the real texCoord value to build into the Entity's vertex list
+     *
+     * Implements half pixel correction to avoid texture bleeding
      *
      * Texture coordinates are specified on a Model with values ranging 0->1, as if sampling from a whole image. Using this in conjunction
      *   with a Texture Component's positional data, we can treat those values as being "within a designated sample space", simplifying the
@@ -59,9 +63,23 @@ export class TextureAtlas {
      * @returns the corrected texture coordinates, sampling from (column -> column + columnSpan), (row -> row + rowSpan)
      */
     public resolveTextureCoordinates(coords: Float32Array, column: number, row: number, columnSpan: number, rowSpan: number): Float32Array {
-        return Float32Array.from([
-            (column + coords[0]) / (this.columns - columnSpan + 1),
-            1 - ((row + coords[1]) / (this.rows - rowSpan + 1))
-        ]);
+        const u = (column + coords[0]) / (this.columns - columnSpan + 1);
+        const v = 1 - ((row + coords[1]) / (this.rows - rowSpan + 1));
+
+        // TODO this seems kinda messy...but it does work
+        // "issue" seems to be caused by want to generalise the solution here for both left-most and right-most coordinates, rather than in
+        //   texture coordinate specification in Geometry
+        // review at a later time...this nonsense may be "worth it"
+        let uCorrected = (((u * this.width) + 0.5) - 1) / this.width;
+        if (uCorrected < 0) {
+            uCorrected = ((u * this.width) + 0.5) / this.width;
+        }
+
+        let vCorrected = (((v * this.height) + 0.5) - 1) / this.height;
+        if (vCorrected < 0) {
+            vCorrected = ((v * this.height) + 0.5) / this.height;
+        }
+
+        return Float32Array.from([uCorrected, vCorrected]);
     }
 }

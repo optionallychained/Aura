@@ -4,7 +4,7 @@ import { MAIN_STATE } from './state/main.state';
 const game = new Core.ThreeD.Game3D({
     canvasDimensions: new Vec2(1024, 768),
     world: {
-        textureAtlas: new Texture.TextureAtlas('world', 'res/world.png', 2, 2),
+        textureAtlas: new Texture.TextureAtlas('world', 'res/world.png', 512, 512, 2, 2),
         dimensions: new Vec3(1024 * 100, 768 * 100, 1000000),
         camera: {
             offset: {

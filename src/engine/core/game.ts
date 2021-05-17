@@ -87,7 +87,7 @@ export abstract class Game {
             'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '(', ')', '[', ']', '+', '-', '*', '/', '!', '?', '\'', '"', '#', '£',
             '$', '&', '%', '^', ',', '.', ':', ';', '<', '>', '_', ' ', '~', '~'
         ],
-        fontAtlas: new TextureAtlas('text', 'res/font.png', 64, 1),
+        fontAtlas: new TextureAtlas('text', 'res/font.png', 2048, 32, 64, 1),
     }
 
     /**
@@ -101,6 +101,8 @@ export abstract class Game {
      * @param config the optional GameConfig
      */
     constructor(config?: GameConfig) {
+        // TODO if parent + no size, infer from parent :)
+
         if (config?.canvasId) {
             this.canvas = document.getElementById(config.canvasId) as HTMLCanvasElement;
 
