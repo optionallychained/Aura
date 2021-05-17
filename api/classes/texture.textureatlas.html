@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>TextureAtlas | API | Aura Documentation - v0.8.4</title>
-	<meta name="description" content="Documentation for API | Aura Documentation - v0.8.4">
+	<title>TextureAtlas | API | Aura Documentation - v0.8.5</title>
+	<meta name="description" content="Documentation for API | Aura Documentation - v0.8.5">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
 	<script async src="../assets/js/search.js" id="search-script"></script>
@@ -23,7 +23,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">API | Aura Documentation - v0.8.4</a>
+					<a href="../index.html" class="title">API | Aura Documentation - v0.8.5</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -52,7 +52,7 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="../modules.html">API | Aura Documentation - v0.8.4</a>
+					<a href="../modules.html">API | Aura Documentation - v0.8.5</a>
 				</li>
 				<li>
 					<a href="../modules/texture.html">Texture</a>
@@ -125,9 +125,11 @@
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="texture.textureatlas.html#columns" class="tsd-kind-icon">columns</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="texture.textureatlas.html#height" class="tsd-kind-icon">height</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="texture.textureatlas.html#name" class="tsd-kind-icon">name</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="texture.textureatlas.html#rows" class="tsd-kind-icon">rows</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="texture.textureatlas.html#src" class="tsd-kind-icon">src</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="texture.textureatlas.html#width" class="tsd-kind-icon">width</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -145,13 +147,13 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Texture<wbr>Atlas<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;world&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;text&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;ui&quot;</span>, src<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, columns<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, rows<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="texture.textureatlas.html" class="tsd-signature-type" data-tsd-kind="Class">TextureAtlas</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Texture<wbr>Atlas<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;world&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;text&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;ui&quot;</span>, src<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, width<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, height<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, columns<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, rows<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="texture.textureatlas.html" class="tsd-signature-type" data-tsd-kind="Class">TextureAtlas</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/f9aba40/src/engine/texture/textureAtlas.ts#L24">src/engine/texture/textureAtlas.ts:24</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/570e4ec/src/engine/texture/textureAtlas.ts#L24">src/engine/texture/textureAtlas.ts:24</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -175,6 +177,12 @@
 									<div class="tsd-comment tsd-typography">
 										<p>the file path of the image the Atlas will load</p>
 									</div>
+								</li>
+								<li>
+									<h5>width: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5>height: <span class="tsd-signature-type">number</span></h5>
 								</li>
 								<li>
 									<h5>columns: <span class="tsd-signature-type">number</span></h5>
@@ -204,6 +212,13 @@
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="height" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> height</h3>
+					<div class="tsd-signature tsd-kind-icon">height<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="name" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> name</h3>
 					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;world&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;text&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;ui&quot;</span></div>
@@ -224,6 +239,13 @@
 					<aside class="tsd-sources">
 					</aside>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="width" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> width</h3>
+					<div class="tsd-signature tsd-kind-icon">width<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+					</aside>
+				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
@@ -237,7 +259,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/f9aba40/src/engine/texture/textureAtlas.ts#L61">src/engine/texture/textureAtlas.ts:61</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/570e4ec/src/engine/texture/textureAtlas.ts#L65">src/engine/texture/textureAtlas.ts:65</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -245,6 +267,7 @@
 									<p>Given a set of vertex texture coordinates retrieved from an Entity&#39;s Model, as well as the atlas positional data found in the
 									Entity&#39;s Texture, calculate the real texCoord value to build into the Entity&#39;s vertex list</p>
 								</div>
+								<p>Implements half pixel correction to avoid texture bleeding</p>
 								<p>Texture coordinates are specified on a Model with values ranging 0-&gt;1, as if sampling from a whole image. Using this in conjunction
 									with a Texture Component&#39;s positional data, we can treat those values as being &quot;within a designated sample space&quot;, simplifying the
 								specification of texture coordinates for Models as well as removing the need for Entities to explicitly define texture coordinates</p>
@@ -353,6 +376,9 @@
 								<a href="texture.textureatlas.html#columns" class="tsd-kind-icon">columns</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="texture.textureatlas.html#height" class="tsd-kind-icon">height</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="texture.textureatlas.html#name" class="tsd-kind-icon">name</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
@@ -360,6 +386,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="texture.textureatlas.html#src" class="tsd-kind-icon">src</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="texture.textureatlas.html#width" class="tsd-kind-icon">width</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="texture.textureatlas.html#resolvetexturecoordinates" class="tsd-kind-icon">resolve<wbr>Texture<wbr>Coordinates</a>
