@@ -26,3 +26,8 @@
 
 
 - [ ] **Consider/Experiment:** Generification of 2D/3D Component/System/etc splits?
+
+- [ ] Destroy():
+    - handling of canvas + game references is...annoying. Better way?
+    - actual teardown of WebGL resources in Renderer
+    - ...etc

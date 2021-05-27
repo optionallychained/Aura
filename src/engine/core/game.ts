@@ -45,7 +45,7 @@ export abstract class Game {
     public readonly renderer: Renderer;
 
     /** HTML Canvas */
-    public readonly canvas: HTMLCanvasElement;
+    public canvas: HTMLCanvasElement | undefined;
 
     /** Abstract mapping of 2D or 3D States, to be implemented and managed and the type to be narrowed by the subclass */
     protected abstract readonly states: Map<string, State2D | State3D>;
@@ -96,6 +96,11 @@ export abstract class Game {
     protected init: GameConfig['init'];
 
     /**
+     * Flag for whether or not the Game is stopped and therefore should not request any animation frames
+     */
+    private stopped = false;
+
+    /**
      * Constructor. Take an optional GameConfig, and initialise all generic/abstractable aspects of the Game
      *
      * @param config the optional GameConfig
@@ -138,7 +143,7 @@ export abstract class Game {
 
         // set up the Renderer and InputManager
         this.renderer = new Renderer(this, config?.backgroundColor ?? this.defaults.backgroundColor);
-        this.input = new InputManager(this, config?.controlScheme ?? this.defaults.controlScheme);
+        this.input = new InputManager(this.canvas, config?.controlScheme ?? this.defaults.controlScheme);
 
         // copy over some configuration
         this.debugMode = config?.debugMode;
@@ -311,6 +316,22 @@ export abstract class Game {
     }
 
     /**
+     * End game execution by setting the stopped flag, signalling to other constructs to tear down, and then dereferencing things
+     *
+     * // TODO first-working-version; needs improvement (see TODO/general)
+     */
+    public destroy(): void {
+        this.stopped = true;
+
+        this.renderer.destroy();
+        this.input.destroy();
+
+        this.canvas?.remove();
+
+        this.canvas = undefined;
+    }
+
+    /**
      * Abstract frame update routine, to be implemented by the subclass and intended to be used for updating the concrete Game's Systems and
      *   current State
      *
@@ -335,6 +356,10 @@ export abstract class Game {
      *     - handles debugData if appropriate
      */
     private run(): void {
+        if (this.stopped) {
+            return;
+        }
+
         const now = Date.now();
 
         this.frameDelta = now - this.lastFrameTime;

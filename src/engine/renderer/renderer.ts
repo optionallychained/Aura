@@ -101,14 +101,19 @@ export class Renderer {
     /** Current rendering mode; used for differentiating some rendering functionality between 2D and 3D States */
     private mode: '2D' | '3D' = '2D';
 
+    /** Reference to the Game the Renderer belongs to */
+    private game: Game | undefined;
+
     /**
      * Constructor. Retrieve and store the Game the Renderer belongs to, then perform one-time setup of the Canvas context
      *
      * @param game the Game the Renderer belongs to
      * @param clearColor the Game's background color, to be set as the gl clearColor once on init
      */
-    constructor(private readonly game: Game, clearColor: Color) {
-        const gl = game.canvas.getContext('webgl');
+    constructor(game: Game, clearColor: Color) {
+        this.game = game;
+
+        const gl = game.canvas?.getContext('webgl');
 
         if (!gl) {
             throw new AuraError({
@@ -337,7 +342,9 @@ export class Renderer {
         // handle 'static' uniforms (vary once per render call)
         if (staticUniforms?.length) {
             for (const uniform of staticUniforms) {
-                this.loadUniform(uniform.location, uniform.type, ShaderVariableResolver.resolveStaticUniform(uniform.name, this.game));
+                // TODO instance of destroy() being annoying; Game optional; see TODO/general
+                // eslint-disable-next-line
+                this.loadUniform(uniform.location, uniform.type, ShaderVariableResolver.resolveStaticUniform(uniform.name, this.game!));
             }
         }
 
@@ -365,6 +372,15 @@ export class Renderer {
             // if the shader program contains no uniforms, we can draw all the entities in one batch
             gl.drawArrays(config.vbo.glShape, 0, config.vbo.vertexCount * config.entities.length);
         }
+    }
+
+    /**
+     * Called as part of Game destroy(); clean up after ourselves
+     *
+     * // TODO incomplete, part of the first-working-version of the destroy() solution (see TODO/general)
+     */
+    public destroy(): void {
+        this.game = undefined;
     }
 
     /**

@@ -35,24 +35,45 @@ export class InputManager {
     ];
 
     /**
+     * HTML Canvas
+     */
+    private canvas: HTMLCanvasElement | undefined;
+
+    /**
+     * The set of input handling methods, properly bound, useful in setting up and in tearing down
+     */
+    private readonly boundHandlers = {
+        onKeyDown: this.onKeyDown.bind(this),
+        onKeyUp: this.onKeyUp.bind(this),
+        onMouseDown: this.onMouseDown.bind(this),
+        onMouseUp: this.onMouseUp.bind(this),
+        onClick: this.onClick.bind(this),
+        onContextMenu: this.onContextMenu.bind(this),
+        onDoubleClick: this.onDoubleClick.bind(this),
+        onMouseMove: this.onMouseMove.bind(this)
+    };
+
+    /**
      * Constructor. Initialise event handlers as appropriate based on the controlScheme
      *
-     * @param game the Game the InputManager belongs to
+     * @param canvas the HTML Canvas to register events upon
      * @param controlScheme the ControlScheme given to the Game's Config, used for optimising event registration and handling
      */
-    constructor(game: Game, public readonly controlScheme: ControlScheme) {
+    constructor(canvas: HTMLCanvasElement, public readonly controlScheme: ControlScheme) {
+        this.canvas = canvas;
+
         switch (controlScheme) {
             case 'keyboard':
-                this.initializeKeyboard();
+                this.setupKeyboard();
                 break;
 
             case 'mouse':
-                this.initializeMouse(game.canvas);
+                this.setupMouse(canvas);
                 break;
 
             default:
-                this.initializeKeyboard();
-                this.initializeMouse(game.canvas);
+                this.setupMouse(canvas);
+                this.setupKeyboard();
         }
     }
 
@@ -74,6 +95,29 @@ export class InputManager {
      */
     public isMouseDown(): boolean {
         return this.mousePressed;
+    }
+
+    /**
+     * Tear down event handlers; called as part of Game destroy()
+     */
+    public destroy(): void {
+        switch (this.controlScheme) {
+            case 'keyboard':
+                this.tearDownKeyboard();
+                break;
+
+            case 'mouse':
+                // eslint-disable-next-line
+                this.tearDownMouse(this.canvas!);
+                break;
+
+            default:
+                // eslint-disable-next-line
+                this.tearDownMouse(this.canvas!);
+                this.tearDownKeyboard();
+        }
+
+        this.canvas = undefined;
     }
 
     /**
@@ -161,12 +205,17 @@ export class InputManager {
      *
      * // TODO register on Canvas directly?
      */
-    private initializeKeyboard(): void {
-        // register keydown on the window
-        window.addEventListener('keydown', this.onKeyDown.bind(this));
+    private setupKeyboard(): void {
+        window.addEventListener('keydown', this.boundHandlers.onKeyDown);
+        window.addEventListener('keyup', this.boundHandlers.onKeyUp);
+    }
 
-        // register keyup on the window
-        window.addEventListener('keyup', this.onKeyUp.bind(this));
+    /**
+     * Tear down keyboard event handling
+     */
+    private tearDownKeyboard(): void {
+        window.removeEventListener('keydown', this.boundHandlers.onKeyDown);
+        window.removeEventListener('keyup', this.boundHandlers.onKeyUp);
     }
 
     /**
@@ -174,23 +223,26 @@ export class InputManager {
      *
      * @param canvas the Canvas to register events upon
      */
-    private initializeMouse(canvas: HTMLCanvasElement): void {
-        // register mousedown on the canvas
-        canvas.addEventListener('mousedown', this.onMouseDown.bind(this));
+    private setupMouse(canvas: HTMLCanvasElement): void {
+        canvas.addEventListener('mousedown', this.boundHandlers.onMouseDown);
+        canvas.addEventListener('mouseup', this.boundHandlers.onMouseUp);
+        canvas.addEventListener('click', this.boundHandlers.onClick);
+        canvas.addEventListener('contextmenu', this.boundHandlers.onContextMenu);
+        canvas.addEventListener('dblclick', this.boundHandlers.onDoubleClick);
+        canvas.addEventListener('mousemove', this.boundHandlers.onMouseMove);
+    }
 
-        // register mouseup on the canvas
-        canvas.addEventListener('mouseup', this.onMouseUp.bind(this));
-
-        // register click on the canvas
-        canvas.addEventListener('click', this.onClick.bind(this));
-
-        // register contextmenu on the canvas
-        canvas.addEventListener('contextmenu', this.onContextMenu.bind(this));
-
-        // register dblclick on the canvas
-        canvas.addEventListener('dblclick', this.onDoubleClick.bind(this));
-
-        // register mousemove on the canvas
-        canvas.addEventListener('mousemove', this.onMouseMove.bind(this));
+    /**
+     * Tear down mouse event handling
+     *
+     * @param canvas the Canvas to deregister events from
+     */
+    private tearDownMouse(canvas: HTMLCanvasElement): void {
+        canvas.removeEventListener('mousedown', this.boundHandlers.onMouseDown);
+        canvas.removeEventListener('mouseup', this.boundHandlers.onMouseUp);
+        canvas.removeEventListener('click', this.boundHandlers.onClick);
+        canvas.removeEventListener('contextmenu', this.boundHandlers.onContextMenu);
+        canvas.removeEventListener('dblclick', this.boundHandlers.onDoubleClick);
+        canvas.removeEventListener('mousemove', this.boundHandlers.onMouseMove);
     }
 }
