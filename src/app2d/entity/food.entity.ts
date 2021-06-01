@@ -11,7 +11,7 @@ export class Food extends Entity.Entity {
                 new Component.TwoD.Transform2D(position, new Vec2(25, 25), 0, new Vec2()),
                 new Component.Generic.Model(Geometry.TwoD.BOX),
                 new Component.Generic.Shader(Shader.Program.TwoD.PROGRAM_BASIC_2D),
-                new Component.Generic.FlatColor(new Color(255, 255, 0)),
+                new Component.Generic.FlatColor(Color.yellow()),
                 new Component.TwoD.BoxCollider2D(new Vec2(25, 25), (game, self, other) => {
                     if (other.tag === 'player') {
                         game.world.removeEntity(self)

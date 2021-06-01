@@ -6,6 +6,105 @@ import { Random } from './random';
 export class Color {
 
     /**
+     * Construct the Color white
+     *
+     * @param alpha optional alpha value; defaults to 1
+     *
+     * @returns a Color with rgba (255,255,255,a=1)
+     */
+    public static white(alpha?: number): Color {
+        return new Color(255, 255, 255, alpha);
+    }
+
+    /**
+     * Construct the Color black
+     *
+     * @param alpha optional alpha value; defaults to 1
+     *
+     * @returns a Color with rgba (0,0,0,a=1)
+     */
+    public static black(alpha?: number): Color {
+        return new Color(0, 0, 0, alpha);
+    }
+
+    /**
+     * Construct the Color grey
+     *
+     * @param alpha optional alpha value; defaults to 1
+     *
+     * @returns a Color with rgba (128,128,128,a=1)
+     */
+    public static grey(alpha?: number): Color {
+        return new Color(128, 128, 128, alpha);
+    }
+
+    /**
+     * Construct the Color red
+     *
+     * @param alpha optional alpha value; defaults to 1
+     *
+     * @returns a Color with rgba (255,0,0,a=1)
+     */
+    public static red(alpha?: number): Color {
+        return new Color(255, 0, 0, alpha);
+    }
+
+    /**
+     * Construct the Color green
+     *
+     * @param alpha optional alpha value; defaults to 1
+     *
+     * @returns a Color with rgba (0,255,0,a=1)
+     */
+    public static green(alpha?: number): Color {
+        return new Color(0, 255, 0, alpha);
+    }
+
+    /**
+     * Construct the Color blue
+     *
+     * @param alpha optional alpha value; defaults to 1
+     *
+     * @returns a Color with rgba (0,0,255,a=1)
+     */
+    public static blue(alpha?: number): Color {
+        return new Color(0, 0, 255, alpha);
+    }
+
+    /**
+     * Construct the Color yellow
+     *
+     * @param alpha optional alpha value; defaults to 1
+     *
+     * @returns a Color with rgba (255,255,0,a=1)
+     */
+    public static yellow(alpha?: number): Color {
+        return new Color(255, 255, 0, alpha);
+    }
+
+    /**
+     * Construct the Color magenta
+     *
+     * @param alpha optional alpha value; defaults to 1
+     *
+     * @returns a Color with rgba (255,0,255,a=1)
+     */
+    public static magenta(alpha?: number): Color {
+        return new Color(255, 0, 255, alpha);
+    }
+
+    /**
+     * Construct the Color cyan
+     *
+     * @param alpha optional alpha value; defaults to 1
+     *
+     * @returns a Color with rgba (0,255,255,a=1)
+     */
+    public static cyan(alpha?: number): Color {
+        return new Color(0, 255, 255, alpha);
+    }
+
+    /**
      * Generate a random Color with r, g and b values
      *
      * Alpha value may be randomised or given as a fixed value
@@ -44,17 +143,35 @@ export class Color {
     }
 
     /**
-     * Convert a hex string to an RGB Color.
+     * Create a custom Color with given r, g, b and a values
      *
-     * The given hex can be in the form #000000, 000000, #000 or 000.
+     * r, g and b are clamped to 255, and a is clamped to 1. Negative values will be set to 0
+     *
+     * @param r the Color's red value; 0-255; defaults to 0
+     * @param g the Color's green value; 0-255; defaults to 0
+     * @param b the Color's blue value; 0-255; defaults to 0
+     * @param a the Color's alpha value; 0-1; defaults to 1
+     *
+     * @returns the Color
+     */
+    public static rgba(r = 0, g = 0, b = 0, a?: number): Color {
+        return new Color(r, g, b, a);
+    }
+
+    /**
+     * Create a custom Color for a given hex string
+     *
+     * The hex can be in the form #000000, 000000, #000 or 000.
      *
      * If the string is malformed or the wrong length, a default Color will be returned (0, 0, 0)
      *
+     * Final r, g and b values are clamped to 255, and alpha will be 1
+     *
      * @param hex the hex to convert
      *
-     * @returns the converted Color
+     * @returns the Color
      */
-    public static fromHex(hex: string): Color {
+    public static hex(hex: string): Color {
         let r = 0, g = 0, b = 0;
 
         if (hex.startsWith('#')) {
@@ -112,16 +229,18 @@ export class Color {
     }
 
     /**
-     * Constructor. Take and store the Color's r, g, b and a properties
+     * Private constructor. Take and store the Color's r, g, b and a properties
      *
      * r, g and b are clamped to 255, and a is clamped to 1. Negative values will be set to 0
+     *
+     * Colors should be constructed with `Color.hex()` or `Color.rgba()`
      *
      * @param r the Color's red value; 0-255; defaults to 0
      * @param g the Color's green value; 0-255; defaults to 0
      * @param b the Color's blue value; 0-255; defaults to 0
      * @param a the Color's alpha value; 0-1; defaults to 1
      */
-    constructor(public readonly r = 0, public readonly g = 0, public readonly b = 0, public readonly a = 1) {
+    private constructor(public readonly r: number, public readonly g: number, public readonly b: number, public readonly a = 1) {
         this.r = Math.max(Math.min(r, 255), 0);
         this.g = Math.max(Math.min(g, 255), 0);
         this.b = Math.max(Math.min(b, 255), 0);

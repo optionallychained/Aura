@@ -11,7 +11,7 @@ export class FlatColor extends Component {
      *
      * @param color the Color. Defaults to white
      */
-    constructor(public readonly color = new Color(255, 255, 255)) {
+    constructor(public readonly color = Color.white()) {
         super('FlatColor');
     }
 }

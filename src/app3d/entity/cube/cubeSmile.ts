@@ -7,7 +7,7 @@ export class CubeSmile extends Entity.Entity {
             tag: 'cubeSmile',
             components: [
                 new Component.Generic.Texture(1, 0),
-                new Component.Generic.FlatColor(new Color(255, 255, 255, Random.between(0, 1))),
+                new Component.Generic.FlatColor(Color.white(Random.between(0, 1))),
                 new Component.Generic.Model(Geometry.ThreeD.BOX),
                 new Component.Generic.Shader(Shader.Program.ThreeD.PROGRAM_TEXTURE_COLORED_3D),
                 new Component.ThreeD.Transform3D(

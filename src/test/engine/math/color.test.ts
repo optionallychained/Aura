@@ -10,6 +10,8 @@ describe('Color', () => {
      */
     describe('Static', () => {
 
+        // TODO color methods
+
         /**
          * Tests for Color.random()
          */
@@ -154,103 +156,9 @@ describe('Color', () => {
         });
 
         /**
-         * Tests for Color.fromHex()
+         * Tests for Color.rgba()
          */
-        describe('fromHex', () => {
-
-            /**
-             * Tests for long-form hexes
-             */
-            describe('long hexes', () => {
-                // form #000000
-                it('should convert the form #000000 correctly', () => {
-                    const color = Color.fromHex('#332255');
-
-                    expect(color).toHaveProperty('r', 51);
-                    expect(color).toHaveProperty('g', 34);
-                    expect(color).toHaveProperty('b', 85);
-                });
-
-                // form 000000
-                it('should convert the form 000000 correctly', () => {
-                    const color = Color.fromHex('332255');
-
-                    expect(color).toHaveProperty('r', 51);
-                    expect(color).toHaveProperty('g', 34);
-                    expect(color).toHaveProperty('b', 85);
-                });
-            });
-
-            /**
-             * Tests for short-form hexes
-             */
-            describe('short hexes', () => {
-                // form #000
-                it('should convert the form #000 correctly', () => {
-                    const color = Color.fromHex('#325');
-
-                    expect(color).toHaveProperty('r', 51);
-                    expect(color).toHaveProperty('g', 34);
-                    expect(color).toHaveProperty('b', 85);
-                });
-
-                // form 000
-                it('should convert the form 000 correctly', () => {
-                    const color = Color.fromHex('325');
-
-                    expect(color).toHaveProperty('r', 51);
-                    expect(color).toHaveProperty('g', 34);
-                    expect(color).toHaveProperty('b', 85);
-                });
-            });
-
-            /**
-             * Tests for invalid hex lengths
-             */
-            describe('invalid length', () => {
-                // too short
-                it('should set default values for too-short hexes', () => {
-                    const color = Color.fromHex('3');
-
-                    expect(color).toHaveProperty('r', 0);
-                    expect(color).toHaveProperty('g', 0);
-                    expect(color).toHaveProperty('b', 0);
-                });
-
-                // too long
-                it('should set default values for too-long hexes', () => {
-                    const color = Color.fromHex('3333333');
-
-                    expect(color).toHaveProperty('r', 0);
-                    expect(color).toHaveProperty('g', 0);
-                    expect(color).toHaveProperty('b', 0);
-                });
-            });
-
-            /**
-             * Tests for NaN hex components
-             */
-            describe('NaN hex components', () => {
-                it('should set default values for NaN hex components', () => {
-                    const color = Color.fromHex('ZFF');
-
-                    expect(color).toHaveProperty('r', 0);
-                    expect(color).toHaveProperty('g', 0);
-                    expect(color).toHaveProperty('b', 0);
-                });
-            });
-        });
-    });
-
-    /**
-     * Tests for Color instances and methods
-     */
-    describe('Instance', () => {
-
-        /**
-         * Tests for Color constructor
-         */
-        describe('construct', () => {
+        describe('rgba', () => {
 
             /**
              * Tests for valid values
@@ -258,7 +166,7 @@ describe('Color', () => {
             describe('valid values', () => {
                 // default values
                 it('should set default values', () => {
-                    const color = new Color();
+                    const color = Color.rgba();
 
                     expect(color).toHaveProperty('r', 0);
                     expect(color).toHaveProperty('g', 0);
@@ -270,7 +178,7 @@ describe('Color', () => {
                 it('should set given values', () => {
                     const r = 50, g = 100, b = 255, a = 0.5;
 
-                    const color = new Color(r, g, b, a);
+                    const color = Color.rgba(r, g, b, a)
 
                     expect(color).toHaveProperty('r', r);
                     expect(color).toHaveProperty('g', g);
@@ -287,7 +195,7 @@ describe('Color', () => {
 
                 // too large
                 it('should clamp large values correctly', () => {
-                    const color = new Color(r, g, b, a);
+                    const color = Color.rgba(r, g, b, a);
 
                     expect(color).toHaveProperty('r', 255);
                     expect(color).toHaveProperty('g', 255);
@@ -297,7 +205,7 @@ describe('Color', () => {
 
                 // negative
                 it('should set default values for negatives', () => {
-                    const color = new Color(-r, -g, -b, -a);
+                    const color = Color.rgba(-r, -g, -b, -a);
 
                     expect(color).toHaveProperty('r', 0);
                     expect(color).toHaveProperty('g', 0);
@@ -308,12 +216,106 @@ describe('Color', () => {
         });
 
         /**
+         * Tests for Color.hex()
+         */
+        describe('hex', () => {
+
+            /**
+             * Tests for long-form hexes
+             */
+            describe('long hexes', () => {
+                // form #000000
+                it('should convert the form #000000 correctly', () => {
+                    const color = Color.hex('#332255');
+
+                    expect(color).toHaveProperty('r', 51);
+                    expect(color).toHaveProperty('g', 34);
+                    expect(color).toHaveProperty('b', 85);
+                });
+
+                // form 000000
+                it('should convert the form 000000 correctly', () => {
+                    const color = Color.hex('332255');
+
+                    expect(color).toHaveProperty('r', 51);
+                    expect(color).toHaveProperty('g', 34);
+                    expect(color).toHaveProperty('b', 85);
+                });
+            });
+
+            /**
+             * Tests for short-form hexes
+             */
+            describe('short hexes', () => {
+                // form #000
+                it('should convert the form #000 correctly', () => {
+                    const color = Color.hex('#325');
+
+                    expect(color).toHaveProperty('r', 51);
+                    expect(color).toHaveProperty('g', 34);
+                    expect(color).toHaveProperty('b', 85);
+                });
+
+                // form 000
+                it('should convert the form 000 correctly', () => {
+                    const color = Color.hex('325');
+
+                    expect(color).toHaveProperty('r', 51);
+                    expect(color).toHaveProperty('g', 34);
+                    expect(color).toHaveProperty('b', 85);
+                });
+            });
+
+            /**
+             * Tests for invalid hex lengths
+             */
+            describe('invalid length', () => {
+                // too short
+                it('should set default values for too-short hexes', () => {
+                    const color = Color.hex('3');
+
+                    expect(color).toHaveProperty('r', 0);
+                    expect(color).toHaveProperty('g', 0);
+                    expect(color).toHaveProperty('b', 0);
+                });
+
+                // too long
+                it('should set default values for too-long hexes', () => {
+                    const color = Color.hex('3333333');
+
+                    expect(color).toHaveProperty('r', 0);
+                    expect(color).toHaveProperty('g', 0);
+                    expect(color).toHaveProperty('b', 0);
+                });
+            });
+
+            /**
+             * Tests for NaN hex components
+             */
+            describe('NaN hex components', () => {
+                it('should set default values for NaN hex components', () => {
+                    const color = Color.hex('ZFF');
+
+                    expect(color).toHaveProperty('r', 0);
+                    expect(color).toHaveProperty('g', 0);
+                    expect(color).toHaveProperty('b', 0);
+                });
+            });
+        });
+    });
+
+    /**
+     * Tests for Color instances and methods
+     */
+    describe('Instance', () => {
+
+        /**
          * Tests for (Color).hex
          */
         describe('hex', () => {
             // nominal test
             it('should give the correct hex form', () => {
-                const color = new Color(150, 250, 75);
+                const color = Color.rgba(150, 250, 75);
                 const knownHex = '#96fa4b';
 
                 expect(color.hex).toBe(knownHex);
@@ -321,7 +323,7 @@ describe('Color', () => {
 
             // cover low RGB value '0' prepends
             it('should prepend hex components properly', () => {
-                const color = new Color(1, 2, 3);
+                const color = Color.rgba(1, 2, 3);
                 const knownHex = '#010203';
 
                 expect(color.hex).toBe(knownHex);
@@ -335,7 +337,7 @@ describe('Color', () => {
             it('should give the correct Float32Array form', () => {
                 const r = 150, g = 250, b = 75, a = 0.25;
 
-                const { float32Array } = new Color(r, g, b, a);
+                const { float32Array } = Color.rgba(r, g, b, a);
 
                 expect(float32Array).toBeInstanceOf(Float32Array);
                 expect(float32Array.length).toBe(4);

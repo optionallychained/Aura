@@ -78,7 +78,7 @@ export abstract class Game {
      * Default GameConfig fallback values for various configuration options
      */
     protected readonly defaults: GameConfigDefaults = {
-        backgroundColor: new Color(),
+        backgroundColor: Color.black(),
         canvasDimensions: new Vec2(window.innerWidth, window.innerHeight),
         canvasParent: document.body,
         controlScheme: 'keyboard',
