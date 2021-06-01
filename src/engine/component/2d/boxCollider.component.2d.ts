@@ -14,9 +14,9 @@ export class BoxCollider2D extends Component {
      *   parent class
      *
      * @param dimensions the dimensions of this collision box, expressed as a Vec2
-     * @param onCollision the collision handling method, receiving the Game instance and the other Entity
+     * @param onCollision the collision handling method, receiving the Game instance and the two Entities involved in the collision
      */
-    constructor(public readonly dimensions = new Vec2(), public readonly onCollision: (game: Game, other: Entity) => void) {
+    constructor(public readonly dimensions = new Vec2(), public readonly onCollision?: (game: Game, self: Entity, other: Entity) => void) {
         super('BoxCollider2D');
     }
 }

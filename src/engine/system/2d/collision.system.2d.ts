@@ -22,14 +22,14 @@ export class Collision2D extends System2D {
      * @param game the Game2D the System is running within
      * @param frameDelta the time between the last frame and the current, for normalizing time-dependent operations
      */
-    public tick(game: Game2D, frameDelta: number): void {
+    public tick(game: Game2D): void {
         const collidables = game.world.filterEntitiesByComponentNames('Transform2D', 'BoxCollider2D');
 
         for (let i = 0; i < collidables.length; i++) {
             for (let j = i + 1; j < collidables.length; j++) {
                 if (this.collides(collidables[i], collidables[j])) {
-                    (collidables[i].getComponent<BoxCollider2D>('BoxCollider2D')).onCollision(game, collidables[j]);
-                    (collidables[j].getComponent<BoxCollider2D>('BoxCollider2D')).onCollision(game, collidables[i]);
+                    (collidables[i].getComponent<BoxCollider2D>('BoxCollider2D')).onCollision?.(game, collidables[i], collidables[j]);
+                    (collidables[j].getComponent<BoxCollider2D>('BoxCollider2D')).onCollision?.(game, collidables[j], collidables[i]);
                 }
             }
         }
