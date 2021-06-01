@@ -47,22 +47,24 @@ export class Collision2D extends System2D {
         const e1Transform = e1.getComponent<Transform2D>('Transform2D');
         const e1Box = e1.getComponent<BoxCollider2D>('BoxCollider2D');
 
+        const e1Left = e1Transform.position.x - (e1Box.dimensions.x / 2);
+        const e1Right = e1Transform.position.x + (e1Box.dimensions.x / 2);
+        const e1Top = e1Transform.position.y + (e1Box.dimensions.y / 2);
+        const e1Bottom = e1Transform.position.y - (e1Box.dimensions.y / 2);
+
         const e2Transform = e2.getComponent<Transform2D>('Transform2D');
         const e2Box = e2.getComponent<BoxCollider2D>('BoxCollider2D');
 
-        const e1Pos = e1Transform.position;
-        const e1Dim = e1Box.dimensions;
-        const e2Pos = e2Transform.position;
-        const e2Dim = e2Box.dimensions;
+        const e2Left = e2Transform.position.x - (e2Box.dimensions.x / 2);
+        const e2Right = e2Transform.position.x + (e2Box.dimensions.x / 2);
+        const e2Top = e2Transform.position.y + (e2Box.dimensions.y / 2);
+        const e2Bottom = e2Transform.position.y - (e2Box.dimensions.y / 2);
 
         return (
-            e1Pos.x < (e2Pos.x + e2Dim.x)
-            &&
-            (e1Pos.x + e1Dim.x) > e2Pos.x
-            &&
-            e1Pos.y < (e2Pos.y + e2Dim.y)
-            &&
-            (e1Pos.y + e1Dim.y) > e2Pos.y
+            e1Left < e2Right &&
+            e1Right > e2Left &&
+            e1Top > e2Bottom &&
+            e1Bottom < e2Top
         );
     }
 }
