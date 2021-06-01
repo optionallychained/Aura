@@ -33,15 +33,8 @@ export class World3D extends World<World3DConfig> {
         // configure, add and make active the default Camera3D
         const defaultCamera = new Camera3D({
             name: 'default',
-            offset: config.camera?.offset,
-            projection: config.camera?.projection ?? {
-                mode: 'perspective',
-                fov: 90,
-                near: 0.1,
-                far: 1000000,
-                width: config.dimensions.x,
-                height: config.dimensions.y
-            }
+            offset: config.camera.offset,
+            projection: config.camera.projection
         });
 
         this.addCamera(defaultCamera);

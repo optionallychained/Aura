@@ -61,7 +61,13 @@ export class Game2D extends Game {
             // TODO instance of destroy() being annoying; canvas optional; see TODO/general
             dimensions: config?.world?.dimensions ?? new Vec2(this.canvas?.width, this.canvas?.height),
             textureAtlas: config?.world?.textureAtlas,
-            camera: config?.world?.camera
+            camera: {
+                offset: config?.world?.camera?.offset,
+                projection: config?.world?.camera?.projection ?? {
+                    width: this.canvas!.width,
+                    height: this.canvas!.height
+                }
+            }
         });
 
         // configure the Renderer

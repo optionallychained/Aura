@@ -8,5 +8,5 @@ import { Vec2 } from '../../math';
 export interface World2DConfig extends EntityManagerConfig {
     /** 2D world dimensions */
     dimensions: Vec2;
-    camera?: Partial<Omit<Camera2DConfig, 'name'>>;
+    camera: Omit<Camera2DConfig, 'name'>;
 }

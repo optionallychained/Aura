@@ -60,7 +60,20 @@ export class Game3D extends Game {
             // TODO instance of destroy() being annoying; canvas optional; see TODO/general
             dimensions: config?.world?.dimensions ?? new Vec3(this.canvas?.width, this.canvas?.height, 1000),
             textureAtlas: config?.world?.textureAtlas,
-            camera: config?.world?.camera
+            camera: {
+                offset: config?.world?.camera?.offset,
+                // TODO instance of destroy() being annoying; canvas optional; see TODO/general
+                projection: config?.world?.camera?.projection ?? {
+                    mode: 'perspective',
+                    fov: 90,
+                    near: 0.1,
+                    far: 1000000,
+                    width: this.canvas!.width,
+                    height: this.canvas!.height
+                }
+            }
+
+            // camera: config?.world?.camera
         });
 
         // configure the Renderer
