@@ -321,6 +321,9 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
             const changes: EntityChanges = new Set<string>();
 
             for (const e of this.removeList) {
+                // remove the Entity from the flattened list to keep filters up to date
+                this.entities.splice(this.entities.indexOf(e), 1);
+
                 if (!e.hasComponent('Shader') || !e.hasComponent('Model')) {
                     // grouped Entities are for optimising rendering; if an Entity lacks either a Shader or a Model, it is implicitly not
                     //   renderable
@@ -358,9 +361,6 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
                         }
                     }
                 }
-
-                // remove the Entity from the flattened list to keep filters up to date
-                this.entities.splice(this.entities.indexOf(e), 1);
             }
 
             // compile the vertices for the altered groups
