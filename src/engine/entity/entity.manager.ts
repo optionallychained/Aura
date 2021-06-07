@@ -321,12 +321,23 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
             const changes: EntityChanges = new Set<string>();
 
             for (const e of this.removeList) {
-                // remove the Entity from the flattened list to keep filters up to date
-                this.entities.splice(this.entities.indexOf(e), 1);
+                // TODO this may be considered a hack - if the Entity is not found, skip
+                //   an Entity being on the removeList but not in the actual list of Entities may occur in very select circumstances, eg:
+                //     - a game structure like a World Management System maintains a list of Entities
+                //     - some of those Entities are removed by, say, a collision routine
+                //     - the World Management System then tries to remove a set of Entities in batches
+                //     - now, Entities which have already been removed are again on the removeList
+                //   a better way of solving this might be desirable - we may even want to throw an error in this use-case
+                const index = this.entities.indexOf(e);
+                if (index < 0) {
+                    continue;
+                }
 
+                this.entities.splice(index, 1);
+
+                // past this point, we're only concerned about keeping `renderableEntities` up to date - if the Entity to remove lacks a
+                //   Shader or Model, it will not be tracked in that Map, so we can skip the below logic
                 if (!e.hasComponent('Shader') || !e.hasComponent('Model')) {
-                    // grouped Entities are for optimising rendering; if an Entity lacks either a Shader or a Model, it is implicitly not
-                    //   renderable
                     continue;
                 }
 
@@ -342,6 +353,10 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
                     const forModel = forShader.get(modelName);
 
                     if (forModel) {
+                        // TODO related to above - here we don't error check for index not found, because in theory if the above passes
+                        //   this one *should* exist
+                        // when look at maybe resolving the above, look at this too
+
                         // remove the Entity from this shader+model group
                         forModel.splice(forModel.indexOf(e), 1);
 
