@@ -63,8 +63,8 @@ export class TextureAtlas {
      * @returns the corrected texture coordinates, sampling from (column -> column + columnSpan), (row -> row + rowSpan)
      */
     public resolveTextureCoordinates(coords: Float32Array, column: number, row: number, columnSpan: number, rowSpan: number): Float32Array {
-        const u = (column + coords[0]) / (this.columns - columnSpan + 1);
-        const v = 1 - ((row + coords[1]) / (this.rows - rowSpan + 1));
+        const u = (column + coords[0]) * (columnSpan / this.columns) - (((columnSpan - 1) / this.columns) * column);
+        const v = 1 - ((row + coords[1]) * (rowSpan / this.rows) - (((rowSpan - 1) / this.rows) * row));
 
         // TODO this seems kinda messy...but it does work
         // "issue" seems to be caused by want to generalise the solution here for both left-most and right-most coordinates, rather than in

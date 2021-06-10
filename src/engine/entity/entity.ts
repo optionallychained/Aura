@@ -120,32 +120,33 @@ export abstract class Entity {
         }
     }
 
-    /**
-     * Remove a Component from the Entity by Component class
-     *
-     * @param component the Component to remove
-     */
-    public removeComponent(component: Component): void {
-        this.components.delete(component.name);
-    }
+    // TODO dead for the same reason as addComponentByType above
+    // /**
+    //  * Remove a Component from the Entity by Component class
+    //  *
+    //  * @param component the Component to remove
+    //  */
+    // public removeComponent(component: Component): void {
+    //     this.components.delete(component.name);
+    // }
 
-    /**
-     * Remove a list of Components from the Entity by Component class
-     *
-     * @param components the Components to remove
-     */
-    public removeComponents(...components: Array<Component>): void {
-        for (const c of components) {
-            this.removeComponent(c);
-        }
-    }
+    // /**
+    //  * Remove a list of Components from the Entity by Component class
+    //  *
+    //  * @param components the Components to remove
+    //  */
+    // public removeComponents(...components: Array<Component>): void {
+    //     for (const c of components) {
+    //         this.removeComponent(c);
+    //     }
+    // }
 
     /**
      * Remove a Component from the Entity by Component name
      *
      * @param name the name of the Component to remove
      */
-    public removeComponentByName(name: string): void {
+    public removeComponent(name: string): void {
         this.components.delete(name);
     }
 
@@ -154,9 +155,9 @@ export abstract class Entity {
      *
      * @param names the names of the Components to remove
      */
-    public removeComponentsByName(...names: Array<string>): void {
+    public removeComponents(...names: Array<string>): void {
         for (const n of names) {
-            this.removeComponentByName(n);
+            this.removeComponent(n);
         }
     }
 
