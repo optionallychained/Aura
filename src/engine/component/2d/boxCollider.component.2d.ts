@@ -1,5 +1,3 @@
-import { Game } from '../../core';
-import { Entity } from '../../entity';
 import { Vec2 } from '../../math';
 import { Component } from '../component';
 
@@ -16,7 +14,7 @@ export class BoxCollider2D extends Component {
      * @param dimensions the dimensions of this collision box, expressed as a Vec2
      * @param onCollision the collision handling method, receiving the Game instance and the two Entities involved in the collision
      */
-    constructor(public readonly dimensions = new Vec2(), public readonly onCollision?: (game: Game, self: Entity, other: Entity) => void) {
+    constructor(public readonly dimensions?: Vec2) {
         super('BoxCollider2D');
     }
 }

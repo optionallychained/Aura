@@ -14,22 +14,42 @@ export class Collision2D extends System2D {
     /** Provide the System's name */
     public readonly name = 'Collision2D';
 
+    /** Simple array of `id-id` collision strings, used for tracking Entity-Entity collisions and invoking correct collision callbacks */
+    // TODO how could we go about cleaning up stale collision strings for Entity pairings which have become invalid (eg by Entity removal)?
+    private collisions: Array<string> = [];
+
     /**
-     * Concrete tick lifecycle methid implementing the Collision System's per-frame functionality
+     * Concrete tick lifecycle method implementing the Collision System's per-frame functionality
      *
-     * Check for collision between all eligible Entities and call their collision handling methods if appropriate
+     * Check for collision between all eligible Entities and call their collision handling methods as appropriate
      *
      * @param game the Game2D the System is running within
-     * @param frameDelta the time between the last frame and the current, for normalizing time-dependent operations
      */
     public tick(game: Game2D): void {
         const collidables = game.world.filterEntitiesByComponentNames('Transform2D', 'BoxCollider2D');
 
+        // TODO research + investigate ways to optimise this
         for (let i = 0; i < collidables.length; i++) {
             for (let j = i + 1; j < collidables.length; j++) {
+                const collisionId = `${collidables[i].id}-${collidables[j].id}`;
+
                 if (this.collides(collidables[i], collidables[j])) {
-                    (collidables[i].getComponent<BoxCollider2D>('BoxCollider2D')).onCollision?.(game, collidables[i], collidables[j]);
-                    (collidables[j].getComponent<BoxCollider2D>('BoxCollider2D')).onCollision?.(game, collidables[j], collidables[i]);
+                    if (!this.collisions.includes(collisionId)) {
+                        collidables[i].onCollisionStart(game, collidables[j]);
+                        collidables[j].onCollisionStart(game, collidables[i]);
+
+                        this.collisions.push(collisionId);
+                    }
+                    else {
+                        collidables[i].onCollisionContinue(game, collidables[j]);
+                        collidables[j].onCollisionContinue(game, collidables[i]);
+                    }
+                }
+                else if (this.collisions.includes(collisionId)) {
+                    collidables[i].onCollisionEnd(game, collidables[j]);
+                    collidables[j].onCollisionEnd(game, collidables[i]);
+
+                    this.collisions.splice(this.collisions.indexOf(collisionId), 1);
                 }
             }
         }
@@ -46,19 +66,21 @@ export class Collision2D extends System2D {
     private collides(e1: Entity, e2: Entity): boolean {
         const e1Transform = e1.getComponent<Transform2D>('Transform2D');
         const e1Box = e1.getComponent<BoxCollider2D>('BoxCollider2D');
+        const e1Dimensions = e1Box.dimensions ?? e1Transform.scale;
 
-        const e1Left = e1Transform.position.x - (e1Box.dimensions.x / 2);
-        const e1Right = e1Transform.position.x + (e1Box.dimensions.x / 2);
-        const e1Top = e1Transform.position.y + (e1Box.dimensions.y / 2);
-        const e1Bottom = e1Transform.position.y - (e1Box.dimensions.y / 2);
+        const e1Left = e1Transform.position.x - (e1Dimensions.x / 2);
+        const e1Right = e1Transform.position.x + (e1Dimensions.x / 2);
+        const e1Top = e1Transform.position.y + (e1Dimensions.y / 2);
+        const e1Bottom = e1Transform.position.y - (e1Dimensions.y / 2);
 
         const e2Transform = e2.getComponent<Transform2D>('Transform2D');
         const e2Box = e2.getComponent<BoxCollider2D>('BoxCollider2D');
+        const e2Dimensions = e2Box.dimensions ?? e2Transform.scale;
 
-        const e2Left = e2Transform.position.x - (e2Box.dimensions.x / 2);
-        const e2Right = e2Transform.position.x + (e2Box.dimensions.x / 2);
-        const e2Top = e2Transform.position.y + (e2Box.dimensions.y / 2);
-        const e2Bottom = e2Transform.position.y - (e2Box.dimensions.y / 2);
+        const e2Left = e2Transform.position.x - (e2Dimensions.x / 2);
+        const e2Right = e2Transform.position.x + (e2Dimensions.x / 2);
+        const e2Top = e2Transform.position.y + (e2Dimensions.y / 2);
+        const e2Bottom = e2Transform.position.y - (e2Dimensions.y / 2);
 
         return (
             e1Left < e2Right &&

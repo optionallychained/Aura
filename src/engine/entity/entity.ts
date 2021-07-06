@@ -2,6 +2,8 @@ import { Component } from '../component';
 import { AuraError, Game } from '../core';
 import { EntityConfig } from './entity.config';
 
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 /**
  * Class representing an Entity
  *
@@ -42,13 +44,40 @@ export abstract class Entity {
     }
 
     /**
-     * Update function called by the EntityManager during frame execution. Runs the Entity's tick, if provided in its config
+     * Optional frame update function called by the EntityManager during frame execution, implementable by concrete Entities
      *
      * @see EntityManager
      *
      * @param frameDelta the time between the last frame and the current, for normalizing time-dependent operations
      */
-    public abstract tick(game: Game, frameDelta: number): void;
+    public tick(game: Game, frameDelta: number): void { }
+
+    /**
+     * Optional collision callback method called by the collision system when this Entity begins colliding with another, implementable by
+     *   concrete Entities
+     *
+     * @param game a reference to the Game, for setting data, switching States or similar
+     * @param other the Entity with which collision has begun
+     */
+    public onCollisionStart(game: Game, other: Entity): void { }
+
+    /**
+     * Optional collision callback method called by the collision system when this Entity continues to collide with another on the current
+     *   frame, implementable by concrete Entities
+     *
+     * @param game a reference to the Game, for setting data, switching States or similar
+     * @param other the Entity with which collision continues
+     */
+    public onCollisionContinue(game: Game, other: Entity): void { }
+
+    /**
+     * Optional collision callback method called by the collision system when this Entity stops colliding with another, implementable by
+     *   concrete Entities
+     *
+     * @param game a reference to the Game, for setting data, switching states or similar
+     * @param other the Entity with which collision has ended
+     */
+    public onCollisionEnd(game: Game, other: Entity): void { }
 
     /**
      * Get a Component from the Entity by name

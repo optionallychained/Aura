@@ -1,4 +1,4 @@
-import { Color, Component, Core, Entity, Geometry, Shader, Vec2 } from '../../engine';
+import { Color, Component, Entity, Geometry, Shader, Vec2 } from '../../engine';
 
 export class Enemy extends Entity.Entity {
 
@@ -10,10 +10,8 @@ export class Enemy extends Entity.Entity {
                 new Component.Generic.Model(Geometry.TwoD.BOX),
                 new Component.Generic.Shader(Shader.Program.TwoD.PROGRAM_BASIC_2D),
                 new Component.Generic.FlatColor(Color.red()),
-                new Component.TwoD.BoxCollider2D(new Vec2(40, 40))
+                new Component.TwoD.BoxCollider2D()
             ]
         });
     }
-
-    public tick(game: Core.TwoD.Game2D, frameDelta: number): void { }
 }

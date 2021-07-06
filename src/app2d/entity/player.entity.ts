@@ -11,18 +11,18 @@ export class Player extends Entity.Entity {
                 new Component.Generic.Model(Geometry.TwoD.BOX),
                 new Component.Generic.Shader(Shader.Program.TwoD.PROGRAM_BASIC_2D),
                 new Component.Generic.FlatColor(Color.green()),
-                new Component.TwoD.BoxCollider2D(new Vec2(50, 50), (game, self, other) => {
-                    if (other.tag === 'enemy') {
-                        self.getComponent<Health>('Health').health -= 1;
-                    }
-                    else if (other.tag === 'food') {
-                        game.setData('points', game.getData<number>('points') + 1);
-                    }
-                }),
-                new Health(50)
+                new Component.TwoD.BoxCollider2D(),
+                new Health(5)
             ]
         });
     }
 
-    public tick(game: Core.TwoD.Game2D, frameDelta: number): void { }
+    public onCollisionStart(game: Core.TwoD.Game2D, other: Entity.Entity): void {
+        if (other.tag === 'enemy') {
+            this.getComponent<Health>('Health').health -= 1;
+        }
+        else if (other.tag === 'food') {
+            game.setData('points', game.getData<number>('points') + 1);
+        }
+    }
 }
