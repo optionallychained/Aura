@@ -1,8 +1,8 @@
-import { Geometry } from '../geometry';
-import { GLShape } from '../glShape.enum';
+import { Geometry } from '../../geometry';
+import { GLShape } from '../../glShape.enum';
 
 /**
- * Built-in generic 2D Polygon Geometry factory, enabling the runtime production of n-sided shapes
+ * Built-in generic 2D Wireframe Polygon Geometry factory, enabling the runtime production of n-sided wireframe shapes
  */
 export const POLYGON = (vertexCount: number, name?: string): Geometry => {
     const vertexSize = 2;
@@ -16,11 +16,11 @@ export const POLYGON = (vertexCount: number, name?: string): Geometry => {
     }
 
     return new Geometry({
-        name: name ?? `polygon_${vertexCount}_2d`,
+        name: name ?? `polygon_${vertexCount}_2d_wireframe`,
         vertices: Float32Array.from(vertices),
         vertexSize,
         vertexCount,
-        glShape: GLShape.TRIANGLE_FAN,
+        glShape: GLShape.LINE_LOOP,
         textureCoordinates: Float32Array.from([
             // TODO
         ])

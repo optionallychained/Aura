@@ -2,7 +2,7 @@ import { Geometry } from '../../geometry';
 import { GLShape } from '../../glShape.enum';
 
 /**
- * Built-in 2D Wireframe box Geometry, setting out the information required to render wireframe quads
+ * Built-in 2D Wireframe Box Geometry, setting out the information required to render wireframe quads
  */
 export const BOX = new Geometry({
     name: 'box_2d_wireframe',

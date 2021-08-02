@@ -11,7 +11,7 @@ export const MENU_STATE = new State.TwoD.State2D({
         //     Color.white()
         // );
 
-        game.world.addEntity(new Shape(Geometry.TwoD.CIRCLE));
+        game.world.addEntity(new Shape(Geometry.TwoD.Wireframe.PENTAGON));
     },
     end: (game) => {
         game.font.clearEntities();

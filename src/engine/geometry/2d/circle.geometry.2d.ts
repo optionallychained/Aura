@@ -5,4 +5,4 @@ import { POLYGON } from './polygon.geometry.2d';
  *
  * Using 30 as the lowest vertex count which produces a smooth circle
  */
-export const CIRCLE = POLYGON(30, 'circle');
+export const CIRCLE = POLYGON(30, 'circle_2d');
