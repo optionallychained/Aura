@@ -8,7 +8,7 @@ export const POLYGON = (vertexCount: number, name?: string): Geometry => {
     const vertexSize = 2;
     const vertices: Array<number> = [];
 
-    for (let i = 0; i <= vertexCount * vertexSize; i += vertexSize) {
+    for (let i = 0; i < vertexCount * vertexSize; i += vertexSize) {
         const angle = (Math.PI * i) / vertexCount;
 
         vertices.push(Math.cos(angle) / 2);
