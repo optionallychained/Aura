@@ -1,5 +1,6 @@
 export * from './box.geometry.2d';
 export * from './circle.geometry.2d';
+export * from './f.geometry.2d';
 export * from './hexagon.geometry.2d';
 export * from './line.geometry.2d';
 export * from './octagon.geometry.2d';
