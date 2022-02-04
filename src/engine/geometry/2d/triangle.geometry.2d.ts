@@ -2,14 +2,17 @@ import { Geometry } from '../geometry';
 import { GLShape } from '../glShape.enum';
 
 /**
- * Built-in 2D Triangle Geometry, setting out the information required to render triangles
+ * Built-in 2D Triangle Geometry, setting out the information required to render equilateral triangles
  */
+
+const h = Math.sqrt(3) / 4;
+
 export const TRIANGLE = new Geometry({
-    name: 'triangle_2d',
+    name: 'triangle_equilateral_2d',
     vertices: Float32Array.from([
-        -0.5, -0.5,
-        0.5, -0.5,
-        0, 0.5
+        -0.5, -h,
+        0.5, -h,
+        0, h,
     ]),
     vertexSize: 2,
     vertexCount: 3,
