@@ -6,3 +6,4 @@ export * from './octagon.wireframe.geometry.2d';
 export * from './pentagon.wireframe.geometry.2d';
 export * from './polygon.wireframe.geometry.2d';
 export * from './triangle.wireframe.geometry.2d';
+export * from './triangleright.wireframe.geometry.2d';

@@ -8,5 +8,6 @@ export * from './pentagon.geometry.2d';
 export * from './point.geometry.2d';
 export * from './polygon.geometry.2d';
 export * from './triangle.geometry.2d';
+export * from './triangleright.geometry.2d';
 
 export * as Wireframe from './wireframe';
