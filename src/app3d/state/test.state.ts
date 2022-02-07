@@ -1,55 +1,24 @@
-import { Angle, Geometry, Input, Random, State, Vec3 } from '../../engine';
+import { Angle, Component, Geometry, Input, State } from '../../engine';
 import { Axis } from '../entity/axis';
 import { Shape } from '../entity/shape';
 
-export const SHAPES_STATE = new State.ThreeD.State3D({
-    name: 'shapes',
+export const TEST_STATE = new State.ThreeD.State3D({
+    name: 'test',
     init: (game) => {
-        game.world.activeCamera.moveForward(-90000);
-        game.world.activeCamera.moveRight(-50000);
-        game.world.activeCamera.rotateY(Angle.toRadians(-45));
-        game.world.activeCamera.rotateX(Angle.toRadians(-45));
-
-        const shapeScale = 10000;
-
-        const geometries = [
-            Geometry.ThreeD.BOX,
-            Geometry.ThreeD.LINE,
-            Geometry.ThreeD.OCTAHEDRON,
-            Geometry.ThreeD.PRISM_HEXAGONAL,
-            Geometry.ThreeD.PRISM_TRIANGULAR,
-            Geometry.ThreeD.PYRAMID_HEXAGONAL,
-            Geometry.ThreeD.PYRAMID_SQUARE,
-            Geometry.ThreeD.TETRAHEDRON,
-            Geometry.ThreeD.Wireframe.BOX,
-            Geometry.ThreeD.Wireframe.OCTAHEDRON,
-            Geometry.ThreeD.Wireframe.PRISM_HEXAGONAL,
-            Geometry.ThreeD.Wireframe.PRISM_TRIANGULAR,
-            Geometry.ThreeD.Wireframe.PYRAMID_HEXAGONAL,
-            Geometry.ThreeD.Wireframe.PYRAMID_SQUARE,
-            Geometry.ThreeD.Wireframe.TETRAHEDRON
-        ];
-
-        for (let i = -game.world.dimensions.x / 2; i <= game.world.dimensions.x / 2; i += shapeScale) {
-            for (let j = -game.world.dimensions.y / 2; j <= game.world.dimensions.y / 2; j += shapeScale) {
-                for (let k = -game.world.dimensions.z / 10; k <= game.world.dimensions.z / 10; k += shapeScale) {
-                    const geometry = geometries[Math.floor(Random.between(0, geometries.length))];
-
-                    game.world.addEntity(new Shape(geometry, new Vec3(i, j, k), shapeScale * 0.25));
-                }
-            }
-        }
-
         game.world.addEntity(new Axis('x', game.world.dimensions.x));
         game.world.addEntity(new Axis('y', game.world.dimensions.y));
         game.world.addEntity(new Axis('z', game.world.dimensions.z));
+
+        game.world.addEntity(new Shape(Geometry.ThreeD.Wireframe.PYRAMID_HEXAGONAL));
     },
     end: () => { },
     tick: (game) => {
+        const shapeTransform = game.world.filterEntitiesByTag('shape')[0]?.getComponent<Component.ThreeD.Transform3D>('Transform3D');
         const camera = game.world.activeCamera;
 
         const cameraAngle = Angle.toRadians(0.5);
-        const cameraMove = 200;
+        const cameraMove = 2;
+        const shapeAngle = Angle.toRadians(2.5);
 
         // camera controls
         if (game.input.isKeyDown(Input.Keys.A)) {
@@ -92,6 +61,21 @@ export const SHAPES_STATE = new State.ThreeD.State3D({
         }
         else if (game.input.isKeyDown(Input.Keys.O)) {
             camera.rotateZ(cameraAngle);
+        }
+
+        // shape controls
+        if (game.input.isKeyDown(Input.Keys.ARROW_LEFT)) {
+            shapeTransform.rotateY(shapeAngle);
+        }
+        else if (game.input.isKeyDown(Input.Keys.ARROW_RIGHT)) {
+            shapeTransform.rotateY(-shapeAngle);
+        }
+
+        if (game.input.isKeyDown(Input.Keys.ARROW_UP)) {
+            shapeTransform.rotateX(shapeAngle);
+        }
+        else if (game.input.isKeyDown(Input.Keys.ARROW_DOWN)) {
+            shapeTransform.rotateX(-shapeAngle);
         }
     }
 });

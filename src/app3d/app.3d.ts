@@ -1,5 +1,6 @@
 import { Angle, Core, Shader, Vec2, Vec3 } from '../engine';
 import { SHAPES_STATE } from './state/shapes.state';
+import { TEST_STATE } from './state/test.state';
 
 const game = new Core.ThreeD.Game3D({
     canvasDimensions: new Vec2(1024, 768),
@@ -19,6 +20,6 @@ game.registerShader(Shader.Program.ThreeD.PROGRAM_COLOR_PER_VERTEX_3D);
 game.registerShader(Shader.Program.ThreeD.PROGRAM_TEXTURE_3D);
 game.registerShader(Shader.Program.ThreeD.PROGRAM_TEXTURE_COLORED_3D);
 
-game.addState(SHAPES_STATE);
+game.addStates(SHAPES_STATE, TEST_STATE);
 
-game.start(SHAPES_STATE.name);
+game.start(TEST_STATE.name);

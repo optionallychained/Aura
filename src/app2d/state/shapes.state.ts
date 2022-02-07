@@ -26,8 +26,8 @@ export const SHAPES_STATE = new State.TwoD.State2D({
             Geometry.TwoD.Wireframe.TRIANGLE_RIGHT_ANGLE
         ];
 
-        for (let i = -game.world.dimensions.x / 2; i < game.world.dimensions.x / 2; i += shapeScale) {
-            for (let j = -game.world.dimensions.x / 2; j <= game.world.dimensions.y / 2; j += shapeScale) {
+        for (let i = -game.world.dimensions.x / 2; i <= game.world.dimensions.x / 2; i += shapeScale) {
+            for (let j = -game.world.dimensions.y / 2; j <= game.world.dimensions.y / 2; j += shapeScale) {
                 const geometry = geometries[Math.floor(Random.between(0, geometries.length))];
 
                 game.world.addEntity(new Shape(geometry, new Vec2(i, j), shapeScale * 0.75));
