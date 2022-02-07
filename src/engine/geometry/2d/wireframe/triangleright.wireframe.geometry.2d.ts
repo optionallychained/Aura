@@ -5,7 +5,7 @@ import { GLShape } from '../../glShape.enum';
  * Built-in 2D Wireframe Triangle Geometry, setting out the information required to render wireframe right angle triangles
  */
 export const TRIANGLE_RIGHT_ANGLE = new Geometry({
-    name: 'triangle_right_angle_2d_wireframe',
+    name: 'triangle_right_angle_wireframe',
     vertices: Float32Array.from([
         -0.5, -0.5,
         0.5, -0.5,

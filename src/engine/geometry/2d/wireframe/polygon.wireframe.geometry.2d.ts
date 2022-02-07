@@ -16,7 +16,7 @@ export const POLYGON = (vertexCount: number, name?: string): Geometry => {
     }
 
     return new Geometry({
-        name: name ?? `polygon_${vertexCount}_2d_wireframe`,
+        name: name ?? `polygon_${vertexCount}_wireframe`,
         vertices: Float32Array.from(vertices),
         vertexSize,
         vertexCount,

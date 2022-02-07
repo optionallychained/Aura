@@ -5,7 +5,7 @@ import { GLShape } from '../glShape.enum';
  * Built-in 2D line Geometry, setting out the information required to render a 2D line
  */
 export const LINE = new Geometry({
-    name: 'line_2d',
+    name: 'line',
     vertices: Float32Array.from([
         -0.5, 0,
         0.5, 0

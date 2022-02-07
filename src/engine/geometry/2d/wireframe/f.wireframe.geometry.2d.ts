@@ -5,7 +5,7 @@ import { GLShape } from '../../glShape.enum';
  * Built-in 2D Wireframe F Geometry, setting out the information required to render Wireframe Fs
  */
 export const F = new Geometry({
-    name: 'f_2d_wireframe',
+    name: 'f_wireframe',
     vertices: Float32Array.from([
         -0.5, -0.5,
         -0.25, -0.5,

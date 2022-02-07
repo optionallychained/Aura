@@ -5,7 +5,7 @@ import { GLShape } from '../glShape.enum';
  * Built-in 2D F Geometry, setting out the information required to render Fs
  */
 export const F = new Geometry({
-    name: 'f_2d',
+    name: 'f',
     vertices: Float32Array.from([
         // left side
         -0.5, -0.5,

@@ -5,7 +5,7 @@ import { GLShape } from '../glShape.enum';
  * Built-in 3D point Geometry, setting out the information required to render a point
  */
 export const POINT = new Geometry({
-    name: 'point_3d',
+    name: 'point',
     vertices: Float32Array.from([
         0, 0, 0
     ]),

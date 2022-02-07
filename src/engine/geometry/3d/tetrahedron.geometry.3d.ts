@@ -2,13 +2,13 @@ import { GLShape } from '../glShape.enum';
 import { Geometry } from '../geometry';
 
 /**
- * Built-in 3D pyramid Geometry, setting out the information required to render equilateral triangle-based pyramids
+ * Built-in 3D tetrahedron Geometry, setting out the information required to render equilateral triangle-based pyramids
  */
 
 const h = Math.sqrt(3) / 4;
 
 export const TETRAHEDRON = new Geometry({
-    name: 'pyramid_3d',
+    name: 'tetrahedron',
     vertices: Float32Array.from([
         // bottom
         -0.5, -h, h,
