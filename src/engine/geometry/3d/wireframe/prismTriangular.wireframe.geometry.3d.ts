@@ -7,8 +7,8 @@ import { Geometry } from '../../geometry';
 
 const h = Math.sqrt(3) / 4;
 
-export const PRISM = new Geometry({
-    name: 'prism_wireframe',
+export const PRISM_TRIANGULAR = new Geometry({
+    name: 'prism_triangular_wireframe',
     vertices: Float32Array.from([
         -0.5, -h, 0.5,
         0.5, -h, 0.5,
