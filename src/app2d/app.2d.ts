@@ -10,6 +10,6 @@ game.registerShader(Shader.Program.TwoD.PROGRAM_COLOR_PER_VERTEX_2D)
 game.registerShader(Shader.Program.TwoD.PROGRAM_TEXTURE_2D);
 game.registerShader(Shader.Program.TwoD.PROGRAM_TEXTURE_COLORED_2D);
 
-game.addStates(SHAPES_STATE);
+game.addState(SHAPES_STATE);
 
 game.start(SHAPES_STATE.name);

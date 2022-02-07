@@ -1,11 +1,10 @@
-import { Angle, Color, Component, Core, Entity, Geometry, Shader, Vec3 } from '../../engine';
+import { Angle, Color, Component, Entity, Geometry, Shader, Vec3 } from '../../engine';
 
-export class Axis3D extends Entity.Entity {
+export class Axis extends Entity.Entity {
 
-    constructor(axis: 'x' | 'y' | 'z', offset: Vec3, length: number) {
+    constructor(axis: 'x' | 'y' | 'z', length: number) {
         let angleX, angleY, angleZ;
 
-        // TODO axis rotation
         switch (axis) {
             case 'x':
                 angleX = angleY = angleZ = 0;
@@ -23,19 +22,13 @@ export class Axis3D extends Entity.Entity {
         }
 
         super({
-            tag: 'axis3D',
+            tag: 'axis',
             components: [
-                new Component.Generic.FlatColor(Color.random()),
+                new Component.ThreeD.Transform3D(new Vec3(), new Vec3(length, 1, 1), new Vec3(angleX, angleY, angleZ)),
                 new Component.Generic.Model(Geometry.ThreeD.LINE),
                 new Component.Generic.Shader(Shader.Program.ThreeD.PROGRAM_BASIC_3D),
-                new Component.ThreeD.Transform3D(
-                    offset,
-                    new Vec3(length, 1, 1),
-                    new Vec3(angleX, angleY, angleZ)
-                )
+                new Component.Generic.FlatColor(Color.white()),
             ]
         });
     }
-
-    public tick(game: Core.Game, frameDelta: number): void { }
 }

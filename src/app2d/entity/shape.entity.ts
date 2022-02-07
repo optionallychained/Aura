@@ -20,7 +20,7 @@ export class Shape extends Entity.Entity {
         }
 
         super({
-            tag: 'shape2D',
+            tag: 'shape',
             components
         });
     }
