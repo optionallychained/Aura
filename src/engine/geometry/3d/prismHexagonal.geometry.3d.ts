@@ -5,7 +5,7 @@ import { Geometry } from '../geometry';
  * Built-in 3D prism Geometry, setting out the information required to render hexagonal prisms
  */
 
-const h = (Math.sqrt(3) / 2) * 0.5;
+const h = Math.sqrt(3) / 4;
 
 export const PRISM_HEXAGONAL = new Geometry({
     name: 'prism_hexagonal',
