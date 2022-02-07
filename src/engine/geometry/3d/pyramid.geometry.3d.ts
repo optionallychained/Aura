@@ -2,7 +2,7 @@ import { GLShape } from '../glShape.enum';
 import { Geometry } from '../geometry';
 
 /**
- * Built-in 3D pyramid Geometry, setting out the information required to render equilateral square-based pyramids
+ * Built-in 3D pyramid Geometry, setting out the information required to render square-based pyramids
  */
 
 const h = Math.sqrt(3) / 4;

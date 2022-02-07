@@ -1,4 +1,4 @@
-import { Core, Shader, Vec2, Vec3 } from '../engine';
+import { Angle, Core, Shader, Vec2, Vec3 } from '../engine';
 import { SHAPES_STATE } from './state/shapes.state';
 
 const game = new Core.ThreeD.Game3D({
