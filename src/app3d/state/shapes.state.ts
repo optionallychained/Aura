@@ -9,7 +9,7 @@ export const SHAPES_STATE = new State.ThreeD.State3D({
         game.world.addEntity(new Axis('y', game.world.dimensions.y));
         game.world.addEntity(new Axis('z', game.world.dimensions.z));
 
-        game.world.addEntity(new Shape(Geometry.ThreeD.PRISM));
+        game.world.addEntity(new Shape(Geometry.ThreeD.OCTAHEDRON));
     },
     end: () => { },
     tick: (game) => {
