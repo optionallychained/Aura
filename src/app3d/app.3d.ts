@@ -9,8 +9,28 @@ const game = new Core.ThreeD.Game3D({
         dimensions: new Vec3(1024 * 100, 768 * 100, 1000000),
         camera: {
             offset: {
-                // angles: new Vec3(Angle.toRadians(-90), 0, 0)
-                position: new Vec3(0, 150, 500)
+                // from top
+                // angles: new Vec3(Angle.toRadians(-90), 0, 0),
+                // position: new Vec3(0, 150, 0)
+
+                // from bottom
+                // angles: new Vec3(Angle.toRadians(90), 0, 0),
+                // position: new Vec3(0, -150, 0)
+
+                // from left
+                // angles: new Vec3(0, Angle.toRadians(-90), 0),
+                // position: new Vec3(-150, 0, 0)
+
+                // from right
+                // angles: new Vec3(0, Angle.toRadians(90), 0),
+                // position: new Vec3(150, 0, 0)
+
+                // from back
+                // angles: new Vec3(0, Angle.toRadians(-180), 0),
+                // position: new Vec3(0, 0, -150)
+
+                // from front
+                position: new Vec3(0, 0, 150)
             }
         }
     }
