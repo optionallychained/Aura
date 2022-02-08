@@ -1,5 +1,5 @@
 const pug = require('pug');
-const marked = require('marked');
+const marked = require('marked').marked;
 const hljs = require('highlight.js');
 
 const fs = require('fs-extra');
