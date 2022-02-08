@@ -58,50 +58,60 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<a href="#aura" id="aura" style="color: inherit; text-decoration: none;">
-					<h1>Aura</h1>
+				<a href="#engine" id="engine" style="color: inherit; text-decoration: none;">
+					<h1>Engine</h1>
 				</a>
-				<p><a href="https://badge.fury.io/js/aura"><img src="https://badge.fury.io/js/aura.svg" alt="NPM"></a></p>
-				<p>Aura is a work-in-progress TypeScript/WebGL general-purpose game engine, designed to enable the swift implementation of both 2D and 3D browser games and providing a large base of built-in utility.</p>
-				<p>Built on the Entity-Component-System architecture and operating on the concept of distinct game States, Aura aims to enable a compartmentalised approach to game creation, supporting developments of varying complexity.</p>
-				<p>Goals:</p>
+				<p>Aura.</p>
+				<a href="#todo" id="todo" style="color: inherit; text-decoration: none;">
+					<h2>TODO</h2>
+				</a>
+				<a href="#engine-1" id="engine-1" style="color: inherit; text-decoration: none;">
+					<h3>Engine</h3>
+				</a>
 				<ul>
-					<li>Zero (or close to) dependencies</li>
-					<li>Simplistic and easy-to-approach API and project structure</li>
-					<li>Flexible rendering engine, with support for custom Shaders and Components</li>
-					<li>Large base of built-in utility, serving many use-cases out of the box</li>
-					<li>Support for both 2D and 3D game creation</li>
-					<li>Multiple input/control schemes (Keyboard/Mouse, Gamepad, Touch)</li>
-					<li>Approachable documentation</li>
-					<li>Comprehensive testing</li>
-					<li><em>Potentially</em>: Desktop and Mobile builds</li>
+					<li>Sounds (WebAudio API?)</li>
+					<li>Materials?</li>
+					<li>Restructure<ul>
+							<li>shallower grouping</li>
+							<li>better 2D/3D separation<ul>
+									<li>remove in-code 2D/3D specifications where appropriate</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li>Re-evaluate type differentiation mechanisms for 2D/3D split aspects</li>
+					<li>Review for consistency of design approach in core aspects (Config/Class/Instantiate/Extend)<ul>
+							<li>States</li>
+							<li>Components</li>
+							<li>Systems</li>
+							<li>Geometry</li>
+							<li>...</li>
+						</ul>
+					</li>
+					<li>Mobile support<ul>
+							<li>device detection</li>
+							<li>viewport sizing</li>
+							<li>touch (associated: Input)</li>
+						</ul>
+					</li>
+					<li>Consider &quot;zero config&quot; setup - default shader registrations, systems, etc</li>
 				</ul>
-				<a href="#documentation" id="documentation" style="color: inherit; text-decoration: none;">
-					<h2>Documentation</h2>
+				<a href="#testing" id="testing" style="color: inherit; text-decoration: none;">
+					<h3>Testing</h3>
 				</a>
-				<p><em>(Under Construction)</em> <a href="https://optionallychained.github.io/Aura/">Aura Documentation</a></p>
-				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
-					<h2>Usage</h2>
-				</a>
-				<a href="#quickstart" id="quickstart" style="color: inherit; text-decoration: none;">
-					<h3>Quickstart</h3>
-				</a>
-				<p>To get up and running with Aura fast, see the following Template Repositories:</p>
 				<ul>
-					<li><p><a href="https://github.com/optionallychained/Aura-Template-2D">Aura-Template-2D</a> for 2D games</p>
-					</li>
-					<li><p><a href="https://github.com/optionallychained/Aura-Template-3D">Aura-Template-3D</a> for 3D games</p>
+					<li>Unit + integration testing for core aspects<ul>
+							<li>may require a look at something akin to dep injection for Game</li>
+						</ul>
 					</li>
 				</ul>
-				<a href="#npm" id="npm" style="color: inherit; text-decoration: none;">
-					<h3>NPM</h3>
+				<a href="#project" id="project" style="color: inherit; text-decoration: none;">
+					<h3>Project</h3>
 				</a>
-				<p><code>npm install aura</code></p>
-				<a href="#cdn" id="cdn" style="color: inherit; text-decoration: none;">
-					<h3>CDN</h3>
-				</a>
-				<pre><code class="language-html"><span style="color: #800000">&lt;script</span><span style="color: #000000FF"> </span><span style="color: #FF0000">src</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;https://unpkg.com/aura/publish/_min/aura.min.js&quot;</span><span style="color: #800000">&gt;&lt;/script&gt;</span>
-</code></pre>
+				<ul>
+					<li>Review barelling approach + overall export volume</li>
+					<li>Re-evaluate publication format/structure(s) (ESM?)</li>
+				</ul>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">

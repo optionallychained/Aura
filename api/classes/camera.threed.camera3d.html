@@ -77,15 +77,6 @@
 						<p>Concrete Camera3D, representing a 3D Camera and narrowing generic types to their corresponding 3D variants</p>
 					</div>
 					<p>Supports both Orthographic and Perspecitve Projection approaches by way of the projection configuration member &#39;mode&#39;</p>
-					<p>// TODO due to being backed by the non-gimbal-locked Transform3D, technically produces a &#39;free&#39; camera with 6-degrees of freedom
-						//   suitable for use as a first or third person spaceship camera, for example
-						//
-						// Alongside implementing a Transform3D that does have gimbal lock, probably want to split into a few use cases:
-						//   - freecam (this)
-						//   - third person camera (lookat ?)
-					//   - first person camera (gimbal locked transform3d ?)</p>
-					<p>// TODO for now, due to the way the view matrix is computed, follow rules have no effect
-					//   this will be solved alongside the review of Transform3D + thereby Camera3D implementation</p>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-hierarchy">
@@ -161,7 +152,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="camera.camera-1.html">Camera</a>.<a href="camera.camera-1.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/f023f32/src/engine/camera/3d/camera.3d.ts#L33">src/engine/camera/3d/camera.3d.ts:33</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/b41e334/src/engine/camera/3d/camera.3d.ts#L22">src/engine/camera/3d/camera.3d.ts:22</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -201,7 +192,7 @@
 					<aside class="tsd-sources">
 						<p>Overrides <a href="camera.camera-1.html">Camera</a>.<a href="camera.camera-1.html#following">following</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/f023f32/src/engine/camera/3d/camera.3d.ts#L30">src/engine/camera/3d/camera.3d.ts:30</a></li>
+							<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/b41e334/src/engine/camera/3d/camera.3d.ts#L19">src/engine/camera/3d/camera.3d.ts:19</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -217,7 +208,7 @@
 					<aside class="tsd-sources">
 						<p>Overrides <a href="camera.camera-1.html">Camera</a>.<a href="camera.camera-1.html#projection">projection</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/f023f32/src/engine/camera/3d/camera.3d.ts#L27">src/engine/camera/3d/camera.3d.ts:27</a></li>
+							<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/b41e334/src/engine/camera/3d/camera.3d.ts#L16">src/engine/camera/3d/camera.3d.ts:16</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -233,7 +224,7 @@
 					<aside class="tsd-sources">
 						<p>Overrides <a href="camera.camera-1.html">Camera</a>.<a href="camera.camera-1.html#transform">transform</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/f023f32/src/engine/camera/3d/camera.3d.ts#L33">src/engine/camera/3d/camera.3d.ts:33</a></li>
+							<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/b41e334/src/engine/camera/3d/camera.3d.ts#L22">src/engine/camera/3d/camera.3d.ts:22</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -255,7 +246,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/f023f32/src/engine/camera/camera.ts#L44">src/engine/camera/camera.ts:44</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/b41e334/src/engine/camera/camera.ts#L44">src/engine/camera/camera.ts:44</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -281,7 +272,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="camera.camera-1.html">Camera</a>.<a href="camera.camera-1.html#attachto">attachTo</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/f023f32/src/engine/camera/3d/camera.3d.ts#L89">src/engine/camera/3d/camera.3d.ts:89</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/b41e334/src/engine/camera/3d/camera.3d.ts#L78">src/engine/camera/3d/camera.3d.ts:78</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -326,7 +317,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="camera.camera-1.html">Camera</a>.<a href="camera.camera-1.html#detach">detach</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/f023f32/src/engine/camera/camera.ts#L68">src/engine/camera/camera.ts:68</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/b41e334/src/engine/camera/camera.ts#L68">src/engine/camera/camera.ts:68</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -349,7 +340,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="camera.camera-1.html">Camera</a>.<a href="camera.camera-1.html#getviewmatrix">getViewMatrix</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/f023f32/src/engine/camera/3d/camera.3d.ts#L122">src/engine/camera/3d/camera.3d.ts:122</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/b41e334/src/engine/camera/3d/camera.3d.ts#L111">src/engine/camera/3d/camera.3d.ts:111</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -372,7 +363,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/f023f32/src/engine/camera/3d/camera.3d.ts#L174">src/engine/camera/3d/camera.3d.ts:174</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/b41e334/src/engine/camera/3d/camera.3d.ts#L160">src/engine/camera/3d/camera.3d.ts:160</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -403,7 +394,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/f023f32/src/engine/camera/3d/camera.3d.ts#L156">src/engine/camera/3d/camera.3d.ts:156</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/b41e334/src/engine/camera/3d/camera.3d.ts#L142">src/engine/camera/3d/camera.3d.ts:142</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -434,7 +425,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/f023f32/src/engine/camera/3d/camera.3d.ts#L165">src/engine/camera/3d/camera.3d.ts:165</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/b41e334/src/engine/camera/3d/camera.3d.ts#L151">src/engine/camera/3d/camera.3d.ts:151</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -466,7 +457,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="camera.camera-1.html">Camera</a>.<a href="camera.camera-1.html#reset">reset</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/f023f32/src/engine/camera/camera.ts#L75">src/engine/camera/camera.ts:75</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/b41e334/src/engine/camera/camera.ts#L75">src/engine/camera/camera.ts:75</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -488,7 +479,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/f023f32/src/engine/camera/3d/camera.3d.ts#L219">src/engine/camera/3d/camera.3d.ts:219</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/b41e334/src/engine/camera/3d/camera.3d.ts#L205">src/engine/camera/3d/camera.3d.ts:205</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -516,7 +507,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/f023f32/src/engine/camera/3d/camera.3d.ts#L192">src/engine/camera/3d/camera.3d.ts:192</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/b41e334/src/engine/camera/3d/camera.3d.ts#L178">src/engine/camera/3d/camera.3d.ts:178</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -547,7 +538,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/f023f32/src/engine/camera/3d/camera.3d.ts#L201">src/engine/camera/3d/camera.3d.ts:201</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/b41e334/src/engine/camera/3d/camera.3d.ts#L187">src/engine/camera/3d/camera.3d.ts:187</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -578,7 +569,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/f023f32/src/engine/camera/3d/camera.3d.ts#L210">src/engine/camera/3d/camera.3d.ts:210</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/b41e334/src/engine/camera/3d/camera.3d.ts#L196">src/engine/camera/3d/camera.3d.ts:196</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -609,7 +600,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/f023f32/src/engine/camera/3d/camera.3d.ts#L183">src/engine/camera/3d/camera.3d.ts:183</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/b41e334/src/engine/camera/3d/camera.3d.ts#L169">src/engine/camera/3d/camera.3d.ts:169</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -640,7 +631,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/f023f32/src/engine/camera/3d/camera.3d.ts#L228">src/engine/camera/3d/camera.3d.ts:228</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/b41e334/src/engine/camera/3d/camera.3d.ts#L214">src/engine/camera/3d/camera.3d.ts:214</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -671,7 +662,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/f023f32/src/engine/camera/3d/camera.3d.ts#L237">src/engine/camera/3d/camera.3d.ts:237</a></li>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/b41e334/src/engine/camera/3d/camera.3d.ts#L223">src/engine/camera/3d/camera.3d.ts:223</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
