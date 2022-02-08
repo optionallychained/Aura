@@ -16,10 +16,6 @@ export const BOX = new Geometry({
     vertexCount: 4,
     glShape: GLShape.LINE_LOOP,
     textureCoordinates: Float32Array.from([
-        // TODO janky...do we even want texturing for wireframes?
-        0, 0,
-        1, 0,
-        1, 1,
-        0, 1
+        // TODO consider whether or not texcoords make sense for lines
     ])
 });

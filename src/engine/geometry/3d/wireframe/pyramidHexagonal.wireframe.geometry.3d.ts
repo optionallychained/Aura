@@ -45,6 +45,6 @@ export const PYRAMID_HEXAGONAL = new Geometry({
     vertexCount: 17,
     glShape: GLShape.LINE_LOOP,
     textureCoordinates: Float32Array.from([
-
+        // TODO consider whether or not texcoords make sense for lines
     ])
 });

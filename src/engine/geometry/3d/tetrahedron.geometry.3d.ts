@@ -34,6 +34,6 @@ export const TETRAHEDRON = new Geometry({
     vertexCount: 36,
     glShape: GLShape.TRIANGLES,
     textureCoordinates: Float32Array.from([
-
+        // TODO Tetrahedron texcoords
     ])
 });

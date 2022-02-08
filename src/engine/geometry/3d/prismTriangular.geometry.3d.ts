@@ -48,6 +48,6 @@ export const PRISM_TRIANGULAR = new Geometry({
     vertexCount: 24,
     glShape: GLShape.TRIANGLES,
     textureCoordinates: Float32Array.from([
-
+        // TODO Triangular Prism texcoords
     ])
 });

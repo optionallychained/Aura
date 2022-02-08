@@ -19,6 +19,6 @@ export const PENTAGON = new Geometry({
     vertexCount: 5,
     glShape: GLShape.LINE_LOOP,
     textureCoordinates: Float32Array.from([
-        // TODO
+        // TODO consider whether or not texcoords make sense for lines
     ])
 });

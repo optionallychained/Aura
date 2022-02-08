@@ -13,7 +13,6 @@ export const POINT = new Geometry({
     vertexCount: 1,
     glShape: GLShape.POINTS,
     textureCoordinates: Float32Array.from([
-        // TODO janky, do we want texture coordinates for points?
-        0.5, 0.5
+        // TODO consider whether or not texcoords make sense for points
     ])
 });

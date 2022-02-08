@@ -22,7 +22,7 @@ export const POLYGON = (vertexCount: number, name?: string): Geometry => {
         vertexCount,
         glShape: GLShape.TRIANGLE_FAN,
         textureCoordinates: Float32Array.from([
-            // TODO
+            // TODO Polygon texcoords
         ])
     });
 };

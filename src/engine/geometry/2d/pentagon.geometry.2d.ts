@@ -19,6 +19,6 @@ export const PENTAGON = new Geometry({
     vertexCount: 5,
     glShape: GLShape.TRIANGLE_FAN,
     textureCoordinates: Float32Array.from([
-        // TODO
+        // TODO Pentagon texcoords
     ])
 });

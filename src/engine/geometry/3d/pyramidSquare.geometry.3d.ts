@@ -42,6 +42,6 @@ export const PYRAMID_SQUARE = new Geometry({
     vertexCount: 18,
     glShape: GLShape.TRIANGLES,
     textureCoordinates: Float32Array.from([
-
+        // TODO Square Pyramid texcoords
     ])
 });

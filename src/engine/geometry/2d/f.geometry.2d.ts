@@ -35,6 +35,6 @@ export const F = new Geometry({
     vertexCount: 18,
     glShape: GLShape.TRIANGLES,
     textureCoordinates: Float32Array.from([
-        // TODO
+        // TODO F texcoords
     ])
 });

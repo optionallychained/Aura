@@ -30,6 +30,6 @@ export const PRISM_TRIANGULAR = new Geometry({
     vertexCount: 12,
     glShape: GLShape.LINE_LOOP,
     textureCoordinates: Float32Array.from([
-
+        // TODO consider whether or not texcoords make sense for lines
     ])
 });
