@@ -47,8 +47,8 @@ export const OCTAHEDRON = new Geometry({
 
         // top right
         0, h, 0,
-        0.5, 0, -0.5,
-        0.5, 0, 0.5
+        0.5, 0, 0.5,
+        0.5, 0, -0.5
     ]),
     vertexSize: 3,
     vertexCount: 24,
