@@ -61,6 +61,10 @@ export class Geometry {
      * Getter for the Geometry's textureCoordinates, as provided in its config
      */
     public get textureCoordinates(): Float32Array {
+        // TODO consider making texcoords optional alongside thoughts on validity of point + line texture sampling
+        //   associated thinking: if texcoords become optional, an implicit constraint is placed upon Entity construction which may be
+        //    difficult to communicate or enforce (Texture Components only compatible with Models/Geometries with texcoords)
+
         return this.config.textureCoordinates;
     }
 }

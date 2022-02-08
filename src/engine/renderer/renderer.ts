@@ -295,19 +295,18 @@ export class Renderer {
     }
 
     /**
-     * Rendering mode switching routine; receives a State's rendering mode, indicating a transition towards either 2D or 3D rendering, and
-     *   configures WebGL to render in the mode if it's different than the last one
+     * Extra WebGL state configuation for specific 2D and 3D related state
      *
-     * Effectively allows a Game to comprise both 2D and 3D States
-     *
-     * @param mode the mode to switch to
-    //  */
+     * // TODO make this configurable
+     */
     public setRenderingMode(mode: '2D' | '3D'): void {
         const { gl } = this;
 
         if (mode === '3D') {
             gl.enable(gl.DEPTH_TEST);
             gl.depthFunc(gl.LESS);
+
+            gl.enable(gl.CULL_FACE);
         }
 
         this.mode = mode;
@@ -384,9 +383,9 @@ export class Renderer {
     }
 
     /**
-     * Internal-use one-time WebGL configuration routine; set flags and enable features once at application initialisation
+     * One-time WebGL global state configuration, where configurations apply to both 2D and 3D rendering modes
      *
-     * // TODO make this configurable and expand its utility
+     * // TODO make this configurable
      */
     private init(): void {
         const { gl } = this;
