@@ -11,12 +11,12 @@ export const PRISM_TRIANGULAR = new Geometry({
     name: 'prism_triangular',
     vertices: Float32Array.from([
         // base
-        -0.5, -h, 0.5,
-        0.5, -h, 0.5,
-        0.5, -h, -0.5,
-        0.5, -h, -0.5,
         -0.5, -h, -0.5,
+        0.5, -h, -0.5,
+        0.5, -h, 0.5,
+        0.5, -h, 0.5,
         -0.5, -h, 0.5,
+        -0.5, -h, -0.5,
 
         // front face
         -0.5, -h, 0.5,
@@ -24,8 +24,8 @@ export const PRISM_TRIANGULAR = new Geometry({
         0, h, 0.5,
 
         // back face
-        -0.5, -h, -0.5,
         0.5, -h, -0.5,
+        -0.5, -h, -0.5,
         0, h, -0.5,
 
         // left side
