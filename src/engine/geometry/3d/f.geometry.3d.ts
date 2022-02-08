@@ -2,7 +2,7 @@ import { Geometry } from '../geometry';
 import { GLShape } from '../glShape.enum';
 
 /**
- * Built-in 3D box Geometry, setting out the information required to render cubes
+ * Built-in 3D F Geometry, setting out the information required to render Fs
  */
 export const F = new Geometry({
     name: 'f',
