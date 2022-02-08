@@ -1,4 +1,5 @@
 import { Angle, Core, Shader, Vec2, Vec3 } from '../engine';
+import { PROGRAM_FRONT_TEST } from './shader/program/frontTest.program';
 import { SHAPES_STATE } from './state/shapes.state';
 import { TEST_STATE } from './state/test.state';
 
@@ -19,6 +20,8 @@ game.registerShader(Shader.Program.ThreeD.PROGRAM_BASIC_3D);
 game.registerShader(Shader.Program.ThreeD.PROGRAM_COLOR_PER_VERTEX_3D);
 game.registerShader(Shader.Program.ThreeD.PROGRAM_TEXTURE_3D);
 game.registerShader(Shader.Program.ThreeD.PROGRAM_TEXTURE_COLORED_3D);
+
+game.registerShader(PROGRAM_FRONT_TEST);
 
 game.addStates(SHAPES_STATE, TEST_STATE);
 
