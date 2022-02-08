@@ -11,12 +11,12 @@ export const PYRAMID_SQUARE = new Geometry({
     name: 'pyramid_square',
     vertices: Float32Array.from([
         // base
-        -0.5, -h, 0.5,
-        0.5, -h, 0.5,
-        0.5, -h, -0.5,
-        0.5, -h, -0.5,
         -0.5, -h, -0.5,
+        0.5, -h, -0.5,
+        0.5, -h, 0.5,
+        0.5, -h, 0.5,
         -0.5, -h, 0.5,
+        -0.5, -h, -0.5,
 
         // front face
         -0.5, -h, 0.5,
@@ -24,13 +24,13 @@ export const PYRAMID_SQUARE = new Geometry({
         0, h, 0,
 
         // left face
-        -0.5, -h, 0.5,
         -0.5, -h, -0.5,
+        -0.5, -h, 0.5,
         0, h, 0,
 
         // back face
-        -0.5, -h, -0.5,
         0.5, -h, -0.5,
+        -0.5, -h, -0.5,
         0, h, 0,
 
         // right face
