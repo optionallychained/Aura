@@ -14,6 +14,7 @@ export const SHAPES_STATE = new State.ThreeD.State3D({
 
         const geometries = [
             Geometry.ThreeD.BOX,
+            Geometry.ThreeD.F,
             Geometry.ThreeD.LINE,
             Geometry.ThreeD.OCTAHEDRON,
             Geometry.ThreeD.PRISM_HEXAGONAL,
@@ -22,6 +23,7 @@ export const SHAPES_STATE = new State.ThreeD.State3D({
             Geometry.ThreeD.PYRAMID_SQUARE,
             Geometry.ThreeD.TETRAHEDRON,
             Geometry.ThreeD.Wireframe.BOX,
+            Geometry.ThreeD.Wireframe.F,
             Geometry.ThreeD.Wireframe.OCTAHEDRON,
             Geometry.ThreeD.Wireframe.PRISM_HEXAGONAL,
             Geometry.ThreeD.Wireframe.PRISM_TRIANGULAR,

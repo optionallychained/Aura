@@ -45,4 +45,4 @@ game.registerShader(PROGRAM_FRONT_TEST);
 
 game.addStates(SHAPES_STATE, TEST_STATE);
 
-game.start(TEST_STATE.name);
+game.start(SHAPES_STATE.name);
