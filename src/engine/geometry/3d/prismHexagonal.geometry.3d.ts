@@ -112,6 +112,6 @@ export const PRISM_HEXAGONAL = new Geometry({
     vertexCount: 72,
     glShape: GLShape.TRIANGLES,
     textureCoordinates: Float32Array.from([
-        // TODO Hexagonal Prism texcoords
+
     ])
 });

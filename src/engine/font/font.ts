@@ -10,8 +10,6 @@ import { Font3DConfig } from './3d';
  * Implements Font-specific utilities like String management
  *
  * @typeparam TConfig the specific configuration object type, allowing for the type-correct configuration of the Font Manager
- *
- * // TODO continue on branch text
  */
 export abstract class Font<TConfig extends Font2DConfig | Font3DConfig> extends EntityManager<TConfig> {
 

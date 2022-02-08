@@ -133,7 +133,6 @@ export class Renderer {
      * Getter for the active texture unit, used for configuring Sampler2Ds in shaders
      */
     public get activeTextureUnit(): number {
-        // TODO error handling?
         return this.activeTexture?.uniformUnit ?? -1;
     }
 
@@ -244,9 +243,6 @@ export class Renderer {
     /**
      * Create a texture from an image with a given source
      *
-     * // TODO lots of opportunity in here for configuration on a per-texture basis
-     * // TODO texParameter*()
-     *
      * @param textureAtlas the TextureAtlas representing the texture to load
      */
     public createTexture(textureAtlas: TextureAtlas): void {
@@ -296,8 +292,6 @@ export class Renderer {
 
     /**
      * Extra WebGL state configuation for specific 2D and 3D related state
-     *
-     * // TODO make this configurable
      */
     public setRenderingMode(mode: '2D' | '3D'): void {
         const { gl } = this;
@@ -341,7 +335,7 @@ export class Renderer {
         // handle 'static' uniforms (vary once per render call)
         if (staticUniforms?.length) {
             for (const uniform of staticUniforms) {
-                // TODO instance of destroy() being annoying; Game optional; see TODO/general
+                // TODO instance of destroy() being annoying; Game optional
                 // eslint-disable-next-line
                 this.loadUniform(uniform.location, uniform.type, ShaderVariableResolver.resolveStaticUniform(uniform.name, this.game!));
             }
@@ -376,7 +370,7 @@ export class Renderer {
     /**
      * Called as part of Game destroy(); clean up after ourselves
      *
-     * // TODO incomplete, part of the first-working-version of the destroy() solution (see TODO/general)
+     * // TODO incomplete, part of the first-working-version of the destroy() solution
      */
     public destroy(): void {
         this.game = undefined;
@@ -384,8 +378,6 @@ export class Renderer {
 
     /**
      * One-time WebGL global state configuration, where configurations apply to both 2D and 3D rendering modes
-     *
-     * // TODO make this configurable
      */
     private init(): void {
         const { gl } = this;

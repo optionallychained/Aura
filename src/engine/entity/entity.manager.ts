@@ -136,8 +136,6 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
         const removed = this.cleanEntities();
 
         if (added || removed) {
-            // TODO would be nice if we could detect and invalidate only those filter caches which will change based on the add/remove
-            //   work relevant alongside Entity change detection optimisation for vertex compilation and buffering
             this.invalidateFilterCaches();
         }
 
@@ -151,10 +149,6 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
      *
      * Processes Entities grouped by given shader+model combinations so as to reduce the amount of GL buffering required and render all
      *   technically-similar Entities from a single vertex source
-     *
-     * // TODO draw order problem: since Entities are grouped, batches of same-shader+model Entities are rendered in the order new
-     * //   new combinations were added to the game, instead of the order the Entities were added to the game. Tricky problem; want for a
-     * //   way of defining a draw order from the outside maybe, but without undoing the optimisation that shader+model grouping represents
      */
     public render(): void {
         for (const [shaderName, forModel] of this.renderableEntities.entries()) {
@@ -186,7 +180,6 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
      * @returns the list of Entities with the Component
      */
     public filterEntitiesByComponentName(component: string): Array<Entity> {
-        // TODO by class
         return this.memoizeFilter(component, (e) => e.hasComponent(component))
     }
 
@@ -198,7 +191,6 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
      * @returns the list of Entities with the Components
      */
     public filterEntitiesByComponentNames(...components: Array<string>): Array<Entity> {
-        // TODO by class
         return this.memoizeFilter(components.toString(), (e) => e.hasComponents(...components));
     }
 
@@ -213,7 +205,6 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
      * @returns the list of Entities from the source with the Components
      */
     public filterEntitiesByComponentNamesFromSource(source: Array<Entity>, filterId: string, ...components: Array<string>): Array<Entity> {
-        // TODO by class
         return this.memoizeFilter(components.toString(), (e) => e.hasComponents(...components), filterId, source);
     }
 
@@ -261,8 +252,6 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
                 const { modelName } = e.getComponent<Model>('Model');
 
                 // mark that the vertices for this shader+model combo should be recompiled
-                // TODO entity change detection: further optimise vertex compilation and buffering by recompiling and buffering on a per
-                //   Entity basis
                 changes.add(`${programName}-${modelName}`);
 
                 // retrieve the existing Entities associated with this Shader
@@ -321,13 +310,13 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
             const changes: EntityChanges = new Set<string>();
 
             for (const e of this.removeList) {
-                // TODO this may be considered a hack - if the Entity is not found, skip
+                // TODO this might be a little hacky - if the Entity is not found, skip
                 //   an Entity being on the removeList but not in the actual list of Entities may occur in very select circumstances, eg:
                 //     - a game structure like a World Management System maintains a list of Entities
                 //     - some of those Entities are removed by, say, a collision routine
                 //     - the World Management System then tries to remove a set of Entities in batches
                 //     - now, Entities which have already been removed are again on the removeList
-                //   a better way of solving this might be desirable - we may even want to throw an error in this use-case
+                //   a better way of solving this might be desirable
                 const index = this.entities.indexOf(e);
                 if (index < 0) {
                     continue;
@@ -361,8 +350,6 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
                         forModel.splice(forModel.indexOf(e), 1);
 
                         // mark that the vertices for this shader+model combo should be recompiled
-                        // TODO entity change detection: further optimise vertex compilation and buffering by recompiling and buffering on
-                        //   a per Entity basis
                         changes.add(`${programName}-${modelName}`);
 
                         // delete the shader+model combo outright if it's now empty
@@ -394,9 +381,6 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
 
     /**
      * Compile any vertex lists and update relevant VBOs for a given set of shader+model combinations altered in Entity list changes
-     *
-     * // TODO entity change detection: further optimise vertex compilation and buffering by recompiling and buffering on a per
-     * //   Entity basis
      *
      * @param changes the list of Shader+Model combinations that were altered and require compiling
      */
@@ -452,7 +436,6 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
                     for (let i = 0; i < vertexCount; i++) {
                         // process every attribute for every vertex of the Entity
                         for (const attr of shaderInfo.vertex.attributes) {
-                            // TODO entity change detection: recompile dynamic values only as necessary
                             let value = ShaderVariableResolver.resolveAttribute(attr.name, e);
 
                             if (typeof value === 'number') {
@@ -524,9 +507,6 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
      * Further separate sourced filters from each other with a filterId so as to avoid conflicts between similar filters from disparate
      *   sources
      *
-     * // TODO would be nice if we could detect and invalidate only those filter caches which will change based on add/remove
-     * //   work relevant alongside Entity change detection optimisation for vertex compilation and buffering
-     *
      * @param filter a string representation of the Entity filter, to be used as a cache key
      * @param predicate the filter predicate for matching Entities
      * @param filterId (optional) a filter ID for sourced filters, to be used as a cache key extension. Must be provided for sourced filters
@@ -556,9 +536,6 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
     /**
      * Clear all filter caches in the event of an Entity list change by way of loadEntities or cleanEntities, ensuring that filters do not
      *   become out of date
-     *
-     * // TODO would be nice if we could detect and invalidate only those filter caches which will change based on add/remove
-     * //   work relevant alongside Entity change detection optimisation for vertex compilation and buffering
      */
     private invalidateFilterCaches(): void {
         this.entityFilterCache.clear();

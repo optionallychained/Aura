@@ -131,6 +131,6 @@ export const F = new Geometry({
     vertexCount: 90,
     glShape: GLShape.TRIANGLES,
     textureCoordinates: Float32Array.from([
-        // TODO F texcoords
+
     ])
 });

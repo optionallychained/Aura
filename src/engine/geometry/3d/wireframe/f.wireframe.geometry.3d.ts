@@ -89,6 +89,6 @@ export const F = new Geometry({
     vertexCount: 60,
     glShape: GLShape.LINES,
     textureCoordinates: Float32Array.from([
-        // TODO consider whether or not texcoords make sense for lines
+
     ])
 });

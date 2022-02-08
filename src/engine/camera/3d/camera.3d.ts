@@ -9,17 +9,6 @@ import { Camera3DConfig, Camera3DFollow, Camera3DFollowRules } from './camera.3d
  * Concrete Camera3D, representing a 3D Camera and narrowing generic types to their corresponding 3D variants
  *
  * Supports both Orthographic and Perspecitve Projection approaches by way of the projection configuration member 'mode'
- *
- * // TODO due to being backed by the non-gimbal-locked Transform3D, technically produces a 'free' camera with 6-degrees of freedom
- * //   suitable for use as a first or third person spaceship camera, for example
- * //
- * // Alongside implementing a Transform3D that does have gimbal lock, probably want to split into a few use cases:
- * //   - freecam (this)
- * //   - third person camera (lookat ?)
- * //   - first person camera (gimbal locked transform3d ?)
- *
- * // TODO for now, due to the way the view matrix is computed, follow rules have no effect
- * //   this will be solved alongside the review of Transform3D + thereby Camera3D implementation
  */
 export class Camera3D extends Camera<Camera3DConfig> {
 
@@ -126,9 +115,6 @@ export class Camera3D extends Camera<Camera3DConfig> {
             // if we're following, compose the View Matrix by applying our own transformations over the followed Entity's transformation
             //   matrix
             const { transform } = this.following;
-
-            // TODO fix position/angle follow configurability by breaking down composition similar to Camera2D
-            //   right now, configuration means nothing lul
 
             // zero out the scale factor of the followed' Entity's transform
             view = Mat4.scale(transform.compute(), Vec3.invert(transform.scale));

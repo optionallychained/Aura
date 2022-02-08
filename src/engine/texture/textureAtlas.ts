@@ -11,9 +11,6 @@
  *
  * Image dimensions must be power-of-2 in both x and y
  *
- * // TODO Texture implementation is likely to change significantly in the future; all this is subject to change. Especially, a stronger
- * //   association between Entities and their Atlases (rather than indirectly via built-ins and Managers) is desirable
- *
  * @see Texture
  * @see GameConfig
  * @see WorldConfig
@@ -66,10 +63,8 @@ export class TextureAtlas {
         const u = (column + coords[0]) * (columnSpan / this.columns) - (((columnSpan - 1) / this.columns) * column);
         const v = 1 - ((row + coords[1]) * (rowSpan / this.rows) - (((rowSpan - 1) / this.rows) * row));
 
-        // TODO this seems kinda messy...but it does work
-        // "issue" seems to be caused by want to generalise the solution here for both left-most and right-most coordinates, rather than in
-        //   texture coordinate specification in Geometry
-        // review at a later time...this nonsense may be "worth it"
+        // TODO this is horrible, but it works for now
+        // issue caused by want to generalise solution for both left-and-right-most coordinates here rather than in geometry texcoords
         let uCorrected = (((u * this.width) + 0.5) - 1) / this.width;
         if (uCorrected < 0) {
             uCorrected = ((u * this.width) + 0.5) / this.width;

@@ -13,7 +13,6 @@ export interface Game2DConfig extends GameConfig {
         camera?: Partial<World2DConfig['camera']>;
         textureAtlas?: World2DConfig['textureAtlas'];
     };
-    // } DeepPartial<Omit<World2DConfig, 'renderer'>>;
     /** 2D UI configuration */
     readonly ui?: Omit<UI2DConfig, 'renderer'>;
     /** 2D Font configuration; defaults to the built-in font + charset */

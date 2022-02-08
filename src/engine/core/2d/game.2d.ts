@@ -7,7 +7,6 @@ import { World2D } from '../../world/2d';
 import { Game } from '../game';
 import { Game2DConfig } from './game.2d.config';
 
-
 /**
  * Concrete Game2D object, setting out the 2D-specific properties and runtime behaviour of 2D Aura Games
  *
@@ -58,7 +57,7 @@ export class Game2D extends Game {
         // initialise a World2D
         this.world = new World2D({
             renderer: this.renderer,
-            // TODO instance of destroy() being annoying; canvas optional; see TODO/general
+            // TODO instance of destroy() being annoying; canvas optional
             dimensions: config?.world?.dimensions ?? new Vec2(this.canvas?.width, this.canvas?.height),
             textureAtlas: config?.world?.textureAtlas,
             camera: {

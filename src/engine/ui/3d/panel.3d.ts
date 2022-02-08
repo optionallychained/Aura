@@ -1,12 +1,13 @@
 import { Transform3D } from '../../component/3d';
 import { FlatColor, Model, Shader } from '../../component/generic';
-import { Game } from '../../core';
 import { Entity } from '../../entity';
 import { BOX } from '../../geometry/3d';
 import { Color, Vec3 } from '../../math';
 import { PROGRAM_BASIC_3D } from '../../shader/program/3d';
 
-// TODO continue on branch ui
+/**
+ * Prefab Entity representing a 3D UI panel, utilised by the UI manager
+ */
 export class Panel3D extends Entity {
 
     constructor(position: Vec3, scale: Vec3, color: Color) {
@@ -20,6 +21,4 @@ export class Panel3D extends Entity {
             ]
         })
     }
-
-    public tick(game: Game, frameDelta: number): void { }
 }

@@ -54,6 +54,6 @@ export const OCTAHEDRON = new Geometry({
     vertexCount: 24,
     glShape: GLShape.TRIANGLES,
     textureCoordinates: Float32Array.from([
-        // TODO Octahedron texcoords
+
     ])
 });

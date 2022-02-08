@@ -8,9 +8,6 @@ import { Component } from '../component';
  * Provides for both relative movement along own axes as well as absolute movement along the world axes
  *
  * Produces the Mat4 Transformation Matrix used in shaders to position Game Objects
- *
- * NB: this Transform3D does not suffer gimbal lock
- * // TODO maybe we want a version that *does*?
  */
 export class Transform3D extends Component {
 

@@ -30,6 +30,6 @@ export const PYRAMID_SQUARE = new Geometry({
     vertexCount: 11,
     glShape: GLShape.LINE_LOOP,
     textureCoordinates: Float32Array.from([
-        // TODO consider whether or not texcoords make sense for lines
+
     ])
 });

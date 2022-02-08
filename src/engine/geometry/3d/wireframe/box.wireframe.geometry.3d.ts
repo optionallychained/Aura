@@ -53,6 +53,6 @@ export const BOX = new Geometry({
     vertexCount: 24,
     glShape: GLShape.LINES,
     textureCoordinates: Float32Array.from([
-        // TODO consider whether or not texcoords make sense for lines
+
     ])
 });

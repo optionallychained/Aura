@@ -24,63 +24,11 @@ ul {
     }
 }
 
-/* dropdown styles */
-li.dropdown {
-    cursor: pointer;
-    position: relative;
-
-    ul,
-    ul li,
-    ul li a {
-        max-height: 0;
-        opacity: 0;
-    }
-    ul li a {
-        padding: 0;
-    }
-
-    &.dropdown:hover ul,
-    &.dropdown.open ul,
-    &.dropdown:hover ul li,
-    &.dropdown.open ul li,
-    &.dropdown:hover ul li a,
-    &.dropdown.open ul li a {
-        max-height: 1000px;
-        opacity: 1;
-    }
-
-    &.dropdown:hover ul li a,
-    &.dropdown.open ul li a {
-        padding: 15px 5px;
-    }
-
-    &.dropdown > a::after {
-        content: ">";
-        font-weight: bold;
-        font-size: 18px;
-        display: inline;
-        position: absolute;
-        right: 10px;
-    }
-
-    &.dropdown:hover > a::after,
-    &.dropdown.open > a::after {
-        transform: rotate(90deg);
-    }
-}
-
 /* hamfisted link highlighting; mixin maybe? */
 li.selected > a,
 li:hover > a,
 body.index li.index a,
-body.getting-started li.getting-started a,
-body.installation li.installation a,
-body.game li.game a,
-body.states li.states a,
-body.entities-and-components li.entities-and-components a,
-body.systems li.systems a,
-body.api li.api a,
-li.dropdown.open > a {
+body.getting-started li.getting-started a {
     background: $nav;
     color: white;
 }

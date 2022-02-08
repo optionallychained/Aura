@@ -106,8 +106,6 @@ export abstract class Game {
      * @param config the optional GameConfig
      */
     constructor(config?: GameConfig) {
-        // TODO if parent + no size, infer from parent :)
-
         if (config?.canvasId) {
             this.canvas = document.getElementById(config.canvasId) as HTMLCanvasElement;
 
@@ -317,8 +315,6 @@ export abstract class Game {
 
     /**
      * End game execution by setting the stopped flag, signalling to other constructs to tear down, and then dereferencing things
-     *
-     * // TODO first-working-version; needs improvement (see TODO/general)
      */
     public destroy(): void {
         this.stopped = true;

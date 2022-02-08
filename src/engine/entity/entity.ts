@@ -11,8 +11,6 @@ import { EntityConfig } from './entity.config';
  *
  * Entities maintain a list of Components, which give them their properties and behaviour and allow Systems to operate on them as necessary
  *
- * // TODO look at ways of reimplementing get/has Component by Type/Class
- *
  * @see Component
  */
 export abstract class Entity {
@@ -102,33 +100,6 @@ export abstract class Entity {
         return this.components.get(name) as T;
     }
 
-    // /**
-    //  * // TODO DEAD - this does NOT work in distribution builds
-    //  * //   reason: (component).name is the *prototype name*, at runtime in obfuscated builds indeterminate
-    //  *
-    //  * it would be nice to be able to reimplement the pattern (entity).getComponent(Class)...somehow. Enforced prototype naming?
-    //  *
-    //  * Get a Component from the Entity by Component class
-    //  *
-    //  * @typeparam T (autoinferred) the type of the Component to retrieve
-    //  *
-    //  * @param component the Component class to retrieve
-    //  *
-    //  * @returns the retrieved Component
-    //  */
-    // public getComponentByType<T extends Component>(component: ClassType<T>): T {
-    //     // throw an error if the Component is not found on the Entity to allow type safety + simplistic no-questions consumer calls
-    //     if (!this.hasComponent(component)) {
-    //         throw new AuraError({
-    //             class: 'Entity',
-    //             method: 'getComponent',
-    //             message: `Failed to retrieve Component '${component.name}' for Entity with tag '${this.tag}'`
-    //         });
-    //     }
-
-    //     return this.components.get(component.name) as T;
-    // }
-
     /**
      * Add a Component to the Entity
      *
@@ -148,27 +119,6 @@ export abstract class Entity {
             this.addComponent(c);
         }
     }
-
-    // TODO dead for the same reason as addComponentByType above
-    // /**
-    //  * Remove a Component from the Entity by Component class
-    //  *
-    //  * @param component the Component to remove
-    //  */
-    // public removeComponent(component: Component): void {
-    //     this.components.delete(component.name);
-    // }
-
-    // /**
-    //  * Remove a list of Components from the Entity by Component class
-    //  *
-    //  * @param components the Components to remove
-    //  */
-    // public removeComponents(...components: Array<Component>): void {
-    //     for (const c of components) {
-    //         this.removeComponent(c);
-    //     }
-    // }
 
     /**
      * Remove a Component from the Entity by Component name
@@ -192,8 +142,6 @@ export abstract class Entity {
 
     /**
      * Check if the Entity has a Component by Component name
-     *
-     * // TODO this doesn't appear to work in dist. Why?
      *
      * @param name the name of the Component to check
      *
@@ -219,4 +167,33 @@ export abstract class Entity {
 
         return true;
     }
+
+    // TODO dead class/type-based component get
+    // public getComponentByType<T extends Component>(component: ClassType<T>): T {
+    //     // throw an error if the Component is not found on the Entity to allow type safety + simplistic no-questions consumer calls
+    //     if (!this.hasComponent(component)) {
+    //         throw new AuraError({
+    //             class: 'Entity',
+    //             method: 'getComponent',
+    //             message: `Failed to retrieve Component '${component.name}' for Entity with tag '${this.tag}'`
+    //         });
+    //     }
+
+    //     return this.components.get(component.name) as T;
+    // }
+
+    // TODO dead class/type-based component remove
+    // public removeComponent(component: Component): void {
+    //     this.components.delete(component.name);
+    // }
+    // public removeComponents(...components: Array<Component>): void {
+    //     for (const c of components) {
+    //         this.removeComponent(c);
+    //     }
+    // }
+
+    // TODO dead class/type-based component has
+    // public hasComponent(component: Component): boolean {
+    //     return this.components.has(component.name);
+    // }
 }

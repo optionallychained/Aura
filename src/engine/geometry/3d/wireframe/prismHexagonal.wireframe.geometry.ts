@@ -52,6 +52,6 @@ export const PRISM_HEXAGONAL = new Geometry({
     vertexCount: 24,
     glShape: GLShape.LINE_LOOP,
     textureCoordinates: Float32Array.from([
-        // TODO consider whether or not texcoords make sense for lines
+
     ])
 });

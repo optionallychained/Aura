@@ -28,7 +28,6 @@ export class Collision2D extends System2D {
     public tick(game: Game2D): void {
         const collidables = game.world.filterEntitiesByComponentNames('Transform2D', 'BoxCollider2D');
 
-        // TODO research + investigate ways to optimise this
         for (let i = 0; i < collidables.length; i++) {
             for (let j = i + 1; j < collidables.length; j++) {
                 const collisionId = `${collidables[i].id}-${collidables[j].id}`;

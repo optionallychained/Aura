@@ -46,8 +46,6 @@ type EntityShaderVariableResolver = (e: Entity) => Float32Array | number;
  *
  * Handles errors in the absence of Resulution Functions for given names, preventing invalid WebGL draws
  *
- * // TODO the information in this class *could* be used to 'verify' an Entity's makeup - that it can be rendered with its designated Shader
- *
  * @see EntityShaderVariableResolver
  * @see StaticShaderVariableResolver
  * @see VertexShader

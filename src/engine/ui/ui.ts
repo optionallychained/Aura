@@ -10,8 +10,6 @@ import { UI3DConfig } from './3d';
  * Implements UI-specific utilities like Panel management
  *
  * @typeparam TConfig the specific configuration object type, allowing for the type-correct configuration of the UI Manager
- *
- * // TODO continue on branch ui
  */
 export abstract class UI<TConfig extends UI2DConfig | UI3DConfig> extends EntityManager<TConfig> {
 

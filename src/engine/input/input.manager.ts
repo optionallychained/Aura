@@ -1,4 +1,3 @@
-import { Game } from '../core';
 import { Vec2 } from '../math';
 import { ControlScheme } from './controlScheme.type';
 import { Keys } from './keys.enum';
@@ -202,8 +201,6 @@ export class InputManager {
 
     /**
      * Initialize keyboard event handling
-     *
-     * // TODO register on Canvas directly?
      */
     private setupKeyboard(): void {
         window.addEventListener('keydown', this.boundHandlers.onKeyDown);

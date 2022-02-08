@@ -15,6 +15,6 @@ export const TRIANGLE_RIGHT_ANGLE = new Geometry({
     vertexCount: 3,
     glShape: GLShape.LINE_LOOP,
     textureCoordinates: Float32Array.from([
-        // TODO consider whether or not texcoords make sense for lines
+
     ])
 });

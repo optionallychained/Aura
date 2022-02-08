@@ -14,6 +14,6 @@ export const LINE = new Geometry({
     vertexCount: 2,
     glShape: GLShape.LINES,
     textureCoordinates: Float32Array.from([
-        // TODO consider whether or not texcoords make sense for lines
+
     ])
 })

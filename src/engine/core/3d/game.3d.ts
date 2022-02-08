@@ -57,12 +57,11 @@ export class Game3D extends Game {
         // initialsie a World3D
         this.world = new World3D({
             renderer: this.renderer,
-            // TODO instance of destroy() being annoying; canvas optional; see TODO/general
+            // TODO instance of destroy() being annoying; canvas optional
             dimensions: config?.world?.dimensions ?? new Vec3(this.canvas?.width, this.canvas?.height, 1000),
             textureAtlas: config?.world?.textureAtlas,
             camera: {
                 offset: config?.world?.camera?.offset,
-                // TODO instance of destroy() being annoying; canvas optional; see TODO/general
                 projection: config?.world?.camera?.projection ?? {
                     mode: 'perspective',
                     fov: 90,

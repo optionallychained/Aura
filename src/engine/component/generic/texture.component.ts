@@ -8,9 +8,6 @@ import { Component } from '../component';
  * Entities sample from one of three supported texture atlases (world, text, ui), where which they will sample from is determined by the
  *   EntityManager they are handled by (World, Font, UI)
  *
- * // TODO Texture implementation is likely to change significantly in the future; all this is subject to change. Especially, a stronger
- * //   association between Entities and their Atlases (rather than indirectly via built-ins and Managers) is desirable
- *
  * @see TextureAtlas
  */
 export class Texture extends Component {

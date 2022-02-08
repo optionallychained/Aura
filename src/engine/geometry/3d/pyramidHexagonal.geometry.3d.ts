@@ -69,6 +69,6 @@ export const PYRAMID_HEXAGONAL = new Geometry({
     vertexCount: 36,
     glShape: GLShape.TRIANGLES,
     textureCoordinates: Float32Array.from([
-        // TODO Hexagonal Pyramid texcoords
+
     ])
 });

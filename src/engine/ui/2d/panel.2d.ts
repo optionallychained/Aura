@@ -1,12 +1,13 @@
 import { Transform2D } from '../../component/2d';
 import { FlatColor, Model, Shader } from '../../component/generic';
-import { Game } from '../../core';
 import { Entity } from '../../entity';
 import { BOX } from '../../geometry/2d';
 import { Color, Vec2 } from '../../math';
 import { PROGRAM_BASIC_2D } from '../../shader/program/2d';
 
-// TODO continue on branch ui
+/**
+ * Prefab Entity representing a 2D UI panel, utilised by the UI manager
+ */
 export class Panel2D extends Entity {
 
     constructor(position: Vec2, scale: Vec2, color: Color) {
@@ -20,6 +21,4 @@ export class Panel2D extends Entity {
             ]
         })
     }
-
-    public tick(game: Game, frameDelta: number): void { }
 }

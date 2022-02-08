@@ -13,7 +13,6 @@ export interface Game3DConfig extends GameConfig {
         camera?: Partial<World3DConfig['camera']>;
         textureAtlas?: World3DConfig['textureAtlas'];
     };
-    // readonly world?: Partial<Omit<World3DConfig, 'renderer'>>;
     /** 3D UI configuration */
     readonly ui?: Omit<UI3DConfig, 'renderer'>;
     /** 3D Font configuration; defaults to the built-in font + charset */
