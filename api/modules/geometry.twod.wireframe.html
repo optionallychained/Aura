@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Wireframe | API | Aura Documentation - v0.12.0</title>
-	<meta name="description" content="Documentation for API | Aura Documentation - v0.12.0">
+	<title>Wireframe | API | Aura Documentation - v0.13.0</title>
+	<meta name="description" content="Documentation for API | Aura Documentation - v0.13.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
 	<script async src="../assets/js/search.js" id="search-script"></script>
@@ -23,7 +23,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">API | Aura Documentation - v0.12.0</a>
+					<a href="../index.html" class="title">API | Aura Documentation - v0.13.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -52,7 +52,7 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="../modules.html">API | Aura Documentation - v0.12.0</a>
+					<a href="../modules.html">API | Aura Documentation - v0.13.0</a>
 				</li>
 				<li>
 					<a href="geometry.html">Geometry</a>
@@ -79,7 +79,19 @@
 							<h3>Variables</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-variable tsd-parent-kind-namespace"><a href="geometry.twod.wireframe.html#box" class="tsd-kind-icon">BOX</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-namespace"><a href="geometry.twod.wireframe.html#circle" class="tsd-kind-icon">CIRCLE</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-namespace"><a href="geometry.twod.wireframe.html#f" class="tsd-kind-icon">F</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-namespace"><a href="geometry.twod.wireframe.html#hexagon" class="tsd-kind-icon">HEXAGON</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-namespace"><a href="geometry.twod.wireframe.html#octagon" class="tsd-kind-icon">OCTAGON</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-namespace"><a href="geometry.twod.wireframe.html#pentagon" class="tsd-kind-icon">PENTAGON</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-namespace"><a href="geometry.twod.wireframe.html#triangle" class="tsd-kind-icon">TRIANGLE</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-namespace"><a href="geometry.twod.wireframe.html#triangle_right_angle" class="tsd-kind-icon">TRIANGLE_<wbr>RIGHT_<wbr>ANGLE</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Functions</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-namespace"><a href="geometry.twod.wireframe.html#polygon" class="tsd-kind-icon">POLYGON</a></li>
 							</ul>
 						</section>
 					</div>
@@ -93,13 +105,90 @@
 					<div class="tsd-signature tsd-kind-icon">BOX<span class="tsd-signature-symbol">:</span> <a href="../classes/geometry.geometry-1.html" class="tsd-signature-type" data-tsd-kind="Class">Geometry</a><span class="tsd-signature-symbol"> = ...</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/3fa693e/src/engine/geometry/2d/wireframe/box.wireframe.geometry.2d.ts#L7">src/engine/geometry/2d/wireframe/box.wireframe.geometry.2d.ts:7</a></li>
+							<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/f023f32/src/engine/geometry/2d/wireframe/box.wireframe.geometry.2d.ts#L7">src/engine/geometry/2d/wireframe/box.wireframe.geometry.2d.ts:7</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Built-in 2D Wireframe box Geometry, setting out the information required to render wireframe quads</p>
+							<p>Built-in 2D Wireframe Box Geometry, setting out the information required to render wireframe quads</p>
 						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-namespace">
+					<a name="circle" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> CIRCLE</h3>
+					<div class="tsd-signature tsd-kind-icon">CIRCLE<span class="tsd-signature-symbol">:</span> <a href="../classes/geometry.geometry-1.html" class="tsd-signature-type" data-tsd-kind="Class">Geometry</a><span class="tsd-signature-symbol"> = ...</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/f023f32/src/engine/geometry/2d/wireframe/circle.wireframe.geometry.2d.ts#L8">src/engine/geometry/2d/wireframe/circle.wireframe.geometry.2d.ts:8</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Built-in 2D Wireframe Circle Geometry; a preset 30-sided Wireframe Polygon</p>
+						</div>
+						<p>Using 30 as the lowest vertex count which produces a smooth circle</p>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-namespace">
+					<a name="f" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> F</h3>
+					<div class="tsd-signature tsd-kind-icon">F<span class="tsd-signature-symbol">:</span> <a href="../classes/geometry.geometry-1.html" class="tsd-signature-type" data-tsd-kind="Class">Geometry</a><span class="tsd-signature-symbol"> = ...</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/f023f32/src/engine/geometry/2d/wireframe/f.wireframe.geometry.2d.ts#L7">src/engine/geometry/2d/wireframe/f.wireframe.geometry.2d.ts:7</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Built-in 2D Wireframe F Geometry, setting out the information required to render Wireframe Fs</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-namespace">
+					<a name="hexagon" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> HEXAGON</h3>
+					<div class="tsd-signature tsd-kind-icon">HEXAGON<span class="tsd-signature-symbol">:</span> <a href="../classes/geometry.geometry-1.html" class="tsd-signature-type" data-tsd-kind="Class">Geometry</a><span class="tsd-signature-symbol"> = ...</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/f023f32/src/engine/geometry/2d/wireframe/hexagon.wireframe.geometry.2d.ts#L6">src/engine/geometry/2d/wireframe/hexagon.wireframe.geometry.2d.ts:6</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Built-in 2D Wireframe Hexagon Geometry; a preset 6-sided Wireframe Polygon</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-namespace">
+					<a name="octagon" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> OCTAGON</h3>
+					<div class="tsd-signature tsd-kind-icon">OCTAGON<span class="tsd-signature-symbol">:</span> <a href="../classes/geometry.geometry-1.html" class="tsd-signature-type" data-tsd-kind="Class">Geometry</a><span class="tsd-signature-symbol"> = ...</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/f023f32/src/engine/geometry/2d/wireframe/octagon.wireframe.geometry.2d.ts#L6">src/engine/geometry/2d/wireframe/octagon.wireframe.geometry.2d.ts:6</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Built-in 2D Wireframe Octagon Geometry; a preset 8-sided Wireframe Polygon</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-namespace">
+					<a name="pentagon" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> PENTAGON</h3>
+					<div class="tsd-signature tsd-kind-icon">PENTAGON<span class="tsd-signature-symbol">:</span> <a href="../classes/geometry.geometry-1.html" class="tsd-signature-type" data-tsd-kind="Class">Geometry</a><span class="tsd-signature-symbol"> = ...</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/f023f32/src/engine/geometry/2d/wireframe/pentagon.wireframe.geometry.2d.ts#L9">src/engine/geometry/2d/wireframe/pentagon.wireframe.geometry.2d.ts:9</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Built-in 2D Wireframe Pentagon Geometry, setting out the information required to render wireframe pentagons</p>
+						</div>
+						<p>Not using POLYGON() because the resultant shape is &#39;rotated&#39; strangely</p>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-namespace">
@@ -108,14 +197,58 @@
 					<div class="tsd-signature tsd-kind-icon">TRIANGLE<span class="tsd-signature-symbol">:</span> <a href="../classes/geometry.geometry-1.html" class="tsd-signature-type" data-tsd-kind="Class">Geometry</a><span class="tsd-signature-symbol"> = ...</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/3fa693e/src/engine/geometry/2d/wireframe/triangle.wireframe.geometry.2d.ts#L7">src/engine/geometry/2d/wireframe/triangle.wireframe.geometry.2d.ts:7</a></li>
+							<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/f023f32/src/engine/geometry/2d/wireframe/triangle.wireframe.geometry.2d.ts#L10">src/engine/geometry/2d/wireframe/triangle.wireframe.geometry.2d.ts:10</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-namespace">
+					<a name="triangle_right_angle" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> TRIANGLE_<wbr>RIGHT_<wbr>ANGLE</h3>
+					<div class="tsd-signature tsd-kind-icon">TRIANGLE_<wbr>RIGHT_<wbr>ANGLE<span class="tsd-signature-symbol">:</span> <a href="../classes/geometry.geometry-1.html" class="tsd-signature-type" data-tsd-kind="Class">Geometry</a><span class="tsd-signature-symbol"> = ...</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/f023f32/src/engine/geometry/2d/wireframe/triangleright.wireframe.geometry.2d.ts#L7">src/engine/geometry/2d/wireframe/triangleright.wireframe.geometry.2d.ts:7</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Built-in 2D Wireframe Triangle Geometry, setting out the information required to render wireframe triangles</p>
+							<p>Built-in 2D Wireframe Triangle Geometry, setting out the information required to render wireframe right angle triangles</p>
 						</div>
 					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace">
+					<a name="polygon" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> POLYGON</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace">
+						<li class="tsd-signature tsd-kind-icon">POLYGON<span class="tsd-signature-symbol">(</span>vertexCount<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, name<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../classes/geometry.geometry-1.html" class="tsd-signature-type" data-tsd-kind="Class">Geometry</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/optionallychained/Aura/blob/f023f32/src/engine/geometry/2d/wireframe/polygon.wireframe.geometry.2d.ts#L7">src/engine/geometry/2d/wireframe/polygon.wireframe.geometry.2d.ts:7</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Built-in generic 2D Wireframe Polygon Geometry factory, enabling the runtime production of n-sided wireframe shapes</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>vertexCount: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> name: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../classes/geometry.geometry-1.html" class="tsd-signature-type" data-tsd-kind="Class">Geometry</a></h4>
+						</li>
+					</ul>
 				</section>
 			</section>
 		</div>
@@ -188,7 +321,28 @@
 						<a href="geometry.twod.wireframe.html#box" class="tsd-kind-icon">BOX</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-namespace">
+						<a href="geometry.twod.wireframe.html#circle" class="tsd-kind-icon">CIRCLE</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-namespace">
+						<a href="geometry.twod.wireframe.html#f" class="tsd-kind-icon">F</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-namespace">
+						<a href="geometry.twod.wireframe.html#hexagon" class="tsd-kind-icon">HEXAGON</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-namespace">
+						<a href="geometry.twod.wireframe.html#octagon" class="tsd-kind-icon">OCTAGON</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-namespace">
+						<a href="geometry.twod.wireframe.html#pentagon" class="tsd-kind-icon">PENTAGON</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-namespace">
 						<a href="geometry.twod.wireframe.html#triangle" class="tsd-kind-icon">TRIANGLE</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-namespace">
+						<a href="geometry.twod.wireframe.html#triangle_right_angle" class="tsd-kind-icon">TRIANGLE_<wbr>RIGHT_<wbr>ANGLE</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-namespace">
+						<a href="geometry.twod.wireframe.html#polygon" class="tsd-kind-icon">POLYGON</a>
 					</li>
 				</ul>
 			</nav>
