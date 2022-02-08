@@ -15,17 +15,17 @@ export const TETRAHEDRON = new Geometry({
         0, -h, -h,
         0.5, -h, h,
 
-        // face 1
+        // front face
         0.5, -h, h,
         0, h, 0,
         -0.5, -h, h,
 
-        // face 2
+        // left face
         -0.5, -h, h,
-        0, -h, -h,
         0, h, 0,
+        0, -h, -h,
 
-        // face 3
+        // right face
         0, -h, -h,
         0, h, 0,
         0.5, -h, h,
