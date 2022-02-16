@@ -75,8 +75,8 @@ import { VERTEX_TEXTURE_2D } from './shader/vertex/2d/texture.vertex.2d';
 import { StateConfig } from './state/state.config';
 import { State2D as State } from './state/2d/state.2d';
 
-import { Collision2D as Collision } from './system/2d/collision.system.2d';
-import { Physics2D as Physics } from './system/2d/physics.system.2d';
+import { Collision } from './system/2d/collision.system.2d';
+import { Physics } from './system/2d/physics.system.2d';
 import { System2D as System } from './system/2d/system.2d';
 
 import { TextureAtlas } from './texture/textureAtlas';

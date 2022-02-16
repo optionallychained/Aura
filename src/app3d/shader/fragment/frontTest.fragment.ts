@@ -1,4 +1,4 @@
-import { FragmentShader } from '../../../aura/shader/fragment/fragment.shader';
+import { FragmentShader } from '../../../aura/index.3d';
 
 export const FRAGMENT_FRONT_TEST = new FragmentShader({
     name: 'fragment_front_test',

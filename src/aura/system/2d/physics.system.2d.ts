@@ -8,7 +8,7 @@ import { System2D } from './system.2d';
  *
  * To be eligible for movement, an Entity must have a Transform2D
  */
-export class Physics2D extends System2D {
+export class Physics extends System2D {
 
     /** Provide the System's name */
     public readonly name = 'Physics2D';

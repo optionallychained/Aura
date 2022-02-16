@@ -1,29 +1,8 @@
-import { F_WIREFRAME } from '../../aura/geometry/2d/wireframe/f.wireframe.geometry.2d';
-import { CUBE } from '../../aura/geometry/3d/cube.geometry.3d';
-import { F } from '../../aura/geometry/3d/f.geometry.3d';
-import { LINE } from '../../aura/geometry/3d/line.geometry.3d';
-import { OCTAHEDRON } from '../../aura/geometry/3d/octahedron.geometry.3d';
-import { PRISM_HEXAGONAL } from '../../aura/geometry/3d/prismHexagonal.geometry.3d';
-import { PRISM_TRIANGULAR } from '../../aura/geometry/3d/prismTriangular.geometry.3d';
-import { PYRAMID_HEXAGONAL } from '../../aura/geometry/3d/pyramidHexagonal.geometry.3d';
-import { PYRAMID_SQUARE } from '../../aura/geometry/3d/pyramidSquare.geometry.3d';
-import { TETRAHEDRON } from '../../aura/geometry/3d/tetrahedron.geometry.3d';
-import { CUBE_WIREFRAME } from '../../aura/geometry/3d/wireframe/cube.wireframe.geometry.3d';
-import { OCTAHEDRON_WIREFRAME } from '../../aura/geometry/3d/wireframe/octahedron.wireframe.geometry.3d';
-import { PRISM_HEXAGONAL_WIREFRAME } from '../../aura/geometry/3d/wireframe/prismHexagonal.wireframe.geometry';
-import { PRISM_TRIANGULAR_WIREFRAME } from '../../aura/geometry/3d/wireframe/prismTriangular.wireframe.geometry.3d';
-import { PYRAMID_HEXAGONAL_WIREFRAME } from '../../aura/geometry/3d/wireframe/pyramidHexagonal.wireframe.geometry.3d';
-import { PYRAMID_SQUARE_WIREFRAME } from '../../aura/geometry/3d/wireframe/pyramidSquare.wireframe.geometry.3d';
-import { TETRAHEDRON_WIREFRAME } from '../../aura/geometry/3d/wireframe/tetrahedron.wireframe.geometry.3d';
-import { Keys } from '../../aura/input/keys.enum';
-import { Angle } from '../../aura/math/angle';
-import { Random } from '../../aura/math/random';
-import { Vec3 } from '../../aura/math/vec3';
-import { State3D } from '../../aura/state/3d/state.3d';
+import { State, Angle, Geometries, Random, Vec3, Keys } from '../../aura/index.3d';
 import { Axis } from '../entity/axis';
 import { Shape } from '../entity/shape';
 
-export const SHAPES_STATE = new State3D({
+export const SHAPES_STATE = new State({
     name: 'shapes',
     init: (game) => {
         game.world.activeCamera.moveForward(-90000);
@@ -34,23 +13,23 @@ export const SHAPES_STATE = new State3D({
         const shapeScale = 10000;
 
         const geometries = [
-            CUBE,
-            F,
-            LINE,
-            OCTAHEDRON,
-            PRISM_HEXAGONAL,
-            PRISM_TRIANGULAR,
-            PYRAMID_HEXAGONAL,
-            PYRAMID_SQUARE,
-            TETRAHEDRON,
-            CUBE_WIREFRAME,
-            F_WIREFRAME,
-            OCTAHEDRON_WIREFRAME,
-            PRISM_HEXAGONAL_WIREFRAME,
-            PRISM_TRIANGULAR_WIREFRAME,
-            PYRAMID_HEXAGONAL_WIREFRAME,
-            PYRAMID_SQUARE_WIREFRAME,
-            TETRAHEDRON_WIREFRAME
+            Geometries.CUBE,
+            Geometries.F,
+            Geometries.LINE,
+            Geometries.OCTAHEDRON,
+            Geometries.PRISM_HEXAGONAL,
+            Geometries.PRISM_TRIANGULAR,
+            Geometries.PYRAMID_HEXAGONAL,
+            Geometries.PYRAMID_SQUARE,
+            Geometries.TETRAHEDRON,
+            Geometries.CUBE_WIREFRAME,
+            Geometries.F_WIREFRAME,
+            Geometries.OCTAHEDRON_WIREFRAME,
+            Geometries.PRISM_HEXAGONAL_WIREFRAME,
+            Geometries.PRISM_TRIANGULAR_WIREFRAME,
+            Geometries.PYRAMID_HEXAGONAL_WIREFRAME,
+            Geometries.PYRAMID_SQUARE_WIREFRAME,
+            Geometries.TETRAHEDRON_WIREFRAME
         ];
 
         for (let i = -game.world.dimensions.x / 2; i <= game.world.dimensions.x / 2; i += shapeScale) {

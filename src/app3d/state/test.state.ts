@@ -1,23 +1,19 @@
-import { Transform3D } from '../../aura/component/3d/transform.component.3d';
-import { F_WIREFRAME } from '../../aura/geometry/3d/wireframe/f.wireframe.geometry.3d';
-import { Keys } from '../../aura/input/keys.enum';
-import { Angle } from '../../aura/math/angle';
-import { State3D } from '../../aura/state/3d/state.3d';
+import { Geometries, State, Transform, Angle, Keys } from '../../aura/index.3d';
 import { Axis } from '../entity/axis';
 import { Shape } from '../entity/shape';
 
-export const TEST_STATE = new State3D({
+export const TEST_STATE = new State({
     name: 'test',
     init: (game) => {
         game.world.addEntity(new Axis('x', game.world.dimensions.x));
         game.world.addEntity(new Axis('y', game.world.dimensions.y));
         game.world.addEntity(new Axis('z', game.world.dimensions.z));
 
-        game.world.addEntity(new Shape(F_WIREFRAME));
+        game.world.addEntity(new Shape(Geometries.F_WIREFRAME));
     },
     end: () => { },
     tick: (game) => {
-        const shapeTransform = game.world.filterEntitiesByTag('shape')[0]?.getComponent<Transform3D>('Transform3D');
+        const shapeTransform = game.world.filterEntitiesByTag('shape')[0]?.getComponent<Transform>('Transform3D');
         const camera = game.world.activeCamera;
 
         const cameraAngle = Angle.toRadians(0.5);

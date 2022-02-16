@@ -10,10 +10,10 @@ import { System2D } from './system.2d';
  *
  * To be eligible for collision, an Entity must have a Transform2D and a BoxCollider2D
  */
-export class Collision2D extends System2D {
+export class Collision extends System2D {
 
     /** Provide the System's name */
-    public readonly name = 'Collision2D';
+    public readonly name = 'Collision';
 
     /** Simple array of `id-id` collision strings, used for tracking Entity-Entity collisions and invoking correct collision callbacks */
     // TODO how could we go about cleaning up stale collision strings for Entity pairings which have become invalid (eg by Entity removal)?
