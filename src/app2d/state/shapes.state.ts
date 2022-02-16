@@ -16,14 +16,14 @@ export const SHAPES_STATE = new State({
             Geometries.PENTAGON,
             Geometries.TRIANGLE,
             Geometries.TRIANGLE_RIGHT_ANGLE,
-            Geometries.SQUARE_WIREFRAME,
-            Geometries.CIRCLE_WIREFRAME,
-            Geometries.F_WIREFRAME,
-            Geometries.HEXAGON_WIREFRAME,
-            Geometries.OCTAGON_WIREFRAME,
-            Geometries.PENTAGON_WIREFRAME,
-            Geometries.TRIANGLE_WIREFRAME,
-            Geometries.TRIANGLE_RIGHT_ANGLE_WIREFRAME
+            Geometries.Wireframe.SQUARE,
+            Geometries.Wireframe.CIRCLE,
+            Geometries.Wireframe.F,
+            Geometries.Wireframe.HEXAGON,
+            Geometries.Wireframe.OCTAGON,
+            Geometries.Wireframe.PENTAGON,
+            Geometries.Wireframe.TRIANGLE,
+            Geometries.Wireframe.TRIANGLE_RIGHT_ANGLE
         ];
 
         for (let i = -game.world.dimensions.x / 2; i <= game.world.dimensions.x / 2; i += shapeScale) {

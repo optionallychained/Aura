@@ -22,14 +22,14 @@ export const SHAPES_STATE = new State({
             Geometries.PYRAMID_HEXAGONAL,
             Geometries.PYRAMID_SQUARE,
             Geometries.TETRAHEDRON,
-            Geometries.CUBE_WIREFRAME,
-            Geometries.F_WIREFRAME,
-            Geometries.OCTAHEDRON_WIREFRAME,
-            Geometries.PRISM_HEXAGONAL_WIREFRAME,
-            Geometries.PRISM_TRIANGULAR_WIREFRAME,
-            Geometries.PYRAMID_HEXAGONAL_WIREFRAME,
-            Geometries.PYRAMID_SQUARE_WIREFRAME,
-            Geometries.TETRAHEDRON_WIREFRAME
+            Geometries.Wireframe.CUBE,
+            Geometries.Wireframe.F,
+            Geometries.Wireframe.OCTAHEDRON,
+            Geometries.Wireframe.PRISM_HEXAGONAL,
+            Geometries.Wireframe.PRISM_TRIANGULAR,
+            Geometries.Wireframe.PYRAMID_HEXAGONAL,
+            Geometries.Wireframe.PYRAMID_SQUARE,
+            Geometries.Wireframe.TETRAHEDRON
         ];
 
         for (let i = -game.world.dimensions.x / 2; i <= game.world.dimensions.x / 2; i += shapeScale) {
