@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "target": "es5",
-        "outDir": "./publish",
+        "outDir": "./publish/3d",
         "lib": [
             "es2016",
             "dom"
@@ -11,6 +11,6 @@
         "downlevelIteration": true
     },
     "include": [
-        "./src/aura/**/*.ts"
+        "./src/aura/index.3d.ts"
     ]
 }

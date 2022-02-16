@@ -1,16 +1,16 @@
 {
     "compilerOptions": {
         "target": "es5",
-        "outDir": "./compiled",
+        "outDir": "./publish/2d",
         "lib": [
             "es2016",
             "dom"
         ],
-        "sourceMap": true,
+        "declaration": true,
         "strict": true,
         "downlevelIteration": true
     },
     "include": [
-        "./src/**/*.ts"
+        "./src/aura/index.2d.ts"
     ]
 }

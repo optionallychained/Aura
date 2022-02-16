@@ -3,6 +3,8 @@ debug.log
 
 coverage
 
+compiled
+
 dist
 /docs
 publish

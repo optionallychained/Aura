@@ -19,7 +19,7 @@ module.exports = {
     },
     output: {
         filename: 'aura.2d.min.js',
-        path: path.resolve(__dirname, 'publish/_min'),
+        path: path.resolve(__dirname, 'publish/2d/_min'),
         library: 'Aura2D'
     }
 };

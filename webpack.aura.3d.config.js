@@ -19,7 +19,7 @@ module.exports = {
     },
     output: {
         filename: 'aura.3d.min.js',
-        path: path.resolve(__dirname, 'publish/_min'),
+        path: path.resolve(__dirname, 'publish/3d/_min'),
         library: 'Aura3D'
     }
 };

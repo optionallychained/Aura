@@ -1,16 +1,4 @@
-import { Transform2D } from '../../aura/component/2d/transform.component.2d';
-import { Component } from '../../aura/component/component';
-import { FlatColor } from '../../aura/component/generic/flatColor.component';
-import { Model } from '../../aura/component/generic/model.component';
-import { MultiColor } from '../../aura/component/generic/multiColor.component';
-import { Shader } from '../../aura/component/generic/shader.component';
-import { Entity } from '../../aura/entity/entity';
-import { Geometry } from '../../aura/geometry/geometry';
-import { Angle } from '../../aura/math/angle';
-import { Color } from '../../aura/math/color';
-import { Vec2 } from '../../aura/math/vec2';
-import { PROGRAM_BASIC_2D } from '../../aura/shader/program/2d/basic.program.2d';
-import { PROGRAM_COLOR_PER_VERTEX_2D } from '../../aura/shader/program/2d/colorPerVertex.program.2d';
+import { Angle, Color, Component, Entity, FlatColor, Geometry, Model, MultiColor, Shader, ShaderPrograms, Transform, Vec2 } from '../../aura/index.2d';
 
 export class Shape extends Entity {
 
@@ -18,16 +6,16 @@ export class Shape extends Entity {
         const r = Math.random() < 0.5;
 
         const components: Array<Component> = [
-            new Transform2D(position, new Vec2(scale, scale)),
+            new Transform(position, new Vec2(scale, scale)),
             new Model(geometry),
         ];
 
         if (r) {
-            components.push(new Shader(PROGRAM_BASIC_2D));
+            components.push(new Shader(ShaderPrograms.BASIC));
             components.push(new FlatColor(Color.random()));
         }
         else {
-            components.push(new Shader(PROGRAM_COLOR_PER_VERTEX_2D));
+            components.push(new Shader(ShaderPrograms.COLOR_PER_VERTEX));
             components.push(new MultiColor(Color.randomList(30)));
         }
 
@@ -38,6 +26,6 @@ export class Shape extends Entity {
     }
 
     public tick(): void {
-        this.getComponent<Transform2D>('Transform2D').rotate(Angle.toRadians(1));
+        this.getComponent<Transform>('Transform2D').rotate(Angle.toRadians(1));
     }
 }
