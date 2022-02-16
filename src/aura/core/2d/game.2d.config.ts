@@ -1,6 +1,6 @@
-import { Font2DConfig } from '../../font/2d';
-import { UI2DConfig } from '../../ui/2d';
-import { World2DConfig } from '../../world/2d';
+import { Font2DConfig } from '../../font/2d/font.2d.config';
+import { UI2DConfig } from '../../ui/2d/ui.2d.config';
+import { World2DConfig } from '../../world/2d/world.2d.config';
 import { GameConfig } from '../game.config';
 
 /**

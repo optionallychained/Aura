@@ -1,4 +1,4 @@
-import { EntityManagerConfig } from '../../entity';
+import { EntityManagerConfig } from '../../entity/entity.manager.config';
 
 /**
  * Interface desciribing the Font2D configuration object, specifying 2d-relevant Font configruation

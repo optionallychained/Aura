@@ -1,4 +1,4 @@
-import { EntityManagerConfig } from '../../entity';
+import { EntityManagerConfig } from '../../entity/entity.manager.config';
 
 /* eslint-disable @typescript-eslint/no-empty-interface */
 

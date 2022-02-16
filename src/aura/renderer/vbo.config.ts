@@ -1,4 +1,4 @@
-import { GLShape } from '../geometry';
+import { GLShape } from '../geometry/glShape.enum';
 
 /**
  * Interface describing a VBO configuration object, containing all the information required by the EntityManager and WebGLRenderer to

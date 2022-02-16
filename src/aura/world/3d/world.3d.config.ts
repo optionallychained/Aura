@@ -1,6 +1,6 @@
-import { Camera3DConfig } from '../../camera/3d';
-import { EntityManagerConfig } from '../../entity';
-import { Vec3 } from '../../math';
+import { Camera3DConfig } from '../../camera/3d/camera.3d.config';
+import { EntityManagerConfig } from '../../entity/entity.manager.config';
+import { Vec3 } from '../../math/vec3';
 
 /**
  * Interface describing a World3D Configuration object

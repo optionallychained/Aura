@@ -1,7 +1,10 @@
-import { Model, Shader, Texture } from '../component/generic';
-import { AuraError, Game } from '../core';
-import { VBOConfig } from '../renderer';
-import { ShaderVariableResolver } from '../shader';
+import { Model } from '../component/generic/model.component';
+import { Shader } from '../component/generic/shader.component';
+import { Texture } from '../component/generic/texture.component';
+import { AuraError } from '../core/aura.error';
+import { Game } from '../core/game';
+import { VBOConfig } from '../renderer/vbo.config';
+import { ShaderVariableResolver } from '../shader/shaderVariableResolver';
 import { Entity } from './entity';
 import { EntityManagerConfig } from './entity.manager.config';
 

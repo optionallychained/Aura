@@ -1,7 +1,9 @@
-import { EntityManager } from '../entity';
-import { Color, Vec2, Vec3 } from '../math';
-import { UI2DConfig } from './2d';
-import { UI3DConfig } from './3d';
+import { EntityManager } from '../entity/entity.manager';
+import { Color } from '../math/color';
+import { Vec2 } from '../math/vec2';
+import { Vec3 } from '../math/vec3';
+import { UI2DConfig } from './2d/ui.2d.config';
+import { UI3DConfig } from './3d/ui.3d.config';
 
 /**
  * Abstract UI, an EntityManager which sets out the fundamental properties and runtime behavior of UI object management, and broken

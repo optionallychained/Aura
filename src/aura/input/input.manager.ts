@@ -1,4 +1,4 @@
-import { Vec2 } from '../math';
+import { Vec2 } from '../math/vec2';
 import { ControlScheme } from './controlScheme.type';
 import { Keys } from './keys.enum';
 

@@ -1,9 +1,13 @@
-import { Transform2D } from '../../component/2d';
-import { FlatColor, Model, Shader, Texture } from '../../component/generic';
-import { Entity } from '../../entity';
-import { BOX } from '../../geometry/2d';
-import { Color, Vec2 } from '../../math';
-import { PROGRAM_TEXTURE_COLORED_2D } from '../../shader/program/2d';
+import { Transform2D } from '../../component/2d/transform.component.2d';
+import { FlatColor } from '../../component/generic/flatColor.component';
+import { Model } from '../../component/generic/model.component';
+import { Shader } from '../../component/generic/shader.component';
+import { Texture } from '../../component/generic/texture.component';
+import { Entity } from '../../entity/entity';
+import { BOX } from '../../geometry/2d/box.geometry.2d';
+import { Color } from '../../math/color';
+import { Vec2 } from '../../math/vec2';
+import { PROGRAM_TEXTURE_COLORED_2D } from '../../shader/program/2d/textureColored.program.2d';
 
 /**
  * Prefab Entity representing a character in 2D text, utilised by the Font manager

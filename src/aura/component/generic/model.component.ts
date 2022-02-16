@@ -1,4 +1,5 @@
-import { Geometry, GLShape } from '../../geometry';
+import { Geometry } from '../../geometry/geometry';
+import { GLShape } from '../../geometry/glShape.enum';
 import { Component } from '../component';
 
 /**

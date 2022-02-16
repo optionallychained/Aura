@@ -1,6 +1,6 @@
-import { Font3DConfig } from '../../font/3d';
-import { UI3DConfig } from '../../ui/3d';
-import { World3DConfig } from '../../world/3d';
+import { Font3DConfig } from '../../font/3d/font.3d.config';
+import { UI3DConfig } from '../../ui/3d/ui.3d.config';
+import { World3DConfig } from '../../world/3d/world.3d.config';
 import { GameConfig } from '../game.config';
 
 /**

@@ -1,5 +1,7 @@
-import { Entity } from '../../entity';
-import { Color, Vec2, Vec3 } from '../../math';
+import { Entity } from '../../entity/entity';
+import { Color } from '../../math/color';
+import { Vec2 } from '../../math/vec2';
+import { Vec3 } from '../../math/vec3';
 import { Font } from '../font';
 import { Char3D } from './char.3d';
 import { Font3DConfig } from './font.3d.config';

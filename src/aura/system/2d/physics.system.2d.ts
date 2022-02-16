@@ -1,6 +1,6 @@
-import { Transform2D } from '../../component/2d';
-import { Game2D } from '../../core/2d';
-import { Vec2 } from '../../math';
+import { Transform2D } from '../../component/2d/transform.component.2d';
+import { Game2D } from '../../core/2d/game.2d';
+import { Vec2 } from '../../math/vec2';
 import { System2D } from './system.2d';
 
 /**

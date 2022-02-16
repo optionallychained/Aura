@@ -1,4 +1,4 @@
-import { EntityManagerConfig } from '../../entity';
+import { EntityManagerConfig } from '../../entity/entity.manager.config';
 
 /**
  * Interface desciribing the Font3D configuration object, specifying 3d-relevant Font configruation

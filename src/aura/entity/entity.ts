@@ -1,5 +1,6 @@
-import { Component } from '../component';
-import { AuraError, Game } from '../core';
+import { Component } from '../component/component';
+import { AuraError } from '../core/aura.error';
+import { Game } from '../core/game';
 import { EntityConfig } from './entity.config';
 
 /* eslint-disable @typescript-eslint/no-unused-vars */

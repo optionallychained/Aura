@@ -1,5 +1,5 @@
-import { FRAGMENT_TEXTURE } from '../../fragment/generic';
-import { VERTEX_TEXTURE_2D } from '../../vertex/2d';
+import { FRAGMENT_TEXTURE } from '../../fragment/generic/texture.fragment.generic';
+import { VERTEX_TEXTURE_2D } from '../../vertex/2d/texture.vertex.2d';
 import { ShaderProgram } from '../shaderProgram';
 
 /**

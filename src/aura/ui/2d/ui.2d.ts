@@ -1,4 +1,5 @@
-import { Color, Vec2 } from '../../math';
+import { Color } from '../../math/color';
+import { Vec2 } from '../../math/vec2';
 import { UI } from '../ui';
 import { Panel2D } from './panel.2d';
 import { UI2DConfig } from './ui.2d.config';

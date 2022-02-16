@@ -1,6 +1,7 @@
-import { ControlScheme } from '../input';
-import { Color, Vec2 } from '../math';
-import { TextureAtlas } from '../texture';
+import { ControlScheme } from '../input/controlScheme.type';
+import { Color } from '../math/color';
+import { Vec2 } from '../math/vec2';
+import { TextureAtlas } from '../texture/textureAtlas';
 
 /**
  * Interface describing the generic Game Configuration object, with configuration relevant both to 2D and 3D games

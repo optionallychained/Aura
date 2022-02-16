@@ -1,9 +1,12 @@
-import { Transform2D } from '../../component/2d';
-import { FlatColor, Model, Shader } from '../../component/generic';
-import { Entity } from '../../entity';
-import { BOX } from '../../geometry/2d';
-import { Color, Vec2 } from '../../math';
-import { PROGRAM_BASIC_2D } from '../../shader/program/2d';
+import { Transform2D } from '../../component/2d/transform.component.2d';
+import { FlatColor } from '../../component/generic/flatColor.component';
+import { Model } from '../../component/generic/model.component';
+import { Shader } from '../../component/generic/shader.component';
+import { Entity } from '../../entity/entity';
+import { BOX } from '../../geometry/2d/box.geometry.2d';
+import { Color } from '../../math/color';
+import { Vec2 } from '../../math/vec2';
+import { PROGRAM_BASIC_2D } from '../../shader/program/2d/basic.program.2d';
 
 /**
  * Prefab Entity representing a 2D UI panel, utilised by the UI manager

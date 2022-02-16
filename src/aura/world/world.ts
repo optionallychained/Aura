@@ -1,10 +1,11 @@
-import { Camera2D } from '../camera/2d';
-import { Camera3D } from '../camera/3d';
-import { AuraError } from '../core';
-import { EntityManager } from '../entity';
-import { Vec2, Vec3 } from '../math';
-import { World2DConfig } from './2d';
-import { World3DConfig } from './3d';
+import { Camera2D } from '../camera/2d/camera.2d';
+import { Camera3D } from '../camera/3d/camera.3d';
+import { AuraError } from '../core/aura.error';
+import { EntityManager } from '../entity/entity.manager';
+import { Vec2 } from '../math/vec2';
+import { Vec3 } from '../math/vec3';
+import { World2DConfig } from './2d/world.2d.config';
+import { World3DConfig } from './3d/world.3d.config';
 
 /**
  * Abstract World, an EntityManager which sets out the fundamental properties and runtime behavior of World object management, and broken

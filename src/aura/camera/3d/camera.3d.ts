@@ -1,7 +1,8 @@
-import { Transform3D } from '../../component/3d';
-import { AuraError } from '../../core';
-import { Entity } from '../../entity';
-import { Mat4, Vec3 } from '../../math';
+import { Transform3D } from '../../component/3d/transform.component.3d';
+import { AuraError } from '../../core/aura.error';
+import { Entity } from '../../entity/entity';
+import { Mat4 } from '../../math/mat4';
+import { Vec3 } from '../../math/vec3';
 import { Camera } from '../camera';
 import { Camera3DConfig, Camera3DFollow, Camera3DFollowRules } from './camera.3d.config';
 

@@ -1,9 +1,9 @@
-import { Font3D } from '../../font/3d';
-import { Vec3 } from '../../math';
-import { State3D } from '../../state/3d';
-import { System3D } from '../../system/3d';
-import { UI3D } from '../../ui/3d';
-import { World3D } from '../../world/3d';
+import { Font3D } from '../../font/3d/font.3d';
+import { Vec3 } from '../../math/vec3';
+import { State3D } from '../../state/3d/state.3d';
+import { System3D } from '../../system/3d/system.3d';
+import { UI3D } from '../../ui/3d/ui.3d';
+import { World3D } from '../../world/3d/world.3d';
 import { Game } from '../game';
 import { Game3DConfig } from './game.3d.config';
 

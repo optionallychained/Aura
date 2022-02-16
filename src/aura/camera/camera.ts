@@ -1,9 +1,10 @@
-import { Transform2D } from '../component/2d';
-import { Transform3D } from '../component/3d';
-import { Entity } from '../entity';
-import { Mat3, Mat4 } from '../math';
-import { Camera2DConfig, Camera2DFollow, Camera2DFollowRules } from './2d';
-import { Camera3DConfig, Camera3DFollow, Camera3DFollowRules } from './3d';
+import { Transform2D } from '../component/2d/transform.component.2d';
+import { Transform3D } from '../component/3d/transform.component.3d';
+import { Entity } from '../entity/entity';
+import { Mat3 } from '../math/mat3';
+import { Mat4 } from '../math/mat4';
+import { Camera2DConfig, Camera2DFollow, Camera2DFollowRules } from './2d/camera.2d.config';
+import { Camera3DConfig, Camera3DFollow, Camera3DFollowRules } from './3d/camera.3d.config';
 
 /**
  * Abstract class representing a Camera, broken down into concrete 2D and 3D variants in Camera2D and Camera3D

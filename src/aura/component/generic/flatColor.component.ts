@@ -1,4 +1,4 @@
-import { Color } from '../../math';
+import { Color } from '../../math/color';
 import { Component } from '../component';
 
 /**

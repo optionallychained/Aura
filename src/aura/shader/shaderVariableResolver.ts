@@ -1,9 +1,11 @@
-import { Transform2D } from '../component/2d';
-import { Transform3D } from '../component/3d';
-import { FlatColor, Model, MultiColor } from '../component/generic';
-import { AuraError, Game } from '../core';
-import { Entity } from '../entity';
-
+import { Transform2D } from '../component/2d/transform.component.2d';
+import { Transform3D } from '../component/3d/transform.component.3d';
+import { FlatColor } from '../component/generic/flatColor.component';
+import { Model } from '../component/generic/model.component';
+import { MultiColor } from '../component/generic/multiColor.component';
+import { AuraError } from '../core/aura.error';
+import { Game } from '../core/game';
+import { Entity } from '../entity/entity';
 
 /**
  * Internal-use utility type representing a Shader Variable Resolution Function which retrieves a value from the Game

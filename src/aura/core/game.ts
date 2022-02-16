@@ -1,21 +1,21 @@
-import { Font2D } from '../font/2d';
-import { Font3D } from '../font/3d';
-import { InputManager } from '../input';
-import { Color, Vec2 } from '../math';
-import { Renderer } from '../renderer';
-import { ShaderProgram } from '../shader/program';
-import { State2D } from '../state/2d';
-import { State3D } from '../state/3d';
-import { System2D } from '../system/2d';
-import { System3D } from '../system/3d';
-import { TextureAtlas } from '../texture';
-import { UI2D } from '../ui/2d';
-import { UI3D } from '../ui/3d';
-import { World2D } from '../world/2d';
-import { World3D } from '../world/3d';
+import { Font2D } from '../font/2d/font.2d';
+import { Font3D } from '../font/3d/font.3d';
+import { InputManager } from '../input/input.manager';
+import { Color } from '../math/color';
+import { Vec2 } from '../math/vec2';
+import { Renderer } from '../renderer/renderer';
+import { ShaderProgram } from '../shader/program/shaderProgram';
+import { State2D } from '../state/2d/state.2d';
+import { State3D } from '../state/3d/state.3d';
+import { System2D } from '../system/2d/system.2d';
+import { System3D } from '../system/3d/system.3d';
+import { TextureAtlas } from '../texture/textureAtlas';
+import { UI2D } from '../ui/2d/ui.2d';
+import { UI3D } from '../ui/3d/ui.3d';
+import { World2D } from '../world/2d/world.2d';
+import { World3D } from '../world/3d/world.3d';
 import { AuraError } from './aura.error';
 import { GameConfig, GameConfigDefaults } from './game.config';
-
 
 /**
  * Generic abstract Game object, setting out the fundamental properties and runtime behaviour of all Aura Games, and broken down into

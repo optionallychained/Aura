@@ -1,4 +1,4 @@
-import { Game3D } from '../../core/3d';
+import { Game3D } from '../../core/3d/game.3d';
 import { State } from '../state';
 
 /**

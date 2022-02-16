@@ -1,4 +1,5 @@
-import { Mat4, Vec3 } from '../../../engine';
+import { Mat4 } from '../../../aura/math/mat4';
+import { Vec3 } from '../../../aura/math/vec3';
 
 /**
  * Tests for class Mat4

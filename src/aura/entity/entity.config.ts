@@ -1,4 +1,4 @@
-import { Component } from '../component';
+import { Component } from '../component/component';
 
 /**
  * Interface describing an Entity Configuration object

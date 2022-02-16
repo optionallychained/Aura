@@ -1,6 +1,6 @@
-import { Transform3D } from '../../component/3d';
-import { Game3D } from '../../core/3d';
-import { Vec3 } from '../../math';
+import { Transform3D } from '../../component/3d/transform.component.3d';
+import { Game3D } from '../../core/3d/game.3d';
+import { Vec3 } from '../../math/vec3';
 import { System3D } from './system.3d';
 
 /**

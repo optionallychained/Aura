@@ -1,5 +1,5 @@
-import { FRAGMENT_COLOR_PER_VERTEX } from '../../fragment/generic';
-import { VERTEX_COLOR_PER_VERTEX_2D } from '../../vertex/2d';
+import { FRAGMENT_COLOR_PER_VERTEX } from '../../fragment/generic/colorPerVertex.fragment.generic';
+import { VERTEX_COLOR_PER_VERTEX_2D } from '../../vertex/2d/colorPerVertex.vertex.2d';
 import { ShaderProgram } from '../shaderProgram';
 
 /**

@@ -1,7 +1,8 @@
-import { Transform2D } from '../../component/2d';
-import { AuraError } from '../../core';
-import { Entity } from '../../entity';
-import { Mat3, Vec2 } from '../../math';
+import { Transform2D } from '../../component/2d/transform.component.2d';
+import { AuraError } from '../../core/aura.error';
+import { Entity } from '../../entity/entity';
+import { Mat3 } from '../../math/mat3';
+import { Vec2 } from '../../math/vec2';
 import { Camera } from '../camera';
 import { Camera2DConfig, Camera2DFollow, Camera2DFollowRules } from './camera.2d.config';
 

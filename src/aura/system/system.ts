@@ -1,5 +1,5 @@
-import { Game2D } from '../core/2d';
-import { Game3D } from '../core/3d';
+import { Game2D } from '../core/2d/game.2d';
+import { Game3D } from '../core/3d/game.3d';
 
 /**
  * Abstract class representing a System, broken down into concrete 2D and 3D variants in System2D and System3D

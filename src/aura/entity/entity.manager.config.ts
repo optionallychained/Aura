@@ -1,5 +1,5 @@
-import { Renderer } from '../renderer';
-import { TextureAtlas } from '../texture';
+import { Renderer } from '../renderer/renderer';
+import { TextureAtlas } from '../texture/textureAtlas';
 
 /**
  * Interface desciribing a generic EntityManager configuration object

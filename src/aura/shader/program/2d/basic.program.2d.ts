@@ -1,5 +1,5 @@
-import { FRAGMENT_BASIC } from '../../fragment/generic';
-import { VERTEX_BASIC_2D } from '../../vertex/2d';
+import { FRAGMENT_BASIC } from '../../fragment/generic/basic.fragment.generic';
+import { VERTEX_BASIC_2D } from '../../vertex/2d/basic.vertex.2d';
 import { ShaderProgram } from '../shaderProgram';
 
 /**

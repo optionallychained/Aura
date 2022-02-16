@@ -1,6 +1,6 @@
-import { Camera2D } from '../../camera/2d';
-import { AuraError } from '../../core';
-import { Vec2 } from '../../math';
+import { Camera2D } from '../../camera/2d/camera.2d';
+import { AuraError } from '../../core/aura.error';
+import { Vec2 } from '../../math/vec2';
 import { World } from '../world';
 import { World2DConfig } from './world.2d.config';
 

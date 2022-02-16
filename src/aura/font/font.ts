@@ -1,7 +1,9 @@
-import { EntityManager } from '../entity';
-import { Color, Vec2, Vec3 } from '../math';
-import { Font2DConfig } from './2d';
-import { Font3DConfig } from './3d';
+import { EntityManager } from '../entity/entity.manager';
+import { Color } from '../math/color';
+import { Vec2 } from '../math/vec2';
+import { Vec3 } from '../math/vec3';
+import { Font2DConfig } from './2d/font.2d.config';
+import { Font3DConfig } from './3d/font.3d.config';
 
 /**
  * Abstract Font, an EntityManager which sets out the fundamental properties and runtime behavior of Font object management, and broken

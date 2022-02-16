@@ -1,4 +1,5 @@
-import { Color, Vec3 } from '../../math';
+import { Color } from '../../math/color';
+import { Vec3 } from '../../math/vec3';
 import { UI } from '../ui';
 import { Panel3D } from './panel.3d';
 import { UI3DConfig } from './ui.3d.config';

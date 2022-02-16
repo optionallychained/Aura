@@ -1,8 +1,11 @@
-import { AuraError, Game } from '../core';
-import { Color } from '../math';
-import { ShaderVariableResolver, UniformType, UniformVariation } from '../shader';
-import { ShaderProgram } from '../shader/program';
-import { TextureAtlas } from '../texture';
+import { AuraError } from '../core/aura.error';
+import { Game } from '../core/game';
+import { Color } from '../math/color';
+import { ShaderProgram } from '../shader/program/shaderProgram';
+import { ShaderVariableResolver } from '../shader/shaderVariableResolver';
+import { UniformType } from '../shader/uniformType.enum';
+import { UniformVariation } from '../shader/uniformVariation.enum';
+import { TextureAtlas } from '../texture/textureAtlas';
 import { RendererConfig } from './renderer.config';
 import { VBOConfig } from './vbo.config';
 
@@ -271,7 +274,7 @@ export class Renderer {
         const image = new Image();
         image.src = textureAtlas.src;
 
-        if (!this.imageIsSameOrigin(image, textureAtlas.src)) {
+        if (!this.imageIsSameOrigin(textureAtlas.src)) {
             image.crossOrigin = '';
         }
 
@@ -640,7 +643,7 @@ export class Renderer {
      *
      * @returns whether or not the image is sourced from the same origin
      */
-    private imageIsSameOrigin(image: HTMLImageElement, url: string): boolean {
+    private imageIsSameOrigin(url: string): boolean {
         return new URL(url, window.location.href).origin === window.location.origin;
     }
 }

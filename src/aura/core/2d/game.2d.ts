@@ -1,9 +1,9 @@
-import { Font2D } from '../../font/2d';
-import { Vec2 } from '../../math';
-import { State2D } from '../../state/2d';
-import { System2D } from '../../system/2d';
-import { UI2D } from '../../ui/2d';
-import { World2D } from '../../world/2d';
+import { Font2D } from '../../font/2d/font.2d';
+import { Vec2 } from '../../math/vec2';
+import { State2D } from '../../state/2d/state.2d';
+import { System2D } from '../../system/2d/system.2d';
+import { UI2D } from '../../ui/2d/ui.2d';
+import { World2D } from '../../world/2d/world.2d';
 import { Game } from '../game';
 import { Game2DConfig } from './game.2d.config';
 

@@ -1,4 +1,4 @@
-import { Random } from '../../../engine';
+import { Random } from '../../../aura/math/random';
 
 /**
  * Tests for class Random

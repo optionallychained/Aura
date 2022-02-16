@@ -1,5 +1,5 @@
-import { Game2D } from '../core/2d';
-import { Game3D } from '../core/3d';
+import { Game2D } from '../core/2d/game.2d';
+import { Game3D } from '../core/3d/game.3d';
 import { StateConfig } from './state.config';
 
 /**

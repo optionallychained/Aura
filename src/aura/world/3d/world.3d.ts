@@ -1,6 +1,6 @@
-import { Camera3D } from '../../camera/3d';
-import { AuraError } from '../../core';
-import { Vec3 } from '../../math';
+import { Camera3D } from '../../camera/3d/camera.3d';
+import { AuraError } from '../../core/aura.error';
+import { Vec3 } from '../../math/vec3';
 import { World } from '../world';
 import { World3DConfig } from './world.3d.config';
 
