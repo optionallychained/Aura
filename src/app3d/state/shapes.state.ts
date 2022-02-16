@@ -1,8 +1,29 @@
-import { Angle, Geometry, Input, Random, State, Vec3 } from '../../engine';
+import { F_WIREFRAME } from '../../aura/geometry/2d/wireframe/f.wireframe.geometry.2d';
+import { CUBE } from '../../aura/geometry/3d/cube.geometry.3d';
+import { F } from '../../aura/geometry/3d/f.geometry.3d';
+import { LINE } from '../../aura/geometry/3d/line.geometry.3d';
+import { OCTAHEDRON } from '../../aura/geometry/3d/octahedron.geometry.3d';
+import { PRISM_HEXAGONAL } from '../../aura/geometry/3d/prismHexagonal.geometry.3d';
+import { PRISM_TRIANGULAR } from '../../aura/geometry/3d/prismTriangular.geometry.3d';
+import { PYRAMID_HEXAGONAL } from '../../aura/geometry/3d/pyramidHexagonal.geometry.3d';
+import { PYRAMID_SQUARE } from '../../aura/geometry/3d/pyramidSquare.geometry.3d';
+import { TETRAHEDRON } from '../../aura/geometry/3d/tetrahedron.geometry.3d';
+import { CUBE_WIREFRAME } from '../../aura/geometry/3d/wireframe/cube.wireframe.geometry.3d';
+import { OCTAHEDRON_WIREFRAME } from '../../aura/geometry/3d/wireframe/octahedron.wireframe.geometry.3d';
+import { PRISM_HEXAGONAL_WIREFRAME } from '../../aura/geometry/3d/wireframe/prismHexagonal.wireframe.geometry';
+import { PRISM_TRIANGULAR_WIREFRAME } from '../../aura/geometry/3d/wireframe/prismTriangular.wireframe.geometry.3d';
+import { PYRAMID_HEXAGONAL_WIREFRAME } from '../../aura/geometry/3d/wireframe/pyramidHexagonal.wireframe.geometry.3d';
+import { PYRAMID_SQUARE_WIREFRAME } from '../../aura/geometry/3d/wireframe/pyramidSquare.wireframe.geometry.3d';
+import { TETRAHEDRON_WIREFRAME } from '../../aura/geometry/3d/wireframe/tetrahedron.wireframe.geometry.3d';
+import { Keys } from '../../aura/input/keys.enum';
+import { Angle } from '../../aura/math/angle';
+import { Random } from '../../aura/math/random';
+import { Vec3 } from '../../aura/math/vec3';
+import { State3D } from '../../aura/state/3d/state.3d';
 import { Axis } from '../entity/axis';
 import { Shape } from '../entity/shape';
 
-export const SHAPES_STATE = new State.ThreeD.State3D({
+export const SHAPES_STATE = new State3D({
     name: 'shapes',
     init: (game) => {
         game.world.activeCamera.moveForward(-90000);
@@ -13,23 +34,23 @@ export const SHAPES_STATE = new State.ThreeD.State3D({
         const shapeScale = 10000;
 
         const geometries = [
-            Geometry.ThreeD.BOX,
-            Geometry.ThreeD.F,
-            Geometry.ThreeD.LINE,
-            Geometry.ThreeD.OCTAHEDRON,
-            Geometry.ThreeD.PRISM_HEXAGONAL,
-            Geometry.ThreeD.PRISM_TRIANGULAR,
-            Geometry.ThreeD.PYRAMID_HEXAGONAL,
-            Geometry.ThreeD.PYRAMID_SQUARE,
-            Geometry.ThreeD.TETRAHEDRON,
-            Geometry.ThreeD.Wireframe.BOX,
-            Geometry.ThreeD.Wireframe.F,
-            Geometry.ThreeD.Wireframe.OCTAHEDRON,
-            Geometry.ThreeD.Wireframe.PRISM_HEXAGONAL,
-            Geometry.ThreeD.Wireframe.PRISM_TRIANGULAR,
-            Geometry.ThreeD.Wireframe.PYRAMID_HEXAGONAL,
-            Geometry.ThreeD.Wireframe.PYRAMID_SQUARE,
-            Geometry.ThreeD.Wireframe.TETRAHEDRON
+            CUBE,
+            F,
+            LINE,
+            OCTAHEDRON,
+            PRISM_HEXAGONAL,
+            PRISM_TRIANGULAR,
+            PYRAMID_HEXAGONAL,
+            PYRAMID_SQUARE,
+            TETRAHEDRON,
+            CUBE_WIREFRAME,
+            F_WIREFRAME,
+            OCTAHEDRON_WIREFRAME,
+            PRISM_HEXAGONAL_WIREFRAME,
+            PRISM_TRIANGULAR_WIREFRAME,
+            PYRAMID_HEXAGONAL_WIREFRAME,
+            PYRAMID_SQUARE_WIREFRAME,
+            TETRAHEDRON_WIREFRAME
         ];
 
         for (let i = -game.world.dimensions.x / 2; i <= game.world.dimensions.x / 2; i += shapeScale) {
@@ -54,45 +75,45 @@ export const SHAPES_STATE = new State.ThreeD.State3D({
         const cameraMove = 200;
 
         // camera controls
-        if (game.input.isKeyDown(Input.Keys.A)) {
+        if (game.input.isKeyDown(Keys.A)) {
             camera.moveRight(-cameraMove);
         }
-        else if (game.input.isKeyDown(Input.Keys.D)) {
+        else if (game.input.isKeyDown(Keys.D)) {
             camera.moveRight(cameraMove);
         }
 
-        if (game.input.isKeyDown(Input.Keys.W)) {
+        if (game.input.isKeyDown(Keys.W)) {
             camera.moveForward(cameraMove);
         }
-        else if (game.input.isKeyDown(Input.Keys.S)) {
+        else if (game.input.isKeyDown(Keys.S)) {
             camera.moveForward(-cameraMove);
         }
 
-        if (game.input.isKeyDown(Input.Keys.Q)) {
+        if (game.input.isKeyDown(Keys.Q)) {
             camera.moveUp(-cameraMove);
         }
-        else if (game.input.isKeyDown(Input.Keys.E)) {
+        else if (game.input.isKeyDown(Keys.E)) {
             camera.moveUp(cameraMove);
         }
 
-        if (game.input.isKeyDown(Input.Keys.J)) {
+        if (game.input.isKeyDown(Keys.J)) {
             camera.rotateY(cameraAngle);
         }
-        else if (game.input.isKeyDown(Input.Keys.L)) {
+        else if (game.input.isKeyDown(Keys.L)) {
             camera.rotateY(-cameraAngle);
         }
 
-        if (game.input.isKeyDown(Input.Keys.I)) {
+        if (game.input.isKeyDown(Keys.I)) {
             camera.rotateX(cameraAngle);
         }
-        else if (game.input.isKeyDown(Input.Keys.K)) {
+        else if (game.input.isKeyDown(Keys.K)) {
             camera.rotateX(-cameraAngle);
         }
 
-        if (game.input.isKeyDown(Input.Keys.U)) {
+        if (game.input.isKeyDown(Keys.U)) {
             camera.rotateZ(-cameraAngle);
         }
-        else if (game.input.isKeyDown(Input.Keys.O)) {
+        else if (game.input.isKeyDown(Keys.O)) {
             camera.rotateZ(cameraAngle);
         }
     }
