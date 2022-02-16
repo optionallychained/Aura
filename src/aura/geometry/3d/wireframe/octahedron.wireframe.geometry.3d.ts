@@ -7,7 +7,7 @@ import { Geometry } from '../../geometry';
 
 const h = Math.sqrt(3) / 4;
 
-export const OCTAHEDRON = new Geometry({
+export const OCTAHEDRON_WIREFRAME = new Geometry({
     name: 'octahedron_wireframe',
     vertices: Float32Array.from([
         0, -h, 0,

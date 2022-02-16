@@ -4,7 +4,7 @@ import { GLShape } from '../../glShape.enum';
 /**
  * Built-in generic 2D Wireframe Polygon Geometry factory, enabling the runtime production of n-sided wireframe shapes
  */
-export const POLYGON = (vertexCount: number, name?: string): Geometry => {
+export const POLYGON_WIREFRAME = (vertexCount: number, name?: string): Geometry => {
     const vertexSize = 2;
     const vertices: Array<number> = [];
 

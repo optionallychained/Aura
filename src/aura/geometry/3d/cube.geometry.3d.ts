@@ -2,10 +2,10 @@ import { Geometry } from '../geometry';
 import { GLShape } from '../glShape.enum';
 
 /**
- * Built-in 3D box Geometry, setting out the information required to render cubes
+ * Built-in 3D cube Geometry, setting out the information required to render cubes
  */
-export const BOX = new Geometry({
-    name: 'box',
+export const CUBE = new Geometry({
+    name: 'cube',
     vertices: Float32Array.from([
         // front face
         -0.5, -0.5, 0.5,

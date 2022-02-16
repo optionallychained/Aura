@@ -4,7 +4,7 @@ import { GLShape } from '../../glShape.enum';
 /**
  * Built-in 3D wireframe F Geometry, setting out the information required to render wireframe Fs
  */
-export const F = new Geometry({
+export const F_WIREFRAME = new Geometry({
     name: 'f_wireframe',
     vertices: Float32Array.from([
         // front left

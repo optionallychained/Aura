@@ -6,7 +6,7 @@ import { GLShape } from '../../glShape.enum';
  *
  * Not using POLYGON() because the resultant shape is 'rotated' strangely
  */
-export const PENTAGON = new Geometry({
+export const PENTAGON_WIREFRAME = new Geometry({
     name: 'pentagon_wireframe',
     vertices: Float32Array.from([
         -0.3, -0.5,

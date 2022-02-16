@@ -7,7 +7,7 @@ import { GLShape } from '../../glShape.enum';
 
 const h = Math.sqrt(3) / 4;
 
-export const TRIANGLE = new Geometry({
+export const TRIANGLE_WIREFRAME = new Geometry({
     name: 'triangle_equilateral_wireframe',
     vertices: Float32Array.from([
         -0.5, -h,

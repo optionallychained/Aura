@@ -3,7 +3,7 @@ import { FlatColor } from '../../component/generic/flatColor.component';
 import { Model } from '../../component/generic/model.component';
 import { Shader } from '../../component/generic/shader.component';
 import { Entity } from '../../entity/entity';
-import { BOX } from '../../geometry/3d/box.geometry.3d';
+import { CUBE } from '../../geometry/3d/cube.geometry.3d';
 import { Color } from '../../math/color';
 import { Vec3 } from '../../math/vec3';
 import { PROGRAM_BASIC_3D } from '../../shader/program/3d/basic.program.3d';
@@ -19,7 +19,7 @@ export class Panel3D extends Entity {
             components: [
                 new Transform3D(position, scale),
                 new Shader(PROGRAM_BASIC_3D),
-                new Model(BOX),
+                new Model(CUBE),
                 new FlatColor(color)
             ]
         })

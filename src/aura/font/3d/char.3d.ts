@@ -4,7 +4,7 @@ import { Model } from '../../component/generic/model.component';
 import { Shader } from '../../component/generic/shader.component';
 import { Texture } from '../../component/generic/texture.component';
 import { Entity } from '../../entity/entity';
-import { BOX } from '../../geometry/3d/box.geometry.3d';
+import { CUBE } from '../../geometry/3d/cube.geometry.3d';
 import { Color } from '../../math/color';
 import { Vec2 } from '../../math/vec2';
 import { Vec3 } from '../../math/vec3';
@@ -21,7 +21,7 @@ export class Char3D extends Entity {
             components: [
                 new Transform3D(position, scale),
                 new Shader(PROGRAM_TEXTURE_COLORED_3D),
-                new Model(BOX),
+                new Model(CUBE),
                 new Texture(texCoords.x, texCoords.y),
                 new FlatColor(color)
             ]

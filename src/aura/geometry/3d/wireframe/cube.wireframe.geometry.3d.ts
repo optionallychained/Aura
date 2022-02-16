@@ -2,10 +2,10 @@ import { Geometry } from '../../geometry';
 import { GLShape } from '../../glShape.enum';
 
 /**
- * Built-in 3D Wireframe box Geometry, setting out the information required to render wireframe cubes
+ * Built-in 3D Wireframe cube Geometry, setting out the information required to render wireframe cubes
  */
-export const BOX = new Geometry({
-    name: 'box_wireframe',
+export const CUBE_WIREFRAME = new Geometry({
+    name: 'cube_wireframe',
     vertices: Float32Array.from([
         // front face
         -0.5, -0.5, 0.5,

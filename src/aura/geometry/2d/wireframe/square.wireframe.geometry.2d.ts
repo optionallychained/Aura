@@ -4,8 +4,8 @@ import { GLShape } from '../../glShape.enum';
 /**
  * Built-in 2D Wireframe Box Geometry, setting out the information required to render wireframe quads
  */
-export const BOX = new Geometry({
-    name: 'box_wireframe',
+export const SQUARE_WIREFRAME = new Geometry({
+    name: 'square_wireframe',
     vertices: Float32Array.from([
         -0.5, -0.5,
         0.5, -0.5,

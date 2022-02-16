@@ -2,10 +2,10 @@ import { Geometry } from '../geometry';
 import { GLShape } from '../glShape.enum';
 
 /**
- * Built-in 2D box Geometry, setting out the information required to render quads
+ * Built-in 2D square Geometry, setting out the information required to render quads
  */
-export const BOX = new Geometry({
-    name: 'box',
+export const SQUARE = new Geometry({
+    name: 'square',
     vertices: Float32Array.from([
         -0.5, -0.5,
         0.5, -0.5,

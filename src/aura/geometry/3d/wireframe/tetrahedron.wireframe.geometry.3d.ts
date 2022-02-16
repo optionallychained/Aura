@@ -7,7 +7,7 @@ import { Geometry } from '../../geometry';
 
 const h = Math.sqrt(3) / 4;
 
-export const TETRAHEDRON = new Geometry({
+export const TETRAHEDRON_WIREFRAME = new Geometry({
     name: 'tetrahedron_wireframe',
     vertices: Float32Array.from([
         -0.5, -h, h,

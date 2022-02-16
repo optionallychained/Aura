@@ -7,7 +7,7 @@ import { Geometry } from '../../geometry';
 
 const h = Math.sqrt(3) / 4;
 
-export const PRISM_HEXAGONAL = new Geometry({
+export const PRISM_HEXAGONAL_WIREFRAME = new Geometry({
     name: 'prism_hexagonal_wireframe',
     vertices: Float32Array.from([
         // base

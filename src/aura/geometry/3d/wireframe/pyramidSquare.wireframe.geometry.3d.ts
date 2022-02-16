@@ -7,7 +7,7 @@ import { Geometry } from '../../geometry';
 
 const h = Math.sqrt(3) / 4;
 
-export const PYRAMID_SQUARE = new Geometry({
+export const PYRAMID_SQUARE_WIREFRAME = new Geometry({
     name: 'pyramid_square_wireframe',
     vertices: Float32Array.from([
         -0.5, -h, 0.5,
