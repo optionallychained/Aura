@@ -31,8 +31,8 @@ module.exports = (env, options) => {
             extensions: ['.ts', '.js']
         },
         output: {
-            filename: 'app3d.js',
-            path: path.resolve(__dirname, dev ? 'dev' : 'dist/3d'),
+            filename: 'app3d.min.js',
+            path: path.resolve(__dirname, dev ? 'dev' : 'dist/app3d'),
         }
     };
 

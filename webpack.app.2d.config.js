@@ -31,8 +31,8 @@ module.exports = (env, options) => {
             extensions: ['.ts', '.js']
         },
         output: {
-            filename: 'app2d.js',
-            path: path.resolve(__dirname, dev ? 'dev' : 'dist/2d'),
+            filename: 'app2d.min.js',
+            path: path.resolve(__dirname, dev ? 'dev' : 'dist/app2d'),
         }
     };
 

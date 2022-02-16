@@ -14,26 +14,31 @@
         "publish/"
     ],
     "scripts": {
+        "clean": "rm -rf ./dist && rm -rf ./publish && rm -rf ./docs",
+
         "lint": "eslint --ext .ts --fix src",
         "test": "jest",
+
         "docs:serve": "browser-sync start --port 9090 --server './docs' --files './docs/**/*'",
         "docs:watch": "nodemon -w ./src/docs --ext pug,ts,scss,md,png,jpg,svg ./scripts/docgen.js --args dev",
         "docs:dev": "concurrently \"npm run docs:serve\" \"npm run docs:watch\"",
         "docs:dist": "node ./scripts/docgen.js",
-        "predocs:deploy": "npm run docs:dist",
-        "docs:deploy": "gh-pages -d docs",
+        "docs:deploy": "npm run docs:dist && gh-pages -d docs",
+
         "app:2d:debug": "webpack serve --config webpack.app.2d.config.js --mode development",
         "app:2d:dev": "webpack serve --config webpack.app.2d.config.js --mode development --open 'Chrome'",
-        "preapp:2d:dist": "npm run lint",
-        "app:2d:dist": "webpack --config webpack.app.2d.config.js --mode production",
+        "app:2d:dist": "npm run lint && webpack --config webpack.app.2d.config.js --mode production",
+
         "app:3d:debug": "webpack serve --config webpack.app.3d.config.js --mode development",
         "app:3d:dev": "webpack serve --config webpack.app.3d.config.js --mode development --open 'Chrome'",
-        "preapp:3d:dist": "npm run lint",
-        "app:3d:dist": "webpack --config webpack.app.3d.config.js --mode production",
-        "preengine:dist": "npm run lint",
-        "engine:dist": "webpack --config webpack.engine.config.js",
-        "engine:publish": "tsc --project ./tsconfig.publish.json",
-        "prepublishOnly": "npm run docs:deploy && npm run engine:dist && npm run engine:publish"
+        "app:3d:dist": "npm run lint && webpack --config webpack.app.3d.config.js --mode production",
+
+        "aura:2d:publish": "webpack --config webpack.aura.2d.config.js",
+        "aura:3d:publish": "webpack --config webpack.aura.3d.config.js",
+
+        "aura:publish": "tsc --project ./tsconfig.publish.json",
+
+        "prepublishOnly": "npm run docs:deploy && npm run lint && npm run aura:2d:publish && npm run aura:3d:publish && npm run aura:publish"
     },
     "devDependencies": {
         "@types/jest": "^27.4.0",

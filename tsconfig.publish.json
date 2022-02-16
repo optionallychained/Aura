@@ -11,6 +11,6 @@
         "downlevelIteration": true
     },
     "include": [
-        "./src/engine/**/*.ts"
+        "./src/aura/**/*.ts"
     ]
 }

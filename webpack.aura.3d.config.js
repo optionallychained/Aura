@@ -4,7 +4,7 @@ const path = require('path');
 
 module.exports = {
     mode: 'production',
-    entry: './src/engine/index.ts',
+    entry: './src/aura/index.3d.ts',
     module: {
         rules: [
             {
@@ -18,8 +18,8 @@ module.exports = {
         extensions: ['.ts', '.js']
     },
     output: {
-        filename: 'aura.min.js',
+        filename: 'aura.3d.min.js',
         path: path.resolve(__dirname, 'publish/_min'),
-        library: 'Aura'
+        library: 'Aura3D'
     }
 };
