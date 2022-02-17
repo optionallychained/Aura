@@ -11,14 +11,15 @@ if (!process.argv.includes('--mode=2d') && !process.argv.includes('--mode=3d')) 
 
 const mode = /--mode=(2d|3d)/.exec(process.argv)[1];
 const output = path.resolve(__dirname, '../publish', mode);
+const packageName = `@aura/${mode}`;
 
 (async () => {
     // compile Aura
-    console.info(`Compiling Aura ${mode}...`);
+    console.info(`Compiling ${packageName}...`);
     execSync(`tsc --project ./tsconfig.publish.${mode}.json`, { stdio: 'inherit' });
 
     // produce aura.<mode>.min.js with webpack
-    console.info(`Packing Aura ${mode}...`);
+    console.info(`Packing Aura ${packageName}...`);
     await new Promise((resolve, reject) => {
         webpack({
             mode: 'production',
@@ -47,14 +48,14 @@ const output = path.resolve(__dirname, '../publish', mode);
     });
 
     // rename index + typedefs
-    console.info(`Renaming ${mode} indices...`);
+    console.info(`Renaming ${packageName} indices...`);
     fs.moveSync(path.resolve(output, `index.${mode}.js`), path.resolve(output, 'index.js'));
     fs.moveSync(path.resolve(output, `index.${mode}.d.ts`), path.resolve(output, 'index.d.ts'));
 
     // write an appropriate package.json, carrying dependencies (if any) from ./package.json
-    console.info(`Writing Aura ${mode} package.json...`)
+    console.info(`Writing ${packageName} package.json...`)
     fs.writeFileSync(path.resolve(output, 'package.json'), JSON.stringify({
-        name: `@aura/${mode}`,
+        name: packageName,
         version: `${mode === '2d' ? version2d : version3d}`,
         author: 'optionallychained',
         license: 'MIT',
@@ -87,5 +88,5 @@ const output = path.resolve(__dirname, '../publish', mode);
         return;
     })(output, (path) => path.includes(mode === '2d' ? '/3d' : '/2d'));
 
-    console.info(`Done! Aura ${mode} ready to publish`);
+    console.info(`Done! ${packageName} ready to publish`);
 })();

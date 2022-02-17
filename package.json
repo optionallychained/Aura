@@ -1,26 +1,36 @@
 {
     "scripts": {
-        "clean": "rm -rf ./compiled && rm -rf ./dist rm -rf ./docs && rm -rf ./coverage",
-
         "lint": "eslint --ext .ts --fix src",
-        "test": "jest",
 
+        "test": "rm -rf ./coverage && jest",
+
+        "docs:clean": "rm -rf ./docs",
         "docs:serve": "browser-sync start --port 9090 --server './docs' --files './docs/**/*'",
         "docs:watch": "nodemon -w ./src/docs --ext pug,ts,scss,md,png,jpg,svg ./scripts/docgen.js --args dev",
-        "docs:dev": "concurrently \"npm run docs:serve\" \"npm run docs:watch\"",
-        "docs:dist": "node ./scripts/docgen.js",
-        "docs:deploy": "npm run docs:dist && gh-pages -d docs",
+        "docs:dev": "npm run docs:clean && concurrently \"npm run docs:serve\" \"npm run docs:watch\"",
+        "docs:build": "npm run docs:clean && node ./scripts/docgen.js",
+        "docs:deploy": "npm run docs:build && gh-pages -d docs",
 
-        "app:2d:debug": "webpack serve --config webpack.app.2d.config.js --mode development",
-        "app:2d:dev": "webpack serve --config webpack.app.2d.config.js --mode development --open 'Chrome'",
-        "app:2d:dist": "npm run lint && webpack --config webpack.app.2d.config.js --mode production",
+        "app:2d:clean": "rm -rf ./dist/app2d",
+        "app:2d:debug": "npm run app:2d:clean && webpack serve --config webpack.app.2d.config.js --mode development",
+        "app:2d:build": "npm run app:2d:clean && npm run lint && webpack --config webpack.app.2d.config.js --mode production",
 
-        "app:3d:debug": "webpack serve --config webpack.app.3d.config.js --mode development",
-        "app:3d:dev": "webpack serve --config webpack.app.3d.config.js --mode development --open 'Chrome'",
-        "app:3d:dist": "npm run lint && webpack --config webpack.app.3d.config.js --mode production",
+        "app:3d:clean": "rm -rf ./dist/app3d",
+        "app:3d:debug": "npm run app:3d:clean && webpack serve --config webpack.app.3d.config.js --mode development",
+        "app:3d:build": "npm run app:3d:clean && npm run lint && webpack --config webpack.app.3d.config.js --mode production",
 
-        "aura:2d:publish": "npm run clean && rm -rf ./publish/2d && npm run lint && node ./scripts/publish.js --mode=2d",
-        "aura:3d:publish": "npm run clean && rm -rf ./publish/3d && npm run lint && node ./scripts/publish.js --mode=3d"
+        "aura:2d:clean": "rm -rf ./publish/2d",
+        "aura:2d:build": "npm run aura:2d:clean && npm run lint && node ./scripts/publish.js --mode=2d",
+
+        "aura:3d:clean": "rm -rf ./publish/3d",
+        "aura:3d:build": "npm run aura:3d:clean && npm run lint && node ./scripts/publish.js --mode=3d",
+
+        "aura:build": "npm run aura:2d:build && npm run aura:3d:build",
+
+        "aura:2d:publish": "npm run aura:2d:build && cd ./publish/2d && npm publish",
+        "aura:3d:publish": "npm run aura:3d:build && cd ./publish/3d && npm publish",
+
+        "aura:publish": "npm run aura:2d:publish && npm run aura:3d:publish"
     },
     "devDependencies": {
         "@types/jest": "^27.4.0",
