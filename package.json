@@ -1,20 +1,6 @@
 {
-    "name": "aura",
-    "version": "0.13.0",
-    "author": "optionallychained",
-    "license": "MIT",
-    "homepage": "https://optionallychained.github.io/Aura",
-    "repository": {
-        "type": "git",
-        "url": "git://git@github.com/optionallychained/Aura.git"
-    },
-    "main": "publish/index.js",
-    "types": "publish/index.d.ts",
-    "files": [
-        "publish/"
-    ],
     "scripts": {
-        "clean": "rm -rf ./compiled && rm -rf ./dist && rm -rf ./publish && rm -rf ./docs && rm -rf ./coverage",
+        "clean": "rm -rf ./compiled && rm -rf ./dist rm -rf ./docs && rm -rf ./coverage",
 
         "lint": "eslint --ext .ts --fix src",
         "test": "jest",
@@ -33,10 +19,8 @@
         "app:3d:dev": "webpack serve --config webpack.app.3d.config.js --mode development --open 'Chrome'",
         "app:3d:dist": "npm run lint && webpack --config webpack.app.3d.config.js --mode production",
 
-        "aura:2d:publish": "tsc --project ./tsconfig.publish.2d.json && webpack --config webpack.aura.2d.config.js",
-        "aura:3d:publish": "tsc --project ./tsconfig.publish.3d.json && webpack --config webpack.aura.3d.config.js",
-
-        "prepublishOnly": "npm run docs:deploy && npm run lint && npm run aura:2d:publish && npm run aura:3d:publish && npm run aura:publish"
+        "aura:2d:publish": "npm run clean && rm -rf ./publish/2d && npm run lint && node ./scripts/publish.js --mode=2d",
+        "aura:3d:publish": "npm run clean && rm -rf ./publish/3d && npm run lint && node ./scripts/publish.js --mode=3d"
     },
     "devDependencies": {
         "@types/jest": "^27.4.0",
