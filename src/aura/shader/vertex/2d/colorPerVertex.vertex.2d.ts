@@ -6,7 +6,7 @@ import { VertexShader } from '../vertex.shader';
  * Built-in basic 2D Vertex Shader, transforming vertices by a uniform Mat3 and setting a varying VertexColor
  */
 export const VERTEX_COLOR_PER_VERTEX_2D = new VertexShader({
-    name: 'vertex_color_per_vertex_2d',
+    name: 'vertex_color_per_vertex',
     source: `
         precision mediump float;
 

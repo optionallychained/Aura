@@ -42,7 +42,7 @@ export class Transform2D extends Component {
         public readonly velocity = new Vec2()
     ) {
 
-        super('Transform2D');
+        super('Transform');
 
         this.translate(initialPosition);
         this.scaleTo(initialScale);

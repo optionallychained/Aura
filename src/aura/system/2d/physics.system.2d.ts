@@ -10,8 +10,12 @@ import { System2D } from './system.2d';
  */
 export class Physics extends System2D {
 
-    /** Provide the System's name */
-    public readonly name = 'Physics2D';
+    /**
+     * Constructor. Provide the name 'Physics' to the parent class
+     */
+    constructor() {
+        super('Physics');
+    }
 
     /**
      * Concrete tick lifecycle methid implementing the Physics System's per-frame functionality

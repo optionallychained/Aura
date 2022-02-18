@@ -97,7 +97,7 @@ export class Camera3D extends Camera<Camera3DConfig> {
         catch (e) {
             // re-throw the Component Not Found .getComponent() error for clarity
             throw new AuraError({
-                class: 'Camera3D',
+                class: 'Camera',
                 method: 'attachTo',
                 message: `Failed to attach to entity with tag ${entity.tag} : the Entity lacks a Transform3D`
             })

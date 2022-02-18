@@ -16,7 +16,7 @@ export class Char2D extends Entity {
 
     constructor(position: Vec2, scale: Vec2, texCoords: Vec2, color: Color) {
         super({
-            tag: 'font_char_2d',
+            tag: 'char',
             components: [
                 new Transform2D(position, scale),
                 new Shader(PROGRAM_TEXTURE_COLORED_2D),

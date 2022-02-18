@@ -15,7 +15,7 @@ export class Panel3D extends Entity {
 
     constructor(position: Vec3, scale: Vec3, color: Color) {
         super({
-            tag: 'ui_panel_3d',
+            tag: 'panel',
             components: [
                 new Transform3D(position, scale),
                 new Shader(PROGRAM_BASIC_3D),

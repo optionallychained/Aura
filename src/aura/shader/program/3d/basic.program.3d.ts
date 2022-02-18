@@ -9,7 +9,7 @@ import { ShaderProgram } from '../shaderProgram';
  * @see FRAGMENT_BASIC
  */
 export const PROGRAM_BASIC_3D = new ShaderProgram({
-    name: 'program_basic_3d',
+    name: 'program_basic',
     vertex: VERTEX_BASIC_3D,
     fragment: FRAGMENT_BASIC
 });

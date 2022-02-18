@@ -72,7 +72,7 @@ export class World3D extends World<World3DConfig> {
 
         if (!camera) {
             throw new AuraError({
-                class: 'World3D',
+                class: 'World',
                 method: 'getCamera',
                 message: `Failed to retrieve 3D Camera with name ${name}`
             });

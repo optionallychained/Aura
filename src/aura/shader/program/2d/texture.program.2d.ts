@@ -9,7 +9,7 @@ import { ShaderProgram } from '../shaderProgram';
  * @see FRAGMENT_TEXTURE
  */
 export const PROGRAM_TEXTURE_2D = new ShaderProgram({
-    name: 'program_texture_2d',
+    name: 'program_texture',
     vertex: VERTEX_TEXTURE_2D,
     fragment: FRAGMENT_TEXTURE
 });

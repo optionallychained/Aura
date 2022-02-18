@@ -10,8 +10,12 @@ import { System3D } from './system.3d';
  */
 export class Physics extends System3D {
 
-    /** Provide the System's name */
-    public readonly name = 'Physics3D';
+    /**
+     * Constructor. Provide the name 'Physics' to the parent class
+     */
+    constructor() {
+        super('Physics');
+    }
 
     /**
      * Concrete tick lifecycle method implementing the Physics System's per-frame functionality

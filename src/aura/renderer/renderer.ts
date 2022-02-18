@@ -120,7 +120,7 @@ export class Renderer {
 
         if (!gl) {
             throw new AuraError({
-                class: 'WebGLRenderer',
+                class: 'Renderer',
                 method: 'construct',
                 message: 'Failed to retrieve WebGL Canvas context'
             });
@@ -163,7 +163,7 @@ export class Renderer {
         const buffer = gl.createBuffer();
         if (!buffer) {
             throw new AuraError({
-                class: 'WebGLRenderer',
+                class: 'Renderer',
                 method: 'createVBO',
                 message: `Failed to create buffer with name '${name}'`
             });
@@ -212,7 +212,7 @@ export class Renderer {
         const program = gl.createProgram();
         if (!program) {
             throw new AuraError({
-                class: 'WebGLRenderer',
+                class: 'Renderer',
                 method: 'createShaderProgram',
                 message: `Failed to create Shader Program with name '${shader.name}'`
             });
@@ -233,7 +233,7 @@ export class Renderer {
             gl.deleteShader(vertexCompiled);
 
             throw new AuraError({
-                class: 'WebGLRenderer',
+                class: 'Renderer',
                 method: 'createShaderProgram',
                 message: `Failed to link Shader Program with name '${shader.name}' : [${error ?? ''}]`
             });
@@ -259,7 +259,7 @@ export class Renderer {
         const texture = gl.createTexture();
         if (!texture) {
             throw new AuraError({
-                class: 'WebGLRenderer',
+                class: 'Renderer',
                 method: 'createTexture',
                 message: `Failed to create texture with name '${textureAtlas.name}' and src '${textureAtlas.src}'`
             });
@@ -419,7 +419,7 @@ export class Renderer {
         const shader = gl.createShader(type);
         if (!shader) {
             throw new AuraError({
-                class: 'WebGLRenderer',
+                class: 'Renderer',
                 method: 'compileShader',
                 message: `Failed to create ${typeString} with name ${name}`
             });
@@ -437,7 +437,7 @@ export class Renderer {
             gl.deleteShader(shader);
 
             throw new AuraError({
-                class: 'WebGLRenderer',
+                class: 'Renderer',
                 method: 'compileShader',
                 message: `Failed to compile ${typeString} with name ${name} : [${error ?? ''}]`
             });
@@ -481,7 +481,7 @@ export class Renderer {
 
             if (!location) {
                 throw new AuraError({
-                    class: 'WebGLRenderer',
+                    class: 'Renderer',
                     method: 'initializeShaderProgram',
                     message: `Failed to retrieve uniform location for uniform name '${uniform.name}' in shader program '${spec.name}'`
                 });
@@ -518,7 +518,7 @@ export class Renderer {
         const program = this.shaderPrograms.get(name);
         if (!program) {
             throw new AuraError({
-                class: 'WebGLRenderer',
+                class: 'Renderer',
                 method: 'useShaderProgram',
                 message: `Failed to switch to Shader Program with name '${name}'`
             });
@@ -543,7 +543,7 @@ export class Renderer {
 
         if (!buffer) {
             throw new AuraError({
-                class: 'WebGLRenderer',
+                class: 'Renderer',
                 method: 'useVBO',
                 message: `Failed to switch to VBO with name '${vbo.name}'`
             });
@@ -579,7 +579,7 @@ export class Renderer {
         const texture = this.textures.get(name);
         if (!texture) {
             throw new AuraError({
-                class: 'WebGLRenderer',
+                class: 'Renderer',
                 method: 'useTexture',
                 message: `Failed to switch to Texture with name '${name}'`
             });

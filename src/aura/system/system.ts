@@ -17,8 +17,12 @@ import { Game3D } from '../core/3d/game.3d';
  */
 export abstract class System<TGame extends Game2D | Game3D> {
 
-    /** Abstract name for the System, to be implemented by concrete Systems */
-    public abstract readonly name: string;
+    /**
+     * Constructor. Take and store a name for this System
+     *
+     * @param name the name of the System
+     */
+    constructor(public readonly name: string) { }
 
     /**
      * Abstract tick lifecycle method, called once per frame while the System is active

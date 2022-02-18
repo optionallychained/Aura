@@ -17,7 +17,7 @@ export class Char3D extends Entity {
 
     constructor(position: Vec3, scale: Vec3, texCoords: Vec2, color: Color) {
         super({
-            tag: 'font_char_3d',
+            tag: 'char',
             components: [
                 new Transform3D(position, scale),
                 new Shader(PROGRAM_TEXTURE_COLORED_3D),

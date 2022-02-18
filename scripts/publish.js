@@ -19,7 +19,7 @@ const packageName = `@aura/${mode}`;
     execSync(`tsc --project ./tsconfig.publish.${mode}.json`, { stdio: 'inherit' });
 
     // produce aura.<mode>.min.js with webpack
-    console.info(`Packing Aura ${packageName}...`);
+    console.info(`Packing ${packageName}...`);
     await new Promise((resolve, reject) => {
         webpack({
             mode: 'production',
@@ -69,7 +69,7 @@ const packageName = `@aura/${mode}`;
         dependencies: JSON.parse(fs.readFileSync(path.resolve(__dirname, '../', 'package.json')).toString()).dependencies
     }, null, '\t'));
 
-    // delete all files related to the opposite of mode(for Aura3D, delete 2d files and vice versa)
+    // delete all files related to the opposite of mode (for Aura3D, delete 2d files and vice versa)
     console.info(`Deleting all ${mode === '2d' ? '3d' : '2d'} files from ${output}...`);
     (function scrub(dir, match) {
         fs.readdirSync(dir).forEach((f) => {
@@ -84,8 +84,6 @@ const packageName = `@aura/${mode}`;
                 }
             }
         });
-
-        return;
     })(output, (path) => path.includes(mode === '2d' ? '/3d' : '/2d'));
 
     console.info(`Done! ${packageName} ready to publish`);

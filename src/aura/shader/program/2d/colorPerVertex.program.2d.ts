@@ -9,7 +9,7 @@ import { ShaderProgram } from '../shaderProgram';
  * @see FRAGMENT_COLOR_PER_VERTEX
  */
 export const PROGRAM_COLOR_PER_VERTEX_2D = new ShaderProgram({
-    name: 'program_color_per_vertex_2d',
+    name: 'program_color_per_vertex',
     vertex: VERTEX_COLOR_PER_VERTEX_2D,
     fragment: FRAGMENT_COLOR_PER_VERTEX
 });

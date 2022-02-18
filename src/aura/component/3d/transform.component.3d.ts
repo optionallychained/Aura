@@ -45,7 +45,7 @@ export class Transform3D extends Component {
         public readonly velocity = new Vec3()
     ) {
 
-        super('Transform3D');
+        super('Transform');
 
         this.translate(initialPosition);
         this.scaleTo(initialScale);

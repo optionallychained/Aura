@@ -12,12 +12,16 @@ import { System2D } from './system.2d';
  */
 export class Collision extends System2D {
 
-    /** Provide the System's name */
-    public readonly name = 'Collision';
-
     /** Simple array of `id-id` collision strings, used for tracking Entity-Entity collisions and invoking correct collision callbacks */
     // TODO how could we go about cleaning up stale collision strings for Entity pairings which have become invalid (eg by Entity removal)?
     private collisions: Array<string> = [];
+
+    /**
+     * Constructor. Provide the name 'Collision' to the parent class
+     */
+    constructor() {
+        super('Collision');
+    }
 
     /**
      * Concrete tick lifecycle method implementing the Collision System's per-frame functionality

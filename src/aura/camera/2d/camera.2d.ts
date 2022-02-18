@@ -68,7 +68,7 @@ export class Camera2D extends Camera<Camera2DConfig> {
         catch (e) {
             // re-throw the Component Not Found .getComponent() error for clarity
             throw new AuraError({
-                class: 'Camera2D',
+                class: 'Camera',
                 method: 'attachTo',
                 message: `Failed to attach to Entity with tag ${entity.tag} : the Entity lacks a Transform2D`
             })

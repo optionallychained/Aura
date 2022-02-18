@@ -9,7 +9,7 @@ import { ShaderProgram } from '../shaderProgram';
  * @see FRAGMENT_TEXTURE
  */
 export const PROGRAM_TEXTURE_COLORED_3D = new ShaderProgram({
-    name: 'program_texture_colored_3d',
+    name: 'program_texture_colored',
     vertex: VERTEX_TEXTURE_3D,
     fragment: FRAGMENT_TEXTURE_COLORED
 });

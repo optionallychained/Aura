@@ -70,7 +70,7 @@ export class World2D extends World<World2DConfig> {
 
         if (!camera) {
             throw new AuraError({
-                class: 'World2D',
+                class: 'World',
                 method: 'getCamera',
                 message: `Failed to retrieve 2D Camera with name ${name}`
             });
