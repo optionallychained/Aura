@@ -1,36 +1,23 @@
 /**
- * Class representing a texture atlas; a uniformly-distributed grid composed of individual textures which Entities may sample from with
- *   Texture Components
+ * Texture Atlas representation; a uniform grid composed of individual textures which Entities may sample from with Texture Components
  *
- * One part of the system's solution for texture support
+ * One TextureAtlas may be configured for each EntityManager (World, UI, Text), providing texture sampling space for each Entity type
  *
- * Utilised by EntityManagers in configuring the WebGLRenderer and resolving texture coordinates for Entity vertex lists, three
- *   TextureAtlases are supported to contain textures for game objects (World), text (Font) and UI elements (UI)
+ * Images used in TextureAtlas configurations must have power-of-2 dimensions
  *
- * Atlases, if required, are configured in association with World, UI and Font by way of the top-level GameConfig object
- *
- * Image dimensions must be power-of-2 in both x and y
- *
- * @see Texture
- * @see GameConfig
- * @see WorldConfig
- * @see UIConfig
- * @see FontConfig
- * @see EntityManagerConfig
+ * NB: the Game (currently) configures a default TextureAtlas for Font, expecting a monospace Font texture at `./src/res/font.png`
  */
 export class TextureAtlas {
 
     /**
-     * Constructor. Take the Atlas' name and filepath, as well as the dimensions of the atlas
+     * Constructor. Take the Atlas' name and image filepath, the image's dimensions, and the number of rows and columns in the image's grid
      *
-     * Atlases must (currently?) be uniform, in that the Atlas should be divisible evenly along its x and y axis to yield individual
-     *   textures. However, an Entity can specify a column/row "span" so as to sample from multiple contiguous columns or rows in the Atlas,
-     *   allowing for packing of differently-sized textures
-     *
-     * @param name the name of the Atlas, constrained to the three supported names
-     * @param src the file path of the image the Atlas will load
-     * @param columns the number of texture cells on the x-axis of the Atlas
-     * @param rows the number of texture cells on the y-axis of the Atlas
+     * @param name the name of the Atlas, constrained to the three supported use cases
+     * @param src the file path of the Atlas' image
+     * @param width the pixel width of the Atlas' image
+     * @param height the pixel height of the Atlas' image
+     * @param columns the number of texture cells along the Atlas' x dimension
+     * @param rows the number of texture cells along the Atlas' y dimension
      */
     constructor(
         public readonly name: 'world' | 'text' | 'ui',
@@ -42,22 +29,19 @@ export class TextureAtlas {
     ) { }
 
     /**
-     * Given a set of vertex texture coordinates retrieved from an Entity's Model, as well as the atlas positional data found in the
-     *   Entity's Texture, calculate the real texCoord value to build into the Entity's vertex list
+     * Given a set of normalized vertex texture coordinates retrieved from an Entity's Model Component (specified by Geometry), as well as
+     *   the Atlas row and column to sample from retrieved from an Entity's Texture Component, calculate the real Texture Coordinate value
+     *   to pack into the Entity's vertex array
      *
      * Implements half pixel correction to avoid texture bleeding
      *
-     * Texture coordinates are specified on a Model with values ranging 0->1, as if sampling from a whole image. Using this in conjunction
-     *   with a Texture Component's positional data, we can treat those values as being "within a designated sample space", simplifying the
-     *   specification of texture coordinates for Models as well as removing the need for Entities to explicitly define texture coordinates
+     * @param coords the normalized texture coordinates as associated with a given vertex (Geometry texCoords)
+     * @param column the Atlas column to sample from
+     * @param row the Atlas row to sample from
+     * @param columnSpan the number of columns to sample from within the Atlas (Texture columnSpan)
+     * @param rowSpan the number of rows to sample from within the atlas (Texture rowSpan)
      *
-     * @param coords the base texture coordinates to scale
-     * @param column the column within the Atlas to sample from
-     * @param row the row within the Atlas to sample from
-     * @param columnSpan the number of columns to span in the sample
-     * @param rowSpan the number of rows to span in the sample
-     *
-     * @returns the corrected texture coordinates, sampling from (column -> column + columnSpan), (row -> row + rowSpan)
+     * @returns the calculated and corrected texture coordinates for the vertex
      */
     public resolveTextureCoordinates(coords: Float32Array, column: number, row: number, columnSpan: number, rowSpan: number): Float32Array {
         const u = (column + coords[0]) * (columnSpan / this.columns) - (((columnSpan - 1) / this.columns) * column);

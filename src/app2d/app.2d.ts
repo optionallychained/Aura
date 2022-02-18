@@ -1,4 +1,4 @@
-import { Game, ShaderPrograms, Vec2 } from '../aura/index.2d';
+import { Game, ShaderPrograms, Vec2 } from '../aura/aura.2d';
 import { SHAPES_STATE } from './state/shapes.state';
 
 const game = new Game({

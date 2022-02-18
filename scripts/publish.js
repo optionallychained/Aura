@@ -23,7 +23,7 @@ const packageName = `@aura/${mode}`;
     await new Promise((resolve, reject) => {
         webpack({
             mode: 'production',
-            entry: path.resolve(__dirname, '../src/aura', `index.${mode}.ts`),
+            entry: path.resolve(__dirname, '../src/aura', `aura.${mode}.ts`),
             module: {
                 rules: [
                     {
@@ -49,8 +49,8 @@ const packageName = `@aura/${mode}`;
 
     // rename index + typedefs
     console.info(`Renaming ${packageName} indices...`);
-    fs.moveSync(path.resolve(output, `index.${mode}.js`), path.resolve(output, 'index.js'));
-    fs.moveSync(path.resolve(output, `index.${mode}.d.ts`), path.resolve(output, 'index.d.ts'));
+    fs.moveSync(path.resolve(output, `aura.${mode}.js`), path.resolve(output, 'index.js'));
+    fs.moveSync(path.resolve(output, `aura.${mode}.d.ts`), path.resolve(output, 'index.d.ts'));
 
     // write an appropriate package.json, carrying dependencies (if any) from ./package.json
     console.info(`Writing ${packageName} package.json...`)

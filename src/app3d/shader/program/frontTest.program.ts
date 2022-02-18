@@ -1,4 +1,4 @@
-import { ShaderProgram, VertexShaders } from '../../../aura/index.3d';
+import { ShaderProgram, VertexShaders } from '../../../aura/aura.3d';
 import { FRAGMENT_FRONT_TEST } from '../fragment/frontTest.fragment';
 
 export const PROGRAM_FRONT_TEST = new ShaderProgram({

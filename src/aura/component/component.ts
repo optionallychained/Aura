@@ -1,17 +1,14 @@
 /**
- * Abstract class defining a Component; an object stored on an Entity providing data and behaviour enabling the operation of Systems on the
- *   Entity
+ * Abstract Component; an object stored on an Entity providing data and/or behavior, enabling rendering and System operation on the Entity
  *
- * All Components should extend from this class and provide an easy-to-guess and sensible name (eg. Transform2D => 'Transform2D')
+ * Concrete Components should extend from this class and provide an easy-to-guess name (eg Transform -> 'Transform')
  *
- * Example Components include physics-related Transforms, rendering-related Shaders and Models, Colliders and more
- *
- * @see Entity
+ * Example Components include physics-related Transforms, rendering-related Shaders and Models and Colliders
  */
 export abstract class Component {
 
     /**
-     * Constructor. Take and store a name for this Component
+     * Constructor. Take a name for the Component
      *
      * @param name the name of the Component
      */

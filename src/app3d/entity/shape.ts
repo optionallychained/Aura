@@ -1,4 +1,4 @@
-import { Entity, Angle, Geometry, Vec3, Transform, Model, Shader, MultiColor, Color, ShaderPrograms, Random } from '../../aura/index.3d';
+import { Entity, Angle, Geometry, Vec3, Transform, Model, Shader, MultiColor, Color, ShaderPrograms, Random } from '../../aura/aura.3d';
 import { PROGRAM_FRONT_TEST } from '../shader/program/frontTest.program';
 
 export class Shape extends Entity {
@@ -23,7 +23,7 @@ export class Shape extends Entity {
     }
 
     public tick(): void {
-        this.getComponent<Transform>('Transform3D').rotate(
+        this.getComponent<Transform>('Transform').rotate(
             new Vec3(this.rotations[0], this.rotations[1], this.rotations[2])
         );
     }

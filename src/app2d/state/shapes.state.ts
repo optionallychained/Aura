@@ -1,4 +1,4 @@
-import { Geometries, Random, State, Vec2 } from '../../aura/index.2d';
+import { Geometries, Random, State, Vec2 } from '../../aura/aura.2d';
 import { Shape } from '../entity/shape.entity';
 
 export const SHAPES_STATE = new State({

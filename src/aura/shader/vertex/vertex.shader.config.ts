@@ -9,8 +9,8 @@ export interface VertexShaderConfig {
     readonly name: string;
     /** The VertexShader's source */
     readonly source: string;
-    /** An AttributeArray describing the attributes the VertexShader contains; used in automatic attribute vertex compilation */
+    /** An AttributeArray describing the attributes the VertexShader contains */
     readonly attributes: AttributeArray;
-    /** A UniformArray describing the uniforms the VertexShader contains; used in automatic uniform value retrieval and upload */
+    /** A UniformArray describing the uniforms the VertexShader contains */
     readonly uniforms: UniformArray;
 }

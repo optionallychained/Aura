@@ -1,67 +1,13 @@
 import { AuraError } from '../core/aura.error';
-import { Game } from '../core/game';
+import { GameBase } from '../core/game.base';
 import { Color } from '../math/color';
 import { ShaderProgram } from '../shader/program/shaderProgram';
 import { ShaderVariableResolver } from '../shader/shaderVariableResolver';
 import { UniformType } from '../shader/uniformType.enum';
 import { UniformVariation } from '../shader/uniformVariation.enum';
 import { TextureAtlas } from '../texture/textureAtlas';
-import { RendererConfig } from './renderer.config';
+import { RendererConfig, AttributeLocationArray, ShaderProgramSpec, TextureSpec, UniformLocationArray } from './renderer.config';
 import { VBOConfig } from './vbo.config';
-
-/**
- * Internal-use utility type for representing attribute location and size information required only by the renderer
- *
- * Created on shader program initialisation and used in generically handling vertexAttribPointer() calls
- */
-type AttributeLocationArray = Array<{
-    readonly location: number;
-    readonly size: number;
-}>;
-
-/**
- * Internal-use utility type for representing uniform location and type information required only by the renderer
- *
- * Created on shader program initialisation and used in generically handling glUniform*() calls
- */
-type UniformLocationArray = Array<{
-    readonly name: string;
-    readonly location: WebGLUniformLocation;
-    readonly type: UniformType;
-}>;
-
-/**
- * Internal-use utility interface describing a shader program's specification with information required only by the renderer
- *
- * Comprising a shader program's name, WebGL handle, and information about its attribute and uniform locations, constructed on shader
- *   program initialisation and used in generically handling shader program registration and switching
- */
-interface ShaderProgramSpec {
-    /** The name of the shader program */
-    readonly name: string;
-    /** The WebGL handle for the shader program */
-    readonly program: WebGLProgram;
-    /** The attribute information associated with the shader program */
-    readonly attributeLocations: AttributeLocationArray;
-    /** The uniform information for all 'static' (once per render call) uniforms */
-    readonly staticUniformLocations: UniformLocationArray;
-    /** the uniform information for all 'entity' (once per Entity) uniforms */
-    readonly entityUniformLocations: UniformLocationArray;
-}
-
-/**
- * Internal-use utility interface describing a texture's specification with information only required by the renderer
- */
-interface TextureSpec {
-    /** The name of the texture */
-    name: string;
-    /** The GL Unit of the texture (eg gl.TEXTURE0) */
-    unit: number;
-    /** the Unit index of the texture (eg. unit - gl.TEXTURE0) to upload as a uniform to a Sampler*D() */
-    uniformUnit: number;
-    /** The WebGLTexture */
-    texture: WebGLTexture;
-}
 
 /**
  * Core WebGL Renderer; utilised by the EntityManager to defer the rendering of Entities to the Canvas
@@ -71,9 +17,6 @@ interface TextureSpec {
  *
  * Designed to operate entirely on outside configuration, so as to enable the EntityManager to implement abstracted optimisations for things
  *   like vertex management, buffering and shader switching
- *
- * @see Game
- * @see EntityManager
  */
 export class Renderer {
 
@@ -101,19 +44,19 @@ export class Renderer {
     /** Active texture specification; used for render-to-render optimisation of texture switching */
     private activeTexture: TextureSpec | null = null;
 
-    /** Current rendering mode; used for differentiating some rendering functionality between 2D and 3D States */
+    /** Current rendering mode; used for differentiating some rendering functionality between 2D and 3D Games */
     private mode: '2D' | '3D' = '2D';
 
     /** Reference to the Game the Renderer belongs to */
-    private game: Game | undefined;
+    private game: GameBase | undefined;
 
     /**
-     * Constructor. Retrieve and store the Game the Renderer belongs to, then perform one-time setup of the Canvas context
+     * Constructor. Take the Game the Renderer belongs to, then perform one-time setup of the Canvas context
      *
      * @param game the Game the Renderer belongs to
-     * @param clearColor the Game's background color, to be set as the gl clearColor once on init
+     * @param clearColor the Game's background color, to be set once as the gl clearColor
      */
-    constructor(game: Game, clearColor: Color) {
+    constructor(game: GameBase, clearColor: Color) {
         this.game = game;
 
         const gl = game.canvas?.getContext('webgl');
@@ -133,14 +76,14 @@ export class Renderer {
     }
 
     /**
-     * Getter for the active texture unit, used for configuring Sampler2Ds in shaders
+     * Retrieve the active texture unit, used for configuring Sampler2Ds in shaders
      */
     public get activeTextureUnit(): number {
         return this.activeTexture?.uniformUnit ?? -1;
     }
 
     /**
-     * Clear the drawing buffer with the appropriate bitmask, account for depth buffer if we're rendering in 3D
+     * Clear the drawing buffer with the appropriate bitmask, accounting for depth buffer if we're rendering in 3D
      */
     public clearScreen(): void {
         let clearBit = this.gl.COLOR_BUFFER_BIT;
@@ -195,8 +138,7 @@ export class Renderer {
     }
 
     /**
-     * Initialise and store a shader program with the given ShaderProgram specification, performing one-time retrieval of its attribute and
-     *   uniform locations to persist in the ShaderProgramSpec map
+     * Initialise and store a shader program and perform one-time setup of its attribute and uniform locations
      *
      * @param shader the ShaderProgram specification
      */
@@ -371,7 +313,7 @@ export class Renderer {
     }
 
     /**
-     * Called as part of Game destroy(); clean up after ourselves
+     * Unlink the Renderer's Game reference, allowing for garbage collection on Game destroy
      *
      * // TODO incomplete, part of the first-working-version of the destroy() solution
      */
@@ -398,11 +340,11 @@ export class Renderer {
     }
 
     /**
-     * Internal-use single-shader source compilation routine for registering and compiling the individual Vertex and Fragment aspects of a
-     *   ShaderProgram
+     * Compile an individual FragmentShader or VertexShader
      *
-     * @param type the gl numerical type of the shader to create; either gl.VERTEX_SHADER or gl.FRAGMENT_SHADER
-     * @param src the source of the shader to compile
+     * @param name the name of the shader
+     * @param type the type of the shader - vertex or fragment
+     * @param src the shader source
      *
      * @returns the compiled WebGLShader
      */
@@ -447,11 +389,10 @@ export class Renderer {
     }
 
     /**
-     * Perform one-time setup of a new shader program by retrieving information about its attribute and uniform locations and storing the
-     *   results for later use in the ShaderProgramSpec map
+     * Perform one-time setup of a ShaderProgram's attribute and uniform locations, storing the information in the ShaderProgramSpec map
      *
      * @param program the WebGLProgram to initialise
-     * @param spec the ShaderProgram that was used to create the program
+     * @param spec the ShaderProgramSpec that was used to create the program
      */
     private initializeShaderProgram(program: WebGLProgram, spec: ShaderProgram): void {
         const { gl } = this;
@@ -508,9 +449,9 @@ export class Renderer {
     }
 
     /**
-     * Internal-use shader switching routine; make the shader program, specified by name, active for draw calls
+     * Switch to the named Shader Program
      *
-     * @param name the name of the shader program to make active
+     * @param name the name of the Shader Program to switch to
      */
     private useShaderProgram(name: string): void {
         const { gl } = this;
@@ -530,12 +471,11 @@ export class Renderer {
     }
 
     /**
-     * Internal-use VBO switching routine; make the VBO, specified by a configuration, active for draw calls
+     * Switch to the VBO with the given VBOConfig, configuring attribute points.
      *
-     * (re)buffer the vertices specified in the VBOConfig if its 'changed' flag is set, indicating either that it's new or that its vertex
-     *   list has changed since the last time it was drawn
+     * Rebuffers the VBO's vertex array if it has been marked as changed between renders
      *
-     * @param vbo the VBOConfig representing the VBO to make active
+     * @param vbo the VBOConfig specifying the VBO to switch to
      */
     private useVBO(vbo: VBOConfig): void {
         const { gl } = this;
@@ -569,9 +509,9 @@ export class Renderer {
     }
 
     /**
-     * Internal-use texture switching routine; make the texture, specified by name, active for draw calls
+     * Switch to the named Texture
      *
-     * @param name the name of the texture to make active
+     * @param name the name of the Texture to switch to
      */
     private useTexture(name: string): void {
         const { gl } = this;
@@ -592,11 +532,9 @@ export class Renderer {
     }
 
     /**
-     * Internal-use uniform upload routine; used in uploading uniform values as necessary in render()
+     * Upload a uniform of a given type and value to the given uniform location as previously retrieved for a ShaderProgram
      *
-     * Encapsulates and limits the implicit relationship between the UniformType enum and associated uniform*() methods
-     *
-     * @param location the WebGLUniformLocation of the uniform to upload
+     * @param location the loction of the uniform to upload
      * @param type the UniformType of the uniform to upload
      * @param value the value of the uniform to upload
      */
@@ -635,13 +573,11 @@ export class Renderer {
     }
 
     /**
-     * Check if a given Image is sourced from the same origin as that which Aura is running on, used as a check for including the
-     *   'crossOrigin' field on images loaded as textures, thereby enabling cross-origin textures
+     * Check whether or not a given image is sourced from the same origin as that which Aura is running on; used in supporting crossorign
+     *   textures
      *
-     * @param image the Image
-     * @param url the source URL of the Image
-     *
-     * @returns whether or not the image is sourced from the same origin
+     * @param url the source URL of the image
+     * @returns
      */
     private imageIsSameOrigin(url: string): boolean {
         return new URL(url, window.location.href).origin === window.location.origin;

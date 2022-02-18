@@ -3,14 +3,14 @@ import { GLShape } from '../../geometry/glShape.enum';
 import { Component } from '../component';
 
 /**
- * Built-in Model Component, defining the Geometry the Entity will use to define its shape
+ * Model Component, defining the Geometry the Entity will use to define its shape
  *
- * @see Geometry
+ * Together with the Shader Component, makes an Entity renderable
  */
 export class Model extends Component {
 
     /**
-     * Constructor. Take and store the Geometry to use
+     * Constructor. Take the Geometry to use and provide the name 'Model' to the parent class
      *
      * @param geometry the Geometry to use
      */
@@ -19,42 +19,42 @@ export class Model extends Component {
     }
 
     /**
-     * Getter for the Model's name, as provided in its Geometry config
+     * Retrieve the Geometry's name
      */
     public get modelName(): string {
         return this.geometry.name;
     }
 
     /**
-     * Getter for the Model's vertices, as provided in its Geometry config
+     * Retrieve the Geometry's vertices
      */
     public get vertices(): Float32Array {
         return this.geometry.vertices;
     }
 
     /**
-     * Getter for the Model's vertexSize, as provided in its Geometry config
+     * Retrieve the Geometry's vertex size
      */
     public get vertexSize(): number {
         return this.geometry.vertexSize;
     }
 
     /**
-     * Getter for the Model's vertexCount, as provided in its Geometry config
+     * Retrieve the Geometry's vertex count
      */
     public get vertexCount(): number {
         return this.geometry.vertexCount;
     }
 
     /**
-     * Getter for the Model's GLShape, as provided in its Geometry config
+     * Retrieve the Geometry's GLShape
      */
     public get glShape(): GLShape {
         return this.geometry.glShape;
     }
 
     /**
-     * Getter for the Model's textureCoordinates, as provided in its Geometry config
+     * Retrieve the Geometry's texture coordinates
      */
     public get textureCoordinates(): Float32Array {
         return this.geometry.textureCoordinates;

@@ -1,4 +1,4 @@
-import { State, Angle, Geometries, Random, Vec3, Keys } from '../../aura/index.3d';
+import { State, Angle, Geometries, Random, Vec3, Keys } from '../../aura/aura.3d';
 import { Axis } from '../entity/axis';
 import { Shape } from '../entity/shape';
 

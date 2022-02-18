@@ -2,9 +2,9 @@ import { Color } from '../../math/color';
 import { Component } from '../component';
 
 /**
- * Built-in MultiColor Component, defining an arbitrary number of colors for the Entity
+ * MultiColor Component, defining an arbitrary number of colors for the Entity
  *
- * MultiColor colors will be cycled through on a per-vertex basis, allowing for per-vertex colouration
+ * A MultiColor's colors will be cycled through on a per-vertex basis, allowing for per-vertex colouration
  */
 export class MultiColor extends Component {
 
@@ -14,9 +14,9 @@ export class MultiColor extends Component {
     private currentColor = 0;
 
     /**
-     * Constructor. Take and store the colors to use
+     * Constructor. Take the list of Colors to use and provide the name 'MultiColor' to the parent class
      *
-     * @param colors the colors to use
+     * @param colors the list of Colors to use
      */
     constructor(public readonly colors: ReadonlyArray<Color>) {
         super('MultiColor');

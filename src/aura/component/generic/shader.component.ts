@@ -4,14 +4,14 @@ import { VertexShader } from '../../shader/vertex/vertex.shader';
 import { Component } from '../component';
 
 /**
- * Built-in Shader Component, defining the Shader an Entity will use in rendering
+ * Shader Component, defining the Shader an Entity will use
  *
- * @see ShaderProgram
+ * Together with the Model Component, makes an Entity renderable
  */
 export class Shader extends Component {
 
     /**
-     * Constructor. Take the ShaderProgram to use, and extract its details into the Component
+     * Constructor. Take the ShaderProgram to use and provide the name 'Shader' to the parent class
      *
      * @param program the ShaderProgram to use
      */
@@ -20,21 +20,21 @@ export class Shader extends Component {
     }
 
     /**
-     * Getter for the Shader's name, as provided in its ShaderProgram config
+     * Retriever the ShaderProgram's name
      */
     public get programName(): string {
         return this.program.name;
     }
 
     /**
-     * Getter for the Shader's VertexShader, as provided in its ShaderProgram config
+     * Retrieve the ShaderProgram's VertexShader
      */
     public get vertex(): VertexShader {
         return this.program.vertex;
     }
 
     /**
-     * Getter for the Shader's FragmentShader, as provided in its ShaderProgram config
+     * Retrieve the ShaderProgram's FragmentShader
      */
     public get fragment(): FragmentShader {
         return this.program.fragment;

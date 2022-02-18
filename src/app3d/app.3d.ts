@@ -1,4 +1,4 @@
-import { Game, ShaderPrograms, Vec2, Vec3 } from '../aura/index.3d';
+import { Game, ShaderPrograms, Vec2, Vec3 } from '../aura/aura.3d';
 import { PROGRAM_FRONT_TEST } from './shader/program/frontTest.program';
 import { SHAPES_STATE } from './state/shapes.state';
 import { TEST_STATE } from './state/test.state';

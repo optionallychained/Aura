@@ -11,6 +11,6 @@
         "downlevelIteration": true
     },
     "include": [
-        "./src/aura/index.2d.ts"
+        "./src/aura/aura.2d.ts"
     ]
 }

@@ -1,18 +1,14 @@
 import { Component } from '../component/component';
 import { AuraError } from '../core/aura.error';
-import { Game } from '../core/game';
+import { GameBase } from '../core/game.base';
 import { EntityConfig } from './entity.config';
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 /**
- * Class representing an Entity
+ * Abstract Entity - any object existing in a Game's World, Text or UI, comprised of Components and handled by respective EntityManagers
  *
- * An Entity is any object existing within the game; be it a player, enemy, pickup, level object, camera, UI element, etc
- *
- * Entities maintain a list of Components, which give them their properties and behaviour and allow Systems to operate on them as necessary
- *
- * @see Component
+ * Concrete Entities implemented in Games should extend from this class, overring its methods as required
  */
 export abstract class Entity {
 
@@ -23,9 +19,9 @@ export abstract class Entity {
     private readonly components = new Map<string, Component>();
 
     /**
-     * Constructor. Take and store the Entity's config and initialise the Entity with Components if provided in the config
+     * Constructor. Take an EntityConfig and initialise the Entity's Components, if provided
      *
-     * @param config entity configuration
+     * @param config the EntityConfig
      */
     constructor(private readonly config: EntityConfig) {
         if (config.components) {
@@ -34,7 +30,7 @@ export abstract class Entity {
     }
 
     /**
-     * Getter for the Entity's tag, as provide in its config
+     * Retrieve the Entity's tag as provided in its config
      *
      * @returns the Entity's tag
      */
@@ -45,49 +41,45 @@ export abstract class Entity {
     /**
      * Optional frame update function called by the EntityManager during frame execution, implementable by concrete Entities
      *
-     * @see EntityManager
-     *
-     * @param frameDelta the time between the last frame and the current, for normalizing time-dependent operations
+     * @param game the Game the System is operating within
+     * @param frameDelta the frame delta as calculated by the Game
      */
-    public tick(game: Game, frameDelta: number): void { }
+    public tick(game: GameBase, frameDelta: number): void { }
 
     /**
-     * Optional collision callback method called by the collision system when this Entity begins colliding with another, implementable by
-     *   concrete Entities
+     * Optional collision callback method for the start of a collision with another specific Entity, implementable by concrete Entities
      *
-     * @param game a reference to the Game, for setting data, switching States or similar
+     * @param game the 2D or 3D Game the System is operating within
      * @param other the Entity with which collision has begun
      */
-    public onCollisionStart(game: Game, other: Entity): void { }
+    public onCollisionStart(game: GameBase, other: Entity): void { }
 
     /**
-     * Optional collision callback method called by the collision system when this Entity continues to collide with another on the current
-     *   frame, implementable by concrete Entities
+     * Optional collision callback method for the continuation of a collision with another specific Entity, implentable by concrete Entities
      *
-     * @param game a reference to the Game, for setting data, switching States or similar
+     * @param game the 2D or 3D Game the System is operating within
      * @param other the Entity with which collision continues
      */
-    public onCollisionContinue(game: Game, other: Entity): void { }
+    public onCollisionContinue(game: GameBase, other: Entity): void { }
 
     /**
-     * Optional collision callback method called by the collision system when this Entity stops colliding with another, implementable by
-     *   concrete Entities
+     * Optional collision callback method for the end of a collision with another specific Entity, implementable by concrete Entities
      *
-     * @param game a reference to the Game, for setting data, switching states or similar
+     * @param game the 2D or 3D Game the System is operating within
      * @param other the Entity with which collision has ended
      */
-    public onCollisionEnd(game: Game, other: Entity): void { }
+    public onCollisionEnd(game: GameBase, other: Entity): void { }
 
     /**
-     * Get a Component from the Entity by name
+     * Retrieve a Component by name
      *
      * Throws an error if the Component is not found on the Entity to allow type safety + simplistic no-questions consumer calls
      *
-     * @typeparam T the type of the Component that will be returned
+     * @typeparam T the type of the Component to retrieve
      *
      * @param name the name of the Component to retrieve
      *
-     * @returns the Component
+     * @returns the retrieved Component
      */
     public getComponent<T extends Component>(name: string): T {
         if (!this.hasComponent(name)) {
@@ -122,7 +114,7 @@ export abstract class Entity {
     }
 
     /**
-     * Remove a Component from the Entity by Component name
+     * Remove the named Component from the Entity
      *
      * @param name the name of the Component to remove
      */
@@ -131,7 +123,7 @@ export abstract class Entity {
     }
 
     /**
-     * Remove a list of Components from the Entity by Component name
+     * Remove a list of named Components from the Entity
      *
      * @param names the names of the Components to remove
      */
@@ -142,22 +134,22 @@ export abstract class Entity {
     }
 
     /**
-     * Check if the Entity has a Component by Component name
+     * Check if the Entity has a named Component
      *
      * @param name the name of the Component to check
      *
-     * @returns a boolean indicating whether or not the Entity has the named Component
+     * @returns whether or not the Entity has the named Component
      */
     public hasComponent(name: string): boolean {
         return this.components.has(name);
     }
 
     /**
-     * Check if the Entity has a list of Components by Component name
+     * Check if the Entity has a list of named Components
      *
      * @param names the names of the Components to check
      *
-     * @returns a boolean indicating whether or not the Entity has all of the named Components
+     * @returns whether or not the Entity has all of the named Components
      */
     public hasComponents(...names: Array<string>): boolean {
         for (const n of names) {

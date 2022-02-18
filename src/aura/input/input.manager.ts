@@ -4,8 +4,6 @@ import { Keys } from './keys.enum';
 
 /**
  * Core InputManager; utilised by the Game to defer the detection and management of user input
- *
- * @see Game
  */
 export class InputManager {
 

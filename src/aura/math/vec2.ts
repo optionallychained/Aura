@@ -1,4 +1,4 @@
-import { Mutable } from '../types';
+import { Mutable } from '../aura.types';
 import { Mat3 } from './mat3';
 import { Vec3 } from './vec3';
 

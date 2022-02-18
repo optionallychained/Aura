@@ -1,4 +1,4 @@
-import { Geometries, State, Transform, Angle, Keys } from '../../aura/index.3d';
+import { Geometries, State, Transform, Angle, Keys } from '../../aura/aura.3d';
 import { Axis } from '../entity/axis';
 import { Shape } from '../entity/shape';
 
@@ -13,7 +13,7 @@ export const TEST_STATE = new State({
     },
     end: () => { },
     tick: (game) => {
-        const shapeTransform = game.world.filterEntitiesByTag('shape')[0]?.getComponent<Transform>('Transform3D');
+        const shapeTransform = game.world.filterEntitiesByTag('shape')[0]?.getComponent<Transform>('Transform');
         const camera = game.world.activeCamera;
 
         const cameraAngle = Angle.toRadians(0.5);

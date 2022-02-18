@@ -6,6 +6,6 @@ import { Component } from '../component/component';
 export interface EntityConfig {
     /** A human-readable tag for identifying the Entity */
     readonly tag: string;
-    /** Components to initialise the Entity with, for convenient setup */
+    /** Components to initialise the Entity with */
     readonly components?: ReadonlyArray<Component>;
 }

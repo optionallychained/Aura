@@ -1,4 +1,4 @@
-import { Entity, Angle, Transform, Vec3, Color, Geometries, Model, Shader, FlatColor, ShaderPrograms } from '../../aura/index.3d';
+import { Entity, Angle, Transform, Vec3, Color, Geometries, Model, Shader, FlatColor, ShaderPrograms } from '../../aura/aura.3d';
 
 export class Axis extends Entity {
 

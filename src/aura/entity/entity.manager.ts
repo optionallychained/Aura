@@ -2,42 +2,29 @@ import { Model } from '../component/generic/model.component';
 import { Shader } from '../component/generic/shader.component';
 import { Texture } from '../component/generic/texture.component';
 import { AuraError } from '../core/aura.error';
-import { Game } from '../core/game';
+import { GameBase } from '../core/game.base';
 import { VBOConfig } from '../renderer/vbo.config';
 import { ShaderVariableResolver } from '../shader/shaderVariableResolver';
 import { Entity } from './entity';
 import { EntityManagerConfig } from './entity.manager.config';
 
 /**
- * Internal-use utility type for representing Entity list change hints to the vertex compilation routine
- */
-type EntityChanges = Set<string>;
-
-/**
- * Abstract core EntityManager; implementing the generic and abstractable behaviour for the management, updating and rendering of Entities
+ * Abstract core EntityManager; implementing the abstractable behaviour for the management, update, retrieval and rendering of Entities
  *
- * Three concrete EntityManagers are utilised by the core Game to manage World objects, UI objects and Font objects; separating processing
- *   and utility for the three distince use-cases for Entities. These are then broken down into 2D and 3D variants for the type correction
- *   of their consumer APIs
+ * Entities are any object existing in a Game's World, Text or UI
  *
- * Works to optimise Entity management and rendering by grouping Entities, precompiling vertex lists, handling VBOs and caching Entity
- *   filter/search results
+ * Three concrete EntityManagers are utilised by the core Game - World for world objects, UI for ui elements and Text for strings. These
+ *   are broken down into specific 2D and 3D variants for type safety in 2D and 3D Games
  *
- * VBOs are provisioned on a per-shader+model combination basis. This is because Entities that share both a Shader and a Model can be
- *   rendered in batches, and thereby their vertices buffered  to the GPU and drawn from as a single set
+ * Handles the management of Entity vertex lists, communicating with the Renderer to manage and draw scenes
  *
  * Receives and works with a single TextureAtlas, thereby allowing for texture sources per Entity use-case
  *
- * The concrete EntityManagers are available on the Game instance at `game.[world|ui|font]`
+ * The concrete EntityManagers are available on the Game instance at `game.[world|ui|text]`
  *
- * @typeparam TConfig the configuration object type, extending the core EntityManagerConfig, used by concrete extensions
- *
- * @see Game
- * @see World
- * @see Font
- * @see UI
+ * @typeparam Config the configuration object type, extending the core EntityManagerConfig, used by concrete extensions
  */
-export abstract class EntityManager<TConfig extends EntityManagerConfig> {
+export abstract class EntityManager<Config extends EntityManagerConfig> {
 
     /** Flat list of all Entities currently in play, used for efficiently executing frame ticks and in filtering */
     private entities: Array<Entity> = [];
@@ -65,18 +52,18 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
     private readonly sourcedEntityFilterCache = new Map<string, Array<Entity>>();
 
     /**
-     * Constructor. Take and store the EntityManager's config, and initialise the Texture Atlas if provided
+     * Constructor. Take the type-correct EntityManagerConfig, and initialise the Texture Atlas if provided
      *
-     * @param renderer the renderer
+     * @param config the type-correct EntityManagerConfig
      */
-    constructor(protected readonly config: TConfig & { name: string }) {
+    constructor(protected readonly config: Config & { name: string }) {
         if (config.textureAtlas) {
             config.renderer.createTexture(config.textureAtlas);
         }
     }
 
     /**
-     * Getter for the number of active Entities
+     * Retrieve the number of Entities in play
      *
      * @returns the number of active Entities
      */
@@ -85,7 +72,7 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
     }
 
     /**
-     * Add an Entity to the addList, to be added to the game on the next frame
+     * Prepare an Entity to be added to the Game on the next frame
      *
      * @param entity the Entity to add
      */
@@ -94,7 +81,7 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
     }
 
     /**
-     * Add a list of Entities to the addList, to be added to the game on the next frame
+     * Prepare a list of Entities to be added to the Game on the next frame
      *
      * @param entities the Entities to add
      */
@@ -103,7 +90,7 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
     }
 
     /**
-     * Add an Entity to the removeList, to be removed from the game on the next frame
+     * Prepare an Entity to be removed from the Game on the next frame
      *
      * @param entity the Entity to remove
      */
@@ -112,7 +99,7 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
     }
 
     /**
-     * Add a list of Entities to the removeList, to be removed from the game on the next frame
+     * Prepare a list of Entities to be removed from the Game on the next frame
      *
      * @param entities the Entities to remove
      */
@@ -130,11 +117,12 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
     }
 
     /**
-     * Frame update method. Augment the Entity list by processing the addList and removeList, then update all active Entities
+     * Frame update method. Process the Entity addList and removeList, then run all active Entities' frame update methods
      *
-     * @param frameDelta the time between the last frame and the current, for normalizing time-dependent operations
+     * @param game the Game the EntityManager is running within
+     * @param frameDelta the frame delta as calculated by the Game
      */
-    public tick(game: Game, frameDelta: number): void {
+    public tick(game: GameBase, frameDelta: number): void {
         const added = this.loadEntities();
         const removed = this.cleanEntities();
 
@@ -148,10 +136,9 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
     }
 
     /**
-     * Frame render method, called after tick so as to render all renderable active Entities
+     * Frame render method. Render all active and renderable Entities.
      *
-     * Processes Entities grouped by given shader+model combinations so as to reduce the amount of GL buffering required and render all
-     *   technically-similar Entities from a single vertex source
+     * Processes Entities grouped by shader+model combinations so as to reduce the amount of GL buffering required and render in batches
      */
     public render(): void {
         for (const [shaderName, forModel] of this.renderableEntities.entries()) {
@@ -198,7 +185,20 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
     }
 
     /**
-     * Filter the Entities in a given source by a given list of Component names. Filter results are cached to optimise frame-to-frame
+     * Filter Entities from a given source by a given Component name. Filter results are cached to optimise frame-to-frame filters
+     *
+     * @param source the Entity list to treat as the filter source
+     * @param filterId an identifier for the filter result, used to avoid conflicts for similar filters across disparate sources
+     * @param components the name of the Component to filter by
+     *
+     * @returns the list of Entities from the source with the Component
+     */
+    public filterEntitiesByComponentNameFromSource(source: Array<Entity>, filterId: string, component: string): Array<Entity> {
+        return this.memoizeFilter(component, (e) => e.hasComponent(component), filterId, source);
+    }
+
+    /**
+     * Filter the Entities from a given source by a given list of Component names. Filter results are cached to optimise frame-to-frame
      *   filters
      *
      * @param source the Entity list to treat as the filter source
@@ -237,11 +237,11 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
      * Process the addList by adding Entities both to the grouped store and the flat store, facilitating both fast filters and efficient
      *   rendering
      *
-     * @returns a boolean indicating whether or not the Entity lists were changed, signalling the need to invalidate cached filters
+     * @returns whether or not the Entity lists were changed, signalling the need to invalidate cached filters
      */
     private loadEntities(): boolean {
         if (this.addList.length) {
-            const changes: EntityChanges = new Set<string>();
+            const changes = new Set<string>();
 
             for (const e of this.addList) {
                 if (!e.hasComponent('Shader') || !e.hasComponent('Model')) {
@@ -306,11 +306,11 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
     /**
      * Clean the list of active Entities by removing all those in the removeList
      *
-     * @returns a boolean indicating whether or not the Entity lists were changed, signalling the need to invalidate cached filters
+     * @returns whether or not the Entity lists were changed, signalling the need to invalidate cached filters
      */
     private cleanEntities(): boolean {
         if (this.removeList.length) {
-            const changes: EntityChanges = new Set<string>();
+            const changes = new Set<string>();
 
             for (const e of this.removeList) {
                 // TODO this might be a little hacky - if the Entity is not found, skip
@@ -385,9 +385,9 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
     /**
      * Compile any vertex lists and update relevant VBOs for a given set of shader+model combinations altered in Entity list changes
      *
-     * @param changes the list of Shader+Model combinations that were altered and require compiling
+     * @param changes the set of shader+model combinations that were altered and require compiling
      */
-    private compileVertices(changes: EntityChanges): void {
+    private compileVertices(changes: Set<string>): void {
         for (const change of changes) {
             const programName = change.substring(0, change.indexOf('-'));
             const modelName = change.substring(change.indexOf('-') + 1);
@@ -500,20 +500,14 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
     }
 
     /**
-     * Retrieve a set of Entities by filtering Entities by the given predicate, caching the result to reduce frame-to-frame filtering
-     *   operations
+     * Retrieve a set of Entities by filtering by the given predicate, caching the result to reduce frame-to-frame filtering operations
      *
-     * Support filtering from a specific source as well as from all Entities so as to facilitate multiple use cases
-     *
-     * Separate regular filters from sourced filters so as to avoid conflicts between similar filters of all Entities and subsets
-     *
-     * Further separate sourced filters from each other with a filterId so as to avoid conflicts between similar filters from disparate
-     *   sources
+     * Support filtering from a specific source as well as from all Entities, separating the two filter types to avoid set conflicts
      *
      * @param filter a string representation of the Entity filter, to be used as a cache key
      * @param predicate the filter predicate for matching Entities
-     * @param filterId (optional) a filter ID for sourced filters, to be used as a cache key extension. Must be provided for sourced filters
-     * @param source the source to filter from; defaulting to the flat list of all Entities
+     * @param filterId optional filter ID for sourced filters, to be used as a cache key extension. Must be provided for sourced filters
+     * @param source the source to filter from, defaulting to the flat list of all Entities
      *
      * @returns the array of Entities matching the filter
      */
@@ -537,8 +531,7 @@ export abstract class EntityManager<TConfig extends EntityManagerConfig> {
     }
 
     /**
-     * Clear all filter caches in the event of an Entity list change by way of loadEntities or cleanEntities, ensuring that filters do not
-     *   become out of date
+     * Clear all filter caches in the event of an Entity list chang, ensuring that filters do not become out of date
      */
     private invalidateFilterCaches(): void {
         this.entityFilterCache.clear();

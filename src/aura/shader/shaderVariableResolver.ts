@@ -1,16 +1,16 @@
-import { Transform2D } from '../component/2d/transform.component.2d';
-import { Transform3D } from '../component/3d/transform.component.3d';
+import { Transform as Transform2D } from '../component/2d/transform.component';
+import { Transform as Transform3D } from '../component/3d/transform.component';
 import { FlatColor } from '../component/generic/flatColor.component';
 import { Model } from '../component/generic/model.component';
 import { MultiColor } from '../component/generic/multiColor.component';
 import { AuraError } from '../core/aura.error';
-import { Game } from '../core/game';
+import { GameBase } from '../core/game.base';
 import { Entity } from '../entity/entity';
 
 /**
  * Internal-use utility type representing a Shader Variable Resolution Function which retrieves a value from the Game
  */
-type StaticShaderVariableResolver = (game: Game) => Float32Array | number;
+type StaticShaderVariableResolver = (game: GameBase) => Float32Array | number;
 
 /**
  * Internal-use utility type representing a Shader Variable Resolution Function which retrieves a value from an Entity
@@ -85,11 +85,11 @@ export class ShaderVariableResolver {
     private static readonly ENTITY_UNIFORM_MAPPINGS = new Map<string, EntityShaderVariableResolver>([
         [
             'u_Transform2D',
-            (e) => e.getComponent<Transform2D>('Transform2D').compute().float32Array
+            (e) => e.getComponent<Transform2D>('Transform').compute().float32Array
         ],
         [
             'u_Transform3D',
-            (e) => e.getComponent<Transform3D>('Transform3D').compute().float32Array
+            (e) => e.getComponent<Transform3D>('Transform').compute().float32Array
         ],
         [
             'u_Color',
@@ -171,7 +171,7 @@ export class ShaderVariableResolver {
      *
      * @returns the resolved Uniform value
      */
-    public static resolveStaticUniform(uniformName: string, game: Game): Float32Array | number {
+    public static resolveStaticUniform(uniformName: string, game: GameBase): Float32Array | number {
         const resolve = ShaderVariableResolver.STATIC_UNIFORM_MAPPINGS.get(uniformName);
 
         if (!resolve) {

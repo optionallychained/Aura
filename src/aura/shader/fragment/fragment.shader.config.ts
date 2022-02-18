@@ -8,6 +8,6 @@ export interface FragmentShaderConfig {
     readonly name: string;
     /** The FragmentShader's source */
     readonly source: string;
-    /** A UniformArray describing the uniforms the FragmentShader contains; used in automatic uniform value retrieval and upload */
+    /** A UniformArray describing the uniforms the FragmentShader contains */
     readonly uniforms: UniformArray;
 }

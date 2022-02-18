@@ -8,7 +8,7 @@ Game Object representation and management.
 
 ### Entity
 
-- Find a way to reimplement class/type-based Component get/remove/has (see bottom of entity.ts)
+- Find a way to reimplement class/type-based Component get/remove/has (see bottom of entity.ts) (drop 'name' entirely?)
 - Consider "prefab" Entities, comprising common Component groupings
 - Consider Entity "validation"
     - Construct-time assurance than an Entity's component configuration works

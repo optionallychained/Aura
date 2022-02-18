@@ -1,6 +1,5 @@
 /**
- * Enum mapping convenient uniform type names to a string representation, used to lock down Shader uniform definitions and facilitate
- *   automatic uniform GPU uploads in the WebGLRenderer
+ * Enum mapping convenient uniform type names to a string representation
  */
 export enum UniformType {
     VEC2 = 'vec2',

@@ -2,8 +2,6 @@
  * Enum mapping convenient GLShape (drawing mode) names to their WebGLRenderingContext numerical counterparts
  *
  * Used in defining Geometry and setting the WebGLRenderer's rendering mode for drawing
- *
- * @see Geometry
  */
 export enum GLShape {
     POINTS = WebGLRenderingContext.POINTS,

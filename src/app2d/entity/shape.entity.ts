@@ -1,4 +1,4 @@
-import { Angle, Color, Component, Entity, FlatColor, Geometry, Model, MultiColor, Shader, ShaderPrograms, Transform, Vec2 } from '../../aura/index.2d';
+import { Angle, Color, Component, Entity, FlatColor, Geometry, Model, MultiColor, Shader, ShaderPrograms, Transform, Vec2 } from '../../aura/aura.2d';
 
 export class Shape extends Entity {
 
@@ -26,6 +26,6 @@ export class Shape extends Entity {
     }
 
     public tick(): void {
-        this.getComponent<Transform>('Transform2D').rotate(Angle.toRadians(1));
+        this.getComponent<Transform>('Transform').rotate(Angle.toRadians(1));
     }
 }

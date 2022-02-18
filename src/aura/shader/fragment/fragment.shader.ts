@@ -4,37 +4,36 @@ import { UniformArray } from '../uniformArray.type';
 /**
  * Class representing a FragmentShader
  *
- * Stores and provides access to all the information the WebGLRenderer, EntityshaderMap and EntityManager need to render an Entity with a
- *   given shader
+ * Provides access to all the information Aura needs to render an Entity with a given fragment shader
  *
- * Used in constructing ShaderPrograms for registration on the game/renderer and use in Entity Shader components
- *
- * @see ShaderProgram
- * @see UniformArray
+ * Used in constructing ShaderPrograms for registration on the Game and for use in Entity Shader components
  */
 export class FragmentShader {
 
     /**
-     * Constructor. Take and store the FragmentShader's config
+     * Constructor. Take a FragmentShaderConfig
      *
-     * @param config the FragmentShader's configuration
+     * @param config the FragmentShaderConfig
      */
     constructor(private readonly config: FragmentShaderConfig) { }
 
     /**
-     * Getter for the FragmentShader's name, as provided in its config
+     * Retrieve the FragmentShader's name
      */
     public get name(): string {
         return this.config.name;
     }
 
     /**
-     * Getter for the FragmentShader's source, as provided in its config
+     * Retrieve the FragmentShader's source
      */
     public get source(): string {
         return this.config.source;
     }
 
+    /**
+     * Retrieve the FragmentShader's uniform specifications
+     */
     public get uniforms(): UniformArray {
         return this.config.uniforms;
     }
