@@ -1,6 +1,6 @@
-const fs = require('fs-extra');
+const fs = require('fs/promises');
 const path = require('path');
-const { execSync } = require('child_process');
+const { exec } = require('child_process');
 const webpack = require('webpack');
 const { version2d, version3d } = require('../version');
 
@@ -14,77 +14,82 @@ const output = path.resolve(__dirname, '../publish', mode);
 const packageName = `@aura/${mode}`;
 
 (async () => {
-    // compile Aura
+    // compile (tsc) + pack (webpack) Aura
     console.info(`Compiling ${packageName}...`);
-    execSync(`tsc --project ./tsconfig.publish.${mode}.json`, { stdio: 'inherit' });
-
-    // produce aura.<mode>.min.js with webpack
-    console.info(`Packing ${packageName}...`);
-    await new Promise((resolve, reject) => {
-        webpack({
-            mode: 'production',
-            entry: path.resolve(__dirname, '../src/aura', `aura.${mode}.ts`),
-            module: {
-                rules: [
-                    {
-                        test: /\.ts$/,
-                        use: 'ts-loader',
-                        exclude: /node_modules/
-                    }
-                ]
-            },
-            resolve: {
-                extensions: ['.ts', '.js']
-            },
-            output: {
-                filename: `aura.${mode}.min.js`,
-                path: path.resolve(output, '_min'),
-                library: `Aura${mode.toUpperCase()}`
-            }
-        }).run((err) => err ? reject(err) : resolve());
-    }).catch((err) => {
-        console.log(err);
+    await Promise.all([
+        new Promise((resolve, reject) => {
+            exec(`tsc --project ./tsconfig.publish.${mode}.json`, { stdio: 'inherit' }, (err) => err ? reject(err) : resolve());
+        }),
+        new Promise((resolve, reject) => {
+            webpack({
+                mode: 'production',
+                entry: path.resolve(__dirname, '../src/aura', `aura.${mode}.ts`),
+                module: {
+                    rules: [
+                        {
+                            test: /\.ts$/,
+                            use: 'ts-loader',
+                            exclude: /node_modules/
+                        }
+                    ]
+                },
+                resolve: {
+                    extensions: ['.ts', '.js']
+                },
+                output: {
+                    filename: `aura.${mode}.min.js`,
+                    path: path.resolve(output, '_min'),
+                    library: `Aura${mode.toUpperCase()}`
+                }
+            }).run((err) => err ? reject(err) : resolve());
+        })
+    ]).catch((err) => {
+        console.error(err);
         process.exit(1);
     });
 
-    // rename index + typedefs
-    console.info(`Renaming ${packageName} indices...`);
-    fs.moveSync(path.resolve(output, `aura.${mode}.js`), path.resolve(output, 'index.js'));
-    fs.moveSync(path.resolve(output, `aura.${mode}.d.ts`), path.resolve(output, 'index.d.ts'));
+    // prepare output directory for publish
+    console.info(`Preparing ${packageName} for publish...`);
+    await Promise.all([
+        // rename index + typedefs
+        fs.rename(path.resolve(output, `aura.${mode}.js`), path.resolve(output, 'index.js')),
+        fs.rename(path.resolve(output, `aura.${mode}.d.ts`), path.resolve(output, 'index.d.ts')),
 
-    // write an appropriate package.json, carrying dependencies (if any) from ./package.json
-    console.info(`Writing ${packageName} package.json...`)
-    fs.writeFileSync(path.resolve(output, 'package.json'), JSON.stringify({
-        name: packageName,
-        version: `${mode === '2d' ? version2d : version3d}`,
-        author: 'optionallychained',
-        license: 'MIT',
-        homepage: 'https://optionallychained.github.io/Aura',
-        repository: {
-            type: 'git',
-            url: 'git://git@github.com/optionallychained/Aura.git'
-        },
-        main: 'index.js',
-        types: 'index.d.ts',
-        dependencies: JSON.parse(fs.readFileSync(path.resolve(__dirname, '../', 'package.json')).toString()).dependencies
-    }, null, '\t'));
+        // write package.json, carrying over dependencies from project root if applicable
+        fs.writeFile(path.resolve(output, 'package.json'), JSON.stringify({
+            name: packageName,
+            version: `${mode === '2d' ? version2d : version3d}`,
+            author: 'optionallychained',
+            license: 'MIT',
+            homepage: 'https://optionallychained.github.io/Aura',
+            repository: {
+                type: 'git',
+                url: 'git://git@github.com/optionallychained/Aura.git'
+            },
+            main: 'index.js',
+            types: 'index.d.ts',
+            dependencies: JSON.parse((await fs.readFile(path.resolve(__dirname, '../', 'package.json'))).toString()).dependencies
+        }, null, '\t')),
 
-    // delete all files related to the opposite of mode (for Aura3D, delete 2d files and vice versa)
-    console.info(`Deleting all ${mode === '2d' ? '3d' : '2d'} files from ${output}...`);
-    (function scrub(dir, match) {
-        fs.readdirSync(dir).forEach((f) => {
-            const path = `${dir}/${f}`;
+        // delete all files related to the opposite of mode (all 3d files for Aura2D, vice versa)
+        (async function scrub(dir, match) {
+            (await fs.readdir(dir)).forEach(async (f) => {
+                const path = `${dir}/${f}`;
 
-            if (fs.statSync(path).isDirectory()) {
-                if (match(path)) {
-                    fs.rmSync(path, { recursive: true });
+                if ((await fs.stat(path)).isDirectory()) {
+                    if (match(path)) {
+                        fs.rm(path, { recursive: true });
+                    }
+                    else {
+                        scrub(path, match);
+                    }
                 }
-                else {
-                    scrub(path, match);
-                }
-            }
-        });
-    })(output, (path) => path.includes(mode === '2d' ? '/3d' : '/2d'));
+            });
+        })(output, (path) => path.includes(mode === '2d' ? '/3d' : '/2d'))
+    ]).catch((err) => {
+        console.error(err);
+        process.exit(1);
+    });
 
     console.info(`Done! ${packageName} ready to publish`);
 })();

@@ -19,18 +19,20 @@
         "app:3d:debug": "npm run app:3d:clean && webpack serve --config webpack.app.3d.config.js --mode development",
         "app:3d:build": "npm run app:3d:clean && npm run lint && webpack --config webpack.app.3d.config.js --mode production",
 
+        "app:build": "npm run app:2d:build & npm run app:3d:build",
+
         "aura:2d:clean": "rm -rf ./publish/2d",
         "aura:2d:build": "npm run aura:2d:clean && npm run lint && node ./scripts/publish.js --mode=2d",
 
         "aura:3d:clean": "rm -rf ./publish/3d",
         "aura:3d:build": "npm run aura:3d:clean && npm run lint && node ./scripts/publish.js --mode=3d",
 
-        "aura:build": "npm run aura:2d:build && npm run aura:3d:build",
+        "aura:build": "npm run aura:2d:build & npm run aura:3d:build",
 
         "aura:2d:publish": "npm run aura:2d:build && cd ./publish/2d && npm publish",
         "aura:3d:publish": "npm run aura:3d:build && cd ./publish/3d && npm publish",
 
-        "aura:publish": "npm run aura:2d:publish && npm run aura:3d:publish"
+        "aura:publish": "npm run aura:build && cd ./publish/2d && npm publish && cd ../3d && npm publish"
     },
     "devDependencies": {
         "@types/jest": "^27.4.0",
