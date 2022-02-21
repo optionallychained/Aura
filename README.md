@@ -5,7 +5,7 @@
 
 Aura is a general purpose TypeScript/WebGL game engine designed to facilitate the swift implementation of both 2D and 3D browser games. Published as two distinct packages - `@aura/2d` and `@aura/3d` - each variant provides a swathe of domain-specific utility, from standard geometries to generally-useful shaders to common game object components and systems.
 
-Built according to the Entity-Component-System architecture with applications broken up into distinct states, Aura aims to enable a compartmentalised development approach; supporting developments of varying complexity with focus on getting prototypes off the ground fast.
+Built according to the Entity-Component-System architecture with applications broken up into distinct states, Aura aims to enable a compartmentalised development approach, supporting developments of varying complexity with focus on getting prototypes off the ground fast.
 
 While functional, Aura is very much a work-in-progress, made purely for fun and self-education.
 
@@ -31,18 +31,21 @@ This repository serves as a master project producing both the Aura2D and Aura3D 
 
 ## Getting Started
 
+
 ### Quickstart
 
 For getting up and running with Aura fast with recommended configurations and example applications, see the following template repositories:
 - [Aura-Template-2D](https://github.com/optionallychained/Aura-Template-2D)
 - [Aura-Template-3D](https://github.com/optionallychained/Aura-Template-3D)
 
+
 ### NPM
 
 - `npm i @aura/2d`
-- `npm i @aura/3d` 
+- `npm i @aura/3d`
 
 It's recommended to write Aura applications in TypeScript and build with Webpack - though regular JS and other bundlers should work.
+
 
 ### CDN
 
@@ -53,7 +56,7 @@ It's recommended to write Aura applications in TypeScript and build with Webpack
 <script src="https://unpkg.com/@aura/3d/_min/aura.3d.min.js"></script>
 ```
 
-Minified scripts package Aura under libraries `Aura2D` and `Aura3D`. For example:
+Minified scripts provide the libraries `Aura2D` and `Aura3D`. For example:
 
 ```html
 <!DOCTYPE html>
@@ -73,6 +76,7 @@ Minified scripts package Aura under libraries `Aura2D` and `Aura3D`. For example
     </body>
 </html>
 ```
+
 
 ### Note for Text Rendering
 

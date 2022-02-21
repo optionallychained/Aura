@@ -55,6 +55,12 @@ const packageName = `@aura/${mode}`;
         fs.rename(path.resolve(output, `aura.${mode}.js`), path.resolve(output, 'index.js')),
         fs.rename(path.resolve(output, `aura.${mode}.d.ts`), path.resolve(output, 'index.d.ts')),
 
+        // copy over appropriate package README
+        fs.copyFile(path.resolve(__dirname, '../', `README.${mode}.md`), path.resolve(output, 'README.md')),
+
+        // copy over license
+        fs.copyFile(path.resolve(__dirname, '../', 'LICENSE'), path.resolve(output, 'LICENSE')),
+
         // write package.json, carrying over dependencies from project root if applicable
         fs.writeFile(path.resolve(output, 'package.json'), JSON.stringify({
             name: packageName,
