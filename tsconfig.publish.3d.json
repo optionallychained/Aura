@@ -1,14 +1,7 @@
 {
+    "extends": "./tsconfig.json",
     "compilerOptions": {
-        "target": "es5",
         "outDir": "./publish/3d",
-        "lib": [
-            "es2016",
-            "dom"
-        ],
-        "declaration": true,
-        "strict": true,
-        "downlevelIteration": true
     },
     "include": [
         "./src/aura/aura.3d.ts"

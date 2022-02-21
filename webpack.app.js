@@ -2,11 +2,13 @@ const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+// config for webpack building both app2d and app3d
 module.exports = (env, options) => {
     const dev = options.mode === 'development';
+    const { build } = env;
 
     const config = {
-        entry: './src/app3d/app.3d.ts',
+        entry: `./src/app${build}/app.${build}.ts`,
         devtool: dev ? 'inline-source-map' : false,
         module: {
             rules: [
@@ -20,19 +22,19 @@ module.exports = (env, options) => {
         plugins: [
             new CopyWebpackPlugin({
                 patterns: [
-                    { from: './src/app3d/res', to: 'res' }
+                    { from: './assets', to: 'res' }
                 ]
             }),
             new HtmlWebpackPlugin({
-                title: 'Aura3D App'
+                title: `Aura${build.toUpperCase()} App`
             })
         ],
         resolve: {
             extensions: ['.ts', '.js']
         },
         output: {
-            filename: 'app3d.min.js',
-            path: path.resolve(__dirname, dev ? 'dev' : 'dist/app3d'),
+            filename: `app${build}.js`,
+            path: path.resolve(__dirname, dev ? 'dev' : `dist/app${build}`),
         }
     };
 

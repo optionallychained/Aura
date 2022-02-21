@@ -12,12 +12,12 @@
         "docs:deploy": "npm run docs:build && gh-pages -d docs",
 
         "app:2d:clean": "rm -rf ./dist/app2d",
-        "app:2d:debug": "npm run app:2d:clean && webpack serve --config webpack.app.2d.config.js --mode development",
-        "app:2d:build": "npm run app:2d:clean && npm run lint && webpack --config webpack.app.2d.config.js --mode production",
+        "app:2d:debug": "npm run app:2d:clean && webpack serve --config webpack.app.js --mode development --env build=2d",
+        "app:2d:build": "npm run app:2d:clean && npm run lint && webpack --config webpack.app.js --mode production --env build=2d",
 
         "app:3d:clean": "rm -rf ./dist/app3d",
-        "app:3d:debug": "npm run app:3d:clean && webpack serve --config webpack.app.3d.config.js --mode development",
-        "app:3d:build": "npm run app:3d:clean && npm run lint && webpack --config webpack.app.3d.config.js --mode production",
+        "app:3d:debug": "npm run app:3d:clean && webpack serve --config webpack.app.js --mode development --env build=3d",
+        "app:3d:build": "npm run app:3d:clean && npm run lint && webpack --config webpack.app.js --mode production --env build=3d",
 
         "app:build": "npm run app:2d:build & npm run app:3d:build",
 

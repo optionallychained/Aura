@@ -78,6 +78,6 @@ Minified scripts package Aura under libraries `Aura2D` and `Aura3D`. For example
 
 Currently, for text rendering, Aura will require a `res/font.png` situated next to the application entry script. This is a uniform, one-dimensional texture atlas of characters for sampling onto in-game text.
 
-Aura configures a default charset matching the example font found in `./src/app<2d|3d>/res/font.png`; for now, this should be copied into Aura projects (or an alternative atlas configured on the Game).
+Aura configures a default charset matching the example font found in `./assets/font.png`; for now, this should be copied into Aura projects (or an alternative atlas configured on the Game).
 
 This is naturally subject to change with an upcoming overhaul to texture management and text rendering.
