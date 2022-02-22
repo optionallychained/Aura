@@ -47,7 +47,10 @@ import { Physics } from './system/2d/physics.system';
 import { System } from './system/2d/system';
 
 import { Panel } from './ui/2d/panel';
+import { UIConfig } from './ui/2d/ui.config';
+import { UI } from './ui/2d/ui';
 
+import { WorldConfig } from './world/2d/world.config';
 import { World } from './world/2d/world';
 
 export * from './aura.core';
@@ -67,6 +70,9 @@ export {
     Physics,
     System,
     Panel,
+    UIConfig,
+    UI,
+    WorldConfig,
     World
 };
 
