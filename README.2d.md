@@ -22,7 +22,7 @@ For getting up and running with Aura2D fast with recommended configurations and 
 
 ### NPM
 
-- `npm i @aura/2d`
+- `npm i --save aura-2d`
 
 It's recommended to write Aura2D applications in TypeScript and build with Webpack - though regular JS and other bundlers should work.
 
@@ -30,7 +30,7 @@ It's recommended to write Aura2D applications in TypeScript and build with Webpa
 ### CDN
 
 ```html
-<script src="https://unpkg.com/@aura/2d/_min/aura.2d.min.js"></script>
+<script src="https://unpkg.com/aura-2d/_min/aura.2d.min.js"></script>
 ```
 
 The minified Aura2D provides the library `Aura2D`. For example:
@@ -39,7 +39,7 @@ The minified Aura2D provides the library `Aura2D`. For example:
 <!DOCTYPE html>
 <html>
     <body>
-        <script src="https://unpkg.com/@aura/2d/_min/aura.2d.min.js"></script>
+        <script src="https://unpkg.com/aura-2d/_min/aura.2d.min.js"></script>
 
         <script>
             const { Game, State, Vec2 } = Aura2D;

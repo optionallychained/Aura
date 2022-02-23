@@ -1,9 +1,9 @@
 # Aura
 
-[![NPM @aura/2d badge](https://badge.fury.io/js/@aura/2d.svg)](https://badge.fury.io/js/@aura/2d)
-[![NPM @aura/3d badge](https://badge.fury.io/js/@aura/3d.svg)](https://badge.fury.io/js/@aura/3d)
+[![NPM aura-2d badge](https://badge.fury.io/js/aura-2d.svg)](https://badge.fury.io/js/aura-2d)
+[![NPM aura-3d badge](https://badge.fury.io/js/aura-3d.svg)](https://badge.fury.io/js/aura-3d)
 
-Aura is a general purpose TypeScript/WebGL game engine designed to facilitate the swift implementation of both 2D and 3D browser games. Published as two distinct packages - `@aura/2d` and `@aura/3d` - each variant provides a swathe of domain-specific utility, from standard geometries to generally-useful shaders to common game object components and systems.
+Aura is a general purpose TypeScript/WebGL game engine designed to facilitate the swift implementation of both 2D and 3D browser games. Published as two distinct packages - `aura-2d` and `aura-3d` - each variant provides a swathe of domain-specific utility, from standard geometries to generally-useful shaders to common game object components and systems.
 
 Built according to the Entity-Component-System architecture with applications broken up into distinct states, Aura aims to enable a compartmentalised development approach, supporting developments of varying complexity with focus on getting prototypes off the ground fast.
 
@@ -41,8 +41,8 @@ For getting up and running with Aura fast with recommended configurations and ex
 
 ### NPM
 
-- `npm i @aura/2d`
-- `npm i @aura/3d`
+- `npm i --save aura-2d`
+- `npm i --save aura-3d`
 
 It's recommended to write Aura applications in TypeScript and build with Webpack - though regular JS and other bundlers should work.
 
@@ -50,10 +50,10 @@ It's recommended to write Aura applications in TypeScript and build with Webpack
 ### CDN
 
 ```html
-<script src="https://unpkg.com/@aura/2d/_min/aura.2d.min.js"></script>
+<script src="https://unpkg.com/aura-2d/_min/aura.2d.min.js"></script>
 ```
 ```html
-<script src="https://unpkg.com/@aura/3d/_min/aura.3d.min.js"></script>
+<script src="https://unpkg.com/aura-3d/_min/aura.3d.min.js"></script>
 ```
 
 Minified scripts provide the libraries `Aura2D` and `Aura3D`. For example:
@@ -62,7 +62,7 @@ Minified scripts provide the libraries `Aura2D` and `Aura3D`. For example:
 <!DOCTYPE html>
 <html>
     <body>
-        <script src="https://unpkg.com/@aura/2d/_min/aura.2d.min.js"></script>
+        <script src="https://unpkg.com/aura-2d/_min/aura.2d.min.js"></script>
 
         <script>
             const { Game, State, Vec2 } = Aura2D;

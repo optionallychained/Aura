@@ -11,7 +11,7 @@ if (!process.argv.includes('--mode=2d') && !process.argv.includes('--mode=3d')) 
 
 const mode = /--mode=(2d|3d)/.exec(process.argv)[1];
 const output = path.resolve(__dirname, '../publish', mode);
-const packageName = `@aura/${mode}`;
+const packageName = `aura-${mode}`;
 
 (async () => {
     // compile (tsc) + pack (webpack) Aura

@@ -22,7 +22,7 @@ For getting up and running with Aura3D fast with recommended configurations and 
 
 ### NPM
 
-- `npm i @aura/3d`
+- `npm i --save aura-3d`
 
 It's recommended to write Aura3D applications in TypeScript and build with Webpack - though regular JS and other bundlers should work.
 
@@ -30,7 +30,7 @@ It's recommended to write Aura3D applications in TypeScript and build with Webpa
 ### CDN
 
 ```html
-<script src="https://unpkg.com/@aura/3d/_min/aura.3d.min.js"></script>
+<script src="https://unpkg.com/aura-3d/_min/aura.3d.min.js"></script>
 ```
 
 The minified Aura3D provides the library `Aura3D`. For example:
@@ -39,7 +39,7 @@ The minified Aura3D provides the library `Aura3D`. For example:
 <!DOCTYPE html>
 <html>
     <body>
-        <script src="https://unpkg.com/@aura/3d/_min/aura.3d.min.js"></script>
+        <script src="https://unpkg.com/aura-3d/_min/aura.3d.min.js"></script>
 
         <script>
             const { Game, State, Vec2 } = Aura3D;
