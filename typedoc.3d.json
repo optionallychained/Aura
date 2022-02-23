@@ -1,0 +1,11 @@
+{
+    "entryPoints": [
+        "./src/aura/aura.3d.ts"
+    ],
+    "out": "./docs/api/3d",
+    "theme": "default",
+    "excludePrivate": true,
+    "name": "API | Aura3D",
+    "hideGenerator": true,
+    "readme": "none"
+}

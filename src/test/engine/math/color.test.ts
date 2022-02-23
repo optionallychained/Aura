@@ -1,4 +1,4 @@
-import { Color } from '../../../engine';
+import { Color } from '../../../aura/math/color';
 
 /**
  * Tests for class Color

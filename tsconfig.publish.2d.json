@@ -1,0 +1,9 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "outDir": "./publish/2d",
+    },
+    "include": [
+        "./src/aura/aura.2d.ts"
+    ]
+}

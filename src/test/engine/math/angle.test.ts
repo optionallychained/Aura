@@ -1,4 +1,4 @@
-import { Angle } from '../../../engine';
+import { Angle } from '../../../aura/math/angle';
 
 /**
  * Tests for class Angle

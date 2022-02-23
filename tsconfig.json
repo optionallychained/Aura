@@ -1,12 +1,13 @@
 {
     "compilerOptions": {
         "target": "es5",
-        "outDir": "./dist",
+        "outDir": "./compiled",
         "lib": [
             "es2016",
             "dom"
         ],
         "sourceMap": true,
+        "declaration": true,
         "strict": true,
         "downlevelIteration": true
     },

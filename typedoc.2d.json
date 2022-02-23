@@ -1,0 +1,11 @@
+{
+    "entryPoints": [
+        "./src/aura/aura.2d.ts"
+    ],
+    "out": "./docs/api/2d",
+    "theme": "default",
+    "excludePrivate": true,
+    "name": "API | Aura2D",
+    "hideGenerator": true,
+    "readme": "none"
+}

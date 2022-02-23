@@ -1,6 +1,6 @@
-import { Angle, Color, Component, Entity, Geometry, Shader, Vec3 } from '../../engine';
+import { Entity, Angle, Transform, Vec3, Color, Geometries, Model, Shader, FlatColor, ShaderPrograms } from '../../aura/aura.3d';
 
-export class Axis extends Entity.Entity {
+export class Axis extends Entity {
 
     constructor(axis: 'x' | 'y' | 'z', length: number) {
         let angleX, angleY, angleZ;
@@ -24,10 +24,10 @@ export class Axis extends Entity.Entity {
         super({
             tag: 'axis',
             components: [
-                new Component.ThreeD.Transform3D(new Vec3(), new Vec3(length, 1, 1), new Vec3(angleX, angleY, angleZ)),
-                new Component.Generic.Model(Geometry.ThreeD.LINE),
-                new Component.Generic.Shader(Shader.Program.ThreeD.PROGRAM_BASIC_3D),
-                new Component.Generic.FlatColor(Color.white()),
+                new Transform(new Vec3(), new Vec3(length, 1, 1), new Vec3(angleX, angleY, angleZ)),
+                new Model(Geometries.LINE),
+                new Shader(ShaderPrograms.BASIC),
+                new FlatColor(Color.white()),
             ]
         });
     }

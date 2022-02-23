@@ -1,14 +1,14 @@
-import { Core, Shader, Vec2 } from '../engine';
+import { Game, ShaderPrograms, Vec2 } from '../aura/aura.2d';
 import { SHAPES_STATE } from './state/shapes.state';
 
-const game = new Core.TwoD.Game2D({
+const game = new Game({
     canvasDimensions: new Vec2(1024, 768)
 });
 
-game.registerShader(Shader.Program.TwoD.PROGRAM_BASIC_2D);
-game.registerShader(Shader.Program.TwoD.PROGRAM_COLOR_PER_VERTEX_2D)
-game.registerShader(Shader.Program.TwoD.PROGRAM_TEXTURE_2D);
-game.registerShader(Shader.Program.TwoD.PROGRAM_TEXTURE_COLORED_2D);
+game.registerShader(ShaderPrograms.BASIC);
+game.registerShader(ShaderPrograms.COLOR_PER_VERTEX);
+game.registerShader(ShaderPrograms.TEXTURE);
+game.registerShader(ShaderPrograms.TEXTURE_COLORED);
 
 game.addState(SHAPES_STATE);
 

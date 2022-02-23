@@ -1,8 +1,8 @@
-import { Angle, Geometry, Input, Random, State, Vec3 } from '../../engine';
+import { State, Angle, Geometries, Random, Vec3, Keys } from '../../aura/aura.3d';
 import { Axis } from '../entity/axis';
 import { Shape } from '../entity/shape';
 
-export const SHAPES_STATE = new State.ThreeD.State3D({
+export const SHAPES_STATE = new State({
     name: 'shapes',
     init: (game) => {
         game.world.activeCamera.moveForward(-90000);
@@ -13,23 +13,23 @@ export const SHAPES_STATE = new State.ThreeD.State3D({
         const shapeScale = 10000;
 
         const geometries = [
-            Geometry.ThreeD.BOX,
-            Geometry.ThreeD.F,
-            Geometry.ThreeD.LINE,
-            Geometry.ThreeD.OCTAHEDRON,
-            Geometry.ThreeD.PRISM_HEXAGONAL,
-            Geometry.ThreeD.PRISM_TRIANGULAR,
-            Geometry.ThreeD.PYRAMID_HEXAGONAL,
-            Geometry.ThreeD.PYRAMID_SQUARE,
-            Geometry.ThreeD.TETRAHEDRON,
-            Geometry.ThreeD.Wireframe.BOX,
-            Geometry.ThreeD.Wireframe.F,
-            Geometry.ThreeD.Wireframe.OCTAHEDRON,
-            Geometry.ThreeD.Wireframe.PRISM_HEXAGONAL,
-            Geometry.ThreeD.Wireframe.PRISM_TRIANGULAR,
-            Geometry.ThreeD.Wireframe.PYRAMID_HEXAGONAL,
-            Geometry.ThreeD.Wireframe.PYRAMID_SQUARE,
-            Geometry.ThreeD.Wireframe.TETRAHEDRON
+            Geometries.CUBE,
+            Geometries.F,
+            Geometries.LINE,
+            Geometries.OCTAHEDRON,
+            Geometries.PRISM_HEXAGONAL,
+            Geometries.PRISM_TRIANGULAR,
+            Geometries.PYRAMID_HEXAGONAL,
+            Geometries.PYRAMID_SQUARE,
+            Geometries.TETRAHEDRON,
+            Geometries.Wireframe.CUBE,
+            Geometries.Wireframe.F,
+            Geometries.Wireframe.OCTAHEDRON,
+            Geometries.Wireframe.PRISM_HEXAGONAL,
+            Geometries.Wireframe.PRISM_TRIANGULAR,
+            Geometries.Wireframe.PYRAMID_HEXAGONAL,
+            Geometries.Wireframe.PYRAMID_SQUARE,
+            Geometries.Wireframe.TETRAHEDRON
         ];
 
         for (let i = -game.world.dimensions.x / 2; i <= game.world.dimensions.x / 2; i += shapeScale) {
@@ -54,45 +54,45 @@ export const SHAPES_STATE = new State.ThreeD.State3D({
         const cameraMove = 200;
 
         // camera controls
-        if (game.input.isKeyDown(Input.Keys.A)) {
+        if (game.input.isKeyDown(Keys.A)) {
             camera.moveRight(-cameraMove);
         }
-        else if (game.input.isKeyDown(Input.Keys.D)) {
+        else if (game.input.isKeyDown(Keys.D)) {
             camera.moveRight(cameraMove);
         }
 
-        if (game.input.isKeyDown(Input.Keys.W)) {
+        if (game.input.isKeyDown(Keys.W)) {
             camera.moveForward(cameraMove);
         }
-        else if (game.input.isKeyDown(Input.Keys.S)) {
+        else if (game.input.isKeyDown(Keys.S)) {
             camera.moveForward(-cameraMove);
         }
 
-        if (game.input.isKeyDown(Input.Keys.Q)) {
+        if (game.input.isKeyDown(Keys.Q)) {
             camera.moveUp(-cameraMove);
         }
-        else if (game.input.isKeyDown(Input.Keys.E)) {
+        else if (game.input.isKeyDown(Keys.E)) {
             camera.moveUp(cameraMove);
         }
 
-        if (game.input.isKeyDown(Input.Keys.J)) {
+        if (game.input.isKeyDown(Keys.J)) {
             camera.rotateY(cameraAngle);
         }
-        else if (game.input.isKeyDown(Input.Keys.L)) {
+        else if (game.input.isKeyDown(Keys.L)) {
             camera.rotateY(-cameraAngle);
         }
 
-        if (game.input.isKeyDown(Input.Keys.I)) {
+        if (game.input.isKeyDown(Keys.I)) {
             camera.rotateX(cameraAngle);
         }
-        else if (game.input.isKeyDown(Input.Keys.K)) {
+        else if (game.input.isKeyDown(Keys.K)) {
             camera.rotateX(-cameraAngle);
         }
 
-        if (game.input.isKeyDown(Input.Keys.U)) {
+        if (game.input.isKeyDown(Keys.U)) {
             camera.rotateZ(-cameraAngle);
         }
-        else if (game.input.isKeyDown(Input.Keys.O)) {
+        else if (game.input.isKeyDown(Keys.O)) {
             camera.rotateZ(cameraAngle);
         }
     }

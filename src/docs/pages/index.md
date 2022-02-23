@@ -1,4 +1,4 @@
-# Aura Documentation [Under Construction]
+# Aura Documentation [WIP]
 
 *emphasis*
 
@@ -9,11 +9,12 @@
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 
 ```typescript
-import { Game } from 'protogl';
+// highlighting
+
+import { Game, Vec2 } from 'aura-2d';
 
 const game = new Game({
-    width: 800,
-    height: 600,
+    canvasDimensions: new Vec2(800, 600),
     init: () => {
         console.log('init')
     }

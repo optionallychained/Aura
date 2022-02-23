@@ -1,10 +1,11 @@
 const pug = require('pug');
 const marked = require('marked').marked;
 const hljs = require('highlight.js');
-
-const fs = require('fs-extra');
+const fs = require('fs/promises');
 const path = require('path');
-const { execSync } = require('child_process');
+const { exec } = require('child_process');
+
+const dev = process.argv.includes('--dev') || process.argv.includes('dev');
 
 // source paths
 const source = './src/docs';
@@ -18,9 +19,6 @@ const assetDest = path.join(dest, 'assets');
 const jsDest = path.join(assetDest, 'js');
 const cssDest = path.join(assetDest, 'css');
 const imgDest = path.join(assetDest, 'img');
-
-// whether or not we're running in dev mode
-const dev = process.argv.includes('--dev') || process.argv.includes('dev');
 
 // pretty filename => pagetitle mappings
 const pageNameMappings = {
@@ -39,10 +37,8 @@ marked.setOptions({
 });
 
 // convenient shorthand for making a directory only if it doesn't already exist
-const mkDirOptional = (dir) => {
-    if (!fs.existsSync(dir)) {
-        fs.mkdirSync(dir);
-    }
+const mkdir = async (dir) => {
+    await fs.mkdir(dir);
 }
 
 // simple logging function, only logging if we're not in dev mode
@@ -56,21 +52,19 @@ const log = (...args) => {
 const processPages = async (src, depth = 1) => {
     log('Processing Pages:', src, '\n');
 
-    for (const file of await fs.promises.readdir(src, 'utf8')) {
+    for (const file of await fs.readdir(src, 'utf8')) {
         const srcPath = path.join(src, file);
         const pageName = file.replace('.md', '');
         const pageNamePretty = titleCase(pageNameMappings[pageName] ?? pageName);
         const destName = file.replace('.md', '.html');
         const destPath = path.join(src.replace(/src|pages/g, '').substr(1), destName);
 
-        const stat = await fs.promises.stat(srcPath);
-
-        if (stat.isFile()) {
+        if ((await fs.stat(srcPath)).isFile()) {
             // file encountered: render it
             log('Rendering File:', destPath);
 
             // remove any return characters because Pug is finnicky
-            const markdown = marked((await fs.promises.readFile(srcPath)).toString()).replace(/(?:\r\n|\r|\n)/g, '');
+            const markdown = marked((await fs.readFile(srcPath)).toString()).replace(/(?:\r\n|\r|\n)/g, '');
 
             // nb: the strange layout of the template string is the only way I've found to avoid Pug complaining about extension/blocks due to indent problems
             const page = pug.render(
@@ -85,12 +79,12 @@ const processPages = async (src, depth = 1) => {
                     // relative prefix for links and asset inclusions
                     relativePrefix: `${'.'.repeat(depth)}/`
                 }
-            )
+            );
 
             // write the file
-            await fs.promises.writeFile(destPath, page);
+            await fs.writeFile(destPath, page);
         }
-        else if (stat.isDirectory()) {
+        else {
             // directory encountered: mirror into dest, then recurse
             mkDirOptional(destPath);
             await processPages(srcPath, depth + 1);
@@ -103,22 +97,23 @@ const processPages = async (src, depth = 1) => {
 const copyImages = async (src) => {
     log('Copying Images:', src, '\n');
 
-    for (const file of await fs.promises.readdir(src)) {
+    for (const file of await fs.readdir(src)) {
         const srcPath = path.join(src, file);
         const destPath = path.join(src.replace(/src/g, '').substr(1), file);
 
-        const stat = await fs.promises.stat(srcPath);
+        log('srcpath:', srcPath);
+        log('destPath:', destPath);
 
-        if (stat.isFile()) {
+        if ((await fs.stat(srcPath)).isFile()) {
             // file encountered: copy it
             log('Copying File:', destPath);
 
-            await fs.promises.copyFile(srcPath, destPath);
+            await fs.copyFile(srcPath, destPath);
         }
-        else if (stat.isDirectory()) {
+        else {
             // directory encountered: mirror into dest, then recurse
-            mkDirOptional(destPath);
-            await processImages(srcPath);
+            await mkdir(destPath);
+            await copyImages(srcPath);
             log('\n');
         }
     }
@@ -129,52 +124,65 @@ const copyImages = async (src) => {
 // process the documentation's assets by compiling TS + SCSS with Webpack, shuffling the output a bit and then copying the images directory
 const processAssets = async () => {
     log('Processing Assets:', assetSource, '\n');
-    mkDirOptional(assetSource);
+
+    await mkdir(assetDest);
+
+    await Promise.all([
+        mkdir(cssDest),
+        mkdir(jsDest),
+        mkdir(imgDest)
+    ]);
 
     // run webpack in the proper mode
-    const cmd = `webpack --config webpack.docs.config.js --mode ${dev ? 'development' : 'production'}`;
-    execSync(cmd, { stdio: 'inherit' });
+    await new Promise((resolve, reject) => {
+        exec(`webpack --config webpack.docs.js --mode ${dev ? 'development' : 'production'}`, { stdio: 'inherit' }, (err) => err ? reject(err) : resolve());
+    }).catch((err) => {
+        console.error(err);
+        process.exit(1);
+    });
 
-    // move webpack JS output to the right dest
-    mkDirOptional(cssDest);
-    await fs.promises.rename(path.join(assetDest, 'css.css'), path.join(cssDest, 'main.css'));
+    await Promise.all([
+        // move webpack CSS output to the right dest
+        fs.rename(path.join(assetDest, 'css.css'), path.join(cssDest, 'main.css')),
 
-    // move webpack CSS output to the right dest
-    mkDirOptional(jsDest);
-    await fs.promises.rename(path.join(assetDest, 'js.js'), path.join(jsDest, 'main.js'));
+        // move webpack JS output to the right dest
+        fs.rename(path.join(assetDest, 'js.js'), path.join(jsDest, 'main.js')),
 
-    // clean up the Webpack CSS JS output (not applicable for our use-case)
-    await fs.promises.rm(path.join(assetDest, 'css.js'));
+        // clean up the webpack CSS JS output (not applicable for our use-case)
+        fs.rm(path.join(assetDest, 'css.js'))
+    ]);
 
-    // handle images
-    mkDirOptional(imgDest);
     log('\n');
     await copyImages(imgSource);
 }
 
 // generate the API documentation by running typedoc
-const generateAPI = () => {
-    log('\n', 'Generating API Documentation...', '\n');
+const generateAPI = async () => {
+    log('\n', 'Generating Aura API documentation...', '\n');
 
-    const cmd = `typedoc${dev ? '' : ' --logLevel Verbose'}`;
-    execSync(cmd, { stdio: 'inherit' });
+    await Promise.all([
+        new Promise((resolve, reject) => {
+            exec(`typedoc --options ./typedoc.2d.json ${dev ? '' : '--logLevel Verbose'}`, { stdio: 'inherit' }, (err) => err ? reject(err) : resolve());
+        }),
+        new Promise((resolve, reject) => {
+            exec(`typedoc --options ./typedoc.3d.json ${dev ? '' : '--logLevel Verbose'}`, { stdio: 'inherit' }, (err) => err ? reject(err) : resolve());
+        })
+    ]);
 }
 
 // main execution routine; create the root output directory, then process assets, pages and API documentation in order
 (async () => {
     try {
         log('DocGen Starting...', '\n');
-        mkDirOptional(dest);
+        mkdir(dest);
 
-        // process assets
-        await processAssets();
+        await Promise.all([
+            processAssets(),
+            processPages(pageSource)
+        ]);
 
-        // process pages
-        await processPages(pageSource);
-
-        // generate API documentation only if we're building for prod
         if (!dev) {
-            generateAPI();
+            await generateAPI();
         }
 
         log('\n\n', 'Done! Docs generated at', dest);

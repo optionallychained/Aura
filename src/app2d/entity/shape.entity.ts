@@ -1,22 +1,22 @@
-import { Angle, Color, Component, Entity, Geometry, Shader, Vec2 } from '../../engine';
+import { Angle, Color, Component, Entity, FlatColor, Geometry, Model, MultiColor, Shader, ShaderPrograms, Transform, Vec2 } from '../../aura/aura.2d';
 
-export class Shape extends Entity.Entity {
+export class Shape extends Entity {
 
-    constructor(geometry: Geometry.Geometry, position = new Vec2(), scale = 10) {
+    constructor(geometry: Geometry, position = new Vec2(), scale = 10) {
         const r = Math.random() < 0.5;
 
-        const components: Array<Component.Component> = [
-            new Component.TwoD.Transform2D(position, new Vec2(scale, scale)),
-            new Component.Generic.Model(geometry),
+        const components: Array<Component> = [
+            new Transform(position, new Vec2(scale, scale)),
+            new Model(geometry),
         ];
 
         if (r) {
-            components.push(new Component.Generic.Shader(Shader.Program.TwoD.PROGRAM_BASIC_2D));
-            components.push(new Component.Generic.FlatColor(Color.random()));
+            components.push(new Shader(ShaderPrograms.BASIC));
+            components.push(new FlatColor(Color.random()));
         }
         else {
-            components.push(new Component.Generic.Shader(Shader.Program.TwoD.PROGRAM_COLOR_PER_VERTEX_2D));
-            components.push(new Component.Generic.MultiColor(Color.randomList(30)));
+            components.push(new Shader(ShaderPrograms.COLOR_PER_VERTEX));
+            components.push(new MultiColor(Color.randomList(30)));
         }
 
         super({
@@ -26,6 +26,6 @@ export class Shape extends Entity.Entity {
     }
 
     public tick(): void {
-        this.getComponent<Component.TwoD.Transform2D>('Transform2D').rotate(Angle.toRadians(1));
+        this.getComponent<Transform>('Transform').rotate(Angle.toRadians(1));
     }
 }

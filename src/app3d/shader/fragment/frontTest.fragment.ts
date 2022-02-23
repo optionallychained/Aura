@@ -1,6 +1,6 @@
-import { Shader } from '../../../engine';
+import { FragmentShader } from '../../../aura/aura.3d';
 
-export const FRAGMENT_FRONT_TEST = new Shader.Fragment.FragmentShader({
+export const FRAGMENT_FRONT_TEST = new FragmentShader({
     name: 'fragment_front_test',
     source: `
         precision mediump float;

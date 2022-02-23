@@ -15,6 +15,9 @@
         "@typescript-eslint/no-empty-function": [
             "off"
         ],
+        "@typescript-eslint/no-empty-interface": [
+            "off"
+        ],
         "quotes": [
             "error",
             "single",
@@ -25,7 +28,8 @@
         "max-len": [
             "error",
             {
-                "code": 140
+                "code": 140,
+                "ignorePattern": "import"
             }
         ],
         "@typescript-eslint/restrict-template-expressions": [

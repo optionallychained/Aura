@@ -1,29 +1,29 @@
-import { Geometry, Random, State, Vec2 } from '../../engine';
+import { Geometries, Random, State, Vec2 } from '../../aura/aura.2d';
 import { Shape } from '../entity/shape.entity';
 
-export const SHAPES_STATE = new State.TwoD.State2D({
+export const SHAPES_STATE = new State({
     name: 'shapes',
     init: (game) => {
         const shapeScale = 50;
 
         const geometries = [
-            Geometry.TwoD.BOX,
-            Geometry.TwoD.CIRCLE,
-            Geometry.TwoD.F,
-            Geometry.TwoD.HEXAGON,
-            Geometry.TwoD.LINE,
-            Geometry.TwoD.OCTAGON,
-            Geometry.TwoD.PENTAGON,
-            Geometry.TwoD.TRIANGLE,
-            Geometry.TwoD.TRIANGLE_RIGHT_ANGLE,
-            Geometry.TwoD.Wireframe.BOX,
-            Geometry.TwoD.Wireframe.CIRCLE,
-            Geometry.TwoD.Wireframe.F,
-            Geometry.TwoD.Wireframe.HEXAGON,
-            Geometry.TwoD.Wireframe.OCTAGON,
-            Geometry.TwoD.Wireframe.PENTAGON,
-            Geometry.TwoD.Wireframe.TRIANGLE,
-            Geometry.TwoD.Wireframe.TRIANGLE_RIGHT_ANGLE
+            Geometries.SQUARE,
+            Geometries.CIRCLE,
+            Geometries.F,
+            Geometries.HEXAGON,
+            Geometries.LINE,
+            Geometries.OCTAGON,
+            Geometries.PENTAGON,
+            Geometries.TRIANGLE,
+            Geometries.TRIANGLE_RIGHT_ANGLE,
+            Geometries.Wireframe.SQUARE,
+            Geometries.Wireframe.CIRCLE,
+            Geometries.Wireframe.F,
+            Geometries.Wireframe.HEXAGON,
+            Geometries.Wireframe.OCTAGON,
+            Geometries.Wireframe.PENTAGON,
+            Geometries.Wireframe.TRIANGLE,
+            Geometries.Wireframe.TRIANGLE_RIGHT_ANGLE
         ];
 
         for (let i = -game.world.dimensions.x / 2; i <= game.world.dimensions.x / 2; i += shapeScale) {

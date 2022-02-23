@@ -1,19 +1,19 @@
-import { Angle, Component, Geometry, Input, State } from '../../engine';
+import { Geometries, State, Transform, Angle, Keys } from '../../aura/aura.3d';
 import { Axis } from '../entity/axis';
 import { Shape } from '../entity/shape';
 
-export const TEST_STATE = new State.ThreeD.State3D({
+export const TEST_STATE = new State({
     name: 'test',
     init: (game) => {
         game.world.addEntity(new Axis('x', game.world.dimensions.x));
         game.world.addEntity(new Axis('y', game.world.dimensions.y));
         game.world.addEntity(new Axis('z', game.world.dimensions.z));
 
-        game.world.addEntity(new Shape(Geometry.ThreeD.Wireframe.F));
+        game.world.addEntity(new Shape(Geometries.Wireframe.F));
     },
     end: () => { },
     tick: (game) => {
-        const shapeTransform = game.world.filterEntitiesByTag('shape')[0]?.getComponent<Component.ThreeD.Transform3D>('Transform3D');
+        const shapeTransform = game.world.filterEntitiesByTag('shape')[0]?.getComponent<Transform>('Transform');
         const camera = game.world.activeCamera;
 
         const cameraAngle = Angle.toRadians(0.5);
@@ -21,60 +21,60 @@ export const TEST_STATE = new State.ThreeD.State3D({
         const shapeAngle = Angle.toRadians(2.5);
 
         // camera controls
-        if (game.input.isKeyDown(Input.Keys.A)) {
+        if (game.input.isKeyDown(Keys.A)) {
             camera.moveRight(-cameraMove);
         }
-        else if (game.input.isKeyDown(Input.Keys.D)) {
+        else if (game.input.isKeyDown(Keys.D)) {
             camera.moveRight(cameraMove);
         }
 
-        if (game.input.isKeyDown(Input.Keys.W)) {
+        if (game.input.isKeyDown(Keys.W)) {
             camera.moveForward(cameraMove);
         }
-        else if (game.input.isKeyDown(Input.Keys.S)) {
+        else if (game.input.isKeyDown(Keys.S)) {
             camera.moveForward(-cameraMove);
         }
 
-        if (game.input.isKeyDown(Input.Keys.Q)) {
+        if (game.input.isKeyDown(Keys.Q)) {
             camera.moveUp(-cameraMove);
         }
-        else if (game.input.isKeyDown(Input.Keys.E)) {
+        else if (game.input.isKeyDown(Keys.E)) {
             camera.moveUp(cameraMove);
         }
 
-        if (game.input.isKeyDown(Input.Keys.J)) {
+        if (game.input.isKeyDown(Keys.J)) {
             camera.rotateY(cameraAngle);
         }
-        else if (game.input.isKeyDown(Input.Keys.L)) {
+        else if (game.input.isKeyDown(Keys.L)) {
             camera.rotateY(-cameraAngle);
         }
 
-        if (game.input.isKeyDown(Input.Keys.I)) {
+        if (game.input.isKeyDown(Keys.I)) {
             camera.rotateX(cameraAngle);
         }
-        else if (game.input.isKeyDown(Input.Keys.K)) {
+        else if (game.input.isKeyDown(Keys.K)) {
             camera.rotateX(-cameraAngle);
         }
 
-        if (game.input.isKeyDown(Input.Keys.U)) {
+        if (game.input.isKeyDown(Keys.U)) {
             camera.rotateZ(-cameraAngle);
         }
-        else if (game.input.isKeyDown(Input.Keys.O)) {
+        else if (game.input.isKeyDown(Keys.O)) {
             camera.rotateZ(cameraAngle);
         }
 
         // shape controls
-        if (game.input.isKeyDown(Input.Keys.ARROW_LEFT)) {
+        if (game.input.isKeyDown(Keys.ARROW_LEFT)) {
             shapeTransform.rotateY(shapeAngle);
         }
-        else if (game.input.isKeyDown(Input.Keys.ARROW_RIGHT)) {
+        else if (game.input.isKeyDown(Keys.ARROW_RIGHT)) {
             shapeTransform.rotateY(-shapeAngle);
         }
 
-        if (game.input.isKeyDown(Input.Keys.ARROW_UP)) {
+        if (game.input.isKeyDown(Keys.ARROW_UP)) {
             shapeTransform.rotateX(shapeAngle);
         }
-        else if (game.input.isKeyDown(Input.Keys.ARROW_DOWN)) {
+        else if (game.input.isKeyDown(Keys.ARROW_DOWN)) {
             shapeTransform.rotateX(-shapeAngle);
         }
     }

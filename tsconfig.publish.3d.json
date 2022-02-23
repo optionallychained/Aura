@@ -1,0 +1,9 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "outDir": "./publish/3d",
+    },
+    "include": [
+        "./src/aura/aura.3d.ts"
+    ]
+}
