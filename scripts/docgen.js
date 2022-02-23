@@ -132,7 +132,7 @@ const processAssets = async () => {
     mkDirOptional(assetSource);
 
     // run webpack in the proper mode
-    const cmd = `webpack --config webpack.docs.config.js --mode ${dev ? 'development' : 'production'}`;
+    const cmd = `webpack --config webpack.docs.js --mode ${dev ? 'development' : 'production'}`;
     execSync(cmd, { stdio: 'inherit' });
 
     // move webpack JS output to the right dest
@@ -154,10 +154,11 @@ const processAssets = async () => {
 
 // generate the API documentation by running typedoc
 const generateAPI = () => {
-    log('\n', 'Generating API Documentation...', '\n');
+    log('\n', 'Generating Aura2D API Documentation...', '\n');
+    execSync(`typedoc --options ./typedoc.2d.json ${dev ? '' : '--logLevel Verbose'}`, { stdio: 'inherit' });
 
-    const cmd = `typedoc${dev ? '' : ' --logLevel Verbose'}`;
-    execSync(cmd, { stdio: 'inherit' });
+    log('\n', 'Generating Aura3D API Documentation...', '\n');
+    execSync(`typedoc --options ./typedoc.3d.json ${dev ? '' : '--logLevel Verbose'}`, { stdio: 'inherit' });
 }
 
 // main execution routine; create the root output directory, then process assets, pages and API documentation in order

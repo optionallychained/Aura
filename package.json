@@ -29,10 +29,10 @@
 
         "aura:build": "npm run aura:2d:build & npm run aura:3d:build",
 
-        "aura:2d:publish": "npm run aura:2d:build && cd ./publish/2d && npm publish",
-        "aura:3d:publish": "npm run aura:3d:build && cd ./publish/3d && npm publish",
+        "aura:2d:publish": "npm run aura:2d:build && npm run docs:deploy && cd ./publish/2d && npm publish",
+        "aura:3d:publish": "npm run aura:3d:build && npm run docs:deploy && cd ./publish/3d && npm publish",
 
-        "aura:publish": "npm run aura:build && cd ./publish/2d && npm publish && cd ../3d && npm publish"
+        "aura:publish": "npm run aura:build && npm run docs:deploy && cd ./publish/2d && npm publish && cd ../3d && npm publish"
     },
     "devDependencies": {
         "@types/jest": "^27.4.0",
