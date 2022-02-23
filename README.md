@@ -20,7 +20,7 @@ This repository serves as a master project producing both the Aura2D and Aura3D 
 | `./src/app2d` | demo/test application emulating Aura2D developments; a test bed for ongoing Aura works                        |
 | `./src/app3d` | as app2d for Aura3D                                                                                           |
 | `./src/aura`  | Aura itself, with domain-specific implementations found in `**/2d/` and `**/3d/` directories                  |
-| `./src/docs`  | PUG-based documentation site, combined with typedoc API docs in final documentation output                    |
+| `./src/docs`  | Pug-based documentation site, combined with typedoc API docs in final documentation output                    |
 | `./src/test`  | Jest tests for Aura                                                                                           |
 
 
