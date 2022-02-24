@@ -32,9 +32,5 @@ Aura.
 
 - Unit + integration testing for core aspects
     - may require a look at something akin to dep injection for Game
-
-
-### Project
-
-- Review barelling approach + overall export volume
-- Re-evaluate publication format/structure(s) (ESM?)
+- flesh out math tests
+    - for mat + vec, move to externally-sourced expected results
