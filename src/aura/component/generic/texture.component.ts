@@ -1,5 +1,4 @@
-import { Component } from '../component';
-import { Name } from '../../core/name.decorator';
+import { Component } from '../component.decorator';
 
 /**
  * Texture component, defining the grid positions within a TextureAtlas that an Entity will sample from
@@ -8,8 +7,8 @@ import { Name } from '../../core/name.decorator';
  *
  * Entities can sample from multiple cells in the Atlas' grid with the columnSpan and rowSpan fields
  */
-@Name('Texture')
-export class Texture extends Component {
+@Component('Texture')
+export class Texture {
 
     /**
      * Constructor. Take the texture sampling information and provide the name 'Texture' to the parent class
@@ -24,7 +23,5 @@ export class Texture extends Component {
         public readonly row: number,
         public readonly columnSpan = 1,
         public readonly rowSpan = 1
-    ) {
-        super('Texture');
-    }
+    ) { }
 }

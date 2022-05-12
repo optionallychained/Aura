@@ -1,25 +1,22 @@
 import { FragmentShader } from '../../shader/fragment/fragment.shader';
 import { ShaderProgram } from '../../shader/program/shaderProgram';
 import { VertexShader } from '../../shader/vertex/vertex.shader';
-import { Component } from '../component';
-import { Name } from '../../core/name.decorator';
+import { Component } from '../component.decorator';
 
 /**
  * Shader Component, defining the Shader an Entity will use
  *
  * Together with the Model Component, makes an Entity renderable
  */
-@Name('Shader')
-export class Shader extends Component {
+@Component('Shader')
+export class Shader {
 
     /**
      * Constructor. Take the ShaderProgram to use and provide the name 'Shader' to the parent class
      *
      * @param program the ShaderProgram to use
      */
-    constructor(private readonly program: ShaderProgram) {
-        super('Shader');
-    }
+    constructor(private readonly program: ShaderProgram) { }
 
     /**
      * Retriever the ShaderProgram's name

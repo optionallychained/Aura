@@ -1,5 +1,4 @@
 import { ClassType } from '../aura.types';
-import { Component } from '../component/component';
 import { AuraError } from '../core/aura.error';
 import { GameBase } from '../core/game.base';
 import { EntityConfig } from './entity.config';
@@ -17,7 +16,7 @@ export abstract class Entity {
     public readonly id = (+new Date()).toString(16) + (Math.random() * 10000000 | 0).toString(16);
 
     /** Entity Components, mapped by their name for simple management */
-    private readonly components = new Map<string, Component>();
+    private readonly components = new Map<string, object>();
 
     /**
      * Constructor. Take an EntityConfig and initialise the Entity's Components, if provided
@@ -76,8 +75,9 @@ export abstract class Entity {
      *
      * @param component the Component to add
      */
-    public addComponent(component: Component): void {
-        this.components.set(component.name, component);
+    public addComponent(component: object): void {
+        // TODO see Entity README; re-evaluate both object type + .constructor.name; + then @Component
+        this.components.set(component.constructor.name, component);
     }
 
     /**
@@ -85,7 +85,7 @@ export abstract class Entity {
      *
      * @param components the Components to add
      */
-    public addComponents(...components: Array<Component>): void {
+    public addComponents(...components: Array<object>): void {
         for (const c of components) {
             this.addComponent(c);
         }
@@ -96,8 +96,8 @@ export abstract class Entity {
      *
      * @param component the class of the Component to remove
      */
-    public removeComponent(component: ClassType<Component>): void {
-        this.components.delete(component.name);
+    public removeComponent(component: ClassType<object>): void {
+        this.components.delete(component.constructor.name);
     }
 
     /**
@@ -105,7 +105,7 @@ export abstract class Entity {
      *
      * @param components the classes of the Components to remove
      */
-    public removeComponents(...components: Array<ClassType<Component>>): void {
+    public removeComponents(...components: Array<ClassType<object>>): void {
         for (const c of components) {
             this.removeComponent(c);
         }
@@ -122,14 +122,14 @@ export abstract class Entity {
      *
      * @returns the retrieved Component
      */
-    public getComponent<T extends Component>(component: ClassType<T>): T {
+    public getComponent<T extends object>(component: ClassType<T>): T {
         const c = this.components.get(component.name);
 
         if (!c) {
             throw new AuraError({
                 class: 'Entity',
                 method: 'getComponent',
-                message: `Failed to retrieve Component '${component.constructor.name}' for Entity with tag '${this.tag}'`
+                message: `Failed to retrieve Component '${component.name}' for Entity with tag '${this.tag}'`
             });
         }
 
@@ -143,7 +143,7 @@ export abstract class Entity {
      *
      * @returns whether or not the Entity has the Component
      */
-    public hasComponent(component: ClassType<Component>): boolean {
+    public hasComponent(component: ClassType<object>): boolean {
         return this.components.has(component.name);
     }
 
@@ -154,7 +154,7 @@ export abstract class Entity {
      *
      * @returns whether or not the Entity has all of the named Components
      */
-    public hasComponents(...components: Array<ClassType<Component>>): boolean {
+    public hasComponents(...components: Array<ClassType<object>>): boolean {
         for (const c of components) {
             if (!this.hasComponent(c)) {
                 return false;

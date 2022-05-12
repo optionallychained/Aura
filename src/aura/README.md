@@ -10,17 +10,10 @@ Aura.
 
 - Sounds (WebAudio API?)
 - Materials?
-- Restructure
-    - shallower grouping
-    - better 2D/3D separation
-        - remove in-code 2D/3D specifications where appropriate
-- Re-evaluate type differentiation mechanisms for 2D/3D split aspects
-- Review for consistency of design approach in core aspects (Config/Class/Instantiate/Extend)
-    - States
-    - Components
-    - Systems
-    - Geometry
-    - ...
+- Re-evaluate engine architecture:
+    - type differentiation mechanisms for 2D/3D split aspects
+    - consistency of design approach for core aspects (Config/Class/Instantiate/Extend) / (States, Components, Systems, Geometry, etc)
+    - use of @Component for supporting class-based management; use of decorators elsewhere?
 - Mobile support
     - device detection
     - viewport sizing

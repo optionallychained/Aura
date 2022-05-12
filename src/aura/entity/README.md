@@ -8,11 +8,12 @@ Game Object representation and management.
 
 ### Entity
 
-- Find a way to reimplement class/type-based Component get/remove/has (see bottom of entity.ts) (drop 'name' entirely?)
 - Consider "prefab" Entities, comprising common Component groupings
 - Consider Entity "validation"
     - Construct-time assurance than an Entity's component configuration works
     - eg: has all the Components required to fill its Shader's Attributes
+
+- (at a later time) re-evaluate decorated-class approach for Component definition/management - especially use of 'object' type in Entity for components and use of .constructor.name in add()
 
 
 ### EntityManager

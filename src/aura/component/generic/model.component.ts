@@ -1,24 +1,21 @@
 import { Geometry } from '../../geometry/geometry';
 import { GLShape } from '../../geometry/glShape.enum';
-import { Component } from '../component';
-import { Name } from '../../core/name.decorator';
+import { Component } from '../component.decorator';
 
 /**
  * Model Component, defining the Geometry the Entity will use to define its shape
  *
  * Together with the Shader Component, makes an Entity renderable
  */
-@Name('Model')
-export class Model extends Component {
+@Component('Model')
+export class Model {
 
     /**
      * Constructor. Take the Geometry to use and provide the name 'Model' to the parent class
      *
      * @param geometry the Geometry to use
      */
-    constructor(private readonly geometry: Geometry) {
-        super('Model');
-    }
+    constructor(private readonly geometry: Geometry) { }
 
     /**
      * Retrieve the Geometry's name

@@ -1,14 +1,13 @@
 import { Color } from '../../math/color';
-import { Component } from '../component';
-import { Name } from '../../core/name.decorator';
+import { Component } from '../component.decorator';
 
 /**
  * MultiColor Component, defining an arbitrary number of colors for the Entity
  *
  * A MultiColor's colors will be cycled through on a per-vertex basis, allowing for per-vertex colouration
  */
-@Name('MultiColor')
-export class MultiColor extends Component {
+@Component('MultiColor')
+export class MultiColor {
 
     /**
      * Counter for the current Color used in nextColor()
@@ -20,9 +19,7 @@ export class MultiColor extends Component {
      *
      * @param colors the list of Colors to use
      */
-    constructor(public readonly colors: ReadonlyArray<Color>) {
-        super('MultiColor');
-    }
+    constructor(public readonly colors: ReadonlyArray<Color>) { }
 
     /**
      * Retrieve the next Color in the list and cycle the counter

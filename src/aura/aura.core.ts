@@ -1,18 +1,17 @@
 import { CameraBase } from './camera/camera.base';
 
-import { Component } from './component/component';
-
 import { FlatColor } from './component/generic/flatColor.component';
 import { Model } from './component/generic/model.component';
 import { MultiColor } from './component/generic/multiColor.component';
 import { Shader } from './component/generic/shader.component';
 import { Texture } from './component/generic/texture.component';
 
+import { Component } from './component/component.decorator';
+
 import { AuraError } from './core/aura.error';
 import { GameBase } from './core/game.base';
 import { GameConfigBase } from './core/game.config.base';
 import { GameConfigDefaults } from './core/game.config.base';
-import { Name } from './core/name.decorator';
 
 import { EntityConfig } from './entity/entity.config';
 import { EntityManagerConfig } from './entity/entity.manager.config';
@@ -67,17 +66,16 @@ import { WorldManager } from './world/world.manager';
 
 export {
     CameraBase,
-    Component,
     FlatColor,
     Model,
     MultiColor,
     Shader,
     Texture,
+    Component,
     AuraError,
     GameBase,
     GameConfigBase,
     GameConfigDefaults,
-    Name,
     EntityConfig,
     EntityManagerConfig,
     EntityManager,

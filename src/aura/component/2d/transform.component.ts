@@ -1,14 +1,13 @@
 import { Mat3 } from '../../math/mat3';
 import { Vec2 } from '../../math/vec2';
 import { Mutable } from '../../aura.types';
-import { Name } from '../../core/name.decorator';
-import { Component } from '../component';
+import { Component } from '../component.decorator';
 
 /**
  * 2D Transform Component, defining the "physical" attributes of an Entity as well as transformation methods, enabling presence in 2D space
  */
-@Name('Transform')
-export class Transform extends Component {
+@Component('Transform')
+export class Transform {
 
     /** Maintained position */
     public readonly position = new Vec2();
@@ -39,8 +38,6 @@ export class Transform extends Component {
         public readonly initialAngle = 0,
         public readonly velocity = new Vec2()
     ) {
-        super('Transform');
-
         this.translate(initialPosition);
         this.scaleTo(initialScale);
         this.rotate(initialAngle);

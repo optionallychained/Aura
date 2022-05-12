@@ -1,5 +1,3 @@
-import { Component } from '../component/component';
-
 /**
  * Interface describing an Entity Configuration object
  */
@@ -7,5 +5,5 @@ export interface EntityConfig {
     /** A human-readable tag for identifying the Entity */
     readonly tag: string;
     /** Components to initialise the Entity with */
-    readonly components?: ReadonlyArray<Component>;
+    readonly components?: ReadonlyArray<object>;
 }
