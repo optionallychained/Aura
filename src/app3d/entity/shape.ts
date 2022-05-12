@@ -23,8 +23,6 @@ export class Shape extends Entity {
     }
 
     public tick(): void {
-        this.getComponent<Transform>('Transform').rotate(
-            new Vec3(this.rotations[0], this.rotations[1], this.rotations[2])
-        );
+        this.getComponent(Transform).rotate(new Vec3(this.rotations[0], this.rotations[1], this.rotations[2]));
     }
 }

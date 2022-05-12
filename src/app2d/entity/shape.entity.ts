@@ -7,7 +7,7 @@ export class Shape extends Entity {
 
         const components: Array<Component> = [
             new Transform(position, new Vec2(scale, scale)),
-            new Model(geometry),
+            new Model(geometry)
         ];
 
         if (r) {
@@ -26,6 +26,6 @@ export class Shape extends Entity {
     }
 
     public tick(): void {
-        this.getComponent<Transform>('Transform').rotate(Angle.toRadians(1));
+        this.getComponent(Transform).rotate(Angle.toRadians(1));
     }
 }

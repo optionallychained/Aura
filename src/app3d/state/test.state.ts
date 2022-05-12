@@ -13,7 +13,7 @@ export const TEST_STATE = new State({
     },
     end: () => { },
     tick: (game) => {
-        const shapeTransform = game.world.filterEntitiesByTag('shape')[0]?.getComponent<Transform>('Transform');
+        const shapeTransform = game.world.filterEntitiesByTag('shape')[0]?.getComponent(Transform);
         const camera = game.world.activeCamera;
 
         const cameraAngle = Angle.toRadians(0.5);
