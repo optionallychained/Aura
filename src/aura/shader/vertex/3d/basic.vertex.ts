@@ -10,7 +10,7 @@ export const VERTEX_BASIC = new VertexShader({
     source: `
         precision mediump float;
 
-        uniform mat4 u_Transform3D;
+        uniform mat4 u_Transform;
         uniform mat4 u_Projection;
         uniform mat4 u_View;
 
@@ -19,7 +19,7 @@ export const VERTEX_BASIC = new VertexShader({
         void main() {
             gl_PointSize = 1.0;
 
-            gl_Position = u_Projection * u_View * u_Transform3D * vec4(a_Position, 1.0);
+            gl_Position = u_Projection * u_View * u_Transform * vec4(a_Position, 1.0);
         }
     `,
     attributes: [
@@ -30,7 +30,7 @@ export const VERTEX_BASIC = new VertexShader({
     ],
     uniforms: [
         {
-            name: 'u_Transform3D',
+            name: 'u_Transform',
             type: UniformType.MAT4,
             variation: UniformVariation.ENTITY
         },

@@ -6,6 +6,7 @@ import { UI } from '../../ui/3d/ui';
 import { World } from '../../world/3d/world';
 import { GameBase } from '../game.base';
 import { GameConfig } from './game.config';
+import { initializeResolver } from '../../shader/resolve/3d/initializeResolver';
 
 /**
  * Concrete 3D Game, setting out the 3D-specific properties and behavior for the operation of 3D Games
@@ -37,6 +38,9 @@ export class Game extends GameBase {
      */
     constructor(config?: GameConfig) {
         super(config);
+
+        // initialize the 3D-specific shader variable resolvers
+        initializeResolver();
 
         // initialise a 3D Text
         this.text = new Text({

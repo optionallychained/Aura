@@ -1,11 +1,9 @@
-import { Transform as Transform2D } from '../component/2d/transform.component';
-import { Transform as Transform3D } from '../component/3d/transform.component';
-import { FlatColor } from '../component/generic/flatColor.component';
-import { Model } from '../component/generic/model.component';
-import { MultiColor } from '../component/generic/multiColor.component';
-import { AuraError } from '../core/aura.error';
-import { GameBase } from '../core/game.base';
-import { Entity } from '../entity/entity';
+import { FlatColor } from '../../component/generic/flatColor.component';
+import { Model } from '../../component/generic/model.component';
+import { MultiColor } from '../../component/generic/multiColor.component';
+import { AuraError } from '../../core/aura.error';
+import { GameBase } from '../../core/game.base';
+import { Entity } from '../../entity/entity';
 
 /**
  * Internal-use utility type representing a Shader Variable Resolution Function which retrieves a value from the Game
@@ -32,10 +30,10 @@ type EntityShaderVariableResolver = (e: Entity) => Float32Array | number;
  *     - example: `attribute vec2 a_Position;` - a vertex position, retrieved from an Entity's Model Component
  *
  *   - EntityUniform - uniforms, varying per Entity, to be retrieved from Entities and uploaded once per draw call by the WebGLRenderer
- *     - example: `uniform mat3 u_Transform2D;` - an Entity's Transformation Matrix, retrieved from its Transform Component
+ *     - example: `uniform mat3 u_Transform;` - an Entity's Transformation Matrix, retrieved from its Transform Component
  *
  *   - StaticUniform - uniforms, unrelated to Entities, to be retrieved from the Game and uploaded once per render call by the WebGLRenderer
- *     - example: `uniform mat3 u_View2D;` - the 2D View Matrix, retrieved from the Game's World/Camera
+ *     - example: `uniform mat3 u_View;` - the View Matrix, retrieved from the Game's World/Camera
  *
  * The mappings built into the class represent the supported set of built-in Attribute/Uniform names which, when used in Shaders, will
  *   automatically be retrieved; thereby also setting out the relationship between a variable name and the Entity/engine data it reflects
@@ -63,19 +61,19 @@ export class ShaderVariableResolver {
     private static readonly ENTITY_ATTRIBUTE_MAPPINGS = new Map<string, EntityShaderVariableResolver>([
         [
             'a_Position',
-            (e) => e.getComponent<Model>('Model').vertices
+            (e) => e.getComponent(Model).vertices
         ],
         [
             'a_Color',
-            (e) => e.getComponent<FlatColor>('FlatColor').color.float32Array
+            (e) => e.getComponent(FlatColor).color.float32Array
         ],
         [
             'a_VertexColor',
-            (e) => e.getComponent<MultiColor>('MultiColor').nextColor().float32Array
+            (e) => e.getComponent(MultiColor).nextColor().float32Array
         ],
         [
             'a_TexCoord',
-            (e) => e.getComponent<Model>('Model').textureCoordinates
+            (e) => e.getComponent(Model).textureCoordinates
         ]
     ]);
 
@@ -84,16 +82,8 @@ export class ShaderVariableResolver {
      */
     private static readonly ENTITY_UNIFORM_MAPPINGS = new Map<string, EntityShaderVariableResolver>([
         [
-            'u_Transform2D',
-            (e) => e.getComponent<Transform2D>('Transform').compute().float32Array
-        ],
-        [
-            'u_Transform3D',
-            (e) => e.getComponent<Transform3D>('Transform').compute().float32Array
-        ],
-        [
             'u_Color',
-            (e) => e.getComponent<FlatColor>('FlatColor').color.float32Array
+            (e) => e.getComponent(FlatColor).color.float32Array
         ]
     ]);
 

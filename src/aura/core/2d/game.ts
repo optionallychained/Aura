@@ -6,6 +6,7 @@ import { UI } from '../../ui/2d/ui';
 import { World } from '../../world/2d/world';
 import { GameBase } from '../game.base';
 import { GameConfig } from './game.config';
+import { initializeResolver } from '../../shader/resolve/2d/initializeResolver';
 
 /**
  * Concrete 2D Game, setting out the 2D-specific properties and behavior for the operation of 2D Games
@@ -37,6 +38,9 @@ export class Game extends GameBase {
      */
     constructor(config?: GameConfig) {
         super(config);
+
+        // initialize the 2D-specific shader variable resolvers
+        initializeResolver();
 
         // initialsie a 2D Text
         this.text = new Text({

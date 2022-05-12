@@ -2,7 +2,7 @@ import { AuraError } from '../core/aura.error';
 import { GameBase } from '../core/game.base';
 import { Color } from '../math/color';
 import { ShaderProgram } from '../shader/program/shaderProgram';
-import { ShaderVariableResolver } from '../shader/shaderVariableResolver';
+import { ShaderVariableResolver } from '../shader/resolve/shaderVariableResolver';
 import { UniformType } from '../shader/uniformType.enum';
 import { UniformVariation } from '../shader/uniformVariation.enum';
 import { TextureAtlas } from '../texture/textureAtlas';
