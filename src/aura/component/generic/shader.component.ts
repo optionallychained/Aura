@@ -2,12 +2,14 @@ import { FragmentShader } from '../../shader/fragment/fragment.shader';
 import { ShaderProgram } from '../../shader/program/shaderProgram';
 import { VertexShader } from '../../shader/vertex/vertex.shader';
 import { Component } from '../component';
+import { Name } from '../../core/name.decorator';
 
 /**
  * Shader Component, defining the Shader an Entity will use
  *
  * Together with the Model Component, makes an Entity renderable
  */
+@Name('Shader')
 export class Shader extends Component {
 
     /**

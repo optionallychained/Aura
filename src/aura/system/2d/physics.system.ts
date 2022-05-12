@@ -24,10 +24,10 @@ export class Physics extends System {
      * @param frameDelta the frame delta as calculated by the Game
      */
     public tick(game: Game, frameDelta: number): void {
-        const movers = game.world.filterEntitiesByComponentName('Transform');
+        const movers = game.world.filterEntitiesByComponent(Transform);
 
         for (const e of movers) {
-            const transform = e.getComponent<Transform>('Transform');
+            const transform = e.getComponent(Transform);
             transform.move(Vec2.scale(transform.velocity, frameDelta / 1000));
         }
     }

@@ -1,10 +1,12 @@
+import { Component } from '../aura.core';
+import { ClassType } from '../aura.types';
 import { Model } from '../component/generic/model.component';
 import { Shader } from '../component/generic/shader.component';
 import { Texture } from '../component/generic/texture.component';
 import { AuraError } from '../core/aura.error';
 import { GameBase } from '../core/game.base';
 import { VBOConfig } from '../renderer/vbo.config';
-import { ShaderVariableResolver } from '../shader/shaderVariableResolver';
+import { ShaderVariableResolver } from '../shader/resolve/shaderVariableResolver';
 import { Entity } from './entity';
 import { EntityManagerConfig } from './entity.manager.config';
 
@@ -163,52 +165,56 @@ export abstract class EntityManager<Config extends EntityManagerConfig> {
     }
 
     /**
-     * Filter the active Entities by a given Component name. Filter results are cached to optimise frame-to-frame filters
+     * Filter the active Entities by a given Component class. Filter results are cached to optimise frame-to-frame filters
      *
-     * @param component the name of the Component to filter by
+     * @param component the class of the Component to filter by
      *
      * @returns the list of Entities with the Component
      */
-    public filterEntitiesByComponentName(component: string): Array<Entity> {
-        return this.memoizeFilter(component, (e) => e.hasComponent(component))
+    public filterEntitiesByComponent(component: ClassType<Component>): Array<Entity> {
+        return this.memoizeFilter(component.name, (e) => e.hasComponent(component))
     }
 
     /**
-     * Filter the active Entities by a given list of Component names. Filter results are cached to optimise frame-to-frame filters
+     * Filter the active Entities by a given list of Component classes. Filter results are cached to optimise frame-to-frame filters
      *
-     * @param components the names of the Components to filter by
+     * @param components the classes of the Components to filter by
      *
      * @returns the list of Entities with the Components
      */
-    public filterEntitiesByComponentNames(...components: Array<string>): Array<Entity> {
-        return this.memoizeFilter(components.toString(), (e) => e.hasComponents(...components));
+    public filterEntitiesByComponents(...components: Array<ClassType<Component>>): Array<Entity> {
+        return this.memoizeFilter(components.map((c) => c.name).toString(), (e) => e.hasComponents(...components));
     }
 
     /**
-     * Filter Entities from a given source by a given Component name. Filter results are cached to optimise frame-to-frame filters
+     * Filter Entities from a given source by a given Component class. Filter results are cached to optimise frame-to-frame filters
      *
      * @param source the Entity list to treat as the filter source
      * @param filterId an identifier for the filter result, used to avoid conflicts for similar filters across disparate sources
-     * @param components the name of the Component to filter by
+     * @param component the class of the Component to filter by
      *
      * @returns the list of Entities from the source with the Component
      */
-    public filterEntitiesByComponentNameFromSource(source: Array<Entity>, filterId: string, component: string): Array<Entity> {
-        return this.memoizeFilter(component, (e) => e.hasComponent(component), filterId, source);
+    public filterEntitiesByComponentFromSource(source: Array<Entity>, filterId: string, component: ClassType<Component>): Array<Entity> {
+        return this.memoizeFilter(component.name, (e) => e.hasComponent(component), filterId, source);
     }
 
     /**
-     * Filter the Entities from a given source by a given list of Component names. Filter results are cached to optimise frame-to-frame
+     * Filter the Entities from a given source by a given list of Component classes. Filter results are cached to optimise frame-to-frame
      *   filters
      *
      * @param source the Entity list to treat as the filter source
      * @param filterId an identifier for the filter result, used to avoid conflicts for similar filters across disparate sources
-     * @param components the names of the Components to filter by
+     * @param components the classes of the Components to filter by
      *
      * @returns the list of Entities from the source with the Components
      */
-    public filterEntitiesByComponentNamesFromSource(source: Array<Entity>, filterId: string, ...components: Array<string>): Array<Entity> {
-        return this.memoizeFilter(components.toString(), (e) => e.hasComponents(...components), filterId, source);
+    public filterEntitiesByComponentsromSource(
+        source: Array<Entity>,
+        filterId: string,
+        ...components: Array<ClassType<Component>>
+    ): Array<Entity> {
+        return this.memoizeFilter(components.map((c) => c.name).toString(), (e) => e.hasComponents(...components), filterId, source);
     }
 
     /**
@@ -244,15 +250,14 @@ export abstract class EntityManager<Config extends EntityManagerConfig> {
             const changes = new Set<string>();
 
             for (const e of this.addList) {
-                if (!e.hasComponent('Shader') || !e.hasComponent('Model')) {
-                    // grouped Entities are for optimising rendering; if an Entity lacks either a Shader or a Model, it is implicitly not
-                    //   renderable
+                if (!e.hasComponents(Shader, Model)) {
+                    // grouped Entities are for optimising rendering; if an Entity lacks either a Shader or a Model, it is not renderable
                     continue;
                 }
 
                 // get the shader and model name for provisioning vertices and VBOs
-                const { programName } = e.getComponent<Shader>('Shader');
-                const { modelName } = e.getComponent<Model>('Model');
+                const { programName } = e.getComponent(Shader);
+                const { modelName } = e.getComponent(Model);
 
                 // mark that the vertices for this shader+model combo should be recompiled
                 changes.add(`${programName}-${modelName}`);
@@ -329,13 +334,13 @@ export abstract class EntityManager<Config extends EntityManagerConfig> {
 
                 // past this point, we're only concerned about keeping `renderableEntities` up to date - if the Entity to remove lacks a
                 //   Shader or Model, it will not be tracked in that Map, so we can skip the below logic
-                if (!e.hasComponent('Shader') || !e.hasComponent('Model')) {
+                if (!e.hasComponents(Shader, Model)) {
                     continue;
                 }
 
                 // get the shader and model name for provisioning vertices and VBOs
-                const { programName } = e.getComponent<Shader>('Shader');
-                const { modelName } = e.getComponent<Model>('Model');
+                const { programName } = e.getComponent(Shader);
+                const { modelName } = e.getComponent(Model);
 
                 // retrieve the Entities associated with this Shader
                 const forShader = this.renderableEntities.get(programName);
@@ -410,8 +415,8 @@ export abstract class EntityManager<Config extends EntityManagerConfig> {
                 }
 
                 // pull out the shader and model info once from the first Entity, as they're guaranteed to be the same for all
-                const shaderInfo = entities[0].getComponent<Shader>('Shader');
-                const modelInfo = entities[0].getComponent<Model>('Model');
+                const shaderInfo = entities[0].getComponent(Shader);
+                const modelInfo = entities[0].getComponent(Model);
 
                 // retrieve nominal information relating to all the Entities
                 const { glShape, vertexCount } = modelInfo;
@@ -467,7 +472,7 @@ export abstract class EntityManager<Config extends EntityManagerConfig> {
                                     });
                                 }
 
-                                const { column, row, columnSpan, rowSpan } = e.getComponent<Texture>('Texture');
+                                const { column, row, columnSpan, rowSpan } = e.getComponent(Texture);
                                 value = textureAtlas.resolveTextureCoordinates(value.slice(t, t + 2), column, row, columnSpan, rowSpan);
 
                                 // all texture coordinates are (currently?) of size 2

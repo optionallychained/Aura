@@ -1,3 +1,4 @@
+import { ClassType } from '../aura.types';
 import { Component } from '../component/component';
 import { AuraError } from '../core/aura.error';
 import { GameBase } from '../core/game.base';
@@ -71,29 +72,6 @@ export abstract class Entity {
     public onCollisionEnd(game: GameBase, other: Entity): void { }
 
     /**
-     * Retrieve a Component by name
-     *
-     * Throws an error if the Component is not found on the Entity to allow type safety + simplistic no-questions consumer calls
-     *
-     * @typeparam T the type of the Component to retrieve
-     *
-     * @param name the name of the Component to retrieve
-     *
-     * @returns the retrieved Component
-     */
-    public getComponent<T extends Component>(name: string): T {
-        if (!this.hasComponent(name)) {
-            throw new AuraError({
-                class: 'Entity',
-                method: 'getComponent',
-                message: `Failed to retrieve Component ${name} for Entity with tag ${this.tag}`
-            });
-        }
-
-        return this.components.get(name) as T;
-    }
-
-    /**
      * Add a Component to the Entity
      *
      * @param component the Component to add
@@ -114,79 +92,75 @@ export abstract class Entity {
     }
 
     /**
-     * Remove the named Component from the Entity
+     * Remove a Component from the Entity
      *
-     * @param name the name of the Component to remove
+     * @param component the class of the Component to remove
      */
-    public removeComponent(name: string): void {
-        this.components.delete(name);
+    public removeComponent(component: ClassType<Component>): void {
+        this.components.delete(component.name);
     }
 
     /**
-     * Remove a list of named Components from the Entity
+     * Remove a list of Components from the Entity
      *
-     * @param names the names of the Components to remove
+     * @param components the classes of the Components to remove
      */
-    public removeComponents(...names: Array<string>): void {
-        for (const n of names) {
-            this.removeComponent(n);
+    public removeComponents(...components: Array<ClassType<Component>>): void {
+        for (const c of components) {
+            this.removeComponent(c);
         }
     }
 
     /**
-     * Check if the Entity has a named Component
+     * Retrieve a Component
      *
-     * @param name the name of the Component to check
+     * Throws an error if the Component is not found on the Entity to allow type safety + simplistic no-questions consumer calls
      *
-     * @returns whether or not the Entity has the named Component
+     * @typeparam T (inferred) the type of the Component to retrieve
+     *
+     * @param component the class of the Component to retrieve
+     *
+     * @returns the retrieved Component
      */
-    public hasComponent(name: string): boolean {
-        return this.components.has(name);
+    public getComponent<T extends Component>(component: ClassType<T>): T {
+        const c = this.components.get(component.name);
+
+        if (!c) {
+            throw new AuraError({
+                class: 'Entity',
+                method: 'getComponent',
+                message: `Failed to retrieve Component '${component.constructor.name}' for Entity with tag '${this.tag}'`
+            });
+        }
+
+        return c as T;
     }
 
     /**
-     * Check if the Entity has a list of named Components
+     * Check if the Entity has a specific Component
      *
-     * @param names the names of the Components to check
+     * @param component the class of the Component to check for
+     *
+     * @returns whether or not the Entity has the Component
+     */
+    public hasComponent(component: ClassType<Component>): boolean {
+        return this.components.has(component.name);
+    }
+
+    /**
+     * Check if the Entity has a list of Components
+     *
+     * @param components the classes of the Components to check for
      *
      * @returns whether or not the Entity has all of the named Components
      */
-    public hasComponents(...names: Array<string>): boolean {
-        for (const n of names) {
-            if (!this.hasComponent(n)) {
+    public hasComponents(...components: Array<ClassType<Component>>): boolean {
+        for (const c of components) {
+            if (!this.hasComponent(c)) {
                 return false;
             }
         }
 
         return true;
     }
-
-    // TODO dead class/type-based component get
-    // public getComponentByType<T extends Component>(component: ClassType<T>): T {
-    //     // throw an error if the Component is not found on the Entity to allow type safety + simplistic no-questions consumer calls
-    //     if (!this.hasComponent(component)) {
-    //         throw new AuraError({
-    //             class: 'Entity',
-    //             method: 'getComponent',
-    //             message: `Failed to retrieve Component '${component.name}' for Entity with tag '${this.tag}'`
-    //         });
-    //     }
-
-    //     return this.components.get(component.name) as T;
-    // }
-
-    // TODO dead class/type-based component remove
-    // public removeComponent(component: Component): void {
-    //     this.components.delete(component.name);
-    // }
-    // public removeComponents(...components: Array<Component>): void {
-    //     for (const c of components) {
-    //         this.removeComponent(c);
-    //     }
-    // }
-
-    // TODO dead class/type-based component has
-    // public hasComponent(component: Component): boolean {
-    //     return this.components.has(component.name);
-    // }
 }

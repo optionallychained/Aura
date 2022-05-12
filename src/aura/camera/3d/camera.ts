@@ -52,7 +52,7 @@ export class Camera extends CameraBase<CameraConfig> {
             );
         }
 
-        // configure the Transform3D
+        // configure the Transform
         this.transform = new Transform(
             config.offset?.position,
             new Vec3(1, 1, 1),
@@ -77,7 +77,7 @@ export class Camera extends CameraBase<CameraConfig> {
     public attachTo(entity: Entity, rules?: CameraFollowRules): void {
         try {
             this.following = {
-                transform: entity.getComponent<Transform>('Transform'),
+                transform: entity.getComponent(Transform),
                 rules: {
                     position: {
                         x: rules?.position?.x ?? true,
@@ -97,7 +97,7 @@ export class Camera extends CameraBase<CameraConfig> {
             throw new AuraError({
                 class: 'Camera',
                 method: 'attachTo',
-                message: `Failed to attach to entity with tag ${entity.tag} : the Entity lacks a Transform3D`
+                message: `Failed to attach to entity with tag ${entity.tag} : the Entity lacks a Transform`
             })
         }
     }

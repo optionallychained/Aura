@@ -12,6 +12,7 @@ import { AuraError } from './core/aura.error';
 import { GameBase } from './core/game.base';
 import { GameConfigBase } from './core/game.config.base';
 import { GameConfigDefaults } from './core/game.config.base';
+import { Name } from './core/name.decorator';
 
 import { EntityConfig } from './entity/entity.config';
 import { EntityManagerConfig } from './entity/entity.manager.config';
@@ -40,7 +41,7 @@ import { Renderer } from './renderer/renderer';
 import { VBOConfig } from './renderer/vbo.config';
 
 import { AttributeArray } from './shader/attributeArray.type';
-import { ShaderVariableResolver } from './shader/shaderVariableResolver';
+import { ShaderVariableResolver } from './shader/resolve/shaderVariableResolver';
 import { UniformArray } from './shader/uniformArray.type';
 import { UniformType } from './shader/uniformType.enum';
 import { UniformVariation } from './shader/uniformVariation.enum';
@@ -76,6 +77,7 @@ export {
     GameBase,
     GameConfigBase,
     GameConfigDefaults,
+    Name,
     EntityConfig,
     EntityManagerConfig,
     EntityManager,

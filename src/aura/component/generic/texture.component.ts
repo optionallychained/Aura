@@ -1,4 +1,5 @@
 import { Component } from '../component';
+import { Name } from '../../core/name.decorator';
 
 /**
  * Texture component, defining the grid positions within a TextureAtlas that an Entity will sample from
@@ -7,6 +8,7 @@ import { Component } from '../component';
  *
  * Entities can sample from multiple cells in the Atlas' grid with the columnSpan and rowSpan fields
  */
+@Name('Texture')
 export class Texture extends Component {
 
     /**

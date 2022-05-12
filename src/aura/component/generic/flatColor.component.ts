@@ -1,9 +1,11 @@
 import { Color } from '../../math/color';
 import { Component } from '../component';
+import { Name } from '../../core/name.decorator';
 
 /**
  * FlatColor Component, defining a basic singular color for the Entity
  */
+@Name('FlatColor')
 export class FlatColor extends Component {
 
     /**

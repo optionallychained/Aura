@@ -1,9 +1,11 @@
 import { Vec2 } from '../../math/vec2';
 import { Component } from '../component';
+import { Name } from '../../core/name.decorator';
 
 /**
  * 2D BoxCollider Component, defining an AABB of a given size for the Entity
  */
+@Name('BoxCollider')
 export class BoxCollider extends Component {
 
     /**

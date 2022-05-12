@@ -1,12 +1,14 @@
 import { Geometry } from '../../geometry/geometry';
 import { GLShape } from '../../geometry/glShape.enum';
 import { Component } from '../component';
+import { Name } from '../../core/name.decorator';
 
 /**
  * Model Component, defining the Geometry the Entity will use to define its shape
  *
  * Together with the Shader Component, makes an Entity renderable
  */
+@Name('Model')
 export class Model extends Component {
 
     /**

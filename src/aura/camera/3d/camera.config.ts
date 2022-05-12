@@ -49,7 +49,7 @@ export interface CameraFollowRules {
  * Interface describing a 3D Camera follow specification, defining what and how the Camera will follow
  */
 export interface CameraFollow {
-    /** The Transform3D to follow */
+    /** The Transform to follow */
     transform: Transform;
     /** The Camera3D Follow Rules */
     rules: DeepRequired<CameraFollowRules>;

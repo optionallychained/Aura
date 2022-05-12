@@ -1,11 +1,13 @@
 import { Color } from '../../math/color';
 import { Component } from '../component';
+import { Name } from '../../core/name.decorator';
 
 /**
  * MultiColor Component, defining an arbitrary number of colors for the Entity
  *
  * A MultiColor's colors will be cycled through on a per-vertex basis, allowing for per-vertex colouration
  */
+@Name('MultiColor')
 export class MultiColor extends Component {
 
     /**

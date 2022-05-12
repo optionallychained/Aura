@@ -31,7 +31,7 @@ export class Camera extends CameraBase<CameraConfig> {
         // configure the projection matrix
         this.projection = Mat3.projection(config.projection.width, config.projection.height);
 
-        // configure the Transform2D
+        // configure the Transform
         this.transform = new Transform(
             config?.offset?.position,
             new Vec2(1, 1),
@@ -53,7 +53,7 @@ export class Camera extends CameraBase<CameraConfig> {
     public attachTo(entity: Entity, rules?: CameraFollowRules): void {
         try {
             this.following = {
-                transform: entity.getComponent<Transform>('Transform'),
+                transform: entity.getComponent(Transform),
                 rules: {
                     position: {
                         x: rules?.position?.x ?? true,
@@ -68,7 +68,7 @@ export class Camera extends CameraBase<CameraConfig> {
             throw new AuraError({
                 class: 'Camera',
                 method: 'attachTo',
-                message: `Failed to attach to Entity with tag ${entity.tag} : the Entity lacks a Transform2D`
+                message: `Failed to attach to Entity with tag ${entity.tag} : the Entity lacks a Transform`
             })
         }
     }

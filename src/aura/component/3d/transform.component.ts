@@ -2,10 +2,12 @@ import { Mat4 } from '../../math/mat4';
 import { Vec3 } from '../../math/vec3';
 import { Mutable } from '../../aura.types';
 import { Component } from '../component';
+import { Name } from '../../core/name.decorator';
 
 /**
  * 3D Transform Component, defining the "physical" attributes of an Entity as well as transformation methods, enabling presence in 3D space
  */
+@Name('Transform')
 export class Transform extends Component {
 
     /** Maintained position */

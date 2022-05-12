@@ -32,7 +32,7 @@ export class Collision extends System {
      * @param game the 2D Game the System is operating within
      */
     public tick(game: Game): void {
-        const collidables = game.world.filterEntitiesByComponentNames('Transform', 'BoxCollider');
+        const collidables = game.world.filterEntitiesByComponents(Transform, BoxCollider);
 
         for (let i = 0; i < collidables.length; i++) {
             for (let j = i + 1; j < collidables.length; j++) {
@@ -69,8 +69,8 @@ export class Collision extends System {
      * @returns whether or not the two Entities are colliding
      */
     private collides(e1: Entity, e2: Entity): boolean {
-        const e1Transform = e1.getComponent<Transform>('Transform');
-        const e1Box = e1.getComponent<BoxCollider>('BoxCollider');
+        const e1Transform = e1.getComponent(Transform);
+        const e1Box = e1.getComponent(BoxCollider);
         const e1Dimensions = e1Box.dimensions ?? e1Transform.scale;
 
         const e1Left = e1Transform.position.x - (e1Dimensions.x / 2);
@@ -78,8 +78,8 @@ export class Collision extends System {
         const e1Top = e1Transform.position.y + (e1Dimensions.y / 2);
         const e1Bottom = e1Transform.position.y - (e1Dimensions.y / 2);
 
-        const e2Transform = e2.getComponent<Transform>('Transform');
-        const e2Box = e2.getComponent<BoxCollider>('BoxCollider');
+        const e2Transform = e2.getComponent(Transform);
+        const e2Box = e2.getComponent(BoxCollider);
         const e2Dimensions = e2Box.dimensions ?? e2Transform.scale;
 
         const e2Left = e2Transform.position.x - (e2Dimensions.x / 2);
