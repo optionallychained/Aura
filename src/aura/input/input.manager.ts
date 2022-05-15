@@ -7,23 +7,23 @@ import { Keys } from './keys.enum';
  */
 export class InputManager {
 
+    /** Current position of the mouse within the window */
+    public mousePos = new Vec2();
+
+    /** Position of last user click */
+    public clickPos = new Vec2();
+
+    /** Position of last user double click */
+    public dblClickPos = new Vec2();
+
+    /** Position of last user context click */
+    public contextClickPos = new Vec2();
+
     /** Buffer for user keypresses */
     private readonly keyBuffer = new Set<string>();
 
     /** Boolean indicating whether or not the left mouse button is currently down */
     private mousePressed = false;
-
-    /** Current position of the mouse within the window */
-    private mousePos = new Vec2();
-
-    /** Position of last user click */
-    private clickPos = new Vec2();
-
-    /** Position of last user double click */
-    private dblClickPos = new Vec2();
-
-    /** Position of last user context click */
-    private contextClickPos = new Vec2();
 
     /** Keys to ignore in the handling of keyboard input */
     private readonly ignoreKeys: ReadonlyArray<string> = [
