@@ -61,7 +61,7 @@ export abstract class GameBase {
     protected frameDelta = 0;
 
     /** Time of the last frame, set during run() */
-    protected lastFrameTime = 0;
+    protected lastFrameTime = Date.now();
 
     /** Generic mapping of Game Data, useful for storing and retrieving arbitrary global data at Game runtime */
     protected readonly data = new Map<string, unknown>();
