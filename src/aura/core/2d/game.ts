@@ -6,6 +6,10 @@ import { UI } from '../../ui/2d/ui';
 import { World } from '../../world/2d/world';
 import { GameBase } from '../game.base';
 import { GameConfig } from './game.config';
+import { PROGRAM_BASIC } from '../../shader/program/2d/basic.program';
+import { PROGRAM_COLOR_PER_VERTEX } from '../../shader/program/2d/colorPerVertex.program';
+import { PROGRAM_TEXTURE } from '../../shader/program/2d/texture.program';
+import { PROGRAM_TEXTURE_COLORED } from '../../shader/program/2d/textureColored.program';
 
 /**
  * Concrete 2D Game, setting out the 2D-specific properties and behavior for the operation of 2D Games
@@ -29,6 +33,14 @@ export class Game extends GameBase {
 
     /** Concrete mapping of 2D Systems */
     protected readonly systems = new Map<string, System>();
+
+    /** Concrete list of default shaders */
+    protected readonly defaultShaders = [
+        PROGRAM_BASIC,
+        PROGRAM_COLOR_PER_VERTEX,
+        PROGRAM_TEXTURE,
+        PROGRAM_TEXTURE_COLORED
+    ];
 
     /**
      * Constructor. Pass an optional 2D GameConfig to the parent class and initialise all 2D-specific aspects of the Game

@@ -61,6 +61,9 @@ export abstract class GameBase {
     /** Abstract mapping of 2D or 3D Systems, to be type narrowed by the subclass */
     protected abstract readonly systems: Map<string, System2D | System3D>;
 
+    /** Abstract list of default shader programs to register on game init */
+    protected readonly abstract defaultShaders: Array<ShaderProgram>;
+
     /** Frame time step, calculated during run() */
     protected frameDelta = 0;
 
@@ -92,7 +95,7 @@ export abstract class GameBase {
             'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '(', ')', '[', ']', '+', '-', '*', '/', '!', '?', '\'', '"', '#', '£',
             '$', '&', '%', '^', ',', '.', ':', ';', '<', '>', '_', ' ', '~', '~'
         ],
-        textAtlas: new TextureAtlas('text', 'res/font.png', 2048, 32, 64, 1),
+        textAtlas: new TextureAtlas('text', 'res/font.png', 2048, 32, 64, 1)
     }
 
     /**
@@ -152,6 +155,9 @@ export abstract class GameBase {
         config?.sounds?.forEach((sound) => {
             this.audio.add(sound.name, sound.filePath);
         });
+
+        // register shaders
+        this.initializeShaders(config?.shaders);
 
         // copy over some configuration
         this.debugMode = config?.debugMode;
@@ -329,6 +335,20 @@ export abstract class GameBase {
      * Abstract frame update routine; to be implemented by the subclass for type safety on core construct update routines
      */
     protected abstract update(): void;
+
+    /**
+     * Register shaders, called on init
+     *
+     * Registers the default set, or a set provided in the GameConfig
+     */
+    private initializeShaders(shaders?: Array<ShaderProgram>): void {
+        if (shaders) {
+            shaders.forEach(this.registerShader.bind(this));
+        }
+        else {
+            this.defaultShaders.forEach(this.registerShader.bind(this));
+        }
+    }
 
     /**
      * Main game execution routine, representing the production of a single frame

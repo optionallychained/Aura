@@ -6,6 +6,10 @@ import { UI } from '../../ui/3d/ui';
 import { World } from '../../world/3d/world';
 import { GameBase } from '../game.base';
 import { GameConfig } from './game.config';
+import { PROGRAM_BASIC } from '../../shader/program/3d/basic.program';
+import { PROGRAM_COLOR_PER_VERTEX } from '../../shader/program/3d/colorPerVertex.program';
+import { PROGRAM_TEXTURE } from '../../shader/program/3d/texture.program';
+import { PROGRAM_TEXTURE_COLORED } from '../../shader/program/3d/textureColored.program';
 
 /**
  * Concrete 3D Game, setting out the 3D-specific properties and behavior for the operation of 3D Games
@@ -29,6 +33,14 @@ export class Game extends GameBase {
 
     /** Concrete mapping of 3D Systems */
     protected readonly systems = new Map<string, System>();
+
+    /** Concrete list of default shaders */
+    protected readonly defaultShaders = [
+        PROGRAM_BASIC,
+        PROGRAM_COLOR_PER_VERTEX,
+        PROGRAM_TEXTURE,
+        PROGRAM_TEXTURE_COLORED
+    ];
 
     /**
      * Constructor. Pass an optional 3D GameConfig to the parent class and initialise all 3D-specific aspects of the Game
