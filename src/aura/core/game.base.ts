@@ -148,6 +148,10 @@ export abstract class GameBase {
         this.canvas.width = config?.canvasDimensions?.x ?? this.defaults.canvasDimensions.x;
         this.canvas.height = config?.canvasDimensions?.y ?? this.defaults.canvasDimensions.y;
 
+        if (config?.hideCursor) {
+            this.canvas.style.cursor = 'none';
+        }
+
         // set up the Renderer and InputManager
         this.renderer = new Renderer(this, config?.backgroundColor ?? this.defaults.backgroundColor);
         this.input = new InputManager(this.canvas, config?.controlScheme ?? this.defaults.controlScheme);

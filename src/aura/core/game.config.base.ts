@@ -20,6 +20,8 @@ export interface GameConfigBase {
     readonly backgroundColor?: Color;
     /** Game Control Scheme; default value is 'keyboard' */
     readonly controlScheme?: ControlScheme;
+    /** Whether or not to hide the cursor on the game canvas */
+    readonly hideCursor?: boolean;
     /** Sounds to load on game init */
     readonly sounds?: Array<{ name: string, filePath: string }>;
     /** Shaders to register on init; overrides the default set if provided */
