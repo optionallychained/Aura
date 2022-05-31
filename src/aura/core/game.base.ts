@@ -16,6 +16,7 @@ import { World as World2D } from '../world/2d/world';
 import { World as World3D } from '../world/3d/world';
 import { AuraError } from './aura.error';
 import { GameConfigBase, GameConfigDefaults } from './game.config.base';
+import { AudioManager } from '../audio/audio.manager';
 
 /**
  * Abstract core Game; implementing the abstractable behavior for the operation of both 2D and 3D Games
@@ -38,6 +39,9 @@ export abstract class GameBase {
 
     /** Abstract 2D or 3D UI; to be type narrowed by the subclass */
     public abstract readonly ui: UI2D | UI3D;
+
+    /** Audio manager for adding and playing sounds */
+    public readonly audio = new AudioManager();
 
     /** InputManager */
     public readonly input: InputManager;
@@ -143,6 +147,11 @@ export abstract class GameBase {
         // set up the Renderer and InputManager
         this.renderer = new Renderer(this, config?.backgroundColor ?? this.defaults.backgroundColor);
         this.input = new InputManager(this.canvas, config?.controlScheme ?? this.defaults.controlScheme);
+
+        // add any sounds provided in the config to the AudioManager
+        config?.sounds?.forEach((sound) => {
+            this.audio.add(sound.name, sound.filePath);
+        });
 
         // copy over some configuration
         this.debugMode = config?.debugMode;

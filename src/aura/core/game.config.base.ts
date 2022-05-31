@@ -19,6 +19,8 @@ export interface GameConfigBase {
     readonly backgroundColor?: Color;
     /** Game Control Scheme; default value is 'keyboard' */
     readonly controlScheme?: ControlScheme;
+    /** Sounds to load on game init */
+    readonly sounds?: Array<{ name: string, filePath: string }>;
     /** Debug Mode, enabling game stat display; default value is false */
     readonly debugMode?: boolean;
     /** Game init function; none is provided by default */
