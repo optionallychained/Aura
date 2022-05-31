@@ -142,7 +142,7 @@ export class Game extends GameBase {
     /**
      * Retrieve a System from the Game
      *
-     * Throws an error if there's no system by the given name
+     * Throws an error if the System is not found to allow type safety + simplistic no-questions consumer calls
      *
      * @typeparam T the type of the System to retrieve
      *
@@ -151,9 +151,7 @@ export class Game extends GameBase {
      * @returns the retrieved System
      */
     public getSystem<T extends System>(name: string): T {
-        const system = this.systems.get(name);
-
-        if (!system) {
+        if (!this.hasSystem(name)) {
             throw new AuraError({
                 class: 'Game',
                 method: 'getSystem',
@@ -161,7 +159,7 @@ export class Game extends GameBase {
             });
         }
 
-        return system as T;
+        return this.systems.get(name) as T;
     }
 
     /**

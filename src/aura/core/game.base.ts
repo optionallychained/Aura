@@ -242,13 +242,41 @@ export abstract class GameBase {
     }
 
     /**
+     * Check if the Game has a named System
+     *
+     * @param name the name of the System to check
+     *
+     * @returns whether or not the Game has the named System
+     */
+    public hasSystem(name: string): boolean {
+        return this.systems.has(name);
+    }
+
+    /**
+     * Check if the Game has a list of named Systems
+     *
+     * @param names the names of the Systems to check
+     *
+     * @returns whether or not the Game has all of the named Systems
+     */
+    public hasSystems(...names: Array<string>): boolean {
+        for (const name of names) {
+            if (!this.hasSystem(name)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * Abstract system retrieval method; to be implemented and type narrowed by the subclass
      *
      * @param name the name of the system to retrieve
      *
      * @returns the retrieved system
      */
-    public abstract getSystem(name: string): System2D | System3D;
+    public abstract getSystem(name: string): System2D | System3D; // TODO remove need for has*() by | undefined?
 
     /**
      * Set the value of some arbitrary generic Game Data

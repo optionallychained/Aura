@@ -1,4 +1,4 @@
 module.exports = {
-    version2d: '0.15.2',
-    version3d: '0.15.2'
+    version2d: '0.15.3',
+    version3d: '0.15.3'
 };
