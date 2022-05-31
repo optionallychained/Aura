@@ -66,6 +66,11 @@ export class Game extends GameBase {
             }
         });
 
+        // initialise states
+        if (config?.states) {
+            this.addStates(...config.states);
+        }
+
         // configure the Renderer
         this.renderer.setRenderingMode('2D');
     }
