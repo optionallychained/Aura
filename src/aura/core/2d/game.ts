@@ -36,21 +36,18 @@ export class Game extends GameBase {
     /** Concrete mapping of 2D Systems */
     protected readonly systems = new Map<string, System>();
 
-    /** Concrete list of default shaders */
-    protected readonly defaultShaders = [
-        PROGRAM_BASIC,
-        PROGRAM_COLOR_PER_VERTEX,
-        PROGRAM_TEXTURE,
-        PROGRAM_TEXTURE_COLORED
-    ];
-
     /**
      * Constructor. Pass an optional 2D GameConfig to the parent class and initialise all 2D-specific aspects of the Game
      *
      * @param config the optional 2D GameConfig
      */
     constructor(config?: GameConfig) {
-        super(config);
+        super(config ?? {}, [
+            PROGRAM_BASIC,
+            PROGRAM_COLOR_PER_VERTEX,
+            PROGRAM_TEXTURE,
+            PROGRAM_TEXTURE_COLORED
+        ]);
 
         // initialsie a 2D Text
         this.text = new Text({

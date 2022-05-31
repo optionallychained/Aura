@@ -62,9 +62,6 @@ export abstract class GameBase {
     /** Abstract mapping of 2D or 3D Systems, to be type narrowed by the subclass */
     protected abstract readonly systems: Map<string, System2D | System3D>;
 
-    /** Abstract list of default shader programs to register on game init */
-    protected readonly abstract defaultShaders: Array<ShaderProgram>;
-
     /** Frame time step, calculated during run() */
     protected frameDelta = 0;
 
@@ -114,8 +111,8 @@ export abstract class GameBase {
      *
      * @param config the optional GameConfig
      */
-    constructor(config?: GameConfigBase) {
-        if (config?.canvasId) {
+    constructor(config: GameConfigBase, defaultShaders: Array<ShaderProgram>) {
+        if (config.canvasId) {
             this.canvas = document.getElementById(config.canvasId) as HTMLCanvasElement;
 
             if (!this.canvas) {
@@ -130,7 +127,7 @@ export abstract class GameBase {
             this.canvas = document.createElement('canvas');
             let parent: HTMLElement;
 
-            if (config?.canvasParent) {
+            if (config.canvasParent) {
                 if (typeof config.canvasParent === 'string') {
                     parent = document.getElementById(config.canvasParent) as HTMLElement;
                 }
@@ -145,28 +142,30 @@ export abstract class GameBase {
             parent.append(this.canvas);
         }
 
-        this.canvas.width = config?.canvasDimensions?.x ?? this.defaults.canvasDimensions.x;
-        this.canvas.height = config?.canvasDimensions?.y ?? this.defaults.canvasDimensions.y;
+        this.canvas.width = config.canvasDimensions?.x ?? this.defaults.canvasDimensions.x;
+        this.canvas.height = config.canvasDimensions?.y ?? this.defaults.canvasDimensions.y;
 
-        if (config?.hideCursor) {
+        if (config.hideCursor) {
             this.canvas.style.cursor = 'none';
         }
 
         // set up the Renderer and InputManager
-        this.renderer = new Renderer(this, config?.backgroundColor ?? this.defaults.backgroundColor);
-        this.input = new InputManager(this.canvas, config?.controlScheme ?? this.defaults.controlScheme);
+        this.renderer = new Renderer(this, config.backgroundColor ?? this.defaults.backgroundColor);
+        this.input = new InputManager(this.canvas, config.controlScheme ?? this.defaults.controlScheme);
 
         // add any sounds provided in the config to the AudioManager
-        config?.sounds?.forEach((sound) => {
+        config.sounds?.forEach((sound) => {
             this.audio.add(sound.name, sound.filePath);
         });
 
-        // register shaders
-        this.initializeShaders(config?.shaders);
+        // register shaders; do not register the same shader twice if a default was provided in the GameConfig by mistake
+        for (const shader of [...defaultShaders, ...config.shaders?.filter((s) => !defaultShaders.includes(s)) ?? []]) {
+            this.renderer.createShaderProgram(shader);
+        }
 
         // copy over some configuration
-        this.debugMode = config?.debugMode;
-        this.init = config?.init;
+        this.debugMode = config.debugMode;
+        this.init = config.init;
     }
 
     /**
@@ -349,20 +348,6 @@ export abstract class GameBase {
      * Abstract frame update routine; to be implemented by the subclass for type safety on core construct update routines
      */
     protected abstract update(): void;
-
-    /**
-     * Register shaders, called on init
-     *
-     * Registers the default set, or a set provided in the GameConfig
-     */
-    private initializeShaders(shaders?: Array<ShaderProgram>): void {
-        if (shaders) {
-            shaders.forEach(this.registerShader.bind(this));
-        }
-        else {
-            this.defaultShaders.forEach(this.registerShader.bind(this));
-        }
-    }
 
     /**
      * Main game execution routine, representing the production of a single frame
