@@ -17,6 +17,7 @@ import { World as World3D } from '../world/3d/world';
 import { AuraError } from './aura.error';
 import { GameConfigBase, GameConfigDefaults } from './game.config.base';
 import { AudioManager } from '../audio/audio.manager';
+import { ClassType } from '../aura.types';
 
 /**
  * Abstract core Game; implementing the abstractable behavior for the operation of both 2D and 3D Games
@@ -208,14 +209,14 @@ export abstract class GameBase {
      *
      * @param system the 2D or 3D System to add
      */
-    public abstract addSystem(system: System2D | System3D): void;
+    public abstract addSystem(system: ClassType<System2D | System3D>): void;
 
     /**
      * Abstract multi 2D or 3D System addition; to be implemented and type narrowed by the subclass
      *
      * @param system the 2D or 3D Systems to add
      */
-    public abstract addSystems(...systems: Array<System2D | System3D>): void;
+    public abstract addSystems(...systems: Array<ClassType<System2D | System3D>>): void;
 
     /**
      * Remove a single System by name
@@ -236,6 +237,15 @@ export abstract class GameBase {
             this.removeSystem(name);
         }
     }
+
+    /**
+     * Abstract system retrieval method; to be implemented and type narrowed by the subclass
+     *
+     * @param name the name of the system to retrieve
+     *
+     * @returns the retrieved system
+     */
+    public abstract getSystem(name: string): System2D | System3D;
 
     /**
      * Set the value of some arbitrary generic Game Data

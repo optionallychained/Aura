@@ -10,6 +10,8 @@ import { PROGRAM_BASIC } from '../../shader/program/3d/basic.program';
 import { PROGRAM_COLOR_PER_VERTEX } from '../../shader/program/3d/colorPerVertex.program';
 import { PROGRAM_TEXTURE } from '../../shader/program/3d/texture.program';
 import { PROGRAM_TEXTURE_COLORED } from '../../shader/program/3d/textureColored.program';
+import { AuraError } from '../aura.error';
+import { ClassType } from '../../aura.types';
 
 /**
  * Concrete 3D Game, setting out the 3D-specific properties and behavior for the operation of 3D Games
@@ -114,21 +116,60 @@ export class Game extends GameBase {
     /**
      * Add a single 3D System to the Game
      *
+     * Throws an error if the system already exists so as to prevent accidental replacement
+     *
      * @param system the 3D System to add
      */
-    public addSystem(system: System): void {
-        this.systems.set(system.name, system);
+    public addSystem(system: ClassType<System>): void {
+        const instance = new system();
+
+        if (this.systems.get(instance.name)) {
+            throw new AuraError({
+                class: 'Game',
+                method: 'addSystem',
+                message: `Failed to add system with name '${instance.name}' : system already exists`
+            });
+        }
+        else {
+            this.systems.set(instance.name, instance);
+        }
     }
 
     /**
-     * Add a list of 3D States to the Game
+     * Add a list of 3D Systems to the Game
      *
      * @param systems the list of 3D Systems to add
+     * @param override whether or not to allow the provided systems to override existing instances
      */
-    public addSystems(...systems: Array<System>): void {
+    public addSystems(...systems: Array<ClassType<System>>): void {
         for (const system of systems) {
             this.addSystem(system);
         }
+    }
+
+    /**
+     * Retrieve a System from the Game
+     *
+     * Throws an error if there's no system by the given name
+     *
+     * @typeparam T the type of the System to retrieve
+     *
+     * @param name the name of the System to retrieve
+     *
+     * @returns the retrieved System
+     */
+    public getSystem<T extends System>(name: string): T {
+        const system = this.systems.get(name);
+
+        if (!system) {
+            throw new AuraError({
+                class: 'Game',
+                method: 'getSystem',
+                message: `Failed to retrieve system with name '${name}'`
+            });
+        }
+
+        return system as T;
     }
 
     /**
