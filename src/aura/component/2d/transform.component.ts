@@ -40,7 +40,7 @@ export class Transform extends Component {
         super('Transform');
 
         this.translate(initialPosition);
-        this.scaleTo(initialScale);
+        this.scaleTo(initialScale.clone());
         this.rotate(initialAngle);
     }
 
@@ -134,7 +134,7 @@ export class Transform extends Component {
 
         // retread the construction transformation to reconfigure
         this.translate(this.initialPosition);
-        this.scaleTo(this.initialScale);
+        this.scaleTo(this.initialScale.clone());
         this.rotate(this.initialAngle);
     }
 
