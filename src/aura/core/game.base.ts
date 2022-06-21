@@ -2,7 +2,6 @@ import { Text as Text2D } from '../text/2d/text';
 import { Text as Text3D } from '../text/3d/text';
 import { InputManager } from '../input/input.manager';
 import { Color } from '../math/color';
-import { Vec2 } from '../math/vec2';
 import { Renderer } from '../renderer/renderer';
 import { ShaderProgram } from '../shader/program/shaderProgram';
 import { State as State2D } from '../state/2d/state';
@@ -85,8 +84,6 @@ export abstract class GameBase {
      */
     protected readonly defaults: GameConfigDefaults = {
         backgroundColor: Color.black(),
-        canvasDimensions: new Vec2(window.innerWidth, window.innerHeight),
-        canvasParent: document.body,
         controlScheme: 'keyboard',
         textCharset: [
             'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y',
@@ -112,48 +109,10 @@ export abstract class GameBase {
      * @param config the optional GameConfig
      */
     constructor(config: GameConfigBase, defaultShaders: Array<ShaderProgram>) {
-        if (config.canvasId) {
-            this.canvas = document.getElementById(config.canvasId) as HTMLCanvasElement;
-
-            if (!this.canvas) {
-                throw new AuraError({
-                    class: 'Game',
-                    method: 'construct',
-                    message: `Failed to retrieve Canvas with id ${config.canvasId}`
-                });
-            }
-        }
-        else {
-            this.canvas = document.createElement('canvas');
-            let parent: HTMLElement;
-
-            if (config.canvasParent) {
-                if (typeof config.canvasParent === 'string') {
-                    parent = document.getElementById(config.canvasParent) as HTMLElement;
-                }
-                else {
-                    parent = config.canvasParent;
-                }
-            }
-            else {
-                parent = this.defaults.canvasParent;
-            }
-
-            parent.append(this.canvas);
-        }
-
-        this.canvas.width = config.canvasDimensions?.x ?? this.defaults.canvasDimensions.x;
-        this.canvas.height = config.canvasDimensions?.y ?? this.defaults.canvasDimensions.y;
-
-        if (config.hideCursor) {
-            this.canvas.style.cursor = 'none';
-        }
-
-        // set up the Renderer and InputManager
+        this.canvas = this.configureCanvas(config.canvas);
         this.renderer = new Renderer(this, config.backgroundColor ?? this.defaults.backgroundColor);
         this.input = new InputManager(this.canvas, config.controlScheme ?? this.defaults.controlScheme);
 
-        // add any sounds provided in the config to the AudioManager
         config.sounds?.forEach((sound) => {
             this.audio.add(sound.name, sound.filePath);
         });
@@ -163,7 +122,6 @@ export abstract class GameBase {
             this.renderer.createShaderProgram(shader);
         }
 
-        // copy over some configuration
         this.debugMode = config.debugMode;
         this.init = config.init;
     }
@@ -376,6 +334,75 @@ export abstract class GameBase {
      * Abstract frame update routine; to be implemented by the subclass for type safety on core construct update routines
      */
     protected abstract update(): void;
+
+    /**
+     * Configure the Game's canvas
+     *
+     * @param config the GameConfig.canvas, if provided
+     *
+     * @returns the configured canvas
+     */
+    private configureCanvas(config: GameConfigBase['canvas']): HTMLCanvasElement {
+        let width, height, canvas;
+
+        if (config?.id) {
+            canvas = document.getElementById(config.id) as HTMLCanvasElement | undefined;
+
+            if (!canvas) {
+                throw new AuraError({
+                    class: 'Game',
+                    method: 'configureCanvas',
+                    message: `Failed to retrieve Canvas with id ${config.id}`
+                });
+            }
+
+            // assume the canvas is sized appropriately within the document by CSS
+            width = canvas.clientWidth;
+            height = canvas.clientHeight;
+        }
+        else {
+            let parent;
+
+            if (config?.parentId) {
+                parent = document.getElementById(config.parentId);
+
+                if (!parent) {
+                    throw new AuraError({
+                        class: 'Game',
+                        method: 'configureCanvas',
+                        message: `Failed to retrieve Canvas Parent with id ${config.parentId}`
+                    });
+                }
+            }
+            else {
+                parent = document.body;
+
+                // assume canvas is on a standalone page; style the body to accommodate a full-size canvas
+                parent.style.width = '100vw';
+                parent.style.height = '100vh';
+                parent.style.margin = '0';
+                parent.style.overflow = 'hidden';
+            }
+
+            // adopt the size of the parent
+            width = parent.clientWidth;
+            height = parent.clientHeight;
+
+            // create the canvas
+            canvas = document.createElement('canvas');
+            parent.append(canvas);
+        }
+
+        // config dimensions override computed dimensions in all cases
+        canvas.width = config?.dimensions?.x ?? width;
+        canvas.height = config?.dimensions?.y ?? height;
+
+        if (config?.hideCursor) {
+            canvas.style.cursor = 'none';
+        }
+
+        return canvas;
+    }
 
     /**
      * Main game execution routine, representing the production of a single frame

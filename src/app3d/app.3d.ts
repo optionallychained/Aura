@@ -1,10 +1,14 @@
-import { Game, ShaderPrograms, Vec2, Vec3 } from '../aura/aura.3d';
+import { Game, Vec2, Vec3 } from '../aura/aura.3d';
+import { PROGRAM_BASIC } from '../aura/shader/program/3d/basic.program';
 import { PROGRAM_FRONT_TEST } from './shader/program/frontTest.program';
 import { SHAPES_STATE } from './state/shapes.state';
 import { TEST_STATE } from './state/test.state';
 
 const game = new Game({
-    canvasDimensions: new Vec2(1024, 768),
+    canvas: {
+        dimensions: new Vec2(1024, 768),
+        hideCursor: true
+    },
     world: {
         dimensions: new Vec3(1024 * 100, 768 * 100, 1000000),
         camera: {
@@ -33,16 +37,15 @@ const game = new Game({
                 position: new Vec3(0, 0, 150)
             }
         }
-    }
+    },
+    states: [
+        SHAPES_STATE,
+        TEST_STATE
+    ],
+    shaders: [
+        PROGRAM_FRONT_TEST,
+        PROGRAM_BASIC
+    ]
 });
-
-game.registerShader(ShaderPrograms.BASIC);
-game.registerShader(ShaderPrograms.COLOR_PER_VERTEX);
-game.registerShader(ShaderPrograms.TEXTURE);
-game.registerShader(ShaderPrograms.TEXTURE_COLORED);
-
-game.registerShader(PROGRAM_FRONT_TEST);
-
-game.addStates(SHAPES_STATE, TEST_STATE);
 
 game.start(SHAPES_STATE.name);

@@ -1,15 +1,13 @@
-import { Game, ShaderPrograms, Vec2 } from '../aura/aura.2d';
+import { Game, Vec2 } from '../aura/aura.2d';
 import { SHAPES_STATE } from './state/shapes.state';
 
 const game = new Game({
-    canvasDimensions: new Vec2(1024, 768)
+    canvas: {
+        // id: 'target',
+        // parentId: 'parent',
+        // dimensions: new Vec2(1024, 768)
+    },
+    states: [SHAPES_STATE]
 });
-
-game.registerShader(ShaderPrograms.BASIC);
-game.registerShader(ShaderPrograms.COLOR_PER_VERTEX);
-game.registerShader(ShaderPrograms.TEXTURE);
-game.registerShader(ShaderPrograms.TEXTURE_COLORED);
-
-game.addState(SHAPES_STATE);
 
 game.start(SHAPES_STATE.name);

@@ -10,18 +10,21 @@ import { TextureAtlas } from '../texture/textureAtlas';
  * All configuration is optional; default values will be provided if unprovided
  */
 export interface GameConfigBase {
-    /** Dimensions of the Canvas; default value is (window.innerWidth, window.innerHeight) */
-    readonly canvasDimensions?: Vec2;
-    /** ID of the Canvas; a Canvas will be created if not provided */
-    readonly canvasId?: string;
-    /** ID or HTMLElement of the container to place an automatically-created Canvas within */
-    readonly canvasParent?: string | HTMLElement;
+    /** Optional canvas configuration */
+    canvas?: {
+        /** ID of the canvas; a canvas will be created if not provided. Takes precedence over parentId */
+        id?: string;
+        /** ID of a parent element append a created canvas to. If not provided, the canvas will be appended to the body */
+        parentId?: string;
+        /** Dimensions of the canvas. If not provided, the canvas will adopt the clientWidth,clientHeight of its parent */
+        dimensions?: Vec2;
+        /** Whether or not to hide the cursor on the canvas */
+        hideCursor?: boolean;
+    };
     /** Background Color for the Game; default value is black */
     readonly backgroundColor?: Color;
     /** Game Control Scheme; default value is 'keyboard' */
     readonly controlScheme?: ControlScheme;
-    /** Whether or not to hide the cursor on the game canvas */
-    readonly hideCursor?: boolean;
     /** Sounds to load on game init */
     readonly sounds?: Array<{ name: string, filePath: string }>;
     /** Shaders to register on init; overrides the default set if provided */
@@ -36,8 +39,8 @@ export interface GameConfigBase {
  * Interface describing the generic Game configuration defaults object, just used to type-secure the generic Game's defaults
  */
 export interface GameConfigDefaults {
-    canvasDimensions: Vec2;
-    canvasParent: HTMLElement;
+    // canvasDimensions: Vec2;
+    // canvasParent: HTMLElement;
     backgroundColor: Color;
     controlScheme: ControlScheme;
     textAtlas: TextureAtlas;
