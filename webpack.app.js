@@ -26,7 +26,8 @@ module.exports = (env, options) => {
                 ]
             }),
             new HtmlWebpackPlugin({
-                title: `Aura${build.toUpperCase()} App`
+                title: `Aura${build.toUpperCase()} App`,
+                template: './webpack.template.html'
             })
         ],
         resolve: {
