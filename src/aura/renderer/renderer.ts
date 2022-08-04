@@ -336,7 +336,11 @@ export class Renderer {
         gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
         // viewport
-        gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+        gl.viewport(0, 0, gl.canvas.clientWidth, gl.canvas.clientHeight);
+
+        window.addEventListener('resize', () => {
+            gl.viewport(0, 0, gl.canvas.clientWidth, gl.canvas.clientHeight);
+        });
     }
 
     /**

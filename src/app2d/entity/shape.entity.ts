@@ -26,6 +26,6 @@ export class Shape extends Entity {
     }
 
     public tick(): void {
-        this.getComponent<Transform>('Transform').rotate(Angle.toRadians(1));
+        // this.getComponent<Transform>('Transform').rotate(Angle.toRadians(1));
     }
 }

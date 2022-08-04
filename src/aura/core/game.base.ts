@@ -396,6 +396,12 @@ export abstract class GameBase {
         // config dimensions override computed dimensions in all cases
         canvas.width = config?.dimensions?.x ?? width;
         canvas.height = config?.dimensions?.y ?? height;
+        if (!config?.dimensions?.x) {
+            canvas.style.width = '100%';
+        }
+        if (!config?.dimensions?.y) {
+            canvas.style.height = '100%';
+        }
 
         if (config?.hideCursor) {
             canvas.style.cursor = 'none';

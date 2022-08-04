@@ -12,6 +12,7 @@ import { PROGRAM_TEXTURE } from '../../shader/program/2d/texture.program';
 import { PROGRAM_TEXTURE_COLORED } from '../../shader/program/2d/textureColored.program';
 import { AuraError } from '../aura.error';
 import { ClassType } from '../../aura.types';
+import { WORLD_SCALE } from '../../../app2d/world_scale';
 
 /**
  * Concrete 2D Game, setting out the 2D-specific properties and behavior for the operation of 2D Games
@@ -62,17 +63,31 @@ export class Game extends GameBase {
             textureAtlas: config?.ui?.textureAtlas
         });
 
+        console.log('WORLD', config?.world?.dimensions?.string);
+        console.log('WORLD_SCALE', WORLD_SCALE);
+        console.log('PROJECT', (config?.world?.dimensions?.x ?? 0) * (1 / WORLD_SCALE));
+
         // initialise a 2D World
         this.world = new World({
             renderer: this.renderer,
             // TODO instance of destroy() being annoying; canvas optional
-            dimensions: config?.world?.dimensions ?? new Vec2(this.canvas?.width, this.canvas?.height),
+            dimensions: config?.world?.dimensions ?? new Vec2(this.canvas!.clientWidth, this.canvas!.clientHeight),
             textureAtlas: config?.world?.textureAtlas,
             camera: {
                 offset: config?.world?.camera?.offset,
                 projection: config?.world?.camera?.projection ?? {
-                    width: this.canvas!.width,
-                    height: this.canvas!.height
+                    // width: 1024,
+                    // height: 768
+                    // width: config?.world?.dimensions?.x ?? 1,
+                    // height: config?.world?.dimensions?.y ?? 1
+                    // width: config?.world?.dimensions?.x ?? this.canvas!.width,
+                    // height: config?.world?.dimensions?.y ?? this.canvas!.height
+                    width: (config?.world?.dimensions?.x ?? 0) * (1 / WORLD_SCALE),
+                    height: (config?.world?.dimensions?.y ?? 0) * (1 / WORLD_SCALE)
+                    // width: 50,
+                    // height: 50
+                    // width: this.canvas!.width,
+                    // height: this.canvas!.height
                 }
             }
         });
@@ -84,6 +99,18 @@ export class Game extends GameBase {
 
         // configure the Renderer
         this.renderer.setRenderingMode('2D');
+
+        window.addEventListener('resize', () => {
+            if (this.canvas!.width !== this.canvas!.clientWidth) {
+                this.canvas!.width = this.canvas!.clientWidth;
+            }
+
+            if (this.canvas!.height !== this.canvas!.clientHeight) {
+                this.canvas!.height = this.canvas!.clientHeight;
+            }
+
+            // this.world.activeCamera.projection = Mat3.projection(this.canvas!.clientWidth, this.canvas!.clientHeight);
+        });
     }
 
     /**
