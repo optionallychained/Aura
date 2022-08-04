@@ -39,7 +39,7 @@ export class Transform {
         public readonly velocity = new Vec2()
     ) {
         this.translate(initialPosition);
-        this.scaleTo(initialScale);
+        this.scaleTo(initialScale.clone());
         this.rotate(initialAngle);
     }
 
@@ -133,7 +133,7 @@ export class Transform {
 
         // retread the construction transformation to reconfigure
         this.translate(this.initialPosition);
-        this.scaleTo(this.initialScale);
+        this.scaleTo(this.initialScale.clone());
         this.rotate(this.initialAngle);
     }
 

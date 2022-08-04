@@ -16,6 +16,8 @@ import { World as World2D } from '../world/2d/world';
 import { World as World3D } from '../world/3d/world';
 import { AuraError } from './aura.error';
 import { GameConfigBase, GameConfigDefaults } from './game.config.base';
+import { AudioManager } from '../audio/audio.manager';
+import { ClassType } from '../aura.types';
 
 /**
  * Abstract core Game; implementing the abstractable behavior for the operation of both 2D and 3D Games
@@ -39,6 +41,9 @@ export abstract class GameBase {
     /** Abstract 2D or 3D UI; to be type narrowed by the subclass */
     public abstract readonly ui: UI2D | UI3D;
 
+    /** Audio manager for adding and playing sounds */
+    public readonly audio = new AudioManager();
+
     /** InputManager */
     public readonly input: InputManager;
 
@@ -61,7 +66,7 @@ export abstract class GameBase {
     protected frameDelta = 0;
 
     /** Time of the last frame, set during run() */
-    protected lastFrameTime = 0;
+    protected lastFrameTime = Date.now();
 
     /** Generic mapping of Game Data, useful for storing and retrieving arbitrary global data at Game runtime */
     protected readonly data = new Map<string, unknown>();
@@ -88,7 +93,7 @@ export abstract class GameBase {
             'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '(', ')', '[', ']', '+', '-', '*', '/', '!', '?', '\'', '"', '#', '£',
             '$', '&', '%', '^', ',', '.', ':', ';', '<', '>', '_', ' ', '~', '~'
         ],
-        textAtlas: new TextureAtlas('text', 'res/font.png', 2048, 32, 64, 1),
+        textAtlas: new TextureAtlas('text', 'res/font.png', 2048, 32, 64, 1)
     }
 
     /**
@@ -106,8 +111,8 @@ export abstract class GameBase {
      *
      * @param config the optional GameConfig
      */
-    constructor(config?: GameConfigBase) {
-        if (config?.canvasId) {
+    constructor(config: GameConfigBase, defaultShaders: Array<ShaderProgram>) {
+        if (config.canvasId) {
             this.canvas = document.getElementById(config.canvasId) as HTMLCanvasElement;
 
             if (!this.canvas) {
@@ -122,7 +127,7 @@ export abstract class GameBase {
             this.canvas = document.createElement('canvas');
             let parent: HTMLElement;
 
-            if (config?.canvasParent) {
+            if (config.canvasParent) {
                 if (typeof config.canvasParent === 'string') {
                     parent = document.getElementById(config.canvasParent) as HTMLElement;
                 }
@@ -137,16 +142,30 @@ export abstract class GameBase {
             parent.append(this.canvas);
         }
 
-        this.canvas.width = config?.canvasDimensions?.x ?? this.defaults.canvasDimensions.x;
-        this.canvas.height = config?.canvasDimensions?.y ?? this.defaults.canvasDimensions.y;
+        this.canvas.width = config.canvasDimensions?.x ?? this.defaults.canvasDimensions.x;
+        this.canvas.height = config.canvasDimensions?.y ?? this.defaults.canvasDimensions.y;
+
+        if (config.hideCursor) {
+            this.canvas.style.cursor = 'none';
+        }
 
         // set up the Renderer and InputManager
-        this.renderer = new Renderer(this, config?.backgroundColor ?? this.defaults.backgroundColor);
-        this.input = new InputManager(this.canvas, config?.controlScheme ?? this.defaults.controlScheme);
+        this.renderer = new Renderer(this, config.backgroundColor ?? this.defaults.backgroundColor);
+        this.input = new InputManager(this.canvas, config.controlScheme ?? this.defaults.controlScheme);
+
+        // add any sounds provided in the config to the AudioManager
+        config.sounds?.forEach((sound) => {
+            this.audio.add(sound.name, sound.filePath);
+        });
+
+        // register shaders; do not register the same shader twice if a default was provided in the GameConfig by mistake
+        for (const shader of [...defaultShaders, ...config.shaders?.filter((s) => !defaultShaders.includes(s)) ?? []]) {
+            this.renderer.createShaderProgram(shader);
+        }
 
         // copy over some configuration
-        this.debugMode = config?.debugMode;
-        this.init = config?.init;
+        this.debugMode = config.debugMode;
+        this.init = config.init;
     }
 
     /**
@@ -193,14 +212,14 @@ export abstract class GameBase {
      *
      * @param system the 2D or 3D System to add
      */
-    public abstract addSystem(system: System2D | System3D): void;
+    public abstract addSystem(system: ClassType<System2D | System3D>): void;
 
     /**
      * Abstract multi 2D or 3D System addition; to be implemented and type narrowed by the subclass
      *
      * @param system the 2D or 3D Systems to add
      */
-    public abstract addSystems(...systems: Array<System2D | System3D>): void;
+    public abstract addSystems(...systems: Array<ClassType<System2D | System3D>>): void;
 
     /**
      * Remove a single System by name
@@ -221,6 +240,43 @@ export abstract class GameBase {
             this.removeSystem(name);
         }
     }
+
+    /**
+     * Check if the Game has a named System
+     *
+     * @param name the name of the System to check
+     *
+     * @returns whether or not the Game has the named System
+     */
+    public hasSystem(name: string): boolean {
+        return this.systems.has(name);
+    }
+
+    /**
+     * Check if the Game has a list of named Systems
+     *
+     * @param names the names of the Systems to check
+     *
+     * @returns whether or not the Game has all of the named Systems
+     */
+    public hasSystems(...names: Array<string>): boolean {
+        for (const name of names) {
+            if (!this.hasSystem(name)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Abstract system retrieval method; to be implemented and type narrowed by the subclass
+     *
+     * @param name the name of the system to retrieve
+     *
+     * @returns the retrieved system
+     */
+    public abstract getSystem(name: string): System2D | System3D; // TODO remove need for has*() by | undefined?
 
     /**
      * Set the value of some arbitrary generic Game Data

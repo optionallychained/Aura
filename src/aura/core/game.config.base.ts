@@ -1,3 +1,4 @@
+import { ShaderProgram } from '../shader/program/shaderProgram';
 import { ControlScheme } from '../input/controlScheme.type';
 import { Color } from '../math/color';
 import { Vec2 } from '../math/vec2';
@@ -19,6 +20,12 @@ export interface GameConfigBase {
     readonly backgroundColor?: Color;
     /** Game Control Scheme; default value is 'keyboard' */
     readonly controlScheme?: ControlScheme;
+    /** Whether or not to hide the cursor on the game canvas */
+    readonly hideCursor?: boolean;
+    /** Sounds to load on game init */
+    readonly sounds?: Array<{ name: string, filePath: string }>;
+    /** Shaders to register on init; overrides the default set if provided */
+    readonly shaders?: Array<ShaderProgram>;
     /** Debug Mode, enabling game stat display; default value is false */
     readonly debugMode?: boolean;
     /** Game init function; none is provided by default */

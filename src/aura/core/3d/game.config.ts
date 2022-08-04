@@ -1,3 +1,4 @@
+import { State } from '../../aura.3d';
 import { TextConfig } from '../../text/3d/text.config';
 import { UIConfig } from '../../ui/3d/ui.config';
 import { WorldConfig } from '../../world/3d/world.config';
@@ -17,4 +18,6 @@ export interface GameConfig extends GameConfigBase {
     readonly ui?: Omit<UIConfig, 'renderer'>;
     /** 3D Text configuration; defaults to the built-in font + charset */
     readonly text?: Omit<TextConfig, 'renderer'>;
+    /** 3D State configuration */
+    readonly states?: Array<State>;
 }
