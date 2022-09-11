@@ -11,8 +11,8 @@ export interface VBOConfig {
     readonly vertices: Float32Array;
     /** The size of the vertices comprising the VBO */
     readonly vertexSize: number;
-    /** The number of vertices contained within the vertex list */
-    readonly vertexCount: number;
+    /** The number of vertices per Entity described by the VBO */
+    readonly verticesPerEntity: number;
     /** The GLShape (drawing mode) to render the vertices with */
     readonly glShape: GLShape;
     /** A flag indicating whether or not the VBO has been modified on a frame-to-frame basis, thereby requiring (re)buffering to the GPU */

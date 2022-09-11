@@ -71,7 +71,7 @@ export class ShaderVariableResolver {
         ],
         [
             'a_VertexColor',
-            (e) => e.getComponent<MultiColor>('MultiColor').nextColor().float32Array
+            (e) => e.getComponent<MultiColor>('MultiColor').colors
         ],
         [
             'a_TexCoord',

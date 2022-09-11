@@ -301,14 +301,13 @@ export class Renderer {
                 }
 
                 // draw the a set of vertices from the VBO and update the offset for the next go round
-                gl.drawArrays(config.vbo.glShape, offset, config.vbo.vertexCount);
-
-                offset += config.vbo.vertexCount;
+                gl.drawArrays(config.vbo.glShape, offset, config.vbo.verticesPerEntity);
+                offset += config.vbo.verticesPerEntity;
             }
         }
         else {
             // if the shader program contains no uniforms, we can draw all the entities in one batch
-            gl.drawArrays(config.vbo.glShape, 0, config.vbo.vertexCount * config.entities.length);
+            gl.drawArrays(config.vbo.glShape, 0, config.vbo.verticesPerEntity * config.entities.length);
         }
     }
 

@@ -9,29 +9,19 @@ import { Component } from '../component';
 export class MultiColor extends Component {
 
     /**
-     * Counter for the current Color used in nextColor()
+     * Float32Array form of all colors, to be accessed in vertex compilation
      */
-    private currentColor = 0;
+    public readonly colors: Float32Array;
 
     /**
      * Constructor. Take the list of Colors to use and provide the name 'MultiColor' to the parent class
      *
      * @param colors the list of Colors to use
      */
-    constructor(public readonly colors: ReadonlyArray<Color>) {
+    constructor(colors: ReadonlyArray<Color>) {
         super('MultiColor');
-    }
 
-    /**
-     * Retrieve the next Color in the list and cycle the counter
-     */
-    public nextColor(): Color {
-        const color = this.colors[this.currentColor++];
-
-        if (this.currentColor === this.colors.length) {
-            this.currentColor = 0;
-        }
-
-        return color;
+        this.colors = new Float32Array(colors.length * 4);
+        colors.forEach((c, i) => this.colors.set(c.float32Array, i * 4));
     }
 }

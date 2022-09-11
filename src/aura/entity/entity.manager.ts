@@ -425,58 +425,56 @@ export abstract class EntityManager<Config extends EntityManagerConfig> {
                     };
                 }).size;
 
-                // initialise the Float32Array; its size is the number of entities multiplied by the size and count of their vertices
-                const stride = vertexSize * vertexCount;
-                const vertices = new Float32Array(entities.length * stride);
-
-                // track the offset for setting values into vertices
+                const vertices = new Float32Array(entities.length * vertexSize * vertexCount);
                 let offset = 0;
                 for (const e of entities) {
-                    // track the offset for pulling positional data out of an Entity's Model's vertices
-                    let p = 0;
-                    // track the offset for pulling texture coordinate data out of an Entity's Model's texture coordinates
-                    let t = 0;
+                    // offset trackers for combining slices of large array attribute arrays into interleaved buffers
+                    const offsetTrackers = [];
+
                     for (let i = 0; i < vertexCount; i++) {
                         // process every attribute for every vertex of the Entity
-                        for (const attr of shaderInfo.vertex.attributes) {
-                            let value = ShaderVariableResolver.resolveAttribute(attr.name, e);
+                        for (let j = 0; j < shaderInfo.vertex.attributes.length; j++) {
+                            const { name, size } = shaderInfo.vertex.attributes[j];
+                            let value = ShaderVariableResolver.resolveAttribute(name, e);
 
                             if (typeof value === 'number') {
                                 // handle numerical values by wrapping them in an array for setting into vertices
                                 value = Float32Array.from([value]);
                             }
-                            else if (attr.name === 'a_Position') {
-                                // handle positions by pulling out only *this* vertex's position from the Model's array
-                                value = value.slice(p, p + attr.size);
-                                p += attr.size;
-                            }
-                            else if (attr.name === 'a_TexCoord') {
-                                // handle texture coordinates by asking the Texture Atlas to resolve this vertex's texcoord
-                                const { textureAtlas } = this.config;
-
-                                if (!textureAtlas) {
-                                    // if we're trying to render an Entity with a Texture-involved shader, but we have no Texture Atlas,
-                                    //   then something has gone wrong
-                                    throw new AuraError({
-                                        class: 'EntityManager',
-                                        method: 'compileVertices',
-                                        message: `
-                                            Failed to render ${this.config.name} Entity '${e.tag}' with texture shader: No Texture Atlas
-                                            was configured for ${this.config.name} Entities
-                                        `
-                                    });
+                            else if (size < value.length) {
+                                // values that are larger than the actual attr size must be spliced into the vertex array in pieces to
+                                //   produce interleaved buffers
+                                // eg: a_Position - vertex positions are pulled from the geometry all at once, but only 2 or 3 are required
+                                //   per step
+                                if (offsetTrackers[j] === undefined) {
+                                    offsetTrackers.push(0);
                                 }
 
-                                const { column, row, columnSpan, rowSpan } = e.getComponent<Texture>('Texture');
-                                value = textureAtlas.resolveTextureCoordinates(value.slice(t, t + 2), column, row, columnSpan, rowSpan);
+                                value = value.slice(offsetTrackers[j], offsetTrackers[j] += size);
 
-                                // all texture coordinates are (currently?) of size 2
-                                t += 2;
+                                if (name === 'a_TexCoord') {
+                                    // texcoords supplied by geometry are defined as if sampling from a whole texture; their actual position
+                                    //   in the atlas needs to be resolved
+                                    const { textureAtlas } = this.config;
+
+                                    if (!textureAtlas) {
+                                        throw new AuraError({
+                                            class: 'EntityManager',
+                                            method: 'compileVertices',
+                                            message: `
+                                                Failed to render ${this.config.name} Entity '${e.tag}' with texture shader: No Texture Atlas
+                                                 was configured for ${this.config.name} Entities
+                                                `
+                                        });
+                                    }
+
+                                    const { column, row, columnSpan, rowSpan } = e.getComponent<Texture>('Texture');
+                                    value = textureAtlas.resolveTextureCoordinates(value, column, row, columnSpan, rowSpan);
+                                }
                             }
 
                             vertices.set(value, offset);
-
-                            offset += attr.size;
+                            offset += size;
                         }
                     }
                 }
@@ -485,7 +483,7 @@ export abstract class EntityManager<Config extends EntityManagerConfig> {
                 this.vbos.set(vboIdentifier, {
                     name: vboName,
                     vertices,
-                    vertexCount,
+                    verticesPerEntity: vertexCount,
                     vertexSize,
                     glShape,
                     changed: true
